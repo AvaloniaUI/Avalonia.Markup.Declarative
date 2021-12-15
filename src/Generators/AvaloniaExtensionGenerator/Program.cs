@@ -1,8 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Layout;
 using System.Reflection;
 using System.Text;
@@ -12,11 +11,13 @@ var useFullNamespace = new[] {
     typeof(ContextMenu),
 };
 
-var baseTypes = new[] {
+List<Type> baseTypes = new() {
     typeof(Layoutable),
     typeof(Visual),
     typeof(TemplatedControl),
-    typeof(ItemsControl)
+    typeof(ItemsControl),
+    typeof(InputElement),
+    typeof(ContentControl),
 };
 
 var type = typeof(Control);
@@ -81,13 +82,13 @@ nssb.AppendLine();
 
 var result =
     nssb.ToString() + Environment.NewLine +
-    "namespace Avalonia;" + Environment.NewLine +
-    "public static class ControlExtensions" + Environment.NewLine +
+    "namespace Avalonia.Markup.Declarative;" + Environment.NewLine +
+    "public static partial class ControlExtensions" + Environment.NewLine +
     "{" + Environment.NewLine +
     sb.ToString() + Environment.NewLine +
     "}";
 
-File.WriteAllText("AvaloniaControlExtensions.cs", result);
+File.WriteAllText("..\\..\\Avalonia.Markup.Declarative\\ControlExtensions.Generated.cs", result);
 
 string GetPropertySetterExtension(FieldInfo field, HashSet<string> namespaces)
 {
@@ -182,7 +183,7 @@ void AddExtraCode(StringBuilder sb)
         "    setAction();" + Environment.NewLine +
         "    return control;" + Environment.NewLine +
         "}" + Environment.NewLine +
-        "public static IBrush ToBrush(this Color color) => new SolidColorBrush(color);";
+        "public static Brush ToBrush(this Color color) => new SolidColorBrush(color);";
 
     sb.AppendLine(extra);
 }

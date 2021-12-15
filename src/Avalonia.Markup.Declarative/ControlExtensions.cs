@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Avalonia.Collections;
 using Avalonia.Controls;
@@ -72,22 +74,11 @@ public static partial class ControlExtensions
         return control;
     }
 
-    public static TPanel Add<TPanel>(this TPanel container, params Control[] children)
+    public static TPanel Children<TPanel>(this TPanel container, params Control[] children)
         where TPanel : IPanel
     {
         foreach (var child in children)
             container.Children.Add(child);
-        return container;
-    }
-
-    public static TPanel AddNew<TPanel, TControl>(this TPanel container, Action<TControl> childInitializer)
-        where TPanel : IPanel
-        where TControl : Control, new()
-
-    {
-        var child = new TControl();
-        childInitializer.Invoke(child);
-        container.Children.Add(child);
         return container;
     }
 
@@ -103,20 +94,24 @@ public static partial class ControlExtensions
         control.Name = name;
         return control;
     }
-    public static TElement AddStyle<TElement>(this TElement control, Style style)
+    public static TElement Styles<TElement>(this TElement control, Style style)
         where TElement : Control
     {
         control.Styles.Add(style);
         return control;
     }
-    public static TElement AddClass<TElement>(this TElement control, string className)
+
+    public static TElement Classes<TElement>(this TElement control, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string caller = default)
         where TElement : Control
     {
         control.Classes.Add(className);
         return control;
     }
+    public static StackTrace GetDeeperStackTrace(int depth) =>
+        depth > 0 ? GetDeeperStackTrace(depth - 1) : new StackTrace(0, true);
 
-    public static TElement AddDataTemplate<TElement>(this TElement control, IDataTemplate dataTemplate)
+
+    public static TElement DataTemplates<TElement>(this TElement control, IDataTemplate dataTemplate)
         where TElement : Control
     {
         control.DataTemplates.Add(dataTemplate);
