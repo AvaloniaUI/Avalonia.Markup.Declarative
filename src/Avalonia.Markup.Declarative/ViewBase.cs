@@ -24,7 +24,7 @@ namespace Avalonia.Markup.Declarative
         protected Binding Bind<TProp>(TProp propertyPath, BindingMode bindingMode = BindingMode.Default,
             [CallerArgumentExpression("propertyPath")] string propertyPathString = null, [CallerMemberName] string callerMethod = null)
         {
-            var propName = GetPropertyName(propertyPathString);
+            var propName = PropertyPathHelper.GetPropertyName(propertyPathString);
 
             //normal binding from View
             if (callerMethod == nameof(Build))
@@ -69,6 +69,7 @@ namespace Avalonia.Markup.Declarative
         {
             Dispatcher.UIThread.InvokeAsync(() =>
             {
+                OnBeforeReload();
                 Child = null;
                 VisualChildren.Clear();
 
@@ -81,6 +82,9 @@ namespace Avalonia.Markup.Declarative
             });
         }
 
+        protected virtual void OnBeforeReload()
+        {
+        }
 
         public void Initialize()
         {
@@ -140,17 +144,9 @@ namespace Avalonia.Markup.Declarative
             return new Binding()
             {
                 Source = source,
-                Path = GetPropertyName(propertyPathString),
+                Path = PropertyPathHelper.GetPropertyName(propertyPathString),
                 Mode = bindingMode,
             };
-        }
-
-        protected static string GetPropertyName(string path)
-        {
-            if (path == null)
-                return "";
-            int startIndex = path.IndexOf('.', path.LastIndexOf(')') + 1) + 1;
-            return path.Substring(startIndex).Replace("?", "").Trim('"', '@', ' ', '\t');
         }
 
         protected static Binding Bind<T, TProp>(T source, Expression<Func<T, TProp>> propertyGetterExp, BindingMode bindingMode = BindingMode.Default)

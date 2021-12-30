@@ -7,12 +7,35 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
+using Avalonia.Media;
 using Avalonia.Styling;
 
 namespace Avalonia.Markup.Declarative;
 
 public static partial class ControlExtensions
 {
+    public static TControl _set<TControl>(this TControl control, Action setAction)
+    {
+        setAction();
+        return control;
+    }
+    
+    public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty, string sourcePropertyPathString, Action setAction)
+        where TControl : AvaloniaObject
+    {
+        setAction();
+        if (sourcePropertyPathString.StartsWith("@"))
+        {
+            var propertyName = PropertyPathHelper.GetPropertyName(sourcePropertyPathString);
+            var binding = new Binding(propertyName);
+            control.Bind(destProperty, binding);
+        }
+        return control;
+    }
+
+
+    public static Brush ToBrush(this Color color) => new SolidColorBrush(color);
+
     public static TElement Col<TElement>(this TElement control, int value)
         where TElement : Control
     {
@@ -100,7 +123,7 @@ public static partial class ControlExtensions
         control.Styles.Add(style);
         return control;
     }
-
+     
     public static TElement Classes<TElement>(this TElement control, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string caller = default)
         where TElement : Control
     {
