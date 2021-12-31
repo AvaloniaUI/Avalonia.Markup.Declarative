@@ -26,8 +26,12 @@ public static partial class ControlExtensions
         setAction();
         if (sourcePropertyPathString.StartsWith("@"))
         {
-            var propertyName = PropertyPathHelper.GetPropertyName(sourcePropertyPathString);
-            var binding = new Binding(propertyName);
+            var path = sourcePropertyPathString.TrimStart('@');
+            var propertyName = PropertyPathHelper.GetPropertyName(path);
+
+            var binding = propertyName == path
+                ? new Binding() // if property not set, but only vm itself
+                : new Binding(propertyName);
             control.Bind(destProperty, binding);
         }
         return control;
