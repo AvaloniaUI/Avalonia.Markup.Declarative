@@ -18,3 +18,9 @@ steps:
 - script: |
     dotnet pack -c Release src/Avalonia.Markup.Declarative/Avalonia.Markup.Declarative.csproj
   displayName: 'Build and Package'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.SourcesDirectory)/src/Avalonia.Markup.Declarative/bin/Release'
+    artifactName: 'Nuget'
+  condition: succeeded()
