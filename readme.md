@@ -5,9 +5,9 @@ Write Avalonia UI with C#
 
 ## Installation
 
-for now this project avalable as a source code. Sou you need to clone or download repository and Add *Avalonia.Markup.Declarative* project to your solution.
+for now this project available as a source code. Sou you need to clone or download repository and Add *Avalonia.Markup.Declarative* project to your solution.
 
-There will be Nuget package avalable later.
+There will be Nuget package available later.
 
 ## Usage
 
