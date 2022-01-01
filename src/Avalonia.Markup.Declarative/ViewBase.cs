@@ -169,7 +169,7 @@ namespace Avalonia.Markup.Declarative
         {
             base.OnAttachedToVisualTree(e);
 #if DEBUG
-            SharpViewsHotReloadManager.RegisterInstance(this);
+            HotReloadManager.RegisterInstance(this);
 #endif
         }
 
@@ -177,7 +177,7 @@ namespace Avalonia.Markup.Declarative
         {
             base.OnDetachedFromVisualTree(e);
 #if DEBUG
-            SharpViewsHotReloadManager.UnregisterInstance(this);
+            HotReloadManager.UnregisterInstance(this);
 #endif
         }
 
