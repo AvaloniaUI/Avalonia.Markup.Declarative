@@ -10,6 +10,11 @@ pool:
   vmImage: windows-latest
 
 steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 6.0.100'
+  inputs:
+      version: 6.0.100
+
 - script: |
     dotnet pack -c Release src/Avalonia.Markup.Declarative/Avalonia.Markup.Declarative.csproj
   displayName: 'Build and Package'
