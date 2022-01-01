@@ -9,6 +9,11 @@ namespace AvaloniaExtensionGenerator
     public class Config
     {
         public string OutputPath { get; set; } = "..\\..\\Avalonia.Markup.Declarative\\ControlExtensions.Generated.cs";
+        public string[] InitialNamespaces = { 
+            "Avalonia.Data",
+            "Avalonia.Data.Converters",
+            "System.Runtime.CompilerServices" };
+
         public Type[] UseFullNamespace = new[]
         {
             typeof(Calendar),

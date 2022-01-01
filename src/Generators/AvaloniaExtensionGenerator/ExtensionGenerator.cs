@@ -24,7 +24,7 @@ namespace AvaloniaExtensionGenerator
         {
             var controlTypes = GetControlTypes();
 
-            var nameSpaces = new HashSet<string>() { "Avalonia.Data", "System.Runtime.CompilerServices" };
+            var nameSpaces = new HashSet<string>(Config.InitialNamespaces);
             var extensionMehtodsString = GetExtensionMethods(controlTypes, ref nameSpaces);
 
             var sb = new StringBuilder();

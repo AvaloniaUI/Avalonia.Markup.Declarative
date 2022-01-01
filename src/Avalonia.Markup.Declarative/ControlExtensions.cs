@@ -7,6 +7,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
+using Avalonia.Data.Converters;
 using Avalonia.Media;
 using Avalonia.Styling;
 
@@ -20,11 +21,11 @@ public static partial class ControlExtensions
         return control;
     }
     
-    public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty, string sourcePropertyPathString, Action setAction)
+    public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty, string sourcePropertyPathString, Action setAction,
+                        BindingMode? bindingMode, IValueConverter converter, object bindingSource)
         where TControl : AvaloniaObject
     {
-        setAction();
-        if (sourcePropertyPathString.StartsWith("@"))
+        if (sourcePropertyPathString.StartsWith("@") || bindingMode.HasValue)
         {
             var path = sourcePropertyPathString.TrimStart('@');
             var propertyName = PropertyPathHelper.GetPropertyName(path);
@@ -32,8 +33,22 @@ public static partial class ControlExtensions
             var binding = propertyName == path
                 ? new Binding() // if property not set, but only vm itself
                 : new Binding(propertyName);
+
+            binding.Mode = bindingMode ?? BindingMode.Default;
+
+            if (converter != null)
+                binding.Converter = converter;
+
+            if (bindingSource != null)
+                binding.Source = bindingSource;
+
             control.Bind(destProperty, binding);
         }
+        else
+        {
+            setAction();
+        }
+
         return control;
     }
 
