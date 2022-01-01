@@ -11,5 +11,5 @@ pool:
 
 steps:
 - script: |
-    dotnet pack -c Release src/Avalonia.Markup.Declarative.csproj
+    dotnet pack -c Release src/Avalonia.Markup.Declarative/Avalonia.Markup.Declarative.csproj
   displayName: 'Build and Package'
