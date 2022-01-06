@@ -1,0 +1,26 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 6.0.100'
+  inputs:
+      version: 6.0.100
+
+- script: |
+    dotnet pack -c Release src/Avalonia.Markup.Declarative/Avalonia.Markup.Declarative.csproj
+  displayName: 'Build and Package'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.SourcesDirectory)/src/Avalonia.Markup.Declarative/bin/Release'
+    artifactName: 'Nuget'
+  condition: succeeded()
