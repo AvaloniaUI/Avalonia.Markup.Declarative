@@ -6,6 +6,8 @@ namespace AvaloniaExtensionGenerator
 {
     public class ExtensionGenerator
     {
+        public string OutputPath { get; set; } = "..\\Avalonia.Markup.Declarative\\ControlExtensions.Generated.cs";
+
         public Config Config { get; set; }
 
         public ISetterExtensionGenerator[] Generators { get; private set; }
@@ -38,7 +40,7 @@ namespace AvaloniaExtensionGenerator
             sb.AppendLine(extensionMehtodsString);
             sb.AppendLine("}");
 
-            File.WriteAllText(Config.OutputPath, sb.ToString());
+            File.WriteAllText(OutputPath, sb.ToString());
         }
 
         private IEnumerable<Type> GetControlTypes()

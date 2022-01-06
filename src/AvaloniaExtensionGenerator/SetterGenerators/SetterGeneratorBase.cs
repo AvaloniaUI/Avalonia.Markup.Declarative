@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace AvaloniaExtensionGenerator
@@ -31,7 +34,7 @@ namespace AvaloniaExtensionGenerator
             {
                 result = result.Split('`')[0];
                 var genericArguments = valueType.GetGenericArguments();
-                var args = string.Join(',', genericArguments.Select(x => GetTypeDeclarationSourceCode(x, namespaces)));
+                var args = string.Join(",", genericArguments.Select(x => GetTypeDeclarationSourceCode(x, namespaces)));
                 result += $"<{args}>";
             }
 

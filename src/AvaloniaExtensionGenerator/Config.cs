@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -8,7 +11,6 @@ namespace AvaloniaExtensionGenerator
 {
     public class Config
     {
-        public string OutputPath { get; set; } = "..\\..\\Avalonia.Markup.Declarative\\ControlExtensions.Generated.cs";
         public string[] InitialNamespaces = { 
             "Avalonia.Data",
             "Avalonia.Data.Converters",
@@ -16,7 +18,7 @@ namespace AvaloniaExtensionGenerator
 
         public Type[] UseFullNamespace = new[]
         {
-            typeof(Calendar),
+            typeof(Avalonia.Controls.Calendar),
             typeof(ContextMenu)
         };
 
