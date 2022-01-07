@@ -25,6 +25,7 @@ namespace AvaloniaExtensionGenerator
         public List<Type> BaseTypes = new()
         {
             typeof(Layoutable),
+            typeof(Panel),
             typeof(Visual),
             typeof(TemplatedControl),
             typeof(ItemsControl),

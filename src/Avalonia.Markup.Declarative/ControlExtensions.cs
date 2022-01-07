@@ -52,6 +52,16 @@ public static partial class ControlExtensions
         return control;
     }
 
+    public static TElement DataContext<TElement>(
+        this TElement control,
+        object value,
+        BindingMode? bindingMode = null,
+        IValueConverter converter = null,
+        [CallerArgumentExpression("value")] string ps = null)
+        where TElement : StyledElement
+    {
+        return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode, converter, null);
+    }
 
     public static Brush ToBrush(this Color color) => new SolidColorBrush(color);
 
@@ -85,14 +95,14 @@ public static partial class ControlExtensions
     public static TElement Cols<TElement>(this TElement control, string value)
         where TElement : Grid
     {
-        control.ColumnDefinitions = Avalonia.Controls.ColumnDefinitions.Parse(value);
+        control.ColumnDefinitions = ColumnDefinitions.Parse(value);
         return control;
     }
 
     public static TElement Rows<TElement>(this TElement control, string value)
         where TElement : Grid
     {
-        control.RowDefinitions = Avalonia.Controls.RowDefinitions.Parse(value);
+        control.RowDefinitions = RowDefinitions.Parse(value);
         return control;
     }
 
@@ -136,6 +146,7 @@ public static partial class ControlExtensions
         control.Name = name;
         return control;
     }
+
     public static TElement Styles<TElement>(this TElement control, Style style)
         where TElement : Control
     {

@@ -27,7 +27,7 @@ namespace AvaloniaExtensionGenerator
             var controlTypes = GetControlTypes();
 
             var nameSpaces = new HashSet<string>(Config.InitialNamespaces);
-            var extensionMehtodsString = GetExtensionMethods(controlTypes, ref nameSpaces);
+            var extensionClassesString = GetExtensionClasses(controlTypes, ref nameSpaces);
 
             var sb = new StringBuilder();
             foreach (var ns in nameSpaces.OrderBy(x => x))
@@ -35,10 +35,7 @@ namespace AvaloniaExtensionGenerator
 
             sb.AppendLine();
             sb.AppendLine("namespace Avalonia.Markup.Declarative;");
-            sb.AppendLine("public static partial class ControlExtensions");
-            sb.AppendLine("{");
-            sb.AppendLine(extensionMehtodsString);
-            sb.AppendLine("}");
+            sb.AppendLine(extensionClassesString);
 
             File.WriteAllText(OutputPath, sb.ToString());
         }
@@ -64,13 +61,17 @@ namespace AvaloniaExtensionGenerator
             return true;
         }
 
-        private string GetExtensionMethods(IEnumerable<Type> controlTypes, ref HashSet<string> namespaces)
+        private string GetExtensionClasses(IEnumerable<Type> controlTypes, ref HashSet<string> namespaces)
         {
             var sb = new StringBuilder();
             var i = 0;
+
             foreach (var controlType in controlTypes)
             {
                 Console.WriteLine(controlType.Name);
+
+                sb.AppendLine($"public static partial class {controlType.Name}Extensions");
+                sb.AppendLine("{");
 
                 foreach (var field in controlType.GetFields().Where(IsAcceptableField))
                 {
@@ -87,6 +88,8 @@ namespace AvaloniaExtensionGenerator
                         sb.AppendLine(setterExtension);
                     }
                 }
+                
+                sb.AppendLine("}");
             }
             return sb.ToString();
         }

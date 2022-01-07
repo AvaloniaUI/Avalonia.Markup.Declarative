@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Avalonia.Markup.Declarative;
-public static partial class ControlExtensions
+public static partial class AutoCompleteBoxExtensions
 {
 public static AutoCompleteBox Watermark(this AutoCompleteBox control, IBinding binding)
    => control._set(() => control[!AutoCompleteBox.WatermarkProperty] = binding);
@@ -75,6 +75,9 @@ public static AutoCompleteBox Items(this AutoCompleteBox control, IEnumerable va
 public static AutoCompleteBox AsyncPopulator(this AutoCompleteBox control, IBinding binding)
    => control._set(() => control[!AutoCompleteBox.AsyncPopulatorProperty] = binding);
 public static AutoCompleteBox AsyncPopulator(this AutoCompleteBox control, Func<String,CancellationToken,Task<IEnumerable<Object>>> value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AutoCompleteBox.AsyncPopulatorProperty, ps, () => control.AsyncPopulator = value, bindingMode, converter, bindingSource);
+}
+public static partial class BorderExtensions
+{
 public static Border Background(this Border control, IBinding binding)
    => control._set(() => control[!Border.BackgroundProperty] = binding);
 public static Border Background(this Border control, IBrush value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Border.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
@@ -121,6 +124,9 @@ public static Border BorderLineCap(this Border control, PenLineCap value, Bindin
 public static Border BorderLineJoin(this Border control, IBinding binding)
    => control._set(() => control[!Border.BorderLineJoinProperty] = binding);
 public static Border BorderLineJoin(this Border control, PenLineJoin value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Border.BorderLineJoinProperty, ps, () => control.BorderLineJoin = value, bindingMode, converter, bindingSource);
+}
+public static partial class ButtonExtensions
+{
 public static Button ClickMode(this Button control, IBinding binding)
    => control._set(() => control[!Button.ClickModeProperty] = binding);
 public static Button ClickMode(this Button control, ClickMode value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Button.ClickModeProperty, ps, () => control.ClickMode = value, bindingMode, converter, bindingSource);
@@ -142,6 +148,9 @@ public static Button IsCancel(this Button control, Boolean value, BindingMode? b
 public static Button Flyout(this Button control, IBinding binding)
    => control._set(() => control[!Button.FlyoutProperty] = binding);
 public static Button Flyout(this Button control, FlyoutBase value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Button.FlyoutProperty, ps, () => control.Flyout = value, bindingMode, converter, bindingSource);
+}
+public static partial class ButtonSpinnerExtensions
+{
 public static ButtonSpinner AllowSpin(this ButtonSpinner control, IBinding binding)
    => control._set(() => control[!ButtonSpinner.AllowSpinProperty] = binding);
 public static ButtonSpinner AllowSpin(this ButtonSpinner control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ButtonSpinner.AllowSpinProperty, ps, () => control.AllowSpin = value, bindingMode, converter, bindingSource);
@@ -151,6 +160,9 @@ public static ButtonSpinner ShowButtonSpinner(this ButtonSpinner control, Boolea
 public static ButtonSpinner ButtonSpinnerLocation(this ButtonSpinner control, IBinding binding)
    => control._set(() => control[!ButtonSpinner.ButtonSpinnerLocationProperty] = binding);
 public static ButtonSpinner ButtonSpinnerLocation(this ButtonSpinner control, Location value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ButtonSpinner.ButtonSpinnerLocationProperty, ps, () => control.ButtonSpinnerLocation = value, bindingMode, converter, bindingSource);
+}
+public static partial class CalendarExtensions
+{
 public static Avalonia.Controls.Calendar FirstDayOfWeek(this Avalonia.Controls.Calendar control, IBinding binding)
    => control._set(() => control[!Avalonia.Controls.Calendar.FirstDayOfWeekProperty] = binding);
 public static Avalonia.Controls.Calendar FirstDayOfWeek(this Avalonia.Controls.Calendar control, DayOfWeek value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Controls.Calendar.FirstDayOfWeekProperty, ps, () => control.FirstDayOfWeek = value, bindingMode, converter, bindingSource);
@@ -178,6 +190,9 @@ public static Avalonia.Controls.Calendar DisplayDateStart(this Avalonia.Controls
 public static Avalonia.Controls.Calendar DisplayDateEnd(this Avalonia.Controls.Calendar control, IBinding binding)
    => control._set(() => control[!Avalonia.Controls.Calendar.DisplayDateEndProperty] = binding);
 public static Avalonia.Controls.Calendar DisplayDateEnd(this Avalonia.Controls.Calendar control, Nullable<DateTime> value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Controls.Calendar.DisplayDateEndProperty, ps, () => control.DisplayDateEnd = value, bindingMode, converter, bindingSource);
+}
+public static partial class CalendarDatePickerExtensions
+{
 public static CalendarDatePicker DisplayDate(this CalendarDatePicker control, IBinding binding)
    => control._set(() => control[!CalendarDatePicker.DisplayDateProperty] = binding);
 public static CalendarDatePicker DisplayDate(this CalendarDatePicker control, DateTime value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(CalendarDatePicker.DisplayDateProperty, ps, () => control.DisplayDate = value, bindingMode, converter, bindingSource);
@@ -220,12 +235,24 @@ public static CalendarDatePicker HorizontalContentAlignment(this CalendarDatePic
 public static CalendarDatePicker VerticalContentAlignment(this CalendarDatePicker control, IBinding binding)
    => control._set(() => control[!CalendarDatePicker.VerticalContentAlignmentProperty] = binding);
 public static CalendarDatePicker VerticalContentAlignment(this CalendarDatePicker control, VerticalAlignment value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(CalendarDatePicker.VerticalContentAlignmentProperty, ps, () => control.VerticalContentAlignment = value, bindingMode, converter, bindingSource);
+}
+public static partial class CanvasExtensions
+{
+}
+public static partial class CarouselExtensions
+{
 public static Carousel IsVirtualized(this Carousel control, IBinding binding)
    => control._set(() => control[!Carousel.IsVirtualizedProperty] = binding);
 public static Carousel IsVirtualized(this Carousel control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Carousel.IsVirtualizedProperty, ps, () => control.IsVirtualized = value, bindingMode, converter, bindingSource);
 public static Carousel PageTransition(this Carousel control, IBinding binding)
    => control._set(() => control[!Carousel.PageTransitionProperty] = binding);
 public static Carousel PageTransition(this Carousel control, IPageTransition value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Carousel.PageTransitionProperty, ps, () => control.PageTransition = value, bindingMode, converter, bindingSource);
+}
+public static partial class CheckBoxExtensions
+{
+}
+public static partial class ComboBoxExtensions
+{
 public static ComboBox IsDropDownOpen(this ComboBox control, IBinding binding)
    => control._set(() => control[!ComboBox.IsDropDownOpenProperty] = binding);
 public static ComboBox IsDropDownOpen(this ComboBox control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ComboBox.IsDropDownOpenProperty, ps, () => control.IsDropDownOpen = value, bindingMode, converter, bindingSource);
@@ -247,6 +274,12 @@ public static ComboBox HorizontalContentAlignment(this ComboBox control, Horizon
 public static ComboBox VerticalContentAlignment(this ComboBox control, IBinding binding)
    => control._set(() => control[!ComboBox.VerticalContentAlignmentProperty] = binding);
 public static ComboBox VerticalContentAlignment(this ComboBox control, VerticalAlignment value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ComboBox.VerticalContentAlignmentProperty, ps, () => control.VerticalContentAlignment = value, bindingMode, converter, bindingSource);
+}
+public static partial class ComboBoxItemExtensions
+{
+}
+public static partial class ContentControlExtensions
+{
 public static T Content<T>(this T control, IBinding binding) where T : ContentControl
    => control._set(() => control[!ContentControl.ContentProperty] = binding);
 public static T Content<T>(this T control, Object value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ContentControl
@@ -263,6 +296,9 @@ public static T VerticalContentAlignment<T>(this T control, IBinding binding) wh
    => control._set(() => control[!ContentControl.VerticalContentAlignmentProperty] = binding);
 public static T VerticalContentAlignment<T>(this T control, VerticalAlignment value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ContentControl
 => control._setEx(ContentControl.VerticalContentAlignmentProperty, ps, () => control.VerticalContentAlignment = value, bindingMode, converter, bindingSource);
+}
+public static partial class ContextMenuExtensions
+{
 public static Avalonia.Controls.ContextMenu HorizontalOffset(this Avalonia.Controls.ContextMenu control, IBinding binding)
    => control._set(() => control[!Avalonia.Controls.ContextMenu.HorizontalOffsetProperty] = binding);
 public static Avalonia.Controls.ContextMenu HorizontalOffset(this Avalonia.Controls.ContextMenu control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Controls.ContextMenu.HorizontalOffsetProperty, ps, () => control.HorizontalOffset = value, bindingMode, converter, bindingSource);
@@ -290,6 +326,9 @@ public static Avalonia.Controls.ContextMenu WindowManagerAddShadowHint(this Aval
 public static Avalonia.Controls.ContextMenu PlacementTarget(this Avalonia.Controls.ContextMenu control, IBinding binding)
    => control._set(() => control[!Avalonia.Controls.ContextMenu.PlacementTargetProperty] = binding);
 public static Avalonia.Controls.ContextMenu PlacementTarget(this Avalonia.Controls.ContextMenu control, Control value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Controls.ContextMenu.PlacementTargetProperty, ps, () => control.PlacementTarget = value, bindingMode, converter, bindingSource);
+}
+public static partial class ControlExtensions
+{
 public static Control FocusAdorner(this Control control, IBinding binding)
    => control._set(() => control[!Control.FocusAdornerProperty] = binding);
 public static Control FocusAdorner(this Control control, ITemplate<IControl> value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Control.FocusAdornerProperty, ps, () => control.FocusAdorner = value, bindingMode, converter, bindingSource);
@@ -302,12 +341,18 @@ public static Control ContextMenu(this Control control, Avalonia.Controls.Contex
 public static Control ContextFlyout(this Control control, IBinding binding)
    => control._set(() => control[!Control.ContextFlyoutProperty] = binding);
 public static Control ContextFlyout(this Control control, FlyoutBase value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Control.ContextFlyoutProperty, ps, () => control.ContextFlyout = value, bindingMode, converter, bindingSource);
+}
+public static partial class DataValidationErrorsExtensions
+{
 public static DataValidationErrors ErrorTemplate(this DataValidationErrors control, IBinding binding)
    => control._set(() => control[!DataValidationErrors.ErrorTemplateProperty] = binding);
 public static DataValidationErrors ErrorTemplate(this DataValidationErrors control, IDataTemplate value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DataValidationErrors.ErrorTemplateProperty, ps, () => control.ErrorTemplate = value, bindingMode, converter, bindingSource);
 public static DataValidationErrors Owner(this DataValidationErrors control, IBinding binding)
    => control._set(() => control[!DataValidationErrors.OwnerProperty] = binding);
 public static DataValidationErrors Owner(this DataValidationErrors control, Control value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DataValidationErrors.OwnerProperty, ps, () => control.Owner = value, bindingMode, converter, bindingSource);
+}
+public static partial class DatePickerExtensions
+{
 public static DatePicker DayFormat(this DatePicker control, IBinding binding)
    => control._set(() => control[!DatePicker.DayFormatProperty] = binding);
 public static DatePicker DayFormat(this DatePicker control, String value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DatePicker.DayFormatProperty, ps, () => control.DayFormat = value, bindingMode, converter, bindingSource);
@@ -341,6 +386,9 @@ public static DatePicker YearVisible(this DatePicker control, Boolean value, Bin
 public static DatePicker SelectedDate(this DatePicker control, IBinding binding)
    => control._set(() => control[!DatePicker.SelectedDateProperty] = binding);
 public static DatePicker SelectedDate(this DatePicker control, Nullable<DateTimeOffset> value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DatePicker.SelectedDateProperty, ps, () => control.SelectedDate = value, bindingMode, converter, bindingSource);
+}
+public static partial class DatePickerPresenterExtensions
+{
 public static DatePickerPresenter Date(this DatePickerPresenter control, IBinding binding)
    => control._set(() => control[!DatePickerPresenter.DateProperty] = binding);
 public static DatePickerPresenter Date(this DatePickerPresenter control, DateTimeOffset value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DatePickerPresenter.DateProperty, ps, () => control.Date = value, bindingMode, converter, bindingSource);
@@ -368,6 +416,9 @@ public static DatePickerPresenter YearFormat(this DatePickerPresenter control, S
 public static DatePickerPresenter YearVisible(this DatePickerPresenter control, IBinding binding)
    => control._set(() => control[!DatePickerPresenter.YearVisibleProperty] = binding);
 public static DatePickerPresenter YearVisible(this DatePickerPresenter control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DatePickerPresenter.YearVisibleProperty, ps, () => control.YearVisible = value, bindingMode, converter, bindingSource);
+}
+public static partial class TimePickerExtensions
+{
 public static TimePicker MinuteIncrement(this TimePicker control, IBinding binding)
    => control._set(() => control[!TimePicker.MinuteIncrementProperty] = binding);
 public static TimePicker MinuteIncrement(this TimePicker control, Int32 value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TimePicker.MinuteIncrementProperty, ps, () => control.MinuteIncrement = value, bindingMode, converter, bindingSource);
@@ -383,6 +434,9 @@ public static TimePicker ClockIdentifier(this TimePicker control, String value, 
 public static TimePicker SelectedTime(this TimePicker control, IBinding binding)
    => control._set(() => control[!TimePicker.SelectedTimeProperty] = binding);
 public static TimePicker SelectedTime(this TimePicker control, Nullable<TimeSpan> value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TimePicker.SelectedTimeProperty, ps, () => control.SelectedTime = value, bindingMode, converter, bindingSource);
+}
+public static partial class TimePickerPresenterExtensions
+{
 public static TimePickerPresenter MinuteIncrement(this TimePickerPresenter control, IBinding binding)
    => control._set(() => control[!TimePickerPresenter.MinuteIncrementProperty] = binding);
 public static TimePickerPresenter MinuteIncrement(this TimePickerPresenter control, Int32 value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TimePickerPresenter.MinuteIncrementProperty, ps, () => control.MinuteIncrement = value, bindingMode, converter, bindingSource);
@@ -392,6 +446,9 @@ public static TimePickerPresenter ClockIdentifier(this TimePickerPresenter contr
 public static TimePickerPresenter Time(this TimePickerPresenter control, IBinding binding)
    => control._set(() => control[!TimePickerPresenter.TimeProperty] = binding);
 public static TimePickerPresenter Time(this TimePickerPresenter control, TimeSpan value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TimePickerPresenter.TimeProperty, ps, () => control.Time = value, bindingMode, converter, bindingSource);
+}
+public static partial class DecoratorExtensions
+{
 public static Decorator Child(this Decorator control, IBinding binding)
    => control._set(() => control[!Decorator.ChildProperty] = binding);
 public static Decorator Child(this Decorator control, IControl value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Decorator.ChildProperty, ps, () => control.Child = value, bindingMode, converter, bindingSource);
@@ -405,9 +462,15 @@ public static Decorator Padding(this Decorator control, Double horizontal, Doubl
    => control._set(() => control.Padding = new Thickness(horizontal, vertical));
 public static Decorator Padding(this Decorator control, Double left, Double top, Double right, Double bottom)
    => control._set(() => control.Padding = new Thickness(left, top, right, bottom));
+}
+public static partial class DockPanelExtensions
+{
 public static DockPanel LastChildFill(this DockPanel control, IBinding binding)
    => control._set(() => control[!DockPanel.LastChildFillProperty] = binding);
 public static DockPanel LastChildFill(this DockPanel control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DockPanel.LastChildFillProperty, ps, () => control.LastChildFill = value, bindingMode, converter, bindingSource);
+}
+public static partial class ExpanderExtensions
+{
 public static Expander ContentTransition(this Expander control, IBinding binding)
    => control._set(() => control[!Expander.ContentTransitionProperty] = binding);
 public static Expander ContentTransition(this Expander control, IPageTransition value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Expander.ContentTransitionProperty, ps, () => control.ContentTransition = value, bindingMode, converter, bindingSource);
@@ -417,6 +480,9 @@ public static Expander ExpandDirection(this Expander control, ExpandDirection va
 public static Expander IsExpanded(this Expander control, IBinding binding)
    => control._set(() => control[!Expander.IsExpandedProperty] = binding);
 public static Expander IsExpanded(this Expander control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Expander.IsExpandedProperty, ps, () => control.IsExpanded = value, bindingMode, converter, bindingSource);
+}
+public static partial class ExperimentalAcrylicBorderExtensions
+{
 public static ExperimentalAcrylicBorder CornerRadius(this ExperimentalAcrylicBorder control, IBinding binding)
    => control._set(() => control[!ExperimentalAcrylicBorder.CornerRadiusProperty] = binding);
 public static ExperimentalAcrylicBorder CornerRadius(this ExperimentalAcrylicBorder control, CornerRadius value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ExperimentalAcrylicBorder.CornerRadiusProperty, ps, () => control.CornerRadius = value, bindingMode, converter, bindingSource);
@@ -430,6 +496,12 @@ public static ExperimentalAcrylicBorder CornerRadius(this ExperimentalAcrylicBor
 public static ExperimentalAcrylicBorder Material(this ExperimentalAcrylicBorder control, IBinding binding)
    => control._set(() => control[!ExperimentalAcrylicBorder.MaterialProperty] = binding);
 public static ExperimentalAcrylicBorder Material(this ExperimentalAcrylicBorder control, ExperimentalAcrylicMaterial value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ExperimentalAcrylicBorder.MaterialProperty, ps, () => control.Material = value, bindingMode, converter, bindingSource);
+}
+public static partial class FlyoutPresenterExtensions
+{
+}
+public static partial class MenuFlyoutPresenterExtensions
+{
 public static MenuFlyoutPresenter CornerRadius(this MenuFlyoutPresenter control, IBinding binding)
    => control._set(() => control[!MenuFlyoutPresenter.CornerRadiusProperty] = binding);
 public static MenuFlyoutPresenter CornerRadius(this MenuFlyoutPresenter control, CornerRadius value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuFlyoutPresenter.CornerRadiusProperty, ps, () => control.CornerRadius = value, bindingMode, converter, bindingSource);
@@ -440,9 +512,15 @@ public static MenuFlyoutPresenter CornerRadius(this MenuFlyoutPresenter control,
    => control._set(() => control.CornerRadius = new CornerRadius(top, bottom));
 public static MenuFlyoutPresenter CornerRadius(this MenuFlyoutPresenter control, Double topLeft, Double topRight, Double bottomRight, Double bottomLeft)
    => control._set(() => control.CornerRadius = new CornerRadius(topLeft, topRight, bottomRight, bottomLeft));
+}
+public static partial class GridExtensions
+{
 public static Grid ShowGridLines(this Grid control, IBinding binding)
    => control._set(() => control[!Grid.ShowGridLinesProperty] = binding);
 public static Grid ShowGridLines(this Grid control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Grid.ShowGridLinesProperty, ps, () => control.ShowGridLines = value, bindingMode, converter, bindingSource);
+}
+public static partial class GridSplitterExtensions
+{
 public static GridSplitter ResizeDirection(this GridSplitter control, IBinding binding)
    => control._set(() => control[!GridSplitter.ResizeDirectionProperty] = binding);
 public static GridSplitter ResizeDirection(this GridSplitter control, GridResizeDirection value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(GridSplitter.ResizeDirectionProperty, ps, () => control.ResizeDirection = value, bindingMode, converter, bindingSource);
@@ -461,6 +539,12 @@ public static GridSplitter DragIncrement(this GridSplitter control, Double value
 public static GridSplitter PreviewContent(this GridSplitter control, IBinding binding)
    => control._set(() => control[!GridSplitter.PreviewContentProperty] = binding);
 public static GridSplitter PreviewContent(this GridSplitter control, ITemplate<IControl> value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(GridSplitter.PreviewContentProperty, ps, () => control.PreviewContent = value, bindingMode, converter, bindingSource);
+}
+public static partial class IconElementExtensions
+{
+}
+public static partial class ImageExtensions
+{
 public static Image Source(this Image control, IBinding binding)
    => control._set(() => control[!Image.SourceProperty] = binding);
 public static Image Source(this Image control, IImage value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Image.SourceProperty, ps, () => control.Source = value, bindingMode, converter, bindingSource);
@@ -470,6 +554,9 @@ public static Image Stretch(this Image control, Stretch value, BindingMode? bind
 public static Image StretchDirection(this Image control, IBinding binding)
    => control._set(() => control[!Image.StretchDirectionProperty] = binding);
 public static Image StretchDirection(this Image control, StretchDirection value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Image.StretchDirectionProperty, ps, () => control.StretchDirection = value, bindingMode, converter, bindingSource);
+}
+public static partial class ItemsControlExtensions
+{
 public static T Items<T>(this T control, IBinding binding) where T : ItemsControl
    => control._set(() => control[!ItemsControl.ItemsProperty] = binding);
 public static T Items<T>(this T control, IEnumerable value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
@@ -482,15 +569,24 @@ public static T ItemTemplate<T>(this T control, IBinding binding) where T : Item
    => control._set(() => control[!ItemsControl.ItemTemplateProperty] = binding);
 public static T ItemTemplate<T>(this T control, IDataTemplate value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
 => control._setEx(ItemsControl.ItemTemplateProperty, ps, () => control.ItemTemplate = value, bindingMode, converter, bindingSource);
+}
+public static partial class LabelExtensions
+{
 public static Label Target(this Label control, IBinding binding)
    => control._set(() => control[!Label.TargetProperty] = binding);
 public static Label Target(this Label control, IInputElement value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Label.TargetProperty, ps, () => control.Target = value, bindingMode, converter, bindingSource);
+}
+public static partial class LayoutTransformControlExtensions
+{
 public static LayoutTransformControl LayoutTransform(this LayoutTransformControl control, IBinding binding)
    => control._set(() => control[!LayoutTransformControl.LayoutTransformProperty] = binding);
 public static LayoutTransformControl LayoutTransform(this LayoutTransformControl control, ITransform value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(LayoutTransformControl.LayoutTransformProperty, ps, () => control.LayoutTransform = value, bindingMode, converter, bindingSource);
 public static LayoutTransformControl UseRenderTransform(this LayoutTransformControl control, IBinding binding)
    => control._set(() => control[!LayoutTransformControl.UseRenderTransformProperty] = binding);
 public static LayoutTransformControl UseRenderTransform(this LayoutTransformControl control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(LayoutTransformControl.UseRenderTransformProperty, ps, () => control.UseRenderTransform = value, bindingMode, converter, bindingSource);
+}
+public static partial class ListBoxExtensions
+{
 public static ListBox SelectedItems(this ListBox control, IBinding binding)
    => control._set(() => control[!ListBox.SelectedItemsProperty] = binding);
 public static ListBox SelectedItems(this ListBox control, IList value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ListBox.SelectedItemsProperty, ps, () => control.SelectedItems = value, bindingMode, converter, bindingSource);
@@ -503,9 +599,15 @@ public static ListBox SelectionMode(this ListBox control, SelectionMode value, B
 public static ListBox VirtualizationMode(this ListBox control, IBinding binding)
    => control._set(() => control[!ListBox.VirtualizationModeProperty] = binding);
 public static ListBox VirtualizationMode(this ListBox control, ItemVirtualizationMode value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ListBox.VirtualizationModeProperty, ps, () => control.VirtualizationMode = value, bindingMode, converter, bindingSource);
+}
+public static partial class ListBoxItemExtensions
+{
 public static ListBoxItem IsSelected(this ListBoxItem control, IBinding binding)
    => control._set(() => control[!ListBoxItem.IsSelectedProperty] = binding);
 public static ListBoxItem IsSelected(this ListBoxItem control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ListBoxItem.IsSelectedProperty, ps, () => control.IsSelected = value, bindingMode, converter, bindingSource);
+}
+public static partial class MaskedTextBoxExtensions
+{
 public static MaskedTextBox AsciiOnly(this MaskedTextBox control, IBinding binding)
    => control._set(() => control[!MaskedTextBox.AsciiOnlyProperty] = binding);
 public static MaskedTextBox AsciiOnly(this MaskedTextBox control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MaskedTextBox.AsciiOnlyProperty, ps, () => control.AsciiOnly = value, bindingMode, converter, bindingSource);
@@ -530,6 +632,15 @@ public static MaskedTextBox ResetOnPrompt(this MaskedTextBox control, Boolean va
 public static MaskedTextBox ResetOnSpace(this MaskedTextBox control, IBinding binding)
    => control._set(() => control[!MaskedTextBox.ResetOnSpaceProperty] = binding);
 public static MaskedTextBox ResetOnSpace(this MaskedTextBox control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MaskedTextBox.ResetOnSpaceProperty, ps, () => control.ResetOnSpace = value, bindingMode, converter, bindingSource);
+}
+public static partial class MenuExtensions
+{
+}
+public static partial class MenuBaseExtensions
+{
+}
+public static partial class MenuItemExtensions
+{
 public static MenuItem Command(this MenuItem control, IBinding binding)
    => control._set(() => control[!MenuItem.CommandProperty] = binding);
 public static MenuItem Command(this MenuItem control, ICommand value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuItem.CommandProperty, ps, () => control.Command = value, bindingMode, converter, bindingSource);
@@ -551,9 +662,21 @@ public static MenuItem IsSelected(this MenuItem control, Boolean value, BindingM
 public static MenuItem IsSubMenuOpen(this MenuItem control, IBinding binding)
    => control._set(() => control[!MenuItem.IsSubMenuOpenProperty] = binding);
 public static MenuItem IsSubMenuOpen(this MenuItem control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuItem.IsSubMenuOpenProperty, ps, () => control.IsSubMenuOpen = value, bindingMode, converter, bindingSource);
+}
+public static partial class NativeControlHostExtensions
+{
+}
+public static partial class NativeMenuBarExtensions
+{
+}
+public static partial class ReversibleStackPanelExtensions
+{
 public static ReversibleStackPanel ReverseOrder(this ReversibleStackPanel control, IBinding binding)
    => control._set(() => control[!ReversibleStackPanel.ReverseOrderProperty] = binding);
 public static ReversibleStackPanel ReverseOrder(this ReversibleStackPanel control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ReversibleStackPanel.ReverseOrderProperty, ps, () => control.ReverseOrder = value, bindingMode, converter, bindingSource);
+}
+public static partial class NumericUpDownExtensions
+{
 public static NumericUpDown AllowSpin(this NumericUpDown control, IBinding binding)
    => control._set(() => control[!NumericUpDown.AllowSpinProperty] = binding);
 public static NumericUpDown AllowSpin(this NumericUpDown control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NumericUpDown.AllowSpinProperty, ps, () => control.AllowSpin = value, bindingMode, converter, bindingSource);
@@ -602,12 +725,22 @@ public static NumericUpDown HorizontalContentAlignment(this NumericUpDown contro
 public static NumericUpDown VerticalContentAlignment(this NumericUpDown control, IBinding binding)
    => control._set(() => control[!NumericUpDown.VerticalContentAlignmentProperty] = binding);
 public static NumericUpDown VerticalContentAlignment(this NumericUpDown control, VerticalAlignment value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NumericUpDown.VerticalContentAlignmentProperty, ps, () => control.VerticalContentAlignment = value, bindingMode, converter, bindingSource);
-public static Panel Background(this Panel control, IBinding binding)
+}
+public static partial class PanelExtensions
+{
+public static T Background<T>(this T control, IBinding binding) where T : Panel
    => control._set(() => control[!Panel.BackgroundProperty] = binding);
-public static Panel Background(this Panel control, IBrush value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Panel.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
+public static T Background<T>(this T control, IBrush value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : Panel
+=> control._setEx(Panel.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
+}
+public static partial class PathIconExtensions
+{
 public static PathIcon Data(this PathIcon control, IBinding binding)
    => control._set(() => control[!PathIcon.DataProperty] = binding);
 public static PathIcon Data(this PathIcon control, Geometry value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PathIcon.DataProperty, ps, () => control.Data = value, bindingMode, converter, bindingSource);
+}
+public static partial class ProgressBarExtensions
+{
 public static ProgressBar IsIndeterminate(this ProgressBar control, IBinding binding)
    => control._set(() => control[!ProgressBar.IsIndeterminateProperty] = binding);
 public static ProgressBar IsIndeterminate(this ProgressBar control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ProgressBar.IsIndeterminateProperty, ps, () => control.IsIndeterminate = value, bindingMode, converter, bindingSource);
@@ -617,15 +750,27 @@ public static ProgressBar ShowProgressText(this ProgressBar control, Boolean val
 public static ProgressBar Orientation(this ProgressBar control, IBinding binding)
    => control._set(() => control[!ProgressBar.OrientationProperty] = binding);
 public static ProgressBar Orientation(this ProgressBar control, Orientation value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ProgressBar.OrientationProperty, ps, () => control.Orientation = value, bindingMode, converter, bindingSource);
+}
+public static partial class RadioButtonExtensions
+{
 public static RadioButton GroupName(this RadioButton control, IBinding binding)
    => control._set(() => control[!RadioButton.GroupNameProperty] = binding);
 public static RadioButton GroupName(this RadioButton control, String value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(RadioButton.GroupNameProperty, ps, () => control.GroupName = value, bindingMode, converter, bindingSource);
+}
+public static partial class RelativePanelExtensions
+{
+}
+public static partial class RepeatButtonExtensions
+{
 public static RepeatButton Interval(this RepeatButton control, IBinding binding)
    => control._set(() => control[!RepeatButton.IntervalProperty] = binding);
 public static RepeatButton Interval(this RepeatButton control, Int32 value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(RepeatButton.IntervalProperty, ps, () => control.Interval = value, bindingMode, converter, bindingSource);
 public static RepeatButton Delay(this RepeatButton control, IBinding binding)
    => control._set(() => control[!RepeatButton.DelayProperty] = binding);
 public static RepeatButton Delay(this RepeatButton control, Int32 value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(RepeatButton.DelayProperty, ps, () => control.Delay = value, bindingMode, converter, bindingSource);
+}
+public static partial class ItemsRepeaterExtensions
+{
 public static ItemsRepeater HorizontalCacheLength(this ItemsRepeater control, IBinding binding)
    => control._set(() => control[!ItemsRepeater.HorizontalCacheLengthProperty] = binding);
 public static ItemsRepeater HorizontalCacheLength(this ItemsRepeater control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ItemsRepeater.HorizontalCacheLengthProperty, ps, () => control.HorizontalCacheLength = value, bindingMode, converter, bindingSource);
@@ -641,6 +786,9 @@ public static ItemsRepeater Layout(this ItemsRepeater control, AttachedLayout va
 public static ItemsRepeater VerticalCacheLength(this ItemsRepeater control, IBinding binding)
    => control._set(() => control[!ItemsRepeater.VerticalCacheLengthProperty] = binding);
 public static ItemsRepeater VerticalCacheLength(this ItemsRepeater control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ItemsRepeater.VerticalCacheLengthProperty, ps, () => control.VerticalCacheLength = value, bindingMode, converter, bindingSource);
+}
+public static partial class ScrollViewerExtensions
+{
 public static ScrollViewer Offset(this ScrollViewer control, IBinding binding)
    => control._set(() => control[!ScrollViewer.OffsetProperty] = binding);
 public static ScrollViewer Offset(this ScrollViewer control, Vector value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ScrollViewer.OffsetProperty, ps, () => control.Offset = value, bindingMode, converter, bindingSource);
@@ -653,6 +801,12 @@ public static ScrollViewer VerticalScrollBarVisibility(this ScrollViewer control
 public static ScrollViewer AllowAutoHide(this ScrollViewer control, IBinding binding)
    => control._set(() => control[!ScrollViewer.AllowAutoHideProperty] = binding);
 public static ScrollViewer AllowAutoHide(this ScrollViewer control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ScrollViewer.AllowAutoHideProperty, ps, () => control.AllowAutoHide = value, bindingMode, converter, bindingSource);
+}
+public static partial class SeparatorExtensions
+{
+}
+public static partial class SliderExtensions
+{
 public static Slider Orientation(this Slider control, IBinding binding)
    => control._set(() => control[!Slider.OrientationProperty] = binding);
 public static Slider Orientation(this Slider control, Orientation value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Slider.OrientationProperty, ps, () => control.Orientation = value, bindingMode, converter, bindingSource);
@@ -671,9 +825,15 @@ public static Slider TickPlacement(this Slider control, TickPlacement value, Bin
 public static Slider Ticks(this Slider control, IBinding binding)
    => control._set(() => control[!Slider.TicksProperty] = binding);
 public static Slider Ticks(this Slider control, AvaloniaList<Double> value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Slider.TicksProperty, ps, () => control.Ticks = value, bindingMode, converter, bindingSource);
+}
+public static partial class SpinnerExtensions
+{
 public static Spinner ValidSpinDirection(this Spinner control, IBinding binding)
    => control._set(() => control[!Spinner.ValidSpinDirectionProperty] = binding);
 public static Spinner ValidSpinDirection(this Spinner control, ValidSpinDirections value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Spinner.ValidSpinDirectionProperty, ps, () => control.ValidSpinDirection = value, bindingMode, converter, bindingSource);
+}
+public static partial class SplitViewExtensions
+{
 public static SplitView CompactPaneLength(this SplitView control, IBinding binding)
    => control._set(() => control[!SplitView.CompactPaneLengthProperty] = binding);
 public static SplitView CompactPaneLength(this SplitView control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(SplitView.CompactPaneLengthProperty, ps, () => control.CompactPaneLength = value, bindingMode, converter, bindingSource);
@@ -704,12 +864,18 @@ public static SplitView UseLightDismissOverlayMode(this SplitView control, Boole
 public static SplitView TemplateSettings(this SplitView control, IBinding binding)
    => control._set(() => control[!SplitView.TemplateSettingsProperty] = binding);
 public static SplitView TemplateSettings(this SplitView control, SplitViewTemplateSettings value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(SplitView.TemplateSettingsProperty, ps, () => control.TemplateSettings = value, bindingMode, converter, bindingSource);
+}
+public static partial class StackPanelExtensions
+{
 public static StackPanel Spacing(this StackPanel control, IBinding binding)
    => control._set(() => control[!StackPanel.SpacingProperty] = binding);
 public static StackPanel Spacing(this StackPanel control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(StackPanel.SpacingProperty, ps, () => control.Spacing = value, bindingMode, converter, bindingSource);
 public static StackPanel Orientation(this StackPanel control, IBinding binding)
    => control._set(() => control[!StackPanel.OrientationProperty] = binding);
 public static StackPanel Orientation(this StackPanel control, Orientation value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(StackPanel.OrientationProperty, ps, () => control.Orientation = value, bindingMode, converter, bindingSource);
+}
+public static partial class TabControlExtensions
+{
 public static TabControl TabStripPlacement(this TabControl control, IBinding binding)
    => control._set(() => control[!TabControl.TabStripPlacementProperty] = binding);
 public static TabControl TabStripPlacement(this TabControl control, Dock value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TabControl.TabStripPlacementProperty, ps, () => control.TabStripPlacement = value, bindingMode, converter, bindingSource);
@@ -722,9 +888,15 @@ public static TabControl VerticalContentAlignment(this TabControl control, Verti
 public static TabControl ContentTemplate(this TabControl control, IBinding binding)
    => control._set(() => control[!TabControl.ContentTemplateProperty] = binding);
 public static TabControl ContentTemplate(this TabControl control, IDataTemplate value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TabControl.ContentTemplateProperty, ps, () => control.ContentTemplate = value, bindingMode, converter, bindingSource);
+}
+public static partial class TabItemExtensions
+{
 public static TabItem IsSelected(this TabItem control, IBinding binding)
    => control._set(() => control[!TabItem.IsSelectedProperty] = binding);
 public static TabItem IsSelected(this TabItem control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TabItem.IsSelectedProperty, ps, () => control.IsSelected = value, bindingMode, converter, bindingSource);
+}
+public static partial class TextBlockExtensions
+{
 public static TextBlock Background(this TextBlock control, IBinding binding)
    => control._set(() => control[!TextBlock.BackgroundProperty] = binding);
 public static TextBlock Background(this TextBlock control, IBrush value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextBlock.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
@@ -774,6 +946,9 @@ public static TextBlock TextTrimming(this TextBlock control, TextTrimming value,
 public static TextBlock TextDecorations(this TextBlock control, IBinding binding)
    => control._set(() => control[!TextBlock.TextDecorationsProperty] = binding);
 public static TextBlock TextDecorations(this TextBlock control, TextDecorationCollection value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextBlock.TextDecorationsProperty, ps, () => control.TextDecorations = value, bindingMode, converter, bindingSource);
+}
+public static partial class TextBoxExtensions
+{
 public static TextBox AcceptsReturn(this TextBox control, IBinding binding)
    => control._set(() => control[!TextBox.AcceptsReturnProperty] = binding);
 public static TextBox AcceptsReturn(this TextBox control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextBox.AcceptsReturnProperty, ps, () => control.AcceptsReturn = value, bindingMode, converter, bindingSource);
@@ -846,6 +1021,9 @@ public static TextBox IsUndoEnabled(this TextBox control, Boolean value, Binding
 public static TextBox UndoLimit(this TextBox control, IBinding binding)
    => control._set(() => control[!TextBox.UndoLimitProperty] = binding);
 public static TextBox UndoLimit(this TextBox control, Int32 value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextBox.UndoLimitProperty, ps, () => control.UndoLimit = value, bindingMode, converter, bindingSource);
+}
+public static partial class TickBarExtensions
+{
 public static TickBar Fill(this TickBar control, IBinding binding)
    => control._set(() => control[!TickBar.FillProperty] = binding);
 public static TickBar Fill(this TickBar control, IBrush value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TickBar.FillProperty, ps, () => control.Fill = value, bindingMode, converter, bindingSource);
@@ -882,6 +1060,9 @@ public static TickBar ReservedSpace(this TickBar control, Point position, Size s
    => control._set(() => control.ReservedSpace = new Rect(position, size));
 public static TickBar ReservedSpace(this TickBar control, Point topLeft, Point bottomRight)
    => control._set(() => control.ReservedSpace = new Rect(topLeft, bottomRight));
+}
+public static partial class ToggleSwitchExtensions
+{
 public static ToggleSwitch OffContent(this ToggleSwitch control, IBinding binding)
    => control._set(() => control[!ToggleSwitch.OffContentProperty] = binding);
 public static ToggleSwitch OffContent(this ToggleSwitch control, Object value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ToggleSwitch.OffContentProperty, ps, () => control.OffContent = value, bindingMode, converter, bindingSource);
@@ -894,12 +1075,21 @@ public static ToggleSwitch OnContent(this ToggleSwitch control, Object value, Bi
 public static ToggleSwitch OnContentTemplate(this ToggleSwitch control, IBinding binding)
    => control._set(() => control[!ToggleSwitch.OnContentTemplateProperty] = binding);
 public static ToggleSwitch OnContentTemplate(this ToggleSwitch control, IDataTemplate value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ToggleSwitch.OnContentTemplateProperty, ps, () => control.OnContentTemplate = value, bindingMode, converter, bindingSource);
+}
+public static partial class ToolTipExtensions
+{
+}
+public static partial class TopLevelExtensions
+{
 public static TopLevel TransparencyLevelHint(this TopLevel control, IBinding binding)
    => control._set(() => control[!TopLevel.TransparencyLevelHintProperty] = binding);
 public static TopLevel TransparencyLevelHint(this TopLevel control, WindowTransparencyLevel value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TopLevel.TransparencyLevelHintProperty, ps, () => control.TransparencyLevelHint = value, bindingMode, converter, bindingSource);
 public static TopLevel TransparencyBackgroundFallback(this TopLevel control, IBinding binding)
    => control._set(() => control[!TopLevel.TransparencyBackgroundFallbackProperty] = binding);
 public static TopLevel TransparencyBackgroundFallback(this TopLevel control, IBrush value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TopLevel.TransparencyBackgroundFallbackProperty, ps, () => control.TransparencyBackgroundFallback = value, bindingMode, converter, bindingSource);
+}
+public static partial class TreeViewExtensions
+{
 public static TreeView AutoScrollToSelectedItem(this TreeView control, IBinding binding)
    => control._set(() => control[!TreeView.AutoScrollToSelectedItemProperty] = binding);
 public static TreeView AutoScrollToSelectedItem(this TreeView control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TreeView.AutoScrollToSelectedItemProperty, ps, () => control.AutoScrollToSelectedItem = value, bindingMode, converter, bindingSource);
@@ -912,15 +1102,30 @@ public static TreeView SelectedItems(this TreeView control, IList value, Binding
 public static TreeView SelectionMode(this TreeView control, IBinding binding)
    => control._set(() => control[!TreeView.SelectionModeProperty] = binding);
 public static TreeView SelectionMode(this TreeView control, SelectionMode value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TreeView.SelectionModeProperty, ps, () => control.SelectionMode = value, bindingMode, converter, bindingSource);
+}
+public static partial class TreeViewItemExtensions
+{
 public static TreeViewItem IsExpanded(this TreeViewItem control, IBinding binding)
    => control._set(() => control[!TreeViewItem.IsExpandedProperty] = binding);
 public static TreeViewItem IsExpanded(this TreeViewItem control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TreeViewItem.IsExpandedProperty, ps, () => control.IsExpanded = value, bindingMode, converter, bindingSource);
 public static TreeViewItem IsSelected(this TreeViewItem control, IBinding binding)
    => control._set(() => control[!TreeViewItem.IsSelectedProperty] = binding);
 public static TreeViewItem IsSelected(this TreeViewItem control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TreeViewItem.IsSelectedProperty, ps, () => control.IsSelected = value, bindingMode, converter, bindingSource);
+}
+public static partial class UserControlExtensions
+{
+}
+public static partial class ViewboxExtensions
+{
 public static Viewbox StretchDirection(this Viewbox control, IBinding binding)
    => control._set(() => control[!Viewbox.StretchDirectionProperty] = binding);
 public static Viewbox StretchDirection(this Viewbox control, StretchDirection value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Viewbox.StretchDirectionProperty, ps, () => control.StretchDirection = value, bindingMode, converter, bindingSource);
+}
+public static partial class VirtualizingStackPanelExtensions
+{
+}
+public static partial class WindowExtensions
+{
 public static Window SizeToContent(this Window control, IBinding binding)
    => control._set(() => control[!Window.SizeToContentProperty] = binding);
 public static Window SizeToContent(this Window control, SizeToContent value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Window.SizeToContentProperty, ps, () => control.SizeToContent = value, bindingMode, converter, bindingSource);
@@ -957,9 +1162,15 @@ public static Window WindowStartupLocation(this Window control, WindowStartupLoc
 public static Window CanResize(this Window control, IBinding binding)
    => control._set(() => control[!Window.CanResizeProperty] = binding);
 public static Window CanResize(this Window control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Window.CanResizeProperty, ps, () => control.CanResize = value, bindingMode, converter, bindingSource);
+}
+public static partial class WindowBaseExtensions
+{
 public static WindowBase Topmost(this WindowBase control, IBinding binding)
    => control._set(() => control[!WindowBase.TopmostProperty] = binding);
 public static WindowBase Topmost(this WindowBase control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(WindowBase.TopmostProperty, ps, () => control.Topmost = value, bindingMode, converter, bindingSource);
+}
+public static partial class WrapPanelExtensions
+{
 public static WrapPanel Orientation(this WrapPanel control, IBinding binding)
    => control._set(() => control[!WrapPanel.OrientationProperty] = binding);
 public static WrapPanel Orientation(this WrapPanel control, Orientation value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(WrapPanel.OrientationProperty, ps, () => control.Orientation = value, bindingMode, converter, bindingSource);
@@ -969,27 +1180,51 @@ public static WrapPanel ItemWidth(this WrapPanel control, Double value, BindingM
 public static WrapPanel ItemHeight(this WrapPanel control, IBinding binding)
    => control._set(() => control[!WrapPanel.ItemHeightProperty] = binding);
 public static WrapPanel ItemHeight(this WrapPanel control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(WrapPanel.ItemHeightProperty, ps, () => control.ItemHeight = value, bindingMode, converter, bindingSource);
+}
+public static partial class ArcExtensions
+{
 public static Arc StartAngle(this Arc control, IBinding binding)
    => control._set(() => control[!Arc.StartAngleProperty] = binding);
 public static Arc StartAngle(this Arc control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Arc.StartAngleProperty, ps, () => control.StartAngle = value, bindingMode, converter, bindingSource);
 public static Arc SweepAngle(this Arc control, IBinding binding)
    => control._set(() => control[!Arc.SweepAngleProperty] = binding);
 public static Arc SweepAngle(this Arc control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Arc.SweepAngleProperty, ps, () => control.SweepAngle = value, bindingMode, converter, bindingSource);
+}
+public static partial class EllipseExtensions
+{
+}
+public static partial class LineExtensions
+{
 public static Line StartPoint(this Line control, IBinding binding)
    => control._set(() => control[!Line.StartPointProperty] = binding);
 public static Line StartPoint(this Line control, Point value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Line.StartPointProperty, ps, () => control.StartPoint = value, bindingMode, converter, bindingSource);
 public static Line EndPoint(this Line control, IBinding binding)
    => control._set(() => control[!Line.EndPointProperty] = binding);
 public static Line EndPoint(this Line control, Point value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Line.EndPointProperty, ps, () => control.EndPoint = value, bindingMode, converter, bindingSource);
+}
+public static partial class PathExtensions
+{
 public static Path Data(this Path control, IBinding binding)
    => control._set(() => control[!Path.DataProperty] = binding);
 public static Path Data(this Path control, Geometry value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Path.DataProperty, ps, () => control.Data = value, bindingMode, converter, bindingSource);
+}
+public static partial class PolygonExtensions
+{
 public static Polygon Points(this Polygon control, IBinding binding)
    => control._set(() => control[!Polygon.PointsProperty] = binding);
 public static Polygon Points(this Polygon control, IList<Point> value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Polygon.PointsProperty, ps, () => control.Points = value, bindingMode, converter, bindingSource);
+}
+public static partial class PolylineExtensions
+{
 public static Polyline Points(this Polyline control, IBinding binding)
    => control._set(() => control[!Polyline.PointsProperty] = binding);
 public static Polyline Points(this Polyline control, IList<Point> value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Polyline.PointsProperty, ps, () => control.Points = value, bindingMode, converter, bindingSource);
+}
+public static partial class RectangleExtensions
+{
+}
+public static partial class ShapeExtensions
+{
 public static Shape Fill(this Shape control, IBinding binding)
    => control._set(() => control[!Shape.FillProperty] = binding);
 public static Shape Fill(this Shape control, IBrush value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Shape.FillProperty, ps, () => control.Fill = value, bindingMode, converter, bindingSource);
@@ -1014,6 +1249,12 @@ public static Shape StrokeLineCap(this Shape control, PenLineCap value, BindingM
 public static Shape StrokeJoin(this Shape control, IBinding binding)
    => control._set(() => control[!Shape.StrokeJoinProperty] = binding);
 public static Shape StrokeJoin(this Shape control, PenLineJoin value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Shape.StrokeJoinProperty, ps, () => control.StrokeJoin = value, bindingMode, converter, bindingSource);
+}
+public static partial class RemoteWidgetExtensions
+{
+}
+public static partial class CarouselPresenterExtensions
+{
 public static CarouselPresenter IsVirtualized(this CarouselPresenter control, IBinding binding)
    => control._set(() => control[!CarouselPresenter.IsVirtualizedProperty] = binding);
 public static CarouselPresenter IsVirtualized(this CarouselPresenter control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(CarouselPresenter.IsVirtualizedProperty, ps, () => control.IsVirtualized = value, bindingMode, converter, bindingSource);
@@ -1023,6 +1264,9 @@ public static CarouselPresenter SelectedIndex(this CarouselPresenter control, In
 public static CarouselPresenter PageTransition(this CarouselPresenter control, IBinding binding)
    => control._set(() => control[!CarouselPresenter.PageTransitionProperty] = binding);
 public static CarouselPresenter PageTransition(this CarouselPresenter control, IPageTransition value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(CarouselPresenter.PageTransitionProperty, ps, () => control.PageTransition = value, bindingMode, converter, bindingSource);
+}
+public static partial class ContentPresenterExtensions
+{
 public static ContentPresenter Background(this ContentPresenter control, IBinding binding)
    => control._set(() => control[!ContentPresenter.BackgroundProperty] = binding);
 public static ContentPresenter Background(this ContentPresenter control, IBrush value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ContentPresenter.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
@@ -1082,9 +1326,15 @@ public static ContentPresenter Padding(this ContentPresenter control, Double lef
 public static ContentPresenter RecognizesAccessKey(this ContentPresenter control, IBinding binding)
    => control._set(() => control[!ContentPresenter.RecognizesAccessKeyProperty] = binding);
 public static ContentPresenter RecognizesAccessKey(this ContentPresenter control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ContentPresenter.RecognizesAccessKeyProperty, ps, () => control.RecognizesAccessKey = value, bindingMode, converter, bindingSource);
+}
+public static partial class ItemsPresenterExtensions
+{
 public static ItemsPresenter VirtualizationMode(this ItemsPresenter control, IBinding binding)
    => control._set(() => control[!ItemsPresenter.VirtualizationModeProperty] = binding);
 public static ItemsPresenter VirtualizationMode(this ItemsPresenter control, ItemVirtualizationMode value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ItemsPresenter.VirtualizationModeProperty, ps, () => control.VirtualizationMode = value, bindingMode, converter, bindingSource);
+}
+public static partial class ItemsPresenterBaseExtensions
+{
 public static ItemsPresenterBase Items(this ItemsPresenterBase control, IBinding binding)
    => control._set(() => control[!ItemsPresenterBase.ItemsProperty] = binding);
 public static ItemsPresenterBase Items(this ItemsPresenterBase control, IEnumerable value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ItemsPresenterBase.ItemsProperty, ps, () => control.Items = value, bindingMode, converter, bindingSource);
@@ -1094,6 +1344,9 @@ public static ItemsPresenterBase ItemsPanel(this ItemsPresenterBase control, ITe
 public static ItemsPresenterBase ItemTemplate(this ItemsPresenterBase control, IBinding binding)
    => control._set(() => control[!ItemsPresenterBase.ItemTemplateProperty] = binding);
 public static ItemsPresenterBase ItemTemplate(this ItemsPresenterBase control, IDataTemplate value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ItemsPresenterBase.ItemTemplateProperty, ps, () => control.ItemTemplate = value, bindingMode, converter, bindingSource);
+}
+public static partial class ScrollContentPresenterExtensions
+{
 public static ScrollContentPresenter CanHorizontallyScroll(this ScrollContentPresenter control, IBinding binding)
    => control._set(() => control[!ScrollContentPresenter.CanHorizontallyScrollProperty] = binding);
 public static ScrollContentPresenter CanHorizontallyScroll(this ScrollContentPresenter control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ScrollContentPresenter.CanHorizontallyScrollProperty, ps, () => control.CanHorizontallyScroll = value, bindingMode, converter, bindingSource);
@@ -1103,6 +1356,9 @@ public static ScrollContentPresenter CanVerticallyScroll(this ScrollContentPrese
 public static ScrollContentPresenter Offset(this ScrollContentPresenter control, IBinding binding)
    => control._set(() => control[!ScrollContentPresenter.OffsetProperty] = binding);
 public static ScrollContentPresenter Offset(this ScrollContentPresenter control, Vector value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ScrollContentPresenter.OffsetProperty, ps, () => control.Offset = value, bindingMode, converter, bindingSource);
+}
+public static partial class TextPresenterExtensions
+{
 public static TextPresenter CaretIndex(this TextPresenter control, IBinding binding)
    => control._set(() => control[!TextPresenter.CaretIndexProperty] = binding);
 public static TextPresenter CaretIndex(this TextPresenter control, Int32 value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextPresenter.CaretIndexProperty, ps, () => control.CaretIndex = value, bindingMode, converter, bindingSource);
@@ -1139,21 +1395,51 @@ public static TextPresenter TextWrapping(this TextPresenter control, TextWrappin
 public static TextPresenter Background(this TextPresenter control, IBinding binding)
    => control._set(() => control[!TextPresenter.BackgroundProperty] = binding);
 public static TextPresenter Background(this TextPresenter control, IBrush value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextPresenter.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
+}
+public static partial class NotificationCardExtensions
+{
 public static NotificationCard IsClosed(this NotificationCard control, IBinding binding)
    => control._set(() => control[!NotificationCard.IsClosedProperty] = binding);
 public static NotificationCard IsClosed(this NotificationCard control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NotificationCard.IsClosedProperty, ps, () => control.IsClosed = value, bindingMode, converter, bindingSource);
+}
+public static partial class WindowNotificationManagerExtensions
+{
 public static WindowNotificationManager Position(this WindowNotificationManager control, IBinding binding)
    => control._set(() => control[!WindowNotificationManager.PositionProperty] = binding);
 public static WindowNotificationManager Position(this WindowNotificationManager control, NotificationPosition value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(WindowNotificationManager.PositionProperty, ps, () => control.Position = value, bindingMode, converter, bindingSource);
 public static WindowNotificationManager MaxItems(this WindowNotificationManager control, IBinding binding)
    => control._set(() => control[!WindowNotificationManager.MaxItemsProperty] = binding);
 public static WindowNotificationManager MaxItems(this WindowNotificationManager control, Int32 value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(WindowNotificationManager.MaxItemsProperty, ps, () => control.MaxItems = value, bindingMode, converter, bindingSource);
+}
+public static partial class EmbeddableControlRootExtensions
+{
+}
+public static partial class OffscreenTopLevelExtensions
+{
+}
+public static partial class CaptionButtonsExtensions
+{
+}
+public static partial class TitleBarExtensions
+{
+}
+public static partial class CalendarButtonExtensions
+{
+}
+public static partial class CalendarDayButtonExtensions
+{
+}
+public static partial class CalendarItemExtensions
+{
 public static CalendarItem HeaderBackground(this CalendarItem control, IBinding binding)
    => control._set(() => control[!CalendarItem.HeaderBackgroundProperty] = binding);
 public static CalendarItem HeaderBackground(this CalendarItem control, IBrush value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(CalendarItem.HeaderBackgroundProperty, ps, () => control.HeaderBackground = value, bindingMode, converter, bindingSource);
 public static CalendarItem DayTitleTemplate(this CalendarItem control, IBinding binding)
    => control._set(() => control[!CalendarItem.DayTitleTemplateProperty] = binding);
 public static CalendarItem DayTitleTemplate(this CalendarItem control, ITemplate<IControl> value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(CalendarItem.DayTitleTemplateProperty, ps, () => control.DayTitleTemplate = value, bindingMode, converter, bindingSource);
+}
+public static partial class DateTimePickerPanelExtensions
+{
 public static DateTimePickerPanel ItemHeight(this DateTimePickerPanel control, IBinding binding)
    => control._set(() => control[!DateTimePickerPanel.ItemHeightProperty] = binding);
 public static DateTimePickerPanel ItemHeight(this DateTimePickerPanel control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DateTimePickerPanel.ItemHeightProperty, ps, () => control.ItemHeight = value, bindingMode, converter, bindingSource);
@@ -1166,21 +1452,54 @@ public static DateTimePickerPanel ItemFormat(this DateTimePickerPanel control, S
 public static DateTimePickerPanel ShouldLoop(this DateTimePickerPanel control, IBinding binding)
    => control._set(() => control[!DateTimePickerPanel.ShouldLoopProperty] = binding);
 public static DateTimePickerPanel ShouldLoop(this DateTimePickerPanel control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DateTimePickerPanel.ShouldLoopProperty, ps, () => control.ShouldLoop = value, bindingMode, converter, bindingSource);
+}
+public static partial class PickerPresenterBaseExtensions
+{
+}
+public static partial class AccessTextExtensions
+{
 public static AccessText ShowAccessKey(this AccessText control, IBinding binding)
    => control._set(() => control[!AccessText.ShowAccessKeyProperty] = binding);
 public static AccessText ShowAccessKey(this AccessText control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AccessText.ShowAccessKeyProperty, ps, () => control.ShowAccessKey = value, bindingMode, converter, bindingSource);
+}
+public static partial class AdornerLayerExtensions
+{
+}
+public static partial class ChromeOverlayLayerExtensions
+{
+}
+public static partial class HeaderedContentControlExtensions
+{
 public static HeaderedContentControl Header(this HeaderedContentControl control, IBinding binding)
    => control._set(() => control[!HeaderedContentControl.HeaderProperty] = binding);
 public static HeaderedContentControl Header(this HeaderedContentControl control, Object value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(HeaderedContentControl.HeaderProperty, ps, () => control.Header = value, bindingMode, converter, bindingSource);
 public static HeaderedContentControl HeaderTemplate(this HeaderedContentControl control, IBinding binding)
    => control._set(() => control[!HeaderedContentControl.HeaderTemplateProperty] = binding);
 public static HeaderedContentControl HeaderTemplate(this HeaderedContentControl control, IDataTemplate value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(HeaderedContentControl.HeaderTemplateProperty, ps, () => control.HeaderTemplate = value, bindingMode, converter, bindingSource);
+}
+public static partial class HeaderedItemsControlExtensions
+{
 public static HeaderedItemsControl Header(this HeaderedItemsControl control, IBinding binding)
    => control._set(() => control[!HeaderedItemsControl.HeaderProperty] = binding);
 public static HeaderedItemsControl Header(this HeaderedItemsControl control, Object value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(HeaderedItemsControl.HeaderProperty, ps, () => control.Header = value, bindingMode, converter, bindingSource);
+}
+public static partial class HeaderedSelectingItemsControlExtensions
+{
 public static HeaderedSelectingItemsControl Header(this HeaderedSelectingItemsControl control, IBinding binding)
    => control._set(() => control[!HeaderedSelectingItemsControl.HeaderProperty] = binding);
 public static HeaderedSelectingItemsControl Header(this HeaderedSelectingItemsControl control, Object value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(HeaderedSelectingItemsControl.HeaderProperty, ps, () => control.Header = value, bindingMode, converter, bindingSource);
+}
+public static partial class LightDismissOverlayLayerExtensions
+{
+}
+public static partial class OverlayLayerExtensions
+{
+}
+public static partial class OverlayPopupHostExtensions
+{
+}
+public static partial class PopupExtensions
+{
 public static Popup WindowManagerAddShadowHint(this Popup control, IBinding binding)
    => control._set(() => control[!Popup.WindowManagerAddShadowHintProperty] = binding);
 public static Popup WindowManagerAddShadowHint(this Popup control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Popup.WindowManagerAddShadowHintProperty, ps, () => control.WindowManagerAddShadowHint = value, bindingMode, converter, bindingSource);
@@ -1229,6 +1548,12 @@ public static Popup VerticalOffset(this Popup control, Double value, BindingMode
 public static Popup Topmost(this Popup control, IBinding binding)
    => control._set(() => control[!Popup.TopmostProperty] = binding);
 public static Popup Topmost(this Popup control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Popup.TopmostProperty, ps, () => control.Topmost = value, bindingMode, converter, bindingSource);
+}
+public static partial class PopupRootExtensions
+{
+}
+public static partial class RangeBaseExtensions
+{
 public static RangeBase Minimum(this RangeBase control, IBinding binding)
    => control._set(() => control[!RangeBase.MinimumProperty] = binding);
 public static RangeBase Minimum(this RangeBase control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(RangeBase.MinimumProperty, ps, () => control.Minimum = value, bindingMode, converter, bindingSource);
@@ -1244,6 +1569,9 @@ public static RangeBase SmallChange(this RangeBase control, Double value, Bindin
 public static RangeBase LargeChange(this RangeBase control, IBinding binding)
    => control._set(() => control[!RangeBase.LargeChangeProperty] = binding);
 public static RangeBase LargeChange(this RangeBase control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(RangeBase.LargeChangeProperty, ps, () => control.LargeChange = value, bindingMode, converter, bindingSource);
+}
+public static partial class ScrollBarExtensions
+{
 public static ScrollBar ViewportSize(this ScrollBar control, IBinding binding)
    => control._set(() => control[!ScrollBar.ViewportSizeProperty] = binding);
 public static ScrollBar ViewportSize(this ScrollBar control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ScrollBar.ViewportSizeProperty, ps, () => control.ViewportSize = value, bindingMode, converter, bindingSource);
@@ -1262,6 +1590,9 @@ public static ScrollBar HideDelay(this ScrollBar control, TimeSpan value, Bindin
 public static ScrollBar ShowDelay(this ScrollBar control, IBinding binding)
    => control._set(() => control[!ScrollBar.ShowDelayProperty] = binding);
 public static ScrollBar ShowDelay(this ScrollBar control, TimeSpan value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ScrollBar.ShowDelayProperty, ps, () => control.ShowDelay = value, bindingMode, converter, bindingSource);
+}
+public static partial class SelectingItemsControlExtensions
+{
 public static SelectingItemsControl AutoScrollToSelectedItem(this SelectingItemsControl control, IBinding binding)
    => control._set(() => control[!SelectingItemsControl.AutoScrollToSelectedItemProperty] = binding);
 public static SelectingItemsControl AutoScrollToSelectedItem(this SelectingItemsControl control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(SelectingItemsControl.AutoScrollToSelectedItemProperty, ps, () => control.AutoScrollToSelectedItem = value, bindingMode, converter, bindingSource);
@@ -1274,6 +1605,15 @@ public static SelectingItemsControl SelectedItem(this SelectingItemsControl cont
 public static SelectingItemsControl IsTextSearchEnabled(this SelectingItemsControl control, IBinding binding)
    => control._set(() => control[!SelectingItemsControl.IsTextSearchEnabledProperty] = binding);
 public static SelectingItemsControl IsTextSearchEnabled(this SelectingItemsControl control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(SelectingItemsControl.IsTextSearchEnabledProperty, ps, () => control.IsTextSearchEnabled = value, bindingMode, converter, bindingSource);
+}
+public static partial class TabStripExtensions
+{
+}
+public static partial class TabStripItemExtensions
+{
+}
+public static partial class TemplatedControlExtensions
+{
 public static T Background<T>(this T control, IBinding binding) where T : TemplatedControl
    => control._set(() => control[!TemplatedControl.BackgroundProperty] = binding);
 public static T Background<T>(this T control, IBrush value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : TemplatedControl
@@ -1339,12 +1679,21 @@ public static T Template<T>(this T control, IBinding binding) where T : Template
    => control._set(() => control[!TemplatedControl.TemplateProperty] = binding);
 public static T Template<T>(this T control, IControlTemplate value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : TemplatedControl
 => control._setEx(TemplatedControl.TemplateProperty, ps, () => control.Template = value, bindingMode, converter, bindingSource);
+}
+public static partial class ThumbExtensions
+{
+}
+public static partial class ToggleButtonExtensions
+{
 public static ToggleButton IsChecked(this ToggleButton control, IBinding binding)
    => control._set(() => control[!ToggleButton.IsCheckedProperty] = binding);
 public static ToggleButton IsChecked(this ToggleButton control, Nullable<Boolean> value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ToggleButton.IsCheckedProperty, ps, () => control.IsChecked = value, bindingMode, converter, bindingSource);
 public static ToggleButton IsThreeState(this ToggleButton control, IBinding binding)
    => control._set(() => control[!ToggleButton.IsThreeStateProperty] = binding);
 public static ToggleButton IsThreeState(this ToggleButton control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ToggleButton.IsThreeStateProperty, ps, () => control.IsThreeState = value, bindingMode, converter, bindingSource);
+}
+public static partial class TrackExtensions
+{
 public static Track Minimum(this Track control, IBinding binding)
    => control._set(() => control[!Track.MinimumProperty] = binding);
 public static Track Minimum(this Track control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Track.MinimumProperty, ps, () => control.Minimum = value, bindingMode, converter, bindingSource);
@@ -1372,6 +1721,9 @@ public static Track DecreaseButton(this Track control, Button value, BindingMode
 public static Track IsDirectionReversed(this Track control, IBinding binding)
    => control._set(() => control[!Track.IsDirectionReversedProperty] = binding);
 public static Track IsDirectionReversed(this Track control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Track.IsDirectionReversedProperty, ps, () => control.IsDirectionReversed = value, bindingMode, converter, bindingSource);
+}
+public static partial class UniformGridExtensions
+{
 public static UniformGrid Rows(this UniformGrid control, IBinding binding)
    => control._set(() => control[!UniformGrid.RowsProperty] = binding);
 public static UniformGrid Rows(this UniformGrid control, Int32 value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(UniformGrid.RowsProperty, ps, () => control.Rows = value, bindingMode, converter, bindingSource);
@@ -1381,6 +1733,18 @@ public static UniformGrid Columns(this UniformGrid control, Int32 value, Binding
 public static UniformGrid FirstColumn(this UniformGrid control, IBinding binding)
    => control._set(() => control[!UniformGrid.FirstColumnProperty] = binding);
 public static UniformGrid FirstColumn(this UniformGrid control, Int32 value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(UniformGrid.FirstColumnProperty, ps, () => control.FirstColumn = value, bindingMode, converter, bindingSource);
+}
+public static partial class VisualLayerManagerExtensions
+{
+}
+public static partial class GridLinesRendererExtensions
+{
+}
+public static partial class PreviewAdornerExtensions
+{
+}
+public static partial class LayoutableExtensions
+{
 public static T Width<T>(this T control, IBinding binding) where T : Layoutable
    => control._set(() => control[!Layoutable.WidthProperty] = binding);
 public static T Width<T>(this T control, Double value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : Layoutable
@@ -1428,6 +1792,9 @@ public static T UseLayoutRounding<T>(this T control, IBinding binding) where T :
    => control._set(() => control[!Layoutable.UseLayoutRoundingProperty] = binding);
 public static T UseLayoutRounding<T>(this T control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : Layoutable
 => control._setEx(Layoutable.UseLayoutRoundingProperty, ps, () => control.UseLayoutRounding = value, bindingMode, converter, bindingSource);
+}
+public static partial class VisualExtensions
+{
 public static T ClipToBounds<T>(this T control, IBinding binding) where T : Visual
    => control._set(() => control[!Visual.ClipToBoundsProperty] = binding);
 public static T ClipToBounds<T>(this T control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : Visual
@@ -1465,6 +1832,9 @@ public static T ZIndex<T>(this T control, IBinding binding) where T : Visual
    => control._set(() => control[!Visual.ZIndexProperty] = binding);
 public static T ZIndex<T>(this T control, Int32 value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : Visual
 => control._setEx(Visual.ZIndexProperty, ps, () => control.ZIndex = value, bindingMode, converter, bindingSource);
+}
+public static partial class InputElementExtensions
+{
 public static T Focusable<T>(this T control, IBinding binding) where T : InputElement
    => control._set(() => control[!InputElement.FocusableProperty] = binding);
 public static T Focusable<T>(this T control, Boolean value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : InputElement
@@ -1489,5 +1859,5 @@ public static T TabIndex<T>(this T control, IBinding binding) where T : InputEle
    => control._set(() => control[!InputElement.TabIndexProperty] = binding);
 public static T TabIndex<T>(this T control, Int32 value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : InputElement
 => control._setEx(InputElement.TabIndexProperty, ps, () => control.TabIndex = value, bindingMode, converter, bindingSource);
-
 }
+
