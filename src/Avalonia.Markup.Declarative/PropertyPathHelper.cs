@@ -6,8 +6,16 @@ public static class PropertyPathHelper
     {
         if (path == null)
             return "";
-        int startIndex = path.IndexOf('.', path.LastIndexOf(')') + 1) + 1;
-        return path.Substring(startIndex).Replace("?", "").Trim('"', '@', ' ', '\t');
+
+        var p = path;
+
+        if (p.Contains("??"))
+        {
+            var index = p.IndexOf("??");
+            p = p.Substring(0, index);
+        }
+        int startIndex = p.IndexOf('.', p.LastIndexOf(')') + 1) + 1;
+        return p.Substring(startIndex).Replace("?", "").Trim('"', '@', ' ', '\t');
     }
 
 }

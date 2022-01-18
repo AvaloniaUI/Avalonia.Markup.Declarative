@@ -62,6 +62,18 @@ public static partial class ControlExtensions
     {
         return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode, converter, null);
     }
+    public static TElement DataContext<TElement, TDataContext>(
+        this TElement control,
+        TDataContext value,
+        out TDataContext dataContext,
+        BindingMode? bindingMode = null,
+        IValueConverter converter = null,
+        [CallerArgumentExpression("value")] string ps = null)
+        where TElement : StyledElement
+    {
+        dataContext = value;
+        return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode, converter, null);
+    }
 
     public static Brush ToBrush(this Color color) => new SolidColorBrush(color);
 
@@ -200,10 +212,21 @@ public static partial class ControlExtensions
         return control;
     }
 
-    public static TElement AddItem<TElement>(this TElement menuFlyout, string text, ICommand command)
+    public static TElement AddItem<TElement>(this TElement menuFlyout, MenuItem menuItem)
         where TElement : MenuFlyout
     {
-        (menuFlyout?.Items as AvaloniaList<object>)?.Add(new MenuItem() { Header = text, Command = command });
+        (menuFlyout?.Items as AvaloniaList<object>)?.Add(menuItem);
+        return menuFlyout;
+    }
+
+    public static TElement AddItem<TElement>(this TElement menuFlyout, string text, ICommand command, object commandParameter = null)
+        where TElement : MenuFlyout
+    {
+        var item = new MenuItem() {Header = text, Command = command};
+        if (commandParameter != null)
+            item.CommandParameter = commandParameter;
+
+        (menuFlyout?.Items as AvaloniaList<object>)?.Add(item);
         return menuFlyout;
     }
 
