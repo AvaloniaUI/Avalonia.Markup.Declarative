@@ -230,6 +230,13 @@ public static partial class ControlExtensions
         return menuFlyout;
     }
 
+    /// <summary>
+    /// Sets control instance reference to field so it can be accessed later in Markup
+    /// </summary>
+    /// <typeparam name="TElement">Control Type</typeparam>
+    /// <param name="control">Control instance</param>
+    /// <param name="field">field that will accept reference to control</param>
+    /// <returns></returns>
     public static TElement Ref<TElement>(this TElement control, out TElement field)
     {
         field = control;
