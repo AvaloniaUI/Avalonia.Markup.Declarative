@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Markup.Declarative
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaExtensionGenerator", "AvaloniaExtensionGenerator\AvaloniaExtensionGenerator.csproj", "{5183B326-2752-4CA5-A233-D9F5B83324DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaMarkupSample", "Samples\AvaloniaMarkupSample\AvaloniaMarkupSample.csproj", "{612D87E7-CF30-4E08-A7C3-AF4482924EBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5183B326-2752-4CA5-A233-D9F5B83324DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5183B326-2752-4CA5-A233-D9F5B83324DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5183B326-2752-4CA5-A233-D9F5B83324DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{612D87E7-CF30-4E08-A7C3-AF4482924EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{612D87E7-CF30-4E08-A7C3-AF4482924EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{612D87E7-CF30-4E08-A7C3-AF4482924EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{612D87E7-CF30-4E08-A7C3-AF4482924EBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

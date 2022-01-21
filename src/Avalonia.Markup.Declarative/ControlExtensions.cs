@@ -69,7 +69,7 @@ public static partial class ControlExtensions
         BindingMode? bindingMode = null,
         IValueConverter converter = null,
         [CallerArgumentExpression("value")] string ps = null)
-        where TElement : StyledElement
+        where TElement : StyledElement where TDataContext : class
     {
         dataContext = value;
         return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode, converter, null);
