@@ -1,20 +1,21 @@
 using System.Reflection;
 using System.Text;
-using Avalonia.Controls;
+using static AvaloniaExtensionGenerator.AvaloniaTypeHelper;
 
 namespace AvaloniaExtensionGenerator
 {
-    public class ExtensionGenerator
+    public class PropertyExtensionsGenerator
     {
-        public string OutputPath { get; set; } = "..\\Avalonia.Markup.Declarative\\ControlExtensions.Generated.cs";
+        public string OutputPath { get; set; }
 
         public Config Config { get; set; }
 
         public ISetterExtensionGenerator[] Generators { get; private set; }
 
-        public ExtensionGenerator(Config config, params ISetterExtensionGenerator[] generators)
+        public PropertyExtensionsGenerator(Config config, string outputPath, params ISetterExtensionGenerator[] generators)
         {
             Config = config;
+            OutputPath = outputPath;
             Generators = generators;
 
             foreach (var generator in Generators)
@@ -24,7 +25,7 @@ namespace AvaloniaExtensionGenerator
 
         public void Generate()
         {
-            var controlTypes = GetControlTypes();
+            var controlTypes = GetControlTypes(Config);
 
             var nameSpaces = new HashSet<string>(Config.InitialNamespaces);
             var extensionClassesString = GetExtensionClasses(controlTypes, ref nameSpaces);
@@ -40,27 +41,6 @@ namespace AvaloniaExtensionGenerator
             File.WriteAllText(OutputPath, sb.ToString());
         }
 
-        private IEnumerable<Type> GetControlTypes()
-        {
-            var baseControlType = typeof(Control);
-            var controlTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(s => s.GetTypes())
-                .Where(p => IsAccepatbleControlType(p) && baseControlType.IsAssignableFrom(p))
-                .ToList();
-
-            controlTypes.AddRange(Config.BaseTypes);
-
-            return controlTypes.Distinct();
-        }
-        private static bool IsAccepatbleControlType(Type controlType)
-        {
-            if (controlType.IsGenericType)
-                return false;
-            if (controlType.GetCustomAttribute<ObsoleteAttribute>() != null)
-                return false;
-            return true;
-        }
-
         private string GetExtensionClasses(IEnumerable<Type> controlTypes, ref HashSet<string> namespaces)
         {
             var sb = new StringBuilder();
@@ -68,18 +48,26 @@ namespace AvaloniaExtensionGenerator
 
             foreach (var controlType in controlTypes)
             {
+                if (Config.Exclude.Contains(controlType))
+                    continue;
+
+                var fields = controlType.GetFields().Where(IsAcceptableField).ToArray();
+
+                if (!fields.Any())
+                    continue;
+               
                 Console.WriteLine(controlType.Name);
 
                 sb.AppendLine($"public static partial class {controlType.Name}Extensions");
                 sb.AppendLine("{");
 
-                foreach (var field in controlType.GetFields().Where(IsAcceptableField))
+                foreach (var field in fields)
                 {
                     Console.WriteLine($"\t{i++} - {field.Name} : {field.FieldType}");
 
                     foreach (var generator in Generators)
                     {
-                        var setterExtension = generator.GetPropertySetterExtension(field, out var usedNamespaces);
+                        var setterExtension = generator.GetSetterExtension(field, out var usedNamespaces);
                         if (string.IsNullOrWhiteSpace(setterExtension))
                             continue;
 
@@ -92,12 +80,6 @@ namespace AvaloniaExtensionGenerator
                 sb.AppendLine("}");
             }
             return sb.ToString();
-        }
-
-        private void AddUsedNamespaces(IEnumerable<string> usedNamespaces, ref HashSet<string> namespaces)
-        {
-            foreach (var ns in usedNamespaces)
-                namespaces.Add(ns);
         }
 
         private static bool IsAcceptableField(FieldInfo field)

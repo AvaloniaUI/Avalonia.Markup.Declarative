@@ -1,10 +1,14 @@
 ﻿using AvaloniaExtensionGenerator;
 
 var config = new Config();
-var generator = new ExtensionGenerator(config,
+
+new EventsExtensionGenerator(config, "..\\Avalonia.Markup.Declarative\\ControlEventExtensions.Generated.cs",
+    new ActionToEventGenerator()
+    ).Generate();
+
+new PropertyExtensionsGenerator(config, "..\\Avalonia.Markup.Declarative\\ControlExtensions.Generated.cs",
     // new ValueSetterGenerator(),
     new BindSetterGenerator(),
     new MagicalSetterGenerator(),
     new ValueOverloadsSetterGenerator()
-    );
-generator.Generate();
+    ).Generate();

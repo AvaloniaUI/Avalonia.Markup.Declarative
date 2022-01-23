@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
@@ -10,17 +11,18 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Avalonia.Markup.Declarative.SourceGenerator
 {
     [Generator]
-    public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
+    public class AvaloniaEventExtensionsGenerator : ISourceGenerator
     {
+        static readonly string nl = Environment.NewLine;
         public void Execute(GeneratorExecutionContext context)
         {
 #if DEBUG
            if (!Debugger.IsAttached)
            {
-            //    Debugger.Launch();
+                //Debugger.Launch();
            }
 #endif 
-            Debug.WriteLine("Execute AvaloniaPropertyExtensionsGenerator code generator");
+            Debug.WriteLine("Execute AvaloniaEventExtensionsGenerator code generator");
 
             var comp = context.Compilation;
 
@@ -65,26 +67,20 @@ namespace Avalonia.Markup.Declarative.SourceGenerator
 
                 sb.AppendLine("namespace Avalonia.Markup.Declarative;");
 
-                sb.AppendLine($"public static partial class {typeName}Extensions");
+                sb.AppendLine($"public static partial class {typeName}EventExtensions");
                 sb.AppendLine("{");
 
                 foreach (var member in type.Members)
                 {
-                    if (member is not FieldDeclarationSyntax field)
+                    if (member is not EventFieldDeclarationSyntax @event)
                         continue;
 
-                    if (field.Declaration.Type is GenericNameSyntax
-                        {
-                            Identifier.ValueText: ("DirectProperty" or "StyledProperty" or "AttachedProperty")
-                        })
+                    var extensionString = GetEventExtension(typeName, @event);
+                    if (!string.IsNullOrWhiteSpace(extensionString))
                     {
-                        var extensionString = GetPropertySetterExtension(typeName, field);
-                        if (!string.IsNullOrWhiteSpace(extensionString))
-                        {
-                            //extensions.Add(extensionString);
-                            sb.AppendLine(extensionString);
-                        }
+                        sb.AppendLine(extensionString);
                     }
+
                 }
 
                 sb.AppendLine("}");
@@ -119,21 +115,33 @@ namespace Avalonia.Markup.Declarative.SourceGenerator
             // No initialization required for this one
         }
 
-        public string GetPropertySetterExtension(string controlTypeName, FieldDeclarationSyntax field)
+        public string GetEventExtension(string controlTypeName, EventFieldDeclarationSyntax @event)
         {
-            var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
+            var eventHandler = @event.Declaration.Type.ToString();
 
-            var genericName = field.Declaration.Type as GenericNameSyntax;
+            var eventArgsType = string.Join(",",@event.Declaration.Type.DescendantNodes().OfType<IdentifierNameSyntax>().Select(x=>x.ToString()).ToArray());
 
-            var valueTypeSource = genericName.TypeArgumentList.Arguments[1];
+            var argsString = $"Action<{eventArgsType}> action";
 
-            var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null,"
-                             + $" [CallerArgumentExpression(\"value\")] string ps = null";
+            var actionCallStr = "action(args)";
+
+            if (string.IsNullOrWhiteSpace(eventArgsType))
+            {
+                argsString = $"Action action";
+                eventArgsType = "EventArgs";
+                actionCallStr = "action()";
+            }
+
+            var eventName = @event.Declaration.Variables[0].ToString();
+            var extensionName = "On" + eventName;
 
             var extensionText =
                 $"public static {controlTypeName} {extensionName}"
-                + $"(this {controlTypeName} control, {argsString})"
-                + $"=> control._setEx({controlTypeName}.{extensionName}Property, ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
+                + $"(this {controlTypeName} control, {argsString}) {{{nl}"
+                + $"void Handler(object sender, {eventArgsType} args) => {actionCallStr};{nl}"
+                + $"return control._setEvent(({eventHandler}) Handler, h => control.{eventName} += h, h => control.{eventName} -= h);{nl}"
+                + "}";
+
 
             return extensionText;
         }

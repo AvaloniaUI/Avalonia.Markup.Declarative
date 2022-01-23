@@ -2,9 +2,9 @@ using System;
 using System.Reflection;
 
 namespace AvaloniaExtensionGenerator;
-    public class MagicalSetterGenerator : SetterGeneratorBase
+public class MagicalSetterGenerator : SetterGeneratorBase
 {
-    public override string GetPropertySetterExtensionOverride(ExtensionInfo info)
+    public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
     {
         var argsString = $"{info.ValueTypeSource} value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null,"
                 + $" [CallerArgumentExpression(\"value\")] string ps = null)";

@@ -5,7 +5,7 @@ namespace AvaloniaExtensionGenerator
 {
     public class BindSetterGenerator : SetterGeneratorBase
     {
-        public override string GetPropertySetterExtensionOverride(ExtensionInfo info)
+        public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
         {
             //direct type access
             var extensionText =

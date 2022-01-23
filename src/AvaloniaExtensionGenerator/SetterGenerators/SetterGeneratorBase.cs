@@ -9,10 +9,10 @@ namespace AvaloniaExtensionGenerator
     {
         public Config Config { get; set; } = null!;
 
-        public string? GetPropertySetterExtension(FieldInfo field, out IEnumerable<string> usedNamespaces)
+        public string? GetSetterExtension(FieldInfo field, out IEnumerable<string> usedNamespaces)
         {
             var namespaces = new HashSet<string>();
-            var info = new ExtensionInfo(field, t => GetTypeDeclarationSourceCode(t, namespaces));
+            var info = new PropertyExtensionInfo(field, t => GetTypeDeclarationSourceCode(t, namespaces));
 
             if (!string.IsNullOrWhiteSpace(info.ControlType.Namespace))
                 namespaces.Add(info.ControlType.Namespace);
@@ -21,7 +21,7 @@ namespace AvaloniaExtensionGenerator
             return GetPropertySetterExtensionOverride(info);
         }
 
-        public abstract string GetPropertySetterExtensionOverride(ExtensionInfo info);
+        public abstract string GetPropertySetterExtensionOverride(PropertyExtensionInfo info);
 
         public string GetTypeDeclarationSourceCode(Type valueType, HashSet<string> namespaces)
         {

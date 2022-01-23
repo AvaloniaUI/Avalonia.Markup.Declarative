@@ -7,7 +7,7 @@ namespace AvaloniaExtensionGenerator
 
     public class ValueOverloadsSetterGenerator : SetterGeneratorBase
     {
-        public override string GetPropertySetterExtensionOverride(ExtensionInfo info)
+        public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
         {
             var nl = Environment.NewLine;
             var extensionText = "";

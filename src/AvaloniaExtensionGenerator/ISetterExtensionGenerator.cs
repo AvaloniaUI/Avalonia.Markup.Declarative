@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace AvaloniaExtensionGenerator
+namespace AvaloniaExtensionGenerator;
+
+public interface ISetterExtensionGenerator
 {
-    public interface ISetterExtensionGenerator
-    {
-        Config Config {set;}
-        string? GetPropertySetterExtension(FieldInfo field, out IEnumerable<string> usedNamespaces);
-    }
+    Config Config { set; }
+    string? GetSetterExtension(FieldInfo field, out IEnumerable<string> usedNamespaces);
 }

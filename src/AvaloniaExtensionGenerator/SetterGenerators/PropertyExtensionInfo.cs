@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace AvaloniaExtensionGenerator
 {
-    public class ExtensionInfo
+    public class PropertyExtensionInfo
     {
         public FieldInfo FieldInfo { get; }
         public Type ControlType { get; }
@@ -14,7 +14,7 @@ namespace AvaloniaExtensionGenerator
         public Type ValueType { get; }
         public object ValueTypeSource { get; }
 
-        public ExtensionInfo(FieldInfo field, Func<Type,string> TypeDeclarationFunc)
+        public PropertyExtensionInfo(FieldInfo field, Func<Type,string> TypeDeclarationFunc)
         {
             FieldInfo = field;
             ControlType = field.DeclaringType;
