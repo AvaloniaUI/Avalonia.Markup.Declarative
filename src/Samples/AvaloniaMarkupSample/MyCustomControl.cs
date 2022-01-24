@@ -85,7 +85,7 @@
                         new TextBlock().Text("Enter text:")
                             .VerticalAlignment(VerticalAlignment.Center),
                         new TextBox()
-                            .Text(Bind(NewValueProperty))
+                            .Text(@NewValue, BindingMode.TwoWay, bindingSource: this)
                             .MinWidth(150)
                     ),
 
@@ -98,7 +98,7 @@
                         new TextBlock().Text("Saved text:")
                             .VerticalAlignment(VerticalAlignment.Center),
                         new TextBox()
-                            .Text(Bind(SavedValueProperty))
+                            .Text(@SavedValue, bindingSource: this)
                             .MinWidth(150)
                     ),
                 new StackPanel().Row(3)

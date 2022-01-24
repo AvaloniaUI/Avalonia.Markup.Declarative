@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -25,12 +26,15 @@ public static partial class ControlExtensions
                         BindingMode? bindingMode, IValueConverter converter, object bindingSource)
         where TControl : AvaloniaObject
     {
-        if (sourcePropertyPathString.StartsWith("@") || bindingMode.HasValue)
+        if (sourcePropertyPathString == null 
+            || sourcePropertyPathString.StartsWith("@") 
+            || bindingMode.HasValue 
+            || bindingSource != default)
         {
-            var path = sourcePropertyPathString.TrimStart('@');
-            var propertyName = PropertyPathHelper.GetPropertyName(path);
+            //var path = sourcePropertyPathString.TrimStart('@');
+            var propertyName = PropertyPathHelper.GetPropertyName(sourcePropertyPathString);
 
-            var binding = propertyName == path
+            var binding = sourcePropertyPathString == null
                 ? new Binding() // if property not set, but only vm itself
                 : new Binding(propertyName);
 
@@ -143,6 +147,15 @@ public static partial class ControlExtensions
     {
         foreach (var child in children)
             container.Children.Add(child);
+        return container;
+    }
+
+    public static TItemsControl Items<TItemsControl>(this TItemsControl container, params Control[] items)
+        where TItemsControl : ItemsControl
+    {
+        if(container.Items is IList itemsCollection)
+            foreach (var item in items)
+                itemsCollection.Add(item);
         return container;
     }
 
