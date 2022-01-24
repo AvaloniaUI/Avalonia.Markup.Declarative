@@ -29,5 +29,5 @@ AppBuilder.Configure<Application>()
                 ))
             .Title(tb1.GetObservable(TextBox.TextProperty).Select(x => x.ToUpper()).ToBinding());
 
-        wnd.Topmost = true;
+        //wnd.Topmost = true;
     }, args);
