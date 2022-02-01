@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
+#nullable enable
+
 namespace Avalonia.Markup.Declarative;
 
 public static class HotReloadManager
 {
     private static readonly Dictionary<Type, HashSet<IReloadable>> _instances = new();
 
-    public static event Action<Type[]?> HotReloaded;
+    public static event Action<Type[]?>? HotReloaded;
 
     private static void OnHotReloaded(Type[]? types) => HotReloaded?.Invoke(types);
 
@@ -20,21 +22,23 @@ public static class HotReloadManager
     public static void UpdateApplication(Type[]? types)
     {
         Console.WriteLine("UpdateApplication for types: " + PrintTypes(types));
-
-        foreach (var type in types)
+        if (types != null)
         {
-            if (!_instances.TryGetValue(type, out var instances)) continue;
+            foreach (var type in types)
+            {
+                if (!_instances.TryGetValue(type, out var instances)) continue;
 
-            foreach (var instance in instances) 
-                instance.Reload();
+                foreach (var instance in instances)
+                    instance.Reload();
+            }
+
+            OnHotReloaded(types);
         }
-
-        OnHotReloaded(types);
     }
 
     public static string PrintTypes(Type[]? types)
     {
-        if(types != null)
+        if (types != null)
         {
             return string.Join(", ", types.Select(t => t.Name));
         }
@@ -58,7 +62,7 @@ public static class HotReloadManager
         var type = instance.GetType();
         if (!_instances.TryGetValue(type, out var instances)) return;
 
-        if(instances.Contains(instance))
+        if (instances.Contains(instance))
             instances.Remove(instance);
     }
 }
