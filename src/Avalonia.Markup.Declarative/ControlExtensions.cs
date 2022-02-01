@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using Avalonia.Collections;
+﻿using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
@@ -11,6 +6,11 @@ using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
 using Avalonia.Styling;
+using System;
+using System.Collections;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -21,14 +21,14 @@ public static partial class ControlExtensions
         setAction();
         return control;
     }
-    
+
     public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty, string sourcePropertyPathString, Action setAction,
                         BindingMode? bindingMode, IValueConverter converter, object bindingSource)
         where TControl : AvaloniaObject
     {
-        if (sourcePropertyPathString == null 
-            || sourcePropertyPathString.StartsWith("@") 
-            || bindingMode.HasValue 
+        if (sourcePropertyPathString == null
+            || sourcePropertyPathString.StartsWith("@")
+            || bindingMode.HasValue
             || bindingSource != default)
         {
             //var path = sourcePropertyPathString.TrimStart('@');
@@ -153,7 +153,7 @@ public static partial class ControlExtensions
     public static TItemsControl Items<TItemsControl>(this TItemsControl container, params Control[] items)
         where TItemsControl : ItemsControl
     {
-        if(container.Items is IList itemsCollection)
+        if (container.Items is IList itemsCollection)
             foreach (var item in items)
                 itemsCollection.Add(item);
         return container;
@@ -178,7 +178,7 @@ public static partial class ControlExtensions
         control.Styles.Add(style);
         return control;
     }
-     
+
     public static TElement Classes<TElement>(this TElement control, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string caller = default)
         where TElement : Control
     {
@@ -235,7 +235,7 @@ public static partial class ControlExtensions
     public static TElement AddItem<TElement>(this TElement menuFlyout, string text, ICommand command, object commandParameter = null)
         where TElement : MenuFlyout
     {
-        var item = new MenuItem() {Header = text, Command = command};
+        var item = new MenuItem() { Header = text, Command = command };
         if (commandParameter != null)
             item.CommandParameter = commandParameter;
 
