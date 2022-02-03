@@ -1,21 +1,26 @@
-﻿namespace Avalonia.Markup.Declarative;
+﻿using System;
+
+namespace Avalonia.Markup.Declarative;
 
 public static class PropertyPathHelper
 {
-    public static string GetPropertyName(string path)
+    public static string GetNameFromPropertyPath(string path)
     {
         if (path == null)
             return "";
 
-        var p = path;
+        // if default value passed via ?? operator, remove it
+        path = RemoveNullCoalescingOperator(path);
 
-        if (p.Contains("??"))
-        {
-            var index = p.IndexOf("??");
-            p = p.Substring(0, index);
-        }
-        int startIndex = p.IndexOf('.', p.LastIndexOf(')') + 1) + 1;
-        return p.Substring(startIndex).Replace("?", "").Trim('"', '@', ' ', '\t');
+        //look for property name start position, skip it's parent declaration
+        var propertyNameStartIndex = path.IndexOf('.', path.LastIndexOf(')') + 1) + 1;
+
+        //getting property name and clean it from special symbols
+        return path.Substring(propertyNameStartIndex)
+            .Replace("?", "")
+            .Trim('"', '@', ' ', '\t');
     }
 
+    private static string RemoveNullCoalescingOperator(string path) =>
+        !path.Contains("??") ? path : path.Substring(0, path.IndexOf("??", StringComparison.Ordinal));
 }

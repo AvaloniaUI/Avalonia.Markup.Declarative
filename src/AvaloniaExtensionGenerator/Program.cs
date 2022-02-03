@@ -6,7 +6,7 @@ new EventsExtensionGenerator(config, "..\\Avalonia.Markup.Declarative\\ControlEv
     new ActionToEventGenerator()
     ).Generate();
 
-new PropertyExtensionsGenerator(config, "..\\Avalonia.Markup.Declarative\\ControlExtensions.Generated.cs",
+new PropertyExtensionsGenerator(config, "..\\Avalonia.Markup.Declarative\\ControlPropertyExtensions.Generated.cs",
     // new ValueSetterGenerator(),
     new BindSetterGenerator(),
     new MagicalSetterGenerator(),

@@ -30,7 +30,7 @@ public abstract class ViewBase<TViewModel> : ViewBase
     protected Binding Bind<TProp>(TProp propertyPath, BindingMode bindingMode = BindingMode.Default,
         [CallerArgumentExpression("propertyPath")] string propertyPathString = null, [CallerMemberName] string callerMethod = null)
     {
-        var propName = PropertyPathHelper.GetPropertyName(propertyPathString);
+        var propName = PropertyPathHelper.GetNameFromPropertyPath(propertyPathString);
 
         //normal binding from View
         if (callerMethod == nameof(Build))
@@ -51,6 +51,9 @@ public abstract class ViewBase<TViewModel> : ViewBase
     }
 }
 
+/// <summary>
+/// Base view class used like UserControl in XAML
+/// </summary>
 public abstract class ViewBase : Decorator, IReloadable
 {
     public event Action ViewInitialized; 
@@ -153,7 +156,7 @@ public abstract class ViewBase : Decorator, IReloadable
         return new Binding()
         {
             Source = source,
-            Path = PropertyPathHelper.GetPropertyName(propertyPathString),
+            Path = PropertyPathHelper.GetNameFromPropertyPath(propertyPathString),
             Mode = bindingMode,
         };
     }

@@ -26,7 +26,7 @@ public class ActionToEventGenerator : EventGeneratorBase
             $"public static {controlTypeName} {extensionName}"
             + $"(this {controlTypeName} control, {argsString}) {{{nl}"
             + $"void Handler(object sender, {eventArgsType} args) => {actionCallStr};{nl}"
-            + $"return control._setEvent(({eventHandler}) Handler, h => control.{eventName} += h, h => control.{eventName} -= h);{nl}"
+            + $"return control._setEvent(({eventHandler}) Handler, h => control.{eventName} += h);{nl}"
             + "}";
 
         return extensionText;
