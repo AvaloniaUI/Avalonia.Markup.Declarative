@@ -959,7 +959,7 @@ public static partial class TabControlExtensions
 {
 public static TabControl TabStripPlacement(this TabControl control, IBinding binding)
    => control._set(() => control[!TabControl.TabStripPlacementProperty] = binding);
-public static TabControl TabStripPlacement(this TabControl control, Dock value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TabControl.TabStripPlacementProperty, ps, () => control.TabStripPlacement = value, bindingMode, converter, bindingSource);
+public static TabControl TabStripPlacement(this TabControl control, Avalonia.Controls.Dock value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TabControl.TabStripPlacementProperty, ps, () => control.TabStripPlacement = value, bindingMode, converter, bindingSource);
 public static TabControl HorizontalContentAlignment(this TabControl control, IBinding binding)
    => control._set(() => control[!TabControl.HorizontalContentAlignmentProperty] = binding);
 public static TabControl HorizontalContentAlignment(this TabControl control, HorizontalAlignment value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TabControl.HorizontalContentAlignmentProperty, ps, () => control.HorizontalContentAlignment = value, bindingMode, converter, bindingSource);

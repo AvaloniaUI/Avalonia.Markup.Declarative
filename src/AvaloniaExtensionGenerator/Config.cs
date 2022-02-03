@@ -22,6 +22,7 @@ namespace AvaloniaExtensionGenerator
             typeof(Avalonia.Controls.Calendar),
             typeof(ContextMenu),
             typeof(Animation),
+            typeof(Dock),
         };
 
         public Type[] Exclude = new[]
