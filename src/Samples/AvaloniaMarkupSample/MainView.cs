@@ -12,15 +12,18 @@ public class MainView : ViewBase
                 new TabItem()
                     .Header("Hot reload")
                     .Content(
-                        new Border()
-                            .BorderBrush(Brushes.Gray)
-                            .BorderThickness(1)
-                            .Child(
+                        new StackPanel()
+                            .Children(
                                 new TextBlock()
+                                    .Ref(out var textBlock)
                                     .Padding(12)
                                     .FontSize(30)
                                     .HorizontalAlignment(HorizontalAlignment.Center)
-                                    .Text("Hello Hot Reload!")
+                                    .Text("Hello Hot Reload!"),
+                                new Button()
+                                    .Content("click me!")
+                                    .HorizontalAlignment(HorizontalAlignment.Center)
+                                    .OnClick(_ => textBlock.Text("Button clicked!"))
                             )
                     ),
 

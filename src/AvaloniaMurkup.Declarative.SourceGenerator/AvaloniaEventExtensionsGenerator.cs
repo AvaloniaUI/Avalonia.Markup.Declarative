@@ -13,7 +13,6 @@ namespace Avalonia.Markup.Declarative.SourceGenerator
     [Generator]
     public class AvaloniaEventExtensionsGenerator : ISourceGenerator
     {
-        static readonly string nl = Environment.NewLine;
         public void Execute(GeneratorExecutionContext context)
         {
 #if DEBUG
@@ -128,7 +127,6 @@ namespace Avalonia.Markup.Declarative.SourceGenerator
             if (string.IsNullOrWhiteSpace(eventArgsType))
             {
                 argsString = $"Action action";
-                eventArgsType = "EventArgs";
                 actionCallStr = "action()";
             }
 
@@ -136,11 +134,9 @@ namespace Avalonia.Markup.Declarative.SourceGenerator
             var extensionName = "On" + eventName;
 
             var extensionText =
-                $"public static {controlTypeName} {extensionName}"
-                + $"(this {controlTypeName} control, {argsString}) {{{nl}"
-                + $"void Handler(object sender, {eventArgsType} args) => {actionCallStr};{nl}"
-                + $"return control._setEvent(({eventHandler}) Handler, h => control.{eventName} += h);{nl}"
-                + "}";
+                $"    public static {controlTypeName} {extensionName}"
+                + $"(this {controlTypeName} control, {argsString}) => {Environment.NewLine}"
+                + $"        control._setEvent(({eventHandler}) ((_, args) => {actionCallStr}), h => control.{eventName} += h);";
 
 
             return extensionText;
