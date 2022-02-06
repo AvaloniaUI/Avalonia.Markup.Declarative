@@ -4,23 +4,37 @@ namespace Avalonia.Markup.Declarative;
 
 public static class PropertyPathHelper
 {
+    private static readonly char[] StopChars = {' ', '?', ',', '\"', '@', '\t', '\n'};
+
     public static string GetNameFromPropertyPath(string path)
     {
         if (path == null)
             return "";
 
-        // if default value passed via ?? operator, remove it
-        path = RemoveNullCoalescingOperator(path);
+        var propFound = false;
+        var startIndex = 0;
 
-        //look for property name start position, skip it's parent declaration
-        var propertyNameStartIndex = path.IndexOf('.', path.LastIndexOf(')') + 1) + 1;
+        for (var i = 0; i < path.Length; i++)
+        {
+            var curChar = path[i];
 
-        //getting property name and clean it from special symbols
-        return path.Substring(propertyNameStartIndex)
-            .Replace("?", "")
-            .Trim('"', '@', ' ', '\t');
+            //found special characters after property name, ie: @vm.Property ?? 0
+            if (propFound && Array.IndexOf(StopChars, curChar) > -1)
+                return path.Substring(startIndex, i - startIndex);
+            
+            if (curChar == '.')
+            {
+                //found start of property name
+                startIndex = ++i;
+                propFound = true;
+            }
+        }
+
+        //no special characters - just property name, ie: vm.Property
+        if (propFound)
+            return path.Substring(startIndex);
+
+        //no parent object, ie: TextProperty
+        return path.TrimStart('@');
     }
-
-    private static string RemoveNullCoalescingOperator(string path) =>
-        !path.Contains("??") ? path : path.Substring(0, path.IndexOf("??", StringComparison.Ordinal));
 }
