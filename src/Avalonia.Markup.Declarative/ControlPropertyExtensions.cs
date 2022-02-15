@@ -128,6 +128,35 @@ public static class ControlPropertyExtensions
         Grid.SetRowSpan(control, value);
         return control;
     }
+
+    public static TElement Top<TElement>(this TElement control, double value)
+        where TElement : Control
+    {
+        Canvas.SetTop(control, value);
+        return control;
+    }
+
+    public static TElement Left<TElement>(this TElement control, double value)
+        where TElement : Control
+    {
+        Canvas.SetLeft(control, value);
+        return control;
+    }
+
+    public static TElement Bottom<TElement>(this TElement control, double value)
+        where TElement : Control
+    {
+        Canvas.SetBottom(control, value);
+        return control;
+    }
+
+    public static TElement Right<TElement>(this TElement control, double value)
+        where TElement : Control
+    {
+        Canvas.SetRight(control, value);
+        return control;
+    }
+
     public static TElement HorizontalScrollBarVisibility<TElement>(this TElement control, ScrollBarVisibility value)
         where TElement : Control
     {
