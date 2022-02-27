@@ -10,5 +10,6 @@ new PropertyExtensionsGenerator(config, "..\\Avalonia.Markup.Declarative\\Contro
     // new ValueSetterGenerator(),
     new BindSetterGenerator(),
     new MagicalSetterGenerator(),
+    new MagicalSetterWithConverterGenerator(),
     new ValueOverloadsSetterGenerator()
     ).Generate();
