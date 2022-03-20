@@ -5,7 +5,7 @@ Write Avalonia UI with C#
 
 ## Installation
 
-for now this project available as a source code. Sou you need to clone or download repository and Add *Avalonia.Markup.Declarative* project to your solution.
+for now this project available as a source code. So you need to clone or download repository and Add *Avalonia.Markup.Declarative* project to your solution.
 
 There will be Nuget package available later.
 
@@ -47,10 +47,10 @@ public class MainView : ViewBase<MainViewModel>
                     .Command(vm.ClickButtonCommand) 
                     .Content("Click me") // Content = "Click me"
                     .Padding(8, 0, 0, 0) //Set left padding to 8
-                    .With(ButtonStyle) //Execte LabelStyle method over TextBlock control 
+                    .With(ButtonStyle) //Execute LabelStyle method over TextBlock control 
             );
 
-    private void ButtonStyle(Bitton b) => b
+    private void ButtonStyle(Button b) => b
         .VerticalAlignment(VerticalAlignment.Center)
         .FontSize(12);
 }
@@ -60,7 +60,7 @@ public class MainView : ViewBase<MainViewModel>
 
 To add .NET 6 hot reload support to your views:
 
-* define follwing line in your program.cs
+* define following line in your program.cs
 
 ```C#
 [assembly: MetadataUpdateHandler(typeof(Avalonia.Markup.Declarative.HotReloadManager))]
