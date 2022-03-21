@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
+[assembly: System.Reflection.Metadata.MetadataUpdateHandler(typeof(Avalonia.Markup.Declarative.HotReloadManager))]
+
 #nullable enable
 
 namespace Avalonia.Markup.Declarative;
 
 public static class HotReloadManager
 {
-    private static readonly Dictionary<Type, HashSet<IReloadable>> _instances = new();
+    private static readonly Dictionary<Type, HashSet<IReloadable>> Instances = new();
 
     public static event Action<Type[]?>? HotReloaded;
 
@@ -26,7 +28,7 @@ public static class HotReloadManager
         {
             foreach (var type in types)
             {
-                if (!_instances.TryGetValue(type, out var instances)) continue;
+                if (!Instances.TryGetValue(type, out var instances)) continue;
 
                 foreach (var instance in instances)
                     instance.Reload();
@@ -48,10 +50,10 @@ public static class HotReloadManager
     internal static void RegisterInstance(IReloadable instance)
     {
         var type = instance.GetType();
-        if (!_instances.TryGetValue(type, out var instances))
+        if (!Instances.TryGetValue(type, out var instances))
         {
             instances = new HashSet<IReloadable>();
-            _instances[type] = instances;
+            Instances[type] = instances;
         }
 
         instances.Add(instance);
@@ -60,7 +62,7 @@ public static class HotReloadManager
     internal static void UnregisterInstance(IReloadable instance)
     {
         var type = instance.GetType();
-        if (!_instances.TryGetValue(type, out var instances)) return;
+        if (!Instances.TryGetValue(type, out var instances)) return;
 
         if (instances.Contains(instance))
             instances.Remove(instance);

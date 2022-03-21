@@ -58,12 +58,6 @@ public class MainView : ViewBase<MainViewModel>
 
 ## Hot reload support
 
-To add .NET 6 hot reload support to your views:
+ViewBase class automagiacally supports .Net 6 hot reload feature.
 
-* define following line in your program.cs
-
-```C#
-[assembly: MetadataUpdateHandler(typeof(Avalonia.Markup.Declarative.HotReloadManager))]
-```
- * make sure that your view classes are located in separated **Net Standard 2.0** assembly
- (for now .net 6 hot reload feature not working with avalonia main app and net stadard 2.1 assemblies. Hope this will be fixed in future)
+* make sure that your view classes are located in the Assembly that doesn't contain any Xaml files, otherwise hot reload feature will always throw "need to rebuild" message.

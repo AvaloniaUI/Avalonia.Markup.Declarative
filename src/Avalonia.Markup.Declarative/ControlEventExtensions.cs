@@ -2,12 +2,31 @@
 
 namespace Avalonia.Markup.Declarative;
 
-public static partial class ControlEventExtensions
+public static class ControlEventExtensions
 {
-    public static TControl _setEvent<TControl, THandler>(this TControl control, THandler handler, Action<THandler> subscribe, Action<THandler> unsubscribe)
+    public static TControl _setEvent<TControl, THandler>(this TControl control, THandler handler, Action<THandler> subscribe)
         where TControl : AvaloniaObject
     {
         subscribe?.Invoke(handler);
         return control;
     }
-} 
+}
+
+internal static class WeakEventHandler<TArgs>
+{
+    public static EventHandler<TArgs> Create<THandler>(
+        THandler handler, Action<THandler, object, TArgs> invoker)
+        where THandler : class
+    {
+        var weakEventHandler = new WeakReference<THandler>(handler);
+
+        return (sender, args) =>
+        {
+            THandler thandler;
+            if (weakEventHandler.TryGetTarget(out thandler))
+            {
+                invoker(thandler, sender, args);
+            }
+        };
+    }
+}

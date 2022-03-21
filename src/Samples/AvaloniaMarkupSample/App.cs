@@ -2,7 +2,6 @@
 
 using AvaloniaMarkupSample;
 
-[assembly: System.Reflection.Metadata.MetadataUpdateHandler(typeof(Avalonia.Markup.Declarative.HotReloadManager))]
 
 AppBuilder.Configure<Application>()
     .UsePlatformDetect()
