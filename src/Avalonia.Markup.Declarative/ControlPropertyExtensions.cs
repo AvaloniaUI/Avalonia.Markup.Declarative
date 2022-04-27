@@ -211,10 +211,11 @@ public static class ControlPropertyExtensions
         depth > 0 ? GetDeeperStackTrace(depth - 1) : new StackTrace(0, true);
 
 
-    public static TElement DataTemplates<TElement>(this TElement control, IDataTemplate dataTemplate)
+    public static TElement DataTemplates<TElement>(this TElement control, params IDataTemplate[] dataTemplate)
         where TElement : Control
     {
-        control.DataTemplates.Add(dataTemplate);
+        foreach (var template in dataTemplate) 
+            control.DataTemplates.Add(template);
         return control;
     }
 
