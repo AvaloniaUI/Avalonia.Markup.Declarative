@@ -19,9 +19,17 @@ public abstract class ViewBase<TViewModel> : ViewBase
         set => DataContext = value;
     }
 
-    protected ViewBase(bool deferredLoading = false) : base(deferredLoading)
+    protected ViewBase(TViewModel viewModel)
+        : base(true)
     {
+        DataContext = viewModel;
+        OnCreatedCore();
+        Initialize();
     }
+
+    //protected ViewBase(bool deferredLoading = false) : base(deferredLoading)
+    //{
+    //}
 
     protected abstract object Build(TViewModel vm);
 
@@ -56,7 +64,7 @@ public abstract class ViewBase<TViewModel> : ViewBase
 /// </summary>
 public abstract class ViewBase : Decorator, IReloadable
 {
-    public event Action ViewInitialized; 
+    public event Action ViewInitialized;
 
     protected abstract object Build();
 
@@ -71,7 +79,7 @@ public abstract class ViewBase : Decorator, IReloadable
 
     protected virtual void OnAfterInitialized() { }
 
-    private void OnCreatedCore() => OnCreated();
+    protected internal void OnCreatedCore() => OnCreated();
 
     protected virtual void OnCreated()
     {
@@ -104,7 +112,7 @@ public abstract class ViewBase : Decorator, IReloadable
         {
             var content = Build();
             Child = content as Control;
-                
+
             ViewInitialized?.Invoke();
             OnAfterInitialized();
         }
