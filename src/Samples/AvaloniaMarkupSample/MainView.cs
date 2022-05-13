@@ -52,7 +52,8 @@ public class MainView : ViewBase
                                     .Child(
                                         new MyCustomControl()
                                             .Margin(20)
-                                    ),
+                                    )
+                            ,
 
                                 new TextBlock()
                                     .Text("Custom templated control example:"),

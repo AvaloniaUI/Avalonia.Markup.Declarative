@@ -85,7 +85,7 @@
                         new TextBlock().Text("Enter text:")
                             .VerticalAlignment(VerticalAlignment.Center),
                         new TextBox()
-                            .Text(@NewValue, BindingMode.TwoWay, bindingSource: this)
+                            .Text(Bind(NewValueProperty, BindingMode.TwoWay))
                             .MinWidth(150)
                     ),
 
@@ -98,7 +98,7 @@
                         new TextBlock().Text("Saved text:")
                             .VerticalAlignment(VerticalAlignment.Center),
                         new TextBox()
-                            .Text(@SavedValue, bindingSource: this)
+                            .Text(Bind(SavedValueProperty))
                             .MinWidth(150)
                     ),
                 new StackPanel().Row(3)
@@ -108,12 +108,11 @@
                         new Button().Content("Cancel")
                             .Margin(5, 0)
                             .IsEnabled(Bind(CanSaveProperty))
-                            .Command(Bind(this, "Cancel")),
+                            .OnClick(args=> Cancel()),
                         new Button().Content("Save")
                             .Margin(5, 0)
                             .IsEnabled(Bind(CanSaveProperty))
-                            .Command(Bind(this, "Save"))
-
+                            .OnClick(args => Save())
                     )
             );
 

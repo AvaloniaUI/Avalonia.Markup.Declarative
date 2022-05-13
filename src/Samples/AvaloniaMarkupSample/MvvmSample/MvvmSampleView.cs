@@ -2,9 +2,8 @@
 
 public class MvvmSampleView : ViewBase<MvvmSampleViewModel>
 {
-    protected override void OnCreated()
+    public MvvmSampleView() : base(new MvvmSampleViewModel())
     {
-        ViewModel = new MvvmSampleViewModel();
     }
 
     protected override object Build(MvvmSampleViewModel vm) =>
