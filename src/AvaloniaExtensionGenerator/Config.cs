@@ -15,6 +15,7 @@ namespace AvaloniaExtensionGenerator
         public string[] InitialNamespaces = { 
             "Avalonia.Data",
             "Avalonia.Data.Converters",
+            "System.Numerics",
             "System.Runtime.CompilerServices" };
 
         public Type[] UseFullNamespace = new[]

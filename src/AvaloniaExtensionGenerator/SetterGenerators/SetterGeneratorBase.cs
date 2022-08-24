@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -13,7 +14,6 @@ namespace AvaloniaExtensionGenerator
         {
             var namespaces = new HashSet<string>();
             var info = new PropertyExtensionInfo(field, t => GetTypeDeclarationSourceCode(t, namespaces));
-
             if (!string.IsNullOrWhiteSpace(info.ControlType.Namespace))
                 namespaces.Add(info.ControlType.Namespace);
 
