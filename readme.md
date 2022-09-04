@@ -26,6 +26,12 @@ public class MainView : ViewBase<MainViewModel>
     //Define markup in Build method
     protected override object Build(MainViewModel vm) =>
         new Grid()
+            
+            .Styles(
+                new Style<Button>(s => s.Class(":pointerover")) //make button red when pointer is over using avalonia styles
+                    .Background(Brushes.Red)
+            )
+
             .Cols("Auto, 100, *") // equivalent of Grid.ColumnDefintions property
             .Background(Brushes.Green) // the same as grid.Background = Brushes.Green
             .Children(

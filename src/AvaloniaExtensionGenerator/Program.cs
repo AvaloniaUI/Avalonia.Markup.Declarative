@@ -1,4 +1,5 @@
 ﻿using AvaloniaExtensionGenerator;
+using AvaloniaExtensionGenerator.StyleSetterGenerators;
 
 var config = new Config();
 
@@ -12,4 +13,8 @@ new PropertyExtensionsGenerator(config, "..\\Avalonia.Markup.Declarative\\Contro
     new MagicalSetterGenerator(),
     new MagicalSetterWithConverterGenerator(),
     new ValueOverloadsSetterGenerator()
+    ).Generate();
+
+new StylePropertyExtensionsGenerator(config, "..\\Avalonia.Markup.Declarative\\StylePropertyExtensions.Generated.cs",
+    new ValueStyleSetterGenerator()
     ).Generate();

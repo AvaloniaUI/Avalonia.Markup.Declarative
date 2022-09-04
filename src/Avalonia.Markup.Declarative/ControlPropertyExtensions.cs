@@ -26,7 +26,7 @@ public static class ControlPropertyExtensions
                         BindingMode? bindingMode, IValueConverter converter, object bindingSource)
         where TControl : AvaloniaObject
     {
-        if (sourcePropertyPathString == null 
+        if (sourcePropertyPathString == null
             || bindingMode.HasValue
             || bindingSource != default
             || sourcePropertyPathString.StartsWith("@"))
@@ -38,7 +38,7 @@ public static class ControlPropertyExtensions
                 Converter = converter,
                 Source = bindingSource
             };
-            
+
             control.Bind(destProperty, binding);
         }
         else
@@ -200,10 +200,12 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TElement Styles<TElement>(this TElement control, Style style)
+    public static TElement Styles<TElement>(this TElement control, params Style[] styles)
         where TElement : Control
     {
-        control.Styles.Add(style);
+        foreach (var style in styles) 
+            control.Styles.Add(style);
+
         return control;
     }
 
@@ -213,6 +215,15 @@ public static class ControlPropertyExtensions
         control.Classes.Add(className);
         return control;
     }
+
+    public static TElement BindClass<TElement>(this TElement control, bool value, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string caller = default, [CallerArgumentExpression("value")] string ps = null)
+        where TElement : Control
+    {
+        var path = PropertyPathHelper.GetNameFromPropertyPath(ps);
+        var binding = new Binding(path, BindingMode.OneWay);
+        control.BindClass(className, binding, null);
+        return control;
+    }
     public static StackTrace GetDeeperStackTrace(int depth) =>
         depth > 0 ? GetDeeperStackTrace(depth - 1) : new StackTrace(0, true);
 
@@ -220,7 +231,7 @@ public static class ControlPropertyExtensions
     public static TElement DataTemplates<TElement>(this TElement control, params IDataTemplate[] dataTemplate)
         where TElement : Control
     {
-        foreach (var template in dataTemplate) 
+        foreach (var template in dataTemplate)
             control.DataTemplates.Add(template);
         return control;
     }
