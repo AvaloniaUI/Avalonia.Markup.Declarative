@@ -29,8 +29,8 @@ public static partial class ApplicationEventsExtensions
 }
 public static partial class AutoCompleteBoxEventsExtensions
 {
-    public static AutoCompleteBox OnTextChanged(this AutoCompleteBox control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.TextChanged += h);
+    public static AutoCompleteBox OnTextChanged(this AutoCompleteBox control, Action<TextChangedEventArgs> action) => 
+        control._setEvent((EventHandler<TextChangedEventArgs>) ((_, args) => action(args)), h => control.TextChanged += h);
     public static AutoCompleteBox OnPopulating(this AutoCompleteBox control, Action<PopulatingEventArgs> action) => 
         control._setEvent((EventHandler<PopulatingEventArgs>) ((_, args) => action(args)), h => control.Populating += h);
     public static AutoCompleteBox OnPopulated(this AutoCompleteBox control, Action<PopulatedEventArgs> action) => 
@@ -189,6 +189,10 @@ public static partial class TextBoxEventsExtensions
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.CuttingToClipboard += h);
     public static TextBox OnPastingFromClipboard(this TextBox control, Action<RoutedEventArgs> action) => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.PastingFromClipboard += h);
+    public static TextBox OnTextChanged(this TextBox control, Action<TextChangedEventArgs> action) => 
+        control._setEvent((EventHandler<TextChangedEventArgs>) ((_, args) => action(args)), h => control.TextChanged += h);
+    public static TextBox OnTextChanging(this TextBox control, Action<TextChangingEventArgs> action) => 
+        control._setEvent((EventHandler<TextChangingEventArgs>) ((_, args) => action(args)), h => control.TextChanging += h);
 }
 public static partial class TopLevelEventsExtensions
 {

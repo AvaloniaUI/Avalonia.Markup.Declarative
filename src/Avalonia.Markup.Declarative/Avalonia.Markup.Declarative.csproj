@@ -4,11 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <IsPackable>true</IsPackable>
 	<LangVersion>latest</LangVersion>
-	<Version>0.10.12</Version>
+	<Version>11.0.0-preview3</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.0.0-preview2" />
+    <PackageReference Include="Avalonia" Version="11.0.0-preview3" />
   </ItemGroup>
 
 </Project>
