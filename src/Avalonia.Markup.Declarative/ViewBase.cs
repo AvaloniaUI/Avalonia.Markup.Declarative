@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Avalonia.Controls;
@@ -62,7 +65,7 @@ public abstract class ViewBase<TViewModel> : ViewBase
 /// <summary>
 /// Base view class used like UserControl in XAML
 /// </summary>
-public abstract class ViewBase : Decorator, IReloadable
+public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged
 {
     public event Action ViewInitialized;
 
@@ -110,6 +113,8 @@ public abstract class ViewBase : Decorator, IReloadable
     {
         try
         {
+            InitStateMembers();
+
             var content = Build();
             Child = content as Control;
 
@@ -192,6 +197,34 @@ public abstract class ViewBase : Decorator, IReloadable
 
         var asset = assets.Open(new Uri(uri));
         return asset;
+    }
+
+
+    ViewPropertyState[]? _propertyStates = null;
+    private void InitStateMembers()
+    {
+        var viewType = GetType();
+        _propertyStates = viewType
+            .GetProperties()
+            .Where(p => p.DeclaringType == viewType)
+            .Select(p => new ViewPropertyState(p, this))
+            .ToArray();
+    }
+
+    protected void StateHasChnaged()
+    {
+        if (_propertyStates == null)
+            return;
+
+        foreach (var prop in _propertyStates)
+            if (prop.CheckStateChangedAndUpdate())
+                OnPropertyChanged(prop.Name);
+    }
+
+    public new event PropertyChangedEventHandler? PropertyChanged;
+    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     #region Hot reload stuff

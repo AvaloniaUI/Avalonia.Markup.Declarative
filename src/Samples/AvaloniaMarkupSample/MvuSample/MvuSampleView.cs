@@ -6,17 +6,19 @@ public class MvuSampleView : ViewBase
         new StackPanel()
             .Children(
                 new TextBlock()
-                    .Text(@MyProperty),
+                    .Text(@MyProperty, bindingSource: this),
 
                 new Button()
-                    .Content("Click me")
+                    .Content("Click me " + @MyProperty1)
                     .OnClick(OnButtonClick)
             );
 
     public string MyProperty { get; set; } = "Hello MVU";
+    public string MyProperty1 { get; set; } = "No changes";
 
     private void OnButtonClick(RoutedEventArgs obj)
     {
-        throw new NotImplementedException();
+        MyProperty = "Button was clicked!";
+        StateHasChnaged();
     }
 }
