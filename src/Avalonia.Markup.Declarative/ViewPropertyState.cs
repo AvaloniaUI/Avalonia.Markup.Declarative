@@ -5,7 +5,7 @@ namespace Avalonia.Markup.Declarative
 {
     internal class ViewPropertyState
     {
-        private object _value;
+        public object Value { get; private set; }
 
         public string Name { get; }
         private PropertyInfo PropertyInfo { get; }
@@ -18,23 +18,23 @@ namespace Avalonia.Markup.Declarative
 
             this.Name = propertyInfo.Name;
 
-            _value = PropertyInfo.GetValue(View);
+            Value = PropertyInfo.GetValue(View);
         }
 
         public bool CheckStateChangedAndUpdate()
         {
-            var oldValue = _value;
-            _value = PropertyInfo.GetValue(View);
+            var oldValue = Value;
+            Value = PropertyInfo.GetValue(View);
 
-            if (_value == null && oldValue != null)
+            if (Value == null && oldValue != null)
                 return false;
 
-            if (_value != null && oldValue == null)
+            if (Value != null && oldValue == null)
                 return false;
 
             return
-                (_value == null && oldValue == null)
-                || (_value != null && !_value.Equals(oldValue));
+                (Value == null && oldValue == null)
+                || (Value != null && !Value.Equals(oldValue));
         }
     }
 }

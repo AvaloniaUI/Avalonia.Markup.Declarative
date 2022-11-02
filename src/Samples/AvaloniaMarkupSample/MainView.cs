@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls.Primitives;
+using AvaloniaMarkupSample.MvuSample;
 using AvaloniaMarkupSample.MvvmSample;
 
 namespace AvaloniaMarkupSample;

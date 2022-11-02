@@ -1,4 +1,4 @@
-﻿namespace AvaloniaMarkupSample.MvvmSample;
+﻿namespace AvaloniaMarkupSample.MvuSample;
 
 public class MvuSampleView : ViewBase
 {
@@ -6,19 +6,56 @@ public class MvuSampleView : ViewBase
         new StackPanel()
             .Children(
                 new TextBlock()
-                    .Text(@MyProperty, bindingSource: this),
+                    .Text(Bind(MyProperty)),
+
+                new TextBlock()
+                    .Text(Bind(State.StateProperty)),
 
                 new Button()
-                    .Content("Click me " + @MyProperty1)
-                    .OnClick(OnButtonClick)
+                    .Content(Bind(MyNotifiedProperty))
+                    .OnClick(OnButtonClick),
+
+                new Button()
+                    .Content("Update separate state")
+                    .OnClick(OnButton2Click),
+
+                new Border()
+                    .Background(Colors.Aquamarine.ToBrush())
+                    .Child(
+                        new MvuComponent()
+                            .ComponentParameter("Hello component")
+                    )
             );
 
+
+    private string _myNotifiedProperty1 = "Click me";
+    public string MyNotifiedProperty
+    {
+        get => _myNotifiedProperty1;
+        set
+        {
+            if (value != _myNotifiedProperty1)
+            {
+                _myNotifiedProperty1 = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public string MyProperty { get; set; } = "Hello MVU";
-    public string MyProperty1 { get; set; } = "No changes";
+
+    public SeparatedViewState State { get; set; } = new();
 
     private void OnButtonClick(RoutedEventArgs obj)
     {
         MyProperty = "Button was clicked!";
-        StateHasChnaged();
+        StateHasChanged();
+
+        MyNotifiedProperty = "You clicked me!";
     }
+    private void OnButton2Click(RoutedEventArgs obj)
+    {
+        State.StateProperty = "Value changed!";
+    }
+
 }

@@ -3,8 +3,8 @@
     #region NewValue Styled Avalonia Property
     public string? NewValue
     {
-        get { return GetValue(NewValueProperty); }
-        set { SetValue(NewValueProperty, value); }
+        get => GetValue(NewValueProperty);
+        set => SetValue(NewValueProperty, value);
     }
 
     public static readonly StyledProperty<string?> NewValueProperty =
@@ -18,8 +18,8 @@
     #region SavedValue Styled Avalonia Property
     public string? SavedValue
     {
-        get { return GetValue(SavedValueProperty); }
-        set { SetValue(SavedValueProperty, value); }
+        get => GetValue(SavedValueProperty);
+        set => SetValue(SavedValueProperty, value);
     }
 
     public static readonly StyledProperty<string?> SavedValueProperty =
@@ -43,10 +43,7 @@
     public bool CanSave
     {
         get => _canSave;
-        private set
-        {
-            SetAndRaise(CanSaveProperty, ref _canSave, value);
-        }
+        private set => SetAndRaise(CanSaveProperty, ref _canSave, value);
     }
 
     #endregion CanSave Direct Avalonia Property

@@ -8,8 +8,7 @@ AppBuilder.Configure<Application>()
     .UseFluentTheme()
     .StartWithClassicDesktopLifetime(desktop =>
     {
-        desktop.MainWindow =
-            new Window()
+        desktop.MainWindow = new Window()
                 .Title("Avalonia markup samples")
                 .Content(new MainView());
     }, args);

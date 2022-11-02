@@ -65,7 +65,7 @@ public abstract class ViewBase<TViewModel> : ViewBase
 /// <summary>
 /// Base view class used like UserControl in XAML
 /// </summary>
-public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged
+public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged, IDeclarativeViewBase
 {
     public event Action ViewInitialized;
 
@@ -163,6 +163,7 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged
             Mode = bindingMode
         };
     }
+
     protected static Binding Bind<T>(T source, object propertyPath, BindingMode bindingMode = BindingMode.Default,
         [CallerArgumentExpression("propertyPath")] string propertyPathString = null)
     {
@@ -210,8 +211,12 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged
             .Select(p => new ViewPropertyState(p, this))
             .ToArray();
     }
+    public void UpdateState()
+    {
+        StateHasChanged();
+    }
 
-    protected void StateHasChnaged()
+    protected void StateHasChanged()
     {
         if (_propertyStates == null)
             return;
@@ -220,6 +225,42 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged
             if (prop.CheckStateChangedAndUpdate())
                 OnPropertyChanged(prop.Name);
     }
+
+    protected IBinding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string bindingString = null)
+    {
+        object bindingSource = this;
+        var useStateValueAsSource = false;
+
+        var propName = PropertyPathHelper.GetNameFromPropertyPath(bindingString);
+        var stateName = propName;
+
+        var splitterIndex = bindingString!.IndexOf('.');
+        
+        if (splitterIndex > -1)
+        {
+            var startIndex = bindingString.StartsWith("@") ? 1 : 0;
+            stateName = bindingString.Substring(0, splitterIndex - startIndex);
+
+            useStateValueAsSource = true;
+        }
+        
+        var stateInfo = FindStateForBindingString(stateName);
+        if (stateInfo == null)
+            throw new ArgumentException("No properties found in binding string");
+
+        if(useStateValueAsSource)
+            bindingSource = stateInfo.Value;
+
+        return new Binding()
+        {
+            Source = bindingSource,
+            Path = propName,
+            Mode = bindingMode,
+        };
+    }
+
+    private ViewPropertyState FindStateForBindingString(string stateName) =>
+        _propertyStates?.FirstOrDefault(x => x.Name == stateName);
 
     public new event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -257,4 +298,5 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged
 #endif
     }
     #endregion
+
 }

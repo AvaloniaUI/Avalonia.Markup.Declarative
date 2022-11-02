@@ -48,6 +48,15 @@ public static class ControlPropertyExtensions
 
         return control;
     }
+    public static TControl _setCommonEx<TControl>(this TControl control, string sourcePropertyPathString, Action setAction,
+                        BindingMode? bindingMode, IValueConverter converter, object bindingSource)
+        where TControl : AvaloniaObject
+    {
+        setAction();
+        if (control is IDeclarativeViewBase viewBase) 
+            viewBase.UpdateState();
+        return control;
+    }
 
     public static TElement DataContext<TElement>(
         this TElement control,

@@ -9,16 +9,16 @@
 
     public static int StartWithClassicDesktopLifetime<T>(this T builder, Action<IClassicDesktopStyleApplicationLifetime> callback, string[]? args, ShutdownMode shutdownMode = ShutdownMode.OnLastWindowClose) where T : AppBuilderBase<T>, new()
     {
-        var classicDesktopStyleApplicationLifetime = new ClassicDesktopStyleApplicationLifetime
+        var lifetime = new ClassicDesktopStyleApplicationLifetime
         {
             Args = args,
             ShutdownMode = shutdownMode
         };
 
-        builder.SetupWithLifetime(classicDesktopStyleApplicationLifetime);
+        builder.SetupWithLifetime(lifetime);
 
-        callback?.Invoke(classicDesktopStyleApplicationLifetime);
+        callback?.Invoke(lifetime);
 
-        return classicDesktopStyleApplicationLifetime.Start(args);
+        return lifetime.Start(args);
     }
 }
