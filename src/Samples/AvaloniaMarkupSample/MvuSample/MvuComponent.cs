@@ -9,18 +9,8 @@ public partial class MvuComponent : ViewBase
                     .Text("This is nested MVU Component"),
 
                 new TextBlock()
-                    .Text(Bind(ComponentParameter)),
-
-                new Button()
-                    .Content("Update separate state")
-                    .OnClick(OnButtonClick)
+                    .Text(Bind(ComponentParameter))
             );
 
     public string ComponentParameter { get; set; } = "Parameter value";
-
-    private void OnButtonClick(RoutedEventArgs obj)
-    {
-        ComponentParameter = "111";
-        StateHasChanged();
-    }
 }

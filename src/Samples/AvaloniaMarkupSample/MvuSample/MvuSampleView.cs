@@ -23,10 +23,14 @@ public class MvuSampleView : ViewBase
                     .Background(Colors.Aquamarine.ToBrush())
                     .Child(
                         new MvuComponent()
-                            .ComponentParameter("Hello component")
-                    )
-            );
+                            .ComponentParameter(Bind(MvuComponentParam))
+                    ),
+                
+                new Button()
+                    .Content("Change nested component parameter")
+                    .OnClick(OnButton3Click)
 
+            );
 
     private string _myNotifiedProperty1 = "Click me";
     public string MyNotifiedProperty
@@ -46,6 +50,8 @@ public class MvuSampleView : ViewBase
 
     public SeparatedViewState State { get; set; } = new();
 
+    public string MvuComponentParam { get; set; } = "Hello nested component";
+
     private void OnButtonClick(RoutedEventArgs obj)
     {
         MyProperty = "Button was clicked!";
@@ -57,5 +63,11 @@ public class MvuSampleView : ViewBase
     {
         State.StateProperty = "Value changed!";
     }
+
+    private void OnButton3Click(RoutedEventArgs obj)
+    {
+        throw new NotImplementedException();
+    }
+
 
 }

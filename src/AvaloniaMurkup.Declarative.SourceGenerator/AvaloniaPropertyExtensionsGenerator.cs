@@ -209,4 +209,21 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
 
         return extensionText;
     }
+
+    private string GetCommonPropertyBindingSetterExtension(string controlTypeName, PropertyDeclarationSyntax property)
+    {
+        var extensionName = property.Identifier.ToString();
+
+        var valueTypeSource = property.Type.ToString();
+
+        var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null,"
+                         + $" [CallerArgumentExpression(\"value\")] string ps = null";
+
+        var extensionText =
+            $"public static {controlTypeName} {extensionName}"
+            + $"(this {controlTypeName} control, {argsString})"
+            + $"=> control._setCommonEx(ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
+
+        return extensionText;
+    }
 }
