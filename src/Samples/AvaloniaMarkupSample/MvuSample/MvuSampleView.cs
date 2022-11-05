@@ -1,4 +1,6 @@
-﻿namespace AvaloniaMarkupSample.MvuSample;
+﻿using Avalonia.Markup.Declarative;
+
+namespace AvaloniaMarkupSample.MvuSample;
 
 public class MvuSampleView : ViewBase
 {
@@ -23,9 +25,10 @@ public class MvuSampleView : ViewBase
                     .Background(Colors.Aquamarine.ToBrush())
                     .Child(
                         new MvuComponent()
+                            .Ref(out _nestedComponent)
                             .ComponentParameter(Bind(MvuComponentParam))
                     ),
-                
+
                 new Button()
                     .Content("Change nested component parameter")
                     .OnClick(OnButton3Click)
@@ -33,6 +36,8 @@ public class MvuSampleView : ViewBase
             );
 
     private string _myNotifiedProperty1 = "Click me";
+    private MvuComponent _nestedComponent;
+
     public string MyNotifiedProperty
     {
         get => _myNotifiedProperty1;
@@ -66,8 +71,7 @@ public class MvuSampleView : ViewBase
 
     private void OnButton3Click(RoutedEventArgs obj)
     {
-        throw new NotImplementedException();
+        MvuComponentParam = "I changed from external view!";
+        _nestedComponent.UpdateState();
     }
-
-
 }

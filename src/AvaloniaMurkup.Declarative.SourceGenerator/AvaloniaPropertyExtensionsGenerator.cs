@@ -78,12 +78,13 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
                     && HasPublicSetter(property) 
                     && IsCommonProperty(property, members))
                 {
-                    var extensionString = GetCommonPropertySetterExtension(typeName, property);
-                    if (!string.IsNullOrWhiteSpace(extensionString))
-                    {
-                        //extensions.Add(extensionString);
-                        sb.AppendLine(extensionString);
-                    }
+                    var valueSetterExtensionString = GetCommonPropertySetterExtension(typeName, property);
+                    if (!string.IsNullOrWhiteSpace(valueSetterExtensionString))
+                        sb.AppendLine(valueSetterExtensionString);
+
+                    var bindingSetterExtensionString = GetCommonPropertyBindingSetterExtension(typeName, property);
+                    if (!string.IsNullOrWhiteSpace(bindingSetterExtensionString))
+                        sb.AppendLine(bindingSetterExtensionString);
                 }
 
                 //PROCESS AVALONIA PROPERTIES
@@ -213,16 +214,12 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
     private string GetCommonPropertyBindingSetterExtension(string controlTypeName, PropertyDeclarationSyntax property)
     {
         var extensionName = property.Identifier.ToString();
-
         var valueTypeSource = property.Type.ToString();
-
-        var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null,"
-                         + $" [CallerArgumentExpression(\"value\")] string ps = null";
 
         var extensionText =
             $"public static {controlTypeName} {extensionName}"
-            + $"(this {controlTypeName} control, {argsString})"
-            + $"=> control._setCommonEx(ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
+            + $"(this {controlTypeName} control, IBinding binding)"
+            + $"=> control._setCommonBindingEx(({valueTypeSource} value) => control.{extensionName} = value, binding);";
 
         return extensionText;
     }

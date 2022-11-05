@@ -201,15 +201,23 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
     }
 
 
+
+    #region Property States
+
+
     ViewPropertyState[]? _propertyStates = null;
+    List<ViewPropertyState> _externalPropertyStates = null;
     private void InitStateMembers()
     {
         var viewType = GetType();
-        _propertyStates = viewType
+        var viewPropertyStates = viewType
             .GetProperties()
             .Where(p => p.DeclaringType == viewType)
-            .Select(p => new ViewPropertyState(p, this))
-            .ToArray();
+            .Select(p => new ViewPropertyState(p, this));
+        
+        _propertyStates = _externalPropertyStates == null 
+            ? viewPropertyStates.ToArray() 
+            : viewPropertyStates.Concat(_externalPropertyStates).ToArray();
     }
     public void UpdateState()
     {
@@ -224,6 +232,16 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
         foreach (var prop in _propertyStates)
             if (prop.CheckStateChangedAndUpdate())
                 OnPropertyChanged(prop.Name);
+    }
+
+    public void AddExternalState<TContorl>(TContorl source, string propertyName) 
+        where TContorl : ViewBase
+    {
+        _externalPropertyStates ??= new List<ViewPropertyState>();
+
+        var propInfo = source.GetType().GetProperty(propertyName);
+
+        _externalPropertyStates.Add(new ViewPropertyState(propInfo, source));
     }
 
     protected IBinding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string bindingString = null)
@@ -251,12 +269,18 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
         if(useStateValueAsSource)
             bindingSource = stateInfo.Value;
 
-        return new Binding()
+        return new BindingEx()
         {
             Source = bindingSource,
             Path = propName,
             Mode = bindingMode,
+            Value = value
         };
+    }
+
+    public class BindingEx : Binding 
+    {
+        public object Value { get; set; }
     }
 
     private ViewPropertyState FindStateForBindingString(string stateName) =>
@@ -267,6 +291,7 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+    #endregion
 
     #region Hot reload stuff
 
