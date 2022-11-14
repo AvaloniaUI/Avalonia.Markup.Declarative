@@ -71,7 +71,12 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
 
     protected abstract object Build();
 
-    protected ViewBase(bool deferredLoading = false)
+    protected ViewBase() : this(false)
+    {
+
+    }
+
+    protected ViewBase(bool deferredLoading)
     {
         if (!deferredLoading)
         {

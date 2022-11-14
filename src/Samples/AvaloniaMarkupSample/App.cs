@@ -1,7 +1,4 @@
-﻿//this line is required to support Net 6 hot reload for Views
-
-using AvaloniaMarkupSample;
-
+﻿using AvaloniaMarkupSample;
 
 AppBuilder.Configure<Application>()
     .UsePlatformDetect()

@@ -1,7 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using Avalonia.Markup.Declarative;
-
-namespace AvaloniaMarkupSample.MvuSample;
+﻿namespace AvaloniaMarkupSample.MvuSample;
 
 public class MvuSampleView : ViewBase
 {
