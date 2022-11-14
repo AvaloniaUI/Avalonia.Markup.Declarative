@@ -15,5 +15,5 @@ public class MainWindow : Window
 {
     public MainWindow() =>
         this.Title("Avalonia MVU Template")
-            .Content(new MainView());
+            .Content(new MvuComponent());
 }

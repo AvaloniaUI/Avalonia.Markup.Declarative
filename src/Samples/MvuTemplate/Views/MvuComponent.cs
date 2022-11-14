@@ -1,6 +1,6 @@
 ﻿namespace MvuTemplate.Views;
 
-public class MainView : ViewBase
+public class MvuComponent : ViewBase
 {
     protected override object Build() =>
         new StackPanel()
