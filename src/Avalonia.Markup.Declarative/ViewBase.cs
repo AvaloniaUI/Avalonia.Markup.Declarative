@@ -205,19 +205,18 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
     #region Property States
 
 
-    ViewPropertyState[]? _propertyStates = null;
+    ViewPropertyState[]? _localPropertyStates = null;
     List<ViewPropertyState> _externalPropertyStates = null;
+    List<IDeclarativeViewBase> _dependentViews = null;
+
     private void InitStateMembers()
     {
         var viewType = GetType();
-        var viewPropertyStates = viewType
+        _localPropertyStates = viewType
             .GetProperties()
             .Where(p => p.DeclaringType == viewType)
-            .Select(p => new ViewPropertyState(p, this));
-        
-        _propertyStates = _externalPropertyStates == null 
-            ? viewPropertyStates.ToArray() 
-            : viewPropertyStates.Concat(_externalPropertyStates).ToArray();
+            .Select(p => new ViewPropertyState(p, this))
+            .ToArray();
     }
     public void UpdateState()
     {
@@ -226,22 +225,40 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
 
     protected void StateHasChanged()
     {
-        if (_propertyStates == null)
-            return;
+        if (_externalPropertyStates != null)
+            foreach (var prop in _externalPropertyStates)
+                if (prop.CheckStateChangedAndUpdate())
+                    OnPropertyChanged(prop.Name);
 
-        foreach (var prop in _propertyStates)
-            if (prop.CheckStateChangedAndUpdate())
-                OnPropertyChanged(prop.Name);
+        if (_localPropertyStates != null)
+            foreach (var prop in _localPropertyStates)
+                if (prop.CheckStateChangedAndUpdate())
+                    OnPropertyChanged(prop.Name);
+
+        if (_dependentViews != null)
+            foreach (var dependentView in _dependentViews)
+                dependentView.UpdateState();
     }
 
-    public void AddExternalState<TContorl>(TContorl source, string propertyName) 
+    public void AddExternalState<TContorl, TValue>(TContorl source, string propertyName, Action<TValue> setAction)
         where TContorl : ViewBase
     {
         _externalPropertyStates ??= new List<ViewPropertyState>();
 
         var propInfo = source.GetType().GetProperty(propertyName);
 
-        _externalPropertyStates.Add(new ViewPropertyState(propInfo, source));
+        var propertyState = new ViewPropertyState<TValue>(propInfo, source, setAction);
+        _externalPropertyStates.Add(propertyState);
+
+        source.AddDependentView(this, propertyState);
+    }
+
+    private void AddDependentView(IDeclarativeViewBase view, ViewPropertyState propertyState)
+    {
+        _dependentViews ??= new List<IDeclarativeViewBase>();
+
+        if (!_dependentViews.Contains(view))
+            _dependentViews.Add(view);
     }
 
     protected IBinding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string bindingString = null)
@@ -253,7 +270,7 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
         var stateName = propName;
 
         var splitterIndex = bindingString!.IndexOf('.');
-        
+
         if (splitterIndex > -1)
         {
             var startIndex = bindingString.StartsWith("@") ? 1 : 0;
@@ -261,12 +278,12 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
 
             useStateValueAsSource = true;
         }
-        
+
         var stateInfo = FindStateForBindingString(stateName);
         if (stateInfo == null)
             throw new ArgumentException("No properties found in binding string");
 
-        if(useStateValueAsSource)
+        if (useStateValueAsSource)
             bindingSource = stateInfo.Value;
 
         return new BindingEx()
@@ -278,13 +295,13 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
         };
     }
 
-    public class BindingEx : Binding 
+    public class BindingEx : Binding
     {
         public object Value { get; set; }
     }
 
     private ViewPropertyState FindStateForBindingString(string stateName) =>
-        _propertyStates?.FirstOrDefault(x => x.Name == stateName);
+        _localPropertyStates?.FirstOrDefault(x => x.Name == stateName);
 
     public new event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -82,7 +82,7 @@ public static class ControlPropertyExtensions
 
                 if (bindingEx.Source is ViewBase sourceView)
                 {
-                    targetView.AddExternalState(sourceView, bindingEx.Path);
+                    targetView.AddExternalState(sourceView, bindingEx.Path, setAction);
                 }
             }
         }

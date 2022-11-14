@@ -1,6 +1,6 @@
 ﻿namespace AvaloniaMarkupSample.MvuSample;
 
-public partial class MvuComponent : ViewBase
+public class MvuComponent : ViewBase
 {
     protected override object Build() =>
         new StackPanel()
@@ -9,8 +9,8 @@ public partial class MvuComponent : ViewBase
                     .Text("This is nested MVU Component"),
 
                 new TextBlock()
-                    .Text(Bind(ComponentParameter))
+                    .Text(Bind(InnerContent))
             );
 
-    public string ComponentParameter { get; set; } = "Parameter value";
+    public string InnerContent { get; set; } = "Parameter value";
 }

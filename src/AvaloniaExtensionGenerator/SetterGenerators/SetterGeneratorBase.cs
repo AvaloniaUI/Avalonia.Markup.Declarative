@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace AvaloniaExtensionGenerator
+namespace AvaloniaExtensionGenerator.SetterGenerators
 {
     public abstract class SetterGeneratorBase : ISetterExtensionGenerator
     {

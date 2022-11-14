@@ -1,4 +1,4 @@
-namespace AvaloniaExtensionGenerator;
+namespace AvaloniaExtensionGenerator.EventGenerators;
 
 public class ActionToEventGenerator : EventGeneratorBase
 {

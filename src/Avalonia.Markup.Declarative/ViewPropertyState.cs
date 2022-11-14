@@ -3,6 +3,28 @@ using System.Reflection;
 
 namespace Avalonia.Markup.Declarative
 {
+    internal class ViewPropertyState<TValue> : ViewPropertyState
+    {
+        private readonly Action<TValue> _setAction;
+
+        private TValue TypedValue => (TValue) Value;
+
+        public ViewPropertyState(PropertyInfo propertyInfo, ViewBase view, Action<TValue> setAction) : base(propertyInfo, view)
+        {
+            _setAction = setAction;
+        }
+
+        public override bool CheckStateChangedAndUpdate()
+        {
+            var result = base.CheckStateChangedAndUpdate();
+
+            if (result)
+                _setAction(TypedValue);
+
+            return result;
+        }
+    }
+
     internal class ViewPropertyState
     {
         public object Value { get; private set; }
@@ -21,7 +43,7 @@ namespace Avalonia.Markup.Declarative
             Value = PropertyInfo.GetValue(View);
         }
 
-        public bool CheckStateChangedAndUpdate()
+        public virtual bool CheckStateChangedAndUpdate()
         {
             var oldValue = Value;
             Value = PropertyInfo.GetValue(View);

@@ -1,4 +1,5 @@
-﻿using Avalonia.Markup.Declarative;
+﻿using System.Security.Cryptography.X509Certificates;
+using Avalonia.Markup.Declarative;
 
 namespace AvaloniaMarkupSample.MvuSample;
 
@@ -22,11 +23,10 @@ public class MvuSampleView : ViewBase
                     .OnClick(OnButton2Click),
 
                 new Border()
-                    .Background(Colors.Aquamarine.ToBrush())
+                    .Background(Bind(BorderColor))
                     .Child(
                         new MvuComponent()
-                            .Ref(out _nestedComponent)
-                            .ComponentParameter(Bind(MvuComponentParam))
+                            .InnerContent(Bind(MvuComponentParam))
                     ),
 
                 new Button()
@@ -36,7 +36,6 @@ public class MvuSampleView : ViewBase
             );
 
     private string _myNotifiedProperty1 = "Click me";
-    private MvuComponent _nestedComponent;
 
     public string MyNotifiedProperty
     {
@@ -51,6 +50,7 @@ public class MvuSampleView : ViewBase
         }
     }
 
+    public Brush BorderColor { get; set; } = Colors.Red.ToBrush();
     public string MyProperty { get; set; } = "Hello MVU";
 
     public SeparatedViewState State { get; set; } = new();
@@ -72,6 +72,7 @@ public class MvuSampleView : ViewBase
     private void OnButton3Click(RoutedEventArgs obj)
     {
         MvuComponentParam = "I changed from external view!";
-        _nestedComponent.UpdateState();
+        BorderColor = Colors.Green.ToBrush();
+        StateHasChanged();
     }
 }
