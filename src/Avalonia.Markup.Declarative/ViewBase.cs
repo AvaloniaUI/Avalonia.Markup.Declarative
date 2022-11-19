@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Avalonia.Controls;
@@ -65,7 +63,7 @@ public abstract class ViewBase<TViewModel> : ViewBase
 /// <summary>
 /// Base view class used like UserControl in XAML
 /// </summary>
-public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged, IDeclarativeViewBase
+public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 {
     public event Action ViewInitialized;
 
@@ -89,6 +87,10 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
 
     protected internal void OnCreatedCore() => OnCreated();
 
+    /// <summary>
+    /// Called from constructor, right before initialization and building UI
+    /// Override this method when you want to run some stuff before creation of children controls
+    /// </summary>
     protected virtual void OnCreated()
     {
     }
@@ -118,8 +120,6 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
     {
         try
         {
-            InitStateMembers();
-
             var content = Build();
             Child = content as Control;
 
@@ -207,113 +207,6 @@ public abstract class ViewBase : Decorator, IReloadable, INotifyPropertyChanged,
 
 
 
-    #region Property States
-
-
-    ViewPropertyState[]? _localPropertyStates = null;
-    List<ViewPropertyState> _externalPropertyStates = null;
-    List<IDeclarativeViewBase> _dependentViews = null;
-
-    private void InitStateMembers()
-    {
-        var viewType = GetType();
-        _localPropertyStates = viewType
-            .GetProperties()
-            .Where(p => p.DeclaringType == viewType)
-            .Select(p => new ViewPropertyState(p, this))
-            .ToArray();
-    }
-    public void UpdateState()
-    {
-        StateHasChanged();
-    }
-
-    protected void StateHasChanged()
-    {
-        if (_externalPropertyStates != null)
-            foreach (var prop in _externalPropertyStates)
-                if (prop.CheckStateChangedAndUpdate())
-                    OnPropertyChanged(prop.Name);
-
-        if (_localPropertyStates != null)
-            foreach (var prop in _localPropertyStates)
-                if (prop.CheckStateChangedAndUpdate())
-                    OnPropertyChanged(prop.Name);
-
-        if (_dependentViews != null)
-            foreach (var dependentView in _dependentViews)
-                dependentView.UpdateState();
-    }
-
-    public void AddExternalState<TContorl, TValue>(TContorl source, string propertyName, Action<TValue> setAction)
-        where TContorl : ViewBase
-    {
-        _externalPropertyStates ??= new List<ViewPropertyState>();
-
-        var propInfo = source.GetType().GetProperty(propertyName);
-
-        var propertyState = new ViewPropertyState<TValue>(propInfo, source, setAction);
-        _externalPropertyStates.Add(propertyState);
-
-        source.AddDependentView(this, propertyState);
-    }
-
-    private void AddDependentView(IDeclarativeViewBase view, ViewPropertyState propertyState)
-    {
-        _dependentViews ??= new List<IDeclarativeViewBase>();
-
-        if (!_dependentViews.Contains(view))
-            _dependentViews.Add(view);
-    }
-
-    protected IBinding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string bindingString = null)
-    {
-        object bindingSource = this;
-        var useStateValueAsSource = false;
-
-        var propName = PropertyPathHelper.GetNameFromPropertyPath(bindingString);
-        var stateName = propName;
-
-        var splitterIndex = bindingString!.IndexOf('.');
-
-        if (splitterIndex > -1)
-        {
-            var startIndex = bindingString.StartsWith("@") ? 1 : 0;
-            stateName = bindingString.Substring(0, splitterIndex - startIndex);
-
-            useStateValueAsSource = true;
-        }
-
-        var stateInfo = FindStateForBindingString(stateName);
-        if (stateInfo == null)
-            throw new ArgumentException("No properties found in binding string");
-
-        if (useStateValueAsSource)
-            bindingSource = stateInfo.Value;
-
-        return new BindingEx()
-        {
-            Source = bindingSource,
-            Path = propName,
-            Mode = bindingMode,
-            Value = value
-        };
-    }
-
-    public class BindingEx : Binding
-    {
-        public object Value { get; set; }
-    }
-
-    private ViewPropertyState FindStateForBindingString(string stateName) =>
-        _localPropertyStates?.FirstOrDefault(x => x.Name == stateName);
-
-    public new event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-    #endregion
 
     #region Hot reload stuff
 

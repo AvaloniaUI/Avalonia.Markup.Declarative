@@ -75,6 +75,7 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
             {
                 //PROCESS COMMON PROPERTIES
                 if (member is PropertyDeclarationSyntax property
+                    && IsPublic(property)
                     && HasPublicSetter(property) 
                     && IsCommonProperty(property, members))
                 {
@@ -142,6 +143,11 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
         }
 
         return false;
+    }
+
+    private bool IsPublic(PropertyDeclarationSyntax property)
+    {
+        return property != null && property.Modifiers.Any(x=>x.ValueText == "public");
     }
 
     private static ImmutableArray<ClassDeclarationSyntax> GetGenerateExtensionsViews(Compilation compilation)
