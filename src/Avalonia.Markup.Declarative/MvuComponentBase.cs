@@ -8,22 +8,6 @@ using Avalonia.Data;
 
 namespace Avalonia.Markup.Declarative;
 
-public class Mvu
-{
-    private static IServiceProvider _serviceProvider;
-    internal static IServiceProvider ServiceProvider => _serviceProvider;
-
-    public static void SetServiceProvider(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
-}
-
-public class InjectAttribute : Attribute
-{
-
-}
-
 public abstract class MvuComponentBase : ViewBase, IMvuComponent
 {
     ViewPropertyState[]? _localPropertyStates = null;
