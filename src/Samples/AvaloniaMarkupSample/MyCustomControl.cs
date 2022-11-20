@@ -1,5 +1,21 @@
-﻿public class MyCustomControl : ViewBase
+﻿using AvaloniaMarkupSample;
+
+public class MyCustomControl : ViewBase
 {
+    #region Background Styled Avalonia Property
+    public CustomBrush? Background
+    {
+        get => GetValue(BackgroundProperty);
+        set => SetValue(BackgroundProperty, value);
+    }
+
+    public static readonly StyledProperty<CustomBrush?> BackgroundProperty =
+        AvaloniaProperty.Register<MyCustomControl, CustomBrush?>
+        (
+            nameof(Background)
+        );
+    #endregion Background Styled Avalonia Property
+
     #region NewValue Styled Avalonia Property
     public string? NewValue
     {

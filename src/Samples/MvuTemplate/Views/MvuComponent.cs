@@ -24,6 +24,7 @@ public class MvuComponent : MvuComponentBase
     public int Counter { get; set; }
     public string CounterText => $"Counter: {Counter}";
 
+    public SampleDataService DataService { get; set; }
 
     private void OnButtonClick(RoutedEventArgs e)
     {

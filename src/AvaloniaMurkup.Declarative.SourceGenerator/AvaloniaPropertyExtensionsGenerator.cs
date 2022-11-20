@@ -23,7 +23,7 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
         Debug.WriteLine("Execute AvaloniaPropertyExtensionsGenerator code generator");
 
         var comp = context.Compilation;
-
+        
         var views = GetGenerateExtensionsViews(comp);
 
         var sb = new StringBuilder();
@@ -79,11 +79,11 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
                     && HasPublicSetter(property) 
                     && IsCommonProperty(property, members))
                 {
-                    var valueSetterExtensionString = GetCommonPropertySetterExtension(typeName, property);
+                    var valueSetterExtensionString = GetCommonPropertySetterExtension(typeName, property, comp);
                     if (!string.IsNullOrWhiteSpace(valueSetterExtensionString))
                         sb.AppendLine(valueSetterExtensionString);
 
-                    var bindingSetterExtensionString = GetCommonPropertyBindingSetterExtension(typeName, property);
+                    var bindingSetterExtensionString = GetCommonPropertyBindingSetterExtension(typeName, property, comp);
                     if (!string.IsNullOrWhiteSpace(bindingSetterExtensionString))
                         sb.AppendLine(bindingSetterExtensionString);
                 }
@@ -200,11 +200,12 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
         return extensionText;
     }
 
-    private string GetCommonPropertySetterExtension(string controlTypeName, PropertyDeclarationSyntax property)
+    private string GetCommonPropertySetterExtension(string controlTypeName, PropertyDeclarationSyntax property,
+        Compilation compilation)
     {
         var extensionName = property.Identifier.ToString();
 
-        var valueTypeSource = property.Type.ToString();
+        var valueTypeSource = GetPropertyTypeName(property, compilation);
 
         var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null,"
                          + $" [CallerArgumentExpression(\"value\")] string ps = null";
@@ -217,10 +218,19 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
         return extensionText;
     }
 
-    private string GetCommonPropertyBindingSetterExtension(string controlTypeName, PropertyDeclarationSyntax property)
+    private string GetPropertyTypeName(PropertyDeclarationSyntax property, Compilation compilation)
+    {
+        var semanticModel = compilation.GetSemanticModel(property.SyntaxTree);
+        var fullTypeName = semanticModel.GetTypeInfo(property.Type).Type?.ToString();
+
+        return !string.IsNullOrWhiteSpace(fullTypeName) ? fullTypeName : property.Type.ToString();
+    }
+
+    private string GetCommonPropertyBindingSetterExtension(string controlTypeName, PropertyDeclarationSyntax property,
+        Compilation compilation)
     {
         var extensionName = property.Identifier.ToString();
-        var valueTypeSource = property.Type.ToString();
+        var valueTypeSource = GetPropertyTypeName(property, compilation);
 
         var extensionText =
             $"public static {controlTypeName} {extensionName}"
