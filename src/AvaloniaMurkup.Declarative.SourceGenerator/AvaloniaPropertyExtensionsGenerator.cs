@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static Avalonia.Markup.Declarative.SourceGenerator.MarkupTypeHelpers;
 
 namespace Avalonia.Markup.Declarative.SourceGenerator;
 
@@ -23,11 +21,10 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
         Debug.WriteLine("Execute AvaloniaPropertyExtensionsGenerator code generator");
 
         var comp = context.Compilation;
-        
-        var views = GetGenerateExtensionsViews(comp);
+
+        var views = FindAvaloniaMarkupViews(comp);
 
         var sb = new StringBuilder();
-        var extensions = new List<string>();
         foreach (var type in views)
         {
             var root = type.SyntaxTree
@@ -35,7 +32,7 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
 
             var ns = root
                 .DescendantNodes()
-                .FirstOrDefault(x=>x is BaseNamespaceDeclarationSyntax);
+                .FirstOrDefault(x => x is BaseNamespaceDeclarationSyntax);
 
             var typeNamespace = "";
 
@@ -46,6 +43,7 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
 
             sb.Clear();
 
+            sb.AppendLine("#nullable enable");
             sb.AppendLine("// Auto-generated code");
             sb.AppendLine("using System;");
             sb.AppendLine("using Avalonia.Data.Converters;");
@@ -72,42 +70,28 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
             var members = type.Members;
 
             foreach (var member in members)
-            {
-                //PROCESS COMMON PROPERTIES
-                if (member is PropertyDeclarationSyntax property
-                    && IsPublic(property)
-                    && HasPublicSetter(property) 
-                    && IsCommonProperty(property, members))
+                switch (member)
                 {
-                    var valueSetterExtensionString = GetCommonPropertySetterExtension(typeName, property, comp);
-                    if (!string.IsNullOrWhiteSpace(valueSetterExtensionString))
-                        sb.AppendLine(valueSetterExtensionString);
-
-                    var bindingSetterExtensionString = GetCommonPropertyBindingSetterExtension(typeName, property, comp);
-                    if (!string.IsNullOrWhiteSpace(bindingSetterExtensionString))
-                        sb.AppendLine(bindingSetterExtensionString);
-                }
-
-                //PROCESS AVALONIA PROPERTIES
-                if (member is FieldDeclarationSyntax field)
-                {
-                    if (field.Declaration.Type is GenericNameSyntax
+                    //PROCESS COMMON PROPERTIES
+                    case PropertyDeclarationSyntax property when IsPublic(property) && HasPublicSetter(property) &&
+                                                                 IsCommonProperty(property, members):
+                    {
+                        AppendIfNotNull(sb, GetCommonPropertySetterExtension(typeName, property, comp));
+                        AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(typeName, property, comp));
+                        break;
+                    }
+                    //PROCESS AVALONIA PROPERTIES
+                    case FieldDeclarationSyntax field when
+                        field.Declaration.Type is GenericNameSyntax
                         {
                             Identifier.ValueText: ("DirectProperty" or "StyledProperty" or "AttachedProperty")
-                        })
+                        } &&
+                        HasAvaloniaPropertyPublicSetter(field, members):
                     {
-                        if (!HasAvaloniaPropertyPublicSetter(field, members))
-                            continue;
-
-                        var extensionString = GetPropertySetterExtension(typeName, field);
-                        if (!string.IsNullOrWhiteSpace(extensionString))
-                        {
-                            //extensions.Add(extensionString);
-                            sb.AppendLine(extensionString);
-                        }
+                        AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
+                        break;
                     }
                 }
-            }
 
             sb.AppendLine("}");
             // Add the source code to the compilation
@@ -116,63 +100,10 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
 
     }
 
-    private bool IsCommonProperty(PropertyDeclarationSyntax property, SyntaxList<MemberDeclarationSyntax> members)
+    private static void AppendIfNotNull(StringBuilder sb, string value)
     {
-        var avaloniaPropertyName = property.Identifier + "Property";
-        return members.OfType<FieldDeclarationSyntax>().All(field => field.Declaration.Variables[0].Identifier.ToString() != avaloniaPropertyName);
-    }
-
-    private bool HasAvaloniaPropertyPublicSetter(FieldDeclarationSyntax field, SyntaxList<MemberDeclarationSyntax> members)
-    {
-        var backingPropertyName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
-
-        var property = members
-            .OfType<PropertyDeclarationSyntax>()
-            .FirstOrDefault(x => x.Identifier.ValueText == backingPropertyName);
-
-        return HasPublicSetter(property);
-    }
-
-    private bool HasPublicSetter(PropertyDeclarationSyntax property)
-    {
-        if (property != null)
-        {
-            var setter = property.AccessorList?.Accessors.FirstOrDefault(x => x.IsKind(SyntaxKind.SetAccessorDeclaration));
-            if(setter?.Modifiers.Any() == false)
-                return true;
-        }
-
-        return false;
-    }
-
-    private bool IsPublic(PropertyDeclarationSyntax property)
-    {
-        return property != null && property.Modifiers.Any(x=>x.ValueText == "public");
-    }
-
-    private static ImmutableArray<ClassDeclarationSyntax> GetGenerateExtensionsViews(Compilation compilation)
-    {
-        IEnumerable<SyntaxNode> allNodes = compilation.SyntaxTrees.SelectMany(s => s.GetRoot().DescendantNodes());
-        IEnumerable<ClassDeclarationSyntax> allClasses = allNodes
-            .Where(d => d.IsKind(SyntaxKind.ClassDeclaration))
-            .OfType<ClassDeclarationSyntax>();
-
-        return allClasses
-            .Where(type => IsGenerateExtensionsView(compilation, type))
-            .ToImmutableArray();
-    }
-
-    private static bool IsGenerateExtensionsView(Compilation compilation, ClassDeclarationSyntax component)
-    {
-        var sModel = compilation.GetSemanticModel(component.SyntaxTree);
-        var classSymbol = sModel.GetDeclaredSymbol(component);
-
-        if (classSymbol?.AllInterfaces.Any(x => x.Name.ToString() == "IDeclarativeViewBase") == true)
-            return true;
-
-        return component.AttributeLists
-            .SelectMany(x => x.Attributes)
-            .Any(attr => attr.Name.ToString() == "GenerateMarkupExtensions");
+        if (string.IsNullOrWhiteSpace(value)) return;
+        sb.AppendLine(value);
     }
 
     public void Initialize(GeneratorInitializationContext context)
@@ -216,14 +147,6 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
             + $"=> control._setCommonEx(ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
 
         return extensionText;
-    }
-
-    private string GetPropertyTypeName(PropertyDeclarationSyntax property, Compilation compilation)
-    {
-        var semanticModel = compilation.GetSemanticModel(property.SyntaxTree);
-        var fullTypeName = semanticModel.GetTypeInfo(property.Type).Type?.ToString();
-
-        return !string.IsNullOrWhiteSpace(fullTypeName) ? fullTypeName : property.Type.ToString();
     }
 
     private string GetCommonPropertyBindingSetterExtension(string controlTypeName, PropertyDeclarationSyntax property,

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static Avalonia.Markup.Declarative.SourceGenerator.MarkupTypeHelpers;
 
 namespace Avalonia.Markup.Declarative.SourceGenerator
 {
@@ -25,7 +24,7 @@ namespace Avalonia.Markup.Declarative.SourceGenerator
 
             var comp = context.Compilation;
 
-            var views = GetGenerateExtensionsViews(comp);
+            var views = FindAvaloniaMarkupViews(comp);
 
             var sb = new StringBuilder();
             var extensions = new List<string>();
@@ -47,6 +46,7 @@ namespace Avalonia.Markup.Declarative.SourceGenerator
 
                 sb.Clear();
 
+                sb.AppendLine("#nullable enable");
                 sb.AppendLine("// Auto-generated code");
                 sb.AppendLine("using System;");
                 sb.AppendLine("using System.Runtime.CompilerServices;");
@@ -87,25 +87,6 @@ namespace Avalonia.Markup.Declarative.SourceGenerator
                 context.AddSource($"{typeName}.g.cs", sb.ToString());
             }
 
-        }
-
-        private static ImmutableArray<ClassDeclarationSyntax> GetGenerateExtensionsViews(Compilation compilation)
-        {
-            IEnumerable<SyntaxNode> allNodes = compilation.SyntaxTrees.SelectMany(s => s.GetRoot().DescendantNodes());
-            IEnumerable<ClassDeclarationSyntax> allClasses = allNodes
-                .Where(d => d.IsKind(SyntaxKind.ClassDeclaration))
-                .OfType<ClassDeclarationSyntax>();
-
-            return allClasses
-                .Where(type => IsGenerateExtensionsView(compilation, type))
-                .ToImmutableArray();
-        }
-
-        private static bool IsGenerateExtensionsView(Compilation compilation, ClassDeclarationSyntax component)
-        {
-            return component.AttributeLists
-                .SelectMany(x => x.Attributes)
-                .Any(attr => attr.Name.ToString() == "GenerateMarkupExtensions");
         }
 
         public void Initialize(GeneratorInitializationContext context)
