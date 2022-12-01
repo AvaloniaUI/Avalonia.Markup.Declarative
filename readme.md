@@ -68,6 +68,16 @@ ViewBase class automagiacally supports .Net 6 hot reload feature.
 
 * make sure that your view classes are located in the Assembly that doesn't contain any Xaml files, otherwise hot reload feature will always throw "need to rebuild" message.
 
+## Properties support on custom controls
+There are two source generators to add markup extensions on your own controls. If you downloaded source code or clonned this repo, you have to add them by referencing Avalonia.Markup.Declarative.SourceGenerator project in csproj file like this:
+
+```xml
+	<ItemGroup>
+		<ProjectReference Include="..\..\AvaloniaMurkup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	</ItemGroup>
+```
+* make sure, that path to source generator project is correct relative to your project
+
 ## MVU Pattern implementation
 
 Inspired by blazor component layout. So basic component will looks like:
