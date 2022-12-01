@@ -1,6 +1,8 @@
-﻿namespace AvaloniaMarkupSample.MvuSample;
+﻿using Avalonia.Markup.Declarative.Mvu;
 
-public class MvuComponent : MvuComponentBase
+namespace AvaloniaMarkupSample.MvuSample;
+
+public class Component : ComponentBase
 {
     protected override object Build() =>
         new StackPanel()

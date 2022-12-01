@@ -6,9 +6,9 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Avalonia.Data;
 
-namespace Avalonia.Markup.Declarative;
+namespace Avalonia.Markup.Declarative.Mvu;
 
-public abstract class MvuComponentBase : ViewBase, IMvuComponent
+public abstract class ComponentBase : ViewBase, IMvuComponent
 {
     ViewPropertyState[]? _localPropertyStates = null;
     List<ViewPropertyState> _externalPropertyStates = null;
@@ -30,16 +30,24 @@ public abstract class MvuComponentBase : ViewBase, IMvuComponent
         foreach (var propertyInfo in serviceProps)
         {
             var service = GetServiceFromProvider(propertyInfo.PropertyType);
-            propertyInfo.SetValue(this, service);
+
+            if (propertyInfo.CanWrite)
+            {
+                propertyInfo.SetValue(this, service);
+            }
+            else
+            {
+                throw new InvalidOperationException($"Can't inject {service.GetType()} service. Ensure that target property: {GetType().Name}.{propertyInfo.Name} has public setter");
+            }
         }
     }
 
     private object GetServiceFromProvider(Type serviceType)
     {
-        if (Mvu.ServiceProvider == null)
-            throw new InvalidOperationException("Please set Service Provider by calling Mvu.SetServiceProvider");
+        if (ComponentExtensions.ServiceProvider == null)
+            throw new InvalidOperationException("Please set Service Provider by calling UseServiceProvider on AppBuilder");
 
-        return Mvu.ServiceProvider.GetService(serviceType);
+        return ComponentExtensions.ServiceProvider.GetService(serviceType);
     }
 
     private void InitStateMembers()
@@ -74,7 +82,7 @@ public abstract class MvuComponentBase : ViewBase, IMvuComponent
     }
 
     public void AddExternalState<TContorl, TValue>(TContorl source, string propertyName, Action<TValue> setAction)
-        where TContorl : MvuComponentBase
+        where TContorl : ComponentBase
     {
         _externalPropertyStates ??= new List<ViewPropertyState>();
 

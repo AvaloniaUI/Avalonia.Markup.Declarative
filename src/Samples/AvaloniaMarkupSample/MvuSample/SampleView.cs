@@ -1,6 +1,8 @@
-﻿namespace AvaloniaMarkupSample.MvuSample;
+﻿using Avalonia.Markup.Declarative.Mvu;
 
-public class MvuSampleView : MvuComponentBase
+namespace AvaloniaMarkupSample.MvuSample;
+
+public class SampleView : ComponentBase
 {
     protected override object Build() =>
         new StackPanel()
@@ -22,7 +24,7 @@ public class MvuSampleView : MvuComponentBase
                 new Border()
                     .Background(Bind(BorderColor))
                     .Child(
-                        new MvuComponent()
+                        new Component()
                             .InnerContent(Bind(MvuComponentParam))
                     ),
 

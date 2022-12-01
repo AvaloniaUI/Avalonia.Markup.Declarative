@@ -1,6 +1,8 @@
-﻿namespace MvuTemplate.Views;
+﻿using Avalonia.Markup.Declarative.Mvu;
 
-public class MvuComponent : MvuComponentBase
+namespace MvuTemplate.Views;
+
+public class Component : ComponentBase
 {
     protected override object Build() =>
         new StackPanel()
@@ -19,17 +21,15 @@ public class MvuComponent : MvuComponentBase
 
     private TextBlock _textBlock1;
 
-    [Inject] SampleDataService SampleDataService { get; set; }
+    [Inject] SampleDataService DataService { get; set; } = null!;
 
     public int Counter { get; set; }
     public string CounterText => $"Counter: {Counter}";
 
-    public SampleDataService DataService { get; set; }
-
     private void OnButtonClick(RoutedEventArgs e)
     {
         Counter++;
-        _textBlock1.Text = SampleDataService.GetData();
+        _textBlock1.Text = DataService.GetData();
         StateHasChanged();
     }
 }
