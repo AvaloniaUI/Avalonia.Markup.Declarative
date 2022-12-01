@@ -1,4 +1,6 @@
 ﻿using AvaloniaExtensionGenerator;
+using AvaloniaExtensionGenerator.EventGenerators;
+using AvaloniaExtensionGenerator.SetterGenerators;
 using AvaloniaExtensionGenerator.StyleSetterGenerators;
 
 var config = new Config();

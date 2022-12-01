@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq.Expressions;
@@ -62,13 +63,18 @@ public abstract class ViewBase<TViewModel> : ViewBase
 /// <summary>
 /// Base view class used like UserControl in XAML
 /// </summary>
-public abstract class ViewBase : Decorator, IReloadable
+public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 {
     public event Action ViewInitialized;
 
     protected abstract object Build();
 
-    protected ViewBase(bool deferredLoading = false)
+    protected ViewBase() : this(false)
+    {
+
+    }
+
+    protected ViewBase(bool deferredLoading)
     {
         if (!deferredLoading)
         {
@@ -81,6 +87,10 @@ public abstract class ViewBase : Decorator, IReloadable
 
     protected internal void OnCreatedCore() => OnCreated();
 
+    /// <summary>
+    /// Called from constructor, right before initialization and building UI
+    /// Override this method when you want to run some stuff before creation of children controls
+    /// </summary>
     protected virtual void OnCreated()
     {
     }
@@ -158,6 +168,7 @@ public abstract class ViewBase : Decorator, IReloadable
             Mode = bindingMode
         };
     }
+
     protected static Binding Bind<T>(T source, object propertyPath, BindingMode bindingMode = BindingMode.Default,
         [CallerArgumentExpression("propertyPath")] string propertyPathString = null)
     {
@@ -194,6 +205,9 @@ public abstract class ViewBase : Decorator, IReloadable
         return asset;
     }
 
+
+
+
     #region Hot reload stuff
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
@@ -224,4 +238,5 @@ public abstract class ViewBase : Decorator, IReloadable
 #endif
     }
     #endregion
+
 }

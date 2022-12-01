@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Markup.Declarative
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaExtensionGenerator", "AvaloniaExtensionGenerator\AvaloniaExtensionGenerator.csproj", "{5183B326-2752-4CA5-A233-D9F5B83324DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaMarkupSample", "Samples\AvaloniaMarkupSample\AvaloniaMarkupSample.csproj", "{612D87E7-CF30-4E08-A7C3-AF4482924EBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaMarkupSample", "Samples\AvaloniaMarkupSample\AvaloniaMarkupSample.csproj", "{612D87E7-CF30-4E08-A7C3-AF4482924EBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvuTemplate", "Samples\MvuTemplate\MvuTemplate.csproj", "{43B91641-30D5-448A-A996-16DFB85B7262}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{612D87E7-CF30-4E08-A7C3-AF4482924EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{612D87E7-CF30-4E08-A7C3-AF4482924EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{612D87E7-CF30-4E08-A7C3-AF4482924EBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43B91641-30D5-448A-A996-16DFB85B7262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43B91641-30D5-448A-A996-16DFB85B7262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43B91641-30D5-448A-A996-16DFB85B7262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43B91641-30D5-448A-A996-16DFB85B7262}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

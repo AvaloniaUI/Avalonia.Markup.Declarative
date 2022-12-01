@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace AvaloniaExtensionGenerator;
+namespace AvaloniaExtensionGenerator.SetterGenerators;
 public class MagicalSetterGenerator : SetterGeneratorBase
 {
     public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)

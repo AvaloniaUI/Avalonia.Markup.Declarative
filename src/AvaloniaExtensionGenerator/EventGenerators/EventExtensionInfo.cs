@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace AvaloniaExtensionGenerator;
+namespace AvaloniaExtensionGenerator.EventGenerators;
 
 public class EventExtensionInfo
 {

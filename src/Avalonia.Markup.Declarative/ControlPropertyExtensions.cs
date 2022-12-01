@@ -203,7 +203,7 @@ public static class ControlPropertyExtensions
     public static TElement Styles<TElement>(this TElement control, params Style[] styles)
         where TElement : Control
     {
-        foreach (var style in styles) 
+        foreach (var style in styles)
             control.Styles.Add(style);
 
         return control;

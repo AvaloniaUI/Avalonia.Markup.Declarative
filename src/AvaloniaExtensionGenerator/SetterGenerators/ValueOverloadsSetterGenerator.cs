@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace AvaloniaExtensionGenerator
+namespace AvaloniaExtensionGenerator.SetterGenerators
 {
 
     public class ValueOverloadsSetterGenerator : SetterGeneratorBase

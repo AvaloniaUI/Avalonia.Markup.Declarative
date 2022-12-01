@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace AvaloniaExtensionGenerator
+namespace AvaloniaExtensionGenerator.SetterGenerators
 {
     public class PropertyExtensionInfo
     {
@@ -14,7 +14,7 @@ namespace AvaloniaExtensionGenerator
         public Type ValueType { get; }
         public object ValueTypeSource { get; }
 
-        public PropertyExtensionInfo(FieldInfo field, Func<Type,string> TypeDeclarationFunc)
+        public PropertyExtensionInfo(FieldInfo field, Func<Type, string> TypeDeclarationFunc)
         {
             FieldInfo = field;
             ControlType = field.DeclaringType;

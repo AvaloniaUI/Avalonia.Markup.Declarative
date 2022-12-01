@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls.Primitives;
+using AvaloniaMarkupSample.MvuSample;
 using AvaloniaMarkupSample.MvvmSample;
 
 namespace AvaloniaMarkupSample;
@@ -38,6 +39,17 @@ public class MainView : ViewBase
                             )
                     ),
 
+                new TabItem()
+                    .Header("MVU")
+                    .Content(
+                        new Border()
+                            .BorderBrush(Brushes.Gray)
+                            .BorderThickness(1)
+                            .Child(
+                                new SampleView()
+                            )
+                    ),
+
                 new TabItem().Header("Custom controls")
                     .Content(
                         new StackPanel()
@@ -52,8 +64,7 @@ public class MainView : ViewBase
                                     .Child(
                                         new MyCustomControl()
                                             .Margin(20)
-                                    )
-                            ,
+                                    ),
 
                                 new TextBlock()
                                     .Text("Custom templated control example:"),

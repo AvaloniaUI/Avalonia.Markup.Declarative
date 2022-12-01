@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace AvaloniaExtensionGenerator;
+namespace AvaloniaExtensionGenerator.EventGenerators;
 
 public abstract class EventGeneratorBase : IEventExtensionGenerator
 {

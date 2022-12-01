@@ -1,10 +1,26 @@
-﻿public class MyCustomControl : ViewBase
+﻿using AvaloniaMarkupSample;
+
+public class MyCustomControl : ViewBase
 {
+    #region Background Styled Avalonia Property
+    public CustomBrush? Background
+    {
+        get => GetValue(BackgroundProperty);
+        set => SetValue(BackgroundProperty, value);
+    }
+
+    public static readonly StyledProperty<CustomBrush?> BackgroundProperty =
+        AvaloniaProperty.Register<MyCustomControl, CustomBrush?>
+        (
+            nameof(Background)
+        );
+    #endregion Background Styled Avalonia Property
+
     #region NewValue Styled Avalonia Property
     public string? NewValue
     {
-        get { return GetValue(NewValueProperty); }
-        set { SetValue(NewValueProperty, value); }
+        get => GetValue(NewValueProperty);
+        set => SetValue(NewValueProperty, value);
     }
 
     public static readonly StyledProperty<string?> NewValueProperty =
@@ -18,8 +34,8 @@
     #region SavedValue Styled Avalonia Property
     public string? SavedValue
     {
-        get { return GetValue(SavedValueProperty); }
-        set { SetValue(SavedValueProperty, value); }
+        get => GetValue(SavedValueProperty);
+        set => SetValue(SavedValueProperty, value);
     }
 
     public static readonly StyledProperty<string?> SavedValueProperty =
@@ -43,10 +59,7 @@
     public bool CanSave
     {
         get => _canSave;
-        private set
-        {
-            SetAndRaise(CanSaveProperty, ref _canSave, value);
-        }
+        private set => SetAndRaise(CanSaveProperty, ref _canSave, value);
     }
 
     #endregion CanSave Direct Avalonia Property
