@@ -67,3 +67,39 @@ public class MainView : ViewBase<MainViewModel>
 ViewBase class automagiacally supports .Net 6 hot reload feature.
 
 * make sure that your view classes are located in the Assembly that doesn't contain any Xaml files, otherwise hot reload feature will always throw "need to rebuild" message.
+
+## MVU Pattern implementation
+
+Inspired by blazor component layout. So basic component will looks like:
+
+```C#
+public class Component : ComponentBase
+{
+//markup part
+    protected override object Build() =>
+        new StackPanel()
+            .Children(
+                new TextBlock()
+                    .Ref(out _textBlock1)
+                    .Text("Hello world"),
+                new TextBlock()
+                    .Text(Bind(CounterText)),
+                new Button()
+                    .Content("Click me")
+                    .OnClick(OnButtonClick)
+            );
+            
+//code part
+    [Inject] SampleDataService DataService { get; set; } = null!; //service injection
+
+    public int Counter { get; set; }
+    public string CounterText => $"Counter: {Counter}";  //no need to implement AvaloniaProperty or OnPropertyChanged behaviors, since component has registry of all properties and emits ProperyChanged event after changing state of component.
+
+    private void OnButtonClick(RoutedEventArgs e)
+    {
+        Counter++;
+        _textBlock1.Text = DataService.GetData();
+        StateHasChanged(); //for now we have to call this method manually. In future there will be some additional triggers like user input, that will rise this method automatically
+    }
+}
+```
