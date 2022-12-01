@@ -19,7 +19,7 @@ public class Component : ComponentBase
                     .OnClick(OnButtonClick)
             );
 
-    private TextBlock _textBlock1;
+    private TextBlock _textBlock1 = null!;
 
     [Inject] SampleDataService DataService { get; set; } = null!;
 
