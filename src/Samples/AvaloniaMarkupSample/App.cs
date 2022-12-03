@@ -8,4 +8,9 @@ AppBuilder.Configure<Application>()
         desktop.MainWindow = new Window()
                 .Title("Avalonia markup samples")
                 .Content(new MainView());
+
+#if DEBUG
+        desktop.MainWindow.AttachDevTools();
+#endif
+
     }, args);

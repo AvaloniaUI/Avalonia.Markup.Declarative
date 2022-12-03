@@ -35,8 +35,11 @@ internal static class MarkupTypeHelpers
     /// <param name="property">target property</param>
     /// <param name="members"></param>
     /// <returns></returns>
-    internal static bool IsCommonProperty(PropertyDeclarationSyntax property, SyntaxList<MemberDeclarationSyntax> members)
+    internal static bool IsCommonInstanceProperty(PropertyDeclarationSyntax property, SyntaxList<MemberDeclarationSyntax> members)
     {
+        if(property.Modifiers.Any(x=>x.Text == "static"))
+            return false;
+
         var avaloniaPropertyName = property.Identifier + "Property";
         return members.OfType<FieldDeclarationSyntax>().All(field => field.Declaration.Variables[0].Identifier.ToString() != avaloniaPropertyName);
     }

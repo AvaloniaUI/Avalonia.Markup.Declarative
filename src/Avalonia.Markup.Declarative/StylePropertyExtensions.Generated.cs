@@ -525,19 +525,6 @@ public static Style<ItemsRepeater> Layout(this Style<ItemsRepeater> style, Attac
 public static Style<ItemsRepeater> VerticalCacheLength(this Style<ItemsRepeater> style, Double value)
 => style._addSetter(ItemsRepeater.VerticalCacheLengthProperty, value);
 }
-public static partial class RichTextBlockExtensions
-{
-public static Style<RichTextBlock> IsTextSelectionEnabled(this Style<RichTextBlock> style, Boolean value)
-=> style._addSetter(RichTextBlock.IsTextSelectionEnabledProperty, value);
-public static Style<RichTextBlock> SelectionStart(this Style<RichTextBlock> style, Int32 value)
-=> style._addSetter(RichTextBlock.SelectionStartProperty, value);
-public static Style<RichTextBlock> SelectionEnd(this Style<RichTextBlock> style, Int32 value)
-=> style._addSetter(RichTextBlock.SelectionEndProperty, value);
-public static Style<RichTextBlock> SelectionBrush(this Style<RichTextBlock> style, IBrush value)
-=> style._addSetter(RichTextBlock.SelectionBrushProperty, value);
-public static Style<RichTextBlock> Inlines(this Style<RichTextBlock> style, InlineCollection value)
-=> style._addSetter(RichTextBlock.InlinesProperty, value);
-}
 public static partial class ScrollViewerExtensions
 {
 public static Style<ScrollViewer> Offset(this Style<ScrollViewer> style, Vector value)
@@ -550,6 +537,15 @@ public static Style<ScrollViewer> AllowAutoHide(this Style<ScrollViewer> style, 
 => style._addSetter(ScrollViewer.AllowAutoHideProperty, value);
 public static Style<ScrollViewer> IsScrollChainingEnabled(this Style<ScrollViewer> style, Boolean value)
 => style._addSetter(ScrollViewer.IsScrollChainingEnabledProperty, value);
+}
+public static partial class SelectableTextBlockExtensions
+{
+public static Style<SelectableTextBlock> SelectionStart(this Style<SelectableTextBlock> style, Int32 value)
+=> style._addSetter(SelectableTextBlock.SelectionStartProperty, value);
+public static Style<SelectableTextBlock> SelectionEnd(this Style<SelectableTextBlock> style, Int32 value)
+=> style._addSetter(SelectableTextBlock.SelectionEndProperty, value);
+public static Style<SelectableTextBlock> SelectionBrush(this Style<SelectableTextBlock> style, IBrush value)
+=> style._addSetter(SelectableTextBlock.SelectionBrushProperty, value);
 }
 public static partial class SliderExtensions
 {
@@ -653,6 +649,8 @@ public static Style<TextBlock> BaselineOffset(this Style<TextBlock> style, Doubl
 => style._addSetter(TextBlock.BaselineOffsetProperty, value);
 public static Style<TextBlock> LineHeight(this Style<TextBlock> style, Double value)
 => style._addSetter(TextBlock.LineHeightProperty, value);
+public static Style<TextBlock> LetterSpacing(this Style<TextBlock> style, Double value)
+=> style._addSetter(TextBlock.LetterSpacingProperty, value);
 public static Style<TextBlock> MaxLines(this Style<TextBlock> style, Int32 value)
 => style._addSetter(TextBlock.MaxLinesProperty, value);
 public static Style<TextBlock> Text(this Style<TextBlock> style, String value)
@@ -665,6 +663,8 @@ public static Style<TextBlock> TextTrimming(this Style<TextBlock> style, TextTri
 => style._addSetter(TextBlock.TextTrimmingProperty, value);
 public static Style<TextBlock> TextDecorations(this Style<TextBlock> style, TextDecorationCollection value)
 => style._addSetter(TextBlock.TextDecorationsProperty, value);
+public static Style<TextBlock> Inlines(this Style<TextBlock> style, InlineCollection value)
+=> style._addSetter(TextBlock.InlinesProperty, value);
 }
 public static partial class TextBoxExtensions
 {
@@ -704,6 +704,8 @@ public static Style<TextBox> TextWrapping(this Style<TextBox> style, TextWrappin
 => style._addSetter(TextBox.TextWrappingProperty, value);
 public static Style<TextBox> LineHeight(this Style<TextBox> style, Double value)
 => style._addSetter(TextBox.LineHeightProperty, value);
+public static Style<TextBox> LetterSpacing(this Style<TextBox> style, Double value)
+=> style._addSetter(TextBox.LetterSpacingProperty, value);
 public static Style<TextBox> Watermark(this Style<TextBox> style, String value)
 => style._addSetter(TextBox.WatermarkProperty, value);
 public static Style<TextBox> UseFloatingWatermark(this Style<TextBox> style, Boolean value)
@@ -1004,6 +1006,8 @@ public static Style<TextPresenter> TextWrapping(this Style<TextPresenter> style,
 => style._addSetter(TextPresenter.TextWrappingProperty, value);
 public static Style<TextPresenter> LineHeight(this Style<TextPresenter> style, Double value)
 => style._addSetter(TextPresenter.LineHeightProperty, value);
+public static Style<TextPresenter> LetterSpacing(this Style<TextPresenter> style, Double value)
+=> style._addSetter(TextPresenter.LetterSpacingProperty, value);
 public static Style<TextPresenter> Background(this Style<TextPresenter> style, IBrush value)
 => style._addSetter(TextPresenter.BackgroundProperty, value);
 }

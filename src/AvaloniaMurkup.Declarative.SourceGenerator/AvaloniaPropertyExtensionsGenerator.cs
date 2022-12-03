@@ -74,7 +74,7 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
                 {
                     //PROCESS COMMON PROPERTIES
                     case PropertyDeclarationSyntax property when IsPublic(property) && HasPublicSetter(property) &&
-                                                                 IsCommonProperty(property, members):
+                                                                 IsCommonInstanceProperty(property, members):
                     {
                         AppendIfNotNull(sb, GetCommonPropertySetterExtension(typeName, property, comp));
                         AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(typeName, property, comp));

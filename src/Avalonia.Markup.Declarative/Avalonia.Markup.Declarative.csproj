@@ -1,14 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <IsPackable>true</IsPackable>
-	<LangVersion>latest</LangVersion>
-	<Version>11.0.0-preview3</Version>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<IsPackable>true</IsPackable>
+		<LangVersion>latest</LangVersion>
+		<Version>11.0.0-preview4-2</Version>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.0.0-preview3" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.0.0-preview4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AvaloniaMurkup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Package the generator in the analyzer directory of the nuget package -->
+		<None Include="$(OutputPath)/$(AssemblyName).SourceGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+	</ItemGroup>
 
 </Project>

@@ -1,6 +1,4 @@
-﻿using Avalonia.Markup.Declarative.Mvu;
-
-namespace AvaloniaMarkupSample.MvuSample;
+﻿namespace AvaloniaMarkupSample.MvuSample;
 
 public class SampleView : ComponentBase
 {

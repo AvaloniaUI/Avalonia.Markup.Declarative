@@ -6,11 +6,11 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Avalonia.Data;
 
-namespace Avalonia.Markup.Declarative.Mvu;
+namespace Avalonia.Markup.Declarative;
 
 public abstract class ComponentBase : ViewBase, IMvuComponent
 {
-    ViewPropertyState[]? _localPropertyStates = null;
+    ViewPropertyState[] _localPropertyStates = null;
     List<ViewPropertyState> _externalPropertyStates = null;
     List<IMvuComponent> _dependentViews = null;
 
@@ -144,7 +144,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     private ViewPropertyState FindStateForBindingString(string stateName) =>
         _localPropertyStates?.FirstOrDefault(x => x.Name == stateName);
 
-    public new event PropertyChangedEventHandler? PropertyChanged;
+    public new event PropertyChangedEventHandler PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

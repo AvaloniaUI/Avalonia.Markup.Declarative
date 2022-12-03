@@ -50,6 +50,28 @@ public class MainView : ViewBase
                             )
                     ),
 
+                new TabItem()
+                    .Header("Styles")
+                    .Content(
+                        new Border()
+                            .BorderBrush(Brushes.Gray)
+                            .BorderThickness(1)
+                            .Child(
+                                new StylesSampleView()
+                            )
+                    ),
+
+                new TabItem()
+                    .Header("Item control")
+                    .Content(
+                        new Border()
+                            .BorderBrush(Brushes.Gray)
+                            .BorderThickness(1)
+                            .Child(
+                                new ItemControlSampleView()
+                            )
+                    ),
+
                 new TabItem().Header("Custom controls")
                     .Content(
                         new StackPanel()

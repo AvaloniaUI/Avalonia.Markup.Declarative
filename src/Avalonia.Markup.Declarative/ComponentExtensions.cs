@@ -2,7 +2,7 @@
 using Avalonia.Data;
 using Avalonia.Data.Converters;
 
-namespace Avalonia.Markup.Declarative.Mvu;
+namespace Avalonia.Markup.Declarative;
 
 public static class ComponentExtensions
 {

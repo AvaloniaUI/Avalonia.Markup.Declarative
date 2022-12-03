@@ -1,6 +1,4 @@
-﻿using Avalonia.Markup.Declarative.Mvu;
-
-namespace MvuTemplate.Views;
+﻿namespace MvuTemplate.Views;
 
 public class Component : ComponentBase
 {

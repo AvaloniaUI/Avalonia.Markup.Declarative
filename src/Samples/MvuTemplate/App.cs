@@ -1,5 +1,4 @@
-﻿using Avalonia.Markup.Declarative.Mvu;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using MvuTemplate;
 using MvuTemplate.Views;
 

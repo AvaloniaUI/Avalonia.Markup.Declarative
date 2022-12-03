@@ -86,6 +86,8 @@ public static partial class ControlEventsExtensions
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Loaded += h);
     public static Control OnUnloaded(this Control control, Action<RoutedEventArgs> action) => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Unloaded += h);
+    public static Control OnSizeChanged(this Control control, Action<SizeChangedEventArgs> action) => 
+        control._setEvent((EventHandler<SizeChangedEventArgs>) ((_, args) => action(args)), h => control.SizeChanged += h);
 }
 public static partial class DatePickerEventsExtensions
 {
@@ -145,15 +147,15 @@ public static partial class ItemsRepeaterEventsExtensions
     public static ItemsRepeater OnElementPrepared(this ItemsRepeater control, Action<ItemsRepeaterElementPreparedEventArgs> action) => 
         control._setEvent((EventHandler<ItemsRepeaterElementPreparedEventArgs>) ((_, args) => action(args)), h => control.ElementPrepared += h);
 }
-public static partial class RichTextBlockEventsExtensions
-{
-    public static RichTextBlock OnCopyingToClipboard(this RichTextBlock control, Action<RoutedEventArgs> action) => 
-        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.CopyingToClipboard += h);
-}
 public static partial class ScrollViewerEventsExtensions
 {
     public static ScrollViewer OnScrollChanged(this ScrollViewer control, Action<ScrollChangedEventArgs> action) => 
         control._setEvent((EventHandler<ScrollChangedEventArgs>) ((_, args) => action(args)), h => control.ScrollChanged += h);
+}
+public static partial class SelectableTextBlockEventsExtensions
+{
+    public static SelectableTextBlock OnCopyingToClipboard(this SelectableTextBlock control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.CopyingToClipboard += h);
 }
 public static partial class SpinnerEventsExtensions
 {

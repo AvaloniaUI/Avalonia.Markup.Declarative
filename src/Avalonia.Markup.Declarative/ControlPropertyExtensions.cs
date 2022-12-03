@@ -187,6 +187,26 @@ public static class ControlPropertyExtensions
         return container;
     }
 
+    public static ItemsControl ItemTemplate<TItem>(this ItemsControl control, Func<TItem, Control> build)
+    {
+        control.ItemTemplate =
+            new FuncDataTemplate<TItem>(
+                (val, _) => build(val));
+        return control;
+    }
+
+    public static ItemsControl ItemsPanel(this ItemsControl control, Panel panel)
+    {
+        control.ItemsPanel = new PanelTemplate(panel);
+        return control;
+    }
+
+    record PanelTemplate(Panel panel) : ITemplate<IPanel>
+    {
+        public IPanel Build() => panel;
+        object ITemplate.Build() => throw new NotImplementedException();
+    }
+
     public static TElement With<TElement>(this TElement control, Action<TElement> process)
     {
         process?.Invoke(control);
