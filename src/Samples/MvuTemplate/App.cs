@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MvuTemplate;
-using MvuTemplate.Views;
 
 var services = new ServiceCollection();
 services.AddSingleton<SampleDataService>();
@@ -8,7 +7,7 @@ services.AddSingleton<SampleDataService>();
 var lifetime = new ClassicDesktopStyleApplicationLifetime { Args = args, ShutdownMode = ShutdownMode.OnLastWindowClose };
 FluentTheme GetFluentTheme() =>
     new(new Uri($"avares://{System.Reflection.Assembly.GetExecutingAssembly().GetName()}"))
-        { Mode = FluentThemeMode.Light };
+    { Mode = FluentThemeMode.Light };
 
 AppBuilder.Configure<Application>()
     .UsePlatformDetect()
@@ -16,12 +15,13 @@ AppBuilder.Configure<Application>()
     .UseServiceProvider(services.BuildServiceProvider())
     .SetupWithLifetime(lifetime);
 
-lifetime.MainWindow = new MainWindow();
+lifetime.MainWindow = new Window()
+    .Title("Avalonia MVU Template")
+    .Content(new SimpleComponent());
+
 lifetime.Start(args);
 
-public class MainWindow : Window
+public class SampleDataService
 {
-    public MainWindow() =>
-        this.Title("Avalonia MVU Template")
-            .Content(new Component());
+    public string GetData() => "this text is from sample data service";
 }

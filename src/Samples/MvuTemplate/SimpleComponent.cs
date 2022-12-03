@@ -1,6 +1,6 @@
-﻿namespace MvuTemplate.Views;
+﻿namespace MvuTemplate;
 
-public class Component : ComponentBase
+public class SimpleComponent : ComponentBase
 {
     protected override object Build() =>
         new StackPanel()
@@ -18,15 +18,14 @@ public class Component : ComponentBase
             );
 
     private TextBlock _textBlock1 = null!;
+    private int _counter = 0;
 
     [Inject] SampleDataService DataService { get; set; } = null!;
-
-    public int Counter { get; set; }
-    public string CounterText => $"Counter: {Counter}";
+    public string CounterText => $"Counter: {_counter}";
 
     private void OnButtonClick(RoutedEventArgs e)
     {
-        Counter++;
+        _counter++;
         _textBlock1.Text = DataService.GetData();
         StateHasChanged();
     }
