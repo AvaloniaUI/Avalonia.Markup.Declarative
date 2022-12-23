@@ -13,12 +13,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\AvaloniaMurkup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<!-- Package the generator in the analyzer directory of the nuget package -->
 		<None Include="$(OutputPath)/$(AssemblyName).SourceGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Avalonia.Markup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" />
+	</ItemGroup>
 </Project>

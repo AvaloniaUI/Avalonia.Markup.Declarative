@@ -2,7 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-	<LangVersion>latest</LangVersion>
+    <LangVersion>latest</LangVersion>
+    <Version>11.0.0-preview4</Version>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Avalonia.Markup.Declarative\Avalonia.Markup.Declarative.csproj" />
-    <ProjectReference Include="..\..\AvaloniaMurkup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\..\Avalonia.Markup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
