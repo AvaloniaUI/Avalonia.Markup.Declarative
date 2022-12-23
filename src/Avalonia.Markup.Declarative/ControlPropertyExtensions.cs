@@ -39,6 +39,7 @@ public static class ControlPropertyExtensions
                 Source = bindingSource
             };
 
+            setAction();
             control.Bind(destProperty, binding);
         }
         else
@@ -187,7 +188,14 @@ public static class ControlPropertyExtensions
         return container;
     }
 
-    public static ItemsControl ItemTemplate<TItem>(this ItemsControl control, Func<TItem, Control> build)
+    public static SelectingItemsControl ItemTemplate<TItem>(this SelectingItemsControl control, Func<TItem, Control> build) =>
+        ItemTemplate<TItem, SelectingItemsControl>(control, build);
+
+    public static ItemsControl ItemTemplate<TItem>(this ItemsControl control, Func<TItem, Control> build) =>
+        ItemTemplate<TItem, ItemsControl>(control, build);
+
+    public static TItemsControl ItemTemplate<TItem, TItemsControl>(this TItemsControl control, Func<TItem, Control> build)
+        where TItemsControl : ItemsControl
     {
         control.ItemTemplate =
             new FuncDataTemplate<TItem>(
@@ -195,7 +203,8 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static ItemsControl ItemsPanel(this ItemsControl control, Panel panel)
+    public static TItemsControl ItemsPanel<TItemsControl>(this TItemsControl control, Panel panel)
+        where TItemsControl : ItemsControl
     {
         control.ItemsPanel = new PanelTemplate(panel);
         return control;
