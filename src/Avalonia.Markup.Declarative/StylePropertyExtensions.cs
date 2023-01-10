@@ -1,10 +1,5 @@
-﻿using Avalonia.Controls;
-using Avalonia.Styling;
+﻿using Avalonia.Styling;
 using System;
-using Avalonia.Media;
-using JetBrains.Annotations;
-using System.Xml.Linq;
-using Avalonia.Controls.Primitives;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -67,7 +62,7 @@ public class Style<TControl> : Style
         Selector = TypeSelector(null);
     }
 
-    public Style([NotNull] Func<Selector, Selector> selector)
+    public Style(Func<Selector, Selector> selector)
     {
         Selector TypeSelector(Selector s) => s.OfType<TControl>();
         Selector = selector(TypeSelector(null));
