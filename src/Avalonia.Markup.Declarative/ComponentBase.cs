@@ -122,7 +122,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
 
         var stateInfo = FindStateForBindingString(stateName);
         if (stateInfo == null)
-            throw new ArgumentException("No properties found in binding string");
+            throw new ArgumentException("No properties found in binding string. Make sure that your properties are public!");
 
         if (useStateValueAsSource)
             bindingSource = stateInfo.Value;
