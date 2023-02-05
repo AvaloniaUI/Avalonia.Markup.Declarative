@@ -1,16 +1,19 @@
 ﻿using AvaloniaMarkupSample;
 
+var lifetime = new ClassicDesktopStyleApplicationLifetime { Args = args, ShutdownMode = ShutdownMode.OnLastWindowClose };
+
 AppBuilder.Configure<Application>()
     .UsePlatformDetect()
-    .UseFluentTheme()
-    .StartWithClassicDesktopLifetime(desktop =>
-    {
-        desktop.MainWindow = new Window()
-                .Title("Avalonia markup samples")
-                .Content(new MainView());
+    .AfterSetup(b => b.Instance?.Styles.Add(new FluentTheme()))
+    .SetupWithLifetime(lifetime);
+
+
+lifetime.MainWindow = new Window()
+    .Title("Avalonia markup samples")
+    .Content(new MainView());
 
 #if DEBUG
-        desktop.MainWindow.AttachDevTools();
+    lifetime.MainWindow.AttachDevTools();
 #endif
 
-    }, args);
+lifetime.Start(args);

@@ -172,7 +172,7 @@ public static class ControlPropertyExtensions
     }
 
     public static TPanel Children<TPanel>(this TPanel container, params Control[] children)
-        where TPanel : IPanel
+        where TPanel : Panel
     {
         foreach (var child in children)
             container.Children.Add(child);
@@ -210,9 +210,9 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    record PanelTemplate(Panel panel) : ITemplate<IPanel>
+    record PanelTemplate(Panel panel) : ITemplate<Panel>
     {
-        public IPanel Build() => panel;
+        public Panel Build() => panel;
         object ITemplate.Build() => throw new NotImplementedException();
     }
 

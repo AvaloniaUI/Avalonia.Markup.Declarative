@@ -20,6 +20,8 @@ public static class AvaloniaTypeHelper
 
     private static bool IsAccepatbleControlType(Type controlType)
     {
+        if(!controlType.IsPublic)
+            return false;
         if (controlType.IsGenericType)
             return false;
         if (controlType.GetCustomAttribute<ObsoleteAttribute>() != null)

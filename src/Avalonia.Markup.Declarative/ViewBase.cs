@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Platform;
+using Avalonia.Styling;
 using Avalonia.Threading;
 
 namespace Avalonia.Markup.Declarative;
@@ -134,9 +135,10 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
         }
     }
 
+    [Obsolete("There is no reason to keep it inside view base. Use Avalonia methods: Application.Current.Resources.TryGetResource")]
     public static T GetResource<T>(string key)
     {
-        if (Application.Current.Resources.TryGetResource(key, out var res))
+        if (Application.Current.Resources.TryGetResource(key, ThemeVariant.Default, out var res))
         {
             if (res is T tres)
                 return tres;

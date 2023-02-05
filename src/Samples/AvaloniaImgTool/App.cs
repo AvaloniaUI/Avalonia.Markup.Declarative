@@ -8,15 +8,14 @@ var services = new ServiceCollection();
 services.AddSingleton<HuggingFaceService>();
 services.AddSingleton(new SettingsService());
 services.AddSingleton(new SaveFilePickerService(() => lifetime.MainWindow.StorageProvider));
+var sp = services.BuildServiceProvider();
 
-FluentTheme GetFluentTheme() =>
-    new(new Uri($"avares://{System.Reflection.Assembly.GetExecutingAssembly().GetName()}"))
-    { Mode = FluentThemeMode.Light };
+FluentTheme GetFluentTheme() => new(sp);
 
 AppBuilder.Configure<Application>()
     .UsePlatformDetect()
     .AfterSetup(b => b.Instance?.Styles.Add(GetFluentTheme()))
-    .UseServiceProvider(services.BuildServiceProvider())
+    .UseServiceProvider(sp)
     .SetupWithLifetime(lifetime);
 
 lifetime.MainWindow = new Window()

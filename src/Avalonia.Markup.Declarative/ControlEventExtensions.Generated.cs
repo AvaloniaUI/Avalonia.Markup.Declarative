@@ -26,6 +26,8 @@ public static partial class ApplicationEventsExtensions
         control._setEvent((EventHandler<ResourcesChangedEventArgs>) ((_, args) => action(args)), h => control.ResourcesChanged += h);
     public static Application OnUrlsOpened(this Application control, Action<UrlOpenedEventArgs> action) => 
         control._setEvent((EventHandler<UrlOpenedEventArgs>) ((_, args) => action(args)), h => control.UrlsOpened += h);
+    public static Application OnActualThemeVariantChanged(this Application control, Action action) => 
+        control._setEvent((EventHandler) ((_, args) => action()), h => control.ActualThemeVariantChanged += h);
 }
 public static partial class AutoCompleteBoxEventsExtensions
 {
@@ -71,6 +73,13 @@ public static partial class CalendarEventsExtensions
     public static Calendar OnDisplayModeChanged(this Calendar control, Action<CalendarModeChangedEventArgs> action) => 
         control._setEvent((EventHandler<CalendarModeChangedEventArgs>) ((_, args) => action(args)), h => control.DisplayModeChanged += h);
 }
+public static partial class ComboBoxEventsExtensions
+{
+    public static ComboBox OnDropDownClosed(this ComboBox control, Action action) => 
+        control._setEvent((EventHandler) ((_, args) => action()), h => control.DropDownClosed += h);
+    public static ComboBox OnDropDownOpened(this ComboBox control, Action action) => 
+        control._setEvent((EventHandler) ((_, args) => action()), h => control.DropDownOpened += h);
+}
 public static partial class ContextMenuEventsExtensions
 {
     public static ContextMenu OnContextMenuOpening(this ContextMenu control, Action action) => 
@@ -98,6 +107,24 @@ public static partial class TimePickerEventsExtensions
 {
     public static TimePicker OnSelectedTimeChanged(this TimePicker control, Action<TimePickerSelectedValueChangedEventArgs> action) => 
         control._setEvent((EventHandler<TimePickerSelectedValueChangedEventArgs>) ((_, args) => action(args)), h => control.SelectedTimeChanged += h);
+}
+public static partial class ExpanderEventsExtensions
+{
+    public static Expander OnCollapsed(this Expander control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Collapsed += h);
+    public static Expander OnCollapsing(this Expander control, Action<CancelRoutedEventArgs> action) => 
+        control._setEvent((EventHandler<CancelRoutedEventArgs>) ((_, args) => action(args)), h => control.Collapsing += h);
+    public static Expander OnExpanded(this Expander control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Expanded += h);
+    public static Expander OnExpanding(this Expander control, Action<CancelRoutedEventArgs> action) => 
+        control._setEvent((EventHandler<CancelRoutedEventArgs>) ((_, args) => action(args)), h => control.Expanding += h);
+}
+public static partial class ItemsControlEventsExtensions
+{
+    public static ItemsControl OnHorizontalSnapPointsChanged(this ItemsControl control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.HorizontalSnapPointsChanged += h);
+    public static ItemsControl OnVerticalSnapPointsChanged(this ItemsControl control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.VerticalSnapPointsChanged += h);
 }
 public static partial class MenuBaseEventsExtensions
 {
@@ -138,14 +165,15 @@ public static partial class NumericUpDownEventsExtensions
     public static NumericUpDown OnValueChanged(this NumericUpDown control, Action<NumericUpDownValueChangedEventArgs> action) => 
         control._setEvent((EventHandler<NumericUpDownValueChangedEventArgs>) ((_, args) => action(args)), h => control.ValueChanged += h);
 }
-public static partial class ItemsRepeaterEventsExtensions
+public static partial class RefreshContainerEventsExtensions
 {
-    public static ItemsRepeater OnElementClearing(this ItemsRepeater control, Action<ItemsRepeaterElementClearingEventArgs> action) => 
-        control._setEvent((EventHandler<ItemsRepeaterElementClearingEventArgs>) ((_, args) => action(args)), h => control.ElementClearing += h);
-    public static ItemsRepeater OnElementIndexChanged(this ItemsRepeater control, Action<ItemsRepeaterElementIndexChangedEventArgs> action) => 
-        control._setEvent((EventHandler<ItemsRepeaterElementIndexChangedEventArgs>) ((_, args) => action(args)), h => control.ElementIndexChanged += h);
-    public static ItemsRepeater OnElementPrepared(this ItemsRepeater control, Action<ItemsRepeaterElementPreparedEventArgs> action) => 
-        control._setEvent((EventHandler<ItemsRepeaterElementPreparedEventArgs>) ((_, args) => action(args)), h => control.ElementPrepared += h);
+    public static RefreshContainer OnRefreshRequested(this RefreshContainer control, Action<RefreshRequestedEventArgs> action) => 
+        control._setEvent((EventHandler<RefreshRequestedEventArgs>) ((_, args) => action(args)), h => control.RefreshRequested += h);
+}
+public static partial class RefreshVisualizerEventsExtensions
+{
+    public static RefreshVisualizer OnRefreshRequested(this RefreshVisualizer control, Action<RefreshRequestedEventArgs> action) => 
+        control._setEvent((EventHandler<RefreshRequestedEventArgs>) ((_, args) => action(args)), h => control.RefreshRequested += h);
 }
 public static partial class ScrollViewerEventsExtensions
 {
@@ -183,6 +211,13 @@ public static partial class SplitViewEventsExtensions
     public static SplitView OnPaneOpening(this SplitView control, Action<EventArgs> action) => 
         control._setEvent((EventHandler<EventArgs>) ((_, args) => action(args)), h => control.PaneOpening += h);
 }
+public static partial class StackPanelEventsExtensions
+{
+    public static StackPanel OnHorizontalSnapPointsChanged(this StackPanel control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.HorizontalSnapPointsChanged += h);
+    public static StackPanel OnVerticalSnapPointsChanged(this StackPanel control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.VerticalSnapPointsChanged += h);
+}
 public static partial class TextBoxEventsExtensions
 {
     public static TextBox OnCopyingToClipboard(this TextBox control, Action<RoutedEventArgs> action) => 
@@ -202,6 +237,8 @@ public static partial class TopLevelEventsExtensions
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Opened += h);
     public static TopLevel OnClosed(this TopLevel control, Action action) => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Closed += h);
+    public static TopLevel OnBackRequested(this TopLevel control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.BackRequested += h);
 }
 public static partial class TrayIconEventsExtensions
 {
@@ -213,10 +250,17 @@ public static partial class TreeViewEventsExtensions
     public static TreeView OnSelectionChanged(this TreeView control, Action<SelectionChangedEventArgs> action) => 
         control._setEvent((EventHandler<SelectionChangedEventArgs>) ((_, args) => action(args)), h => control.SelectionChanged += h);
 }
+public static partial class VirtualizingStackPanelEventsExtensions
+{
+    public static VirtualizingStackPanel OnHorizontalSnapPointsChanged(this VirtualizingStackPanel control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.HorizontalSnapPointsChanged += h);
+    public static VirtualizingStackPanel OnVerticalSnapPointsChanged(this VirtualizingStackPanel control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.VerticalSnapPointsChanged += h);
+}
 public static partial class WindowEventsExtensions
 {
-    public static Window OnClosing(this Window control, Action<CancelEventArgs> action) => 
-        control._setEvent((EventHandler<CancelEventArgs>) ((_, args) => action(args)), h => control.Closing += h);
+    public static Window OnClosing(this Window control, Action<WindowClosingEventArgs> action) => 
+        control._setEvent((EventHandler<WindowClosingEventArgs>) ((_, args) => action(args)), h => control.Closing += h);
 }
 public static partial class WindowBaseEventsExtensions
 {
@@ -226,6 +270,13 @@ public static partial class WindowBaseEventsExtensions
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Deactivated += h);
     public static WindowBase OnPositionChanged(this WindowBase control, Action<PixelPointEventArgs> action) => 
         control._setEvent((EventHandler<PixelPointEventArgs>) ((_, args) => action(args)), h => control.PositionChanged += h);
+}
+public static partial class ItemsPresenterEventsExtensions
+{
+    public static ItemsPresenter OnHorizontalSnapPointsChanged(this ItemsPresenter control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.HorizontalSnapPointsChanged += h);
+    public static ItemsPresenter OnVerticalSnapPointsChanged(this ItemsPresenter control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.VerticalSnapPointsChanged += h);
 }
 public static partial class TextPresenterEventsExtensions
 {
@@ -315,6 +366,8 @@ public static partial class ToggleButtonEventsExtensions
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Unchecked += h);
     public static ToggleButton OnIndeterminate(this ToggleButton control, Action<RoutedEventArgs> action) => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Indeterminate += h);
+    public static ToggleButton OnIsCheckedChanged(this ToggleButton control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.IsCheckedChanged += h);
 }
 public static partial class AvaloniaObjectEventsExtensions
 {
@@ -353,13 +406,6 @@ public static partial class StylesEventsExtensions
     public static Styles OnOwnerChanged(this Styles control, Action action) => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.OwnerChanged += h);
 }
-public static partial class AttachedLayoutEventsExtensions
-{
-    public static AttachedLayout OnMeasureInvalidated(this AttachedLayout control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.MeasureInvalidated += h);
-    public static AttachedLayout OnArrangeInvalidated(this AttachedLayout control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.ArrangeInvalidated += h);
-}
 public static partial class LayoutableEventsExtensions
 {
     public static Layoutable OnEffectiveViewportChanged(this Layoutable control, Action<EffectiveViewportChangedEventArgs> action) => 
@@ -397,6 +443,8 @@ public static partial class InputElementEventsExtensions
         control._setEvent((EventHandler<PointerWheelEventArgs>) ((_, args) => action(args)), h => control.PointerWheelChanged += h);
     public static InputElement OnTapped(this InputElement control, Action<TappedEventArgs> action) => 
         control._setEvent((EventHandler<TappedEventArgs>) ((_, args) => action(args)), h => control.Tapped += h);
+    public static InputElement OnHolding(this InputElement control, Action<HoldingRoutedEventArgs> action) => 
+        control._setEvent((EventHandler<HoldingRoutedEventArgs>) ((_, args) => action(args)), h => control.Holding += h);
     public static InputElement OnDoubleTapped(this InputElement control, Action<TappedEventArgs> action) => 
         control._setEvent((EventHandler<TappedEventArgs>) ((_, args) => action(args)), h => control.DoubleTapped += h);
 }

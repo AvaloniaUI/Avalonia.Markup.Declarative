@@ -165,8 +165,6 @@ public static Style<Avalonia.Controls.Calendar> DisplayDateEnd(this Style<Avalon
 }
 public static partial class CarouselExtensions
 {
-public static Style<Carousel> IsVirtualized(this Style<Carousel> style, Boolean value)
-=> style._addSetter(Carousel.IsVirtualizedProperty, value);
 public static Style<Carousel> PageTransition(this Style<Carousel> style, IPageTransition value)
 => style._addSetter(Carousel.PageTransitionProperty, value);
 }
@@ -176,8 +174,6 @@ public static Style<ComboBox> IsDropDownOpen(this Style<ComboBox> style, Boolean
 => style._addSetter(ComboBox.IsDropDownOpenProperty, value);
 public static Style<ComboBox> MaxDropDownHeight(this Style<ComboBox> style, Double value)
 => style._addSetter(ComboBox.MaxDropDownHeightProperty, value);
-public static Style<ComboBox> VirtualizationMode(this Style<ComboBox> style, ItemVirtualizationMode value)
-=> style._addSetter(ComboBox.VirtualizationModeProperty, value);
 public static Style<ComboBox> PlaceholderText(this Style<ComboBox> style, String value)
 => style._addSetter(ComboBox.PlaceholderTextProperty, value);
 public static Style<ComboBox> PlaceholderForeground(this Style<ComboBox> style, IBrush value)
@@ -221,7 +217,7 @@ public static Style<Avalonia.Controls.ContextMenu> PlacementTarget(this Style<Av
 }
 public static partial class ControlExtensions
 {
-public static Style<T> FocusAdorner<T>(this Style<T> style, ITemplate<IControl> value) where T : Control
+public static Style<T> FocusAdorner<T>(this Style<T> style, ITemplate<Control> value) where T : Control
 => style._addSetter(Control.FocusAdornerProperty, value);
 public static Style<T> Tag<T>(this Style<T> style, Object value) where T : Control
 => style._addSetter(Control.TagProperty, value);
@@ -229,8 +225,6 @@ public static Style<T> ContextMenu<T>(this Style<T> style, Avalonia.Controls.Con
 => style._addSetter(Control.ContextMenuProperty, value);
 public static Style<T> ContextFlyout<T>(this Style<T> style, FlyoutBase value) where T : Control
 => style._addSetter(Control.ContextFlyoutProperty, value);
-public static Style<T> FlowDirection<T>(this Style<T> style, FlowDirection value) where T : Control
-=> style._addSetter(Control.FlowDirectionProperty, value);
 }
 public static partial class DataValidationErrorsExtensions
 {
@@ -301,7 +295,7 @@ public static Style<TimePickerPresenter> Time(this Style<TimePickerPresenter> st
 }
 public static partial class DecoratorExtensions
 {
-public static Style<Decorator> Child(this Style<Decorator> style, IControl value)
+public static Style<Decorator> Child(this Style<Decorator> style, Control value)
 => style._addSetter(Decorator.ChildProperty, value);
 public static Style<Decorator> Padding(this Style<Decorator> style, Thickness value)
 => style._addSetter(Decorator.PaddingProperty, value);
@@ -344,7 +338,7 @@ public static Style<GridSplitter> KeyboardIncrement(this Style<GridSplitter> sty
 => style._addSetter(GridSplitter.KeyboardIncrementProperty, value);
 public static Style<GridSplitter> DragIncrement(this Style<GridSplitter> style, Double value)
 => style._addSetter(GridSplitter.DragIncrementProperty, value);
-public static Style<GridSplitter> PreviewContent(this Style<GridSplitter> style, ITemplate<IControl> value)
+public static Style<GridSplitter> PreviewContent(this Style<GridSplitter> style, ITemplate<Control> value)
 => style._addSetter(GridSplitter.PreviewContentProperty, value);
 }
 public static partial class ImageExtensions
@@ -362,10 +356,16 @@ public static Style<T> Items<T>(this Style<T> style, IEnumerable value) where T 
 => style._addSetter(ItemsControl.ItemsProperty, value);
 public static Style<T> ItemContainerTheme<T>(this Style<T> style, ControlTheme value) where T : ItemsControl
 => style._addSetter(ItemsControl.ItemContainerThemeProperty, value);
-public static Style<T> ItemsPanel<T>(this Style<T> style, ITemplate<IPanel> value) where T : ItemsControl
+public static Style<T> ItemsPanel<T>(this Style<T> style, ITemplate<Panel> value) where T : ItemsControl
 => style._addSetter(ItemsControl.ItemsPanelProperty, value);
 public static Style<T> ItemTemplate<T>(this Style<T> style, IDataTemplate value) where T : ItemsControl
 => style._addSetter(ItemsControl.ItemTemplateProperty, value);
+public static Style<T> DisplayMemberBinding<T>(this Style<T> style, IBinding value) where T : ItemsControl
+=> style._addSetter(ItemsControl.DisplayMemberBindingProperty, value);
+public static Style<T> AreHorizontalSnapPointsRegular<T>(this Style<T> style, Boolean value) where T : ItemsControl
+=> style._addSetter(ItemsControl.AreHorizontalSnapPointsRegularProperty, value);
+public static Style<T> AreVerticalSnapPointsRegular<T>(this Style<T> style, Boolean value) where T : ItemsControl
+=> style._addSetter(ItemsControl.AreVerticalSnapPointsRegularProperty, value);
 }
 public static partial class LabelExtensions
 {
@@ -387,8 +387,6 @@ public static Style<ListBox> Selection(this Style<ListBox> style, ISelectionMode
 => style._addSetter(ListBox.SelectionProperty, value);
 public static Style<ListBox> SelectionMode(this Style<ListBox> style, SelectionMode value)
 => style._addSetter(ListBox.SelectionModeProperty, value);
-public static Style<ListBox> VirtualizationMode(this Style<ListBox> style, ItemVirtualizationMode value)
-=> style._addSetter(ListBox.VirtualizationModeProperty, value);
 }
 public static partial class ListBoxItemExtensions
 {
@@ -500,6 +498,18 @@ public static Style<ProgressBar> IndeterminateStartingOffset(this Style<Progress
 public static Style<ProgressBar> IndeterminateEndingOffset(this Style<ProgressBar> style, Double value)
 => style._addSetter(ProgressBar.IndeterminateEndingOffsetProperty, value);
 }
+public static partial class RefreshContainerExtensions
+{
+public static Style<RefreshContainer> Visualizer(this Style<RefreshContainer> style, RefreshVisualizer value)
+=> style._addSetter(RefreshContainer.VisualizerProperty, value);
+public static Style<RefreshContainer> PullDirection(this Style<RefreshContainer> style, PullDirection value)
+=> style._addSetter(RefreshContainer.PullDirectionProperty, value);
+}
+public static partial class RefreshVisualizerExtensions
+{
+public static Style<RefreshVisualizer> Orientation(this Style<RefreshVisualizer> style, RefreshVisualizerOrientation value)
+=> style._addSetter(RefreshVisualizer.OrientationProperty, value);
+}
 public static partial class RadioButtonExtensions
 {
 public static Style<RadioButton> GroupName(this Style<RadioButton> style, String value)
@@ -512,31 +522,28 @@ public static Style<RepeatButton> Interval(this Style<RepeatButton> style, Int32
 public static Style<RepeatButton> Delay(this Style<RepeatButton> style, Int32 value)
 => style._addSetter(RepeatButton.DelayProperty, value);
 }
-public static partial class ItemsRepeaterExtensions
-{
-public static Style<ItemsRepeater> HorizontalCacheLength(this Style<ItemsRepeater> style, Double value)
-=> style._addSetter(ItemsRepeater.HorizontalCacheLengthProperty, value);
-public static Style<ItemsRepeater> ItemTemplate(this Style<ItemsRepeater> style, IDataTemplate value)
-=> style._addSetter(ItemsRepeater.ItemTemplateProperty, value);
-public static Style<ItemsRepeater> Items(this Style<ItemsRepeater> style, IEnumerable value)
-=> style._addSetter(ItemsRepeater.ItemsProperty, value);
-public static Style<ItemsRepeater> Layout(this Style<ItemsRepeater> style, AttachedLayout value)
-=> style._addSetter(ItemsRepeater.LayoutProperty, value);
-public static Style<ItemsRepeater> VerticalCacheLength(this Style<ItemsRepeater> style, Double value)
-=> style._addSetter(ItemsRepeater.VerticalCacheLengthProperty, value);
-}
 public static partial class ScrollViewerExtensions
 {
 public static Style<ScrollViewer> Offset(this Style<ScrollViewer> style, Vector value)
 => style._addSetter(ScrollViewer.OffsetProperty, value);
 public static Style<ScrollViewer> HorizontalScrollBarVisibility(this Style<ScrollViewer> style, ScrollBarVisibility value)
 => style._addSetter(ScrollViewer.HorizontalScrollBarVisibilityProperty, value);
+public static Style<ScrollViewer> HorizontalSnapPointsType(this Style<ScrollViewer> style, SnapPointsType value)
+=> style._addSetter(ScrollViewer.HorizontalSnapPointsTypeProperty, value);
+public static Style<ScrollViewer> VerticalSnapPointsType(this Style<ScrollViewer> style, SnapPointsType value)
+=> style._addSetter(ScrollViewer.VerticalSnapPointsTypeProperty, value);
+public static Style<ScrollViewer> HorizontalSnapPointsAlignment(this Style<ScrollViewer> style, SnapPointsAlignment value)
+=> style._addSetter(ScrollViewer.HorizontalSnapPointsAlignmentProperty, value);
+public static Style<ScrollViewer> VerticalSnapPointsAlignment(this Style<ScrollViewer> style, SnapPointsAlignment value)
+=> style._addSetter(ScrollViewer.VerticalSnapPointsAlignmentProperty, value);
 public static Style<ScrollViewer> VerticalScrollBarVisibility(this Style<ScrollViewer> style, ScrollBarVisibility value)
 => style._addSetter(ScrollViewer.VerticalScrollBarVisibilityProperty, value);
 public static Style<ScrollViewer> AllowAutoHide(this Style<ScrollViewer> style, Boolean value)
 => style._addSetter(ScrollViewer.AllowAutoHideProperty, value);
 public static Style<ScrollViewer> IsScrollChainingEnabled(this Style<ScrollViewer> style, Boolean value)
 => style._addSetter(ScrollViewer.IsScrollChainingEnabledProperty, value);
+public static Style<ScrollViewer> IsScrollInertiaEnabled(this Style<ScrollViewer> style, Boolean value)
+=> style._addSetter(ScrollViewer.IsScrollInertiaEnabledProperty, value);
 }
 public static partial class SelectableTextBlockExtensions
 {
@@ -610,6 +617,10 @@ public static Style<StackPanel> Spacing(this Style<StackPanel> style, Double val
 => style._addSetter(StackPanel.SpacingProperty, value);
 public static Style<StackPanel> Orientation(this Style<StackPanel> style, Orientation value)
 => style._addSetter(StackPanel.OrientationProperty, value);
+public static Style<StackPanel> AreHorizontalSnapPointsRegular(this Style<StackPanel> style, Boolean value)
+=> style._addSetter(StackPanel.AreHorizontalSnapPointsRegularProperty, value);
+public static Style<StackPanel> AreVerticalSnapPointsRegular(this Style<StackPanel> style, Boolean value)
+=> style._addSetter(StackPanel.AreVerticalSnapPointsRegularProperty, value);
 }
 public static partial class TabControlExtensions
 {
@@ -791,8 +802,17 @@ public static Style<Viewbox> Stretch(this Style<Viewbox> style, Stretch value)
 => style._addSetter(Viewbox.StretchProperty, value);
 public static Style<Viewbox> StretchDirection(this Style<Viewbox> style, StretchDirection value)
 => style._addSetter(Viewbox.StretchDirectionProperty, value);
-public static Style<Viewbox> Child(this Style<Viewbox> style, IControl value)
+public static Style<Viewbox> Child(this Style<Viewbox> style, Control value)
 => style._addSetter(Viewbox.ChildProperty, value);
+}
+public static partial class VirtualizingStackPanelExtensions
+{
+public static Style<VirtualizingStackPanel> Orientation(this Style<VirtualizingStackPanel> style, Orientation value)
+=> style._addSetter(VirtualizingStackPanel.OrientationProperty, value);
+public static Style<VirtualizingStackPanel> AreHorizontalSnapPointsRegular(this Style<VirtualizingStackPanel> style, Boolean value)
+=> style._addSetter(VirtualizingStackPanel.AreHorizontalSnapPointsRegularProperty, value);
+public static Style<VirtualizingStackPanel> AreVerticalSnapPointsRegular(this Style<VirtualizingStackPanel> style, Boolean value)
+=> style._addSetter(VirtualizingStackPanel.AreVerticalSnapPointsRegularProperty, value);
 }
 public static partial class WindowExtensions
 {
@@ -897,15 +917,6 @@ public static Style<Shape> StrokeLineCap(this Style<Shape> style, PenLineCap val
 public static Style<Shape> StrokeJoin(this Style<Shape> style, PenLineJoin value)
 => style._addSetter(Shape.StrokeJoinProperty, value);
 }
-public static partial class CarouselPresenterExtensions
-{
-public static Style<CarouselPresenter> IsVirtualized(this Style<CarouselPresenter> style, Boolean value)
-=> style._addSetter(CarouselPresenter.IsVirtualizedProperty, value);
-public static Style<CarouselPresenter> SelectedIndex(this Style<CarouselPresenter> style, Int32 value)
-=> style._addSetter(CarouselPresenter.SelectedIndexProperty, value);
-public static Style<CarouselPresenter> PageTransition(this Style<CarouselPresenter> style, IPageTransition value)
-=> style._addSetter(CarouselPresenter.PageTransitionProperty, value);
-}
 public static partial class ContentPresenterExtensions
 {
 public static Style<ContentPresenter> Background(this Style<ContentPresenter> style, IBrush value)
@@ -955,17 +966,12 @@ public static Style<ContentPresenter> RecognizesAccessKey(this Style<ContentPres
 }
 public static partial class ItemsPresenterExtensions
 {
-public static Style<ItemsPresenter> VirtualizationMode(this Style<ItemsPresenter> style, ItemVirtualizationMode value)
-=> style._addSetter(ItemsPresenter.VirtualizationModeProperty, value);
-}
-public static partial class ItemsPresenterBaseExtensions
-{
-public static Style<ItemsPresenterBase> Items(this Style<ItemsPresenterBase> style, IEnumerable value)
-=> style._addSetter(ItemsPresenterBase.ItemsProperty, value);
-public static Style<ItemsPresenterBase> ItemsPanel(this Style<ItemsPresenterBase> style, ITemplate<IPanel> value)
-=> style._addSetter(ItemsPresenterBase.ItemsPanelProperty, value);
-public static Style<ItemsPresenterBase> ItemTemplate(this Style<ItemsPresenterBase> style, IDataTemplate value)
-=> style._addSetter(ItemsPresenterBase.ItemTemplateProperty, value);
+public static Style<ItemsPresenter> ItemsPanel(this Style<ItemsPresenter> style, ITemplate<Panel> value)
+=> style._addSetter(ItemsPresenter.ItemsPanelProperty, value);
+public static Style<ItemsPresenter> AreHorizontalSnapPointsRegular(this Style<ItemsPresenter> style, Boolean value)
+=> style._addSetter(ItemsPresenter.AreHorizontalSnapPointsRegularProperty, value);
+public static Style<ItemsPresenter> AreVerticalSnapPointsRegular(this Style<ItemsPresenter> style, Boolean value)
+=> style._addSetter(ItemsPresenter.AreVerticalSnapPointsRegularProperty, value);
 }
 public static partial class ScrollContentPresenterExtensions
 {
@@ -975,6 +981,14 @@ public static Style<ScrollContentPresenter> CanVerticallyScroll(this Style<Scrol
 => style._addSetter(ScrollContentPresenter.CanVerticallyScrollProperty, value);
 public static Style<ScrollContentPresenter> Offset(this Style<ScrollContentPresenter> style, Vector value)
 => style._addSetter(ScrollContentPresenter.OffsetProperty, value);
+public static Style<ScrollContentPresenter> HorizontalSnapPointsType(this Style<ScrollContentPresenter> style, SnapPointsType value)
+=> style._addSetter(ScrollContentPresenter.HorizontalSnapPointsTypeProperty, value);
+public static Style<ScrollContentPresenter> VerticalSnapPointsType(this Style<ScrollContentPresenter> style, SnapPointsType value)
+=> style._addSetter(ScrollContentPresenter.VerticalSnapPointsTypeProperty, value);
+public static Style<ScrollContentPresenter> HorizontalSnapPointsAlignment(this Style<ScrollContentPresenter> style, SnapPointsAlignment value)
+=> style._addSetter(ScrollContentPresenter.HorizontalSnapPointsAlignmentProperty, value);
+public static Style<ScrollContentPresenter> VerticalSnapPointsAlignment(this Style<ScrollContentPresenter> style, SnapPointsAlignment value)
+=> style._addSetter(ScrollContentPresenter.VerticalSnapPointsAlignmentProperty, value);
 public static Style<ScrollContentPresenter> IsScrollChainingEnabled(this Style<ScrollContentPresenter> style, Boolean value)
 => style._addSetter(ScrollContentPresenter.IsScrollChainingEnabledProperty, value);
 }
@@ -1032,7 +1046,7 @@ public static Style<Inline> BaselineAlignment(this Style<Inline> style, Baseline
 }
 public static partial class InlineUIContainerExtensions
 {
-public static Style<InlineUIContainer> Child(this Style<InlineUIContainer> style, IControl value)
+public static Style<InlineUIContainer> Child(this Style<InlineUIContainer> style, Control value)
 => style._addSetter(InlineUIContainer.ChildProperty, value);
 }
 public static partial class RunExtensions
@@ -1066,7 +1080,7 @@ public static partial class CalendarItemExtensions
 {
 public static Style<CalendarItem> HeaderBackground(this Style<CalendarItem> style, IBrush value)
 => style._addSetter(CalendarItem.HeaderBackgroundProperty, value);
-public static Style<CalendarItem> DayTitleTemplate(this Style<CalendarItem> style, ITemplate<IControl> value)
+public static Style<CalendarItem> DayTitleTemplate(this Style<CalendarItem> style, ITemplate<Control> value)
 => style._addSetter(CalendarItem.DayTitleTemplateProperty, value);
 }
 public static partial class DateTimePickerPanelExtensions
@@ -1096,6 +1110,8 @@ public static partial class HeaderedItemsControlExtensions
 {
 public static Style<HeaderedItemsControl> Header(this Style<HeaderedItemsControl> style, Object value)
 => style._addSetter(HeaderedItemsControl.HeaderProperty, value);
+public static Style<HeaderedItemsControl> HeaderTemplate(this Style<HeaderedItemsControl> style, IDataTemplate value)
+=> style._addSetter(HeaderedItemsControl.HeaderTemplateProperty, value);
 }
 public static partial class HeaderedSelectingItemsControlExtensions
 {
@@ -1279,6 +1295,8 @@ public static Style<T> RenderTransform<T>(this Style<T> style, ITransform value)
 => style._addSetter(Visual.RenderTransformProperty, value);
 public static Style<T> RenderTransformOrigin<T>(this Style<T> style, RelativePoint value) where T : Visual
 => style._addSetter(Visual.RenderTransformOriginProperty, value);
+public static Style<T> FlowDirection<T>(this Style<T> style, FlowDirection value) where T : Visual
+=> style._addSetter(Visual.FlowDirectionProperty, value);
 public static Style<T> ZIndex<T>(this Style<T> style, Int32 value) where T : Visual
 => style._addSetter(Visual.ZIndexProperty, value);
 }
@@ -1305,6 +1323,11 @@ public static Style<T> VerticalAlignment<T>(this Style<T> style, VerticalAlignme
 public static Style<T> UseLayoutRounding<T>(this Style<T> style, Boolean value) where T : Layoutable
 => style._addSetter(Layoutable.UseLayoutRoundingProperty, value);
 }
+public static partial class PullGestureRecognizerExtensions
+{
+public static Style<PullGestureRecognizer> PullDirection(this Style<PullGestureRecognizer> style, PullDirection value)
+=> style._addSetter(PullGestureRecognizer.PullDirectionProperty, value);
+}
 public static partial class InputElementExtensions
 {
 public static Style<T> Focusable<T>(this Style<T> style, Boolean value) where T : InputElement
@@ -1326,5 +1349,9 @@ public static Style<ScrollGestureRecognizer> CanHorizontallyScroll(this Style<Sc
 => style._addSetter(ScrollGestureRecognizer.CanHorizontallyScrollProperty, value);
 public static Style<ScrollGestureRecognizer> CanVerticallyScroll(this Style<ScrollGestureRecognizer> style, Boolean value)
 => style._addSetter(ScrollGestureRecognizer.CanVerticallyScrollProperty, value);
+public static Style<ScrollGestureRecognizer> IsScrollInertiaEnabled(this Style<ScrollGestureRecognizer> style, Boolean value)
+=> style._addSetter(ScrollGestureRecognizer.IsScrollInertiaEnabledProperty, value);
+public static Style<ScrollGestureRecognizer> ScrollStartDistance(this Style<ScrollGestureRecognizer> style, Int32 value)
+=> style._addSetter(ScrollGestureRecognizer.ScrollStartDistanceProperty, value);
 }
 
