@@ -21,6 +21,7 @@ public class MainView : ViewBase
                                     .FontSize(30)
                                     .HorizontalAlignment(HorizontalAlignment.Center)
                                     .Text("Hello Hot Reload!"),
+
                                 new Button()
                                     .Content("click me!")
                                     .HorizontalAlignment(HorizontalAlignment.Center)

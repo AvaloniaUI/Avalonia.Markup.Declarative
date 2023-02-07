@@ -1193,15 +1193,15 @@ public static Style<ScrollBar> ShowDelay(this Style<ScrollBar> style, TimeSpan v
 }
 public static partial class SelectingItemsControlExtensions
 {
-public static Style<SelectingItemsControl> AutoScrollToSelectedItem(this Style<SelectingItemsControl> style, Boolean value)
+public static Style<T> AutoScrollToSelectedItem<T>(this Style<T> style, Boolean value) where T : SelectingItemsControl
 => style._addSetter(SelectingItemsControl.AutoScrollToSelectedItemProperty, value);
-public static Style<SelectingItemsControl> SelectedIndex(this Style<SelectingItemsControl> style, Int32 value)
+public static Style<T> SelectedIndex<T>(this Style<T> style, Int32 value) where T : SelectingItemsControl
 => style._addSetter(SelectingItemsControl.SelectedIndexProperty, value);
-public static Style<SelectingItemsControl> SelectedItem(this Style<SelectingItemsControl> style, Object value)
+public static Style<T> SelectedItem<T>(this Style<T> style, Object value) where T : SelectingItemsControl
 => style._addSetter(SelectingItemsControl.SelectedItemProperty, value);
-public static Style<SelectingItemsControl> IsTextSearchEnabled(this Style<SelectingItemsControl> style, Boolean value)
+public static Style<T> IsTextSearchEnabled<T>(this Style<T> style, Boolean value) where T : SelectingItemsControl
 => style._addSetter(SelectingItemsControl.IsTextSearchEnabledProperty, value);
-public static Style<SelectingItemsControl> WrapSelection(this Style<SelectingItemsControl> style, Boolean value)
+public static Style<T> WrapSelection<T>(this Style<T> style, Boolean value) where T : SelectingItemsControl
 => style._addSetter(SelectingItemsControl.WrapSelectionProperty, value);
 }
 public static partial class TemplatedControlExtensions
