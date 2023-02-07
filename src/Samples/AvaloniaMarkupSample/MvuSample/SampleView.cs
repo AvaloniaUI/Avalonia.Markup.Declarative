@@ -6,6 +6,10 @@ public class SampleView : ComponentBase
         new StackPanel()
             .Children(
                 new TextBlock()
+                    .Name("NamedTextBlock")
+                    .Text("NamedTextBlock"),
+
+                new TextBlock()
                     .Text(Bind(MyProperty)),
 
                 new TextBlock()
@@ -56,6 +60,8 @@ public class SampleView : ComponentBase
 
     private void OnButtonClick(RoutedEventArgs obj)
     {
+        var tb = this.FindControl<TextBlock>("NamedTextBlock");
+
         MyProperty = "Button was clicked!";
         StateHasChanged();
 
