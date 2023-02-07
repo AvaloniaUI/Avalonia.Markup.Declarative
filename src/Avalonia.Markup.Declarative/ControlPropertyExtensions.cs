@@ -4,6 +4,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
@@ -294,6 +295,13 @@ public static class ControlPropertyExtensions
         return control;
     }
 
+    /// <summary>
+    /// Adds a menu item to the specified menu flyout.
+    /// </summary>
+    /// <typeparam name="TElement">The type of the menu flyout element.</typeparam>
+    /// <param name="menuFlyout">The menu flyout to which the item will be added.</param>
+    /// <param name="menuItem">The menu item to be added to the flyout.</param>
+    /// <returns>The menu flyout with the added item.</returns>
     public static TElement AddItem<TElement>(this TElement menuFlyout, MenuItem menuItem)
         where TElement : MenuFlyout
     {
@@ -301,6 +309,15 @@ public static class ControlPropertyExtensions
         return menuFlyout;
     }
 
+    /// <summary>
+    /// Adds item to MenuFlyout
+    /// </summary>
+    /// <typeparam name="TElement">MenuFlyout type</typeparam>
+    /// <param name="menuFlyout">Target MenuFlyout control</param>
+    /// <param name="text">Item text</param>
+    /// <param name="command">Item command</param>
+    /// <param name="commandParameter">Command parameter</param>
+    /// <returns></returns>
     public static TElement AddItem<TElement>(this TElement menuFlyout, string text, ICommand command, object commandParameter = null)
         where TElement : MenuFlyout
     {
@@ -324,5 +341,4 @@ public static class ControlPropertyExtensions
         field = control;
         return control;
     }
-
 }
