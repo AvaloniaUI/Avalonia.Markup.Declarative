@@ -13,7 +13,8 @@ public class EventExtensionInfo
     public string EventName { get; set; }
 
     public string EventArguments { get; set; }
-
+    public string? ObsoleteMessage { get; } = null;
+    public bool IsObsolete => ObsoleteMessage != null;
     public EventExtensionInfo(EventInfo eventInfo, Func<Type, string> TypeDeclarationFunc)
     {
         EventInfo = eventInfo;
@@ -21,5 +22,6 @@ public class EventExtensionInfo
         EventName = EventInfo.Name;
         EventHandler = TypeDeclarationFunc(EventInfo.EventHandlerType);
         EventArguments = string.Join(",", EventInfo.EventHandlerType.GenericTypeArguments.Select(x => x.Name));
+        ObsoleteMessage = eventInfo.GetCustomAttribute<ObsoleteAttribute>()?.Message;
     }
 }

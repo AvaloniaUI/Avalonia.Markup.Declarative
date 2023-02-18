@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace AvaloniaExtensionGenerator.EventGenerators;
@@ -18,7 +15,12 @@ public abstract class EventGeneratorBase : IEventExtensionGenerator
             namespaces.Add(info.ControlType.Namespace);
 
         usedNamespaces = namespaces;
-        return GetEventExtensionOverride(info);
+
+        var prefix = "";
+        if (info.IsObsolete)
+            prefix = $"\t[Obsolete(\"{info.ObsoleteMessage}\")]{Environment.NewLine}";
+
+        return prefix + GetEventExtensionOverride(info);
     }
 
     public abstract string GetEventExtensionOverride(EventExtensionInfo info);

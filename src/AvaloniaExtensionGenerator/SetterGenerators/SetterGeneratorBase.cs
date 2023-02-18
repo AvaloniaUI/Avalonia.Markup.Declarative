@@ -18,7 +18,12 @@ namespace AvaloniaExtensionGenerator.SetterGenerators
                 namespaces.Add(info.ControlType.Namespace);
 
             usedNamespaces = namespaces;
-            return GetPropertySetterExtensionOverride(info);
+
+            var prefix = "";
+            if (info.IsObsolete)
+                prefix = $"\t[Obsolete(\"{info.ObsoleteMessage}\")]{Environment.NewLine}";
+
+            return prefix + GetPropertySetterExtensionOverride(info);
         }
 
         public abstract string GetPropertySetterExtensionOverride(PropertyExtensionInfo info);

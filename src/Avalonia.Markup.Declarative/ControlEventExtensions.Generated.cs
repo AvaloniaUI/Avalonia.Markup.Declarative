@@ -360,10 +360,13 @@ public static partial class ThumbEventsExtensions
 }
 public static partial class ToggleButtonEventsExtensions
 {
+	[Obsolete("Use IsCheckedChanged instead.")]
     public static ToggleButton OnChecked(this ToggleButton control, Action<RoutedEventArgs> action) => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Checked += h);
+	[Obsolete("Use IsCheckedChanged instead.")]
     public static ToggleButton OnUnchecked(this ToggleButton control, Action<RoutedEventArgs> action) => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Unchecked += h);
+	[Obsolete("Use IsCheckedChanged instead.")]
     public static ToggleButton OnIndeterminate(this ToggleButton control, Action<RoutedEventArgs> action) => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Indeterminate += h);
     public static ToggleButton OnIsCheckedChanged(this ToggleButton control, Action<RoutedEventArgs> action) => 
