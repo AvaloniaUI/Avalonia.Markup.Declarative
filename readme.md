@@ -73,7 +73,7 @@ There are two source generators to add markup extensions on your own controls. I
 
 ```xml
 	<ItemGroup>
-		<ProjectReference Include="..\..\AvaloniaMurkup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="..\..\AvaloniaMarkup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 ```
 * make sure, that path to source generator project is correct relative to your project
