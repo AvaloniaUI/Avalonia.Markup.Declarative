@@ -18,5 +18,6 @@ new PropertyExtensionsGenerator(config, "..\\Avalonia.Markup.Declarative\\Contro
     ).Generate();
 
 new StylePropertyExtensionsGenerator(config, "..\\Avalonia.Markup.Declarative\\StylePropertyExtensions.Generated.cs",
-    new ValueStyleSetterGenerator()
+    new ValueStyleSetterGenerator(),
+    new BindingStyleSetterGenerator()
     ).Generate();

@@ -189,6 +189,8 @@ public static class ControlPropertyExtensions
         return container;
     }
 
+    public static TabControl ItemTemplate<TItem>(this TabControl control, Func<TItem, Control> build) =>
+        ItemTemplate<TItem, TabControl>(control, build);
     public static SelectingItemsControl ItemTemplate<TItem>(this SelectingItemsControl control, Func<TItem, Control> build) =>
         ItemTemplate<TItem, SelectingItemsControl>(control, build);
 
