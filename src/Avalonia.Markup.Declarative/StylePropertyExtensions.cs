@@ -58,13 +58,11 @@ public class Style<TControl> : Style
 {
     public Style()
     {
-        Selector TypeSelector(Selector s) => s.OfType<TControl>();
-        Selector = TypeSelector(null);
+        Selector = ((Selector)null).OfType<TControl>();
     }
 
     public Style(Func<Selector, Selector> selector)
     {
-        Selector TypeSelector(Selector s) => s.OfType<TControl>();
-        Selector = selector(TypeSelector(null));
+        Selector = selector(((Selector)null).OfType<TControl>());
     }
 }
