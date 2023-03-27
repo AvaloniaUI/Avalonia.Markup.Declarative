@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls.Templates;
+﻿using Avalonia.Controls.Presenters;
+using Avalonia.Controls.Templates;
 using Avalonia.Styling;
 
 namespace AvaloniaMarkupSample;
@@ -33,9 +34,9 @@ public class StylesSampleView : ViewBase
                     .Styles(
                         // Typed generic style
                         new Style<Button>(x =>
-                                x.OfType<StackPanel>().Class("sample-wrapper").Descendant().Class("nested-button"))
+                                x.OfType<StackPanel>().Class("sample-wrapper").Descendant().OfType<Button>().Class("nested-button"))
                             .Background(Brushes.Green),
-                        new Style<Button>(s => s.Class(":pointerover"))
+                        new Style<Button>(s => s.OfType<Button>().Class(":pointerover").Child()) //add child selector to change color of content presenter inside button
                             .Background(Brushes.Red)),
 
                 new Button()

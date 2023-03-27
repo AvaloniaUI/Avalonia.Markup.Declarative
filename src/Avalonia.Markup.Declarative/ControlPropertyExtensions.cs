@@ -225,9 +225,10 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TElement Name<TElement>(this TElement control, string name)
+    public static TElement Name<TElement>(this TElement control, string name, INameScope ns = null)
         where TElement : Control
     {
+        ns?.Register(name, control);
         control.Name = name;
         return control;
     }

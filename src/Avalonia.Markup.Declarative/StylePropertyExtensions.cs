@@ -1,5 +1,6 @@
 ﻿using Avalonia.Styling;
 using System;
+using System.Linq.Expressions;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -56,13 +57,21 @@ public static class StylePropertyExtensions
 public class Style<TControl> : Style
     where TControl : IStyleable
 {
+    /// <summary>
+    /// Creates Style with added .OfType<typeparam name="TControl"></typeparam> selector
+    /// </summary>
     public Style()
     {
         Selector = ((Selector)null).OfType<TControl>();
     }
 
+    /// <summary>
+    /// Don't forger to specify target control type directly, since it's impossible to inject it from generic type argument correctly yet
+    /// otherwise Avalonia will try to apply this style to any control, that match this selector. 
+    /// </summary>
+    /// <param name="selector"></param>
     public Style(Func<Selector, Selector> selector)
     {
-        Selector = selector(((Selector)null).OfType<TControl>());
+        Selector = selector(((Selector)null));
     }
 }

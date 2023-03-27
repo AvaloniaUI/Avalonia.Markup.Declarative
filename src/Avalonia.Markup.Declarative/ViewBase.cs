@@ -2,10 +2,12 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Data;
+using Avalonia.LogicalTree;
 using Avalonia.Platform;
 using Avalonia.Styling;
 using Avalonia.Threading;
@@ -66,6 +68,13 @@ public abstract class ViewBase<TViewModel> : ViewBase
 /// </summary>
 public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 {
+    private INameScope _nameScope;
+    
+    /// <summary>
+    /// Current NameScope of this view
+    /// </summary>
+    protected INameScope Scope => _nameScope ??= new NameScope();
+
     public event Action ViewInitialized;
 
     protected abstract object Build();
@@ -121,6 +130,8 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     {
         try
         {
+            NameScope.SetNameScope(this, Scope);
+
             var content = Build();
             Child = content as Control;
 
@@ -197,6 +208,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
         throw new MemberAccessException("Wrong property getter expression");
     }
 
+    [Obsolete("It's not view relative method. Should not be used and Will be removed in future.")]
     public static Stream GetAsset(string uri)
     {
         var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();

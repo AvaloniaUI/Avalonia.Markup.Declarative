@@ -25,9 +25,16 @@ public class MainView : ViewBase
                                     .Text("Hello Hot Reload!"),
 
                                 new Button()
+                                    .Name("HotReloadButton", Scope)
                                     .Content("click me!")
                                     .HorizontalAlignment(HorizontalAlignment.Center)
-                                    .OnClick(_ => textBlock.Text("Button clicked!"))
+                                    .OnClick(_ =>
+                                    {
+                                        textBlock.Text("Button clicked!");
+
+                                        var button = this.FindControl<Button>("HotReloadButton");
+                                        button.Content = "Found by Name";
+                                    })
                             )
                     ),
 
@@ -114,4 +121,5 @@ public class MainView : ViewBase
                                     })
                             )
                     ));
+
 }
