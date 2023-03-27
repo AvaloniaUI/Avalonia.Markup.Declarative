@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls.Templates;
+﻿using Avalonia.Controls.Presenters;
+using Avalonia.Controls.Templates;
 using Avalonia.Styling;
 
 namespace AvaloniaMarkupSample;
@@ -7,6 +8,11 @@ public class StylesSampleView : ViewBase
 {
     protected override object Build() =>
         new StackPanel()
+            .Classes("sample-wrapper")
+            .Styles(
+                new Style<Button>(x => x.OfType<Button>().Class("nested-button"))
+                    .FontSize(26d)
+            )
             .Children(new Control[]
             {
                 new TabControl()
@@ -20,16 +26,23 @@ public class StylesSampleView : ViewBase
                     ),
 
                 new Button()
+                    .Classes("nested-button")
                     .HorizontalAlignment(Avalonia.Layout.HorizontalAlignment.Center)
                     .Content("Hello styles!")
                     .Width(100)
                     .Height(50)
                     .Styles(
-                        new Style<Button>()
+                        // Typed generic style
+                        new Style<Button>(x =>
+                                x.OfType<StackPanel>().Class("sample-wrapper").Descendant().OfType<Button>().Class("nested-button"))
                             .Background(Brushes.Green),
-                        new Style<Button>(s => s.Class(":pointerover"))
-                            .Background(Brushes.Red))
+                        new Style<Button>(s => s.OfType<Button>().Class(":pointerover").Child()) //add child selector to change color of content presenter inside button
+                            .Background(Brushes.Red)),
 
+                new Button()
+                    .HorizontalAlignment(Avalonia.Layout.HorizontalAlignment.Center)
+                    .Content("Unstyled buton")
+                    .Width(150)
             });
 
     public List<TabVm> Tabs { get; set; } = new()
