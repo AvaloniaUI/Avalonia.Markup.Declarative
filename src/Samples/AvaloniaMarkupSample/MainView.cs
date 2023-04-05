@@ -33,7 +33,8 @@ public class MainView : ViewBase
                                         textBlock.Text("Button clicked!");
 
                                         var button = this.FindControl<Button>("HotReloadButton");
-                                        button.Content = "Found by Name";
+                                        if(button != null)
+                                            button.Content = "Found by Name";
                                     })
                             )
                     ),

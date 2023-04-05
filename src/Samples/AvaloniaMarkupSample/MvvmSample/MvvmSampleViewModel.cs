@@ -5,9 +5,9 @@ namespace AvaloniaMarkupSample.MvvmSample;
 
 public class MvvmSampleViewModel : INotifyPropertyChanged
 {
-    private string _myProperty;
+    private string? _myProperty;
 
-    public string MyProperty
+    public string? MyProperty
     {
         get => _myProperty;
         set

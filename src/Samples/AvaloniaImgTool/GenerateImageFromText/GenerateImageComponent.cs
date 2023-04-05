@@ -110,8 +110,8 @@ public class GenerateImageComponent : ComponentBase
 
     #region Code
 
-    private Image _imageControl;
-    private GenerateImageFromTextResult _lastImageResult;
+    private Image _imageControl = null!;
+    private GenerateImageFromTextResult? _lastImageResult;
 
     [Inject] HuggingFaceService HuggingFaceService { get; set; } = null!;
     [Inject] SaveFilePickerService SaveFilePickerService { get; set; } = null!;
@@ -172,6 +172,9 @@ public class GenerateImageComponent : ComponentBase
 
     private async void OnSaveButtonClick(RoutedEventArgs obj)
     {
+        if(_lastImageResult == null)
+            return;
+            
         await SaveFilePickerService.SaveFileAsync(_lastImageResult.GetImageDataAsStream());
     }
 

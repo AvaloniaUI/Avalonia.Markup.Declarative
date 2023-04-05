@@ -16,6 +16,9 @@ public class PropertyExtensionInfo
 
     public PropertyExtensionInfo(FieldInfo field, Func<Type, string> TypeDeclarationFunc)
     {
+        if (field.DeclaringType == null)
+            throw new NullReferenceException("Control type can not be NULL");
+
         FieldInfo = field;
         ControlType = field.DeclaringType;
         ExtensionName = field.Name.Replace("Property", "");
