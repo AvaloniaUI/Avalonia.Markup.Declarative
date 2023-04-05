@@ -16,6 +16,7 @@ using Avalonia.Input;
 using Avalonia.Input.GestureRecognizers;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Media.TextFormatting;
 using Avalonia.Platform;
 using Avalonia.Styling;
 using System;
@@ -354,10 +355,10 @@ public static Style<Avalonia.Controls.ContextMenu> PlacementGravity(this Style<A
 => style._addSetter(Avalonia.Controls.ContextMenu.PlacementGravityProperty, value);
 public static Style<Avalonia.Controls.ContextMenu> PlacementGravity(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
 => style._addSetter(Avalonia.Controls.ContextMenu.PlacementGravityProperty, binding);
-public static Style<Avalonia.Controls.ContextMenu> PlacementMode(this Style<Avalonia.Controls.ContextMenu> style, PlacementMode value)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementModeProperty, value);
-public static Style<Avalonia.Controls.ContextMenu> PlacementMode(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementModeProperty, binding);
+public static Style<Avalonia.Controls.ContextMenu> Placement(this Style<Avalonia.Controls.ContextMenu> style, PlacementMode value)
+=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementProperty, value);
+public static Style<Avalonia.Controls.ContextMenu> Placement(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
+=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementProperty, binding);
 public static Style<Avalonia.Controls.ContextMenu> PlacementRect(this Style<Avalonia.Controls.ContextMenu> style, Nullable<Rect> value)
 => style._addSetter(Avalonia.Controls.ContextMenu.PlacementRectProperty, value);
 public static Style<Avalonia.Controls.ContextMenu> PlacementRect(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
@@ -604,7 +605,7 @@ public static Style<Image> StretchDirection(this Style<Image> style, IBinding bi
 }
 public static partial class ItemsControlExtensions
 {
-public static Style<T> Items<T>(this Style<T> style, IEnumerable value) where T : ItemsControl
+public static Style<T> Items<T>(this Style<T> style, IList value) where T : ItemsControl
 => style._addSetter(ItemsControl.ItemsProperty, value);
 public static Style<T> Items<T>(this Style<T> style, IBinding binding) where T : ItemsControl
 => style._addSetter(ItemsControl.ItemsProperty, binding);
@@ -616,6 +617,10 @@ public static Style<T> ItemsPanel<T>(this Style<T> style, ITemplate<Panel> value
 => style._addSetter(ItemsControl.ItemsPanelProperty, value);
 public static Style<T> ItemsPanel<T>(this Style<T> style, IBinding binding) where T : ItemsControl
 => style._addSetter(ItemsControl.ItemsPanelProperty, binding);
+public static Style<T> ItemsSource<T>(this Style<T> style, IEnumerable value) where T : ItemsControl
+=> style._addSetter(ItemsControl.ItemsSourceProperty, value);
+public static Style<T> ItemsSource<T>(this Style<T> style, IBinding binding) where T : ItemsControl
+=> style._addSetter(ItemsControl.ItemsSourceProperty, binding);
 public static Style<T> ItemTemplate<T>(this Style<T> style, IDataTemplate value) where T : ItemsControl
 => style._addSetter(ItemsControl.ItemTemplateProperty, value);
 public static Style<T> ItemTemplate<T>(this Style<T> style, IBinding binding) where T : ItemsControl
@@ -690,10 +695,6 @@ public static Style<MaskedTextBox> Mask(this Style<MaskedTextBox> style, String 
 => style._addSetter(MaskedTextBox.MaskProperty, value);
 public static Style<MaskedTextBox> Mask(this Style<MaskedTextBox> style, IBinding binding)
 => style._addSetter(MaskedTextBox.MaskProperty, binding);
-public static Style<MaskedTextBox> PasswordChar(this Style<MaskedTextBox> style, Char value)
-=> style._addSetter(MaskedTextBox.PasswordCharProperty, value);
-public static Style<MaskedTextBox> PasswordChar(this Style<MaskedTextBox> style, IBinding binding)
-=> style._addSetter(MaskedTextBox.PasswordCharProperty, binding);
 public static Style<MaskedTextBox> PromptChar(this Style<MaskedTextBox> style, Char value)
 => style._addSetter(MaskedTextBox.PromptCharProperty, value);
 public static Style<MaskedTextBox> PromptChar(this Style<MaskedTextBox> style, IBinding binding)
@@ -1049,10 +1050,6 @@ public static Style<SplitView> UseLightDismissOverlayMode(this Style<SplitView> 
 => style._addSetter(SplitView.UseLightDismissOverlayModeProperty, value);
 public static Style<SplitView> UseLightDismissOverlayMode(this Style<SplitView> style, IBinding binding)
 => style._addSetter(SplitView.UseLightDismissOverlayModeProperty, binding);
-public static Style<SplitView> TemplateSettings(this Style<SplitView> style, SplitViewTemplateSettings value)
-=> style._addSetter(SplitView.TemplateSettingsProperty, value);
-public static Style<SplitView> TemplateSettings(this Style<SplitView> style, IBinding binding)
-=> style._addSetter(SplitView.TemplateSettingsProperty, binding);
 }
 public static partial class StackPanelExtensions
 {
@@ -1285,6 +1282,13 @@ public static Style<TextBox> UndoLimit(this Style<TextBox> style, Int32 value)
 public static Style<TextBox> UndoLimit(this Style<TextBox> style, IBinding binding)
 => style._addSetter(TextBox.UndoLimitProperty, binding);
 }
+public static partial class ThemeVariantScopeExtensions
+{
+public static Style<ThemeVariantScope> RequestedThemeVariant(this Style<ThemeVariantScope> style, ThemeVariant value)
+=> style._addSetter(ThemeVariantScope.RequestedThemeVariantProperty, value);
+public static Style<ThemeVariantScope> RequestedThemeVariant(this Style<ThemeVariantScope> style, IBinding binding)
+=> style._addSetter(ThemeVariantScope.RequestedThemeVariantProperty, binding);
+}
 public static partial class TickBarExtensions
 {
 public static Style<TickBar> Fill(this Style<TickBar> style, IBrush value)
@@ -1353,6 +1357,10 @@ public static Style<TopLevel> TransparencyBackgroundFallback(this Style<TopLevel
 => style._addSetter(TopLevel.TransparencyBackgroundFallbackProperty, value);
 public static Style<TopLevel> TransparencyBackgroundFallback(this Style<TopLevel> style, IBinding binding)
 => style._addSetter(TopLevel.TransparencyBackgroundFallbackProperty, binding);
+public static Style<TopLevel> RequestedThemeVariant(this Style<TopLevel> style, ThemeVariant value)
+=> style._addSetter(TopLevel.RequestedThemeVariantProperty, value);
+public static Style<TopLevel> RequestedThemeVariant(this Style<TopLevel> style, IBinding binding)
+=> style._addSetter(TopLevel.RequestedThemeVariantProperty, binding);
 }
 public static partial class TransitioningContentControlExtensions
 {
@@ -1777,6 +1785,10 @@ public static Style<TextPresenter> PreeditText(this Style<TextPresenter> style, 
 => style._addSetter(TextPresenter.PreeditTextProperty, value);
 public static Style<TextPresenter> PreeditText(this Style<TextPresenter> style, IBinding binding)
 => style._addSetter(TextPresenter.PreeditTextProperty, binding);
+public static Style<TextPresenter> CompositionRegion(this Style<TextPresenter> style, Nullable<TextRange> value)
+=> style._addSetter(TextPresenter.CompositionRegionProperty, value);
+public static Style<TextPresenter> CompositionRegion(this Style<TextPresenter> style, IBinding binding)
+=> style._addSetter(TextPresenter.CompositionRegionProperty, binding);
 public static Style<TextPresenter> TextAlignment(this Style<TextPresenter> style, TextAlignment value)
 => style._addSetter(TextPresenter.TextAlignmentProperty, value);
 public static Style<TextPresenter> TextAlignment(this Style<TextPresenter> style, IBinding binding)
@@ -1916,6 +1928,13 @@ public static Style<AccessText> ShowAccessKey(this Style<AccessText> style, Bool
 public static Style<AccessText> ShowAccessKey(this Style<AccessText> style, IBinding binding)
 => style._addSetter(AccessText.ShowAccessKeyProperty, binding);
 }
+public static partial class AdornerLayerExtensions
+{
+public static Style<AdornerLayer> DefaultFocusAdorner(this Style<AdornerLayer> style, ITemplate<Control> value)
+=> style._addSetter(AdornerLayer.DefaultFocusAdornerProperty, value);
+public static Style<AdornerLayer> DefaultFocusAdorner(this Style<AdornerLayer> style, IBinding binding)
+=> style._addSetter(AdornerLayer.DefaultFocusAdornerProperty, binding);
+}
 public static partial class HeaderedContentControlExtensions
 {
 public static Style<HeaderedContentControl> Header(this Style<HeaderedContentControl> style, Object value)
@@ -1982,10 +2001,10 @@ public static Style<Popup> PlacementGravity(this Style<Popup> style, PopupGravit
 => style._addSetter(Popup.PlacementGravityProperty, value);
 public static Style<Popup> PlacementGravity(this Style<Popup> style, IBinding binding)
 => style._addSetter(Popup.PlacementGravityProperty, binding);
-public static Style<Popup> PlacementMode(this Style<Popup> style, PlacementMode value)
-=> style._addSetter(Popup.PlacementModeProperty, value);
-public static Style<Popup> PlacementMode(this Style<Popup> style, IBinding binding)
-=> style._addSetter(Popup.PlacementModeProperty, binding);
+public static Style<Popup> Placement(this Style<Popup> style, PlacementMode value)
+=> style._addSetter(Popup.PlacementProperty, value);
+public static Style<Popup> Placement(this Style<Popup> style, IBinding binding)
+=> style._addSetter(Popup.PlacementProperty, binding);
 public static Style<Popup> PlacementRect(this Style<Popup> style, Nullable<Rect> value)
 => style._addSetter(Popup.PlacementRectProperty, value);
 public static Style<Popup> PlacementRect(this Style<Popup> style, IBinding binding)
@@ -2090,6 +2109,13 @@ public static Style<T> SelectedItem<T>(this Style<T> style, Object value) where 
 => style._addSetter(SelectingItemsControl.SelectedItemProperty, value);
 public static Style<T> SelectedItem<T>(this Style<T> style, IBinding binding) where T : SelectingItemsControl
 => style._addSetter(SelectingItemsControl.SelectedItemProperty, binding);
+public static Style<T> SelectedValue<T>(this Style<T> style, Object value) where T : SelectingItemsControl
+=> style._addSetter(SelectingItemsControl.SelectedValueProperty, value);
+public static Style<T> SelectedValue<T>(this Style<T> style, IBinding binding) where T : SelectingItemsControl
+=> style._addSetter(SelectingItemsControl.SelectedValueProperty, binding);
+public static Style<T> SelectedValueBinding<T>(this Style<T> style, IBinding value) where T : SelectingItemsControl
+=> style._addSetter(SelectingItemsControl.SelectedValueBindingProperty, value);
+//Skipped SelectedValueBinding because already exist in value setters
 public static Style<T> IsTextSearchEnabled<T>(this Style<T> style, Boolean value) where T : SelectingItemsControl
 => style._addSetter(SelectingItemsControl.IsTextSearchEnabledProperty, value);
 public static Style<T> IsTextSearchEnabled<T>(this Style<T> style, IBinding binding) where T : SelectingItemsControl

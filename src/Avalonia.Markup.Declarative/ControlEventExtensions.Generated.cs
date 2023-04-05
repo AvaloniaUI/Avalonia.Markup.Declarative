@@ -121,6 +121,12 @@ public static partial class ExpanderEventsExtensions
 }
 public static partial class ItemsControlEventsExtensions
 {
+    public static ItemsControl OnContainerPrepared(this ItemsControl control, Action<ContainerPreparedEventArgs> action) => 
+        control._setEvent((EventHandler<ContainerPreparedEventArgs>) ((_, args) => action(args)), h => control.ContainerPrepared += h);
+    public static ItemsControl OnContainerIndexChanged(this ItemsControl control, Action<ContainerIndexChangedEventArgs> action) => 
+        control._setEvent((EventHandler<ContainerIndexChangedEventArgs>) ((_, args) => action(args)), h => control.ContainerIndexChanged += h);
+    public static ItemsControl OnContainerClearing(this ItemsControl control, Action<ContainerClearingEventArgs> action) => 
+        control._setEvent((EventHandler<ContainerClearingEventArgs>) ((_, args) => action(args)), h => control.ContainerClearing += h);
     public static ItemsControl OnHorizontalSnapPointsChanged(this ItemsControl control, Action<RoutedEventArgs> action) => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.HorizontalSnapPointsChanged += h);
     public static ItemsControl OnVerticalSnapPointsChanged(this ItemsControl control, Action<RoutedEventArgs> action) => 
@@ -137,10 +143,10 @@ public static partial class MenuItemEventsExtensions
 {
     public static MenuItem OnClick(this MenuItem control, Action<RoutedEventArgs> action) => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Click += h);
-    public static MenuItem OnPointerEnteredItem(this MenuItem control, Action<PointerEventArgs> action) => 
-        control._setEvent((EventHandler<PointerEventArgs>) ((_, args) => action(args)), h => control.PointerEnteredItem += h);
-    public static MenuItem OnPointerExitedItem(this MenuItem control, Action<PointerEventArgs> action) => 
-        control._setEvent((EventHandler<PointerEventArgs>) ((_, args) => action(args)), h => control.PointerExitedItem += h);
+    public static MenuItem OnPointerEnteredItem(this MenuItem control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.PointerEnteredItem += h);
+    public static MenuItem OnPointerExitedItem(this MenuItem control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.PointerExitedItem += h);
     public static MenuItem OnSubmenuOpened(this MenuItem control, Action<RoutedEventArgs> action) => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.SubmenuOpened += h);
 }
@@ -202,14 +208,14 @@ public static partial class ToggleSplitButtonEventsExtensions
 }
 public static partial class SplitViewEventsExtensions
 {
-    public static SplitView OnPaneClosed(this SplitView control, Action<EventArgs> action) => 
-        control._setEvent((EventHandler<EventArgs>) ((_, args) => action(args)), h => control.PaneClosed += h);
-    public static SplitView OnPaneClosing(this SplitView control, Action<SplitViewPaneClosingEventArgs> action) => 
-        control._setEvent((EventHandler<SplitViewPaneClosingEventArgs>) ((_, args) => action(args)), h => control.PaneClosing += h);
-    public static SplitView OnPaneOpened(this SplitView control, Action<EventArgs> action) => 
-        control._setEvent((EventHandler<EventArgs>) ((_, args) => action(args)), h => control.PaneOpened += h);
-    public static SplitView OnPaneOpening(this SplitView control, Action<EventArgs> action) => 
-        control._setEvent((EventHandler<EventArgs>) ((_, args) => action(args)), h => control.PaneOpening += h);
+    public static SplitView OnPaneClosed(this SplitView control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.PaneClosed += h);
+    public static SplitView OnPaneClosing(this SplitView control, Action<CancelRoutedEventArgs> action) => 
+        control._setEvent((EventHandler<CancelRoutedEventArgs>) ((_, args) => action(args)), h => control.PaneClosing += h);
+    public static SplitView OnPaneOpened(this SplitView control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.PaneOpened += h);
+    public static SplitView OnPaneOpening(this SplitView control, Action<CancelRoutedEventArgs> action) => 
+        control._setEvent((EventHandler<CancelRoutedEventArgs>) ((_, args) => action(args)), h => control.PaneOpening += h);
 }
 public static partial class StackPanelEventsExtensions
 {
@@ -318,13 +324,16 @@ public static partial class PickerPresenterBaseEventsExtensions
 }
 public static partial class FlyoutBaseEventsExtensions
 {
-    public static FlyoutBase OnClosed(this FlyoutBase control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.Closed += h);
-    public static FlyoutBase OnClosing(this FlyoutBase control, Action<CancelEventArgs> action) => 
-        control._setEvent((EventHandler<CancelEventArgs>) ((_, args) => action(args)), h => control.Closing += h);
     public static FlyoutBase OnOpened(this FlyoutBase control, Action action) => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Opened += h);
-    public static FlyoutBase OnOpening(this FlyoutBase control, Action action) => 
+    public static FlyoutBase OnClosed(this FlyoutBase control, Action action) => 
+        control._setEvent((EventHandler) ((_, args) => action()), h => control.Closed += h);
+}
+public static partial class PopupFlyoutBaseEventsExtensions
+{
+    public static PopupFlyoutBase OnClosing(this PopupFlyoutBase control, Action<CancelEventArgs> action) => 
+        control._setEvent((EventHandler<CancelEventArgs>) ((_, args) => action(args)), h => control.Closing += h);
+    public static PopupFlyoutBase OnOpening(this PopupFlyoutBase control, Action action) => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Opening += h);
 }
 public static partial class PopupEventsExtensions
@@ -389,6 +398,8 @@ public static partial class StyledElementEventsExtensions
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Initialized += h);
     public static StyledElement OnResourcesChanged(this StyledElement control, Action<ResourcesChangedEventArgs> action) => 
         control._setEvent((EventHandler<ResourcesChangedEventArgs>) ((_, args) => action(args)), h => control.ResourcesChanged += h);
+    public static StyledElement OnActualThemeVariantChanged(this StyledElement control, Action action) => 
+        control._setEvent((EventHandler) ((_, args) => action()), h => control.ActualThemeVariantChanged += h);
 }
 public static partial class VisualEventsExtensions
 {

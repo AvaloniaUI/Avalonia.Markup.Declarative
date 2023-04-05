@@ -18,6 +18,7 @@ using Avalonia.Input.GestureRecognizers;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Media.TextFormatting;
 using Avalonia.Platform;
 using Avalonia.Styling;
 using System;
@@ -418,10 +419,10 @@ public static Avalonia.Controls.ContextMenu PlacementGravity(this Avalonia.Contr
    => control._set(() => control[!Avalonia.Controls.ContextMenu.PlacementGravityProperty] = binding);
 public static Avalonia.Controls.ContextMenu PlacementGravity(this Avalonia.Controls.ContextMenu control, PopupGravity value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Controls.ContextMenu.PlacementGravityProperty, ps, () => control.PlacementGravity = value, bindingMode, converter, bindingSource);
 public static Avalonia.Controls.ContextMenu PlacementGravity<TValue>(this Avalonia.Controls.ContextMenu control, TValue value, FuncValueConverter<TValue, PopupGravity> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Controls.ContextMenu.PlacementGravityProperty, ps, () => control.PlacementGravity = (PopupGravity)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static Avalonia.Controls.ContextMenu PlacementMode(this Avalonia.Controls.ContextMenu control, IBinding binding)
-   => control._set(() => control[!Avalonia.Controls.ContextMenu.PlacementModeProperty] = binding);
-public static Avalonia.Controls.ContextMenu PlacementMode(this Avalonia.Controls.ContextMenu control, PlacementMode value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Controls.ContextMenu.PlacementModeProperty, ps, () => control.PlacementMode = value, bindingMode, converter, bindingSource);
-public static Avalonia.Controls.ContextMenu PlacementMode<TValue>(this Avalonia.Controls.ContextMenu control, TValue value, FuncValueConverter<TValue, PlacementMode> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Controls.ContextMenu.PlacementModeProperty, ps, () => control.PlacementMode = (PlacementMode)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static Avalonia.Controls.ContextMenu Placement(this Avalonia.Controls.ContextMenu control, IBinding binding)
+   => control._set(() => control[!Avalonia.Controls.ContextMenu.PlacementProperty] = binding);
+public static Avalonia.Controls.ContextMenu Placement(this Avalonia.Controls.ContextMenu control, PlacementMode value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Controls.ContextMenu.PlacementProperty, ps, () => control.Placement = value, bindingMode, converter, bindingSource);
+public static Avalonia.Controls.ContextMenu Placement<TValue>(this Avalonia.Controls.ContextMenu control, TValue value, FuncValueConverter<TValue, PlacementMode> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Controls.ContextMenu.PlacementProperty, ps, () => control.Placement = (PlacementMode)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static Avalonia.Controls.ContextMenu PlacementRect(this Avalonia.Controls.ContextMenu control, IBinding binding)
    => control._set(() => control[!Avalonia.Controls.ContextMenu.PlacementRectProperty] = binding);
 public static Avalonia.Controls.ContextMenu PlacementRect(this Avalonia.Controls.ContextMenu control, Nullable<Rect> value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Controls.ContextMenu.PlacementRectProperty, ps, () => control.PlacementRect = value, bindingMode, converter, bindingSource);
@@ -652,6 +653,10 @@ public static Flyout Content(this Flyout control, IBinding binding)
    => control._set(() => control[!Flyout.ContentProperty] = binding);
 public static Flyout Content(this Flyout control, Object value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Flyout.ContentProperty, ps, () => control.Content = value, bindingMode, converter, bindingSource);
 public static Flyout Content<TValue>(this Flyout control, TValue value, FuncValueConverter<TValue, Object> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Flyout.ContentProperty, ps, () => control.Content = (Object)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static Flyout FlyoutPresenterTheme(this Flyout control, IBinding binding)
+   => control._set(() => control[!Flyout.FlyoutPresenterThemeProperty] = binding);
+public static Flyout FlyoutPresenterTheme(this Flyout control, ControlTheme value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Flyout.FlyoutPresenterThemeProperty, ps, () => control.FlyoutPresenterTheme = value, bindingMode, converter, bindingSource);
+public static Flyout FlyoutPresenterTheme<TValue>(this Flyout control, TValue value, FuncValueConverter<TValue, ControlTheme> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Flyout.FlyoutPresenterThemeProperty, ps, () => control.FlyoutPresenterTheme = (ControlTheme)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class MenuFlyoutExtensions
 {
@@ -667,6 +672,10 @@ public static MenuFlyout ItemContainerTheme(this MenuFlyout control, IBinding bi
    => control._set(() => control[!MenuFlyout.ItemContainerThemeProperty] = binding);
 public static MenuFlyout ItemContainerTheme(this MenuFlyout control, ControlTheme value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuFlyout.ItemContainerThemeProperty, ps, () => control.ItemContainerTheme = value, bindingMode, converter, bindingSource);
 public static MenuFlyout ItemContainerTheme<TValue>(this MenuFlyout control, TValue value, FuncValueConverter<TValue, ControlTheme> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuFlyout.ItemContainerThemeProperty, ps, () => control.ItemContainerTheme = (ControlTheme)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static MenuFlyout FlyoutPresenterTheme(this MenuFlyout control, IBinding binding)
+   => control._set(() => control[!MenuFlyout.FlyoutPresenterThemeProperty] = binding);
+public static MenuFlyout FlyoutPresenterTheme(this MenuFlyout control, ControlTheme value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuFlyout.FlyoutPresenterThemeProperty, ps, () => control.FlyoutPresenterTheme = value, bindingMode, converter, bindingSource);
+public static MenuFlyout FlyoutPresenterTheme<TValue>(this MenuFlyout control, TValue value, FuncValueConverter<TValue, ControlTheme> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuFlyout.FlyoutPresenterThemeProperty, ps, () => control.FlyoutPresenterTheme = (ControlTheme)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class GridExtensions
 {
@@ -721,10 +730,10 @@ public static partial class ItemsControlExtensions
 {
 public static T Items<T>(this T control, IBinding binding) where T : ItemsControl
    => control._set(() => control[!ItemsControl.ItemsProperty] = binding);
-public static T Items<T>(this T control, IEnumerable value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
+public static T Items<T>(this T control, IList value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
 => control._setEx(ItemsControl.ItemsProperty, ps, () => control.Items = value, bindingMode, converter, bindingSource);
-public static T Items<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IEnumerable> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
-=> control._setEx(ItemsControl.ItemsProperty, ps, () => control.Items = (IEnumerable)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static T Items<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IList> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
+=> control._setEx(ItemsControl.ItemsProperty, ps, () => control.Items = (IList)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static T ItemContainerTheme<T>(this T control, IBinding binding) where T : ItemsControl
    => control._set(() => control[!ItemsControl.ItemContainerThemeProperty] = binding);
 public static T ItemContainerTheme<T>(this T control, ControlTheme value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
@@ -737,6 +746,12 @@ public static T ItemsPanel<T>(this T control, ITemplate<Panel> value = default, 
 => control._setEx(ItemsControl.ItemsPanelProperty, ps, () => control.ItemsPanel = value, bindingMode, converter, bindingSource);
 public static T ItemsPanel<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, ITemplate<Panel>> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
 => control._setEx(ItemsControl.ItemsPanelProperty, ps, () => control.ItemsPanel = (ITemplate<Panel>)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static T ItemsSource<T>(this T control, IBinding binding) where T : ItemsControl
+   => control._set(() => control[!ItemsControl.ItemsSourceProperty] = binding);
+public static T ItemsSource<T>(this T control, IEnumerable value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
+=> control._setEx(ItemsControl.ItemsSourceProperty, ps, () => control.ItemsSource = value, bindingMode, converter, bindingSource);
+public static T ItemsSource<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IEnumerable> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
+=> control._setEx(ItemsControl.ItemsSourceProperty, ps, () => control.ItemsSource = (IEnumerable)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static T ItemTemplate<T>(this T control, IBinding binding) where T : ItemsControl
    => control._set(() => control[!ItemsControl.ItemTemplateProperty] = binding);
 public static T ItemTemplate<T>(this T control, IDataTemplate value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
@@ -820,10 +835,6 @@ public static MaskedTextBox Mask(this MaskedTextBox control, IBinding binding)
    => control._set(() => control[!MaskedTextBox.MaskProperty] = binding);
 public static MaskedTextBox Mask(this MaskedTextBox control, String value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MaskedTextBox.MaskProperty, ps, () => control.Mask = value, bindingMode, converter, bindingSource);
 public static MaskedTextBox Mask<TValue>(this MaskedTextBox control, TValue value, FuncValueConverter<TValue, String> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MaskedTextBox.MaskProperty, ps, () => control.Mask = (String)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static MaskedTextBox PasswordChar(this MaskedTextBox control, IBinding binding)
-   => control._set(() => control[!MaskedTextBox.PasswordCharProperty] = binding);
-public static MaskedTextBox PasswordChar(this MaskedTextBox control, Char value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MaskedTextBox.PasswordCharProperty, ps, () => control.PasswordChar = value, bindingMode, converter, bindingSource);
-public static MaskedTextBox PasswordChar<TValue>(this MaskedTextBox control, TValue value, FuncValueConverter<TValue, Char> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MaskedTextBox.PasswordCharProperty, ps, () => control.PasswordChar = (Char)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static MaskedTextBox PromptChar(this MaskedTextBox control, IBinding binding)
    => control._set(() => control[!MaskedTextBox.PromptCharProperty] = binding);
 public static MaskedTextBox PromptChar(this MaskedTextBox control, Char value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MaskedTextBox.PromptCharProperty, ps, () => control.PromptChar = value, bindingMode, converter, bindingSource);
@@ -872,13 +883,6 @@ public static MenuItem StaysOpenOnClick(this MenuItem control, IBinding binding)
 public static MenuItem StaysOpenOnClick(this MenuItem control, Boolean value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuItem.StaysOpenOnClickProperty, ps, () => control.StaysOpenOnClick = value, bindingMode, converter, bindingSource);
 public static MenuItem StaysOpenOnClick<TValue>(this MenuItem control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuItem.StaysOpenOnClickProperty, ps, () => control.StaysOpenOnClick = (Boolean)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
-public static partial class NativeMenuExtensions
-{
-public static NativeMenu Parent(this NativeMenu control, IBinding binding)
-   => control._set(() => control[!NativeMenu.ParentProperty] = binding);
-public static NativeMenu Parent(this NativeMenu control, NativeMenuItem value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenu.ParentProperty, ps, () => control.Parent = value, bindingMode, converter, bindingSource);
-public static NativeMenu Parent<TValue>(this NativeMenu control, TValue value, FuncValueConverter<TValue, NativeMenuItem> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenu.ParentProperty, ps, () => control.Parent = (NativeMenuItem)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-}
 public static partial class NativeMenuItemExtensions
 {
 public static NativeMenuItem Menu(this NativeMenuItem control, IBinding binding)
@@ -917,13 +921,6 @@ public static NativeMenuItem IsEnabled(this NativeMenuItem control, IBinding bin
    => control._set(() => control[!NativeMenuItem.IsEnabledProperty] = binding);
 public static NativeMenuItem IsEnabled(this NativeMenuItem control, Boolean value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenuItem.IsEnabledProperty, ps, () => control.IsEnabled = value, bindingMode, converter, bindingSource);
 public static NativeMenuItem IsEnabled<TValue>(this NativeMenuItem control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenuItem.IsEnabledProperty, ps, () => control.IsEnabled = (Boolean)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-}
-public static partial class NativeMenuItemBaseExtensions
-{
-public static NativeMenuItemBase Parent(this NativeMenuItemBase control, IBinding binding)
-   => control._set(() => control[!NativeMenuItemBase.ParentProperty] = binding);
-public static NativeMenuItemBase Parent(this NativeMenuItemBase control, NativeMenu value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenuItemBase.ParentProperty, ps, () => control.Parent = value, bindingMode, converter, bindingSource);
-public static NativeMenuItemBase Parent<TValue>(this NativeMenuItemBase control, TValue value, FuncValueConverter<TValue, NativeMenu> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenuItemBase.ParentProperty, ps, () => control.Parent = (NativeMenu)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class ReversibleStackPanelExtensions
 {
@@ -1254,10 +1251,6 @@ public static SplitView UseLightDismissOverlayMode(this SplitView control, IBind
    => control._set(() => control[!SplitView.UseLightDismissOverlayModeProperty] = binding);
 public static SplitView UseLightDismissOverlayMode(this SplitView control, Boolean value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(SplitView.UseLightDismissOverlayModeProperty, ps, () => control.UseLightDismissOverlayMode = value, bindingMode, converter, bindingSource);
 public static SplitView UseLightDismissOverlayMode<TValue>(this SplitView control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(SplitView.UseLightDismissOverlayModeProperty, ps, () => control.UseLightDismissOverlayMode = (Boolean)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static SplitView TemplateSettings(this SplitView control, IBinding binding)
-   => control._set(() => control[!SplitView.TemplateSettingsProperty] = binding);
-public static SplitView TemplateSettings(this SplitView control, SplitViewTemplateSettings value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(SplitView.TemplateSettingsProperty, ps, () => control.TemplateSettings = value, bindingMode, converter, bindingSource);
-public static SplitView TemplateSettings<TValue>(this SplitView control, TValue value, FuncValueConverter<TValue, SplitViewTemplateSettings> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(SplitView.TemplateSettingsProperty, ps, () => control.TemplateSettings = (SplitViewTemplateSettings)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class StackPanelExtensions
 {
@@ -1497,6 +1490,13 @@ public static TextBox UndoLimit(this TextBox control, IBinding binding)
 public static TextBox UndoLimit(this TextBox control, Int32 value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextBox.UndoLimitProperty, ps, () => control.UndoLimit = value, bindingMode, converter, bindingSource);
 public static TextBox UndoLimit<TValue>(this TextBox control, TValue value, FuncValueConverter<TValue, Int32> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextBox.UndoLimitProperty, ps, () => control.UndoLimit = (Int32)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
+public static partial class ThemeVariantScopeExtensions
+{
+public static ThemeVariantScope RequestedThemeVariant(this ThemeVariantScope control, IBinding binding)
+   => control._set(() => control[!ThemeVariantScope.RequestedThemeVariantProperty] = binding);
+public static ThemeVariantScope RequestedThemeVariant(this ThemeVariantScope control, ThemeVariant value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ThemeVariantScope.RequestedThemeVariantProperty, ps, () => control.RequestedThemeVariant = value, bindingMode, converter, bindingSource);
+public static ThemeVariantScope RequestedThemeVariant<TValue>(this ThemeVariantScope control, TValue value, FuncValueConverter<TValue, ThemeVariant> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ThemeVariantScope.RequestedThemeVariantProperty, ps, () => control.RequestedThemeVariant = (ThemeVariant)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+}
 public static partial class TickBarExtensions
 {
 public static TickBar Fill(this TickBar control, IBinding binding)
@@ -1574,6 +1574,10 @@ public static TopLevel TransparencyBackgroundFallback(this TopLevel control, IBi
    => control._set(() => control[!TopLevel.TransparencyBackgroundFallbackProperty] = binding);
 public static TopLevel TransparencyBackgroundFallback(this TopLevel control, IBrush value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TopLevel.TransparencyBackgroundFallbackProperty, ps, () => control.TransparencyBackgroundFallback = value, bindingMode, converter, bindingSource);
 public static TopLevel TransparencyBackgroundFallback<TValue>(this TopLevel control, TValue value, FuncValueConverter<TValue, IBrush> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TopLevel.TransparencyBackgroundFallbackProperty, ps, () => control.TransparencyBackgroundFallback = (IBrush)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static TopLevel RequestedThemeVariant(this TopLevel control, IBinding binding)
+   => control._set(() => control[!TopLevel.RequestedThemeVariantProperty] = binding);
+public static TopLevel RequestedThemeVariant(this TopLevel control, ThemeVariant value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TopLevel.RequestedThemeVariantProperty, ps, () => control.RequestedThemeVariant = value, bindingMode, converter, bindingSource);
+public static TopLevel RequestedThemeVariant<TValue>(this TopLevel control, TValue value, FuncValueConverter<TValue, ThemeVariant> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TopLevel.RequestedThemeVariantProperty, ps, () => control.RequestedThemeVariant = (ThemeVariant)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class TransitioningContentControlExtensions
 {
@@ -2051,6 +2055,10 @@ public static TextPresenter PreeditText(this TextPresenter control, IBinding bin
    => control._set(() => control[!TextPresenter.PreeditTextProperty] = binding);
 public static TextPresenter PreeditText(this TextPresenter control, String value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextPresenter.PreeditTextProperty, ps, () => control.PreeditText = value, bindingMode, converter, bindingSource);
 public static TextPresenter PreeditText<TValue>(this TextPresenter control, TValue value, FuncValueConverter<TValue, String> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextPresenter.PreeditTextProperty, ps, () => control.PreeditText = (String)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static TextPresenter CompositionRegion(this TextPresenter control, IBinding binding)
+   => control._set(() => control[!TextPresenter.CompositionRegionProperty] = binding);
+public static TextPresenter CompositionRegion(this TextPresenter control, Nullable<TextRange> value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextPresenter.CompositionRegionProperty, ps, () => control.CompositionRegion = value, bindingMode, converter, bindingSource);
+public static TextPresenter CompositionRegion<TValue>(this TextPresenter control, TValue value, FuncValueConverter<TValue, Nullable<TextRange>> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextPresenter.CompositionRegionProperty, ps, () => control.CompositionRegion = (Nullable<TextRange>)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static TextPresenter TextAlignment(this TextPresenter control, IBinding binding)
    => control._set(() => control[!TextPresenter.TextAlignmentProperty] = binding);
 public static TextPresenter TextAlignment(this TextPresenter control, TextAlignment value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TextPresenter.TextAlignmentProperty, ps, () => control.TextAlignment = value, bindingMode, converter, bindingSource);
@@ -2183,26 +2191,36 @@ public static DateTimePickerPanel ShouldLoop(this DateTimePickerPanel control, I
 public static DateTimePickerPanel ShouldLoop(this DateTimePickerPanel control, Boolean value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DateTimePickerPanel.ShouldLoopProperty, ps, () => control.ShouldLoop = value, bindingMode, converter, bindingSource);
 public static DateTimePickerPanel ShouldLoop<TValue>(this DateTimePickerPanel control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DateTimePickerPanel.ShouldLoopProperty, ps, () => control.ShouldLoop = (Boolean)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
-public static partial class FlyoutBaseExtensions
+public static partial class PopupFlyoutBaseExtensions
 {
-public static T Placement<T>(this T control, IBinding binding) where T : FlyoutBase
-   => control._set(() => control[!FlyoutBase.PlacementProperty] = binding);
-public static T Placement<T>(this T control, FlyoutPlacementMode value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : FlyoutBase
-=> control._setEx(FlyoutBase.PlacementProperty, ps, () => control.Placement = value, bindingMode, converter, bindingSource);
-public static T Placement<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, FlyoutPlacementMode> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : FlyoutBase
-=> control._setEx(FlyoutBase.PlacementProperty, ps, () => control.Placement = (FlyoutPlacementMode)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static T ShowMode<T>(this T control, IBinding binding) where T : FlyoutBase
-   => control._set(() => control[!FlyoutBase.ShowModeProperty] = binding);
-public static T ShowMode<T>(this T control, FlyoutShowMode value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : FlyoutBase
-=> control._setEx(FlyoutBase.ShowModeProperty, ps, () => control.ShowMode = value, bindingMode, converter, bindingSource);
-public static T ShowMode<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, FlyoutShowMode> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : FlyoutBase
-=> control._setEx(FlyoutBase.ShowModeProperty, ps, () => control.ShowMode = (FlyoutShowMode)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static T OverlayInputPassThroughElement<T>(this T control, IBinding binding) where T : FlyoutBase
-   => control._set(() => control[!FlyoutBase.OverlayInputPassThroughElementProperty] = binding);
-public static T OverlayInputPassThroughElement<T>(this T control, IInputElement value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : FlyoutBase
-=> control._setEx(FlyoutBase.OverlayInputPassThroughElementProperty, ps, () => control.OverlayInputPassThroughElement = value, bindingMode, converter, bindingSource);
-public static T OverlayInputPassThroughElement<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IInputElement> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : FlyoutBase
-=> control._setEx(FlyoutBase.OverlayInputPassThroughElementProperty, ps, () => control.OverlayInputPassThroughElement = (IInputElement)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static PopupFlyoutBase Placement(this PopupFlyoutBase control, IBinding binding)
+   => control._set(() => control[!PopupFlyoutBase.PlacementProperty] = binding);
+public static PopupFlyoutBase Placement(this PopupFlyoutBase control, PlacementMode value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.PlacementProperty, ps, () => control.Placement = value, bindingMode, converter, bindingSource);
+public static PopupFlyoutBase Placement<TValue>(this PopupFlyoutBase control, TValue value, FuncValueConverter<TValue, PlacementMode> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.PlacementProperty, ps, () => control.Placement = (PlacementMode)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static PopupFlyoutBase HorizontalOffset(this PopupFlyoutBase control, IBinding binding)
+   => control._set(() => control[!PopupFlyoutBase.HorizontalOffsetProperty] = binding);
+public static PopupFlyoutBase HorizontalOffset(this PopupFlyoutBase control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.HorizontalOffsetProperty, ps, () => control.HorizontalOffset = value, bindingMode, converter, bindingSource);
+public static PopupFlyoutBase HorizontalOffset<TValue>(this PopupFlyoutBase control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.HorizontalOffsetProperty, ps, () => control.HorizontalOffset = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static PopupFlyoutBase VerticalOffset(this PopupFlyoutBase control, IBinding binding)
+   => control._set(() => control[!PopupFlyoutBase.VerticalOffsetProperty] = binding);
+public static PopupFlyoutBase VerticalOffset(this PopupFlyoutBase control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.VerticalOffsetProperty, ps, () => control.VerticalOffset = value, bindingMode, converter, bindingSource);
+public static PopupFlyoutBase VerticalOffset<TValue>(this PopupFlyoutBase control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.VerticalOffsetProperty, ps, () => control.VerticalOffset = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static PopupFlyoutBase PlacementAnchor(this PopupFlyoutBase control, IBinding binding)
+   => control._set(() => control[!PopupFlyoutBase.PlacementAnchorProperty] = binding);
+public static PopupFlyoutBase PlacementAnchor(this PopupFlyoutBase control, PopupAnchor value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.PlacementAnchorProperty, ps, () => control.PlacementAnchor = value, bindingMode, converter, bindingSource);
+public static PopupFlyoutBase PlacementAnchor<TValue>(this PopupFlyoutBase control, TValue value, FuncValueConverter<TValue, PopupAnchor> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.PlacementAnchorProperty, ps, () => control.PlacementAnchor = (PopupAnchor)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static PopupFlyoutBase PlacementGravity(this PopupFlyoutBase control, IBinding binding)
+   => control._set(() => control[!PopupFlyoutBase.PlacementGravityProperty] = binding);
+public static PopupFlyoutBase PlacementGravity(this PopupFlyoutBase control, PopupGravity value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.PlacementGravityProperty, ps, () => control.PlacementGravity = value, bindingMode, converter, bindingSource);
+public static PopupFlyoutBase PlacementGravity<TValue>(this PopupFlyoutBase control, TValue value, FuncValueConverter<TValue, PopupGravity> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.PlacementGravityProperty, ps, () => control.PlacementGravity = (PopupGravity)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static PopupFlyoutBase ShowMode(this PopupFlyoutBase control, IBinding binding)
+   => control._set(() => control[!PopupFlyoutBase.ShowModeProperty] = binding);
+public static PopupFlyoutBase ShowMode(this PopupFlyoutBase control, FlyoutShowMode value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.ShowModeProperty, ps, () => control.ShowMode = value, bindingMode, converter, bindingSource);
+public static PopupFlyoutBase ShowMode<TValue>(this PopupFlyoutBase control, TValue value, FuncValueConverter<TValue, FlyoutShowMode> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.ShowModeProperty, ps, () => control.ShowMode = (FlyoutShowMode)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static PopupFlyoutBase OverlayInputPassThroughElement(this PopupFlyoutBase control, IBinding binding)
+   => control._set(() => control[!PopupFlyoutBase.OverlayInputPassThroughElementProperty] = binding);
+public static PopupFlyoutBase OverlayInputPassThroughElement(this PopupFlyoutBase control, IInputElement value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.OverlayInputPassThroughElementProperty, ps, () => control.OverlayInputPassThroughElement = value, bindingMode, converter, bindingSource);
+public static PopupFlyoutBase OverlayInputPassThroughElement<TValue>(this PopupFlyoutBase control, TValue value, FuncValueConverter<TValue, IInputElement> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PopupFlyoutBase.OverlayInputPassThroughElementProperty, ps, () => control.OverlayInputPassThroughElement = (IInputElement)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class AccessTextExtensions
 {
@@ -2210,6 +2228,13 @@ public static AccessText ShowAccessKey(this AccessText control, IBinding binding
    => control._set(() => control[!AccessText.ShowAccessKeyProperty] = binding);
 public static AccessText ShowAccessKey(this AccessText control, Boolean value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AccessText.ShowAccessKeyProperty, ps, () => control.ShowAccessKey = value, bindingMode, converter, bindingSource);
 public static AccessText ShowAccessKey<TValue>(this AccessText control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AccessText.ShowAccessKeyProperty, ps, () => control.ShowAccessKey = (Boolean)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+}
+public static partial class AdornerLayerExtensions
+{
+public static AdornerLayer DefaultFocusAdorner(this AdornerLayer control, IBinding binding)
+   => control._set(() => control[!AdornerLayer.DefaultFocusAdornerProperty] = binding);
+public static AdornerLayer DefaultFocusAdorner(this AdornerLayer control, ITemplate<Control> value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AdornerLayer.DefaultFocusAdornerProperty, ps, () => control.DefaultFocusAdorner = value, bindingMode, converter, bindingSource);
+public static AdornerLayer DefaultFocusAdorner<TValue>(this AdornerLayer control, TValue value, FuncValueConverter<TValue, ITemplate<Control>> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AdornerLayer.DefaultFocusAdornerProperty, ps, () => control.DefaultFocusAdorner = (ITemplate<Control>)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class HeaderedContentControlExtensions
 {
@@ -2277,10 +2302,10 @@ public static Popup PlacementGravity(this Popup control, IBinding binding)
    => control._set(() => control[!Popup.PlacementGravityProperty] = binding);
 public static Popup PlacementGravity(this Popup control, PopupGravity value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Popup.PlacementGravityProperty, ps, () => control.PlacementGravity = value, bindingMode, converter, bindingSource);
 public static Popup PlacementGravity<TValue>(this Popup control, TValue value, FuncValueConverter<TValue, PopupGravity> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Popup.PlacementGravityProperty, ps, () => control.PlacementGravity = (PopupGravity)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static Popup PlacementMode(this Popup control, IBinding binding)
-   => control._set(() => control[!Popup.PlacementModeProperty] = binding);
-public static Popup PlacementMode(this Popup control, PlacementMode value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Popup.PlacementModeProperty, ps, () => control.PlacementMode = value, bindingMode, converter, bindingSource);
-public static Popup PlacementMode<TValue>(this Popup control, TValue value, FuncValueConverter<TValue, PlacementMode> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Popup.PlacementModeProperty, ps, () => control.PlacementMode = (PlacementMode)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static Popup Placement(this Popup control, IBinding binding)
+   => control._set(() => control[!Popup.PlacementProperty] = binding);
+public static Popup Placement(this Popup control, PlacementMode value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Popup.PlacementProperty, ps, () => control.Placement = value, bindingMode, converter, bindingSource);
+public static Popup Placement<TValue>(this Popup control, TValue value, FuncValueConverter<TValue, PlacementMode> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Popup.PlacementProperty, ps, () => control.Placement = (PlacementMode)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static Popup PlacementRect(this Popup control, IBinding binding)
    => control._set(() => control[!Popup.PlacementRectProperty] = binding);
 public static Popup PlacementRect(this Popup control, Nullable<Rect> value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Popup.PlacementRectProperty, ps, () => control.PlacementRect = value, bindingMode, converter, bindingSource);
@@ -2391,6 +2416,18 @@ public static T SelectedItem<T>(this T control, Object value = default, BindingM
 => control._setEx(SelectingItemsControl.SelectedItemProperty, ps, () => control.SelectedItem = value, bindingMode, converter, bindingSource);
 public static T SelectedItem<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Object> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : SelectingItemsControl
 => control._setEx(SelectingItemsControl.SelectedItemProperty, ps, () => control.SelectedItem = (Object)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static T SelectedValue<T>(this T control, IBinding binding) where T : SelectingItemsControl
+   => control._set(() => control[!SelectingItemsControl.SelectedValueProperty] = binding);
+public static T SelectedValue<T>(this T control, Object value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : SelectingItemsControl
+=> control._setEx(SelectingItemsControl.SelectedValueProperty, ps, () => control.SelectedValue = value, bindingMode, converter, bindingSource);
+public static T SelectedValue<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Object> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : SelectingItemsControl
+=> control._setEx(SelectingItemsControl.SelectedValueProperty, ps, () => control.SelectedValue = (Object)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static T SelectedValueBinding<T>(this T control, IBinding binding) where T : SelectingItemsControl
+   => control._set(() => control[!SelectingItemsControl.SelectedValueBindingProperty] = binding);
+public static T SelectedValueBinding<T>(this T control, IBinding value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : SelectingItemsControl
+=> control._setEx(SelectingItemsControl.SelectedValueBindingProperty, ps, () => control.SelectedValueBinding = value, bindingMode, converter, bindingSource);
+public static T SelectedValueBinding<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IBinding> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : SelectingItemsControl
+=> control._setEx(SelectingItemsControl.SelectedValueBindingProperty, ps, () => control.SelectedValueBinding = (IBinding)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static T IsTextSearchEnabled<T>(this T control, IBinding binding) where T : SelectingItemsControl
    => control._set(() => control[!SelectingItemsControl.IsTextSearchEnabledProperty] = binding);
 public static T IsTextSearchEnabled<T>(this T control, Boolean value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : SelectingItemsControl
@@ -2901,6 +2938,13 @@ public static DashStyle Offset(this DashStyle control, IBinding binding)
 public static DashStyle Offset(this DashStyle control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DashStyle.OffsetProperty, ps, () => control.Offset = value, bindingMode, converter, bindingSource);
 public static DashStyle Offset<TValue>(this DashStyle control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DashStyle.OffsetProperty, ps, () => control.Offset = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
+public static partial class DrawingBrushExtensions
+{
+public static DrawingBrush Drawing(this DrawingBrush control, IBinding binding)
+   => control._set(() => control[!DrawingBrush.DrawingProperty] = binding);
+public static DrawingBrush Drawing(this DrawingBrush control, Drawing value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DrawingBrush.DrawingProperty, ps, () => control.Drawing = value, bindingMode, converter, bindingSource);
+public static DrawingBrush Drawing<TValue>(this DrawingBrush control, TValue value, FuncValueConverter<TValue, Drawing> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DrawingBrush.DrawingProperty, ps, () => control.Drawing = (Drawing)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+}
 public static partial class DrawingGroupExtensions
 {
 public static DrawingGroup Opacity(this DrawingGroup control, IBinding binding)
@@ -3005,8 +3049,8 @@ public static GeometryDrawing Brush(this GeometryDrawing control, IBrush value =
 public static GeometryDrawing Brush<TValue>(this GeometryDrawing control, TValue value, FuncValueConverter<TValue, IBrush> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(GeometryDrawing.BrushProperty, ps, () => control.Brush = (IBrush)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static GeometryDrawing Pen(this GeometryDrawing control, IBinding binding)
    => control._set(() => control[!GeometryDrawing.PenProperty] = binding);
-public static GeometryDrawing Pen(this GeometryDrawing control, Pen value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(GeometryDrawing.PenProperty, ps, () => control.Pen = value, bindingMode, converter, bindingSource);
-public static GeometryDrawing Pen<TValue>(this GeometryDrawing control, TValue value, FuncValueConverter<TValue, Pen> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(GeometryDrawing.PenProperty, ps, () => control.Pen = (Pen)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static GeometryDrawing Pen(this GeometryDrawing control, IPen value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(GeometryDrawing.PenProperty, ps, () => control.Pen = value, bindingMode, converter, bindingSource);
+public static GeometryDrawing Pen<TValue>(this GeometryDrawing control, TValue value, FuncValueConverter<TValue, IPen> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(GeometryDrawing.PenProperty, ps, () => control.Pen = (IPen)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class GeometryGroupExtensions
 {

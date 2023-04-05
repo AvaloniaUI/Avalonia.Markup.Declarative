@@ -23,7 +23,8 @@ public class SaveFilePickerService
         options.ShowOverwritePrompt = true;
 
         var result = await _spProviderFunc().SaveFilePickerAsync(options);
-        if (result is { CanOpenWrite: true })
+
+        if (result is not null)
         {
             await using var stream = await result.OpenWriteAsync();
             await getImageDataAsStream.CopyToAsync(stream);
