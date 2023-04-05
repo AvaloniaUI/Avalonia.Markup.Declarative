@@ -120,8 +120,8 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
 
         var valueTypeSource = genericName.TypeArgumentList.Arguments.Last();
 
-        var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null,"
-                         + $" [CallerArgumentExpression(\"value\")] string ps = null";
+        var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null,"
+                         + $" [CallerArgumentExpression(\"value\")] string? ps = null";
 
         var extensionText =
             $"public static {controlTypeName} {extensionName}"
@@ -138,8 +138,8 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
 
         var valueTypeSource = GetPropertyTypeName(property, compilation);
 
-        var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null,"
-                         + $" [CallerArgumentExpression(\"value\")] string ps = null";
+        var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null,"
+                         + $" [CallerArgumentExpression(\"value\")] string? ps = null";
 
         var extensionText =
             $"public static {controlTypeName} {extensionName}"
