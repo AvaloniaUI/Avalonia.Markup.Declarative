@@ -35,6 +35,7 @@ public class Config
     {
         typeof(Control),
         typeof(FlyoutBase),
+        typeof(PopupFlyoutBase),
         typeof(Layoutable),
         typeof(Panel),
         typeof(Visual),
