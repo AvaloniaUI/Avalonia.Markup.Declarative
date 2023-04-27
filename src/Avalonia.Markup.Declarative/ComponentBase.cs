@@ -16,9 +16,8 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
 
     protected override void OnCreated()
     {
-        InitStateMembers();
-
         InjectServices();
+        InitStateMembers();
     }
 
     private void InjectServices()
