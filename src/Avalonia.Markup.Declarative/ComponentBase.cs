@@ -101,7 +101,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             _dependentViews.Add(view);
     }
 
-    protected IBinding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string bindingString = null)
+    protected Binding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string bindingString = null)
     {
         object bindingSource = this;
         var useStateValueAsSource = false;
