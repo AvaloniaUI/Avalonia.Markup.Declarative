@@ -22,7 +22,8 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
 
     private void InjectServices()
     {
-        var serviceProps = GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
+        var componentType = GetType();
+        var serviceProps = componentType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
             .Where(x => x.GetCustomAttribute(typeof(InjectAttribute)) != null)
             .ToArray();
 
@@ -36,7 +37,10 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             }
             else
             {
-                throw new InvalidOperationException($"Can't inject {service.GetType()} service. Ensure that target property: {GetType().Name}.{propertyInfo.Name} has public setter");
+                if (componentType.GetField($"<{propertyInfo.Name}>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance) is { } backingField)
+                    backingField.SetValue(this, service);
+                else
+                    throw new InvalidOperationException($"Can't inject {service.GetType()} service. Ensure that target property: {GetType().Name}.{propertyInfo.Name} has public setter or it's an auto-property");
             }
         }
     }
