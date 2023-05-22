@@ -308,7 +308,7 @@ public static class ControlPropertyExtensions
     public static TElement AddItem<TElement>(this TElement menuFlyout, MenuItem menuItem)
         where TElement : MenuFlyout
     {
-        (menuFlyout?.Items as AvaloniaList<object>)?.Add(menuItem);
+        (menuFlyout?.Items)?.Add(menuItem);
         return menuFlyout;
     }
 
@@ -328,7 +328,7 @@ public static class ControlPropertyExtensions
         if (commandParameter != null)
             item.CommandParameter = commandParameter;
 
-        (menuFlyout?.Items as AvaloniaList<object>)?.Add(item);
+        (menuFlyout?.Items)?.Add(item);
         return menuFlyout;
     }
 

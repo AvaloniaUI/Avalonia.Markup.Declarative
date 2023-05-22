@@ -7,7 +7,7 @@ public class ItemControlSampleView : ComponentBase
             .Children(
                 new ListBox()
                     .HorizontalAlignment(Avalonia.Layout.HorizontalAlignment.Center)
-                    .Items(Bind(Items))
+                    .ItemsSource(Bind(Items))
                     .ItemTemplate<string>(s =>
                         new TextBlock()
                             .Background(Brushes.Beige)

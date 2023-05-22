@@ -10,6 +10,7 @@ public class MainView : ViewBase
     protected override object Build() =>
         new TabControl()
             .SelectedIndex(0)
+            .TabStripPlacement(Dock.Left)
             .Items(
                 new TabItem()
                     .Header("Hot reload")

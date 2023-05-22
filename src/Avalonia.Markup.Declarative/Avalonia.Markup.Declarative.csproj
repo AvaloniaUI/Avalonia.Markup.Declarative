@@ -4,12 +4,12 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<IsPackable>true</IsPackable>
 		<LangVersion>latest</LangVersion>
-		<Version>11.0.0-preview6</Version>
+		<Version>11.0.0-preview8</Version>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="11.0.0-preview6" />
+		<PackageReference Include="Avalonia" Version="11.0.0-preview8" />
 	</ItemGroup>
 
 	<ItemGroup>

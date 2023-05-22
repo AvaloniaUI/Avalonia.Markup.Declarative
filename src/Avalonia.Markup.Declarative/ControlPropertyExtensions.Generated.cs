@@ -105,10 +105,10 @@ public static AutoCompleteBox TextSelector(this AutoCompleteBox control, IBindin
    => control._set(() => control[!AutoCompleteBox.TextSelectorProperty] = binding);
 public static AutoCompleteBox TextSelector(this AutoCompleteBox control, AutoCompleteSelector<String> value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AutoCompleteBox.TextSelectorProperty, ps, () => control.TextSelector = value, bindingMode, converter, bindingSource);
 public static AutoCompleteBox TextSelector<TValue>(this AutoCompleteBox control, TValue value, FuncValueConverter<TValue, AutoCompleteSelector<String>> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AutoCompleteBox.TextSelectorProperty, ps, () => control.TextSelector = (AutoCompleteSelector<String>)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static AutoCompleteBox Items(this AutoCompleteBox control, IBinding binding)
-   => control._set(() => control[!AutoCompleteBox.ItemsProperty] = binding);
-public static AutoCompleteBox Items(this AutoCompleteBox control, IEnumerable value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AutoCompleteBox.ItemsProperty, ps, () => control.Items = value, bindingMode, converter, bindingSource);
-public static AutoCompleteBox Items<TValue>(this AutoCompleteBox control, TValue value, FuncValueConverter<TValue, IEnumerable> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AutoCompleteBox.ItemsProperty, ps, () => control.Items = (IEnumerable)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static AutoCompleteBox ItemsSource(this AutoCompleteBox control, IBinding binding)
+   => control._set(() => control[!AutoCompleteBox.ItemsSourceProperty] = binding);
+public static AutoCompleteBox ItemsSource(this AutoCompleteBox control, IEnumerable value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AutoCompleteBox.ItemsSourceProperty, ps, () => control.ItemsSource = value, bindingMode, converter, bindingSource);
+public static AutoCompleteBox ItemsSource<TValue>(this AutoCompleteBox control, TValue value, FuncValueConverter<TValue, IEnumerable> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AutoCompleteBox.ItemsSourceProperty, ps, () => control.ItemsSource = (IEnumerable)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static AutoCompleteBox AsyncPopulator(this AutoCompleteBox control, IBinding binding)
    => control._set(() => control[!AutoCompleteBox.AsyncPopulatorProperty] = binding);
 public static AutoCompleteBox AsyncPopulator(this AutoCompleteBox control, Func<String,CancellationToken,Task<IEnumerable<Object>>> value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AutoCompleteBox.AsyncPopulatorProperty, ps, () => control.AsyncPopulator = value, bindingMode, converter, bindingSource);
@@ -660,10 +660,10 @@ public static Flyout FlyoutPresenterTheme<TValue>(this Flyout control, TValue va
 }
 public static partial class MenuFlyoutExtensions
 {
-public static MenuFlyout Items(this MenuFlyout control, IBinding binding)
-   => control._set(() => control[!MenuFlyout.ItemsProperty] = binding);
-public static MenuFlyout Items(this MenuFlyout control, IEnumerable value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuFlyout.ItemsProperty, ps, () => control.Items = value, bindingMode, converter, bindingSource);
-public static MenuFlyout Items<TValue>(this MenuFlyout control, TValue value, FuncValueConverter<TValue, IEnumerable> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuFlyout.ItemsProperty, ps, () => control.Items = (IEnumerable)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static MenuFlyout ItemsSource(this MenuFlyout control, IBinding binding)
+   => control._set(() => control[!MenuFlyout.ItemsSourceProperty] = binding);
+public static MenuFlyout ItemsSource(this MenuFlyout control, IEnumerable value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuFlyout.ItemsSourceProperty, ps, () => control.ItemsSource = value, bindingMode, converter, bindingSource);
+public static MenuFlyout ItemsSource<TValue>(this MenuFlyout control, TValue value, FuncValueConverter<TValue, IEnumerable> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuFlyout.ItemsSourceProperty, ps, () => control.ItemsSource = (IEnumerable)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static MenuFlyout ItemTemplate(this MenuFlyout control, IBinding binding)
    => control._set(() => control[!MenuFlyout.ItemTemplateProperty] = binding);
 public static MenuFlyout ItemTemplate(this MenuFlyout control, IDataTemplate value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuFlyout.ItemTemplateProperty, ps, () => control.ItemTemplate = value, bindingMode, converter, bindingSource);
@@ -728,12 +728,6 @@ public static Image StretchDirection<TValue>(this Image control, TValue value, F
 }
 public static partial class ItemsControlExtensions
 {
-public static T Items<T>(this T control, IBinding binding) where T : ItemsControl
-   => control._set(() => control[!ItemsControl.ItemsProperty] = binding);
-public static T Items<T>(this T control, IList value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
-=> control._setEx(ItemsControl.ItemsProperty, ps, () => control.Items = value, bindingMode, converter, bindingSource);
-public static T Items<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IList> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
-=> control._setEx(ItemsControl.ItemsProperty, ps, () => control.Items = (IList)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static T ItemContainerTheme<T>(this T control, IBinding binding) where T : ItemsControl
    => control._set(() => control[!ItemsControl.ItemContainerThemeProperty] = binding);
 public static T ItemContainerTheme<T>(this T control, ControlTheme value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : ItemsControl
@@ -870,10 +864,6 @@ public static MenuItem InputGesture(this MenuItem control, IBinding binding)
    => control._set(() => control[!MenuItem.InputGestureProperty] = binding);
 public static MenuItem InputGesture(this MenuItem control, KeyGesture value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuItem.InputGestureProperty, ps, () => control.InputGesture = value, bindingMode, converter, bindingSource);
 public static MenuItem InputGesture<TValue>(this MenuItem control, TValue value, FuncValueConverter<TValue, KeyGesture> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuItem.InputGestureProperty, ps, () => control.InputGesture = (KeyGesture)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static MenuItem IsSelected(this MenuItem control, IBinding binding)
-   => control._set(() => control[!MenuItem.IsSelectedProperty] = binding);
-public static MenuItem IsSelected(this MenuItem control, Boolean value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuItem.IsSelectedProperty, ps, () => control.IsSelected = value, bindingMode, converter, bindingSource);
-public static MenuItem IsSelected<TValue>(this MenuItem control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuItem.IsSelectedProperty, ps, () => control.IsSelected = (Boolean)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static MenuItem IsSubMenuOpen(this MenuItem control, IBinding binding)
    => control._set(() => control[!MenuItem.IsSubMenuOpenProperty] = binding);
 public static MenuItem IsSubMenuOpen(this MenuItem control, Boolean value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(MenuItem.IsSubMenuOpenProperty, ps, () => control.IsSubMenuOpen = value, bindingMode, converter, bindingSource);
@@ -2278,6 +2268,10 @@ public static HeaderedSelectingItemsControl Header(this HeaderedSelectingItemsCo
    => control._set(() => control[!HeaderedSelectingItemsControl.HeaderProperty] = binding);
 public static HeaderedSelectingItemsControl Header(this HeaderedSelectingItemsControl control, Object value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(HeaderedSelectingItemsControl.HeaderProperty, ps, () => control.Header = value, bindingMode, converter, bindingSource);
 public static HeaderedSelectingItemsControl Header<TValue>(this HeaderedSelectingItemsControl control, TValue value, FuncValueConverter<TValue, Object> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(HeaderedSelectingItemsControl.HeaderProperty, ps, () => control.Header = (Object)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static HeaderedSelectingItemsControl HeaderTemplate(this HeaderedSelectingItemsControl control, IBinding binding)
+   => control._set(() => control[!HeaderedSelectingItemsControl.HeaderTemplateProperty] = binding);
+public static HeaderedSelectingItemsControl HeaderTemplate(this HeaderedSelectingItemsControl control, IDataTemplate value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(HeaderedSelectingItemsControl.HeaderTemplateProperty, ps, () => control.HeaderTemplate = value, bindingMode, converter, bindingSource);
+public static HeaderedSelectingItemsControl HeaderTemplate<TValue>(this HeaderedSelectingItemsControl control, TValue value, FuncValueConverter<TValue, IDataTemplate> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(HeaderedSelectingItemsControl.HeaderTemplateProperty, ps, () => control.HeaderTemplate = (IDataTemplate)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class OverlayPopupHostExtensions
 {
@@ -2667,6 +2661,12 @@ public static T OpacityMask<T>(this T control, IBrush value = default, BindingMo
 => control._setEx(Visual.OpacityMaskProperty, ps, () => control.OpacityMask = value, bindingMode, converter, bindingSource);
 public static T OpacityMask<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IBrush> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : Visual
 => control._setEx(Visual.OpacityMaskProperty, ps, () => control.OpacityMask = (IBrush)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static T Effect<T>(this T control, IBinding binding) where T : Visual
+   => control._set(() => control[!Visual.EffectProperty] = binding);
+public static T Effect<T>(this T control, IEffect value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : Visual
+=> control._setEx(Visual.EffectProperty, ps, () => control.Effect = value, bindingMode, converter, bindingSource);
+public static T Effect<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IEffect> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : Visual
+=> control._setEx(Visual.EffectProperty, ps, () => control.Effect = (IEffect)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static T RenderTransform<T>(this T control, IBinding binding) where T : Visual
    => control._set(() => control[!Visual.RenderTransformProperty] = binding);
 public static T RenderTransform<T>(this T control, ITransform value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null) where T : Visual
@@ -2989,6 +2989,50 @@ public static DrawingImage Drawing(this DrawingImage control, IBinding binding)
 public static DrawingImage Drawing(this DrawingImage control, Drawing value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DrawingImage.DrawingProperty, ps, () => control.Drawing = value, bindingMode, converter, bindingSource);
 public static DrawingImage Drawing<TValue>(this DrawingImage control, TValue value, FuncValueConverter<TValue, Drawing> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DrawingImage.DrawingProperty, ps, () => control.Drawing = (Drawing)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
+public static partial class BlurEffectExtensions
+{
+public static BlurEffect Radius(this BlurEffect control, IBinding binding)
+   => control._set(() => control[!BlurEffect.RadiusProperty] = binding);
+public static BlurEffect Radius(this BlurEffect control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(BlurEffect.RadiusProperty, ps, () => control.Radius = value, bindingMode, converter, bindingSource);
+public static BlurEffect Radius<TValue>(this BlurEffect control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(BlurEffect.RadiusProperty, ps, () => control.Radius = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+}
+public static partial class DropShadowEffectBaseExtensions
+{
+public static DropShadowEffectBase BlurRadius(this DropShadowEffectBase control, IBinding binding)
+   => control._set(() => control[!DropShadowEffectBase.BlurRadiusProperty] = binding);
+public static DropShadowEffectBase BlurRadius(this DropShadowEffectBase control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowEffectBase.BlurRadiusProperty, ps, () => control.BlurRadius = value, bindingMode, converter, bindingSource);
+public static DropShadowEffectBase BlurRadius<TValue>(this DropShadowEffectBase control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowEffectBase.BlurRadiusProperty, ps, () => control.BlurRadius = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static DropShadowEffectBase Color(this DropShadowEffectBase control, IBinding binding)
+   => control._set(() => control[!DropShadowEffectBase.ColorProperty] = binding);
+public static DropShadowEffectBase Color(this DropShadowEffectBase control, Color value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowEffectBase.ColorProperty, ps, () => control.Color = value, bindingMode, converter, bindingSource);
+public static DropShadowEffectBase Color<TValue>(this DropShadowEffectBase control, TValue value, FuncValueConverter<TValue, Color> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowEffectBase.ColorProperty, ps, () => control.Color = (Color)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static DropShadowEffectBase Opacity(this DropShadowEffectBase control, IBinding binding)
+   => control._set(() => control[!DropShadowEffectBase.OpacityProperty] = binding);
+public static DropShadowEffectBase Opacity(this DropShadowEffectBase control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowEffectBase.OpacityProperty, ps, () => control.Opacity = value, bindingMode, converter, bindingSource);
+public static DropShadowEffectBase Opacity<TValue>(this DropShadowEffectBase control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowEffectBase.OpacityProperty, ps, () => control.Opacity = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+}
+public static partial class DropShadowEffectExtensions
+{
+public static DropShadowEffect OffsetX(this DropShadowEffect control, IBinding binding)
+   => control._set(() => control[!DropShadowEffect.OffsetXProperty] = binding);
+public static DropShadowEffect OffsetX(this DropShadowEffect control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowEffect.OffsetXProperty, ps, () => control.OffsetX = value, bindingMode, converter, bindingSource);
+public static DropShadowEffect OffsetX<TValue>(this DropShadowEffect control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowEffect.OffsetXProperty, ps, () => control.OffsetX = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static DropShadowEffect OffsetY(this DropShadowEffect control, IBinding binding)
+   => control._set(() => control[!DropShadowEffect.OffsetYProperty] = binding);
+public static DropShadowEffect OffsetY(this DropShadowEffect control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowEffect.OffsetYProperty, ps, () => control.OffsetY = value, bindingMode, converter, bindingSource);
+public static DropShadowEffect OffsetY<TValue>(this DropShadowEffect control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowEffect.OffsetYProperty, ps, () => control.OffsetY = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+}
+public static partial class DropShadowDirectionEffectExtensions
+{
+public static DropShadowDirectionEffect ShadowDepth(this DropShadowDirectionEffect control, IBinding binding)
+   => control._set(() => control[!DropShadowDirectionEffect.ShadowDepthProperty] = binding);
+public static DropShadowDirectionEffect ShadowDepth(this DropShadowDirectionEffect control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowDirectionEffect.ShadowDepthProperty, ps, () => control.ShadowDepth = value, bindingMode, converter, bindingSource);
+public static DropShadowDirectionEffect ShadowDepth<TValue>(this DropShadowDirectionEffect control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowDirectionEffect.ShadowDepthProperty, ps, () => control.ShadowDepth = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static DropShadowDirectionEffect Direction(this DropShadowDirectionEffect control, IBinding binding)
+   => control._set(() => control[!DropShadowDirectionEffect.DirectionProperty] = binding);
+public static DropShadowDirectionEffect Direction(this DropShadowDirectionEffect control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowDirectionEffect.DirectionProperty, ps, () => control.Direction = value, bindingMode, converter, bindingSource);
+public static DropShadowDirectionEffect Direction<TValue>(this DropShadowDirectionEffect control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(DropShadowDirectionEffect.DirectionProperty, ps, () => control.Direction = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+}
 public static partial class EllipseGeometryExtensions
 {
 public static EllipseGeometry Rect(this EllipseGeometry control, IBinding binding)
@@ -3249,8 +3293,8 @@ public static partial class PolylineGeometryExtensions
 {
 public static PolylineGeometry Points(this PolylineGeometry control, IBinding binding)
    => control._set(() => control[!PolylineGeometry.PointsProperty] = binding);
-public static PolylineGeometry Points(this PolylineGeometry control, Points value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PolylineGeometry.PointsProperty, ps, () => control.Points = value, bindingMode, converter, bindingSource);
-public static PolylineGeometry Points<TValue>(this PolylineGeometry control, TValue value, FuncValueConverter<TValue, Points> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PolylineGeometry.PointsProperty, ps, () => control.Points = (Points)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static PolylineGeometry Points(this PolylineGeometry control, IList<Point> value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PolylineGeometry.PointsProperty, ps, () => control.Points = value, bindingMode, converter, bindingSource);
+public static PolylineGeometry Points<TValue>(this PolylineGeometry control, TValue value, FuncValueConverter<TValue, IList<Point>> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PolylineGeometry.PointsProperty, ps, () => control.Points = (IList<Point>)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static PolylineGeometry IsFilled(this PolylineGeometry control, IBinding binding)
    => control._set(() => control[!PolylineGeometry.IsFilledProperty] = binding);
 public static PolylineGeometry IsFilled(this PolylineGeometry control, Boolean value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PolylineGeometry.IsFilledProperty, ps, () => control.IsFilled = value, bindingMode, converter, bindingSource);
@@ -3260,8 +3304,8 @@ public static partial class PolyLineSegmentExtensions
 {
 public static PolyLineSegment Points(this PolyLineSegment control, IBinding binding)
    => control._set(() => control[!PolyLineSegment.PointsProperty] = binding);
-public static PolyLineSegment Points(this PolyLineSegment control, Points value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PolyLineSegment.PointsProperty, ps, () => control.Points = value, bindingMode, converter, bindingSource);
-public static PolyLineSegment Points<TValue>(this PolyLineSegment control, TValue value, FuncValueConverter<TValue, Points> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PolyLineSegment.PointsProperty, ps, () => control.Points = (Points)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static PolyLineSegment Points(this PolyLineSegment control, IList<Point> value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PolyLineSegment.PointsProperty, ps, () => control.Points = value, bindingMode, converter, bindingSource);
+public static PolyLineSegment Points<TValue>(this PolyLineSegment control, TValue value, FuncValueConverter<TValue, IList<Point>> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(PolyLineSegment.PointsProperty, ps, () => control.Points = (IList<Point>)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class QuadraticBezierSegmentExtensions
 {

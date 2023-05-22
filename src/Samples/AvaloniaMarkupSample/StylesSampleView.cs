@@ -18,7 +18,7 @@ public class StylesSampleView : ViewBase
                 new TabControl()
                     .ItemTemplate<TabVm>(tab => new TextBlock().Text(tab.Title))
                     .ContentTemplate(new FuncDataTemplate<TabVm>((item, ns) => new TextBlock().Text(item?.Content)))
-                    .Items(Tabs)
+                    .ItemsSource(Tabs)
                     .Styles(
                         new Style<TabItem>()
                             .IsEnabled(new Binding(nameof(TabVm.Enabled)))

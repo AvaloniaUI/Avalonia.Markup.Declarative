@@ -243,6 +243,8 @@ public static partial class TopLevelEventsExtensions
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Opened += h);
     public static TopLevel OnClosed(this TopLevel control, Action action) => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Closed += h);
+    public static TopLevel OnScalingChanged(this TopLevel control, Action action) => 
+        control._setEvent((EventHandler) ((_, args) => action()), h => control.ScalingChanged += h);
     public static TopLevel OnBackRequested(this TopLevel control, Action<RoutedEventArgs> action) => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.BackRequested += h);
 }
@@ -276,6 +278,8 @@ public static partial class WindowBaseEventsExtensions
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Deactivated += h);
     public static WindowBase OnPositionChanged(this WindowBase control, Action<PixelPointEventArgs> action) => 
         control._setEvent((EventHandler<PixelPointEventArgs>) ((_, args) => action(args)), h => control.PositionChanged += h);
+    public static WindowBase OnResized(this WindowBase control, Action<WindowResizedEventArgs> action) => 
+        control._setEvent((EventHandler<WindowResizedEventArgs>) ((_, args) => action(args)), h => control.Resized += h);
 }
 public static partial class ItemsPresenterEventsExtensions
 {
@@ -475,6 +479,11 @@ public static partial class DashStyleEventsExtensions
 public static partial class DrawingImageEventsExtensions
 {
     public static DrawingImage OnInvalidated(this DrawingImage control, Action action) => 
+        control._setEvent((EventHandler) ((_, args) => action()), h => control.Invalidated += h);
+}
+public static partial class EffectEventsExtensions
+{
+    public static Effect OnInvalidated(this Effect control, Action action) => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Invalidated += h);
 }
 public static partial class ExperimentalAcrylicMaterialEventsExtensions

@@ -112,6 +112,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
             OnBeforeReload();
             Child = null;
             VisualChildren.Clear();
+            _nameScope = null;
 
             OnCreatedCore();
             Initialize();

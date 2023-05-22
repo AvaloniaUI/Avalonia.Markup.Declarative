@@ -9,7 +9,7 @@ namespace AvaloniaExtensionGenerator;
 
 public class Config
 {
-    public string[] InitialNamespaces = { 
+    public string[] InitialNamespaces = {
         "Avalonia.Data",
         "Avalonia.Data.Converters",
         "System.Numerics",
@@ -23,10 +23,12 @@ public class Config
         typeof(Dock),
     };
 
-    public Type[] Exclude = new[]
-    {
-        typeof(ProgressBar.ProgressBarTemplateProperties)
-    };
+    public Type[] Exclude = Array.Empty<Type>();
+
+    //    new[]
+    //{
+    //    typeof(ProgressBar.ProgressBarTemplateSettings)
+    //};
 
     /// <summary>
     /// Those types will be generated as Generic extension methods instead of using direct control type
