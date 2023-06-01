@@ -13,6 +13,7 @@ using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
+using Avalonia.Input.GestureRecognizers;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.TextFormatting;
@@ -118,22 +119,6 @@ public static Style<Border> BoxShadow(this Style<Border> style, BoxShadows value
 => style._addSetter(Border.BoxShadowProperty, value);
 public static Style<Border> BoxShadow(this Style<Border> style, IBinding binding)
 => style._addSetter(Border.BoxShadowProperty, binding);
-public static Style<Border> BorderDashOffset(this Style<Border> style, Double value)
-=> style._addSetter(Border.BorderDashOffsetProperty, value);
-public static Style<Border> BorderDashOffset(this Style<Border> style, IBinding binding)
-=> style._addSetter(Border.BorderDashOffsetProperty, binding);
-public static Style<Border> BorderDashArray(this Style<Border> style, AvaloniaList<Double> value)
-=> style._addSetter(Border.BorderDashArrayProperty, value);
-public static Style<Border> BorderDashArray(this Style<Border> style, IBinding binding)
-=> style._addSetter(Border.BorderDashArrayProperty, binding);
-public static Style<Border> BorderLineCap(this Style<Border> style, PenLineCap value)
-=> style._addSetter(Border.BorderLineCapProperty, value);
-public static Style<Border> BorderLineCap(this Style<Border> style, IBinding binding)
-=> style._addSetter(Border.BorderLineCapProperty, binding);
-public static Style<Border> BorderLineJoin(this Style<Border> style, PenLineJoin value)
-=> style._addSetter(Border.BorderLineJoinProperty, value);
-public static Style<Border> BorderLineJoin(this Style<Border> style, IBinding binding)
-=> style._addSetter(Border.BorderLineJoinProperty, binding);
 }
 public static partial class ButtonExtensions
 {
@@ -844,14 +829,6 @@ public static Style<ProgressBar> Orientation(this Style<ProgressBar> style, Orie
 => style._addSetter(ProgressBar.OrientationProperty, value);
 public static Style<ProgressBar> Orientation(this Style<ProgressBar> style, IBinding binding)
 => style._addSetter(ProgressBar.OrientationProperty, binding);
-public static Style<ProgressBar> IndeterminateStartingOffset(this Style<ProgressBar> style, Double value)
-=> style._addSetter(ProgressBar.IndeterminateStartingOffsetProperty, value);
-public static Style<ProgressBar> IndeterminateStartingOffset(this Style<ProgressBar> style, IBinding binding)
-=> style._addSetter(ProgressBar.IndeterminateStartingOffsetProperty, binding);
-public static Style<ProgressBar> IndeterminateEndingOffset(this Style<ProgressBar> style, Double value)
-=> style._addSetter(ProgressBar.IndeterminateEndingOffsetProperty, value);
-public static Style<ProgressBar> IndeterminateEndingOffset(this Style<ProgressBar> style, IBinding binding)
-=> style._addSetter(ProgressBar.IndeterminateEndingOffsetProperty, binding);
 }
 public static partial class RefreshContainerExtensions
 {
@@ -891,6 +868,10 @@ public static Style<RepeatButton> Delay(this Style<RepeatButton> style, IBinding
 }
 public static partial class ScrollViewerExtensions
 {
+public static Style<ScrollViewer> BringIntoViewOnFocusChange(this Style<ScrollViewer> style, Boolean value)
+=> style._addSetter(ScrollViewer.BringIntoViewOnFocusChangeProperty, value);
+public static Style<ScrollViewer> BringIntoViewOnFocusChange(this Style<ScrollViewer> style, IBinding binding)
+=> style._addSetter(ScrollViewer.BringIntoViewOnFocusChangeProperty, binding);
 public static Style<ScrollViewer> Offset(this Style<ScrollViewer> style, Vector value)
 => style._addSetter(ScrollViewer.OffsetProperty, value);
 public static Style<ScrollViewer> Offset(this Style<ScrollViewer> style, IBinding binding)
@@ -1340,7 +1321,7 @@ public static Style<ToggleSwitch> OnContentTemplate(this Style<ToggleSwitch> sty
 }
 public static partial class TopLevelExtensions
 {
-public static Style<TopLevel> TransparencyLevelHint(this Style<TopLevel> style, WindowTransparencyLevel value)
+public static Style<TopLevel> TransparencyLevelHint(this Style<TopLevel> style, IReadOnlyList<WindowTransparencyLevel> value)
 => style._addSetter(TopLevel.TransparencyLevelHintProperty, value);
 public static Style<TopLevel> TransparencyLevelHint(this Style<TopLevel> style, IBinding binding)
 => style._addSetter(TopLevel.TransparencyLevelHintProperty, binding);
@@ -2374,5 +2355,24 @@ public static Style<T> TabIndex<T>(this Style<T> style, Int32 value) where T : I
 => style._addSetter(InputElement.TabIndexProperty, value);
 public static Style<T> TabIndex<T>(this Style<T> style, IBinding binding) where T : InputElement
 => style._addSetter(InputElement.TabIndexProperty, binding);
+}
+public static partial class ScrollGestureRecognizerExtensions
+{
+public static Style<ScrollGestureRecognizer> CanHorizontallyScroll(this Style<ScrollGestureRecognizer> style, Boolean value)
+=> style._addSetter(ScrollGestureRecognizer.CanHorizontallyScrollProperty, value);
+public static Style<ScrollGestureRecognizer> CanHorizontallyScroll(this Style<ScrollGestureRecognizer> style, IBinding binding)
+=> style._addSetter(ScrollGestureRecognizer.CanHorizontallyScrollProperty, binding);
+public static Style<ScrollGestureRecognizer> CanVerticallyScroll(this Style<ScrollGestureRecognizer> style, Boolean value)
+=> style._addSetter(ScrollGestureRecognizer.CanVerticallyScrollProperty, value);
+public static Style<ScrollGestureRecognizer> CanVerticallyScroll(this Style<ScrollGestureRecognizer> style, IBinding binding)
+=> style._addSetter(ScrollGestureRecognizer.CanVerticallyScrollProperty, binding);
+public static Style<ScrollGestureRecognizer> IsScrollInertiaEnabled(this Style<ScrollGestureRecognizer> style, Boolean value)
+=> style._addSetter(ScrollGestureRecognizer.IsScrollInertiaEnabledProperty, value);
+public static Style<ScrollGestureRecognizer> IsScrollInertiaEnabled(this Style<ScrollGestureRecognizer> style, IBinding binding)
+=> style._addSetter(ScrollGestureRecognizer.IsScrollInertiaEnabledProperty, binding);
+public static Style<ScrollGestureRecognizer> ScrollStartDistance(this Style<ScrollGestureRecognizer> style, Int32 value)
+=> style._addSetter(ScrollGestureRecognizer.ScrollStartDistanceProperty, value);
+public static Style<ScrollGestureRecognizer> ScrollStartDistance(this Style<ScrollGestureRecognizer> style, IBinding binding)
+=> style._addSetter(ScrollGestureRecognizer.ScrollStartDistanceProperty, binding);
 }
 

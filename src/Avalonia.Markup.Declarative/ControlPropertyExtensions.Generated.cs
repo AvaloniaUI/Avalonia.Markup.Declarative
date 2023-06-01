@@ -155,22 +155,6 @@ public static Border BoxShadow(this Border control, BoxShadow shadow)
    => control._set(() => control.BoxShadow = new BoxShadows(shadow));
 public static Border BoxShadow(this Border control, BoxShadow first, BoxShadow[] rest)
    => control._set(() => control.BoxShadow = new BoxShadows(first, rest));
-public static Border BorderDashOffset(this Border control, IBinding binding)
-   => control._set(() => control[!Border.BorderDashOffsetProperty] = binding);
-public static Border BorderDashOffset(this Border control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Border.BorderDashOffsetProperty, ps, () => control.BorderDashOffset = value, bindingMode, converter, bindingSource);
-public static Border BorderDashOffset<TValue>(this Border control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Border.BorderDashOffsetProperty, ps, () => control.BorderDashOffset = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static Border BorderDashArray(this Border control, IBinding binding)
-   => control._set(() => control[!Border.BorderDashArrayProperty] = binding);
-public static Border BorderDashArray(this Border control, AvaloniaList<Double> value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Border.BorderDashArrayProperty, ps, () => control.BorderDashArray = value, bindingMode, converter, bindingSource);
-public static Border BorderDashArray<TValue>(this Border control, TValue value, FuncValueConverter<TValue, AvaloniaList<Double>> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Border.BorderDashArrayProperty, ps, () => control.BorderDashArray = (AvaloniaList<Double>)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static Border BorderLineCap(this Border control, IBinding binding)
-   => control._set(() => control[!Border.BorderLineCapProperty] = binding);
-public static Border BorderLineCap(this Border control, PenLineCap value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Border.BorderLineCapProperty, ps, () => control.BorderLineCap = value, bindingMode, converter, bindingSource);
-public static Border BorderLineCap<TValue>(this Border control, TValue value, FuncValueConverter<TValue, PenLineCap> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Border.BorderLineCapProperty, ps, () => control.BorderLineCap = (PenLineCap)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static Border BorderLineJoin(this Border control, IBinding binding)
-   => control._set(() => control[!Border.BorderLineJoinProperty] = binding);
-public static Border BorderLineJoin(this Border control, PenLineJoin value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Border.BorderLineJoinProperty, ps, () => control.BorderLineJoin = value, bindingMode, converter, bindingSource);
-public static Border BorderLineJoin<TValue>(this Border control, TValue value, FuncValueConverter<TValue, PenLineJoin> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Border.BorderLineJoinProperty, ps, () => control.BorderLineJoin = (PenLineJoin)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class ButtonExtensions
 {
@@ -881,8 +865,8 @@ public static NativeMenuItem Menu(this NativeMenuItem control, NativeMenu value 
 public static NativeMenuItem Menu<TValue>(this NativeMenuItem control, TValue value, FuncValueConverter<TValue, NativeMenu> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenuItem.MenuProperty, ps, () => control.Menu = (NativeMenu)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static NativeMenuItem Icon(this NativeMenuItem control, IBinding binding)
    => control._set(() => control[!NativeMenuItem.IconProperty] = binding);
-public static NativeMenuItem Icon(this NativeMenuItem control, IBitmap value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenuItem.IconProperty, ps, () => control.Icon = value, bindingMode, converter, bindingSource);
-public static NativeMenuItem Icon<TValue>(this NativeMenuItem control, TValue value, FuncValueConverter<TValue, IBitmap> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenuItem.IconProperty, ps, () => control.Icon = (IBitmap)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static NativeMenuItem Icon(this NativeMenuItem control, Bitmap value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenuItem.IconProperty, ps, () => control.Icon = value, bindingMode, converter, bindingSource);
+public static NativeMenuItem Icon<TValue>(this NativeMenuItem control, TValue value, FuncValueConverter<TValue, Bitmap> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenuItem.IconProperty, ps, () => control.Icon = (Bitmap)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static NativeMenuItem Header(this NativeMenuItem control, IBinding binding)
    => control._set(() => control[!NativeMenuItem.HeaderProperty] = binding);
 public static NativeMenuItem Header(this NativeMenuItem control, String value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(NativeMenuItem.HeaderProperty, ps, () => control.Header = value, bindingMode, converter, bindingSource);
@@ -1024,14 +1008,6 @@ public static ProgressBar Orientation(this ProgressBar control, IBinding binding
    => control._set(() => control[!ProgressBar.OrientationProperty] = binding);
 public static ProgressBar Orientation(this ProgressBar control, Orientation value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ProgressBar.OrientationProperty, ps, () => control.Orientation = value, bindingMode, converter, bindingSource);
 public static ProgressBar Orientation<TValue>(this ProgressBar control, TValue value, FuncValueConverter<TValue, Orientation> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ProgressBar.OrientationProperty, ps, () => control.Orientation = (Orientation)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static ProgressBar IndeterminateStartingOffset(this ProgressBar control, IBinding binding)
-   => control._set(() => control[!ProgressBar.IndeterminateStartingOffsetProperty] = binding);
-public static ProgressBar IndeterminateStartingOffset(this ProgressBar control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ProgressBar.IndeterminateStartingOffsetProperty, ps, () => control.IndeterminateStartingOffset = value, bindingMode, converter, bindingSource);
-public static ProgressBar IndeterminateStartingOffset<TValue>(this ProgressBar control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ProgressBar.IndeterminateStartingOffsetProperty, ps, () => control.IndeterminateStartingOffset = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-public static ProgressBar IndeterminateEndingOffset(this ProgressBar control, IBinding binding)
-   => control._set(() => control[!ProgressBar.IndeterminateEndingOffsetProperty] = binding);
-public static ProgressBar IndeterminateEndingOffset(this ProgressBar control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ProgressBar.IndeterminateEndingOffsetProperty, ps, () => control.IndeterminateEndingOffset = value, bindingMode, converter, bindingSource);
-public static ProgressBar IndeterminateEndingOffset<TValue>(this ProgressBar control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ProgressBar.IndeterminateEndingOffsetProperty, ps, () => control.IndeterminateEndingOffset = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class RefreshContainerExtensions
 {
@@ -1091,6 +1067,10 @@ public static RowDefinition Height(this RowDefinition control, Double value, Gri
 }
 public static partial class ScrollViewerExtensions
 {
+public static ScrollViewer BringIntoViewOnFocusChange(this ScrollViewer control, IBinding binding)
+   => control._set(() => control[!ScrollViewer.BringIntoViewOnFocusChangeProperty] = binding);
+public static ScrollViewer BringIntoViewOnFocusChange(this ScrollViewer control, Boolean value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ScrollViewer.BringIntoViewOnFocusChangeProperty, ps, () => control.BringIntoViewOnFocusChange = value, bindingMode, converter, bindingSource);
+public static ScrollViewer BringIntoViewOnFocusChange<TValue>(this ScrollViewer control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ScrollViewer.BringIntoViewOnFocusChangeProperty, ps, () => control.BringIntoViewOnFocusChange = (Boolean)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static ScrollViewer Offset(this ScrollViewer control, IBinding binding)
    => control._set(() => control[!ScrollViewer.OffsetProperty] = binding);
 public static ScrollViewer Offset(this ScrollViewer control, Vector value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ScrollViewer.OffsetProperty, ps, () => control.Offset = value, bindingMode, converter, bindingSource);
@@ -1558,8 +1538,8 @@ public static partial class TopLevelExtensions
 {
 public static TopLevel TransparencyLevelHint(this TopLevel control, IBinding binding)
    => control._set(() => control[!TopLevel.TransparencyLevelHintProperty] = binding);
-public static TopLevel TransparencyLevelHint(this TopLevel control, WindowTransparencyLevel value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TopLevel.TransparencyLevelHintProperty, ps, () => control.TransparencyLevelHint = value, bindingMode, converter, bindingSource);
-public static TopLevel TransparencyLevelHint<TValue>(this TopLevel control, TValue value, FuncValueConverter<TValue, WindowTransparencyLevel> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TopLevel.TransparencyLevelHintProperty, ps, () => control.TransparencyLevelHint = (WindowTransparencyLevel)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static TopLevel TransparencyLevelHint(this TopLevel control, IReadOnlyList<WindowTransparencyLevel> value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TopLevel.TransparencyLevelHintProperty, ps, () => control.TransparencyLevelHint = value, bindingMode, converter, bindingSource);
+public static TopLevel TransparencyLevelHint<TValue>(this TopLevel control, TValue value, FuncValueConverter<TValue, IReadOnlyList<WindowTransparencyLevel>> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TopLevel.TransparencyLevelHintProperty, ps, () => control.TransparencyLevelHint = (IReadOnlyList<WindowTransparencyLevel>)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static TopLevel TransparencyBackgroundFallback(this TopLevel control, IBinding binding)
    => control._set(() => control[!TopLevel.TransparencyBackgroundFallbackProperty] = binding);
 public static TopLevel TransparencyBackgroundFallback(this TopLevel control, IBrush value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(TopLevel.TransparencyBackgroundFallbackProperty, ps, () => control.TransparencyBackgroundFallback = value, bindingMode, converter, bindingSource);
@@ -3158,8 +3138,8 @@ public static partial class ImageBrushExtensions
 {
 public static ImageBrush Source(this ImageBrush control, IBinding binding)
    => control._set(() => control[!ImageBrush.SourceProperty] = binding);
-public static ImageBrush Source(this ImageBrush control, IBitmap value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ImageBrush.SourceProperty, ps, () => control.Source = value, bindingMode, converter, bindingSource);
-public static ImageBrush Source<TValue>(this ImageBrush control, TValue value, FuncValueConverter<TValue, IBitmap> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ImageBrush.SourceProperty, ps, () => control.Source = (IBitmap)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
+public static ImageBrush Source(this ImageBrush control, IImageBrushSource value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ImageBrush.SourceProperty, ps, () => control.Source = value, bindingMode, converter, bindingSource);
+public static ImageBrush Source<TValue>(this ImageBrush control, TValue value, FuncValueConverter<TValue, IImageBrushSource> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(ImageBrush.SourceProperty, ps, () => control.Source = (IImageBrushSource)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 public static partial class ImageDrawingExtensions
 {
@@ -3569,10 +3549,6 @@ public static CroppedBitmap SourceRect(this CroppedBitmap control, PixelPoint to
 }
 public static partial class AnimatableExtensions
 {
-public static Animatable Clock(this Animatable control, IBinding binding)
-   => control._set(() => control[!Animatable.ClockProperty] = binding);
-public static Animatable Clock(this Animatable control, IClock value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Animatable.ClockProperty, ps, () => control.Clock = value, bindingMode, converter, bindingSource);
-public static Animatable Clock<TValue>(this Animatable control, TValue value, FuncValueConverter<TValue, IClock> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Animatable.ClockProperty, ps, () => control.Clock = (IClock)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 public static Animatable Transitions(this Animatable control, IBinding binding)
    => control._set(() => control[!Animatable.TransitionsProperty] = binding);
 public static Animatable Transitions(this Animatable control, Transitions value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Animatable.TransitionsProperty, ps, () => control.Transitions = value, bindingMode, converter, bindingSource);
@@ -3617,12 +3593,5 @@ public static Avalonia.Animation.Animation SpeedRatio(this Avalonia.Animation.An
    => control._set(() => control[!Avalonia.Animation.Animation.SpeedRatioProperty] = binding);
 public static Avalonia.Animation.Animation SpeedRatio(this Avalonia.Animation.Animation control, Double value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Animation.Animation.SpeedRatioProperty, ps, () => control.SpeedRatio = value, bindingMode, converter, bindingSource);
 public static Avalonia.Animation.Animation SpeedRatio<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(Avalonia.Animation.Animation.SpeedRatioProperty, ps, () => control.SpeedRatio = (Double)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
-}
-public static partial class AnimatorKeyFrameExtensions
-{
-public static AnimatorKeyFrame Value(this AnimatorKeyFrame control, IBinding binding)
-   => control._set(() => control[!AnimatorKeyFrame.ValueProperty] = binding);
-public static AnimatorKeyFrame Value(this AnimatorKeyFrame control, Object value = default, BindingMode? bindingMode = null, IValueConverter converter = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AnimatorKeyFrame.ValueProperty, ps, () => control.Value = value, bindingMode, converter, bindingSource);
-public static AnimatorKeyFrame Value<TValue>(this AnimatorKeyFrame control, TValue value, FuncValueConverter<TValue, Object> converter, BindingMode? bindingMode = null, object bindingSource = null, [CallerArgumentExpression("value")] string ps = null)=> control._setEx(AnimatorKeyFrame.ValueProperty, ps, () => control.Value = (Object)converter.Convert(value,typeof(TValue), null, default), bindingMode, converter, bindingSource);
 }
 

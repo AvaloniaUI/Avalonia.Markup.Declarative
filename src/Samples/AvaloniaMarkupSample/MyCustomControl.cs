@@ -3,14 +3,14 @@
 public class MyCustomControl : ViewBase
 {
     #region Background Styled Avalonia Property
-    public CustomBrush? Background
+    public SolidColorBrush? Background
     {
         get => GetValue(BackgroundProperty);
         set => SetValue(BackgroundProperty, value);
     }
 
-    public static readonly StyledProperty<CustomBrush?> BackgroundProperty =
-        AvaloniaProperty.Register<MyCustomControl, CustomBrush?>
+    public static readonly StyledProperty<SolidColorBrush?> BackgroundProperty =
+        AvaloniaProperty.Register<MyCustomControl, SolidColorBrush?>
         (
             nameof(Background)
         );

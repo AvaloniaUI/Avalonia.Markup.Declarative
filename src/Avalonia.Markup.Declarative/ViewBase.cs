@@ -208,21 +208,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 
         throw new MemberAccessException("Wrong property getter expression");
     }
-
-    [Obsolete("It's not view relative method. Should not be used and Will be removed in future.")]
-    public static Stream GetAsset(string uri)
-    {
-        var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-
-        //var prefix = "avares://MyAssembly/"
-
-        var asset = assets.Open(new Uri(uri));
-        return asset;
-    }
-
-
-
-
+    
     #region Hot reload stuff
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)

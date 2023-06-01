@@ -82,10 +82,10 @@ public static partial class ComboBoxEventsExtensions
 }
 public static partial class ContextMenuEventsExtensions
 {
-    public static ContextMenu OnContextMenuOpening(this ContextMenu control, Action action) => 
-        control._setEvent((CancelEventHandler) ((_, args) => action()), h => control.ContextMenuOpening += h);
-    public static ContextMenu OnContextMenuClosing(this ContextMenu control, Action action) => 
-        control._setEvent((CancelEventHandler) ((_, args) => action()), h => control.ContextMenuClosing += h);
+    public static ContextMenu OnOpening(this ContextMenu control, Action action) => 
+        control._setEvent((CancelEventHandler) ((_, args) => action()), h => control.Opening += h);
+    public static ContextMenu OnClosing(this ContextMenu control, Action action) => 
+        control._setEvent((CancelEventHandler) ((_, args) => action()), h => control.Closing += h);
 }
 public static partial class ControlEventsExtensions
 {
@@ -134,10 +134,10 @@ public static partial class ItemsControlEventsExtensions
 }
 public static partial class MenuBaseEventsExtensions
 {
-    public static MenuBase OnMenuOpened(this MenuBase control, Action<RoutedEventArgs> action) => 
-        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.MenuOpened += h);
-    public static MenuBase OnMenuClosed(this MenuBase control, Action<RoutedEventArgs> action) => 
-        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.MenuClosed += h);
+    public static MenuBase OnOpened(this MenuBase control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Opened += h);
+    public static MenuBase OnClosed(this MenuBase control, Action<RoutedEventArgs> action) => 
+        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Closed += h);
 }
 public static partial class MenuItemEventsExtensions
 {
@@ -347,6 +347,11 @@ public static partial class PopupEventsExtensions
     public static Popup OnOpened(this Popup control, Action action) => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Opened += h);
 }
+public static partial class RangeBaseEventsExtensions
+{
+    public static RangeBase OnValueChanged(this RangeBase control, Action<RangeBaseValueChangedEventArgs> action) => 
+        control._setEvent((EventHandler<RangeBaseValueChangedEventArgs>) ((_, args) => action(args)), h => control.ValueChanged += h);
+}
 public static partial class ScrollBarEventsExtensions
 {
     public static ScrollBar OnScroll(this ScrollBar control, Action<ScrollEventArgs> action) => 
@@ -466,16 +471,6 @@ public static partial class InputElementEventsExtensions
     public static InputElement OnDoubleTapped(this InputElement control, Action<TappedEventArgs> action) => 
         control._setEvent((EventHandler<TappedEventArgs>) ((_, args) => action(args)), h => control.DoubleTapped += h);
 }
-public static partial class BrushEventsExtensions
-{
-    public static Brush OnInvalidated(this Brush control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.Invalidated += h);
-}
-public static partial class DashStyleEventsExtensions
-{
-    public static DashStyle OnInvalidated(this DashStyle control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.Invalidated += h);
-}
 public static partial class DrawingImageEventsExtensions
 {
     public static DrawingImage OnInvalidated(this DrawingImage control, Action action) => 
@@ -495,11 +490,6 @@ public static partial class GeometryEventsExtensions
 {
     public static Geometry OnChanged(this Geometry control, Action action) => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Changed += h);
-}
-public static partial class PenEventsExtensions
-{
-    public static Pen OnInvalidated(this Pen control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.Invalidated += h);
 }
 public static partial class TransformEventsExtensions
 {
