@@ -49,7 +49,7 @@ namespace AvaloniaExtensionGenerator
             foreach (var controlType in controlTypes)
             {
                 //skip all not stylable types
-                if(!typeof(Avalonia.Styling.IStyleable).IsAssignableFrom(controlType))
+                if(!typeof(Avalonia.StyledElement).IsAssignableFrom(controlType))
                     continue;
 
                 if (Config.Exclude.Contains(controlType))
