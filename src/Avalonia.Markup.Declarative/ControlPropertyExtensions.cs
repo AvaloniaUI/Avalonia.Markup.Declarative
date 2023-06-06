@@ -1,15 +1,14 @@
-﻿using Avalonia.Collections;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
-using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -20,6 +19,19 @@ public static class ControlPropertyExtensions
     public static TControl _set<TControl>(this TControl control, Action setAction)
     {
         setAction();
+        return control;
+    }
+
+    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, Binding binding)
+        where TControl : AvaloniaObject
+    {
+        control[!avaloniaProperty] = binding;
+        return control;
+    }
+    public static TControl _set<TControl,TValue>(this TControl control, AvaloniaProperty avaloniaProperty, Expression<Func<TValue>> expression)
+        where TControl : AvaloniaObject
+    {
+        //control[!avaloniaProperty] = binding;
         return control;
     }
 

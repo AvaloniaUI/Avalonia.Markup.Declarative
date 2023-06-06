@@ -16,6 +16,7 @@ using Avalonia.Styling;
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 

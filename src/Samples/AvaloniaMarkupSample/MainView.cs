@@ -22,8 +22,8 @@ public class MainView : ViewBase
                                     .Padding(12)
                                     .FontSize(30)
                                     .HorizontalAlignment(HorizontalAlignment.Center)
-                                    .Foreground(new DynamicResourceExtension("SystemAccentColor"))
-                                    .Text("Hello Hot Reload!"),
+                                    .Text("Hello Hot Reload!")
+                                    .Foreground(new DynamicResourceExtension("SystemAccentColor")),
 
                                 new Button()
                                     .Name("HotReloadButton", Scope)

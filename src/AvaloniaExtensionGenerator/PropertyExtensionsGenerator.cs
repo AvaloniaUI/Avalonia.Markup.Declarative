@@ -44,10 +44,13 @@ public class PropertyExtensionsGenerator
     private string GetExtensionClasses(IEnumerable<Type> controlTypes, ref HashSet<string> namespaces)
     {
         var sb = new StringBuilder();
+        var objIndex = 0;
         var i = 0;
 
         foreach (var controlType in controlTypes)
         {
+            objIndex++;
+
             if (Config.Exclude.Contains(controlType))
                 continue;
 
@@ -56,7 +59,7 @@ public class PropertyExtensionsGenerator
             if (!fields.Any())
                 continue;
            
-            Console.WriteLine(controlType.Name);
+            Console.WriteLine($"{objIndex:N} {controlType.Name}");
 
             sb.AppendLine($"public static partial class {controlType.Name}Extensions");
             sb.AppendLine("{");

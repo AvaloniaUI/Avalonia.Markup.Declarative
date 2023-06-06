@@ -4,7 +4,6 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Data;
-using Avalonia.Styling;
 using Avalonia.Threading;
 
 namespace Avalonia.Markup.Declarative;
@@ -25,10 +24,6 @@ public abstract class ViewBase<TViewModel> : ViewBase
         OnCreatedCore();
         Initialize();
     }
-
-    //protected ViewBase(bool deferredLoading = false) : base(deferredLoading)
-    //{
-    //}
 
     protected abstract object Build(TViewModel vm);
 
@@ -100,28 +95,6 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     {
     }
 
-    public void Reload()
-    {
-        Dispatcher.UIThread.InvokeAsync(() =>
-        {
-            OnBeforeReload();
-            Child = null;
-            VisualChildren.Clear();
-            _nameScope = null;
-
-            OnCreatedCore();
-            Initialize();
-
-            InvalidateArrange();
-            InvalidateMeasure();
-            InvalidateVisual();
-        });
-    }
-
-    protected virtual void OnBeforeReload()
-    {
-    }
-
     public void Initialize()
     {
         try
@@ -140,26 +113,6 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
             Debug.WriteLine(ex.StackTrace);
             throw;
         }
-    }
-
-    [Obsolete("There is no reason to keep it inside view base. Use Avalonia methods: Application.Current.Resources.TryGetResource")]
-    public static T GetResource<T>(string key)
-    {
-        if (Application.Current.Resources.TryGetResource(key, ThemeVariant.Default, out var res))
-        {
-            if (res is T tres)
-                return tres;
-        }
-        return default;
-    }
-
-    protected TControl Create<TControl>(Action<TControl> initializer)
-        where TControl : Control, new()
-
-    {
-        var control = new TControl();
-        initializer?.Invoke(control);
-        return control;
     }
 
     /// <summary>
@@ -203,8 +156,29 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 
         throw new MemberAccessException("Wrong property getter expression");
     }
-    
+
     #region Hot reload stuff
+    public void Reload()
+    {
+        Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            OnBeforeReload();
+            Child = null;
+            VisualChildren.Clear();
+            _nameScope = null;
+
+            OnCreatedCore();
+            Initialize();
+
+            InvalidateArrange();
+            InvalidateMeasure();
+            InvalidateVisual();
+        });
+    }
+
+    protected virtual void OnBeforeReload()
+    {
+    }
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {

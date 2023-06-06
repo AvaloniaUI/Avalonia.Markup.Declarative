@@ -11,7 +11,7 @@ public class SimpleComponent : ComponentBase
                     .Ref(out _textBlock1)
                     .Text("Hello world"),
                 new TextBlock()
-                    .Text(Bind(CounterText)),
+                    .Text(() => $"Counter: {_counter + _counter}"),
                 new Button()
                     .Content("Click me")
                     .OnClick(OnButtonClick)
@@ -21,7 +21,6 @@ public class SimpleComponent : ComponentBase
     private int _counter = 0;
 
     [Inject] SampleDataService DataService { get; set; } = null!;
-    public string CounterText => $"Counter: {_counter}";
 
     private void OnButtonClick(RoutedEventArgs e)
     {
