@@ -64,6 +64,8 @@ public static class ControlPropertyExtensions
         return control;
     }
 
+    public static Avalonia.Markup.Xaml.MarkupExtensions.DynamicResourceExtension GetDynamicResource(this string dynamcResourceKey) => new Avalonia.Markup.Xaml.MarkupExtensions.DynamicResourceExtension("SystemAccentColor");
+
     public static TElement DataContext<TElement>(
         this TElement control,
         object value,

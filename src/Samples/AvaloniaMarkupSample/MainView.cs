@@ -1,5 +1,4 @@
 ﻿using Avalonia.Controls.Primitives;
-using Avalonia.Markup.Xaml.MarkupExtensions;
 using AvaloniaMarkupSample.MvuSample;
 using AvaloniaMarkupSample.MvvmSample;
 
@@ -23,7 +22,7 @@ public class MainView : ViewBase
                                     .FontSize(30)
                                     .HorizontalAlignment(HorizontalAlignment.Center)
                                     .Text("Hello Hot Reload!")
-                                    .Foreground(new DynamicResourceExtension("SystemAccentColor")),
+                                    .Foreground("SystemAccentColor".GetDynamicResource()),
 
                                 new Button()
                                     .Name("HotReloadButton", Scope)
