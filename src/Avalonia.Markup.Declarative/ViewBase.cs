@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
@@ -101,8 +102,11 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
         {
             NameScope.SetNameScope(this, Scope);
 
-            var content = Build();
-            Child = content as Control;
+            using (var viewContext = new ViewBuildContext(this))
+            {
+                var content = Build();
+                Child = content as Control;
+            }
 
             ViewInitialized?.Invoke();
             OnAfterInitialized();
@@ -209,4 +213,32 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     }
     #endregion
 
+}
+
+internal class ViewBuildContext : IDisposable
+{
+    private static Stack<ViewBuildContext> _viewsStack = new();
+    private static ViewBuildContext _currentContext = null;
+
+    ViewBase _view;
+
+    public ViewBuildContext(ViewBase view)
+    {
+        _view = view;
+        
+        if(_currentContext != null)
+            _viewsStack.Push(_currentContext);
+
+        _currentContext = this;
+        
+        Debug.WriteLine($"Pushed view {view.GetType().Name}");
+    }
+
+    public void Dispose()
+    {
+        _currentContext = _viewsStack.Count > 0 ? _viewsStack.Pop() : null;
+        
+        if( _currentContext != null )
+            Debug.WriteLine($"Poped view {_currentContext._view.GetType().Name}");
+    }
 }

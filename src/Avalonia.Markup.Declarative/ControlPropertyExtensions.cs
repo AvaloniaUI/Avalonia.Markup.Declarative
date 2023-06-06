@@ -22,7 +22,7 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, Binding binding)
+    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, IBinding binding)
         where TControl : AvaloniaObject
     {
         control[!avaloniaProperty] = binding;
@@ -31,7 +31,8 @@ public static class ControlPropertyExtensions
     public static TControl _set<TControl,TValue>(this TControl control, AvaloniaProperty avaloniaProperty, Expression<Func<TValue>> expression)
         where TControl : AvaloniaObject
     {
-        //control[!avaloniaProperty] = binding;
+        var setterFunc = expression.Compile();
+        var result = setterFunc.Invoke();
         return control;
     }
 
