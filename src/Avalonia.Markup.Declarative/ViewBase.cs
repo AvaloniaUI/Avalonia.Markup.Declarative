@@ -59,6 +59,8 @@ public abstract class ViewBase<TViewModel> : ViewBase
 /// </summary>
 public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 {
+    internal List<ViewPropertyComputedState> __viewComputedStates { get; set; } = new();
+
     private INameScope _nameScope;
     
     /// <summary>
@@ -219,6 +221,8 @@ internal class ViewBuildContext : IDisposable
 {
     private static Stack<ViewBuildContext> _viewsStack = new();
     private static ViewBuildContext _currentContext = null;
+
+    internal static ViewBase CurrentView => _currentContext?._view;
 
     ViewBase _view;
 

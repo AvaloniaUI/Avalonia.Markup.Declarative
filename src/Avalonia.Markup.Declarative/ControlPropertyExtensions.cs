@@ -8,8 +8,10 @@ using Avalonia.Styling;
 using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Windows.Input;
 
 namespace Avalonia.Markup.Declarative;
@@ -28,11 +30,26 @@ public static class ControlPropertyExtensions
         control[!avaloniaProperty] = binding;
         return control;
     }
+
     public static TControl _set<TControl,TValue>(this TControl control, AvaloniaProperty avaloniaProperty, Expression<Func<TValue>> expression)
         where TControl : AvaloniaObject
     {
-        var setterFunc = expression.Compile();
-        var result = setterFunc.Invoke();
+        var view = ViewBuildContext.CurrentView;
+        var state = new ViewPropertyComputedState<TValue>(expression);
+        
+        if(!view.__viewComputedStates.Any(x => x.Equals(state)))
+            view.__viewComputedStates.Add(state);
+
+        var index = view.__viewComputedStates.IndexOf(state);
+
+        var binding = new Binding
+        {
+            Path = "Value",
+            Mode = BindingMode.OneWay,
+            Source = view.__viewComputedStates[index]
+        };
+        control.Bind(avaloniaProperty, binding);
+
         return control;
     }
 
