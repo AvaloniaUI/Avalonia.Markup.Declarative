@@ -18,9 +18,9 @@ internal class ViewPropertyComputedState<T> : ViewPropertyComputedState
 }
 internal abstract class ViewPropertyComputedState : INotifyPropertyChanged
 {
-    internal string ExpressionString { get; set; }
+    internal string? ExpressionString { get; set; }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return obj is ViewPropertyComputedState state &&
                ExpressionString == state.ExpressionString;
@@ -31,6 +31,6 @@ internal abstract class ViewPropertyComputedState : INotifyPropertyChanged
         return HashCode.Combine(ExpressionString);
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
     internal void OnPropertyChanged() => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
 }

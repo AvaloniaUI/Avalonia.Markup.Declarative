@@ -10,9 +10,9 @@ namespace Avalonia.Markup.Declarative;
 
 public abstract class ComponentBase : ViewBase, IMvuComponent
 {
-    ViewPropertyState[] _localPropertyStates = null;
-    List<ViewPropertyState> _externalPropertyStates = null;
-    List<IMvuComponent> _dependentViews = null;
+    private ViewPropertyState[]? _localPropertyStates;
+    private List<ViewPropertyState>? _externalPropertyStates;
+    private List<IMvuComponent>? _dependentViews;
 
     protected override void OnCreated()
     {
@@ -40,12 +40,12 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
                 if (componentType.GetField($"<{propertyInfo.Name}>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance) is { } backingField)
                     backingField.SetValue(this, service);
                 else
-                    throw new InvalidOperationException($"Can't inject {service.GetType()} service. Ensure that target property: {GetType().Name}.{propertyInfo.Name} has public setter or it's an auto-property");
+                    throw new InvalidOperationException($"Can't inject {service?.GetType()} service. Ensure that target property: {GetType().Name}.{propertyInfo.Name} has public setter or it's an auto-property");
             }
         }
     }
 
-    private object GetServiceFromProvider(Type serviceType)
+    private static object? GetServiceFromProvider(Type serviceType)
     {
         if (ComponentExtensions.ServiceProvider == null)
             throw new InvalidOperationException("Please set Service Provider by calling UseServiceProvider on AppBuilder");
@@ -87,12 +87,15 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             computedState.OnPropertyChanged();
     }
 
-    public void AddExternalState<TContorl, TValue>(TContorl source, string propertyName, Action<TValue> setAction)
+    public void AddExternalState<TContorl, TValue>(TContorl source, string propertyName, Action<TValue?> setAction)
         where TContorl : ComponentBase
     {
         _externalPropertyStates ??= new List<ViewPropertyState>();
 
         var propInfo = source.GetType().GetProperty(propertyName);
+        
+        if (propInfo == null)
+            throw new NullReferenceException($"Property info {propertyName} is null");
 
         var propertyState = new ViewPropertyState<TValue>(propInfo, source, setAction);
         _externalPropertyStates.Add(propertyState);
@@ -108,9 +111,9 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             _dependentViews.Add(view);
     }
 
-    protected Binding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string bindingString = null)
+    protected Binding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string? bindingString = null)
     {
-        object bindingSource = this;
+        object? bindingSource = this;
         var useStateValueAsSource = false;
 
         var propName = PropertyPathHelper.GetNameFromPropertyPath(bindingString);
@@ -144,14 +147,14 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
 
     public class MvuBinding : Binding
     {
-        public object Value { get; set; }
+        public object? Value { get; set; }
     }
 
-    private ViewPropertyState FindStateForBindingString(string stateName) =>
+    private ViewPropertyState? FindStateForBindingString(string stateName) =>
         _localPropertyStates?.FirstOrDefault(x => x.Name == stateName);
 
-    public new event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    public new event PropertyChangedEventHandler? PropertyChanged;
+    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

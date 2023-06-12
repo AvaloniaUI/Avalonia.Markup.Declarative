@@ -24,6 +24,21 @@ public static class ControlPropertyExtensions
         return control;
     }
 
+    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, AvaloniaProperty propertyToBindTo, BindingMode? bindingMode, IValueConverter? converter)
+    where TControl : AvaloniaObject
+    {
+        var view = ViewBuildContext.CurrentView;
+        var binding = new Binding()
+        {
+            Source = view,
+            Path = propertyToBindTo.Name,
+            Mode = BindingMode.Default
+        };
+
+        control[!avaloniaProperty] = binding;
+        return control;
+    }
+
     public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, IBinding binding)
         where TControl : AvaloniaObject
     {
@@ -35,6 +50,10 @@ public static class ControlPropertyExtensions
         where TControl : AvaloniaObject
     {
         var view = ViewBuildContext.CurrentView;
+
+        if(view == null)
+            throw new InvalidOperationException("Curent view is not set");
+
         var state = new ViewPropertyComputedState<TValue>(expression);
         
         if(!view.__viewComputedStates.Any(x => x.Equals(state)))
@@ -53,8 +72,8 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty, string sourcePropertyPathString, Action setAction,
-                        BindingMode? bindingMode, IValueConverter converter, object bindingSource)
+    public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty, string? sourcePropertyPathString, Action setAction,
+                        BindingMode? bindingMode, IValueConverter? converter, object? bindingSource)
         where TControl : AvaloniaObject
     {
         if (sourcePropertyPathString == null
@@ -87,8 +106,8 @@ public static class ControlPropertyExtensions
         this TElement control,
         object value,
         BindingMode? bindingMode = null,
-        IValueConverter converter = null,
-        [CallerArgumentExpression("value")] string ps = null)
+        IValueConverter? converter = null,
+        [CallerArgumentExpression("value")] string? ps = null)
         where TElement : StyledElement
     {
         return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode, converter, null);
@@ -98,8 +117,8 @@ public static class ControlPropertyExtensions
         TDataContext value,
         out TDataContext dataContext,
         BindingMode? bindingMode = null,
-        IValueConverter converter = null,
-        [CallerArgumentExpression("value")] string ps = null)
+        IValueConverter? converter = null,
+        [CallerArgumentExpression("value")] string? ps = null)
         where TElement : StyledElement where TDataContext : class
     {
         dataContext = value;
@@ -245,7 +264,7 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    record PanelTemplate(Panel panel) : ITemplate<Panel>
+    record PanelTemplate(Panel panel) : ITemplate<Panel?>
     {
         public Panel Build() => panel;
         object ITemplate.Build() => throw new NotImplementedException();
@@ -257,7 +276,7 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TElement Name<TElement>(this TElement control, string name, INameScope ns = null)
+    public static TElement Name<TElement>(this TElement control, string name, INameScope? ns = null)
         where TElement : Control
     {
         ns?.Register(name, control);
@@ -274,19 +293,19 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TElement Classes<TElement>(this TElement control, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string caller = default)
+    public static TElement Classes<TElement>(this TElement control, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string? caller = default)
         where TElement : Control
     {
         control.Classes.Add(className);
         return control;
     }
 
-    public static TElement BindClass<TElement>(this TElement control, bool value, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string caller = default, [CallerArgumentExpression("value")] string ps = null)
+    public static TElement BindClass<TElement>(this TElement control, bool value, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string? caller = default, [CallerArgumentExpression("value")] string? ps = null)
         where TElement : Control
     {
         var path = PropertyPathHelper.GetNameFromPropertyPath(ps);
         var binding = new Binding(path, BindingMode.OneWay);
-        control.BindClass(className, binding, null);
+        control.BindClass(className, binding, null!);
         return control;
     }
     public static StackTrace GetDeeperStackTrace(int depth) =>
@@ -337,7 +356,7 @@ public static class ControlPropertyExtensions
     /// <param name="menuFlyout">The menu flyout to which the item will be added.</param>
     /// <param name="menuItem">The menu item to be added to the flyout.</param>
     /// <returns>The menu flyout with the added item.</returns>
-    public static TElement AddItem<TElement>(this TElement menuFlyout, MenuItem menuItem)
+    public static TElement? AddItem<TElement>(this TElement menuFlyout, MenuItem menuItem)
         where TElement : MenuFlyout
     {
         (menuFlyout?.Items)?.Add(menuItem);
@@ -353,7 +372,7 @@ public static class ControlPropertyExtensions
     /// <param name="command">Item command</param>
     /// <param name="commandParameter">Command parameter</param>
     /// <returns></returns>
-    public static TElement AddItem<TElement>(this TElement menuFlyout, string text, ICommand command, object commandParameter = null)
+    public static TElement? AddItem<TElement>(this TElement menuFlyout, string text, ICommand command, object? commandParameter = null)
         where TElement : MenuFlyout
     {
         var item = new MenuItem() { Header = text, Command = command };

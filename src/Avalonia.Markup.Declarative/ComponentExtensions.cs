@@ -7,8 +7,8 @@ namespace Avalonia.Markup.Declarative;
 public static class ComponentExtensions
 {
 
-    private static IServiceProvider _serviceProvider;
-    internal static IServiceProvider ServiceProvider => _serviceProvider;
+    private static IServiceProvider? _serviceProvider;
+    internal static IServiceProvider? ServiceProvider => _serviceProvider;
 
     public static AppBuilder UseServiceProvider(this AppBuilder appBuilder, IServiceProvider serviceProvider)
     {
@@ -46,12 +46,12 @@ public static class ComponentExtensions
     /// <param name="setAction"></param>
     /// <param name="binding"></param>
     /// <returns></returns>
-    public static TControl _setCommonBindingEx<TControl, TValue>(this TControl control, Action<TValue> setAction, IBinding ibinding)
+    public static TControl _setCommonBindingEx<TControl, TValue>(this TControl control, Action<TValue?> setAction, IBinding ibinding)
         where TControl : AvaloniaObject
     {
         if (ibinding is ComponentBase.MvuBinding bindingEx)
         {
-            TValue val = (TValue)bindingEx.Value;
+            TValue? val = (TValue?)bindingEx.Value;
             setAction(val);
 
             if (control is ComponentBase targetView)

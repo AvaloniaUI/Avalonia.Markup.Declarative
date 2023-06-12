@@ -6,8 +6,8 @@ public class MagicalSetterWithConverterGenerator : SetterGeneratorBase
 {
     public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
     {
-        var argsString = $"TValue value, FuncValueConverter<TValue, {info.ValueTypeSource}> converter, BindingMode? bindingMode = null, object bindingSource = null,"
-                + $" [CallerArgumentExpression(\"value\")] string ps = null)";
+        var argsString = $"TValue value, FuncValueConverter<TValue, {info.ValueTypeSource}> converter, BindingMode? bindingMode = null, object? bindingSource = null,"
+                + $" [CallerArgumentExpression(\"value\")] string? ps = null)";
         //direct type access
         var extensionText =
             $"public static {info.ControlTypeName} {info.ExtensionName}<TValue>"
@@ -26,7 +26,7 @@ public class MagicalSetterWithConverterGenerator : SetterGeneratorBase
 
         string getSetterBody()
         {
-            var setterAction = $"() => control.{info.ExtensionName} = ({info.ValueTypeSource})converter.Convert(value,typeof(TValue), null, default)";
+            var setterAction = $"() => control.{info.ExtensionName} = converter.TryConvert(value)";
             return
                 $"=> control._setEx({info.ControlTypeName}.{info.FieldInfo.Name}, ps, {setterAction}, bindingMode, converter, bindingSource);";
         }

@@ -12,7 +12,7 @@ namespace Avalonia.Markup.Declarative;
 public abstract class ViewBase<TViewModel> : ViewBase
     where TViewModel : class
 {
-    public virtual TViewModel ViewModel
+    public virtual TViewModel? ViewModel
     {
         get => DataContext as TViewModel;
         set => DataContext = value;
@@ -26,12 +26,14 @@ public abstract class ViewBase<TViewModel> : ViewBase
         Initialize();
     }
 
-    protected abstract object Build(TViewModel vm);
+    protected abstract object Build(TViewModel? vm);
 
     protected override object Build() => Build(ViewModel);
 
+
+    [Obsolete("Just use Property name in extension method")]
     protected Binding Bind<TProp>(TProp propertyPath, BindingMode bindingMode = BindingMode.Default,
-        [CallerArgumentExpression("propertyPath")] string propertyPathString = null, [CallerMemberName] string callerMethod = null)
+        [CallerArgumentExpression("propertyPath")] string? propertyPathString = null, [CallerMemberName] string? callerMethod = null)
     {
         var propName = PropertyPathHelper.GetNameFromPropertyPath(propertyPathString);
 
@@ -61,14 +63,14 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 {
     internal List<ViewPropertyComputedState> __viewComputedStates { get; set; } = new();
 
-    private INameScope _nameScope;
+    private INameScope? _nameScope;
     
     /// <summary>
     /// Current NameScope of this view
     /// </summary>
     protected INameScope Scope => _nameScope ??= new NameScope();
 
-    public event Action ViewInitialized;
+    public event Action? ViewInitialized;
 
     protected abstract object Build();
 
@@ -121,6 +123,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
         }
     }
 
+    [Obsolete("Threre is new Extension, that allows to bind AvaloniaProperty directly as parameter, eg. TextBlock.Text(HeaderProperty, BindingMode.OneWay)")]
     /// <summary>
     /// Create binding to Avalonia property
     /// </summary>
@@ -137,8 +140,9 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
         };
     }
 
+    [Obsolete("It looks like this overload is useless")]
     protected static Binding Bind<T>(T source, object propertyPath, BindingMode bindingMode = BindingMode.Default,
-        [CallerArgumentExpression("propertyPath")] string propertyPathString = null)
+        [CallerArgumentExpression("propertyPath")] string? propertyPathString = null)
     {
         return new Binding()
         {
@@ -148,6 +152,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
         };
     }
 
+    [Obsolete("It looks like this overload is useless, and can be replaced with other mehtods")]
     protected static Binding Bind<T, TProp>(T source, Expression<Func<T, TProp>> propertyGetterExp, BindingMode bindingMode = BindingMode.Default)
     {
         if (propertyGetterExp.Body is MemberExpression propertyGetter)
@@ -220,9 +225,9 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 internal class ViewBuildContext : IDisposable
 {
     private static Stack<ViewBuildContext> _viewsStack = new();
-    private static ViewBuildContext _currentContext = null;
+    private static ViewBuildContext? _currentContext;
 
-    internal static ViewBase CurrentView => _currentContext?._view;
+    internal static ViewBase? CurrentView => _currentContext?._view;
 
     ViewBase _view;
 

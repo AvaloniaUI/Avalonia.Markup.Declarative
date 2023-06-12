@@ -5,11 +5,11 @@ namespace Avalonia.Markup.Declarative;
 
 internal class ViewPropertyState<TValue> : ViewPropertyState
 {
-    private readonly Action<TValue> _setAction;
+    private readonly Action<TValue?> _setAction;
 
-    private TValue TypedValue => (TValue) Value;
+    private TValue? TypedValue => (TValue?) Value;
 
-    public ViewPropertyState(PropertyInfo propertyInfo, ViewBase view, Action<TValue> setAction) : base(propertyInfo, view)
+    public ViewPropertyState(PropertyInfo propertyInfo, ViewBase view, Action<TValue?> setAction) : base(propertyInfo, view)
     {
         _setAction = setAction;
     }
@@ -27,7 +27,7 @@ internal class ViewPropertyState<TValue> : ViewPropertyState
 
 internal class ViewPropertyState
 {
-    public object Value { get; private set; }
+    public object? Value { get; private set; }
 
     public string Name { get; }
     private PropertyInfo PropertyInfo { get; }

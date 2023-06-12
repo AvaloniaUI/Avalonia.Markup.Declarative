@@ -31,6 +31,9 @@ public class PropertyExtensionsGenerator
         var extensionClassesString = GetExtensionClasses(controlTypes, ref nameSpaces);
 
         var sb = new StringBuilder();
+        
+        sb.AppendLine("#nullable enable");
+        
         foreach (var ns in nameSpaces.OrderBy(x => x))
             sb.AppendLine($"using {ns};");
 
