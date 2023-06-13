@@ -57,7 +57,7 @@ public class MainView : ViewBase
                             .BorderBrush(Brushes.Gray)
                             .BorderThickness(1)
                             .Child(
-                                new SampleView()
+                                new SampleMvuView()
                             )
                     ),
 

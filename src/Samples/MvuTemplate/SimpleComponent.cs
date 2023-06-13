@@ -13,6 +13,8 @@ public class SimpleComponent : ComponentBase
                     .Text("Hello world"),
                 new TextBlock()
                     .Text(() => $"Counter: {_counter}"),
+                new NumericUpDown()
+                    .Value(_counter, BindingMode.TwoWay),
                 new Button()
                     .HorizontalAlignment (HorizontalAlignment.Center)
                     .Content("Click me")
