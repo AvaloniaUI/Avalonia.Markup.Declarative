@@ -19,7 +19,6 @@ using Avalonia.Input.GestureRecognizers;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using Avalonia.Media.TextFormatting;
 using Avalonia.Platform;
 using Avalonia.Styling;
 using System;
@@ -1304,26 +1303,6 @@ public static T DisplayMemberBinding<T>(this T control, IBinding value, BindingM
 => control._setEx(ItemsControl.DisplayMemberBindingProperty, ps, () => control.DisplayMemberBinding = value, bindingMode, converter, bindingSource);
 public static T DisplayMemberBinding<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IBinding> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : ItemsControl
 => control._setEx(ItemsControl.DisplayMemberBindingProperty, ps, () => control.DisplayMemberBinding = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static T AreHorizontalSnapPointsRegular<T>(this T control, IBinding binding) where T : ItemsControl
-   => control._set(ItemsControl.AreHorizontalSnapPointsRegularProperty, binding);
-public static T AreHorizontalSnapPointsRegular<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null) where T : ItemsControl
-   => control._set(ItemsControl.AreHorizontalSnapPointsRegularProperty, avaloniaProperty, bindingMode, converter);
-public static T AreHorizontalSnapPointsRegular<T>(this T control, Expression<Func<Boolean>> expression) where T : ItemsControl
-   => control._set(ItemsControl.AreHorizontalSnapPointsRegularProperty, expression);
-public static T AreHorizontalSnapPointsRegular<T>(this T control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : ItemsControl
-=> control._setEx(ItemsControl.AreHorizontalSnapPointsRegularProperty, ps, () => control.AreHorizontalSnapPointsRegular = value, bindingMode, converter, bindingSource);
-public static T AreHorizontalSnapPointsRegular<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : ItemsControl
-=> control._setEx(ItemsControl.AreHorizontalSnapPointsRegularProperty, ps, () => control.AreHorizontalSnapPointsRegular = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static T AreVerticalSnapPointsRegular<T>(this T control, IBinding binding) where T : ItemsControl
-   => control._set(ItemsControl.AreVerticalSnapPointsRegularProperty, binding);
-public static T AreVerticalSnapPointsRegular<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null) where T : ItemsControl
-   => control._set(ItemsControl.AreVerticalSnapPointsRegularProperty, avaloniaProperty, bindingMode, converter);
-public static T AreVerticalSnapPointsRegular<T>(this T control, Expression<Func<Boolean>> expression) where T : ItemsControl
-   => control._set(ItemsControl.AreVerticalSnapPointsRegularProperty, expression);
-public static T AreVerticalSnapPointsRegular<T>(this T control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : ItemsControl
-=> control._setEx(ItemsControl.AreVerticalSnapPointsRegularProperty, ps, () => control.AreVerticalSnapPointsRegular = value, bindingMode, converter, bindingSource);
-public static T AreVerticalSnapPointsRegular<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : ItemsControl
-=> control._setEx(ItemsControl.AreVerticalSnapPointsRegularProperty, ps, () => control.AreVerticalSnapPointsRegular = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class LabelExtensions
 {
@@ -2763,6 +2742,14 @@ public static ToggleSwitch OnContentTemplate(this ToggleSwitch control, Expressi
    => control._set(ToggleSwitch.OnContentTemplateProperty, expression);
 public static ToggleSwitch OnContentTemplate(this ToggleSwitch control, IDataTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ToggleSwitch.OnContentTemplateProperty, ps, () => control.OnContentTemplate = value, bindingMode, converter, bindingSource);
 public static ToggleSwitch OnContentTemplate<TValue>(this ToggleSwitch control, TValue value, FuncValueConverter<TValue, IDataTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ToggleSwitch.OnContentTemplateProperty, ps, () => control.OnContentTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static ToggleSwitch KnobTransitions(this ToggleSwitch control, IBinding binding)
+   => control._set(ToggleSwitch.KnobTransitionsProperty, binding);
+public static ToggleSwitch KnobTransitions(this ToggleSwitch control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null)
+   => control._set(ToggleSwitch.KnobTransitionsProperty, avaloniaProperty, bindingMode, converter);
+public static ToggleSwitch KnobTransitions(this ToggleSwitch control, Expression<Func<Transitions>> expression)
+   => control._set(ToggleSwitch.KnobTransitionsProperty, expression);
+public static ToggleSwitch KnobTransitions(this ToggleSwitch control, Transitions value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ToggleSwitch.KnobTransitionsProperty, ps, () => control.KnobTransitions = value, bindingMode, converter, bindingSource);
+public static ToggleSwitch KnobTransitions<TValue>(this ToggleSwitch control, TValue value, FuncValueConverter<TValue, Transitions> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ToggleSwitch.KnobTransitionsProperty, ps, () => control.KnobTransitions = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class TopLevelExtensions
 {
@@ -3489,22 +3476,6 @@ public static ItemsPresenter ItemsPanel(this ItemsPresenter control, Expression<
    => control._set(ItemsPresenter.ItemsPanelProperty, expression);
 public static ItemsPresenter ItemsPanel(this ItemsPresenter control, ITemplate<Panel> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ItemsPresenter.ItemsPanelProperty, ps, () => control.ItemsPanel = value, bindingMode, converter, bindingSource);
 public static ItemsPresenter ItemsPanel<TValue>(this ItemsPresenter control, TValue value, FuncValueConverter<TValue, ITemplate<Panel>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ItemsPresenter.ItemsPanelProperty, ps, () => control.ItemsPanel = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static ItemsPresenter AreHorizontalSnapPointsRegular(this ItemsPresenter control, IBinding binding)
-   => control._set(ItemsPresenter.AreHorizontalSnapPointsRegularProperty, binding);
-public static ItemsPresenter AreHorizontalSnapPointsRegular(this ItemsPresenter control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null)
-   => control._set(ItemsPresenter.AreHorizontalSnapPointsRegularProperty, avaloniaProperty, bindingMode, converter);
-public static ItemsPresenter AreHorizontalSnapPointsRegular(this ItemsPresenter control, Expression<Func<Boolean>> expression)
-   => control._set(ItemsPresenter.AreHorizontalSnapPointsRegularProperty, expression);
-public static ItemsPresenter AreHorizontalSnapPointsRegular(this ItemsPresenter control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ItemsPresenter.AreHorizontalSnapPointsRegularProperty, ps, () => control.AreHorizontalSnapPointsRegular = value, bindingMode, converter, bindingSource);
-public static ItemsPresenter AreHorizontalSnapPointsRegular<TValue>(this ItemsPresenter control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ItemsPresenter.AreHorizontalSnapPointsRegularProperty, ps, () => control.AreHorizontalSnapPointsRegular = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static ItemsPresenter AreVerticalSnapPointsRegular(this ItemsPresenter control, IBinding binding)
-   => control._set(ItemsPresenter.AreVerticalSnapPointsRegularProperty, binding);
-public static ItemsPresenter AreVerticalSnapPointsRegular(this ItemsPresenter control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null)
-   => control._set(ItemsPresenter.AreVerticalSnapPointsRegularProperty, avaloniaProperty, bindingMode, converter);
-public static ItemsPresenter AreVerticalSnapPointsRegular(this ItemsPresenter control, Expression<Func<Boolean>> expression)
-   => control._set(ItemsPresenter.AreVerticalSnapPointsRegularProperty, expression);
-public static ItemsPresenter AreVerticalSnapPointsRegular(this ItemsPresenter control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ItemsPresenter.AreVerticalSnapPointsRegularProperty, ps, () => control.AreVerticalSnapPointsRegular = value, bindingMode, converter, bindingSource);
-public static ItemsPresenter AreVerticalSnapPointsRegular<TValue>(this ItemsPresenter control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ItemsPresenter.AreVerticalSnapPointsRegularProperty, ps, () => control.AreVerticalSnapPointsRegular = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class ScrollContentPresenterExtensions
 {
@@ -3655,14 +3626,6 @@ public static TextPresenter PreeditText(this TextPresenter control, Expression<F
    => control._set(TextPresenter.PreeditTextProperty, expression);
 public static TextPresenter PreeditText(this TextPresenter control, String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextPresenter.PreeditTextProperty, ps, () => control.PreeditText = value, bindingMode, converter, bindingSource);
 public static TextPresenter PreeditText<TValue>(this TextPresenter control, TValue value, FuncValueConverter<TValue, String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextPresenter.PreeditTextProperty, ps, () => control.PreeditText = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static TextPresenter CompositionRegion(this TextPresenter control, IBinding binding)
-   => control._set(TextPresenter.CompositionRegionProperty, binding);
-public static TextPresenter CompositionRegion(this TextPresenter control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null)
-   => control._set(TextPresenter.CompositionRegionProperty, avaloniaProperty, bindingMode, converter);
-public static TextPresenter CompositionRegion(this TextPresenter control, Expression<Func<Nullable<TextRange>>> expression)
-   => control._set(TextPresenter.CompositionRegionProperty, expression);
-public static TextPresenter CompositionRegion(this TextPresenter control, Nullable<TextRange> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextPresenter.CompositionRegionProperty, ps, () => control.CompositionRegion = value, bindingMode, converter, bindingSource);
-public static TextPresenter CompositionRegion<TValue>(this TextPresenter control, TValue value, FuncValueConverter<TValue, Nullable<TextRange>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextPresenter.CompositionRegionProperty, ps, () => control.CompositionRegion = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static TextPresenter TextAlignment(this TextPresenter control, IBinding binding)
    => control._set(TextPresenter.TextAlignmentProperty, binding);
 public static TextPresenter TextAlignment(this TextPresenter control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null)

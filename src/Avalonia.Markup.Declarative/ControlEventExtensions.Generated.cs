@@ -128,10 +128,6 @@ public static partial class ItemsControlEventsExtensions
         control._setEvent((EventHandler<ContainerIndexChangedEventArgs>) ((_, args) => action(args)), h => control.ContainerIndexChanged += h);
     public static ItemsControl OnContainerClearing(this ItemsControl control, Action<ContainerClearingEventArgs> action) => 
         control._setEvent((EventHandler<ContainerClearingEventArgs>) ((_, args) => action(args)), h => control.ContainerClearing += h);
-    public static ItemsControl OnHorizontalSnapPointsChanged(this ItemsControl control, Action<RoutedEventArgs> action) => 
-        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.HorizontalSnapPointsChanged += h);
-    public static ItemsControl OnVerticalSnapPointsChanged(this ItemsControl control, Action<RoutedEventArgs> action) => 
-        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.VerticalSnapPointsChanged += h);
 }
 public static partial class MenuBaseEventsExtensions
 {
@@ -281,13 +277,6 @@ public static partial class WindowBaseEventsExtensions
         control._setEvent((EventHandler<PixelPointEventArgs>) ((_, args) => action(args)), h => control.PositionChanged += h);
     public static WindowBase OnResized(this WindowBase control, Action<WindowResizedEventArgs> action) => 
         control._setEvent((EventHandler<WindowResizedEventArgs>) ((_, args) => action(args)), h => control.Resized += h);
-}
-public static partial class ItemsPresenterEventsExtensions
-{
-    public static ItemsPresenter OnHorizontalSnapPointsChanged(this ItemsPresenter control, Action<RoutedEventArgs> action) => 
-        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.HorizontalSnapPointsChanged += h);
-    public static ItemsPresenter OnVerticalSnapPointsChanged(this ItemsPresenter control, Action<RoutedEventArgs> action) => 
-        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.VerticalSnapPointsChanged += h);
 }
 public static partial class TextPresenterEventsExtensions
 {
