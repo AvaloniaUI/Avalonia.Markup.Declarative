@@ -8,10 +8,10 @@ internal class ViewPropertyComputedState<T> : ViewPropertyComputedState
 {
     public T Value => SetterFunc();
     public Func<T> SetterFunc { get; }
-    internal ViewPropertyComputedState(Expression<Func<T>> expression)
+    internal ViewPropertyComputedState(Func<T> setterFunc, string expressionString)
     {
-        ExpressionString = expression.ToString();
-        var setterFunc = expression.Compile();
+        ExpressionString = expressionString;
+        //var setterFunc = expression.Compile();
         SetterFunc = setterFunc;
     }
 

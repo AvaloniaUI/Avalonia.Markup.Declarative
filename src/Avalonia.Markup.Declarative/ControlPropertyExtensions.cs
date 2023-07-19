@@ -46,7 +46,7 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TControl _set<TControl,TValue>(this TControl control, AvaloniaProperty avaloniaProperty, Expression<Func<TValue>> expression)
+    public static TControl _set<TControl,TValue>(this TControl control, AvaloniaProperty avaloniaProperty, Func<TValue> func, string expression)
         where TControl : AvaloniaObject
     {
         var view = ViewBuildContext.CurrentView;
@@ -54,7 +54,7 @@ public static class ControlPropertyExtensions
         if(view == null)
             throw new InvalidOperationException("Curent view is not set");
 
-        var state = new ViewPropertyComputedState<TValue>(expression);
+        var state = new ViewPropertyComputedState<TValue>(func, expression);
         
         if(!view.__viewComputedStates.Any(x => x.Equals(state)))
             view.__viewComputedStates.Add(state);
