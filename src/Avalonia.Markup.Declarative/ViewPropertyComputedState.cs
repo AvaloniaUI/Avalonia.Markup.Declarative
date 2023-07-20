@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq.Expressions;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -11,7 +10,6 @@ internal class ViewPropertyComputedState<T> : ViewPropertyComputedState
     internal ViewPropertyComputedState(Func<T> setterFunc, string expressionString)
     {
         ExpressionString = expressionString;
-        //var setterFunc = expression.Compile();
         SetterFunc = setterFunc;
     }
 

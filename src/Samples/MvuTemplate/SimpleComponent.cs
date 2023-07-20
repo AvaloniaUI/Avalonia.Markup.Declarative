@@ -12,9 +12,9 @@ public class SimpleComponent : ComponentBase
                 new TextBlock().Ref(out _textBlock1)
                     .Text("Hello world"),
                 new TextBlock()
-                    .Text(() => $"Counter: {_counter}"),
+                    .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"),
                 new NumericUpDown()
-                    .Value(_counter, BindingMode.TwoWay),
+                    .Value(Counter, BindingMode.TwoWay),
                 new Button()
                     .HorizontalAlignment (HorizontalAlignment.Center)
                     .Content("Click me")
@@ -22,12 +22,22 @@ public class SimpleComponent : ComponentBase
             );
 
     private TextBlock _textBlock1 = null!;
-    private int _counter = 0;
+    private decimal _counter;
+
+    public decimal Counter
+    {
+        get => _counter;
+        set
+        {
+            _counter = value; 
+            StateHasChanged();
+        }
+    }
 
     private void OnButtonClick(RoutedEventArgs e)
     {
-        _counter++;
+        Counter++; //state updates on setter
+
         _textBlock1.Text = DataService.GetData();
-        StateHasChanged();
     }
 }

@@ -9,9 +9,7 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows.Input;
 
 namespace Avalonia.Markup.Declarative;
@@ -24,6 +22,16 @@ public static class ControlPropertyExtensions
         return control;
     }
 
+    /// <summary>
+    /// Used to bind one avalonia property to another
+    /// </summary>
+    /// <typeparam name="TControl"></typeparam>
+    /// <param name="control"></param>
+    /// <param name="avaloniaProperty"></param>
+    /// <param name="propertyToBindTo"></param>
+    /// <param name="bindingMode"></param>
+    /// <param name="converter"></param>
+    /// <returns></returns>
     public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, AvaloniaProperty propertyToBindTo, BindingMode? bindingMode, IValueConverter? converter)
     where TControl : AvaloniaObject
     {
@@ -39,6 +47,14 @@ public static class ControlPropertyExtensions
         return control;
     }
 
+    /// <summary>
+    /// Used to pass Binding object constructed by end-user
+    /// </summary>
+    /// <typeparam name="TControl"></typeparam>
+    /// <param name="control"></param>
+    /// <param name="avaloniaProperty"></param>
+    /// <param name="binding"></param>
+    /// <returns></returns>
     public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, IBinding binding)
         where TControl : AvaloniaObject
     {
@@ -46,17 +62,28 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TControl _set<TControl,TValue>(this TControl control, AvaloniaProperty avaloniaProperty, Func<TValue> func, string expression)
+    /// <summary>
+    /// Creates binding based on expression argument
+    /// </summary>
+    /// <typeparam name="TControl"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
+    /// <param name="control"></param>
+    /// <param name="avaloniaProperty"></param>
+    /// <param name="func"></param>
+    /// <param name="expression"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
+    public static TControl _set<TControl, TValue>(this TControl control, AvaloniaProperty avaloniaProperty, Func<TValue> func, string expression)
         where TControl : AvaloniaObject
     {
         var view = ViewBuildContext.CurrentView;
 
-        if(view == null)
+        if (view == null)
             throw new InvalidOperationException("Curent view is not set");
 
         var state = new ViewPropertyComputedState<TValue>(func, expression);
-        
-        if(!view.__viewComputedStates.Any(x => x.Equals(state)))
+
+        if (!view.__viewComputedStates.Any(x => x.Equals(state)))
             view.__viewComputedStates.Add(state);
 
         var index = view.__viewComputedStates.IndexOf(state);
@@ -72,6 +99,18 @@ public static class ControlPropertyExtensions
         return control;
     }
 
+    /// <summary>
+    /// Creates binding to property on DataContext of the control parsed from Value's expression arg , used by generated extensions
+    /// </summary>
+    /// <typeparam name="TControl"></typeparam>
+    /// <param name="control"></param>
+    /// <param name="destProperty"></param>
+    /// <param name="sourcePropertyPathString"></param>
+    /// <param name="setAction"></param>
+    /// <param name="bindingMode"></param>
+    /// <param name="converter"></param>
+    /// <param name="bindingSource"></param>
+    /// <returns></returns>
     public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty, string? sourcePropertyPathString, Action setAction,
                         BindingMode? bindingMode, IValueConverter? converter, object? bindingSource)
         where TControl : AvaloniaObject
@@ -89,6 +128,13 @@ public static class ControlPropertyExtensions
                 Source = bindingSource
             };
 
+            //for components the default binding context is the component itself instead of the control's data context
+            var view = ViewBuildContext.CurrentView;
+            if (view is IMvuComponent component)
+            {
+                binding.Source ??= component;
+            }
+
             setAction();
             control.Bind(destProperty, binding);
         }
@@ -99,8 +145,6 @@ public static class ControlPropertyExtensions
 
         return control;
     }
-
-    public static Avalonia.Markup.Xaml.MarkupExtensions.DynamicResourceExtension GetDynamicResource(this string dynamcResourceKey) => new Avalonia.Markup.Xaml.MarkupExtensions.DynamicResourceExtension("SystemAccentColor");
 
     public static TElement DataContext<TElement>(
         this TElement control,

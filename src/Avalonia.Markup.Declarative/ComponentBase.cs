@@ -93,7 +93,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         _externalPropertyStates ??= new List<ViewPropertyState>();
 
         var propInfo = source.GetType().GetProperty(propertyName);
-        
+
         if (propInfo == null)
             throw new NullReferenceException($"Property info {propertyName} is null");
 
@@ -111,20 +111,25 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             _dependentViews.Add(view);
     }
 
-    protected Binding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string? bindingString = null)
+    protected Binding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string? valueExpressionString = null)
+    {
+        return CreateMvuBinding(value, bindingMode, valueExpressionString);
+    }
+
+    internal Binding CreateMvuBinding(object value, BindingMode? bindingMode, string? valueExpressionString)
     {
         object? bindingSource = this;
         var useStateValueAsSource = false;
 
-        var propName = PropertyPathHelper.GetNameFromPropertyPath(bindingString);
+        var propName = PropertyPathHelper.GetNameFromPropertyPath(valueExpressionString);
         var stateName = propName;
 
-        var splitterIndex = bindingString!.IndexOf('.');
+        var splitterIndex = valueExpressionString!.IndexOf('.');
 
         if (splitterIndex > -1)
         {
-            var startIndex = bindingString.StartsWith("@") ? 1 : 0;
-            stateName = bindingString.Substring(0, splitterIndex - startIndex);
+            var startIndex = valueExpressionString.StartsWith("@") ? 1 : 0;
+            stateName = valueExpressionString.Substring(0, splitterIndex - startIndex);
 
             useStateValueAsSource = true;
         }
@@ -140,7 +145,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         {
             Source = bindingSource,
             Path = propName,
-            Mode = bindingMode,
+            Mode = bindingMode ?? BindingMode.Default,
             Value = value
         };
     }
