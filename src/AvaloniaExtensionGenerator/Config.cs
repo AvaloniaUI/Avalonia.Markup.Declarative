@@ -13,6 +13,7 @@ public class Config
         "Avalonia.Data",
         "Avalonia.Data.Converters",
         "System.Numerics",
+        "System.Linq.Expressions",
         "System.Runtime.CompilerServices" };
 
     public Type[] UseFullNamespace = new[]
@@ -24,11 +25,6 @@ public class Config
     };
 
     public Type[] Exclude = Array.Empty<Type>();
-
-    //    new[]
-    //{
-    //    typeof(ProgressBar.ProgressBarTemplateSettings)
-    //};
 
     /// <summary>
     /// Those types will be generated as Generic extension methods instead of using direct control type

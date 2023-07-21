@@ -3,13 +3,14 @@
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<IsPackable>true</IsPackable>
-		<LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
 		<Version>11.0.0-preview8</Version>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="11.0.0-rc1.1" />
+		<PackageReference Include="Avalonia" Version="11.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

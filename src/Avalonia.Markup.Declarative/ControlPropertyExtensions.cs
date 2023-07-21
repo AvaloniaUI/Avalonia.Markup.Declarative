@@ -1,15 +1,14 @@
-﻿using Avalonia.Collections;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
-using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -23,8 +22,97 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty, string sourcePropertyPathString, Action setAction,
-                        BindingMode? bindingMode, IValueConverter converter, object bindingSource)
+    /// <summary>
+    /// Used to bind one avalonia property to another
+    /// </summary>
+    /// <typeparam name="TControl"></typeparam>
+    /// <param name="control"></param>
+    /// <param name="avaloniaProperty"></param>
+    /// <param name="propertyToBindTo"></param>
+    /// <param name="bindingMode"></param>
+    /// <param name="converter"></param>
+    /// <returns></returns>
+    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, AvaloniaProperty propertyToBindTo, BindingMode? bindingMode, IValueConverter? converter)
+    where TControl : AvaloniaObject
+    {
+        var view = ViewBuildContext.CurrentView;
+        var binding = new Binding()
+        {
+            Source = view,
+            Path = propertyToBindTo.Name,
+            Mode = BindingMode.Default
+        };
+
+        control[!avaloniaProperty] = binding;
+        return control;
+    }
+
+    /// <summary>
+    /// Used to pass Binding object constructed by end-user
+    /// </summary>
+    /// <typeparam name="TControl"></typeparam>
+    /// <param name="control"></param>
+    /// <param name="avaloniaProperty"></param>
+    /// <param name="binding"></param>
+    /// <returns></returns>
+    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, IBinding binding)
+        where TControl : AvaloniaObject
+    {
+        control[!avaloniaProperty] = binding;
+        return control;
+    }
+
+    /// <summary>
+    /// Creates binding based on expression argument
+    /// </summary>
+    /// <typeparam name="TControl"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
+    /// <param name="control"></param>
+    /// <param name="avaloniaProperty"></param>
+    /// <param name="func"></param>
+    /// <param name="expression"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
+    public static TControl _set<TControl, TValue>(this TControl control, AvaloniaProperty avaloniaProperty, Func<TValue> func, string expression)
+        where TControl : AvaloniaObject
+    {
+        var view = ViewBuildContext.CurrentView;
+
+        if (view == null)
+            throw new InvalidOperationException("Curent view is not set");
+
+        var state = new ViewPropertyComputedState<TValue>(func, expression);
+
+        if (!view.__viewComputedStates.Any(x => x.Equals(state)))
+            view.__viewComputedStates.Add(state);
+
+        var index = view.__viewComputedStates.IndexOf(state);
+
+        var binding = new Binding
+        {
+            Path = "Value",
+            Mode = BindingMode.OneWay,
+            Source = view.__viewComputedStates[index]
+        };
+        control.Bind(avaloniaProperty, binding);
+
+        return control;
+    }
+
+    /// <summary>
+    /// Creates binding to property on DataContext of the control parsed from Value's expression arg , used by generated extensions
+    /// </summary>
+    /// <typeparam name="TControl"></typeparam>
+    /// <param name="control"></param>
+    /// <param name="destProperty"></param>
+    /// <param name="sourcePropertyPathString"></param>
+    /// <param name="setAction"></param>
+    /// <param name="bindingMode"></param>
+    /// <param name="converter"></param>
+    /// <param name="bindingSource"></param>
+    /// <returns></returns>
+    public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty, string? sourcePropertyPathString, Action setAction,
+                        BindingMode? bindingMode, IValueConverter? converter, object? bindingSource)
         where TControl : AvaloniaObject
     {
         if (sourcePropertyPathString == null
@@ -39,6 +127,13 @@ public static class ControlPropertyExtensions
                 Converter = converter,
                 Source = bindingSource
             };
+
+            //for components the default binding context is the component itself instead of the control's data context
+            var view = ViewBuildContext.CurrentView;
+            if (view is IMvuComponent component)
+            {
+                binding.Source ??= component;
+            }
 
             setAction();
             control.Bind(destProperty, binding);
@@ -55,8 +150,8 @@ public static class ControlPropertyExtensions
         this TElement control,
         object value,
         BindingMode? bindingMode = null,
-        IValueConverter converter = null,
-        [CallerArgumentExpression("value")] string ps = null)
+        IValueConverter? converter = null,
+        [CallerArgumentExpression("value")] string? ps = null)
         where TElement : StyledElement
     {
         return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode, converter, null);
@@ -66,8 +161,8 @@ public static class ControlPropertyExtensions
         TDataContext value,
         out TDataContext dataContext,
         BindingMode? bindingMode = null,
-        IValueConverter converter = null,
-        [CallerArgumentExpression("value")] string ps = null)
+        IValueConverter? converter = null,
+        [CallerArgumentExpression("value")] string? ps = null)
         where TElement : StyledElement where TDataContext : class
     {
         dataContext = value;
@@ -213,7 +308,7 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    record PanelTemplate(Panel panel) : ITemplate<Panel>
+    record PanelTemplate(Panel panel) : ITemplate<Panel?>
     {
         public Panel Build() => panel;
         object ITemplate.Build() => throw new NotImplementedException();
@@ -225,7 +320,7 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TElement Name<TElement>(this TElement control, string name, INameScope ns = null)
+    public static TElement Name<TElement>(this TElement control, string name, INameScope? ns = null)
         where TElement : Control
     {
         ns?.Register(name, control);
@@ -242,19 +337,19 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TElement Classes<TElement>(this TElement control, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string caller = default)
+    public static TElement Classes<TElement>(this TElement control, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string? caller = default)
         where TElement : Control
     {
         control.Classes.Add(className);
         return control;
     }
 
-    public static TElement BindClass<TElement>(this TElement control, bool value, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string caller = default, [CallerArgumentExpression("value")] string ps = null)
+    public static TElement BindClass<TElement>(this TElement control, bool value, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string? caller = default, [CallerArgumentExpression("value")] string? ps = null)
         where TElement : Control
     {
         var path = PropertyPathHelper.GetNameFromPropertyPath(ps);
         var binding = new Binding(path, BindingMode.OneWay);
-        control.BindClass(className, binding, null);
+        control.BindClass(className, binding, null!);
         return control;
     }
     public static StackTrace GetDeeperStackTrace(int depth) =>
@@ -305,7 +400,7 @@ public static class ControlPropertyExtensions
     /// <param name="menuFlyout">The menu flyout to which the item will be added.</param>
     /// <param name="menuItem">The menu item to be added to the flyout.</param>
     /// <returns>The menu flyout with the added item.</returns>
-    public static TElement AddItem<TElement>(this TElement menuFlyout, MenuItem menuItem)
+    public static TElement? AddItem<TElement>(this TElement menuFlyout, MenuItem menuItem)
         where TElement : MenuFlyout
     {
         (menuFlyout?.Items)?.Add(menuItem);
@@ -321,7 +416,7 @@ public static class ControlPropertyExtensions
     /// <param name="command">Item command</param>
     /// <param name="commandParameter">Command parameter</param>
     /// <returns></returns>
-    public static TElement AddItem<TElement>(this TElement menuFlyout, string text, ICommand command, object commandParameter = null)
+    public static TElement? AddItem<TElement>(this TElement menuFlyout, string text, ICommand command, object? commandParameter = null)
         where TElement : MenuFlyout
     {
         var item = new MenuItem() { Header = text, Command = command };

@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Data;
-using Avalonia.Styling;
 using Avalonia.Threading;
 
 namespace Avalonia.Markup.Declarative;
@@ -12,7 +12,7 @@ namespace Avalonia.Markup.Declarative;
 public abstract class ViewBase<TViewModel> : ViewBase
     where TViewModel : class
 {
-    public virtual TViewModel ViewModel
+    public virtual TViewModel? ViewModel
     {
         get => DataContext as TViewModel;
         set => DataContext = value;
@@ -26,16 +26,14 @@ public abstract class ViewBase<TViewModel> : ViewBase
         Initialize();
     }
 
-    //protected ViewBase(bool deferredLoading = false) : base(deferredLoading)
-    //{
-    //}
-
-    protected abstract object Build(TViewModel vm);
+    protected abstract object Build(TViewModel? vm);
 
     protected override object Build() => Build(ViewModel);
 
+
+    [Obsolete("Just use Property name in extension method")]
     protected Binding Bind<TProp>(TProp propertyPath, BindingMode bindingMode = BindingMode.Default,
-        [CallerArgumentExpression("propertyPath")] string propertyPathString = null, [CallerMemberName] string callerMethod = null)
+        [CallerArgumentExpression("propertyPath")] string? propertyPathString = null, [CallerMemberName] string? callerMethod = null)
     {
         var propName = PropertyPathHelper.GetNameFromPropertyPath(propertyPathString);
 
@@ -63,14 +61,16 @@ public abstract class ViewBase<TViewModel> : ViewBase
 /// </summary>
 public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 {
-    private INameScope _nameScope;
+    internal List<ViewPropertyComputedState> __viewComputedStates { get; set; } = new();
+
+    private INameScope? _nameScope;
     
     /// <summary>
     /// Current NameScope of this view
     /// </summary>
     protected INameScope Scope => _nameScope ??= new NameScope();
 
-    public event Action ViewInitialized;
+    public event Action? ViewInitialized;
 
     protected abstract object Build();
 
@@ -100,6 +100,75 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     {
     }
 
+    public void Initialize()
+    {
+        try
+        {
+            NameScope.SetNameScope(this, Scope);
+
+            using (var viewContext = new ViewBuildContext(this))
+            {
+                var content = Build();
+                Child = content as Control;
+            }
+
+            ViewInitialized?.Invoke();
+            OnAfterInitialized();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            Debug.WriteLine(ex.StackTrace);
+            throw;
+        }
+    }
+
+    [Obsolete("Threre is new Extension, that allows to bind AvaloniaProperty directly as parameter, eg. TextBlock.Text(HeaderProperty, BindingMode.OneWay)")]
+    /// <summary>
+    /// Create binding to Avalonia property
+    /// </summary>
+    /// <param name="property">Avalonia property</param>
+    /// <param name="bindingMode">Binding mode</param>
+    /// <returns></returns>
+    protected Binding Bind(AvaloniaProperty property, BindingMode bindingMode = BindingMode.Default)
+    {
+        return new Binding()
+        {
+            Source = this,
+            Path = property.Name,
+            Mode = bindingMode
+        };
+    }
+
+    [Obsolete("It looks like this overload is useless")]
+    protected static Binding Bind<T>(T source, object propertyPath, BindingMode bindingMode = BindingMode.Default,
+        [CallerArgumentExpression("propertyPath")] string? propertyPathString = null)
+    {
+        return new Binding()
+        {
+            Source = source,
+            Path = PropertyPathHelper.GetNameFromPropertyPath(propertyPathString),
+            Mode = bindingMode,
+        };
+    }
+
+    [Obsolete("It looks like this overload is useless, and can be replaced with other mehtods")]
+    protected static Binding Bind<T, TProp>(T source, Expression<Func<T, TProp>> propertyGetterExp, BindingMode bindingMode = BindingMode.Default)
+    {
+        if (propertyGetterExp.Body is MemberExpression propertyGetter)
+        {
+            return new Binding()
+            {
+                Source = source,
+                Path = propertyGetter.Member.Name,
+                Mode = bindingMode,
+            };
+        }
+
+        throw new MemberAccessException("Wrong property getter expression");
+    }
+
+    #region Hot reload stuff
     public void Reload()
     {
         Dispatcher.UIThread.InvokeAsync(() =>
@@ -121,90 +190,6 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     protected virtual void OnBeforeReload()
     {
     }
-
-    public void Initialize()
-    {
-        try
-        {
-            NameScope.SetNameScope(this, Scope);
-
-            var content = Build();
-            Child = content as Control;
-
-            ViewInitialized?.Invoke();
-            OnAfterInitialized();
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-            Debug.WriteLine(ex.StackTrace);
-            throw;
-        }
-    }
-
-    [Obsolete("There is no reason to keep it inside view base. Use Avalonia methods: Application.Current.Resources.TryGetResource")]
-    public static T GetResource<T>(string key)
-    {
-        if (Application.Current.Resources.TryGetResource(key, ThemeVariant.Default, out var res))
-        {
-            if (res is T tres)
-                return tres;
-        }
-        return default;
-    }
-
-    protected TControl Create<TControl>(Action<TControl> initializer)
-        where TControl : Control, new()
-
-    {
-        var control = new TControl();
-        initializer?.Invoke(control);
-        return control;
-    }
-
-    /// <summary>
-    /// Create binding to Avalonia property
-    /// </summary>
-    /// <param name="property">Avalonia property</param>
-    /// <param name="bindingMode">Binding mode</param>
-    /// <returns></returns>
-    protected Binding Bind(AvaloniaProperty property, BindingMode bindingMode = BindingMode.Default)
-    {
-        return new Binding()
-        {
-            Source = this,
-            Path = property.Name,
-            Mode = bindingMode
-        };
-    }
-
-    protected static Binding Bind<T>(T source, object propertyPath, BindingMode bindingMode = BindingMode.Default,
-        [CallerArgumentExpression("propertyPath")] string propertyPathString = null)
-    {
-        return new Binding()
-        {
-            Source = source,
-            Path = PropertyPathHelper.GetNameFromPropertyPath(propertyPathString),
-            Mode = bindingMode,
-        };
-    }
-
-    protected static Binding Bind<T, TProp>(T source, Expression<Func<T, TProp>> propertyGetterExp, BindingMode bindingMode = BindingMode.Default)
-    {
-        if (propertyGetterExp.Body is MemberExpression propertyGetter)
-        {
-            return new Binding()
-            {
-                Source = source,
-                Path = propertyGetter.Member.Name,
-                Mode = bindingMode,
-            };
-        }
-
-        throw new MemberAccessException("Wrong property getter expression");
-    }
-    
-    #region Hot reload stuff
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
@@ -235,4 +220,34 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     }
     #endregion
 
+}
+
+internal class ViewBuildContext : IDisposable
+{
+    private static Stack<ViewBuildContext> _viewsStack = new();
+    private static ViewBuildContext? _currentContext;
+
+    internal static ViewBase? CurrentView => _currentContext?._view;
+
+    ViewBase _view;
+
+    public ViewBuildContext(ViewBase view)
+    {
+        _view = view;
+        
+        if(_currentContext != null)
+            _viewsStack.Push(_currentContext);
+
+        _currentContext = this;
+        
+        Debug.WriteLine($"Pushed view {view.GetType().Name}");
+    }
+
+    public void Dispose()
+    {
+        _currentContext = _viewsStack.Count > 0 ? _viewsStack.Pop() : null;
+        
+        if( _currentContext != null )
+            Debug.WriteLine($"Poped view {_currentContext._view.GetType().Name}");
+    }
 }

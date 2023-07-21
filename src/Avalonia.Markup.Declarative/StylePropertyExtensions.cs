@@ -1,6 +1,5 @@
 ﻿using Avalonia.Styling;
 using System;
-using System.Linq.Expressions;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -16,12 +15,12 @@ public static class StylePropertyExtensions
     public static Style<TElement> Selector<TElement>(this Style<TElement> style, Func<Selector, Selector> selector)
         where TElement : StyledElement
     {
-        Selector TypeSelector(Selector s) => s.OfType<TElement>();
+        Selector TypeSelector(Selector? s) => s.OfType<TElement>();
         style.Selector = selector(TypeSelector(null));
         return style;
     }
 
-    public static Style Selector(this Style style, Func<Selector, Selector> selector)
+    public static Style Selector(this Style style, Func<Selector?, Selector> selector)
     {
         style.Selector = selector(null);
         return style;
@@ -60,7 +59,7 @@ public class Style<TControl> : Style
     /// </summary>
     public Style()
     {
-        Selector = ((Selector)null).OfType<TControl>();
+        Selector = ((Selector?)null).OfType<TControl>();
     }
 
     /// <summary>
@@ -68,8 +67,8 @@ public class Style<TControl> : Style
     /// otherwise Avalonia will try to apply this style to any control, that match this selector. 
     /// </summary>
     /// <param name="selector"></param>
-    public Style(Func<Selector, Selector> selector)
+    public Style(Func<Selector?, Selector> selector)
     {
-        Selector = selector(((Selector)null));
+        Selector = selector(null);
     }
 }

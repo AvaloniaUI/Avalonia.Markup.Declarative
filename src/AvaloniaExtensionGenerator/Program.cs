@@ -12,6 +12,8 @@ new EventsExtensionGenerator(config, "..\\Avalonia.Markup.Declarative\\ControlEv
 new PropertyExtensionsGenerator(config, "..\\Avalonia.Markup.Declarative\\ControlPropertyExtensions.Generated.cs",
     // new ValueSetterGenerator(),
     new BindSetterGenerator(),
+    new AvaloniaPropertyBindSetterGenerator(),
+    new BindFromExpressionSetterGenerator(),
     new MagicalSetterGenerator(),
     new MagicalSetterWithConverterGenerator(),
     new ValueOverloadsSetterGenerator()

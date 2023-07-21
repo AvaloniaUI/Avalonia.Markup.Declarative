@@ -15,15 +15,14 @@ public static class ControlEventExtensions
 internal static class WeakEventHandler<TArgs>
 {
     public static EventHandler<TArgs> Create<THandler>(
-        THandler handler, Action<THandler, object, TArgs> invoker)
+        THandler handler, Action<THandler, object?, TArgs> invoker)
         where THandler : class
     {
         var weakEventHandler = new WeakReference<THandler>(handler);
 
         return (sender, args) =>
         {
-            THandler thandler;
-            if (weakEventHandler.TryGetTarget(out thandler))
+            if (weakEventHandler.TryGetTarget(out THandler? thandler))
             {
                 invoker(thandler, sender, args);
             }

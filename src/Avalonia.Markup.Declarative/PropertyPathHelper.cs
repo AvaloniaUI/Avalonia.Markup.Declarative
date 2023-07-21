@@ -6,7 +6,7 @@ public static class PropertyPathHelper
 {
     private static readonly char[] StopChars = {' ', '?', ',', '\"', '@', '\t', '\n'};
 
-    public static string GetNameFromPropertyPath(string path)
+    public static string GetNameFromPropertyPath(string? path)
     {
         if (path == null)
             return "";

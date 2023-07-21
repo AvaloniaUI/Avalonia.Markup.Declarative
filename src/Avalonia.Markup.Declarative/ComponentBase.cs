@@ -10,9 +10,9 @@ namespace Avalonia.Markup.Declarative;
 
 public abstract class ComponentBase : ViewBase, IMvuComponent
 {
-    ViewPropertyState[] _localPropertyStates = null;
-    List<ViewPropertyState> _externalPropertyStates = null;
-    List<IMvuComponent> _dependentViews = null;
+    private ViewPropertyState[]? _localPropertyStates;
+    private List<ViewPropertyState>? _externalPropertyStates;
+    private List<IMvuComponent>? _dependentViews;
 
     protected override void OnCreated()
     {
@@ -40,12 +40,12 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
                 if (componentType.GetField($"<{propertyInfo.Name}>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance) is { } backingField)
                     backingField.SetValue(this, service);
                 else
-                    throw new InvalidOperationException($"Can't inject {service.GetType()} service. Ensure that target property: {GetType().Name}.{propertyInfo.Name} has public setter or it's an auto-property");
+                    throw new InvalidOperationException($"Can't inject {service?.GetType()} service. Ensure that target property: {GetType().Name}.{propertyInfo.Name} has public setter or it's an auto-property");
             }
         }
     }
 
-    private object GetServiceFromProvider(Type serviceType)
+    private static object? GetServiceFromProvider(Type serviceType)
     {
         if (ComponentExtensions.ServiceProvider == null)
             throw new InvalidOperationException("Please set Service Provider by calling UseServiceProvider on AppBuilder");
@@ -82,14 +82,20 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         if (_dependentViews != null)
             foreach (var dependentView in _dependentViews)
                 dependentView.UpdateState();
+
+        foreach (var computedState in __viewComputedStates)
+            computedState.OnPropertyChanged();
     }
 
-    public void AddExternalState<TContorl, TValue>(TContorl source, string propertyName, Action<TValue> setAction)
+    public void AddExternalState<TContorl, TValue>(TContorl source, string propertyName, Action<TValue?> setAction)
         where TContorl : ComponentBase
     {
         _externalPropertyStates ??= new List<ViewPropertyState>();
 
         var propInfo = source.GetType().GetProperty(propertyName);
+
+        if (propInfo == null)
+            throw new NullReferenceException($"Property info {propertyName} is null");
 
         var propertyState = new ViewPropertyState<TValue>(propInfo, source, setAction);
         _externalPropertyStates.Add(propertyState);
@@ -105,20 +111,25 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             _dependentViews.Add(view);
     }
 
-    protected Binding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string bindingString = null)
+    protected Binding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string? valueExpressionString = null)
     {
-        object bindingSource = this;
+        return CreateMvuBinding(value, bindingMode, valueExpressionString);
+    }
+
+    internal Binding CreateMvuBinding(object value, BindingMode? bindingMode, string? valueExpressionString)
+    {
+        object? bindingSource = this;
         var useStateValueAsSource = false;
 
-        var propName = PropertyPathHelper.GetNameFromPropertyPath(bindingString);
+        var propName = PropertyPathHelper.GetNameFromPropertyPath(valueExpressionString);
         var stateName = propName;
 
-        var splitterIndex = bindingString!.IndexOf('.');
+        var splitterIndex = valueExpressionString!.IndexOf('.');
 
         if (splitterIndex > -1)
         {
-            var startIndex = bindingString.StartsWith("@") ? 1 : 0;
-            stateName = bindingString.Substring(0, splitterIndex - startIndex);
+            var startIndex = valueExpressionString.StartsWith("@") ? 1 : 0;
+            stateName = valueExpressionString.Substring(0, splitterIndex - startIndex);
 
             useStateValueAsSource = true;
         }
@@ -134,21 +145,21 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         {
             Source = bindingSource,
             Path = propName,
-            Mode = bindingMode,
+            Mode = bindingMode ?? BindingMode.Default,
             Value = value
         };
     }
 
     public class MvuBinding : Binding
     {
-        public object Value { get; set; }
+        public object? Value { get; set; }
     }
 
-    private ViewPropertyState FindStateForBindingString(string stateName) =>
+    private ViewPropertyState? FindStateForBindingString(string stateName) =>
         _localPropertyStates?.FirstOrDefault(x => x.Name == stateName);
 
-    public new event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    public new event PropertyChangedEventHandler? PropertyChanged;
+    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

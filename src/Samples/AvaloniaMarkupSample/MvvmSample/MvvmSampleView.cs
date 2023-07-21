@@ -15,6 +15,6 @@ public class MvvmSampleView : ViewBase<MvvmSampleViewModel>
                 new Button()
                     .Content("Execute Command")
                     .Command(new Binding(nameof(vm.MyCommand)))
-                    .CommandParameter()
+                    .CommandParameter(new Binding() { Source = vm })
             );
 }
