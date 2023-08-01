@@ -40,7 +40,8 @@ public static class ControlPropertyExtensions
         {
             Source = view,
             Path = propertyToBindTo.Name,
-            Mode = BindingMode.Default
+            Mode = bindingMode ?? BindingMode.Default,
+            Converter = converter
         };
 
         control[!avaloniaProperty] = binding;
