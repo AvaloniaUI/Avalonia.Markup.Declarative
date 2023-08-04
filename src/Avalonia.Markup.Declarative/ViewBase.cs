@@ -240,14 +240,14 @@ internal class ViewBuildContext : IDisposable
 
         _currentContext = this;
         
-        Debug.WriteLine($"Pushed view {view.GetType().Name}");
+        //Debug.WriteLine($"Pushed view {view.GetType().Name}");
     }
 
     public void Dispose()
     {
         _currentContext = _viewsStack.Count > 0 ? _viewsStack.Pop() : null;
         
-        if( _currentContext != null )
-            Debug.WriteLine($"Poped view {_currentContext._view.GetType().Name}");
+        //if( _currentContext != null )
+        //    Debug.WriteLine($"Poped view {_currentContext._view.GetType().Name}");
     }
 }
