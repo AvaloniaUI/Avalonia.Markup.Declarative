@@ -8,6 +8,9 @@
 		<TrimMode>copyused</TrimMode>
 		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 	</PropertyGroup>
+  <PropertyGroup>
+    <PublishAot>true</PublishAot>
+  </PropertyGroup>
 	<ItemGroup>
 		<None Remove=".gitignore" />
 	</ItemGroup>
