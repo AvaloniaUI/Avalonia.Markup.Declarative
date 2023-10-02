@@ -194,32 +194,16 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
-#if DEBUG
         HotReloadManager.RegisterInstance(this);
-#endif
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
-#if DEBUG
         HotReloadManager.UnregisterInstance(this);
-#endif
     }
 
     #endregion
-
-    #region Debug stuff
-
-    [DebuggerHidden]
-    protected static void Break()
-    {
-#if DEBUG
-        Debugger.Break();
-#endif
-    }
-    #endregion
-
 }
 
 internal class ViewBuildContext : IDisposable

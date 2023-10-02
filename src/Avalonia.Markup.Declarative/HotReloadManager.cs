@@ -14,7 +14,16 @@ public static class HotReloadManager
 
     public static event Action<Type[]?>? HotReloaded;
 
-    private static void OnHotReloaded(Type[]? types) => HotReloaded?.Invoke(types);
+    public static bool IsEnabled { get; private set; } = true;
+
+    public static void Activate() => 
+        IsEnabled = true;
+
+    public static void Deactivate() => 
+        IsEnabled = false;
+
+    private static void OnHotReloaded(Type[]? types) => 
+        HotReloaded?.Invoke(types);
 
     public static void ClearCache(Type[]? types)
     {
@@ -23,6 +32,8 @@ public static class HotReloadManager
 
     public static void UpdateApplication(Type[]? types)
     {
+        if (!IsEnabled) return;
+
         Console.WriteLine("UpdateApplication for types: " + PrintTypes(types));
         if (types != null)
         {
@@ -49,6 +60,8 @@ public static class HotReloadManager
 
     internal static void RegisterInstance(IReloadable instance)
     {
+        if(!IsEnabled) return;
+
         var type = instance.GetType();
         if (!Instances.TryGetValue(type, out var instances))
         {
@@ -61,10 +74,13 @@ public static class HotReloadManager
 
     internal static void UnregisterInstance(IReloadable instance)
     {
+        if (!IsEnabled) return;
+
         var type = instance.GetType();
         if (!Instances.TryGetValue(type, out var instances)) return;
 
         if (instances.Contains(instance))
             instances.Remove(instance);
     }
+
 }

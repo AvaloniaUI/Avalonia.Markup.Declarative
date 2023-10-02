@@ -47,10 +47,10 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
 
     private static object? GetServiceFromProvider(Type serviceType)
     {
-        if (ComponentExtensions.ServiceProvider == null)
+        if (AppBuilderExtensions.ServiceProvider == null)
             throw new InvalidOperationException("Please set Service Provider by calling UseServiceProvider on AppBuilder");
 
-        return ComponentExtensions.ServiceProvider.GetService(serviceType);
+        return AppBuilderExtensions.ServiceProvider.GetService(serviceType);
     }
 
     private void InitStateMembers()
