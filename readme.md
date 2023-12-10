@@ -67,6 +67,7 @@ public class MainView : ViewBase<MainViewModel>
 ViewBase class automagiacally supports .Net 6 hot reload feature.
 
 * make sure that your view classes are located in the Assembly that doesn't contain any Xaml files, otherwise hot reload feature will always throw "need to rebuild" message.
+** 2023 note - according to the latest experience with .net 7 and latest avalonia versions there is no conflict anymore between axaml files and hotreload functionality. So you can mix axmal with cs markup in one project 
 
 ## Properties support on custom controls
 There are two source generators to add markup extensions on your own controls. If you downloaded source code or clonned this repo, you have to add them by referencing Avalonia.Markup.Declarative.SourceGenerator project in csproj file like this:
