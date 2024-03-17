@@ -16,6 +16,10 @@ lifetime.MainWindow = new Window()
     .Title("Avalonia MVU Template")
     .Content(new SimpleComponent());
 
+#if DEBUG
+lifetime.MainWindow.AttachDevTools();
+#endif
+
 lifetime.Start(args);
 
 public class SampleDataService

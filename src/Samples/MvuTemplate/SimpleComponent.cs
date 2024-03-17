@@ -1,11 +1,19 @@
-﻿namespace MvuTemplate;
+﻿using Avalonia.Styling;
+
+namespace MvuTemplate;
 
 public class SimpleComponent : ComponentBase
 {
     [Inject] SampleDataService DataService { get; set; } = null!;
 
+    protected override StyleGroup? BuildStyles()
+    {
+        return base.BuildStyles();
+    }
+
     protected override object Build() =>
         new StackPanel()
+            .BindClass(() => Bounds.Width < 400, "narrow")
             .VerticalAlignment(VerticalAlignment.Center)
             .HorizontalAlignment(HorizontalAlignment.Center)
             .Children(
@@ -14,25 +22,16 @@ public class SimpleComponent : ComponentBase
                 new TextBlock()
                     .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"),
                 new NumericUpDown()
-                    .Value(Counter, BindingMode.TwoWay),
+                    .Value(() => Counter, onChanged: v => Counter = v),
                 new Button()
-                    .HorizontalAlignment (HorizontalAlignment.Center)
+                    .HorizontalAlignment(HorizontalAlignment.Center)
                     .Content("Click me")
                     .OnClick(OnButtonClick)
             );
 
     private TextBlock _textBlock1 = null!;
-    private decimal _counter;
 
-    public decimal Counter
-    {
-        get => _counter;
-        set
-        {
-            _counter = value; 
-            StateHasChanged();
-        }
-    }
+    private decimal? Counter { get; set; } = 0;
 
     private void OnButtonClick(RoutedEventArgs e)
     {

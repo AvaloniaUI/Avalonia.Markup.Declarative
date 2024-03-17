@@ -62,8 +62,9 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             .Select(p => new ViewPropertyState(p, this))
             .ToArray();
     }
-    public void UpdateState()
+    public void UpdateState(Action? updateStateAction = default)
     {
+        updateStateAction?.Invoke();
         StateHasChanged();
     }
 

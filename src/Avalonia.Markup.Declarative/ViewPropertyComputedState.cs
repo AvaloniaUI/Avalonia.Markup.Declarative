@@ -5,10 +5,25 @@ namespace Avalonia.Markup.Declarative;
 
 internal class ViewPropertyComputedState<T> : ViewPropertyComputedState
 {
-    public T Value => SetterFunc();
-    public Func<T> SetterFunc { get; }
-    internal ViewPropertyComputedState(Func<T> setterFunc, string expressionString)
+    public Action<T>? SetChangedHandler { get; }
+
+    public T Value
     {
+        get => SetterFunc();
+        set
+        {
+            if (SetChangedHandler == null)
+                throw new ArgumentNullException($"{ExpressionString}: two way binding value change handler is not set");
+
+            SetChangedHandler(value);
+            OnPropertyChanged();
+        }
+    }
+
+    public Func<T> SetterFunc { get; }
+    internal ViewPropertyComputedState(Func<T> setterFunc, string? expressionString, Action<T>? setChangedHandler)
+    {
+        SetChangedHandler = setChangedHandler;
         ExpressionString = expressionString;
         SetterFunc = setterFunc;
     }

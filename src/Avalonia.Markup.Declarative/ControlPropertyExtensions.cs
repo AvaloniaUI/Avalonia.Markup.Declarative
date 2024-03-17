@@ -7,8 +7,10 @@ using Avalonia.Media;
 using Avalonia.Styling;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -31,11 +33,13 @@ public static class ControlPropertyExtensions
     /// <param name="propertyToBindTo"></param>
     /// <param name="bindingMode"></param>
     /// <param name="converter"></param>
+    /// <param name="overrideView"></param>
     /// <returns></returns>
-    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, AvaloniaProperty propertyToBindTo, BindingMode? bindingMode, IValueConverter? converter)
-    where TControl : AvaloniaObject
+    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty,
+        AvaloniaProperty propertyToBindTo, BindingMode? bindingMode, IValueConverter? converter, ViewBase? overrideView)
+        where TControl : AvaloniaObject
     {
-        var view = ViewBuildContext.CurrentView;
+        var view = overrideView ?? ViewBuildContext.CurrentView;
         var binding = new Binding()
         {
             Source = view,
@@ -71,10 +75,12 @@ public static class ControlPropertyExtensions
     /// <param name="control"></param>
     /// <param name="avaloniaProperty"></param>
     /// <param name="func"></param>
+    /// <param name="setChangedHandler"></param>
     /// <param name="expression"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    public static TControl _set<TControl, TValue>(this TControl control, AvaloniaProperty avaloniaProperty, Func<TValue> func, string expression)
+    public static TControl _set<TControl, TValue>(this TControl control, AvaloniaProperty avaloniaProperty,
+        Func<TValue> func, Action<TValue>? setChangedHandler, string? expression)
         where TControl : AvaloniaObject
     {
         var view = ViewBuildContext.CurrentView;
@@ -82,18 +88,20 @@ public static class ControlPropertyExtensions
         if (view == null)
             throw new InvalidOperationException("Curent view is not set");
 
-        var state = new ViewPropertyComputedState<TValue>(func, expression);
+        var handler = setChangedHandler;
 
-        if (!view.__viewComputedStates.Any(x => x.Equals(state)))
-            view.__viewComputedStates.Add(state);
+        if (view is ComponentBase componentBase && setChangedHandler != null)
+            handler = v => componentBase.UpdateState(() => setChangedHandler(v));
 
-        var index = view.__viewComputedStates.IndexOf(state);
+        var state = new ViewPropertyComputedState<TValue>(func, expression, handler);
+
+        view.__viewComputedStates.Add(state);
 
         var binding = new Binding
         {
             Path = "Value",
-            Mode = BindingMode.OneWay,
-            Source = view.__viewComputedStates[index]
+            Mode = setChangedHandler == null ? BindingMode.OneWay : BindingMode.TwoWay,
+            Source = state
         };
         control.Bind(avaloniaProperty, binding);
 
@@ -112,8 +120,9 @@ public static class ControlPropertyExtensions
     /// <param name="converter"></param>
     /// <param name="bindingSource"></param>
     /// <returns></returns>
-    public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty, string? sourcePropertyPathString, Action setAction,
-                        BindingMode? bindingMode, IValueConverter? converter, object? bindingSource)
+    public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty,
+        string? sourcePropertyPathString, Action setAction,
+        BindingMode? bindingMode, IValueConverter? converter, object? bindingSource)
         where TControl : AvaloniaObject
     {
         if (sourcePropertyPathString == null
@@ -155,8 +164,10 @@ public static class ControlPropertyExtensions
         [CallerArgumentExpression("value")] string? ps = null)
         where TElement : StyledElement
     {
-        return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode, converter, null);
+        return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode,
+            converter, null);
     }
+
     public static TElement DataContext<TElement, TDataContext>(
         this TElement control,
         TDataContext value,
@@ -167,7 +178,8 @@ public static class ControlPropertyExtensions
         where TElement : StyledElement where TDataContext : class
     {
         dataContext = value;
-        return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode, converter, null);
+        return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode,
+            converter, null);
     }
 
     public static Brush ToBrush(this Color color) => new SolidColorBrush(color);
@@ -185,6 +197,7 @@ public static class ControlPropertyExtensions
         Grid.SetRow(control, value);
         return control;
     }
+
     public static TElement Cols<TElement>(this TElement control, ColumnDefinitions value)
         where TElement : Grid
     {
@@ -261,6 +274,7 @@ public static class ControlPropertyExtensions
         ScrollViewer.SetHorizontalScrollBarVisibility(control, value);
         return control;
     }
+
     public static TElement VerticalScrollBarVisibility<TElement>(this TElement control, ScrollBarVisibility value)
         where TElement : Control
     {
@@ -287,13 +301,16 @@ public static class ControlPropertyExtensions
 
     public static TabControl ItemTemplate<TItem>(this TabControl control, Func<TItem, Control> build) =>
         ItemTemplate<TItem, TabControl>(control, build);
-    public static SelectingItemsControl ItemTemplate<TItem>(this SelectingItemsControl control, Func<TItem, Control> build) =>
+
+    public static SelectingItemsControl ItemTemplate<TItem>(this SelectingItemsControl control,
+        Func<TItem, Control> build) =>
         ItemTemplate<TItem, SelectingItemsControl>(control, build);
 
     public static ItemsControl ItemTemplate<TItem>(this ItemsControl control, Func<TItem, Control> build) =>
         ItemTemplate<TItem, ItemsControl>(control, build);
 
-    public static TItemsControl ItemTemplate<TItem, TItemsControl>(this TItemsControl control, Func<TItem, Control> build)
+    public static TItemsControl ItemTemplate<TItem, TItemsControl>(this TItemsControl control,
+        Func<TItem, Control> build)
         where TItemsControl : ItemsControl
     {
         control.ItemTemplate =
@@ -338,21 +355,62 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TElement Classes<TElement>(this TElement control, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string? caller = default)
+    public static TElement Styles<TElement>(this TElement control, IEnumerable<Style> styles)
+        where TElement : Control
+    {
+        foreach (var style in styles)
+            control.Styles.Add(style);
+
+        return control;
+    }
+
+    public static TElement Classes<TElement>(this TElement control, string className, [CallerLineNumber] int line = 0,
+        [CallerMemberName] string? caller = default)
         where TElement : Control
     {
         control.Classes.Add(className);
         return control;
     }
 
-    public static TElement BindClass<TElement>(this TElement control, bool value, string className, [CallerLineNumber] int line = 0, [CallerMemberName] string? caller = default, [CallerArgumentExpression("value")] string? ps = null)
+    public static TElement BindClass<TElement>(this TElement control, Func<bool> func, string className,
+        [CallerArgumentExpression("func")] string? ps = null)
+        where TElement : Control
+    {
+
+        var view = ViewBuildContext.CurrentView;
+
+        if (view == null)
+            throw new InvalidOperationException("Curent view is not set");
+
+        var state = new ViewPropertyComputedState<bool>(func, ps, null);
+
+        view.__viewComputedStates.Add(state);
+
+        var binding = new Binding("Value", BindingMode.OneWay)
+        {
+            Source = state
+        };
+
+        control.BindClass(className, binding, null!);
+
+        return control;
+    }
+
+    public static TElement BindClass<TElement>(this TElement control, bool value, string className,
+        object? bindingSource = null, [CallerLineNumber] int line = 0, [CallerMemberName] string? caller = default,
+        [CallerArgumentExpression("value")] string? ps = null)
         where TElement : Control
     {
         var path = PropertyPathHelper.GetNameFromPropertyPath(ps);
         var binding = new Binding(path, BindingMode.OneWay);
+
+        if (bindingSource != null)
+            binding.Source = bindingSource;
+
         control.BindClass(className, binding, null!);
         return control;
     }
+
     public static StackTrace GetDeeperStackTrace(int depth) =>
         depth > 0 ? GetDeeperStackTrace(depth - 1) : new StackTrace(0, true);
 
@@ -365,7 +423,8 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TElement SetProp<TElement, TValue>(this TElement control, Avalonia.AvaloniaProperty property, TValue value)
+    public static TElement SetProp<TElement, TValue>(this TElement control, Avalonia.AvaloniaProperty property,
+        TValue value)
         where TElement : Control
     {
         if (value is IBinding binding)
@@ -376,6 +435,7 @@ public static class ControlPropertyExtensions
         {
             control[property] = value;
         }
+
         return control;
     }
 
@@ -391,6 +451,7 @@ public static class ControlPropertyExtensions
         {
             control[prop] = value;
         }
+
         return control;
     }
 
@@ -417,7 +478,8 @@ public static class ControlPropertyExtensions
     /// <param name="command">Item command</param>
     /// <param name="commandParameter">Command parameter</param>
     /// <returns></returns>
-    public static TElement? AddItem<TElement>(this TElement menuFlyout, string text, ICommand command, object? commandParameter = null)
+    public static TElement? AddItem<TElement>(this TElement menuFlyout, string text, ICommand command,
+        object? commandParameter = null)
         where TElement : MenuFlyout
     {
         var item = new MenuItem() { Header = text, Command = command };

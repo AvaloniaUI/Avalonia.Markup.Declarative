@@ -2,13 +2,12 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace AvaloniaExtensionGenerator.SetterGenerators
-{
+namespace AvaloniaExtensionGenerator.SetterGenerators;
 
-    public class ValueOverloadsSetterGenerator : SetterGeneratorBase
+public class ValueOverloadsSetterGenerator : SetterGeneratorBase
+{
+    public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
     {
-        public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
-        {
             var nl = Environment.NewLine;
             var extensionText = "";
             // overloads for primitive types like margin
@@ -38,5 +37,4 @@ namespace AvaloniaExtensionGenerator.SetterGenerators
             }
             return extensionText;
         }
-    }
 }
