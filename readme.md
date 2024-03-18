@@ -86,6 +86,15 @@ Inspired by blazor component layout. So basic component will looks like:
 ```C#
 public class Component : ComponentBase
 {
+
+//styles
+	protected override StyleGroup? BuildStyles() =>
+	[
+		new Style<Button>()
+			.Margin(6)
+			.Background(Brushes.DarkSalmon),
+	];
+
 //markup part
     protected override object Build() =>
         new StackPanel()
@@ -94,7 +103,7 @@ public class Component : ComponentBase
                     .Ref(out _textBlock1)
                     .Text("Hello world"),
                 new TextBlock()
-                    .Text(Bind(CounterText)),
+                    .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"),
                 new Button()
                     .Content("Click me")
                     .OnClick(OnButtonClick)
@@ -103,8 +112,7 @@ public class Component : ComponentBase
 //code part
     [Inject] SampleDataService DataService { get; set; } = null!; //service injection
 
-    public int Counter { get; set; }
-    public string CounterText => $"Counter: {Counter}";  //no need to implement AvaloniaProperty or OnPropertyChanged behaviors, since component has registry of all properties and emits ProperyChanged event after changing state of component.
+    public int Counter { get; set; } //no need to implement AvaloniaProperty or OnPropertyChanged behaviors, since component has registry of all properties and emits ProperyChanged event after changing state of component.
 
     private void OnButtonClick(RoutedEventArgs e)
     {
