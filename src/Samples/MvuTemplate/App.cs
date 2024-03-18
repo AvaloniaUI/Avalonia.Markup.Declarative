@@ -14,6 +14,8 @@ AppBuilder.Configure<Application>()
 
 lifetime.MainWindow = new Window()
     .Title("Avalonia MVU Template")
+    .Width(800)
+    .Height(600)
     .Content(new SimpleComponent());
 
 #if DEBUG
