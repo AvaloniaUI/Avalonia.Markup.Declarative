@@ -1,10 +1,14 @@
-﻿using Avalonia.Styling;
+﻿using System.Diagnostics.CodeAnalysis;
+using Avalonia.Styling;
 
 namespace MvuTemplate;
 
-public class SimpleComponent : ComponentBase
+//prevent from trimming [injected] services by native aot compilation
+[method: DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(SimpleComponent))]
+public class SimpleComponent() : ComponentBase
 {
-	[Inject] SampleDataService DataService { get; set; } = null!;
+
+	[Inject] public SampleDataService? DataService { get; set; }
 
 	protected override StyleGroup? BuildStyles() =>
 	[
@@ -53,9 +57,8 @@ public class SimpleComponent : ComponentBase
 
 	private void OnButtonClick(RoutedEventArgs e)
 	{
-		Counter++; //state updates on setter
-
-		_textBlock1.Text = DataService.GetData();
+		_textBlock1.Text = DataService?.GetData() ?? "Data service is `null`";
+		StateHasChanged();
 	}
 
 	protected override void OnSizeChanged(SizeChangedEventArgs e)

@@ -23,11 +23,11 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     private void InjectServices()
     {
         var componentType = GetType();
-        var serviceProps = componentType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+        var injectProps = componentType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
             .Where(x => x.GetCustomAttribute(typeof(InjectAttribute)) != null)
             .ToArray();
 
-        foreach (var propertyInfo in serviceProps)
+        foreach (var propertyInfo in injectProps)
         {
             var service = GetServiceFromProvider(propertyInfo.PropertyType);
 
