@@ -46,6 +46,7 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
             sb.AppendLine("#nullable enable");
             sb.AppendLine("// Auto-generated code");
             sb.AppendLine("using System;");
+            sb.AppendLine("using Avalonia.Data;");
             sb.AppendLine("using Avalonia.Data.Converters;");
             sb.AppendLine("using System.Runtime.CompilerServices;");
 

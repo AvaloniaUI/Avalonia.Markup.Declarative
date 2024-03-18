@@ -1,8 +1,12 @@
-﻿namespace MvuTemplate;
+using System.Diagnostics.CodeAnalysis;
+using Avalonia.Styling;
 
-public class SimpleComponent : ComponentBase
+namespace MvuTemplate;
+
+//prevent from trimming [injected] services by native aot compilation
+[method: DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(SimpleComponent))]
+public class SimpleComponent() : ComponentBase
 {
-    [Inject] SampleDataService DataService { get; set; } = null!;
 
 	[Inject] public SampleDataService? DataService { get; set; } //Service injection with DI container
 

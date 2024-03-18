@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using MvuTemplate;
 
 var services = new ServiceCollection();
@@ -14,7 +15,13 @@ AppBuilder.Configure<Application>()
 
 lifetime.MainWindow = new Window()
     .Title("Avalonia MVU Template")
+    .Width(800)
+    .Height(600)
     .Content(new SimpleComponent());
+
+#if DEBUG
+lifetime.MainWindow.AttachDevTools();
+#endif
 
 lifetime.Start(args);
 

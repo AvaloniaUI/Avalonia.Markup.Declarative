@@ -17,8 +17,8 @@ public static class ComponentExtensions
     /// <param name="converter"></param>
     /// <param name="bindingSource"></param>
     /// <returns></returns>
-    public static TControl _setCommonEx<TControl>(this TControl control, string sourcePropertyPathString, Action setAction,
-        BindingMode? bindingMode, IValueConverter converter, object bindingSource)
+    public static TControl _setCommonEx<TControl>(this TControl control, string? sourcePropertyPathString, Action setAction,
+        BindingMode? bindingMode, IValueConverter? converter, object? bindingSource)
         where TControl : AvaloniaObject
     {
         setAction();

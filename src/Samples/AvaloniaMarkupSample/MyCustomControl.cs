@@ -98,7 +98,7 @@ public class MyCustomControl : ViewBase
                         new TextBlock().Text("Enter text:")
                             .VerticalAlignment(VerticalAlignment.Center),
                         new TextBox()
-                            .Text(Bind(NewValueProperty, BindingMode.TwoWay))
+                            .Text(NewValueProperty, BindingMode.TwoWay)
                             .MinWidth(150)
                     ),
 
@@ -111,7 +111,7 @@ public class MyCustomControl : ViewBase
                         new TextBlock().Text("Saved text:")
                             .VerticalAlignment(VerticalAlignment.Center),
                         new TextBox()
-                            .Text(Bind(SavedValueProperty))
+                            .Text(SavedValueProperty, BindingMode.Default)
                             .MinWidth(150)
                     ),
                 new StackPanel().Row(3)
@@ -120,11 +120,11 @@ public class MyCustomControl : ViewBase
                     .Children(
                         new Button().Content("Cancel")
                             .Margin(5, 0)
-                            .IsEnabled(Bind(CanSaveProperty))
+                            .IsEnabled(CanSaveProperty)
                             .OnClick(args=> Cancel()),
                         new Button().Content("Save")
                             .Margin(5, 0)
-                            .IsEnabled(Bind(CanSaveProperty))
+                            .IsEnabled(CanSaveProperty)
                             .OnClick(args => Save())
                     )
             );

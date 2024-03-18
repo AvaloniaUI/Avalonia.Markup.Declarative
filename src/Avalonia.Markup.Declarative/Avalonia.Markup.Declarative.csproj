@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<IsPackable>true</IsPackable>
-    <Nullable>enable</Nullable>
-    <LangVersion>latest</LangVersion>
-		<Version>11.0.4-preview1</Version>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<Version>11.0.6-preview1</Version>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="11.0.0" />
+		<PackageReference Include="Avalonia" Version="11.0.10" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -20,7 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="bin\Debug\net7.0\/Avalonia.Markup.Declarative.SourceGenerator.dll" />
+		<None Remove="bin\Debug\net7.0\/Avalonia.Markup.Declarative.SourceGenerator.dll" />
 	</ItemGroup>
 
 	<ItemGroup>

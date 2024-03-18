@@ -111,14 +111,33 @@ public static Style<Border> BorderThickness(this Style<Border> style, Thickness 
 => style._addSetter(Border.BorderThicknessProperty, value);
 public static Style<Border> BorderThickness(this Style<Border> style, IBinding binding)
 => style._addSetter(Border.BorderThicknessProperty, binding);
+
+public static Style<Border> BorderThickness(this Style<Border> style, Double uniformLength)
+   => style._addSetter(Border.BorderThicknessProperty, new Thickness(uniformLength));
+public static Style<Border> BorderThickness(this Style<Border> style, Double horizontal, Double vertical)
+   => style._addSetter(Border.BorderThicknessProperty, new Thickness(horizontal, vertical));
+public static Style<Border> BorderThickness(this Style<Border> style, Double left, Double top, Double right, Double bottom)
+   => style._addSetter(Border.BorderThicknessProperty, new Thickness(left, top, right, bottom));
 public static Style<Border> CornerRadius(this Style<Border> style, CornerRadius value)
 => style._addSetter(Border.CornerRadiusProperty, value);
 public static Style<Border> CornerRadius(this Style<Border> style, IBinding binding)
 => style._addSetter(Border.CornerRadiusProperty, binding);
+
+public static Style<Border> CornerRadius(this Style<Border> style, Double uniformRadius)
+   => style._addSetter(Border.CornerRadiusProperty, new CornerRadius(uniformRadius));
+public static Style<Border> CornerRadius(this Style<Border> style, Double top, Double bottom)
+   => style._addSetter(Border.CornerRadiusProperty, new CornerRadius(top, bottom));
+public static Style<Border> CornerRadius(this Style<Border> style, Double topLeft, Double topRight, Double bottomRight, Double bottomLeft)
+   => style._addSetter(Border.CornerRadiusProperty, new CornerRadius(topLeft, topRight, bottomRight, bottomLeft));
 public static Style<Border> BoxShadow(this Style<Border> style, BoxShadows value)
 => style._addSetter(Border.BoxShadowProperty, value);
 public static Style<Border> BoxShadow(this Style<Border> style, IBinding binding)
 => style._addSetter(Border.BoxShadowProperty, binding);
+
+public static Style<Border> BoxShadow(this Style<Border> style, BoxShadow shadow)
+   => style._addSetter(Border.BoxShadowProperty, new BoxShadows(shadow));
+public static Style<Border> BoxShadow(this Style<Border> style, BoxShadow first, BoxShadow[] rest)
+   => style._addSetter(Border.BoxShadowProperty, new BoxShadows(first, rest));
 }
 public static partial class ButtonExtensions
 {
@@ -504,6 +523,13 @@ public static Style<Decorator> Padding(this Style<Decorator> style, Thickness va
 => style._addSetter(Decorator.PaddingProperty, value);
 public static Style<Decorator> Padding(this Style<Decorator> style, IBinding binding)
 => style._addSetter(Decorator.PaddingProperty, binding);
+
+public static Style<Decorator> Padding(this Style<Decorator> style, Double uniformLength)
+   => style._addSetter(Decorator.PaddingProperty, new Thickness(uniformLength));
+public static Style<Decorator> Padding(this Style<Decorator> style, Double horizontal, Double vertical)
+   => style._addSetter(Decorator.PaddingProperty, new Thickness(horizontal, vertical));
+public static Style<Decorator> Padding(this Style<Decorator> style, Double left, Double top, Double right, Double bottom)
+   => style._addSetter(Decorator.PaddingProperty, new Thickness(left, top, right, bottom));
 }
 public static partial class DockPanelExtensions
 {
@@ -533,6 +559,13 @@ public static Style<ExperimentalAcrylicBorder> CornerRadius(this Style<Experimen
 => style._addSetter(ExperimentalAcrylicBorder.CornerRadiusProperty, value);
 public static Style<ExperimentalAcrylicBorder> CornerRadius(this Style<ExperimentalAcrylicBorder> style, IBinding binding)
 => style._addSetter(ExperimentalAcrylicBorder.CornerRadiusProperty, binding);
+
+public static Style<ExperimentalAcrylicBorder> CornerRadius(this Style<ExperimentalAcrylicBorder> style, Double uniformRadius)
+   => style._addSetter(ExperimentalAcrylicBorder.CornerRadiusProperty, new CornerRadius(uniformRadius));
+public static Style<ExperimentalAcrylicBorder> CornerRadius(this Style<ExperimentalAcrylicBorder> style, Double top, Double bottom)
+   => style._addSetter(ExperimentalAcrylicBorder.CornerRadiusProperty, new CornerRadius(top, bottom));
+public static Style<ExperimentalAcrylicBorder> CornerRadius(this Style<ExperimentalAcrylicBorder> style, Double topLeft, Double topRight, Double bottomRight, Double bottomLeft)
+   => style._addSetter(ExperimentalAcrylicBorder.CornerRadiusProperty, new CornerRadius(topLeft, topRight, bottomRight, bottomLeft));
 public static Style<ExperimentalAcrylicBorder> Material(this Style<ExperimentalAcrylicBorder> style, ExperimentalAcrylicMaterial value)
 => style._addSetter(ExperimentalAcrylicBorder.MaterialProperty, value);
 public static Style<ExperimentalAcrylicBorder> Material(this Style<ExperimentalAcrylicBorder> style, IBinding binding)
@@ -788,6 +821,10 @@ public static Style<NumericUpDown> VerticalContentAlignment(this Style<NumericUp
 => style._addSetter(NumericUpDown.VerticalContentAlignmentProperty, value);
 public static Style<NumericUpDown> VerticalContentAlignment(this Style<NumericUpDown> style, IBinding binding)
 => style._addSetter(NumericUpDown.VerticalContentAlignmentProperty, binding);
+public static Style<NumericUpDown> TextAlignment(this Style<NumericUpDown> style, TextAlignment value)
+=> style._addSetter(NumericUpDown.TextAlignmentProperty, value);
+public static Style<NumericUpDown> TextAlignment(this Style<NumericUpDown> style, IBinding binding)
+=> style._addSetter(NumericUpDown.TextAlignmentProperty, binding);
 }
 public static partial class PanelExtensions
 {
@@ -904,6 +941,10 @@ public static Style<ScrollViewer> IsScrollInertiaEnabled(this Style<ScrollViewer
 => style._addSetter(ScrollViewer.IsScrollInertiaEnabledProperty, value);
 public static Style<ScrollViewer> IsScrollInertiaEnabled(this Style<ScrollViewer> style, IBinding binding)
 => style._addSetter(ScrollViewer.IsScrollInertiaEnabledProperty, binding);
+public static Style<ScrollViewer> IsDeferredScrollingEnabled(this Style<ScrollViewer> style, Boolean value)
+=> style._addSetter(ScrollViewer.IsDeferredScrollingEnabledProperty, value);
+public static Style<ScrollViewer> IsDeferredScrollingEnabled(this Style<ScrollViewer> style, IBinding binding)
+=> style._addSetter(ScrollViewer.IsDeferredScrollingEnabledProperty, binding);
 }
 public static partial class SelectableTextBlockExtensions
 {
@@ -1070,6 +1111,13 @@ public static Style<TextBlock> Padding(this Style<TextBlock> style, Thickness va
 => style._addSetter(TextBlock.PaddingProperty, value);
 public static Style<TextBlock> Padding(this Style<TextBlock> style, IBinding binding)
 => style._addSetter(TextBlock.PaddingProperty, binding);
+
+public static Style<TextBlock> Padding(this Style<TextBlock> style, Double uniformLength)
+   => style._addSetter(TextBlock.PaddingProperty, new Thickness(uniformLength));
+public static Style<TextBlock> Padding(this Style<TextBlock> style, Double horizontal, Double vertical)
+   => style._addSetter(TextBlock.PaddingProperty, new Thickness(horizontal, vertical));
+public static Style<TextBlock> Padding(this Style<TextBlock> style, Double left, Double top, Double right, Double bottom)
+   => style._addSetter(TextBlock.PaddingProperty, new Thickness(left, top, right, bottom));
 public static Style<TextBlock> FontFamily(this Style<TextBlock> style, FontFamily value)
 => style._addSetter(TextBlock.FontFamilyProperty, value);
 public static Style<TextBlock> FontFamily(this Style<TextBlock> style, IBinding binding)
@@ -1102,6 +1150,10 @@ public static Style<TextBlock> LineHeight(this Style<TextBlock> style, Double va
 => style._addSetter(TextBlock.LineHeightProperty, value);
 public static Style<TextBlock> LineHeight(this Style<TextBlock> style, IBinding binding)
 => style._addSetter(TextBlock.LineHeightProperty, binding);
+public static Style<TextBlock> LineSpacing(this Style<TextBlock> style, Double value)
+=> style._addSetter(TextBlock.LineSpacingProperty, value);
+public static Style<TextBlock> LineSpacing(this Style<TextBlock> style, IBinding binding)
+=> style._addSetter(TextBlock.LineSpacingProperty, binding);
 public static Style<TextBlock> LetterSpacing(this Style<TextBlock> style, Double value)
 => style._addSetter(TextBlock.LetterSpacingProperty, value);
 public static Style<TextBlock> LetterSpacing(this Style<TextBlock> style, IBinding binding)
@@ -1291,6 +1343,15 @@ public static Style<TickBar> ReservedSpace(this Style<TickBar> style, Rect value
 => style._addSetter(TickBar.ReservedSpaceProperty, value);
 public static Style<TickBar> ReservedSpace(this Style<TickBar> style, IBinding binding)
 => style._addSetter(TickBar.ReservedSpaceProperty, binding);
+
+public static Style<TickBar> ReservedSpace(this Style<TickBar> style, Double x, Double y, Double width, Double height)
+   => style._addSetter(TickBar.ReservedSpaceProperty, new Rect(x, y, width, height));
+public static Style<TickBar> ReservedSpace(this Style<TickBar> style, Size size)
+   => style._addSetter(TickBar.ReservedSpaceProperty, new Rect(size));
+public static Style<TickBar> ReservedSpace(this Style<TickBar> style, Point position, Size size)
+   => style._addSetter(TickBar.ReservedSpaceProperty, new Rect(position, size));
+public static Style<TickBar> ReservedSpace(this Style<TickBar> style, Point topLeft, Point bottomRight)
+   => style._addSetter(TickBar.ReservedSpaceProperty, new Rect(topLeft, bottomRight));
 }
 public static partial class ToggleSwitchExtensions
 {
@@ -1336,6 +1397,10 @@ public static Style<TransitioningContentControl> PageTransition(this Style<Trans
 => style._addSetter(TransitioningContentControl.PageTransitionProperty, value);
 public static Style<TransitioningContentControl> PageTransition(this Style<TransitioningContentControl> style, IBinding binding)
 => style._addSetter(TransitioningContentControl.PageTransitionProperty, binding);
+public static Style<TransitioningContentControl> IsTransitionReversed(this Style<TransitioningContentControl> style, Boolean value)
+=> style._addSetter(TransitioningContentControl.IsTransitionReversedProperty, value);
+public static Style<TransitioningContentControl> IsTransitionReversed(this Style<TransitioningContentControl> style, IBinding binding)
+=> style._addSetter(TransitioningContentControl.IsTransitionReversedProperty, binding);
 }
 public static partial class TreeViewExtensions
 {
@@ -1584,14 +1649,33 @@ public static Style<ContentPresenter> BorderThickness(this Style<ContentPresente
 => style._addSetter(ContentPresenter.BorderThicknessProperty, value);
 public static Style<ContentPresenter> BorderThickness(this Style<ContentPresenter> style, IBinding binding)
 => style._addSetter(ContentPresenter.BorderThicknessProperty, binding);
+
+public static Style<ContentPresenter> BorderThickness(this Style<ContentPresenter> style, Double uniformLength)
+   => style._addSetter(ContentPresenter.BorderThicknessProperty, new Thickness(uniformLength));
+public static Style<ContentPresenter> BorderThickness(this Style<ContentPresenter> style, Double horizontal, Double vertical)
+   => style._addSetter(ContentPresenter.BorderThicknessProperty, new Thickness(horizontal, vertical));
+public static Style<ContentPresenter> BorderThickness(this Style<ContentPresenter> style, Double left, Double top, Double right, Double bottom)
+   => style._addSetter(ContentPresenter.BorderThicknessProperty, new Thickness(left, top, right, bottom));
 public static Style<ContentPresenter> CornerRadius(this Style<ContentPresenter> style, CornerRadius value)
 => style._addSetter(ContentPresenter.CornerRadiusProperty, value);
 public static Style<ContentPresenter> CornerRadius(this Style<ContentPresenter> style, IBinding binding)
 => style._addSetter(ContentPresenter.CornerRadiusProperty, binding);
+
+public static Style<ContentPresenter> CornerRadius(this Style<ContentPresenter> style, Double uniformRadius)
+   => style._addSetter(ContentPresenter.CornerRadiusProperty, new CornerRadius(uniformRadius));
+public static Style<ContentPresenter> CornerRadius(this Style<ContentPresenter> style, Double top, Double bottom)
+   => style._addSetter(ContentPresenter.CornerRadiusProperty, new CornerRadius(top, bottom));
+public static Style<ContentPresenter> CornerRadius(this Style<ContentPresenter> style, Double topLeft, Double topRight, Double bottomRight, Double bottomLeft)
+   => style._addSetter(ContentPresenter.CornerRadiusProperty, new CornerRadius(topLeft, topRight, bottomRight, bottomLeft));
 public static Style<ContentPresenter> BoxShadow(this Style<ContentPresenter> style, BoxShadows value)
 => style._addSetter(ContentPresenter.BoxShadowProperty, value);
 public static Style<ContentPresenter> BoxShadow(this Style<ContentPresenter> style, IBinding binding)
 => style._addSetter(ContentPresenter.BoxShadowProperty, binding);
+
+public static Style<ContentPresenter> BoxShadow(this Style<ContentPresenter> style, BoxShadow shadow)
+   => style._addSetter(ContentPresenter.BoxShadowProperty, new BoxShadows(shadow));
+public static Style<ContentPresenter> BoxShadow(this Style<ContentPresenter> style, BoxShadow first, BoxShadow[] rest)
+   => style._addSetter(ContentPresenter.BoxShadowProperty, new BoxShadows(first, rest));
 public static Style<ContentPresenter> Foreground(this Style<ContentPresenter> style, IBrush value)
 => style._addSetter(ContentPresenter.ForegroundProperty, value);
 public static Style<ContentPresenter> Foreground(this Style<ContentPresenter> style, IBinding binding)
@@ -1656,6 +1740,13 @@ public static Style<ContentPresenter> Padding(this Style<ContentPresenter> style
 => style._addSetter(ContentPresenter.PaddingProperty, value);
 public static Style<ContentPresenter> Padding(this Style<ContentPresenter> style, IBinding binding)
 => style._addSetter(ContentPresenter.PaddingProperty, binding);
+
+public static Style<ContentPresenter> Padding(this Style<ContentPresenter> style, Double uniformLength)
+   => style._addSetter(ContentPresenter.PaddingProperty, new Thickness(uniformLength));
+public static Style<ContentPresenter> Padding(this Style<ContentPresenter> style, Double horizontal, Double vertical)
+   => style._addSetter(ContentPresenter.PaddingProperty, new Thickness(horizontal, vertical));
+public static Style<ContentPresenter> Padding(this Style<ContentPresenter> style, Double left, Double top, Double right, Double bottom)
+   => style._addSetter(ContentPresenter.PaddingProperty, new Thickness(left, top, right, bottom));
 public static Style<ContentPresenter> RecognizesAccessKey(this Style<ContentPresenter> style, Boolean value)
 => style._addSetter(ContentPresenter.RecognizesAccessKeyProperty, value);
 public static Style<ContentPresenter> RecognizesAccessKey(this Style<ContentPresenter> style, IBinding binding)
@@ -1745,6 +1836,10 @@ public static Style<TextPresenter> PreeditText(this Style<TextPresenter> style, 
 => style._addSetter(TextPresenter.PreeditTextProperty, value);
 public static Style<TextPresenter> PreeditText(this Style<TextPresenter> style, IBinding binding)
 => style._addSetter(TextPresenter.PreeditTextProperty, binding);
+public static Style<TextPresenter> PreeditTextCursorPosition(this Style<TextPresenter> style, Nullable<Int32> value)
+=> style._addSetter(TextPresenter.PreeditTextCursorPositionProperty, value);
+public static Style<TextPresenter> PreeditTextCursorPosition(this Style<TextPresenter> style, IBinding binding)
+=> style._addSetter(TextPresenter.PreeditTextCursorPositionProperty, binding);
 public static Style<TextPresenter> TextAlignment(this Style<TextPresenter> style, TextAlignment value)
 => style._addSetter(TextPresenter.TextAlignmentProperty, value);
 public static Style<TextPresenter> TextAlignment(this Style<TextPresenter> style, IBinding binding)
@@ -1772,6 +1867,10 @@ public static Style<NotificationCard> IsClosed(this Style<NotificationCard> styl
 => style._addSetter(NotificationCard.IsClosedProperty, value);
 public static Style<NotificationCard> IsClosed(this Style<NotificationCard> style, IBinding binding)
 => style._addSetter(NotificationCard.IsClosedProperty, binding);
+public static Style<NotificationCard> NotificationType(this Style<NotificationCard> style, NotificationType value)
+=> style._addSetter(NotificationCard.NotificationTypeProperty, value);
+public static Style<NotificationCard> NotificationType(this Style<NotificationCard> style, IBinding binding)
+=> style._addSetter(NotificationCard.NotificationTypeProperty, binding);
 }
 public static partial class WindowNotificationManagerExtensions
 {
@@ -2099,10 +2198,24 @@ public static Style<T> BorderThickness<T>(this Style<T> style, Thickness value) 
 => style._addSetter(TemplatedControl.BorderThicknessProperty, value);
 public static Style<T> BorderThickness<T>(this Style<T> style, IBinding binding) where T : TemplatedControl
 => style._addSetter(TemplatedControl.BorderThicknessProperty, binding);
+
+public static Style<T> BorderThickness<T>(this Style<T> style, Double uniformLength) where T : TemplatedControl
+   => style._addSetter(TemplatedControl.BorderThicknessProperty, new Thickness(uniformLength));
+public static Style<T> BorderThickness<T>(this Style<T> style, Double horizontal, Double vertical) where T : TemplatedControl
+   => style._addSetter(TemplatedControl.BorderThicknessProperty, new Thickness(horizontal, vertical));
+public static Style<T> BorderThickness<T>(this Style<T> style, Double left, Double top, Double right, Double bottom) where T : TemplatedControl
+   => style._addSetter(TemplatedControl.BorderThicknessProperty, new Thickness(left, top, right, bottom));
 public static Style<T> CornerRadius<T>(this Style<T> style, CornerRadius value) where T : TemplatedControl
 => style._addSetter(TemplatedControl.CornerRadiusProperty, value);
 public static Style<T> CornerRadius<T>(this Style<T> style, IBinding binding) where T : TemplatedControl
 => style._addSetter(TemplatedControl.CornerRadiusProperty, binding);
+
+public static Style<T> CornerRadius<T>(this Style<T> style, Double uniformRadius) where T : TemplatedControl
+   => style._addSetter(TemplatedControl.CornerRadiusProperty, new CornerRadius(uniformRadius));
+public static Style<T> CornerRadius<T>(this Style<T> style, Double top, Double bottom) where T : TemplatedControl
+   => style._addSetter(TemplatedControl.CornerRadiusProperty, new CornerRadius(top, bottom));
+public static Style<T> CornerRadius<T>(this Style<T> style, Double topLeft, Double topRight, Double bottomRight, Double bottomLeft) where T : TemplatedControl
+   => style._addSetter(TemplatedControl.CornerRadiusProperty, new CornerRadius(topLeft, topRight, bottomRight, bottomLeft));
 public static Style<T> FontFamily<T>(this Style<T> style, FontFamily value) where T : TemplatedControl
 => style._addSetter(TemplatedControl.FontFamilyProperty, value);
 public static Style<T> FontFamily<T>(this Style<T> style, IBinding binding) where T : TemplatedControl
@@ -2131,6 +2244,13 @@ public static Style<T> Padding<T>(this Style<T> style, Thickness value) where T 
 => style._addSetter(TemplatedControl.PaddingProperty, value);
 public static Style<T> Padding<T>(this Style<T> style, IBinding binding) where T : TemplatedControl
 => style._addSetter(TemplatedControl.PaddingProperty, binding);
+
+public static Style<T> Padding<T>(this Style<T> style, Double uniformLength) where T : TemplatedControl
+   => style._addSetter(TemplatedControl.PaddingProperty, new Thickness(uniformLength));
+public static Style<T> Padding<T>(this Style<T> style, Double horizontal, Double vertical) where T : TemplatedControl
+   => style._addSetter(TemplatedControl.PaddingProperty, new Thickness(horizontal, vertical));
+public static Style<T> Padding<T>(this Style<T> style, Double left, Double top, Double right, Double bottom) where T : TemplatedControl
+   => style._addSetter(TemplatedControl.PaddingProperty, new Thickness(left, top, right, bottom));
 public static Style<T> Template<T>(this Style<T> style, IControlTemplate value) where T : TemplatedControl
 => style._addSetter(TemplatedControl.TemplateProperty, value);
 public static Style<T> Template<T>(this Style<T> style, IBinding binding) where T : TemplatedControl
@@ -2189,6 +2309,10 @@ public static Style<Track> IgnoreThumbDrag(this Style<Track> style, Boolean valu
 => style._addSetter(Track.IgnoreThumbDragProperty, value);
 public static Style<Track> IgnoreThumbDrag(this Style<Track> style, IBinding binding)
 => style._addSetter(Track.IgnoreThumbDragProperty, binding);
+public static Style<Track> DeferThumbDrag(this Style<Track> style, Boolean value)
+=> style._addSetter(Track.DeferThumbDragProperty, value);
+public static Style<Track> DeferThumbDrag(this Style<Track> style, IBinding binding)
+=> style._addSetter(Track.DeferThumbDragProperty, binding);
 }
 public static partial class UniformGridExtensions
 {
@@ -2254,6 +2378,11 @@ public static Style<T> RenderTransformOrigin<T>(this Style<T> style, RelativePoi
 => style._addSetter(Visual.RenderTransformOriginProperty, value);
 public static Style<T> RenderTransformOrigin<T>(this Style<T> style, IBinding binding) where T : Visual
 => style._addSetter(Visual.RenderTransformOriginProperty, binding);
+
+public static Style<T> RenderTransformOrigin<T>(this Style<T> style, Double x, Double y, RelativeUnit unit) where T : Visual
+   => style._addSetter(Visual.RenderTransformOriginProperty, new RelativePoint(x, y, unit));
+public static Style<T> RenderTransformOrigin<T>(this Style<T> style, Point point, RelativeUnit unit) where T : Visual
+   => style._addSetter(Visual.RenderTransformOriginProperty, new RelativePoint(point, unit));
 public static Style<T> FlowDirection<T>(this Style<T> style, FlowDirection value) where T : Visual
 => style._addSetter(Visual.FlowDirectionProperty, value);
 public static Style<T> FlowDirection<T>(this Style<T> style, IBinding binding) where T : Visual
@@ -2293,6 +2422,13 @@ public static Style<T> Margin<T>(this Style<T> style, Thickness value) where T :
 => style._addSetter(Layoutable.MarginProperty, value);
 public static Style<T> Margin<T>(this Style<T> style, IBinding binding) where T : Layoutable
 => style._addSetter(Layoutable.MarginProperty, binding);
+
+public static Style<T> Margin<T>(this Style<T> style, Double uniformLength) where T : Layoutable
+   => style._addSetter(Layoutable.MarginProperty, new Thickness(uniformLength));
+public static Style<T> Margin<T>(this Style<T> style, Double horizontal, Double vertical) where T : Layoutable
+   => style._addSetter(Layoutable.MarginProperty, new Thickness(horizontal, vertical));
+public static Style<T> Margin<T>(this Style<T> style, Double left, Double top, Double right, Double bottom) where T : Layoutable
+   => style._addSetter(Layoutable.MarginProperty, new Thickness(left, top, right, bottom));
 public static Style<T> HorizontalAlignment<T>(this Style<T> style, HorizontalAlignment value) where T : Layoutable
 => style._addSetter(Layoutable.HorizontalAlignmentProperty, value);
 public static Style<T> HorizontalAlignment<T>(this Style<T> style, IBinding binding) where T : Layoutable

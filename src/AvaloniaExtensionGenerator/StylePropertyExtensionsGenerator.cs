@@ -2,18 +2,18 @@ using System.Reflection;
 using System.Text;
 using static AvaloniaExtensionGenerator.AvaloniaTypeHelper;
 
-namespace AvaloniaExtensionGenerator
+namespace AvaloniaExtensionGenerator;
+
+public class StylePropertyExtensionsGenerator
 {
-    public class StylePropertyExtensionsGenerator
+    public string OutputPath { get; set; }
+
+    public Config Config { get; set; }
+
+    public ISetterExtensionGenerator[] Generators { get; private set; }
+
+    public StylePropertyExtensionsGenerator(Config config, string outputPath, params ISetterExtensionGenerator[] generators)
     {
-        public string OutputPath { get; set; }
-
-        public Config Config { get; set; }
-
-        public ISetterExtensionGenerator[] Generators { get; private set; }
-
-        public StylePropertyExtensionsGenerator(Config config, string outputPath, params ISetterExtensionGenerator[] generators)
-        {
             Config = config;
             OutputPath = outputPath;
             Generators = generators;
@@ -23,8 +23,8 @@ namespace AvaloniaExtensionGenerator
         }
 
 
-        public void Generate()
-        {
+    public void Generate()
+    {
             var controlTypes = GetControlTypes(Config);
 
             var nameSpaces = new HashSet<string>(Config.InitialNamespaces);
@@ -41,8 +41,8 @@ namespace AvaloniaExtensionGenerator
             File.WriteAllText(OutputPath, sb.ToString());
         }
 
-        private string GetExtensionClasses(IEnumerable<Type> controlTypes, ref HashSet<string> namespaces)
-        {
+    private string GetExtensionClasses(IEnumerable<Type> controlTypes, ref HashSet<string> namespaces)
+    {
             var sb = new StringBuilder();
             var i = 0;
 
@@ -86,8 +86,8 @@ namespace AvaloniaExtensionGenerator
             return sb.ToString();
         }
 
-        private static bool IsAcceptableField(FieldInfo field)
-        {
+    private static bool IsAcceptableField(FieldInfo field)
+    {
             if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
                 return false;
 
@@ -100,8 +100,8 @@ namespace AvaloniaExtensionGenerator
             return false;
         }
 
-        public static bool IsReadOnlyField(FieldInfo field)
-        {
+    public static bool IsReadOnlyField(FieldInfo field)
+    {
             var controlType = field.DeclaringType;
             var extensionName = field.Name.Replace("Property", "");
             var propertyName = field.Name.Replace("Property", "");
@@ -113,5 +113,4 @@ namespace AvaloniaExtensionGenerator
             }
             return true;
         }
-    }
 }

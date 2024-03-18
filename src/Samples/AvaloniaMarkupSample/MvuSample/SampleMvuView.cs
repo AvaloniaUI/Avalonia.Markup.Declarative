@@ -32,9 +32,20 @@ public class SampleMvuView : ComponentBase
 
                 new Button()
                     .Content("Change nested component parameter")
-                    .OnClick(OnButton3Click)
+                    .OnClick(OnButton3Click),
+
+
+                new TextBlock()
+                    .Text("lambda binding sample")
+                    .FontSize(24),
+                new TextBlock()
+                    .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"),
+                new NumericUpDown()
+                    .Value(() => Counter, v => Counter = v)
 
             );
+
+    private decimal? Counter { get; set; } = 0;
 
     private string _myNotifiedProperty1 = "Click me";
 
