@@ -4,9 +4,6 @@
 # https://aka.ms/yaml
 
 trigger:
-  branches:
-    include:
-    - master
   tags:
     include:
     - v*  # This will trigger the pipeline on tags that start with 'v', e.g., v1.0.0, v2.0.0, etc.
