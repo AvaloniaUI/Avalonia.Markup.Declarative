@@ -25,6 +25,7 @@ public static partial class ApplicationEventsExtensions
 {
     public static Application OnResourcesChanged(this Application control, Action<ResourcesChangedEventArgs> action) => 
         control._setEvent((EventHandler<ResourcesChangedEventArgs>) ((_, args) => action(args)), h => control.ResourcesChanged += h);
+	[Obsolete("Cast ApplicationLifetime to IActivatableApplicationLifetime instead.")]
     public static Application OnUrlsOpened(this Application control, Action<UrlOpenedEventArgs> action) => 
         control._setEvent((EventHandler<UrlOpenedEventArgs>) ((_, args) => action(args)), h => control.UrlsOpened += h);
     public static Application OnActualThemeVariantChanged(this Application control, Action action) => 

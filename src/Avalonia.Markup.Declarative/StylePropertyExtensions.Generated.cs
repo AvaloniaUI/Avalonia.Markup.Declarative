@@ -821,6 +821,10 @@ public static Style<NumericUpDown> VerticalContentAlignment(this Style<NumericUp
 => style._addSetter(NumericUpDown.VerticalContentAlignmentProperty, value);
 public static Style<NumericUpDown> VerticalContentAlignment(this Style<NumericUpDown> style, IBinding binding)
 => style._addSetter(NumericUpDown.VerticalContentAlignmentProperty, binding);
+public static Style<NumericUpDown> TextAlignment(this Style<NumericUpDown> style, TextAlignment value)
+=> style._addSetter(NumericUpDown.TextAlignmentProperty, value);
+public static Style<NumericUpDown> TextAlignment(this Style<NumericUpDown> style, IBinding binding)
+=> style._addSetter(NumericUpDown.TextAlignmentProperty, binding);
 }
 public static partial class PanelExtensions
 {
@@ -937,6 +941,10 @@ public static Style<ScrollViewer> IsScrollInertiaEnabled(this Style<ScrollViewer
 => style._addSetter(ScrollViewer.IsScrollInertiaEnabledProperty, value);
 public static Style<ScrollViewer> IsScrollInertiaEnabled(this Style<ScrollViewer> style, IBinding binding)
 => style._addSetter(ScrollViewer.IsScrollInertiaEnabledProperty, binding);
+public static Style<ScrollViewer> IsDeferredScrollingEnabled(this Style<ScrollViewer> style, Boolean value)
+=> style._addSetter(ScrollViewer.IsDeferredScrollingEnabledProperty, value);
+public static Style<ScrollViewer> IsDeferredScrollingEnabled(this Style<ScrollViewer> style, IBinding binding)
+=> style._addSetter(ScrollViewer.IsDeferredScrollingEnabledProperty, binding);
 }
 public static partial class SelectableTextBlockExtensions
 {
@@ -1142,6 +1150,10 @@ public static Style<TextBlock> LineHeight(this Style<TextBlock> style, Double va
 => style._addSetter(TextBlock.LineHeightProperty, value);
 public static Style<TextBlock> LineHeight(this Style<TextBlock> style, IBinding binding)
 => style._addSetter(TextBlock.LineHeightProperty, binding);
+public static Style<TextBlock> LineSpacing(this Style<TextBlock> style, Double value)
+=> style._addSetter(TextBlock.LineSpacingProperty, value);
+public static Style<TextBlock> LineSpacing(this Style<TextBlock> style, IBinding binding)
+=> style._addSetter(TextBlock.LineSpacingProperty, binding);
 public static Style<TextBlock> LetterSpacing(this Style<TextBlock> style, Double value)
 => style._addSetter(TextBlock.LetterSpacingProperty, value);
 public static Style<TextBlock> LetterSpacing(this Style<TextBlock> style, IBinding binding)
@@ -1385,6 +1397,10 @@ public static Style<TransitioningContentControl> PageTransition(this Style<Trans
 => style._addSetter(TransitioningContentControl.PageTransitionProperty, value);
 public static Style<TransitioningContentControl> PageTransition(this Style<TransitioningContentControl> style, IBinding binding)
 => style._addSetter(TransitioningContentControl.PageTransitionProperty, binding);
+public static Style<TransitioningContentControl> IsTransitionReversed(this Style<TransitioningContentControl> style, Boolean value)
+=> style._addSetter(TransitioningContentControl.IsTransitionReversedProperty, value);
+public static Style<TransitioningContentControl> IsTransitionReversed(this Style<TransitioningContentControl> style, IBinding binding)
+=> style._addSetter(TransitioningContentControl.IsTransitionReversedProperty, binding);
 }
 public static partial class TreeViewExtensions
 {
@@ -1820,6 +1836,10 @@ public static Style<TextPresenter> PreeditText(this Style<TextPresenter> style, 
 => style._addSetter(TextPresenter.PreeditTextProperty, value);
 public static Style<TextPresenter> PreeditText(this Style<TextPresenter> style, IBinding binding)
 => style._addSetter(TextPresenter.PreeditTextProperty, binding);
+public static Style<TextPresenter> PreeditTextCursorPosition(this Style<TextPresenter> style, Nullable<Int32> value)
+=> style._addSetter(TextPresenter.PreeditTextCursorPositionProperty, value);
+public static Style<TextPresenter> PreeditTextCursorPosition(this Style<TextPresenter> style, IBinding binding)
+=> style._addSetter(TextPresenter.PreeditTextCursorPositionProperty, binding);
 public static Style<TextPresenter> TextAlignment(this Style<TextPresenter> style, TextAlignment value)
 => style._addSetter(TextPresenter.TextAlignmentProperty, value);
 public static Style<TextPresenter> TextAlignment(this Style<TextPresenter> style, IBinding binding)
@@ -1847,6 +1867,10 @@ public static Style<NotificationCard> IsClosed(this Style<NotificationCard> styl
 => style._addSetter(NotificationCard.IsClosedProperty, value);
 public static Style<NotificationCard> IsClosed(this Style<NotificationCard> style, IBinding binding)
 => style._addSetter(NotificationCard.IsClosedProperty, binding);
+public static Style<NotificationCard> NotificationType(this Style<NotificationCard> style, NotificationType value)
+=> style._addSetter(NotificationCard.NotificationTypeProperty, value);
+public static Style<NotificationCard> NotificationType(this Style<NotificationCard> style, IBinding binding)
+=> style._addSetter(NotificationCard.NotificationTypeProperty, binding);
 }
 public static partial class WindowNotificationManagerExtensions
 {
@@ -2285,6 +2309,10 @@ public static Style<Track> IgnoreThumbDrag(this Style<Track> style, Boolean valu
 => style._addSetter(Track.IgnoreThumbDragProperty, value);
 public static Style<Track> IgnoreThumbDrag(this Style<Track> style, IBinding binding)
 => style._addSetter(Track.IgnoreThumbDragProperty, binding);
+public static Style<Track> DeferThumbDrag(this Style<Track> style, Boolean value)
+=> style._addSetter(Track.DeferThumbDragProperty, value);
+public static Style<Track> DeferThumbDrag(this Style<Track> style, IBinding binding)
+=> style._addSetter(Track.DeferThumbDragProperty, binding);
 }
 public static partial class UniformGridExtensions
 {

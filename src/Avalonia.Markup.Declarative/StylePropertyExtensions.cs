@@ -1,5 +1,7 @@
 ﻿using Avalonia.Styling;
 using System;
+using Avalonia.Controls;
+using System.Xml.Linq;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -45,30 +47,32 @@ public static class StylePropertyExtensions
         style.Setters.Add(new Setter(avaloniaProperty, value));
         return style;
     }
-}
-
-/// <summary>
-/// Typed style to support method chains with generic arguments
-/// </summary>
-/// <typeparam name="TControl">Type of the control that style will be applied to</typeparam>
-public class Style<TControl> : Style
-    where TControl : StyledElement
-{
-    /// <summary>
-    /// Creates Style with added .OfType<typeparam name="TControl"></typeparam> selector
-    /// </summary>
-    public Style()
+    public static Style<TElement> Col<TElement>(this Style<TElement> style, int value)
+        where TElement : Control
     {
-        Selector = ((Selector?)null).OfType<TControl>();
+        style.Add(new Setter(Grid.ColumnProperty, value));
+        return style;
     }
 
-    /// <summary>
-    /// Don't forger to specify target control type directly, since it's impossible to inject it from generic type argument correctly yet
-    /// otherwise Avalonia will try to apply this style to any control, that match this selector. 
-    /// </summary>
-    /// <param name="selector"></param>
-    public Style(Func<Selector?, Selector> selector)
+    public static Style<TElement> Row<TElement>(this Style<TElement> style, int value)
+        where TElement : Control
     {
-        Selector = selector(null);
+        style.Add(new Setter(Grid.RowProperty, value));
+        return style;
     }
+
+    public static Style<TElement> ColSpan<TElement>(this Style<TElement> style, int value)
+        where TElement : Control
+    {
+        style.Add(new Setter(Grid.ColumnSpanProperty, value));
+        return style;
+    }
+
+    public static Style<TElement> RowSpan<TElement>(this Style<TElement> style, int value)
+        where TElement : Control
+    {
+        style.Add(new Setter(Grid.RowSpanProperty, value));
+        return style;
+    }
+
 }
