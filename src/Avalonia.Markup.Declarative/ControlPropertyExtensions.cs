@@ -99,7 +99,7 @@ public static class ControlPropertyExtensions
 
         var binding = new Binding
         {
-            Path = "Value",
+            Path = nameof(ViewPropertyComputedState<TValue>.Value),
             Mode = setChangedHandler == null ? BindingMode.OneWay : BindingMode.TwoWay,
             Source = state
         };
@@ -386,7 +386,7 @@ public static class ControlPropertyExtensions
 
         view.__viewComputedStates.Add(state);
 
-        var binding = new Binding("Value", BindingMode.OneWay)
+        var binding = new Binding(nameof(ViewPropertyComputedState<bool>.Value), BindingMode.OneWay)
         {
             Source = state
         };
