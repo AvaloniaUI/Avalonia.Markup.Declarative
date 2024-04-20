@@ -33,10 +33,25 @@ public class MainView : ViewBase
                                         textBlock.Text("Button clicked!");
 
                                         var button = this.FindControl<Button>("HotReloadButton");
-                                        if(button != null)
+                                        if (button != null)
                                             button.Content = "Found by Name";
                                     })
                             )
+                    ),
+
+                new TabItem()
+                    .Header("Dock sample")
+                    .Content(
+                        new Border()
+                            .BorderBrush(Brushes.Gray)
+                            .BorderThickness(1)
+                            .Child(
+                                new DockPanel()
+                                    .LastChildFill(true)
+                                    .Children(
+                                        new TextBox().Text("Left1").Dock(Dock.Left),
+                                        new TextBox().Text("Right").Dock(Dock.Right),
+                                        new TextBox().Text("Left2").Dock(Dock.Left)))
                     ),
 
                 new TabItem()
