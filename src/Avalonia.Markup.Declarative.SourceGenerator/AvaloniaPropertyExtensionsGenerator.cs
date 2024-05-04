@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -76,11 +77,11 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
                     //PROCESS COMMON PROPERTIES
                     case PropertyDeclarationSyntax property when IsPublic(property) && HasPublicSetter(property) &&
                                                                  IsCommonInstanceProperty(property, members):
-                    {
-                        AppendIfNotNull(sb, GetCommonPropertySetterExtension(typeName, property, comp));
-                        AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(typeName, property, comp));
-                        break;
-                    }
+                        {
+                            AppendIfNotNull(sb, GetCommonPropertySetterExtension(typeName, property, comp));
+                            AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(typeName, property, comp));
+                            break;
+                        }
                     //PROCESS AVALONIA PROPERTIES
                     case FieldDeclarationSyntax field when
                         field.Declaration.Type is GenericNameSyntax
@@ -88,10 +89,11 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
                             Identifier.ValueText: ("DirectProperty" or "StyledProperty" or "AttachedProperty")
                         } &&
                         HasAvaloniaPropertyPublicSetter(field, members):
-                    {
-                        AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
-                        break;
-                    }
+                        {
+                            AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
+                            AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
+                            break;
+                        }
                 }
 
             sb.AppendLine("}");
@@ -163,4 +165,19 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
 
         return extensionText;
     }
+    public string GetExpressionBindingSetterExtension(string controlTypeName, FieldDeclarationSyntax field)
+    {
+        var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
+
+        var genericName = field.Declaration.Type as GenericNameSyntax;
+
+        var valueTypeSource = genericName.TypeArgumentList.Arguments.Last();
+
+        var extensionText =
+            $"public static {controlTypeName} {extensionName}(this {controlTypeName} control, Func<{valueTypeSource}> func, Action<{valueTypeSource}>? onChanged = null, [CallerArgumentExpression(\"func\")] string? expression = null){Environment.NewLine}" +
+            $"   => control._set({controlTypeName}.{extensionName}Property, func, onChanged, expression);";
+
+        return extensionText;
+    }
+
 }
