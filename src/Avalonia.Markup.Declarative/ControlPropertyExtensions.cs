@@ -320,6 +320,22 @@ public static class ControlPropertyExtensions
         return control;
     }
 
+    public static MenuFlyout ItemTemplate<TItem>(this MenuFlyout control, Func<TItem, Control> build)
+    {
+        control.ItemTemplate = new FuncDataTemplate<TItem>((val, _) => build(val));
+        return control;
+    }
+    public static MenuItem ItemTemplate<TItem>(this MenuItem control, Func<TItem, Control> build)
+    {
+        control.ItemTemplate = new FuncDataTemplate<TItem>((val, _) => build(val));
+        return control;
+    }
+    public static Menu ItemTemplate<TItem>(this Menu control, Func<TItem, Control> build)
+    {
+        control.ItemTemplate = new FuncDataTemplate<TItem>((val, _) => build(val));
+        return control;
+    }
+
     public static TItemsControl ItemsPanel<TItemsControl>(this TItemsControl control, Panel panel)
         where TItemsControl : ItemsControl
     {
@@ -450,6 +466,20 @@ public static class ControlPropertyExtensions
             control[prop] = value;
         }
 
+        return control;
+    }
+
+    /// <summary>
+    /// Adds flyout to button and activates it on button click
+    /// </summary>
+    /// <typeparam name="TElement"></typeparam>
+    /// <param name="control">target button</param>
+    /// <param name="flyout">flyout to activate</param>
+    /// <returns></returns>
+    public static TElement AddFlyoutOnClick<TElement>(this TElement control, FlyoutBase flyout)
+        where TElement : Button
+    {
+        control.OnClick(_ => flyout.ShowAt(control));
         return control;
     }
 

@@ -2014,13 +2014,13 @@ public static Style<HeaderedItemsControl> HeaderTemplate(this Style<HeaderedItem
 }
 public static partial class HeaderedSelectingItemsControlExtensions
 {
-public static Style<HeaderedSelectingItemsControl> Header(this Style<HeaderedSelectingItemsControl> style, Object value)
+public static Style<T> Header<T>(this Style<T> style, Object value) where T : HeaderedSelectingItemsControl
 => style._addSetter(HeaderedSelectingItemsControl.HeaderProperty, value);
-public static Style<HeaderedSelectingItemsControl> Header(this Style<HeaderedSelectingItemsControl> style, IBinding binding)
+public static Style<T> Header<T>(this Style<T> style, IBinding binding) where T : HeaderedSelectingItemsControl
 => style._addSetter(HeaderedSelectingItemsControl.HeaderProperty, binding);
-public static Style<HeaderedSelectingItemsControl> HeaderTemplate(this Style<HeaderedSelectingItemsControl> style, IDataTemplate value)
+public static Style<T> HeaderTemplate<T>(this Style<T> style, IDataTemplate value) where T : HeaderedSelectingItemsControl
 => style._addSetter(HeaderedSelectingItemsControl.HeaderTemplateProperty, value);
-public static Style<HeaderedSelectingItemsControl> HeaderTemplate(this Style<HeaderedSelectingItemsControl> style, IBinding binding)
+public static Style<T> HeaderTemplate<T>(this Style<T> style, IBinding binding) where T : HeaderedSelectingItemsControl
 => style._addSetter(HeaderedSelectingItemsControl.HeaderTemplateProperty, binding);
 }
 public static partial class OverlayPopupHostExtensions

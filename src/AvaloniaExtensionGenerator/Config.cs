@@ -42,5 +42,6 @@ public class Config
         typeof(InputElement),
         typeof(ContentControl),
         typeof(SelectingItemsControl),
+        typeof(HeaderedSelectingItemsControl),
     };
 }
