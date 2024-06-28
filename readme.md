@@ -52,7 +52,7 @@ public class MainView : ViewBase<MainViewModel>
                     // so just direct set to Command on view model
                     .Command(vm.ClickButtonCommand) 
                     .Content("Click me") // Content = "Click me"
-                    .Padding(8, 0, 0, 0) //Set left padding to 8
+                    .Padding(left: 8) //Set left padding to 8
                     .With(ButtonStyle) //Execute LabelStyle method over TextBlock control 
             );
 
