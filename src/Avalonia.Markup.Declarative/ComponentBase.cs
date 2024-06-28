@@ -18,6 +18,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     {
         InjectServices();
         InitStateMembers();
+        StateHasChanged();
     }
 
     private void InjectServices()
@@ -164,4 +165,5 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
 }

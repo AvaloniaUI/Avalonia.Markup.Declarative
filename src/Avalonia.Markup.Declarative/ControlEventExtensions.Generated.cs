@@ -91,13 +91,13 @@ public static partial class ContextMenuEventsExtensions
 }
 public static partial class ControlEventsExtensions
 {
-    public static Control OnContextRequested(this Control control, Action<ContextRequestedEventArgs> action) => 
+    public static T OnContextRequested<T>(this T control, Action<ContextRequestedEventArgs> action) where T : Control => 
         control._setEvent((EventHandler<ContextRequestedEventArgs>) ((_, args) => action(args)), h => control.ContextRequested += h);
-    public static Control OnLoaded(this Control control, Action<RoutedEventArgs> action) => 
+    public static T OnLoaded<T>(this T control, Action<RoutedEventArgs> action) where T : Control => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Loaded += h);
-    public static Control OnUnloaded(this Control control, Action<RoutedEventArgs> action) => 
+    public static T OnUnloaded<T>(this T control, Action<RoutedEventArgs> action) where T : Control => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Unloaded += h);
-    public static Control OnSizeChanged(this Control control, Action<SizeChangedEventArgs> action) => 
+    public static T OnSizeChanged<T>(this T control, Action<SizeChangedEventArgs> action) where T : Control => 
         control._setEvent((EventHandler<SizeChangedEventArgs>) ((_, args) => action(args)), h => control.SizeChanged += h);
 }
 public static partial class DatePickerEventsExtensions
@@ -123,11 +123,11 @@ public static partial class ExpanderEventsExtensions
 }
 public static partial class ItemsControlEventsExtensions
 {
-    public static ItemsControl OnContainerPrepared(this ItemsControl control, Action<ContainerPreparedEventArgs> action) => 
+    public static T OnContainerPrepared<T>(this T control, Action<ContainerPreparedEventArgs> action) where T : ItemsControl => 
         control._setEvent((EventHandler<ContainerPreparedEventArgs>) ((_, args) => action(args)), h => control.ContainerPrepared += h);
-    public static ItemsControl OnContainerIndexChanged(this ItemsControl control, Action<ContainerIndexChangedEventArgs> action) => 
+    public static T OnContainerIndexChanged<T>(this T control, Action<ContainerIndexChangedEventArgs> action) where T : ItemsControl => 
         control._setEvent((EventHandler<ContainerIndexChangedEventArgs>) ((_, args) => action(args)), h => control.ContainerIndexChanged += h);
-    public static ItemsControl OnContainerClearing(this ItemsControl control, Action<ContainerClearingEventArgs> action) => 
+    public static T OnContainerClearing<T>(this T control, Action<ContainerClearingEventArgs> action) where T : ItemsControl => 
         control._setEvent((EventHandler<ContainerClearingEventArgs>) ((_, args) => action(args)), h => control.ContainerClearing += h);
 }
 public static partial class MenuBaseEventsExtensions
@@ -319,16 +319,16 @@ public static partial class PickerPresenterBaseEventsExtensions
 }
 public static partial class FlyoutBaseEventsExtensions
 {
-    public static FlyoutBase OnOpened(this FlyoutBase control, Action action) => 
+    public static T OnOpened<T>(this T control, Action action) where T : FlyoutBase => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Opened += h);
-    public static FlyoutBase OnClosed(this FlyoutBase control, Action action) => 
+    public static T OnClosed<T>(this T control, Action action) where T : FlyoutBase => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Closed += h);
 }
 public static partial class PopupFlyoutBaseEventsExtensions
 {
-    public static PopupFlyoutBase OnClosing(this PopupFlyoutBase control, Action<CancelEventArgs> action) => 
+    public static T OnClosing<T>(this T control, Action<CancelEventArgs> action) where T : PopupFlyoutBase => 
         control._setEvent((EventHandler<CancelEventArgs>) ((_, args) => action(args)), h => control.Closing += h);
-    public static PopupFlyoutBase OnOpening(this PopupFlyoutBase control, Action action) => 
+    public static T OnOpening<T>(this T control, Action action) where T : PopupFlyoutBase => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Opening += h);
 }
 public static partial class PopupEventsExtensions
@@ -350,12 +350,12 @@ public static partial class ScrollBarEventsExtensions
 }
 public static partial class SelectingItemsControlEventsExtensions
 {
-    public static SelectingItemsControl OnSelectionChanged(this SelectingItemsControl control, Action<SelectionChangedEventArgs> action) => 
+    public static T OnSelectionChanged<T>(this T control, Action<SelectionChangedEventArgs> action) where T : SelectingItemsControl => 
         control._setEvent((EventHandler<SelectionChangedEventArgs>) ((_, args) => action(args)), h => control.SelectionChanged += h);
 }
 public static partial class TemplatedControlEventsExtensions
 {
-    public static TemplatedControl OnTemplateApplied(this TemplatedControl control, Action<TemplateAppliedEventArgs> action) => 
+    public static T OnTemplateApplied<T>(this T control, Action<TemplateAppliedEventArgs> action) where T : TemplatedControl => 
         control._setEvent((EventHandler<TemplateAppliedEventArgs>) ((_, args) => action(args)), h => control.TemplateApplied += h);
 }
 public static partial class ThumbEventsExtensions
@@ -403,9 +403,9 @@ public static partial class StyledElementEventsExtensions
 }
 public static partial class VisualEventsExtensions
 {
-    public static Visual OnAttachedToVisualTree(this Visual control, Action<VisualTreeAttachmentEventArgs> action) => 
+    public static T OnAttachedToVisualTree<T>(this T control, Action<VisualTreeAttachmentEventArgs> action) where T : Visual => 
         control._setEvent((EventHandler<VisualTreeAttachmentEventArgs>) ((_, args) => action(args)), h => control.AttachedToVisualTree += h);
-    public static Visual OnDetachedFromVisualTree(this Visual control, Action<VisualTreeAttachmentEventArgs> action) => 
+    public static T OnDetachedFromVisualTree<T>(this T control, Action<VisualTreeAttachmentEventArgs> action) where T : Visual => 
         control._setEvent((EventHandler<VisualTreeAttachmentEventArgs>) ((_, args) => action(args)), h => control.DetachedFromVisualTree += h);
 }
 public static partial class StyleBaseEventsExtensions
@@ -422,44 +422,44 @@ public static partial class StylesEventsExtensions
 }
 public static partial class LayoutableEventsExtensions
 {
-    public static Layoutable OnEffectiveViewportChanged(this Layoutable control, Action<EffectiveViewportChangedEventArgs> action) => 
+    public static T OnEffectiveViewportChanged<T>(this T control, Action<EffectiveViewportChangedEventArgs> action) where T : Layoutable => 
         control._setEvent((EventHandler<EffectiveViewportChangedEventArgs>) ((_, args) => action(args)), h => control.EffectiveViewportChanged += h);
-    public static Layoutable OnLayoutUpdated(this Layoutable control, Action action) => 
+    public static T OnLayoutUpdated<T>(this T control, Action action) where T : Layoutable => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.LayoutUpdated += h);
 }
 public static partial class InputElementEventsExtensions
 {
-    public static InputElement OnGotFocus(this InputElement control, Action<GotFocusEventArgs> action) => 
+    public static T OnGotFocus<T>(this T control, Action<GotFocusEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<GotFocusEventArgs>) ((_, args) => action(args)), h => control.GotFocus += h);
-    public static InputElement OnLostFocus(this InputElement control, Action<RoutedEventArgs> action) => 
+    public static T OnLostFocus<T>(this T control, Action<RoutedEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.LostFocus += h);
-    public static InputElement OnKeyDown(this InputElement control, Action<KeyEventArgs> action) => 
+    public static T OnKeyDown<T>(this T control, Action<KeyEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<KeyEventArgs>) ((_, args) => action(args)), h => control.KeyDown += h);
-    public static InputElement OnKeyUp(this InputElement control, Action<KeyEventArgs> action) => 
+    public static T OnKeyUp<T>(this T control, Action<KeyEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<KeyEventArgs>) ((_, args) => action(args)), h => control.KeyUp += h);
-    public static InputElement OnTextInput(this InputElement control, Action<TextInputEventArgs> action) => 
+    public static T OnTextInput<T>(this T control, Action<TextInputEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<TextInputEventArgs>) ((_, args) => action(args)), h => control.TextInput += h);
-    public static InputElement OnTextInputMethodClientRequested(this InputElement control, Action<TextInputMethodClientRequestedEventArgs> action) => 
+    public static T OnTextInputMethodClientRequested<T>(this T control, Action<TextInputMethodClientRequestedEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<TextInputMethodClientRequestedEventArgs>) ((_, args) => action(args)), h => control.TextInputMethodClientRequested += h);
-    public static InputElement OnPointerEntered(this InputElement control, Action<PointerEventArgs> action) => 
+    public static T OnPointerEntered<T>(this T control, Action<PointerEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<PointerEventArgs>) ((_, args) => action(args)), h => control.PointerEntered += h);
-    public static InputElement OnPointerExited(this InputElement control, Action<PointerEventArgs> action) => 
+    public static T OnPointerExited<T>(this T control, Action<PointerEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<PointerEventArgs>) ((_, args) => action(args)), h => control.PointerExited += h);
-    public static InputElement OnPointerMoved(this InputElement control, Action<PointerEventArgs> action) => 
+    public static T OnPointerMoved<T>(this T control, Action<PointerEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<PointerEventArgs>) ((_, args) => action(args)), h => control.PointerMoved += h);
-    public static InputElement OnPointerPressed(this InputElement control, Action<PointerPressedEventArgs> action) => 
+    public static T OnPointerPressed<T>(this T control, Action<PointerPressedEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<PointerPressedEventArgs>) ((_, args) => action(args)), h => control.PointerPressed += h);
-    public static InputElement OnPointerReleased(this InputElement control, Action<PointerReleasedEventArgs> action) => 
+    public static T OnPointerReleased<T>(this T control, Action<PointerReleasedEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<PointerReleasedEventArgs>) ((_, args) => action(args)), h => control.PointerReleased += h);
-    public static InputElement OnPointerCaptureLost(this InputElement control, Action<PointerCaptureLostEventArgs> action) => 
+    public static T OnPointerCaptureLost<T>(this T control, Action<PointerCaptureLostEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<PointerCaptureLostEventArgs>) ((_, args) => action(args)), h => control.PointerCaptureLost += h);
-    public static InputElement OnPointerWheelChanged(this InputElement control, Action<PointerWheelEventArgs> action) => 
+    public static T OnPointerWheelChanged<T>(this T control, Action<PointerWheelEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<PointerWheelEventArgs>) ((_, args) => action(args)), h => control.PointerWheelChanged += h);
-    public static InputElement OnTapped(this InputElement control, Action<TappedEventArgs> action) => 
+    public static T OnTapped<T>(this T control, Action<TappedEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<TappedEventArgs>) ((_, args) => action(args)), h => control.Tapped += h);
-    public static InputElement OnHolding(this InputElement control, Action<HoldingRoutedEventArgs> action) => 
+    public static T OnHolding<T>(this T control, Action<HoldingRoutedEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<HoldingRoutedEventArgs>) ((_, args) => action(args)), h => control.Holding += h);
-    public static InputElement OnDoubleTapped(this InputElement control, Action<TappedEventArgs> action) => 
+    public static T OnDoubleTapped<T>(this T control, Action<TappedEventArgs> action) where T : InputElement => 
         control._setEvent((EventHandler<TappedEventArgs>) ((_, args) => action(args)), h => control.DoubleTapped += h);
 }
 public static partial class DrawingImageEventsExtensions

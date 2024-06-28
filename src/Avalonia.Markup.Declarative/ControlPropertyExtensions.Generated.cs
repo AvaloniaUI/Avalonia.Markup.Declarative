@@ -218,11 +218,11 @@ public static Border BorderThickness(this Border control, Func<Thickness> func, 
 public static Border BorderThickness(this Border control, Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Border.BorderThicknessProperty, ps, () => control.BorderThickness = value, bindingMode, converter, bindingSource);
 public static Border BorderThickness<TValue>(this Border control, TValue value, FuncValueConverter<TValue, Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Border.BorderThicknessProperty, ps, () => control.BorderThickness = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static Border BorderThickness(this Border control, Double uniformLength)
+public static Border BorderThickness(this Border control, Double uniformLength = default)
    => control._set(() => control.BorderThickness = new Thickness(uniformLength));
-public static Border BorderThickness(this Border control, Double horizontal, Double vertical)
+public static Border BorderThickness(this Border control, Double horizontal = default, Double vertical = default)
    => control._set(() => control.BorderThickness = new Thickness(horizontal, vertical));
-public static Border BorderThickness(this Border control, Double left, Double top, Double right, Double bottom)
+public static Border BorderThickness(this Border control, Double left = default, Double top = default, Double right = default, Double bottom = default)
    => control._set(() => control.BorderThickness = new Thickness(left, top, right, bottom));
 public static Border CornerRadius(this Border control, IBinding binding)
    => control._set(Border.CornerRadiusProperty, binding);
@@ -233,11 +233,11 @@ public static Border CornerRadius(this Border control, Func<CornerRadius> func, 
 public static Border CornerRadius(this Border control, CornerRadius value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Border.CornerRadiusProperty, ps, () => control.CornerRadius = value, bindingMode, converter, bindingSource);
 public static Border CornerRadius<TValue>(this Border control, TValue value, FuncValueConverter<TValue, CornerRadius> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Border.CornerRadiusProperty, ps, () => control.CornerRadius = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static Border CornerRadius(this Border control, Double uniformRadius)
+public static Border CornerRadius(this Border control, Double uniformRadius = default)
    => control._set(() => control.CornerRadius = new CornerRadius(uniformRadius));
-public static Border CornerRadius(this Border control, Double top, Double bottom)
+public static Border CornerRadius(this Border control, Double top = default, Double bottom = default)
    => control._set(() => control.CornerRadius = new CornerRadius(top, bottom));
-public static Border CornerRadius(this Border control, Double topLeft, Double topRight, Double bottomRight, Double bottomLeft)
+public static Border CornerRadius(this Border control, Double topLeft = default, Double topRight = default, Double bottomRight = default, Double bottomLeft = default)
    => control._set(() => control.CornerRadius = new CornerRadius(topLeft, topRight, bottomRight, bottomLeft));
 public static Border BoxShadow(this Border control, IBinding binding)
    => control._set(Border.BoxShadowProperty, binding);
@@ -248,9 +248,9 @@ public static Border BoxShadow(this Border control, Func<BoxShadows> func, Actio
 public static Border BoxShadow(this Border control, BoxShadows value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Border.BoxShadowProperty, ps, () => control.BoxShadow = value, bindingMode, converter, bindingSource);
 public static Border BoxShadow<TValue>(this Border control, TValue value, FuncValueConverter<TValue, BoxShadows> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Border.BoxShadowProperty, ps, () => control.BoxShadow = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static Border BoxShadow(this Border control, BoxShadow shadow)
+public static Border BoxShadow(this Border control, BoxShadow shadow = default)
    => control._set(() => control.BoxShadow = new BoxShadows(shadow));
-public static Border BoxShadow(this Border control, BoxShadow first, BoxShadow[] rest)
+public static Border BoxShadow(this Border control, BoxShadow first = default, BoxShadow[] rest = default)
    => control._set(() => control.BoxShadow = new BoxShadows(first, rest));
 }
 public static partial class ButtonExtensions
@@ -567,9 +567,9 @@ public static ColumnDefinition Width(this ColumnDefinition control, Func<GridLen
 public static ColumnDefinition Width(this ColumnDefinition control, GridLength value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ColumnDefinition.WidthProperty, ps, () => control.Width = value, bindingMode, converter, bindingSource);
 public static ColumnDefinition Width<TValue>(this ColumnDefinition control, TValue value, FuncValueConverter<TValue, GridLength> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ColumnDefinition.WidthProperty, ps, () => control.Width = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static ColumnDefinition Width(this ColumnDefinition control, Double value)
+public static ColumnDefinition Width(this ColumnDefinition control, Double value = default)
    => control._set(() => control.Width = new GridLength(value));
-public static ColumnDefinition Width(this ColumnDefinition control, Double value, GridUnitType type)
+public static ColumnDefinition Width(this ColumnDefinition control, Double value = default, GridUnitType type = default)
    => control._set(() => control.Width = new GridLength(value, type));
 }
 public static partial class ComboBoxExtensions
@@ -1026,11 +1026,11 @@ public static Decorator Padding(this Decorator control, Func<Thickness> func, Ac
 public static Decorator Padding(this Decorator control, Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Decorator.PaddingProperty, ps, () => control.Padding = value, bindingMode, converter, bindingSource);
 public static Decorator Padding<TValue>(this Decorator control, TValue value, FuncValueConverter<TValue, Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Decorator.PaddingProperty, ps, () => control.Padding = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static Decorator Padding(this Decorator control, Double uniformLength)
+public static Decorator Padding(this Decorator control, Double uniformLength = default)
    => control._set(() => control.Padding = new Thickness(uniformLength));
-public static Decorator Padding(this Decorator control, Double horizontal, Double vertical)
+public static Decorator Padding(this Decorator control, Double horizontal = default, Double vertical = default)
    => control._set(() => control.Padding = new Thickness(horizontal, vertical));
-public static Decorator Padding(this Decorator control, Double left, Double top, Double right, Double bottom)
+public static Decorator Padding(this Decorator control, Double left = default, Double top = default, Double right = default, Double bottom = default)
    => control._set(() => control.Padding = new Thickness(left, top, right, bottom));
 }
 public static partial class DefinitionBaseExtensions
@@ -1093,11 +1093,11 @@ public static ExperimentalAcrylicBorder CornerRadius(this ExperimentalAcrylicBor
 public static ExperimentalAcrylicBorder CornerRadius(this ExperimentalAcrylicBorder control, CornerRadius value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ExperimentalAcrylicBorder.CornerRadiusProperty, ps, () => control.CornerRadius = value, bindingMode, converter, bindingSource);
 public static ExperimentalAcrylicBorder CornerRadius<TValue>(this ExperimentalAcrylicBorder control, TValue value, FuncValueConverter<TValue, CornerRadius> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ExperimentalAcrylicBorder.CornerRadiusProperty, ps, () => control.CornerRadius = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static ExperimentalAcrylicBorder CornerRadius(this ExperimentalAcrylicBorder control, Double uniformRadius)
+public static ExperimentalAcrylicBorder CornerRadius(this ExperimentalAcrylicBorder control, Double uniformRadius = default)
    => control._set(() => control.CornerRadius = new CornerRadius(uniformRadius));
-public static ExperimentalAcrylicBorder CornerRadius(this ExperimentalAcrylicBorder control, Double top, Double bottom)
+public static ExperimentalAcrylicBorder CornerRadius(this ExperimentalAcrylicBorder control, Double top = default, Double bottom = default)
    => control._set(() => control.CornerRadius = new CornerRadius(top, bottom));
-public static ExperimentalAcrylicBorder CornerRadius(this ExperimentalAcrylicBorder control, Double topLeft, Double topRight, Double bottomRight, Double bottomLeft)
+public static ExperimentalAcrylicBorder CornerRadius(this ExperimentalAcrylicBorder control, Double topLeft = default, Double topRight = default, Double bottomRight = default, Double bottomLeft = default)
    => control._set(() => control.CornerRadius = new CornerRadius(topLeft, topRight, bottomRight, bottomLeft));
 public static ExperimentalAcrylicBorder Material(this ExperimentalAcrylicBorder control, IBinding binding)
    => control._set(ExperimentalAcrylicBorder.MaterialProperty, binding);
@@ -1877,9 +1877,9 @@ public static RowDefinition Height(this RowDefinition control, Func<GridLength> 
 public static RowDefinition Height(this RowDefinition control, GridLength value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RowDefinition.HeightProperty, ps, () => control.Height = value, bindingMode, converter, bindingSource);
 public static RowDefinition Height<TValue>(this RowDefinition control, TValue value, FuncValueConverter<TValue, GridLength> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RowDefinition.HeightProperty, ps, () => control.Height = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static RowDefinition Height(this RowDefinition control, Double value)
+public static RowDefinition Height(this RowDefinition control, Double value = default)
    => control._set(() => control.Height = new GridLength(value));
-public static RowDefinition Height(this RowDefinition control, Double value, GridUnitType type)
+public static RowDefinition Height(this RowDefinition control, Double value = default, GridUnitType type = default)
    => control._set(() => control.Height = new GridLength(value, type));
 }
 public static partial class ScrollViewerExtensions
@@ -2283,11 +2283,11 @@ public static TextBlock Padding(this TextBlock control, Func<Thickness> func, Ac
 public static TextBlock Padding(this TextBlock control, Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBlock.PaddingProperty, ps, () => control.Padding = value, bindingMode, converter, bindingSource);
 public static TextBlock Padding<TValue>(this TextBlock control, TValue value, FuncValueConverter<TValue, Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBlock.PaddingProperty, ps, () => control.Padding = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static TextBlock Padding(this TextBlock control, Double uniformLength)
+public static TextBlock Padding(this TextBlock control, Double uniformLength = default)
    => control._set(() => control.Padding = new Thickness(uniformLength));
-public static TextBlock Padding(this TextBlock control, Double horizontal, Double vertical)
+public static TextBlock Padding(this TextBlock control, Double horizontal = default, Double vertical = default)
    => control._set(() => control.Padding = new Thickness(horizontal, vertical));
-public static TextBlock Padding(this TextBlock control, Double left, Double top, Double right, Double bottom)
+public static TextBlock Padding(this TextBlock control, Double left = default, Double top = default, Double right = default, Double bottom = default)
    => control._set(() => control.Padding = new Thickness(left, top, right, bottom));
 public static TextBlock FontFamily(this TextBlock control, IBinding binding)
    => control._set(TextBlock.FontFamilyProperty, binding);
@@ -2731,13 +2731,13 @@ public static TickBar ReservedSpace(this TickBar control, Func<Rect> func, Actio
 public static TickBar ReservedSpace(this TickBar control, Rect value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TickBar.ReservedSpaceProperty, ps, () => control.ReservedSpace = value, bindingMode, converter, bindingSource);
 public static TickBar ReservedSpace<TValue>(this TickBar control, TValue value, FuncValueConverter<TValue, Rect> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TickBar.ReservedSpaceProperty, ps, () => control.ReservedSpace = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static TickBar ReservedSpace(this TickBar control, Double x, Double y, Double width, Double height)
+public static TickBar ReservedSpace(this TickBar control, Double x = default, Double y = default, Double width = default, Double height = default)
    => control._set(() => control.ReservedSpace = new Rect(x, y, width, height));
-public static TickBar ReservedSpace(this TickBar control, Size size)
+public static TickBar ReservedSpace(this TickBar control, Size size = default)
    => control._set(() => control.ReservedSpace = new Rect(size));
-public static TickBar ReservedSpace(this TickBar control, Point position, Size size)
+public static TickBar ReservedSpace(this TickBar control, Point position = default, Size size = default)
    => control._set(() => control.ReservedSpace = new Rect(position, size));
-public static TickBar ReservedSpace(this TickBar control, Point topLeft, Point bottomRight)
+public static TickBar ReservedSpace(this TickBar control, Point topLeft = default, Point bottomRight = default)
    => control._set(() => control.ReservedSpace = new Rect(topLeft, bottomRight));
 }
 public static partial class ToggleSwitchExtensions
@@ -3328,11 +3328,11 @@ public static ContentPresenter BorderThickness(this ContentPresenter control, Fu
 public static ContentPresenter BorderThickness(this ContentPresenter control, Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.BorderThicknessProperty, ps, () => control.BorderThickness = value, bindingMode, converter, bindingSource);
 public static ContentPresenter BorderThickness<TValue>(this ContentPresenter control, TValue value, FuncValueConverter<TValue, Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.BorderThicknessProperty, ps, () => control.BorderThickness = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static ContentPresenter BorderThickness(this ContentPresenter control, Double uniformLength)
+public static ContentPresenter BorderThickness(this ContentPresenter control, Double uniformLength = default)
    => control._set(() => control.BorderThickness = new Thickness(uniformLength));
-public static ContentPresenter BorderThickness(this ContentPresenter control, Double horizontal, Double vertical)
+public static ContentPresenter BorderThickness(this ContentPresenter control, Double horizontal = default, Double vertical = default)
    => control._set(() => control.BorderThickness = new Thickness(horizontal, vertical));
-public static ContentPresenter BorderThickness(this ContentPresenter control, Double left, Double top, Double right, Double bottom)
+public static ContentPresenter BorderThickness(this ContentPresenter control, Double left = default, Double top = default, Double right = default, Double bottom = default)
    => control._set(() => control.BorderThickness = new Thickness(left, top, right, bottom));
 public static ContentPresenter CornerRadius(this ContentPresenter control, IBinding binding)
    => control._set(ContentPresenter.CornerRadiusProperty, binding);
@@ -3343,11 +3343,11 @@ public static ContentPresenter CornerRadius(this ContentPresenter control, Func<
 public static ContentPresenter CornerRadius(this ContentPresenter control, CornerRadius value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.CornerRadiusProperty, ps, () => control.CornerRadius = value, bindingMode, converter, bindingSource);
 public static ContentPresenter CornerRadius<TValue>(this ContentPresenter control, TValue value, FuncValueConverter<TValue, CornerRadius> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.CornerRadiusProperty, ps, () => control.CornerRadius = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static ContentPresenter CornerRadius(this ContentPresenter control, Double uniformRadius)
+public static ContentPresenter CornerRadius(this ContentPresenter control, Double uniformRadius = default)
    => control._set(() => control.CornerRadius = new CornerRadius(uniformRadius));
-public static ContentPresenter CornerRadius(this ContentPresenter control, Double top, Double bottom)
+public static ContentPresenter CornerRadius(this ContentPresenter control, Double top = default, Double bottom = default)
    => control._set(() => control.CornerRadius = new CornerRadius(top, bottom));
-public static ContentPresenter CornerRadius(this ContentPresenter control, Double topLeft, Double topRight, Double bottomRight, Double bottomLeft)
+public static ContentPresenter CornerRadius(this ContentPresenter control, Double topLeft = default, Double topRight = default, Double bottomRight = default, Double bottomLeft = default)
    => control._set(() => control.CornerRadius = new CornerRadius(topLeft, topRight, bottomRight, bottomLeft));
 public static ContentPresenter BoxShadow(this ContentPresenter control, IBinding binding)
    => control._set(ContentPresenter.BoxShadowProperty, binding);
@@ -3358,9 +3358,9 @@ public static ContentPresenter BoxShadow(this ContentPresenter control, Func<Box
 public static ContentPresenter BoxShadow(this ContentPresenter control, BoxShadows value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.BoxShadowProperty, ps, () => control.BoxShadow = value, bindingMode, converter, bindingSource);
 public static ContentPresenter BoxShadow<TValue>(this ContentPresenter control, TValue value, FuncValueConverter<TValue, BoxShadows> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.BoxShadowProperty, ps, () => control.BoxShadow = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static ContentPresenter BoxShadow(this ContentPresenter control, BoxShadow shadow)
+public static ContentPresenter BoxShadow(this ContentPresenter control, BoxShadow shadow = default)
    => control._set(() => control.BoxShadow = new BoxShadows(shadow));
-public static ContentPresenter BoxShadow(this ContentPresenter control, BoxShadow first, BoxShadow[] rest)
+public static ContentPresenter BoxShadow(this ContentPresenter control, BoxShadow first = default, BoxShadow[] rest = default)
    => control._set(() => control.BoxShadow = new BoxShadows(first, rest));
 public static ContentPresenter Foreground(this ContentPresenter control, IBinding binding)
    => control._set(ContentPresenter.ForegroundProperty, binding);
@@ -3491,11 +3491,11 @@ public static ContentPresenter Padding(this ContentPresenter control, Func<Thick
 public static ContentPresenter Padding(this ContentPresenter control, Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.PaddingProperty, ps, () => control.Padding = value, bindingMode, converter, bindingSource);
 public static ContentPresenter Padding<TValue>(this ContentPresenter control, TValue value, FuncValueConverter<TValue, Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.PaddingProperty, ps, () => control.Padding = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static ContentPresenter Padding(this ContentPresenter control, Double uniformLength)
+public static ContentPresenter Padding(this ContentPresenter control, Double uniformLength = default)
    => control._set(() => control.Padding = new Thickness(uniformLength));
-public static ContentPresenter Padding(this ContentPresenter control, Double horizontal, Double vertical)
+public static ContentPresenter Padding(this ContentPresenter control, Double horizontal = default, Double vertical = default)
    => control._set(() => control.Padding = new Thickness(horizontal, vertical));
-public static ContentPresenter Padding(this ContentPresenter control, Double left, Double top, Double right, Double bottom)
+public static ContentPresenter Padding(this ContentPresenter control, Double left = default, Double top = default, Double right = default, Double bottom = default)
    => control._set(() => control.Padding = new Thickness(left, top, right, bottom));
 public static ContentPresenter RecognizesAccessKey(this ContentPresenter control, IBinding binding)
    => control._set(ContentPresenter.RecognizesAccessKeyProperty, binding);
@@ -4437,11 +4437,11 @@ public static T BorderThickness<T>(this T control, Thickness value, BindingMode?
 public static T BorderThickness<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : TemplatedControl
 => control._setEx(TemplatedControl.BorderThicknessProperty, ps, () => control.BorderThickness = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static T BorderThickness<T>(this T control, Double uniformLength) where T : TemplatedControl
+public static T BorderThickness<T>(this T control, Double uniformLength = default) where T : TemplatedControl
    => control._set(() => control.BorderThickness = new Thickness(uniformLength));
-public static T BorderThickness<T>(this T control, Double horizontal, Double vertical) where T : TemplatedControl
+public static T BorderThickness<T>(this T control, Double horizontal = default, Double vertical = default) where T : TemplatedControl
    => control._set(() => control.BorderThickness = new Thickness(horizontal, vertical));
-public static T BorderThickness<T>(this T control, Double left, Double top, Double right, Double bottom) where T : TemplatedControl
+public static T BorderThickness<T>(this T control, Double left = default, Double top = default, Double right = default, Double bottom = default) where T : TemplatedControl
    => control._set(() => control.BorderThickness = new Thickness(left, top, right, bottom));
 public static T CornerRadius<T>(this T control, IBinding binding) where T : TemplatedControl
    => control._set(TemplatedControl.CornerRadiusProperty, binding);
@@ -4454,11 +4454,11 @@ public static T CornerRadius<T>(this T control, CornerRadius value, BindingMode?
 public static T CornerRadius<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, CornerRadius> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : TemplatedControl
 => control._setEx(TemplatedControl.CornerRadiusProperty, ps, () => control.CornerRadius = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static T CornerRadius<T>(this T control, Double uniformRadius) where T : TemplatedControl
+public static T CornerRadius<T>(this T control, Double uniformRadius = default) where T : TemplatedControl
    => control._set(() => control.CornerRadius = new CornerRadius(uniformRadius));
-public static T CornerRadius<T>(this T control, Double top, Double bottom) where T : TemplatedControl
+public static T CornerRadius<T>(this T control, Double top = default, Double bottom = default) where T : TemplatedControl
    => control._set(() => control.CornerRadius = new CornerRadius(top, bottom));
-public static T CornerRadius<T>(this T control, Double topLeft, Double topRight, Double bottomRight, Double bottomLeft) where T : TemplatedControl
+public static T CornerRadius<T>(this T control, Double topLeft = default, Double topRight = default, Double bottomRight = default, Double bottomLeft = default) where T : TemplatedControl
    => control._set(() => control.CornerRadius = new CornerRadius(topLeft, topRight, bottomRight, bottomLeft));
 public static T FontFamily<T>(this T control, IBinding binding) where T : TemplatedControl
    => control._set(TemplatedControl.FontFamilyProperty, binding);
@@ -4531,11 +4531,11 @@ public static T Padding<T>(this T control, Thickness value, BindingMode? binding
 public static T Padding<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : TemplatedControl
 => control._setEx(TemplatedControl.PaddingProperty, ps, () => control.Padding = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static T Padding<T>(this T control, Double uniformLength) where T : TemplatedControl
+public static T Padding<T>(this T control, Double uniformLength = default) where T : TemplatedControl
    => control._set(() => control.Padding = new Thickness(uniformLength));
-public static T Padding<T>(this T control, Double horizontal, Double vertical) where T : TemplatedControl
+public static T Padding<T>(this T control, Double horizontal = default, Double vertical = default) where T : TemplatedControl
    => control._set(() => control.Padding = new Thickness(horizontal, vertical));
-public static T Padding<T>(this T control, Double left, Double top, Double right, Double bottom) where T : TemplatedControl
+public static T Padding<T>(this T control, Double left = default, Double top = default, Double right = default, Double bottom = default) where T : TemplatedControl
    => control._set(() => control.Padding = new Thickness(left, top, right, bottom));
 public static T Template<T>(this T control, IBinding binding) where T : TemplatedControl
    => control._set(TemplatedControl.TemplateProperty, binding);
@@ -4795,9 +4795,9 @@ public static T RenderTransformOrigin<T>(this T control, RelativePoint value, Bi
 public static T RenderTransformOrigin<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, RelativePoint> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Visual
 => control._setEx(Visual.RenderTransformOriginProperty, ps, () => control.RenderTransformOrigin = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static T RenderTransformOrigin<T>(this T control, Double x, Double y, RelativeUnit unit) where T : Visual
+public static T RenderTransformOrigin<T>(this T control, Double x = default, Double y = default, RelativeUnit unit = default) where T : Visual
    => control._set(() => control.RenderTransformOrigin = new RelativePoint(x, y, unit));
-public static T RenderTransformOrigin<T>(this T control, Point point, RelativeUnit unit) where T : Visual
+public static T RenderTransformOrigin<T>(this T control, Point point = default, RelativeUnit unit = default) where T : Visual
    => control._set(() => control.RenderTransformOrigin = new RelativePoint(point, unit));
 public static T FlowDirection<T>(this T control, IBinding binding) where T : Visual
    => control._set(Visual.FlowDirectionProperty, binding);
@@ -4893,11 +4893,11 @@ public static T Margin<T>(this T control, Thickness value, BindingMode? bindingM
 public static T Margin<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Layoutable
 => control._setEx(Layoutable.MarginProperty, ps, () => control.Margin = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static T Margin<T>(this T control, Double uniformLength) where T : Layoutable
+public static T Margin<T>(this T control, Double uniformLength = default) where T : Layoutable
    => control._set(() => control.Margin = new Thickness(uniformLength));
-public static T Margin<T>(this T control, Double horizontal, Double vertical) where T : Layoutable
+public static T Margin<T>(this T control, Double horizontal = default, Double vertical = default) where T : Layoutable
    => control._set(() => control.Margin = new Thickness(horizontal, vertical));
-public static T Margin<T>(this T control, Double left, Double top, Double right, Double bottom) where T : Layoutable
+public static T Margin<T>(this T control, Double left = default, Double top = default, Double right = default, Double bottom = default) where T : Layoutable
    => control._set(() => control.Margin = new Thickness(left, top, right, bottom));
 public static T HorizontalAlignment<T>(this T control, IBinding binding) where T : Layoutable
    => control._set(Layoutable.HorizontalAlignmentProperty, binding);
@@ -5128,9 +5128,9 @@ public static ArcSegment Size(this ArcSegment control, Func<Size> func, Action<S
 public static ArcSegment Size(this ArcSegment control, Size value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ArcSegment.SizeProperty, ps, () => control.Size = value, bindingMode, converter, bindingSource);
 public static ArcSegment Size<TValue>(this ArcSegment control, TValue value, FuncValueConverter<TValue, Size> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ArcSegment.SizeProperty, ps, () => control.Size = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static ArcSegment Size(this ArcSegment control, Double width, Double height)
+public static ArcSegment Size(this ArcSegment control, Double width = default, Double height = default)
    => control._set(() => control.Size = new Size(width, height));
-public static ArcSegment Size(this ArcSegment control, Vector2 vector2)
+public static ArcSegment Size(this ArcSegment control, Vector2 vector2 = default)
    => control._set(() => control.Size = new Size(vector2));
 public static ArcSegment SweepDirection(this ArcSegment control, IBinding binding)
    => control._set(ArcSegment.SweepDirectionProperty, binding);
@@ -5195,9 +5195,9 @@ public static Brush TransformOrigin(this Brush control, Func<RelativePoint> func
 public static Brush TransformOrigin(this Brush control, RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Brush.TransformOriginProperty, ps, () => control.TransformOrigin = value, bindingMode, converter, bindingSource);
 public static Brush TransformOrigin<TValue>(this Brush control, TValue value, FuncValueConverter<TValue, RelativePoint> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Brush.TransformOriginProperty, ps, () => control.TransformOrigin = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static Brush TransformOrigin(this Brush control, Double x, Double y, RelativeUnit unit)
+public static Brush TransformOrigin(this Brush control, Double x = default, Double y = default, RelativeUnit unit = default)
    => control._set(() => control.TransformOrigin = new RelativePoint(x, y, unit));
-public static Brush TransformOrigin(this Brush control, Point point, RelativeUnit unit)
+public static Brush TransformOrigin(this Brush control, Point point = default, RelativeUnit unit = default)
    => control._set(() => control.TransformOrigin = new RelativePoint(point, unit));
 }
 public static partial class ConicGradientBrushExtensions
@@ -5211,9 +5211,9 @@ public static ConicGradientBrush Center(this ConicGradientBrush control, Func<Re
 public static ConicGradientBrush Center(this ConicGradientBrush control, RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ConicGradientBrush.CenterProperty, ps, () => control.Center = value, bindingMode, converter, bindingSource);
 public static ConicGradientBrush Center<TValue>(this ConicGradientBrush control, TValue value, FuncValueConverter<TValue, RelativePoint> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ConicGradientBrush.CenterProperty, ps, () => control.Center = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static ConicGradientBrush Center(this ConicGradientBrush control, Double x, Double y, RelativeUnit unit)
+public static ConicGradientBrush Center(this ConicGradientBrush control, Double x = default, Double y = default, RelativeUnit unit = default)
    => control._set(() => control.Center = new RelativePoint(x, y, unit));
-public static ConicGradientBrush Center(this ConicGradientBrush control, Point point, RelativeUnit unit)
+public static ConicGradientBrush Center(this ConicGradientBrush control, Point point = default, RelativeUnit unit = default)
    => control._set(() => control.Center = new RelativePoint(point, unit));
 public static ConicGradientBrush Angle(this ConicGradientBrush control, IBinding binding)
    => control._set(ConicGradientBrush.AngleProperty, binding);
@@ -5395,13 +5395,13 @@ public static EllipseGeometry Rect(this EllipseGeometry control, Func<Rect> func
 public static EllipseGeometry Rect(this EllipseGeometry control, Rect value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(EllipseGeometry.RectProperty, ps, () => control.Rect = value, bindingMode, converter, bindingSource);
 public static EllipseGeometry Rect<TValue>(this EllipseGeometry control, TValue value, FuncValueConverter<TValue, Rect> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(EllipseGeometry.RectProperty, ps, () => control.Rect = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static EllipseGeometry Rect(this EllipseGeometry control, Double x, Double y, Double width, Double height)
+public static EllipseGeometry Rect(this EllipseGeometry control, Double x = default, Double y = default, Double width = default, Double height = default)
    => control._set(() => control.Rect = new Rect(x, y, width, height));
-public static EllipseGeometry Rect(this EllipseGeometry control, Size size)
+public static EllipseGeometry Rect(this EllipseGeometry control, Size size = default)
    => control._set(() => control.Rect = new Rect(size));
-public static EllipseGeometry Rect(this EllipseGeometry control, Point position, Size size)
+public static EllipseGeometry Rect(this EllipseGeometry control, Point position = default, Size size = default)
    => control._set(() => control.Rect = new Rect(position, size));
-public static EllipseGeometry Rect(this EllipseGeometry control, Point topLeft, Point bottomRight)
+public static EllipseGeometry Rect(this EllipseGeometry control, Point topLeft = default, Point bottomRight = default)
    => control._set(() => control.Rect = new Rect(topLeft, bottomRight));
 public static EllipseGeometry RadiusX(this EllipseGeometry control, IBinding binding)
    => control._set(EllipseGeometry.RadiusXProperty, binding);
@@ -5623,13 +5623,13 @@ public static ImageDrawing Rect(this ImageDrawing control, Func<Rect> func, Acti
 public static ImageDrawing Rect(this ImageDrawing control, Rect value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ImageDrawing.RectProperty, ps, () => control.Rect = value, bindingMode, converter, bindingSource);
 public static ImageDrawing Rect<TValue>(this ImageDrawing control, TValue value, FuncValueConverter<TValue, Rect> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ImageDrawing.RectProperty, ps, () => control.Rect = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static ImageDrawing Rect(this ImageDrawing control, Double x, Double y, Double width, Double height)
+public static ImageDrawing Rect(this ImageDrawing control, Double x = default, Double y = default, Double width = default, Double height = default)
    => control._set(() => control.Rect = new Rect(x, y, width, height));
-public static ImageDrawing Rect(this ImageDrawing control, Size size)
+public static ImageDrawing Rect(this ImageDrawing control, Size size = default)
    => control._set(() => control.Rect = new Rect(size));
-public static ImageDrawing Rect(this ImageDrawing control, Point position, Size size)
+public static ImageDrawing Rect(this ImageDrawing control, Point position = default, Size size = default)
    => control._set(() => control.Rect = new Rect(position, size));
-public static ImageDrawing Rect(this ImageDrawing control, Point topLeft, Point bottomRight)
+public static ImageDrawing Rect(this ImageDrawing control, Point topLeft = default, Point bottomRight = default)
    => control._set(() => control.Rect = new Rect(topLeft, bottomRight));
 }
 public static partial class LinearGradientBrushExtensions
@@ -5643,9 +5643,9 @@ public static LinearGradientBrush StartPoint(this LinearGradientBrush control, F
 public static LinearGradientBrush StartPoint(this LinearGradientBrush control, RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(LinearGradientBrush.StartPointProperty, ps, () => control.StartPoint = value, bindingMode, converter, bindingSource);
 public static LinearGradientBrush StartPoint<TValue>(this LinearGradientBrush control, TValue value, FuncValueConverter<TValue, RelativePoint> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(LinearGradientBrush.StartPointProperty, ps, () => control.StartPoint = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static LinearGradientBrush StartPoint(this LinearGradientBrush control, Double x, Double y, RelativeUnit unit)
+public static LinearGradientBrush StartPoint(this LinearGradientBrush control, Double x = default, Double y = default, RelativeUnit unit = default)
    => control._set(() => control.StartPoint = new RelativePoint(x, y, unit));
-public static LinearGradientBrush StartPoint(this LinearGradientBrush control, Point point, RelativeUnit unit)
+public static LinearGradientBrush StartPoint(this LinearGradientBrush control, Point point = default, RelativeUnit unit = default)
    => control._set(() => control.StartPoint = new RelativePoint(point, unit));
 public static LinearGradientBrush EndPoint(this LinearGradientBrush control, IBinding binding)
    => control._set(LinearGradientBrush.EndPointProperty, binding);
@@ -5656,9 +5656,9 @@ public static LinearGradientBrush EndPoint(this LinearGradientBrush control, Fun
 public static LinearGradientBrush EndPoint(this LinearGradientBrush control, RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(LinearGradientBrush.EndPointProperty, ps, () => control.EndPoint = value, bindingMode, converter, bindingSource);
 public static LinearGradientBrush EndPoint<TValue>(this LinearGradientBrush control, TValue value, FuncValueConverter<TValue, RelativePoint> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(LinearGradientBrush.EndPointProperty, ps, () => control.EndPoint = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static LinearGradientBrush EndPoint(this LinearGradientBrush control, Double x, Double y, RelativeUnit unit)
+public static LinearGradientBrush EndPoint(this LinearGradientBrush control, Double x = default, Double y = default, RelativeUnit unit = default)
    => control._set(() => control.EndPoint = new RelativePoint(x, y, unit));
-public static LinearGradientBrush EndPoint(this LinearGradientBrush control, Point point, RelativeUnit unit)
+public static LinearGradientBrush EndPoint(this LinearGradientBrush control, Point point = default, RelativeUnit unit = default)
    => control._set(() => control.EndPoint = new RelativePoint(point, unit));
 }
 public static partial class LineGeometryExtensions
@@ -5702,9 +5702,9 @@ public static MatrixTransform Matrix(this MatrixTransform control, Func<Matrix> 
 public static MatrixTransform Matrix(this MatrixTransform control, Matrix value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MatrixTransform.MatrixProperty, ps, () => control.Matrix = value, bindingMode, converter, bindingSource);
 public static MatrixTransform Matrix<TValue>(this MatrixTransform control, TValue value, FuncValueConverter<TValue, Matrix> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MatrixTransform.MatrixProperty, ps, () => control.Matrix = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static MatrixTransform Matrix(this MatrixTransform control, Double scaleX, Double skewY, Double skewX, Double scaleY, Double offsetX, Double offsetY)
+public static MatrixTransform Matrix(this MatrixTransform control, Double scaleX = default, Double skewY = default, Double skewX = default, Double scaleY = default, Double offsetX = default, Double offsetY = default)
    => control._set(() => control.Matrix = new Matrix(scaleX, skewY, skewX, scaleY, offsetX, offsetY));
-public static MatrixTransform Matrix(this MatrixTransform control, Double scaleX, Double skewY, Double perspX, Double skewX, Double scaleY, Double perspY, Double offsetX, Double offsetY, Double perspZ)
+public static MatrixTransform Matrix(this MatrixTransform control, Double scaleX = default, Double skewY = default, Double perspX = default, Double skewX = default, Double scaleY = default, Double perspY = default, Double offsetX = default, Double offsetY = default, Double perspZ = default)
    => control._set(() => control.Matrix = new Matrix(scaleX, skewY, perspX, skewX, scaleY, perspY, offsetX, offsetY, perspZ));
 }
 public static partial class PathFigureExtensions
@@ -5872,9 +5872,9 @@ public static RadialGradientBrush Center(this RadialGradientBrush control, Func<
 public static RadialGradientBrush Center(this RadialGradientBrush control, RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RadialGradientBrush.CenterProperty, ps, () => control.Center = value, bindingMode, converter, bindingSource);
 public static RadialGradientBrush Center<TValue>(this RadialGradientBrush control, TValue value, FuncValueConverter<TValue, RelativePoint> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RadialGradientBrush.CenterProperty, ps, () => control.Center = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static RadialGradientBrush Center(this RadialGradientBrush control, Double x, Double y, RelativeUnit unit)
+public static RadialGradientBrush Center(this RadialGradientBrush control, Double x = default, Double y = default, RelativeUnit unit = default)
    => control._set(() => control.Center = new RelativePoint(x, y, unit));
-public static RadialGradientBrush Center(this RadialGradientBrush control, Point point, RelativeUnit unit)
+public static RadialGradientBrush Center(this RadialGradientBrush control, Point point = default, RelativeUnit unit = default)
    => control._set(() => control.Center = new RelativePoint(point, unit));
 public static RadialGradientBrush GradientOrigin(this RadialGradientBrush control, IBinding binding)
    => control._set(RadialGradientBrush.GradientOriginProperty, binding);
@@ -5885,9 +5885,9 @@ public static RadialGradientBrush GradientOrigin(this RadialGradientBrush contro
 public static RadialGradientBrush GradientOrigin(this RadialGradientBrush control, RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RadialGradientBrush.GradientOriginProperty, ps, () => control.GradientOrigin = value, bindingMode, converter, bindingSource);
 public static RadialGradientBrush GradientOrigin<TValue>(this RadialGradientBrush control, TValue value, FuncValueConverter<TValue, RelativePoint> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RadialGradientBrush.GradientOriginProperty, ps, () => control.GradientOrigin = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static RadialGradientBrush GradientOrigin(this RadialGradientBrush control, Double x, Double y, RelativeUnit unit)
+public static RadialGradientBrush GradientOrigin(this RadialGradientBrush control, Double x = default, Double y = default, RelativeUnit unit = default)
    => control._set(() => control.GradientOrigin = new RelativePoint(x, y, unit));
-public static RadialGradientBrush GradientOrigin(this RadialGradientBrush control, Point point, RelativeUnit unit)
+public static RadialGradientBrush GradientOrigin(this RadialGradientBrush control, Point point = default, RelativeUnit unit = default)
    => control._set(() => control.GradientOrigin = new RelativePoint(point, unit));
 public static RadialGradientBrush Radius(this RadialGradientBrush control, IBinding binding)
    => control._set(RadialGradientBrush.RadiusProperty, binding);
@@ -5909,13 +5909,13 @@ public static RectangleGeometry Rect(this RectangleGeometry control, Func<Rect> 
 public static RectangleGeometry Rect(this RectangleGeometry control, Rect value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RectangleGeometry.RectProperty, ps, () => control.Rect = value, bindingMode, converter, bindingSource);
 public static RectangleGeometry Rect<TValue>(this RectangleGeometry control, TValue value, FuncValueConverter<TValue, Rect> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RectangleGeometry.RectProperty, ps, () => control.Rect = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static RectangleGeometry Rect(this RectangleGeometry control, Double x, Double y, Double width, Double height)
+public static RectangleGeometry Rect(this RectangleGeometry control, Double x = default, Double y = default, Double width = default, Double height = default)
    => control._set(() => control.Rect = new Rect(x, y, width, height));
-public static RectangleGeometry Rect(this RectangleGeometry control, Size size)
+public static RectangleGeometry Rect(this RectangleGeometry control, Size size = default)
    => control._set(() => control.Rect = new Rect(size));
-public static RectangleGeometry Rect(this RectangleGeometry control, Point position, Size size)
+public static RectangleGeometry Rect(this RectangleGeometry control, Point position = default, Size size = default)
    => control._set(() => control.Rect = new Rect(position, size));
-public static RectangleGeometry Rect(this RectangleGeometry control, Point topLeft, Point bottomRight)
+public static RectangleGeometry Rect(this RectangleGeometry control, Point topLeft = default, Point bottomRight = default)
    => control._set(() => control.Rect = new Rect(topLeft, bottomRight));
 }
 public static partial class RotateTransformExtensions
@@ -6096,15 +6096,15 @@ public static TileBrush DestinationRect(this TileBrush control, Func<RelativeRec
 public static TileBrush DestinationRect(this TileBrush control, RelativeRect value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TileBrush.DestinationRectProperty, ps, () => control.DestinationRect = value, bindingMode, converter, bindingSource);
 public static TileBrush DestinationRect<TValue>(this TileBrush control, TValue value, FuncValueConverter<TValue, RelativeRect> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TileBrush.DestinationRectProperty, ps, () => control.DestinationRect = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static TileBrush DestinationRect(this TileBrush control, Double x, Double y, Double width, Double height, RelativeUnit unit)
+public static TileBrush DestinationRect(this TileBrush control, Double x = default, Double y = default, Double width = default, Double height = default, RelativeUnit unit = default)
    => control._set(() => control.DestinationRect = new RelativeRect(x, y, width, height, unit));
-public static TileBrush DestinationRect(this TileBrush control, Rect rect, RelativeUnit unit)
+public static TileBrush DestinationRect(this TileBrush control, Rect rect = default, RelativeUnit unit = default)
    => control._set(() => control.DestinationRect = new RelativeRect(rect, unit));
-public static TileBrush DestinationRect(this TileBrush control, Size size, RelativeUnit unit)
+public static TileBrush DestinationRect(this TileBrush control, Size size = default, RelativeUnit unit = default)
    => control._set(() => control.DestinationRect = new RelativeRect(size, unit));
-public static TileBrush DestinationRect(this TileBrush control, Point position, Size size, RelativeUnit unit)
+public static TileBrush DestinationRect(this TileBrush control, Point position = default, Size size = default, RelativeUnit unit = default)
    => control._set(() => control.DestinationRect = new RelativeRect(position, size, unit));
-public static TileBrush DestinationRect(this TileBrush control, Point topLeft, Point bottomRight, RelativeUnit unit)
+public static TileBrush DestinationRect(this TileBrush control, Point topLeft = default, Point bottomRight = default, RelativeUnit unit = default)
    => control._set(() => control.DestinationRect = new RelativeRect(topLeft, bottomRight, unit));
 public static TileBrush SourceRect(this TileBrush control, IBinding binding)
    => control._set(TileBrush.SourceRectProperty, binding);
@@ -6115,15 +6115,15 @@ public static TileBrush SourceRect(this TileBrush control, Func<RelativeRect> fu
 public static TileBrush SourceRect(this TileBrush control, RelativeRect value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TileBrush.SourceRectProperty, ps, () => control.SourceRect = value, bindingMode, converter, bindingSource);
 public static TileBrush SourceRect<TValue>(this TileBrush control, TValue value, FuncValueConverter<TValue, RelativeRect> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TileBrush.SourceRectProperty, ps, () => control.SourceRect = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static TileBrush SourceRect(this TileBrush control, Double x, Double y, Double width, Double height, RelativeUnit unit)
+public static TileBrush SourceRect(this TileBrush control, Double x = default, Double y = default, Double width = default, Double height = default, RelativeUnit unit = default)
    => control._set(() => control.SourceRect = new RelativeRect(x, y, width, height, unit));
-public static TileBrush SourceRect(this TileBrush control, Rect rect, RelativeUnit unit)
+public static TileBrush SourceRect(this TileBrush control, Rect rect = default, RelativeUnit unit = default)
    => control._set(() => control.SourceRect = new RelativeRect(rect, unit));
-public static TileBrush SourceRect(this TileBrush control, Size size, RelativeUnit unit)
+public static TileBrush SourceRect(this TileBrush control, Size size = default, RelativeUnit unit = default)
    => control._set(() => control.SourceRect = new RelativeRect(size, unit));
-public static TileBrush SourceRect(this TileBrush control, Point position, Size size, RelativeUnit unit)
+public static TileBrush SourceRect(this TileBrush control, Point position = default, Size size = default, RelativeUnit unit = default)
    => control._set(() => control.SourceRect = new RelativeRect(position, size, unit));
-public static TileBrush SourceRect(this TileBrush control, Point topLeft, Point bottomRight, RelativeUnit unit)
+public static TileBrush SourceRect(this TileBrush control, Point topLeft = default, Point bottomRight = default, RelativeUnit unit = default)
    => control._set(() => control.SourceRect = new RelativeRect(topLeft, bottomRight, unit));
 public static TileBrush Stretch(this TileBrush control, IBinding binding)
    => control._set(TileBrush.StretchProperty, binding);
@@ -6261,13 +6261,13 @@ public static CroppedBitmap SourceRect(this CroppedBitmap control, Func<PixelRec
 public static CroppedBitmap SourceRect(this CroppedBitmap control, PixelRect value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(CroppedBitmap.SourceRectProperty, ps, () => control.SourceRect = value, bindingMode, converter, bindingSource);
 public static CroppedBitmap SourceRect<TValue>(this CroppedBitmap control, TValue value, FuncValueConverter<TValue, PixelRect> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(CroppedBitmap.SourceRectProperty, ps, () => control.SourceRect = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static CroppedBitmap SourceRect(this CroppedBitmap control, Int32 x, Int32 y, Int32 width, Int32 height)
+public static CroppedBitmap SourceRect(this CroppedBitmap control, Int32 x = default, Int32 y = default, Int32 width = default, Int32 height = default)
    => control._set(() => control.SourceRect = new PixelRect(x, y, width, height));
-public static CroppedBitmap SourceRect(this CroppedBitmap control, PixelSize size)
+public static CroppedBitmap SourceRect(this CroppedBitmap control, PixelSize size = default)
    => control._set(() => control.SourceRect = new PixelRect(size));
-public static CroppedBitmap SourceRect(this CroppedBitmap control, PixelPoint position, PixelSize size)
+public static CroppedBitmap SourceRect(this CroppedBitmap control, PixelPoint position = default, PixelSize size = default)
    => control._set(() => control.SourceRect = new PixelRect(position, size));
-public static CroppedBitmap SourceRect(this CroppedBitmap control, PixelPoint topLeft, PixelPoint bottomRight)
+public static CroppedBitmap SourceRect(this CroppedBitmap control, PixelPoint topLeft = default, PixelPoint bottomRight = default)
    => control._set(() => control.SourceRect = new PixelRect(topLeft, bottomRight));
 }
 public static partial class AnimatableExtensions
@@ -6300,9 +6300,9 @@ public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animatio
 public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animation.Animation control, IterationCount value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Avalonia.Animation.Animation.IterationCountProperty, ps, () => control.IterationCount = value, bindingMode, converter, bindingSource);
 public static Avalonia.Animation.Animation IterationCount<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, IterationCount> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Avalonia.Animation.Animation.IterationCountProperty, ps, () => control.IterationCount = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
-public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animation.Animation control, UInt64 value)
+public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animation.Animation control, UInt64 value = default)
    => control._set(() => control.IterationCount = new IterationCount(value));
-public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animation.Animation control, UInt64 value, IterationType type)
+public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animation.Animation control, UInt64 value = default, IterationType type = default)
    => control._set(() => control.IterationCount = new IterationCount(value, type));
 public static Avalonia.Animation.Animation PlaybackDirection(this Avalonia.Animation.Animation control, IBinding binding)
    => control._set(Avalonia.Animation.Animation.PlaybackDirectionProperty, binding);

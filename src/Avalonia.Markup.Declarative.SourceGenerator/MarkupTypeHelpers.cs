@@ -55,7 +55,7 @@ internal static class MarkupTypeHelpers
         return HasPublicSetter(property);
     }
 
-    internal static bool HasPublicSetter(PropertyDeclarationSyntax property)
+    internal static bool HasPublicSetter(PropertyDeclarationSyntax? property)
     {
         if (property != null)
         {
@@ -67,7 +67,7 @@ internal static class MarkupTypeHelpers
         return false;
     }
 
-    internal static bool IsPublic(PropertyDeclarationSyntax property)
+    internal static bool IsPublic(PropertyDeclarationSyntax? property)
     {
         return property != null && property.Modifiers.Any(x => x.ValueText == "public");
     }

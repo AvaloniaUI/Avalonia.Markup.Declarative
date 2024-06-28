@@ -26,6 +26,14 @@ public class ActionToEventGenerator : EventGeneratorBase
             + $"(this {controlTypeName} control, {argsString}) => {Environment.NewLine}"
             + $"        control._setEvent(({eventHandler}) ((_, args) => {actionCallStr}), h => control.{eventName} += h);";
 
+        if (Config.BaseTypes.Contains(@event.ControlType))
+        {
+            extensionText =
+                $"    public static T {extensionName}<T>"
+                + $"(this T control, {argsString}) where T : {controlTypeName} => {Environment.NewLine}"
+                + $"        control._setEvent(({eventHandler}) ((_, args) => {actionCallStr}), h => control.{eventName} += h);";
+        }
+
         return extensionText;
     }
 }

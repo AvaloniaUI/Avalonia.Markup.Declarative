@@ -5,12 +5,12 @@
 		<IsPackable>true</IsPackable>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
-		<Version>11.0.10-preview4</Version>
+		<Version>11.0.11</Version>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="11.0.10" />
+		<PackageReference Include="Avalonia" Version="11.0.11" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -29,8 +29,8 @@ public class Config
     /// <summary>
     /// Those types will be generated as Generic extension methods instead of using direct control type
     /// </summary>
-    public List<Type> BaseTypes = new()
-    {
+    public List<Type> BaseTypes { get; } =
+    [
         typeof(Control),
         typeof(FlyoutBase),
         typeof(PopupFlyoutBase),
@@ -42,6 +42,6 @@ public class Config
         typeof(InputElement),
         typeof(ContentControl),
         typeof(SelectingItemsControl),
-        typeof(HeaderedSelectingItemsControl),
-    };
+        typeof(HeaderedSelectingItemsControl)
+    ];
 }

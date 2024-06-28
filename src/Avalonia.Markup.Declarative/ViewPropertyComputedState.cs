@@ -1,179 +1,197 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Avalonia.Styling;
 
 namespace Avalonia.Markup.Declarative;
 
 internal class ViewPropertyComputedState<TValue> : ViewPropertyComputedState, IObservable<TValue>, INotifyPropertyChanged
 {
-	public Func<TValue> GetterFunc { get; }
-	public TValue Value => GetterFunc();
+    public Func<TValue> GetterFunc { get; }
+    public TValue Value => GetterFunc();
 
-	public ViewPropertyComputedState(string? expressionString, Func<TValue> getterFunc)
-	{
-		GetterFunc = getterFunc;
-		ExpressionString = expressionString;
-	}
+    public ViewPropertyComputedState(string? expressionString, Func<TValue> getterFunc)
+    {
+        GetterFunc = getterFunc;
+        ExpressionString = expressionString;
+    }
 
-	public event PropertyChangedEventHandler? PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-	public override void OnPropertyChanged()
-	{
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
-		NotifyObservers(Value);
-	}
+    public override void OnPropertyChanged()
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
+        NotifyObservers(Value);
+    }
 
-	private readonly List<IObserver<TValue>> _observers = [];
+    private readonly List<IObserver<TValue>> _observers = [];
 
-	public IDisposable Subscribe(IObserver<TValue> observer)
-	{
-		if (!_observers.Contains(observer))
-			_observers.Add(observer);
-		return new Unsubscriber(_observers, observer);
-	}
+    public IDisposable Subscribe(IObserver<TValue> observer)
+    {
+        if (!_observers.Contains(observer))
+            _observers.Add(observer);
+        return new Unsubscriber(_observers, observer);
+    }
 
-	public void NotifyObservers(TValue value)
-	{
-		foreach (var observer in _observers)
-			observer.OnNext(value);
-	}
+    public void NotifyObservers(TValue value)
+    {
+        foreach (var observer in _observers)
+            observer.OnNext(value);
+    }
 
-	private class Unsubscriber(ICollection<IObserver<TValue>> observers, IObserver<TValue> observer) : IDisposable
-	{
-		public void Dispose()
-		{
-			if (observers.Contains(observer))
-				observers.Remove(observer);
-		}
-	}
+    private class Unsubscriber(ICollection<IObserver<TValue>> observers, IObserver<TValue> observer) : IDisposable
+    {
+        public void Dispose()
+        {
+            if (observers.Contains(observer))
+                observers.Remove(observer);
+        }
+    }
 }
 
 internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyComputedState, IObservable<TValue>, IObserver<TValue>
-	where TControl : AvaloniaObject
+    where TControl : AvaloniaObject
 
 {
-	private readonly IObservable<TValue> _obs;
-	private readonly TControl? _control;
-	private readonly AvaloniaProperty<TValue> _avaloniaProperty;
-	public Action<TValue>? SetChangedHandler { get; }
+    private readonly IObservable<TValue>? _obs;
+    private readonly TControl? _control;
+    private readonly AvaloniaProperty<TValue>? _avaloniaProperty;
+    public Action<TValue>? Setter { get; }
+    public Action<TValue>? SetChangedHandler { get; }
 
-	public TValue Value => GetterFunc();
+    public TValue Value => GetterFunc();
 
-	public Func<TValue> GetterFunc { get; }
+    public Func<TValue> GetterFunc { get; }
 
-	internal ViewPropertyComputedState(string? expressionString,
-		Func<TValue> getterFunc,
-		Action<TValue>? setChangedHandler,
-		TControl? control,
-		AvaloniaProperty<TValue>? avaloniaProperty)
-	{
-		_control = control;
-		_avaloniaProperty = avaloniaProperty;
-		SetChangedHandler = setChangedHandler;
-		ExpressionString = expressionString;
-		GetterFunc = getterFunc;
+    internal ViewPropertyComputedState(string? expressionString,
+        Func<TValue> getterFunc,
+        Action<TValue>? setChangedHandler,
+        TControl? control,
+        AvaloniaProperty<TValue>? avaloniaProperty)
+    {
+        _control = control;
+        _avaloniaProperty = avaloniaProperty;
+        SetChangedHandler = setChangedHandler;
+        ExpressionString = expressionString;
+        GetterFunc = getterFunc;
 
-		if (control == null || avaloniaProperty == null)
-			return;
+        if (control == null)
+            return;
 
-		UpdateControlValue();
+        UpdateControlValue();
 
-		control.Bind(avaloniaProperty, this);
+        if (_avaloniaProperty != null)
+        {
+            control.Bind(_avaloniaProperty, this);
 
-		if (setChangedHandler != null)
-		{
-			_obs = control.GetObservable(avaloniaProperty);
-			_obs.Subscribe(this);
-		}
+            if (setChangedHandler != null)
+            {
+                _obs = control.GetObservable(_avaloniaProperty);
+                _obs.Subscribe(this);
+            }
+        }
+    }
 
-	}
+    internal ViewPropertyComputedState(string? expressionString,
+        Action<TValue> setter,
+        Func<TValue> getterFunc,
+        Action<TValue>? setChangedHandler,
+        TControl? control)
+    {
+        _control = control;
+        Setter = setter;
+        SetChangedHandler = setChangedHandler;
+        ExpressionString = expressionString;
+        GetterFunc = getterFunc;
 
-	private void UpdateControlValue()
-	{
-		if (_control == null || _avaloniaProperty == null)
-			return;
+        if (control == null)
+            return;
 
-		switch (_avaloniaProperty)
-		{
-			case DirectProperty<TControl, TValue> dt:
-				_control.SetValue(dt, Value);
-				break;
-			case StyledProperty<TValue> st:
-				_control.SetValue(st, Value);
-				break;
-		}
-	}
+        UpdateControlValue();
+    }
 
-	public override void OnPropertyChanged()
-	{
-		NotifyObservers(Value);
-	}
+    private void UpdateControlValue()
+    {
+        if (_control == null)
+            return;
 
-	public void OnNext(TValue value)
-	{
-		if (Value == null && value == null)
-			return;
+        if (_avaloniaProperty != null)
+            _control.SetValue(_avaloniaProperty, Value);
+        else
+            Setter?.Invoke(GetterFunc());
+    }
 
-		if (value != null && value.Equals(Value))
-			return;
+    public override void OnPropertyChanged()
+    {
+        Setter?.Invoke(GetterFunc());
+        NotifyObservers(Value);
+    }
 
-		SetChangedHandler?.Invoke(value);
-	}
+    public void OnNext(TValue value)
+    {
+        if (Value == null && value == null)
+            return;
 
-	public void OnCompleted()
-	{
-		throw new NotImplementedException();
-	}
+        if (value != null && value.Equals(Value))
+            return;
 
-	public void OnError(Exception error)
-	{
-		throw new NotImplementedException();
-	}
+        SetChangedHandler?.Invoke(value);
+    }
 
-	#region IObservable implementation
+    public void OnCompleted()
+    {
+        throw new NotImplementedException();
+    }
 
-	private readonly List<IObserver<TValue>> _observers = [];
+    public void OnError(Exception error)
+    {
+        throw new NotImplementedException();
+    }
 
-	public IDisposable Subscribe(IObserver<TValue> observer)
-	{
-		if (!_observers.Contains(observer))
-			_observers.Add(observer);
-		return new Unsubscriber(_observers, observer);
-	}
+    #region IObservable implementation
 
-	public void NotifyObservers(TValue value)
-	{
-		foreach (var observer in _observers)
-			observer.OnNext(value);
-	}
+    private readonly List<IObserver<TValue>> _observers = [];
 
-	private class Unsubscriber(ICollection<IObserver<TValue>> observers, IObserver<TValue> observer) : IDisposable
-	{
-		public void Dispose()
-		{
-			if (observers.Contains(observer))
-				observers.Remove(observer);
-		}
-	}
+    public IDisposable Subscribe(IObserver<TValue> observer)
+    {
+        if (!_observers.Contains(observer))
+            _observers.Add(observer);
+        return new Unsubscriber(_observers, observer);
+    }
 
-	#endregion
+    public void NotifyObservers(TValue value)
+    {
+        foreach (var observer in _observers)
+            observer.OnNext(value);
+    }
+
+    private class Unsubscriber(ICollection<IObserver<TValue>> observers, IObserver<TValue> observer) : IDisposable
+    {
+        public void Dispose()
+        {
+            if (observers.Contains(observer))
+                observers.Remove(observer);
+        }
+    }
+
+    #endregion
 
 }
 
 internal abstract class ViewPropertyComputedState
 {
-	internal string? ExpressionString { get; set; }
+    internal string? ExpressionString { get; set; }
 
-	public override bool Equals(object? obj)
-	{
-		return obj is ViewPropertyComputedState state &&
-			   ExpressionString == state.ExpressionString;
-	}
+    public override bool Equals(object? obj)
+    {
+        return obj is ViewPropertyComputedState state &&
+               ExpressionString == state.ExpressionString;
+    }
 
-	public override int GetHashCode()
-	{
-		return HashCode.Combine(ExpressionString);
-	}
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(ExpressionString);
+    }
 
-	public abstract void OnPropertyChanged();
+    public abstract void OnPropertyChanged();
 }

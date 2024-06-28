@@ -31,9 +31,11 @@ public class SimpleComponent() : ComponentBase
 			.Children(
 				new StackPanel()
 					.Name("SideBar")
-					.Background(Brushes.CadetBlue)
+                    .Background(Brushes.CadetBlue)
 					.Children(
-						new TextBlock().Text("Sidebar").Margin(16)
+						new TextBlock()
+                            .Margin(top: 16, left: 16) //partial margin defined with named arguments
+                            .Text("Sidebar")
 					),
 
 				new StackPanel().Col(1)

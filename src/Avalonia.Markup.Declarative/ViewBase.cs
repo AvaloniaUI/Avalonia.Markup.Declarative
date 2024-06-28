@@ -8,11 +8,10 @@ using Avalonia.Threading;
 namespace Avalonia.Markup.Declarative;
 
 public abstract class ViewBase<TViewModel> : ViewBase
-    where TViewModel : class
 {
     public virtual TViewModel? ViewModel
     {
-        get => DataContext as TViewModel;
+        get => (TViewModel)DataContext!;
         set => DataContext = value;
     }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -27,7 +26,6 @@ public class AvaloniaEventExtensionsGenerator : ISourceGenerator
         var views = FindAvaloniaMarkupViews(comp);
 
         var sb = new StringBuilder();
-        var extensions = new List<string>();
         foreach (var type in views)
         {
             var root = type.SyntaxTree
@@ -69,22 +67,24 @@ public class AvaloniaEventExtensionsGenerator : ISourceGenerator
             sb.AppendLine($"public static partial class {typeName}EventExtensions");
             sb.AppendLine("{");
 
+            var processedMembersCount = 0;
             foreach (var member in type.Members)
             {
                 if (member is not EventFieldDeclarationSyntax @event)
                     continue;
 
                 var extensionString = GetEventExtension(typeName, @event);
-                if (!string.IsNullOrWhiteSpace(extensionString))
-                {
-                    sb.AppendLine(extensionString);
-                }
+                if (string.IsNullOrWhiteSpace(extensionString)) 
+                    continue;
 
+                sb.AppendLine(extensionString);
+                processedMembersCount++;
             }
 
             sb.AppendLine("}");
             // Add the source code to the compilation
-            context.AddSource($"{typeName}.g.cs", sb.ToString());
+            if(processedMembersCount > 0)
+                context.AddSource($"{typeName}.g.cs", sb.ToString());
         }
 
     }
