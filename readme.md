@@ -68,6 +68,14 @@ public class MainView : ViewBase<MainViewModel>
 
 - 2023 note - according to the latest reports, with .net 7.0 and latest avalonia versions there are no conflicts anymore between AXAML files and the `Hot Reload` functionality. So you can mix AXAML with C# Markup in the same project.
 
+- JetBrains Rider has an issue with default .net hot reload behavior while debugging, so you can use following workaround:
+  ```C#
+  //init app
+  AppBuilder.Configure<Application>()
+    .UseRiderHotReload() //this line adds watcher that checks, if Views were changed during debugging session
+    .SetupWithLifetime(lifetime);
+  ```
+  
 ## Properties support on custom controls
 There are two source generators to add Markup Extensions on your own controls. If you downloaded source code or clonned this repo, add them by referencing `Avalonia.Markup.Declarative.SourceGenerator` project in your csproj file like this:
 
@@ -77,6 +85,8 @@ There are two source generators to add Markup Extensions on your own controls. I
 	</ItemGroup>
 ```
 * Make sure that the path to the source generator project is correct relative to your project.
+
+* If you are using this library as a Nuget, source generator will added to your project automatically.
 
 ## MVU Pattern implementation
 
