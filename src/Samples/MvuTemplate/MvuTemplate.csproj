@@ -5,10 +5,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<!--Avalonia doesen't support TrimMode=link currently,but we are working on that https://github.com/AvaloniaUI/Avalonia/issues/6892 -->
-		<TrimMode>copyused</TrimMode>
+		<TrimMode Condition="'$(Configuration)' != 'Debug'">copyused</TrimMode>
 		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 	</PropertyGroup>
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
     <PublishAot>true</PublishAot>
   </PropertyGroup>
 	<ItemGroup>

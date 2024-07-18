@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using MvuTemplate;
 
 var services = new ServiceCollection();
@@ -11,6 +10,8 @@ AppBuilder.Configure<Application>()
     .UsePlatformDetect()
     .AfterSetup(b => b.Instance?.Styles.Add(new FluentTheme()))
     .UseServiceProvider(services.BuildServiceProvider())
+    // uncomment the line below to enable rider ht reload workaround
+    //.UseRiderHotReload()
     .SetupWithLifetime(lifetime);
 
 lifetime.MainWindow = new Window()

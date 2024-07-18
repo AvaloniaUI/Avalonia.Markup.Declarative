@@ -26,4 +26,20 @@ public static class AppBuilderExtensions
         return appBuilder;
     }
 
+    public static AppBuilder UseRiderHotReload(this AppBuilder appBuilder, bool enable = true, int checkIntervalInMilliseconds = 2000)
+    {
+        if (enable)
+        {
+            HotReloadManager.ActivateRiderHotReload();
+            HotReloadManager.SetRiderRiderCheckInterval(checkIntervalInMilliseconds);
+        }
+        else
+        {
+            HotReloadManager.DeactivateRiderHotReload();
+        }
+
+        return appBuilder;
+    }
+
+
 }
