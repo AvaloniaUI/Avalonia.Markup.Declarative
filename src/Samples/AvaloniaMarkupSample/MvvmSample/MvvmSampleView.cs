@@ -1,10 +1,20 @@
 ﻿namespace AvaloniaMarkupSample.MvvmSample;
 
-public class MvvmSampleView : ViewBase<MvvmSampleViewModel>
+public class MvvmSampleView() : ViewBase<MvvmSampleViewModel>(new MvvmSampleViewModel())
 {
-    public MvvmSampleView() : base(new MvvmSampleViewModel())
+    #region NewValue Styled Avalonia Property
+    public string? NewValue
     {
+        get => GetValue(NewValueProperty);
+        set => SetValue(NewValueProperty, value);
     }
+
+    public static readonly StyledProperty<string?> NewValueProperty =
+        AvaloniaProperty.Register<MvvmSampleView, string?>
+        (
+            nameof(NewValue)
+        );
+    #endregion NewValue Styled Avalonia Property
 
     protected override object Build(MvvmSampleViewModel vm) =>
         new StackPanel()

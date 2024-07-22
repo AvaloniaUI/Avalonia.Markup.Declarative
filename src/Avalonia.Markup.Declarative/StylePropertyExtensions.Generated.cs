@@ -32,6 +32,10 @@ using System.Windows.Input;
 namespace Avalonia.Markup.Declarative;
 public static partial class AutoCompleteBoxExtensions
 {
+public static Style<AutoCompleteBox> CaretIndex(this Style<AutoCompleteBox> style, Int32 value)
+=> style._addSetter(AutoCompleteBox.CaretIndexProperty, value);
+public static Style<AutoCompleteBox> CaretIndex(this Style<AutoCompleteBox> style, IBinding binding)
+=> style._addSetter(AutoCompleteBox.CaretIndexProperty, binding);
 public static Style<AutoCompleteBox> Watermark(this Style<AutoCompleteBox> style, String value)
 => style._addSetter(AutoCompleteBox.WatermarkProperty, value);
 public static Style<AutoCompleteBox> Watermark(this Style<AutoCompleteBox> style, IBinding binding)
@@ -96,6 +100,18 @@ public static Style<AutoCompleteBox> AsyncPopulator(this Style<AutoCompleteBox> 
 => style._addSetter(AutoCompleteBox.AsyncPopulatorProperty, value);
 public static Style<AutoCompleteBox> AsyncPopulator(this Style<AutoCompleteBox> style, IBinding binding)
 => style._addSetter(AutoCompleteBox.AsyncPopulatorProperty, binding);
+public static Style<AutoCompleteBox> MaxLength(this Style<AutoCompleteBox> style, Int32 value)
+=> style._addSetter(AutoCompleteBox.MaxLengthProperty, value);
+public static Style<AutoCompleteBox> MaxLength(this Style<AutoCompleteBox> style, IBinding binding)
+=> style._addSetter(AutoCompleteBox.MaxLengthProperty, binding);
+public static Style<AutoCompleteBox> InnerLeftContent(this Style<AutoCompleteBox> style, Object value)
+=> style._addSetter(AutoCompleteBox.InnerLeftContentProperty, value);
+public static Style<AutoCompleteBox> InnerLeftContent(this Style<AutoCompleteBox> style, IBinding binding)
+=> style._addSetter(AutoCompleteBox.InnerLeftContentProperty, binding);
+public static Style<AutoCompleteBox> InnerRightContent(this Style<AutoCompleteBox> style, Object value)
+=> style._addSetter(AutoCompleteBox.InnerRightContentProperty, value);
+public static Style<AutoCompleteBox> InnerRightContent(this Style<AutoCompleteBox> style, IBinding binding)
+=> style._addSetter(AutoCompleteBox.InnerRightContentProperty, binding);
 }
 public static partial class BorderExtensions
 {
@@ -103,6 +119,10 @@ public static Style<Border> Background(this Style<Border> style, IBrush value)
 => style._addSetter(Border.BackgroundProperty, value);
 public static Style<Border> Background(this Style<Border> style, IBinding binding)
 => style._addSetter(Border.BackgroundProperty, binding);
+public static Style<Border> BackgroundSizing(this Style<Border> style, BackgroundSizing value)
+=> style._addSetter(Border.BackgroundSizingProperty, value);
+public static Style<Border> BackgroundSizing(this Style<Border> style, IBinding binding)
+=> style._addSetter(Border.BackgroundSizingProperty, binding);
 public static Style<Border> BorderBrush(this Style<Border> style, IBrush value)
 => style._addSetter(Border.BorderBrushProperty, value);
 public static Style<Border> BorderBrush(this Style<Border> style, IBinding binding)
@@ -316,6 +336,10 @@ public static Style<ComboBox> VerticalContentAlignment(this Style<ComboBox> styl
 => style._addSetter(ComboBox.VerticalContentAlignmentProperty, value);
 public static Style<ComboBox> VerticalContentAlignment(this Style<ComboBox> style, IBinding binding)
 => style._addSetter(ComboBox.VerticalContentAlignmentProperty, binding);
+public static Style<ComboBox> SelectionBoxItemTemplate(this Style<ComboBox> style, IDataTemplate value)
+=> style._addSetter(ComboBox.SelectionBoxItemTemplateProperty, value);
+public static Style<ComboBox> SelectionBoxItemTemplate(this Style<ComboBox> style, IBinding binding)
+=> style._addSetter(ComboBox.SelectionBoxItemTemplateProperty, binding);
 }
 public static partial class ContentControlExtensions
 {
@@ -605,6 +629,17 @@ public static Style<GridSplitter> PreviewContent(this Style<GridSplitter> style,
 public static Style<GridSplitter> PreviewContent(this Style<GridSplitter> style, IBinding binding)
 => style._addSetter(GridSplitter.PreviewContentProperty, binding);
 }
+public static partial class HyperlinkButtonExtensions
+{
+public static Style<HyperlinkButton> IsVisited(this Style<HyperlinkButton> style, Boolean value)
+=> style._addSetter(HyperlinkButton.IsVisitedProperty, value);
+public static Style<HyperlinkButton> IsVisited(this Style<HyperlinkButton> style, IBinding binding)
+=> style._addSetter(HyperlinkButton.IsVisitedProperty, binding);
+public static Style<HyperlinkButton> NavigateUri(this Style<HyperlinkButton> style, Uri value)
+=> style._addSetter(HyperlinkButton.NavigateUriProperty, value);
+public static Style<HyperlinkButton> NavigateUri(this Style<HyperlinkButton> style, IBinding binding)
+=> style._addSetter(HyperlinkButton.NavigateUriProperty, binding);
+}
 public static partial class ImageExtensions
 {
 public static Style<Image> Source(this Style<Image> style, IImage value)
@@ -743,6 +778,18 @@ public static Style<MenuItem> StaysOpenOnClick(this Style<MenuItem> style, Boole
 => style._addSetter(MenuItem.StaysOpenOnClickProperty, value);
 public static Style<MenuItem> StaysOpenOnClick(this Style<MenuItem> style, IBinding binding)
 => style._addSetter(MenuItem.StaysOpenOnClickProperty, binding);
+public static Style<MenuItem> ToggleType(this Style<MenuItem> style, MenuItemToggleType value)
+=> style._addSetter(MenuItem.ToggleTypeProperty, value);
+public static Style<MenuItem> ToggleType(this Style<MenuItem> style, IBinding binding)
+=> style._addSetter(MenuItem.ToggleTypeProperty, binding);
+public static Style<MenuItem> IsChecked(this Style<MenuItem> style, Boolean value)
+=> style._addSetter(MenuItem.IsCheckedProperty, value);
+public static Style<MenuItem> IsChecked(this Style<MenuItem> style, IBinding binding)
+=> style._addSetter(MenuItem.IsCheckedProperty, binding);
+public static Style<MenuItem> GroupName(this Style<MenuItem> style, String value)
+=> style._addSetter(MenuItem.GroupNameProperty, value);
+public static Style<MenuItem> GroupName(this Style<MenuItem> style, IBinding binding)
+=> style._addSetter(MenuItem.GroupNameProperty, binding);
 }
 public static partial class ReversibleStackPanelExtensions
 {
@@ -825,6 +872,14 @@ public static Style<NumericUpDown> TextAlignment(this Style<NumericUpDown> style
 => style._addSetter(NumericUpDown.TextAlignmentProperty, value);
 public static Style<NumericUpDown> TextAlignment(this Style<NumericUpDown> style, IBinding binding)
 => style._addSetter(NumericUpDown.TextAlignmentProperty, binding);
+public static Style<NumericUpDown> InnerLeftContent(this Style<NumericUpDown> style, Object value)
+=> style._addSetter(NumericUpDown.InnerLeftContentProperty, value);
+public static Style<NumericUpDown> InnerLeftContent(this Style<NumericUpDown> style, IBinding binding)
+=> style._addSetter(NumericUpDown.InnerLeftContentProperty, binding);
+public static Style<NumericUpDown> InnerRightContent(this Style<NumericUpDown> style, Object value)
+=> style._addSetter(NumericUpDown.InnerRightContentProperty, value);
+public static Style<NumericUpDown> InnerRightContent(this Style<NumericUpDown> style, IBinding binding)
+=> style._addSetter(NumericUpDown.InnerRightContentProperty, binding);
 }
 public static partial class PanelExtensions
 {
@@ -960,6 +1015,10 @@ public static Style<SelectableTextBlock> SelectionBrush(this Style<SelectableTex
 => style._addSetter(SelectableTextBlock.SelectionBrushProperty, value);
 public static Style<SelectableTextBlock> SelectionBrush(this Style<SelectableTextBlock> style, IBinding binding)
 => style._addSetter(SelectableTextBlock.SelectionBrushProperty, binding);
+public static Style<SelectableTextBlock> SelectionForegroundBrush(this Style<SelectableTextBlock> style, IBrush value)
+=> style._addSetter(SelectableTextBlock.SelectionForegroundBrushProperty, value);
+public static Style<SelectableTextBlock> SelectionForegroundBrush(this Style<SelectableTextBlock> style, IBinding binding)
+=> style._addSetter(SelectableTextBlock.SelectionForegroundBrushProperty, binding);
 }
 public static partial class SliderExtensions
 {
@@ -1009,6 +1068,10 @@ public static Style<SplitButton> Flyout(this Style<SplitButton> style, FlyoutBas
 => style._addSetter(SplitButton.FlyoutProperty, value);
 public static Style<SplitButton> Flyout(this Style<SplitButton> style, IBinding binding)
 => style._addSetter(SplitButton.FlyoutProperty, binding);
+public static Style<SplitButton> HotKey(this Style<SplitButton> style, KeyGesture value)
+=> style._addSetter(SplitButton.HotKeyProperty, value);
+public static Style<SplitButton> HotKey(this Style<SplitButton> style, IBinding binding)
+=> style._addSetter(SplitButton.HotKeyProperty, binding);
 }
 public static partial class ToggleSplitButtonExtensions
 {
@@ -1182,6 +1245,10 @@ public static Style<TextBlock> TextDecorations(this Style<TextBlock> style, Text
 => style._addSetter(TextBlock.TextDecorationsProperty, value);
 public static Style<TextBlock> TextDecorations(this Style<TextBlock> style, IBinding binding)
 => style._addSetter(TextBlock.TextDecorationsProperty, binding);
+public static Style<TextBlock> FontFeatures(this Style<TextBlock> style, FontFeatureCollection value)
+=> style._addSetter(TextBlock.FontFeaturesProperty, value);
+public static Style<TextBlock> FontFeatures(this Style<TextBlock> style, IBinding binding)
+=> style._addSetter(TextBlock.FontFeaturesProperty, binding);
 public static Style<TextBlock> Inlines(this Style<TextBlock> style, InlineCollection value)
 => style._addSetter(TextBlock.InlinesProperty, value);
 public static Style<TextBlock> Inlines(this Style<TextBlock> style, IBinding binding)
@@ -1221,6 +1288,10 @@ public static Style<TextBox> CaretBrush(this Style<TextBox> style, IBrush value)
 => style._addSetter(TextBox.CaretBrushProperty, value);
 public static Style<TextBox> CaretBrush(this Style<TextBox> style, IBinding binding)
 => style._addSetter(TextBox.CaretBrushProperty, binding);
+public static Style<TextBox> CaretBlinkInterval(this Style<TextBox> style, TimeSpan value)
+=> style._addSetter(TextBox.CaretBlinkIntervalProperty, value);
+public static Style<TextBox> CaretBlinkInterval(this Style<TextBox> style, IBinding binding)
+=> style._addSetter(TextBox.CaretBlinkIntervalProperty, binding);
 public static Style<TextBox> SelectionStart(this Style<TextBox> style, Int32 value)
 => style._addSetter(TextBox.SelectionStartProperty, value);
 public static Style<TextBox> SelectionStart(this Style<TextBox> style, IBinding binding)
@@ -1237,6 +1308,10 @@ public static Style<TextBox> MaxLines(this Style<TextBox> style, Int32 value)
 => style._addSetter(TextBox.MaxLinesProperty, value);
 public static Style<TextBox> MaxLines(this Style<TextBox> style, IBinding binding)
 => style._addSetter(TextBox.MaxLinesProperty, binding);
+public static Style<TextBox> MinLines(this Style<TextBox> style, Int32 value)
+=> style._addSetter(TextBox.MinLinesProperty, value);
+public static Style<TextBox> MinLines(this Style<TextBox> style, IBinding binding)
+=> style._addSetter(TextBox.MinLinesProperty, binding);
 public static Style<TextBox> Text(this Style<TextBox> style, String value)
 => style._addSetter(TextBox.TextProperty, value);
 public static Style<TextBox> Text(this Style<TextBox> style, IBinding binding)
@@ -1492,6 +1567,10 @@ public static Style<Window> ShowInTaskbar(this Style<Window> style, Boolean valu
 => style._addSetter(Window.ShowInTaskbarProperty, value);
 public static Style<Window> ShowInTaskbar(this Style<Window> style, IBinding binding)
 => style._addSetter(Window.ShowInTaskbarProperty, binding);
+public static Style<Window> ClosingBehavior(this Style<Window> style, WindowClosingBehavior value)
+=> style._addSetter(Window.ClosingBehaviorProperty, value);
+public static Style<Window> ClosingBehavior(this Style<Window> style, IBinding binding)
+=> style._addSetter(Window.ClosingBehaviorProperty, binding);
 public static Style<Window> WindowState(this Style<Window> style, WindowState value)
 => style._addSetter(Window.WindowStateProperty, value);
 public static Style<Window> WindowState(this Style<Window> style, IBinding binding)
@@ -1641,6 +1720,10 @@ public static Style<ContentPresenter> Background(this Style<ContentPresenter> st
 => style._addSetter(ContentPresenter.BackgroundProperty, value);
 public static Style<ContentPresenter> Background(this Style<ContentPresenter> style, IBinding binding)
 => style._addSetter(ContentPresenter.BackgroundProperty, binding);
+public static Style<ContentPresenter> BackgroundSizing(this Style<ContentPresenter> style, BackgroundSizing value)
+=> style._addSetter(ContentPresenter.BackgroundSizingProperty, value);
+public static Style<ContentPresenter> BackgroundSizing(this Style<ContentPresenter> style, IBinding binding)
+=> style._addSetter(ContentPresenter.BackgroundSizingProperty, binding);
 public static Style<ContentPresenter> BorderBrush(this Style<ContentPresenter> style, IBrush value)
 => style._addSetter(ContentPresenter.BorderBrushProperty, value);
 public static Style<ContentPresenter> BorderBrush(this Style<ContentPresenter> style, IBinding binding)
@@ -1820,6 +1903,10 @@ public static Style<TextPresenter> CaretBrush(this Style<TextPresenter> style, I
 => style._addSetter(TextPresenter.CaretBrushProperty, value);
 public static Style<TextPresenter> CaretBrush(this Style<TextPresenter> style, IBinding binding)
 => style._addSetter(TextPresenter.CaretBrushProperty, binding);
+public static Style<TextPresenter> CaretBlinkInterval(this Style<TextPresenter> style, TimeSpan value)
+=> style._addSetter(TextPresenter.CaretBlinkIntervalProperty, value);
+public static Style<TextPresenter> CaretBlinkInterval(this Style<TextPresenter> style, IBinding binding)
+=> style._addSetter(TextPresenter.CaretBlinkIntervalProperty, binding);
 public static Style<TextPresenter> SelectionStart(this Style<TextPresenter> style, Int32 value)
 => style._addSetter(TextPresenter.SelectionStartProperty, value);
 public static Style<TextPresenter> SelectionStart(this Style<TextPresenter> style, IBinding binding)
@@ -1925,6 +2012,10 @@ public static Style<TextElement> FontFamily(this Style<TextElement> style, FontF
 => style._addSetter(TextElement.FontFamilyProperty, value);
 public static Style<TextElement> FontFamily(this Style<TextElement> style, IBinding binding)
 => style._addSetter(TextElement.FontFamilyProperty, binding);
+public static Style<TextElement> FontFeatures(this Style<TextElement> style, FontFeatureCollection value)
+=> style._addSetter(TextElement.FontFeaturesProperty, value);
+public static Style<TextElement> FontFeatures(this Style<TextElement> style, IBinding binding)
+=> style._addSetter(TextElement.FontFeaturesProperty, binding);
 public static Style<TextElement> FontSize(this Style<TextElement> style, Double value)
 => style._addSetter(TextElement.FontSizeProperty, value);
 public static Style<TextElement> FontSize(this Style<TextElement> style, IBinding binding)
@@ -2103,6 +2194,10 @@ public static Style<PopupRoot> Transform(this Style<PopupRoot> style, Transform 
 => style._addSetter(PopupRoot.TransformProperty, value);
 public static Style<PopupRoot> Transform(this Style<PopupRoot> style, IBinding binding)
 => style._addSetter(PopupRoot.TransformProperty, binding);
+public static Style<PopupRoot> WindowManagerAddShadowHint(this Style<PopupRoot> style, Boolean value)
+=> style._addSetter(PopupRoot.WindowManagerAddShadowHintProperty, value);
+public static Style<PopupRoot> WindowManagerAddShadowHint(this Style<PopupRoot> style, IBinding binding)
+=> style._addSetter(PopupRoot.WindowManagerAddShadowHintProperty, binding);
 }
 public static partial class RangeBaseExtensions
 {
@@ -2190,6 +2285,10 @@ public static Style<T> Background<T>(this Style<T> style, IBrush value) where T 
 => style._addSetter(TemplatedControl.BackgroundProperty, value);
 public static Style<T> Background<T>(this Style<T> style, IBinding binding) where T : TemplatedControl
 => style._addSetter(TemplatedControl.BackgroundProperty, binding);
+public static Style<T> BackgroundSizing<T>(this Style<T> style, BackgroundSizing value) where T : TemplatedControl
+=> style._addSetter(TemplatedControl.BackgroundSizingProperty, value);
+public static Style<T> BackgroundSizing<T>(this Style<T> style, IBinding binding) where T : TemplatedControl
+=> style._addSetter(TemplatedControl.BackgroundSizingProperty, binding);
 public static Style<T> BorderBrush<T>(this Style<T> style, IBrush value) where T : TemplatedControl
 => style._addSetter(TemplatedControl.BorderBrushProperty, value);
 public static Style<T> BorderBrush<T>(this Style<T> style, IBinding binding) where T : TemplatedControl
@@ -2220,6 +2319,10 @@ public static Style<T> FontFamily<T>(this Style<T> style, FontFamily value) wher
 => style._addSetter(TemplatedControl.FontFamilyProperty, value);
 public static Style<T> FontFamily<T>(this Style<T> style, IBinding binding) where T : TemplatedControl
 => style._addSetter(TemplatedControl.FontFamilyProperty, binding);
+public static Style<T> FontFeatures<T>(this Style<T> style, FontFeatureCollection value) where T : TemplatedControl
+=> style._addSetter(TemplatedControl.FontFeaturesProperty, value);
+public static Style<T> FontFeatures<T>(this Style<T> style, IBinding binding) where T : TemplatedControl
+=> style._addSetter(TemplatedControl.FontFeaturesProperty, binding);
 public static Style<T> FontSize<T>(this Style<T> style, Double value) where T : TemplatedControl
 => style._addSetter(TemplatedControl.FontSizeProperty, value);
 public static Style<T> FontSize<T>(this Style<T> style, IBinding binding) where T : TemplatedControl

@@ -20,11 +20,11 @@
 
 
 	<ItemGroup>
-		<None Include="icon.png" Pack="true" PackagePath="\"/>
+		<None Include="icon.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="11.0.11" />
+		<PackageReference Include="Avalonia" Version="11.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>

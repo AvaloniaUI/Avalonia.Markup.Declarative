@@ -62,6 +62,14 @@ public static Application Name<TValue>(this Application control, TValue value, F
 }
 public static partial class AutoCompleteBoxExtensions
 {
+public static AutoCompleteBox CaretIndex(this AutoCompleteBox control, IBinding binding)
+   => control._set(AutoCompleteBox.CaretIndexProperty, binding);
+public static AutoCompleteBox CaretIndex(this AutoCompleteBox control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(AutoCompleteBox.CaretIndexProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static AutoCompleteBox CaretIndex(this AutoCompleteBox control, Func<Int32> func, Action<Int32>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(AutoCompleteBox.CaretIndexProperty, func, onChanged, expression);
+public static AutoCompleteBox CaretIndex(this AutoCompleteBox control, Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(AutoCompleteBox.CaretIndexProperty, ps, () => control.CaretIndex = value, bindingMode, converter, bindingSource);
+public static AutoCompleteBox CaretIndex<TValue>(this AutoCompleteBox control, TValue value, FuncValueConverter<TValue, Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(AutoCompleteBox.CaretIndexProperty, ps, () => control.CaretIndex = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static AutoCompleteBox Watermark(this AutoCompleteBox control, IBinding binding)
    => control._set(AutoCompleteBox.WatermarkProperty, binding);
 public static AutoCompleteBox Watermark(this AutoCompleteBox control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
@@ -190,6 +198,30 @@ public static AutoCompleteBox AsyncPopulator(this AutoCompleteBox control, Func<
    => control._set(AutoCompleteBox.AsyncPopulatorProperty, func, onChanged, expression);
 public static AutoCompleteBox AsyncPopulator(this AutoCompleteBox control, Func<String,CancellationToken,Task<IEnumerable<Object>>> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(AutoCompleteBox.AsyncPopulatorProperty, ps, () => control.AsyncPopulator = value, bindingMode, converter, bindingSource);
 public static AutoCompleteBox AsyncPopulator<TValue>(this AutoCompleteBox control, TValue value, FuncValueConverter<TValue, Func<String,CancellationToken,Task<IEnumerable<Object>>>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(AutoCompleteBox.AsyncPopulatorProperty, ps, () => control.AsyncPopulator = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static AutoCompleteBox MaxLength(this AutoCompleteBox control, IBinding binding)
+   => control._set(AutoCompleteBox.MaxLengthProperty, binding);
+public static AutoCompleteBox MaxLength(this AutoCompleteBox control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(AutoCompleteBox.MaxLengthProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static AutoCompleteBox MaxLength(this AutoCompleteBox control, Func<Int32> func, Action<Int32>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(AutoCompleteBox.MaxLengthProperty, func, onChanged, expression);
+public static AutoCompleteBox MaxLength(this AutoCompleteBox control, Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(AutoCompleteBox.MaxLengthProperty, ps, () => control.MaxLength = value, bindingMode, converter, bindingSource);
+public static AutoCompleteBox MaxLength<TValue>(this AutoCompleteBox control, TValue value, FuncValueConverter<TValue, Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(AutoCompleteBox.MaxLengthProperty, ps, () => control.MaxLength = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static AutoCompleteBox InnerLeftContent(this AutoCompleteBox control, IBinding binding)
+   => control._set(AutoCompleteBox.InnerLeftContentProperty, binding);
+public static AutoCompleteBox InnerLeftContent(this AutoCompleteBox control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(AutoCompleteBox.InnerLeftContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static AutoCompleteBox InnerLeftContent(this AutoCompleteBox control, Func<Object> func, Action<Object>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(AutoCompleteBox.InnerLeftContentProperty, func, onChanged, expression);
+public static AutoCompleteBox InnerLeftContent(this AutoCompleteBox control, Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(AutoCompleteBox.InnerLeftContentProperty, ps, () => control.InnerLeftContent = value, bindingMode, converter, bindingSource);
+public static AutoCompleteBox InnerLeftContent<TValue>(this AutoCompleteBox control, TValue value, FuncValueConverter<TValue, Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(AutoCompleteBox.InnerLeftContentProperty, ps, () => control.InnerLeftContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static AutoCompleteBox InnerRightContent(this AutoCompleteBox control, IBinding binding)
+   => control._set(AutoCompleteBox.InnerRightContentProperty, binding);
+public static AutoCompleteBox InnerRightContent(this AutoCompleteBox control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(AutoCompleteBox.InnerRightContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static AutoCompleteBox InnerRightContent(this AutoCompleteBox control, Func<Object> func, Action<Object>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(AutoCompleteBox.InnerRightContentProperty, func, onChanged, expression);
+public static AutoCompleteBox InnerRightContent(this AutoCompleteBox control, Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(AutoCompleteBox.InnerRightContentProperty, ps, () => control.InnerRightContent = value, bindingMode, converter, bindingSource);
+public static AutoCompleteBox InnerRightContent<TValue>(this AutoCompleteBox control, TValue value, FuncValueConverter<TValue, Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(AutoCompleteBox.InnerRightContentProperty, ps, () => control.InnerRightContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class BorderExtensions
 {
@@ -201,6 +233,14 @@ public static Border Background(this Border control, Func<IBrush> func, Action<I
    => control._set(Border.BackgroundProperty, func, onChanged, expression);
 public static Border Background(this Border control, IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Border.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
 public static Border Background<TValue>(this Border control, TValue value, FuncValueConverter<TValue, IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Border.BackgroundProperty, ps, () => control.Background = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Border BackgroundSizing(this Border control, IBinding binding)
+   => control._set(Border.BackgroundSizingProperty, binding);
+public static Border BackgroundSizing(this Border control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(Border.BackgroundSizingProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static Border BackgroundSizing(this Border control, Func<BackgroundSizing> func, Action<BackgroundSizing>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(Border.BackgroundSizingProperty, func, onChanged, expression);
+public static Border BackgroundSizing(this Border control, BackgroundSizing value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Border.BackgroundSizingProperty, ps, () => control.BackgroundSizing = value, bindingMode, converter, bindingSource);
+public static Border BackgroundSizing<TValue>(this Border control, TValue value, FuncValueConverter<TValue, BackgroundSizing> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Border.BackgroundSizingProperty, ps, () => control.BackgroundSizing = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static Border BorderBrush(this Border control, IBinding binding)
    => control._set(Border.BorderBrushProperty, binding);
 public static Border BorderBrush(this Border control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
@@ -622,6 +662,14 @@ public static ComboBox VerticalContentAlignment(this ComboBox control, Func<Vert
    => control._set(ComboBox.VerticalContentAlignmentProperty, func, onChanged, expression);
 public static ComboBox VerticalContentAlignment(this ComboBox control, VerticalAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ComboBox.VerticalContentAlignmentProperty, ps, () => control.VerticalContentAlignment = value, bindingMode, converter, bindingSource);
 public static ComboBox VerticalContentAlignment<TValue>(this ComboBox control, TValue value, FuncValueConverter<TValue, VerticalAlignment> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ComboBox.VerticalContentAlignmentProperty, ps, () => control.VerticalContentAlignment = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static ComboBox SelectionBoxItemTemplate(this ComboBox control, IBinding binding)
+   => control._set(ComboBox.SelectionBoxItemTemplateProperty, binding);
+public static ComboBox SelectionBoxItemTemplate(this ComboBox control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(ComboBox.SelectionBoxItemTemplateProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static ComboBox SelectionBoxItemTemplate(this ComboBox control, Func<IDataTemplate> func, Action<IDataTemplate>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(ComboBox.SelectionBoxItemTemplateProperty, func, onChanged, expression);
+public static ComboBox SelectionBoxItemTemplate(this ComboBox control, IDataTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ComboBox.SelectionBoxItemTemplateProperty, ps, () => control.SelectionBoxItemTemplate = value, bindingMode, converter, bindingSource);
+public static ComboBox SelectionBoxItemTemplate<TValue>(this ComboBox control, TValue value, FuncValueConverter<TValue, IDataTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ComboBox.SelectionBoxItemTemplateProperty, ps, () => control.SelectionBoxItemTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class ContentControlExtensions
 {
@@ -1224,6 +1272,25 @@ public static GridSplitter PreviewContent(this GridSplitter control, Func<ITempl
 public static GridSplitter PreviewContent(this GridSplitter control, ITemplate<Control> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(GridSplitter.PreviewContentProperty, ps, () => control.PreviewContent = value, bindingMode, converter, bindingSource);
 public static GridSplitter PreviewContent<TValue>(this GridSplitter control, TValue value, FuncValueConverter<TValue, ITemplate<Control>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(GridSplitter.PreviewContentProperty, ps, () => control.PreviewContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
+public static partial class HyperlinkButtonExtensions
+{
+public static HyperlinkButton IsVisited(this HyperlinkButton control, IBinding binding)
+   => control._set(HyperlinkButton.IsVisitedProperty, binding);
+public static HyperlinkButton IsVisited(this HyperlinkButton control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(HyperlinkButton.IsVisitedProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static HyperlinkButton IsVisited(this HyperlinkButton control, Func<Boolean> func, Action<Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(HyperlinkButton.IsVisitedProperty, func, onChanged, expression);
+public static HyperlinkButton IsVisited(this HyperlinkButton control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(HyperlinkButton.IsVisitedProperty, ps, () => control.IsVisited = value, bindingMode, converter, bindingSource);
+public static HyperlinkButton IsVisited<TValue>(this HyperlinkButton control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(HyperlinkButton.IsVisitedProperty, ps, () => control.IsVisited = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static HyperlinkButton NavigateUri(this HyperlinkButton control, IBinding binding)
+   => control._set(HyperlinkButton.NavigateUriProperty, binding);
+public static HyperlinkButton NavigateUri(this HyperlinkButton control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(HyperlinkButton.NavigateUriProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static HyperlinkButton NavigateUri(this HyperlinkButton control, Func<Uri> func, Action<Uri>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(HyperlinkButton.NavigateUriProperty, func, onChanged, expression);
+public static HyperlinkButton NavigateUri(this HyperlinkButton control, Uri value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(HyperlinkButton.NavigateUriProperty, ps, () => control.NavigateUri = value, bindingMode, converter, bindingSource);
+public static HyperlinkButton NavigateUri<TValue>(this HyperlinkButton control, TValue value, FuncValueConverter<TValue, Uri> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(HyperlinkButton.NavigateUriProperty, ps, () => control.NavigateUri = converter.TryConvert(value), bindingMode, converter, bindingSource);
+}
 public static partial class ImageExtensions
 {
 public static Image Source(this Image control, IBinding binding)
@@ -1489,6 +1556,30 @@ public static MenuItem StaysOpenOnClick(this MenuItem control, Func<Boolean> fun
    => control._set(MenuItem.StaysOpenOnClickProperty, func, onChanged, expression);
 public static MenuItem StaysOpenOnClick(this MenuItem control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MenuItem.StaysOpenOnClickProperty, ps, () => control.StaysOpenOnClick = value, bindingMode, converter, bindingSource);
 public static MenuItem StaysOpenOnClick<TValue>(this MenuItem control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MenuItem.StaysOpenOnClickProperty, ps, () => control.StaysOpenOnClick = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static MenuItem ToggleType(this MenuItem control, IBinding binding)
+   => control._set(MenuItem.ToggleTypeProperty, binding);
+public static MenuItem ToggleType(this MenuItem control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(MenuItem.ToggleTypeProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static MenuItem ToggleType(this MenuItem control, Func<MenuItemToggleType> func, Action<MenuItemToggleType>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(MenuItem.ToggleTypeProperty, func, onChanged, expression);
+public static MenuItem ToggleType(this MenuItem control, MenuItemToggleType value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MenuItem.ToggleTypeProperty, ps, () => control.ToggleType = value, bindingMode, converter, bindingSource);
+public static MenuItem ToggleType<TValue>(this MenuItem control, TValue value, FuncValueConverter<TValue, MenuItemToggleType> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MenuItem.ToggleTypeProperty, ps, () => control.ToggleType = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static MenuItem IsChecked(this MenuItem control, IBinding binding)
+   => control._set(MenuItem.IsCheckedProperty, binding);
+public static MenuItem IsChecked(this MenuItem control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(MenuItem.IsCheckedProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static MenuItem IsChecked(this MenuItem control, Func<Boolean> func, Action<Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(MenuItem.IsCheckedProperty, func, onChanged, expression);
+public static MenuItem IsChecked(this MenuItem control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MenuItem.IsCheckedProperty, ps, () => control.IsChecked = value, bindingMode, converter, bindingSource);
+public static MenuItem IsChecked<TValue>(this MenuItem control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MenuItem.IsCheckedProperty, ps, () => control.IsChecked = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static MenuItem GroupName(this MenuItem control, IBinding binding)
+   => control._set(MenuItem.GroupNameProperty, binding);
+public static MenuItem GroupName(this MenuItem control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(MenuItem.GroupNameProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static MenuItem GroupName(this MenuItem control, Func<String> func, Action<String>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(MenuItem.GroupNameProperty, func, onChanged, expression);
+public static MenuItem GroupName(this MenuItem control, String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MenuItem.GroupNameProperty, ps, () => control.GroupName = value, bindingMode, converter, bindingSource);
+public static MenuItem GroupName<TValue>(this MenuItem control, TValue value, FuncValueConverter<TValue, String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MenuItem.GroupNameProperty, ps, () => control.GroupName = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class NativeMenuItemExtensions
 {
@@ -1572,6 +1663,14 @@ public static NativeMenuItem IsEnabled(this NativeMenuItem control, Func<Boolean
    => control._set(NativeMenuItem.IsEnabledProperty, func, onChanged, expression);
 public static NativeMenuItem IsEnabled(this NativeMenuItem control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(NativeMenuItem.IsEnabledProperty, ps, () => control.IsEnabled = value, bindingMode, converter, bindingSource);
 public static NativeMenuItem IsEnabled<TValue>(this NativeMenuItem control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(NativeMenuItem.IsEnabledProperty, ps, () => control.IsEnabled = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static NativeMenuItem IsVisible(this NativeMenuItem control, IBinding binding)
+   => control._set(NativeMenuItem.IsVisibleProperty, binding);
+public static NativeMenuItem IsVisible(this NativeMenuItem control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(NativeMenuItem.IsVisibleProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static NativeMenuItem IsVisible(this NativeMenuItem control, Func<Boolean> func, Action<Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(NativeMenuItem.IsVisibleProperty, func, onChanged, expression);
+public static NativeMenuItem IsVisible(this NativeMenuItem control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(NativeMenuItem.IsVisibleProperty, ps, () => control.IsVisible = value, bindingMode, converter, bindingSource);
+public static NativeMenuItem IsVisible<TValue>(this NativeMenuItem control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(NativeMenuItem.IsVisibleProperty, ps, () => control.IsVisible = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class ReversibleStackPanelExtensions
 {
@@ -1730,6 +1829,22 @@ public static NumericUpDown TextAlignment(this NumericUpDown control, Func<TextA
    => control._set(NumericUpDown.TextAlignmentProperty, func, onChanged, expression);
 public static NumericUpDown TextAlignment(this NumericUpDown control, TextAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(NumericUpDown.TextAlignmentProperty, ps, () => control.TextAlignment = value, bindingMode, converter, bindingSource);
 public static NumericUpDown TextAlignment<TValue>(this NumericUpDown control, TValue value, FuncValueConverter<TValue, TextAlignment> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(NumericUpDown.TextAlignmentProperty, ps, () => control.TextAlignment = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static NumericUpDown InnerLeftContent(this NumericUpDown control, IBinding binding)
+   => control._set(NumericUpDown.InnerLeftContentProperty, binding);
+public static NumericUpDown InnerLeftContent(this NumericUpDown control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(NumericUpDown.InnerLeftContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static NumericUpDown InnerLeftContent(this NumericUpDown control, Func<Object> func, Action<Object>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(NumericUpDown.InnerLeftContentProperty, func, onChanged, expression);
+public static NumericUpDown InnerLeftContent(this NumericUpDown control, Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(NumericUpDown.InnerLeftContentProperty, ps, () => control.InnerLeftContent = value, bindingMode, converter, bindingSource);
+public static NumericUpDown InnerLeftContent<TValue>(this NumericUpDown control, TValue value, FuncValueConverter<TValue, Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(NumericUpDown.InnerLeftContentProperty, ps, () => control.InnerLeftContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static NumericUpDown InnerRightContent(this NumericUpDown control, IBinding binding)
+   => control._set(NumericUpDown.InnerRightContentProperty, binding);
+public static NumericUpDown InnerRightContent(this NumericUpDown control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(NumericUpDown.InnerRightContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static NumericUpDown InnerRightContent(this NumericUpDown control, Func<Object> func, Action<Object>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(NumericUpDown.InnerRightContentProperty, func, onChanged, expression);
+public static NumericUpDown InnerRightContent(this NumericUpDown control, Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(NumericUpDown.InnerRightContentProperty, ps, () => control.InnerRightContent = value, bindingMode, converter, bindingSource);
+public static NumericUpDown InnerRightContent<TValue>(this NumericUpDown control, TValue value, FuncValueConverter<TValue, Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(NumericUpDown.InnerRightContentProperty, ps, () => control.InnerRightContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class PanelExtensions
 {
@@ -2007,6 +2122,14 @@ public static SelectableTextBlock SelectionBrush(this SelectableTextBlock contro
    => control._set(SelectableTextBlock.SelectionBrushProperty, func, onChanged, expression);
 public static SelectableTextBlock SelectionBrush(this SelectableTextBlock control, IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(SelectableTextBlock.SelectionBrushProperty, ps, () => control.SelectionBrush = value, bindingMode, converter, bindingSource);
 public static SelectableTextBlock SelectionBrush<TValue>(this SelectableTextBlock control, TValue value, FuncValueConverter<TValue, IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(SelectableTextBlock.SelectionBrushProperty, ps, () => control.SelectionBrush = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static SelectableTextBlock SelectionForegroundBrush(this SelectableTextBlock control, IBinding binding)
+   => control._set(SelectableTextBlock.SelectionForegroundBrushProperty, binding);
+public static SelectableTextBlock SelectionForegroundBrush(this SelectableTextBlock control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(SelectableTextBlock.SelectionForegroundBrushProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static SelectableTextBlock SelectionForegroundBrush(this SelectableTextBlock control, Func<IBrush> func, Action<IBrush>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(SelectableTextBlock.SelectionForegroundBrushProperty, func, onChanged, expression);
+public static SelectableTextBlock SelectionForegroundBrush(this SelectableTextBlock control, IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(SelectableTextBlock.SelectionForegroundBrushProperty, ps, () => control.SelectionForegroundBrush = value, bindingMode, converter, bindingSource);
+public static SelectableTextBlock SelectionForegroundBrush<TValue>(this SelectableTextBlock control, TValue value, FuncValueConverter<TValue, IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(SelectableTextBlock.SelectionForegroundBrushProperty, ps, () => control.SelectionForegroundBrush = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class SliderExtensions
 {
@@ -2096,6 +2219,14 @@ public static SplitButton Flyout(this SplitButton control, Func<FlyoutBase> func
    => control._set(SplitButton.FlyoutProperty, func, onChanged, expression);
 public static SplitButton Flyout(this SplitButton control, FlyoutBase value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(SplitButton.FlyoutProperty, ps, () => control.Flyout = value, bindingMode, converter, bindingSource);
 public static SplitButton Flyout<TValue>(this SplitButton control, TValue value, FuncValueConverter<TValue, FlyoutBase> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(SplitButton.FlyoutProperty, ps, () => control.Flyout = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static SplitButton HotKey(this SplitButton control, IBinding binding)
+   => control._set(SplitButton.HotKeyProperty, binding);
+public static SplitButton HotKey(this SplitButton control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(SplitButton.HotKeyProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static SplitButton HotKey(this SplitButton control, Func<KeyGesture> func, Action<KeyGesture>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(SplitButton.HotKeyProperty, func, onChanged, expression);
+public static SplitButton HotKey(this SplitButton control, KeyGesture value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(SplitButton.HotKeyProperty, ps, () => control.HotKey = value, bindingMode, converter, bindingSource);
+public static SplitButton HotKey<TValue>(this SplitButton control, TValue value, FuncValueConverter<TValue, KeyGesture> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(SplitButton.HotKeyProperty, ps, () => control.HotKey = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class ToggleSplitButtonExtensions
 {
@@ -2417,6 +2548,14 @@ public static TextBlock TextDecorations(this TextBlock control, Func<TextDecorat
    => control._set(TextBlock.TextDecorationsProperty, func, onChanged, expression);
 public static TextBlock TextDecorations(this TextBlock control, TextDecorationCollection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBlock.TextDecorationsProperty, ps, () => control.TextDecorations = value, bindingMode, converter, bindingSource);
 public static TextBlock TextDecorations<TValue>(this TextBlock control, TValue value, FuncValueConverter<TValue, TextDecorationCollection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBlock.TextDecorationsProperty, ps, () => control.TextDecorations = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static TextBlock FontFeatures(this TextBlock control, IBinding binding)
+   => control._set(TextBlock.FontFeaturesProperty, binding);
+public static TextBlock FontFeatures(this TextBlock control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(TextBlock.FontFeaturesProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static TextBlock FontFeatures(this TextBlock control, Func<FontFeatureCollection> func, Action<FontFeatureCollection>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(TextBlock.FontFeaturesProperty, func, onChanged, expression);
+public static TextBlock FontFeatures(this TextBlock control, FontFeatureCollection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBlock.FontFeaturesProperty, ps, () => control.FontFeatures = value, bindingMode, converter, bindingSource);
+public static TextBlock FontFeatures<TValue>(this TextBlock control, TValue value, FuncValueConverter<TValue, FontFeatureCollection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBlock.FontFeaturesProperty, ps, () => control.FontFeatures = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static TextBlock Inlines(this TextBlock control, IBinding binding)
    => control._set(TextBlock.InlinesProperty, binding);
 public static TextBlock Inlines(this TextBlock control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
@@ -2492,6 +2631,14 @@ public static TextBox CaretBrush(this TextBox control, Func<IBrush> func, Action
    => control._set(TextBox.CaretBrushProperty, func, onChanged, expression);
 public static TextBox CaretBrush(this TextBox control, IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBox.CaretBrushProperty, ps, () => control.CaretBrush = value, bindingMode, converter, bindingSource);
 public static TextBox CaretBrush<TValue>(this TextBox control, TValue value, FuncValueConverter<TValue, IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBox.CaretBrushProperty, ps, () => control.CaretBrush = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static TextBox CaretBlinkInterval(this TextBox control, IBinding binding)
+   => control._set(TextBox.CaretBlinkIntervalProperty, binding);
+public static TextBox CaretBlinkInterval(this TextBox control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(TextBox.CaretBlinkIntervalProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static TextBox CaretBlinkInterval(this TextBox control, Func<TimeSpan> func, Action<TimeSpan>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(TextBox.CaretBlinkIntervalProperty, func, onChanged, expression);
+public static TextBox CaretBlinkInterval(this TextBox control, TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBox.CaretBlinkIntervalProperty, ps, () => control.CaretBlinkInterval = value, bindingMode, converter, bindingSource);
+public static TextBox CaretBlinkInterval<TValue>(this TextBox control, TValue value, FuncValueConverter<TValue, TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBox.CaretBlinkIntervalProperty, ps, () => control.CaretBlinkInterval = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static TextBox SelectionStart(this TextBox control, IBinding binding)
    => control._set(TextBox.SelectionStartProperty, binding);
 public static TextBox SelectionStart(this TextBox control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
@@ -2524,6 +2671,14 @@ public static TextBox MaxLines(this TextBox control, Func<Int32> func, Action<In
    => control._set(TextBox.MaxLinesProperty, func, onChanged, expression);
 public static TextBox MaxLines(this TextBox control, Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBox.MaxLinesProperty, ps, () => control.MaxLines = value, bindingMode, converter, bindingSource);
 public static TextBox MaxLines<TValue>(this TextBox control, TValue value, FuncValueConverter<TValue, Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBox.MaxLinesProperty, ps, () => control.MaxLines = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static TextBox MinLines(this TextBox control, IBinding binding)
+   => control._set(TextBox.MinLinesProperty, binding);
+public static TextBox MinLines(this TextBox control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(TextBox.MinLinesProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static TextBox MinLines(this TextBox control, Func<Int32> func, Action<Int32>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(TextBox.MinLinesProperty, func, onChanged, expression);
+public static TextBox MinLines(this TextBox control, Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBox.MinLinesProperty, ps, () => control.MinLines = value, bindingMode, converter, bindingSource);
+public static TextBox MinLines<TValue>(this TextBox control, TValue value, FuncValueConverter<TValue, Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextBox.MinLinesProperty, ps, () => control.MinLines = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static TextBox Text(this TextBox control, IBinding binding)
    => control._set(TextBox.TextProperty, binding);
 public static TextBox Text(this TextBox control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
@@ -3046,6 +3201,14 @@ public static Window ShowInTaskbar(this Window control, Func<Boolean> func, Acti
    => control._set(Window.ShowInTaskbarProperty, func, onChanged, expression);
 public static Window ShowInTaskbar(this Window control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Window.ShowInTaskbarProperty, ps, () => control.ShowInTaskbar = value, bindingMode, converter, bindingSource);
 public static Window ShowInTaskbar<TValue>(this Window control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Window.ShowInTaskbarProperty, ps, () => control.ShowInTaskbar = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Window ClosingBehavior(this Window control, IBinding binding)
+   => control._set(Window.ClosingBehaviorProperty, binding);
+public static Window ClosingBehavior(this Window control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(Window.ClosingBehaviorProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static Window ClosingBehavior(this Window control, Func<WindowClosingBehavior> func, Action<WindowClosingBehavior>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(Window.ClosingBehaviorProperty, func, onChanged, expression);
+public static Window ClosingBehavior(this Window control, WindowClosingBehavior value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Window.ClosingBehaviorProperty, ps, () => control.ClosingBehavior = value, bindingMode, converter, bindingSource);
+public static Window ClosingBehavior<TValue>(this Window control, TValue value, FuncValueConverter<TValue, WindowClosingBehavior> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Window.ClosingBehaviorProperty, ps, () => control.ClosingBehavior = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static Window WindowState(this Window control, IBinding binding)
    => control._set(Window.WindowStateProperty, binding);
 public static Window WindowState(this Window control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
@@ -3311,6 +3474,14 @@ public static ContentPresenter Background(this ContentPresenter control, Func<IB
    => control._set(ContentPresenter.BackgroundProperty, func, onChanged, expression);
 public static ContentPresenter Background(this ContentPresenter control, IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
 public static ContentPresenter Background<TValue>(this ContentPresenter control, TValue value, FuncValueConverter<TValue, IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.BackgroundProperty, ps, () => control.Background = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static ContentPresenter BackgroundSizing(this ContentPresenter control, IBinding binding)
+   => control._set(ContentPresenter.BackgroundSizingProperty, binding);
+public static ContentPresenter BackgroundSizing(this ContentPresenter control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(ContentPresenter.BackgroundSizingProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static ContentPresenter BackgroundSizing(this ContentPresenter control, Func<BackgroundSizing> func, Action<BackgroundSizing>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(ContentPresenter.BackgroundSizingProperty, func, onChanged, expression);
+public static ContentPresenter BackgroundSizing(this ContentPresenter control, BackgroundSizing value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.BackgroundSizingProperty, ps, () => control.BackgroundSizing = value, bindingMode, converter, bindingSource);
+public static ContentPresenter BackgroundSizing<TValue>(this ContentPresenter control, TValue value, FuncValueConverter<TValue, BackgroundSizing> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(ContentPresenter.BackgroundSizingProperty, ps, () => control.BackgroundSizing = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static ContentPresenter BorderBrush(this ContentPresenter control, IBinding binding)
    => control._set(ContentPresenter.BorderBrushProperty, binding);
 public static ContentPresenter BorderBrush(this ContentPresenter control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
@@ -3634,6 +3805,14 @@ public static TextPresenter CaretBrush(this TextPresenter control, Func<IBrush> 
    => control._set(TextPresenter.CaretBrushProperty, func, onChanged, expression);
 public static TextPresenter CaretBrush(this TextPresenter control, IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextPresenter.CaretBrushProperty, ps, () => control.CaretBrush = value, bindingMode, converter, bindingSource);
 public static TextPresenter CaretBrush<TValue>(this TextPresenter control, TValue value, FuncValueConverter<TValue, IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextPresenter.CaretBrushProperty, ps, () => control.CaretBrush = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static TextPresenter CaretBlinkInterval(this TextPresenter control, IBinding binding)
+   => control._set(TextPresenter.CaretBlinkIntervalProperty, binding);
+public static TextPresenter CaretBlinkInterval(this TextPresenter control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(TextPresenter.CaretBlinkIntervalProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static TextPresenter CaretBlinkInterval(this TextPresenter control, Func<TimeSpan> func, Action<TimeSpan>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(TextPresenter.CaretBlinkIntervalProperty, func, onChanged, expression);
+public static TextPresenter CaretBlinkInterval(this TextPresenter control, TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextPresenter.CaretBlinkIntervalProperty, ps, () => control.CaretBlinkInterval = value, bindingMode, converter, bindingSource);
+public static TextPresenter CaretBlinkInterval<TValue>(this TextPresenter control, TValue value, FuncValueConverter<TValue, TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextPresenter.CaretBlinkIntervalProperty, ps, () => control.CaretBlinkInterval = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static TextPresenter SelectionStart(this TextPresenter control, IBinding binding)
    => control._set(TextPresenter.SelectionStartProperty, binding);
 public static TextPresenter SelectionStart(this TextPresenter control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
@@ -3823,6 +4002,14 @@ public static TextElement FontFamily(this TextElement control, Func<FontFamily> 
    => control._set(TextElement.FontFamilyProperty, func, onChanged, expression);
 public static TextElement FontFamily(this TextElement control, FontFamily value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextElement.FontFamilyProperty, ps, () => control.FontFamily = value, bindingMode, converter, bindingSource);
 public static TextElement FontFamily<TValue>(this TextElement control, TValue value, FuncValueConverter<TValue, FontFamily> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextElement.FontFamilyProperty, ps, () => control.FontFamily = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static TextElement FontFeatures(this TextElement control, IBinding binding)
+   => control._set(TextElement.FontFeaturesProperty, binding);
+public static TextElement FontFeatures(this TextElement control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(TextElement.FontFeaturesProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static TextElement FontFeatures(this TextElement control, Func<FontFeatureCollection> func, Action<FontFeatureCollection>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(TextElement.FontFeaturesProperty, func, onChanged, expression);
+public static TextElement FontFeatures(this TextElement control, FontFeatureCollection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextElement.FontFeaturesProperty, ps, () => control.FontFeatures = value, bindingMode, converter, bindingSource);
+public static TextElement FontFeatures<TValue>(this TextElement control, TValue value, FuncValueConverter<TValue, FontFeatureCollection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TextElement.FontFeaturesProperty, ps, () => control.FontFeatures = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static TextElement FontSize(this TextElement control, IBinding binding)
    => control._set(TextElement.FontSizeProperty, binding);
 public static TextElement FontSize(this TextElement control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
@@ -4236,6 +4423,14 @@ public static PopupRoot Transform(this PopupRoot control, Func<Transform> func, 
    => control._set(PopupRoot.TransformProperty, func, onChanged, expression);
 public static PopupRoot Transform(this PopupRoot control, Transform value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(PopupRoot.TransformProperty, ps, () => control.Transform = value, bindingMode, converter, bindingSource);
 public static PopupRoot Transform<TValue>(this PopupRoot control, TValue value, FuncValueConverter<TValue, Transform> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(PopupRoot.TransformProperty, ps, () => control.Transform = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static PopupRoot WindowManagerAddShadowHint(this PopupRoot control, IBinding binding)
+   => control._set(PopupRoot.WindowManagerAddShadowHintProperty, binding);
+public static PopupRoot WindowManagerAddShadowHint(this PopupRoot control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(PopupRoot.WindowManagerAddShadowHintProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static PopupRoot WindowManagerAddShadowHint(this PopupRoot control, Func<Boolean> func, Action<Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(PopupRoot.WindowManagerAddShadowHintProperty, func, onChanged, expression);
+public static PopupRoot WindowManagerAddShadowHint(this PopupRoot control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(PopupRoot.WindowManagerAddShadowHintProperty, ps, () => control.WindowManagerAddShadowHint = value, bindingMode, converter, bindingSource);
+public static PopupRoot WindowManagerAddShadowHint<TValue>(this PopupRoot control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(PopupRoot.WindowManagerAddShadowHintProperty, ps, () => control.WindowManagerAddShadowHint = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class RangeBaseExtensions
 {
@@ -4416,6 +4611,16 @@ public static T Background<T>(this T control, IBrush value, BindingMode? binding
 => control._setEx(TemplatedControl.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
 public static T Background<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : TemplatedControl
 => control._setEx(TemplatedControl.BackgroundProperty, ps, () => control.Background = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T BackgroundSizing<T>(this T control, IBinding binding) where T : TemplatedControl
+   => control._set(TemplatedControl.BackgroundSizingProperty, binding);
+public static T BackgroundSizing<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : TemplatedControl
+   => control._set(TemplatedControl.BackgroundSizingProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T BackgroundSizing<T>(this T control, Func<BackgroundSizing> func, Action<BackgroundSizing>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : TemplatedControl
+   => control._set(TemplatedControl.BackgroundSizingProperty, func, onChanged, expression);
+public static T BackgroundSizing<T>(this T control, BackgroundSizing value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : TemplatedControl
+=> control._setEx(TemplatedControl.BackgroundSizingProperty, ps, () => control.BackgroundSizing = value, bindingMode, converter, bindingSource);
+public static T BackgroundSizing<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, BackgroundSizing> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : TemplatedControl
+=> control._setEx(TemplatedControl.BackgroundSizingProperty, ps, () => control.BackgroundSizing = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static T BorderBrush<T>(this T control, IBinding binding) where T : TemplatedControl
    => control._set(TemplatedControl.BorderBrushProperty, binding);
 public static T BorderBrush<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : TemplatedControl
@@ -4470,6 +4675,16 @@ public static T FontFamily<T>(this T control, FontFamily value, BindingMode? bin
 => control._setEx(TemplatedControl.FontFamilyProperty, ps, () => control.FontFamily = value, bindingMode, converter, bindingSource);
 public static T FontFamily<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, FontFamily> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : TemplatedControl
 => control._setEx(TemplatedControl.FontFamilyProperty, ps, () => control.FontFamily = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontFeatures<T>(this T control, IBinding binding) where T : TemplatedControl
+   => control._set(TemplatedControl.FontFeaturesProperty, binding);
+public static T FontFeatures<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : TemplatedControl
+   => control._set(TemplatedControl.FontFeaturesProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T FontFeatures<T>(this T control, Func<FontFeatureCollection> func, Action<FontFeatureCollection>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : TemplatedControl
+   => control._set(TemplatedControl.FontFeaturesProperty, func, onChanged, expression);
+public static T FontFeatures<T>(this T control, FontFeatureCollection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : TemplatedControl
+=> control._setEx(TemplatedControl.FontFeaturesProperty, ps, () => control.FontFeatures = value, bindingMode, converter, bindingSource);
+public static T FontFeatures<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, FontFeatureCollection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : TemplatedControl
+=> control._setEx(TemplatedControl.FontFeaturesProperty, ps, () => control.FontFeatures = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static T FontSize<T>(this T control, IBinding binding) where T : TemplatedControl
    => control._set(TemplatedControl.FontSizeProperty, binding);
 public static T FontSize<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : TemplatedControl
@@ -5761,6 +5976,17 @@ public static PathGeometry FillRule(this PathGeometry control, Func<FillRule> fu
 public static PathGeometry FillRule(this PathGeometry control, FillRule value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(PathGeometry.FillRuleProperty, ps, () => control.FillRule = value, bindingMode, converter, bindingSource);
 public static PathGeometry FillRule<TValue>(this PathGeometry control, TValue value, FuncValueConverter<TValue, FillRule> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(PathGeometry.FillRuleProperty, ps, () => control.FillRule = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
+public static partial class PathSegmentExtensions
+{
+public static PathSegment IsStroked(this PathSegment control, IBinding binding)
+   => control._set(PathSegment.IsStrokedProperty, binding);
+public static PathSegment IsStroked(this PathSegment control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(PathSegment.IsStrokedProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static PathSegment IsStroked(this PathSegment control, Func<Boolean> func, Action<Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(PathSegment.IsStrokedProperty, func, onChanged, expression);
+public static PathSegment IsStroked(this PathSegment control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(PathSegment.IsStrokedProperty, ps, () => control.IsStroked = value, bindingMode, converter, bindingSource);
+public static PathSegment IsStroked<TValue>(this PathSegment control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(PathSegment.IsStrokedProperty, ps, () => control.IsStroked = converter.TryConvert(value), bindingMode, converter, bindingSource);
+}
 public static partial class PenExtensions
 {
 public static Pen Brush(this Pen control, IBinding binding)
@@ -5889,17 +6115,41 @@ public static RadialGradientBrush GradientOrigin(this RadialGradientBrush contro
    => control._set(() => control.GradientOrigin = new RelativePoint(x, y, unit));
 public static RadialGradientBrush GradientOrigin(this RadialGradientBrush control, Point point = default, RelativeUnit unit = default)
    => control._set(() => control.GradientOrigin = new RelativePoint(point, unit));
-public static RadialGradientBrush Radius(this RadialGradientBrush control, IBinding binding)
-   => control._set(RadialGradientBrush.RadiusProperty, binding);
-public static RadialGradientBrush Radius(this RadialGradientBrush control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
-   => control._set(RadialGradientBrush.RadiusProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static RadialGradientBrush Radius(this RadialGradientBrush control, Func<Double> func, Action<Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
-   => control._set(RadialGradientBrush.RadiusProperty, func, onChanged, expression);
-public static RadialGradientBrush Radius(this RadialGradientBrush control, Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RadialGradientBrush.RadiusProperty, ps, () => control.Radius = value, bindingMode, converter, bindingSource);
-public static RadialGradientBrush Radius<TValue>(this RadialGradientBrush control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RadialGradientBrush.RadiusProperty, ps, () => control.Radius = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static RadialGradientBrush RadiusX(this RadialGradientBrush control, IBinding binding)
+   => control._set(RadialGradientBrush.RadiusXProperty, binding);
+public static RadialGradientBrush RadiusX(this RadialGradientBrush control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(RadialGradientBrush.RadiusXProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static RadialGradientBrush RadiusX(this RadialGradientBrush control, Func<RelativeScalar> func, Action<RelativeScalar>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(RadialGradientBrush.RadiusXProperty, func, onChanged, expression);
+public static RadialGradientBrush RadiusX(this RadialGradientBrush control, RelativeScalar value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RadialGradientBrush.RadiusXProperty, ps, () => control.RadiusX = value, bindingMode, converter, bindingSource);
+public static RadialGradientBrush RadiusX<TValue>(this RadialGradientBrush control, TValue value, FuncValueConverter<TValue, RelativeScalar> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RadialGradientBrush.RadiusXProperty, ps, () => control.RadiusX = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static RadialGradientBrush RadiusY(this RadialGradientBrush control, IBinding binding)
+   => control._set(RadialGradientBrush.RadiusYProperty, binding);
+public static RadialGradientBrush RadiusY(this RadialGradientBrush control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(RadialGradientBrush.RadiusYProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static RadialGradientBrush RadiusY(this RadialGradientBrush control, Func<RelativeScalar> func, Action<RelativeScalar>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(RadialGradientBrush.RadiusYProperty, func, onChanged, expression);
+public static RadialGradientBrush RadiusY(this RadialGradientBrush control, RelativeScalar value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RadialGradientBrush.RadiusYProperty, ps, () => control.RadiusY = value, bindingMode, converter, bindingSource);
+public static RadialGradientBrush RadiusY<TValue>(this RadialGradientBrush control, TValue value, FuncValueConverter<TValue, RelativeScalar> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RadialGradientBrush.RadiusYProperty, ps, () => control.RadiusY = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 public static partial class RectangleGeometryExtensions
 {
+public static RectangleGeometry RadiusX(this RectangleGeometry control, IBinding binding)
+   => control._set(RectangleGeometry.RadiusXProperty, binding);
+public static RectangleGeometry RadiusX(this RectangleGeometry control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(RectangleGeometry.RadiusXProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static RectangleGeometry RadiusX(this RectangleGeometry control, Func<Double> func, Action<Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(RectangleGeometry.RadiusXProperty, func, onChanged, expression);
+public static RectangleGeometry RadiusX(this RectangleGeometry control, Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RectangleGeometry.RadiusXProperty, ps, () => control.RadiusX = value, bindingMode, converter, bindingSource);
+public static RectangleGeometry RadiusX<TValue>(this RectangleGeometry control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RectangleGeometry.RadiusXProperty, ps, () => control.RadiusX = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static RectangleGeometry RadiusY(this RectangleGeometry control, IBinding binding)
+   => control._set(RectangleGeometry.RadiusYProperty, binding);
+public static RectangleGeometry RadiusY(this RectangleGeometry control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(RectangleGeometry.RadiusYProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static RectangleGeometry RadiusY(this RectangleGeometry control, Func<Double> func, Action<Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(RectangleGeometry.RadiusYProperty, func, onChanged, expression);
+public static RectangleGeometry RadiusY(this RectangleGeometry control, Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RectangleGeometry.RadiusYProperty, ps, () => control.RadiusY = value, bindingMode, converter, bindingSource);
+public static RectangleGeometry RadiusY<TValue>(this RectangleGeometry control, TValue value, FuncValueConverter<TValue, Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(RectangleGeometry.RadiusYProperty, ps, () => control.RadiusY = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static RectangleGeometry Rect(this RectangleGeometry control, IBinding binding)
    => control._set(RectangleGeometry.RectProperty, binding);
 public static RectangleGeometry Rect(this RectangleGeometry control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)

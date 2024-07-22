@@ -35,7 +35,11 @@ public class MainView : ViewBase
                                         var button = this.FindControl<Button>("HotReloadButton");
                                         if (button != null)
                                             button.Content = "Found by Name";
-                                    })
+                                    }),
+                                new HyperlinkButton()
+                                    .HorizontalAlignment(HorizontalAlignment.Center)
+                                    .NavigateUri(new Uri("https://github.com/AvaloniaUI/Avalonia.Markup.Declarative"))
+                                    .Content("Open on github")
                             )
                     ),
 
