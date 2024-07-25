@@ -21,8 +21,8 @@ public static class PropertyPathHelper
             //found special characters after property name, ie: @vm.Property ?? 0
             if (propFound && Array.IndexOf(StopChars, curChar) > -1)
                 return path.Substring(startIndex, i - startIndex);
-            
-            if (curChar == '.')
+
+            if (!propFound && curChar == '.')
             {
                 //found start of property name
                 startIndex = ++i;
