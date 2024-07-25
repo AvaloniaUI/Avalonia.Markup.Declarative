@@ -5,11 +5,16 @@ namespace AvaloniaExtensionGenerator;
 
 public static class AvaloniaTypeHelper
 {
-    public static IEnumerable<Type> GetControlTypes(Config config)
+    public static IEnumerable<Type> GetControlTypes(IConfig config)
     {
         var baseControlType = typeof(AvaloniaObject);
-        var controlTypes = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(s => s.GetTypes())
+
+        if (config.TypesToProcess == null)
+        {
+            throw new NullReferenceException("List of types is not set");
+        }
+
+        var controlTypes = config.TypesToProcess
             .Where(p => IsAccepatbleControlType(p) && baseControlType.IsAssignableFrom(p))
             .ToList();
 

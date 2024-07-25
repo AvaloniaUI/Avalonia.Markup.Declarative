@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "AvaloniaExtensionGenerator": {
+      "commandName": "Project"
+    },
+    "ExternalLibraryBuilder": {
+      "commandName": "Project",
+      "commandLineArgs": "--projectPath=C:\\Projects\\Avalonia\\Avalonia.Markup.Declarative\\src\\Samples\\ExternalLibrarySample\\ExternalLibrarySample.csproj"
+    }
+  }
+}
