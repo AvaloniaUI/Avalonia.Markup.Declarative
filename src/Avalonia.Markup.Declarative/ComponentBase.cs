@@ -8,11 +8,42 @@ using Avalonia.Data;
 
 namespace Avalonia.Markup.Declarative;
 
+public abstract class ComponentBase<TViewModel> : ComponentBase
+{
+    public virtual TViewModel? ViewModel
+    {
+        get => (TViewModel)DataContext!;
+        set => DataContext = value;
+    }
+
+    protected ComponentBase(TViewModel viewModel)
+        : base(true)
+    {
+        DataContext = viewModel;
+        OnCreatedCore();
+        Initialize();
+    }
+
+    protected abstract object Build(TViewModel? vm);
+
+    protected override object Build() => Build(ViewModel);
+}
+
 public abstract class ComponentBase : ViewBase, IMvuComponent
 {
     private ViewPropertyState[]? _localPropertyStates;
     private List<ViewPropertyState>? _externalPropertyStates;
     private List<IMvuComponent>? _dependentViews;
+
+    public ComponentBase()
+        : base()
+    {
+    }
+
+    public ComponentBase(bool deferredLoading)
+        : base(deferredLoading)
+    {
+    }
 
     protected override void OnCreated()
     {
