@@ -7,6 +7,10 @@ using Avalonia.Layout;
 
 namespace AvaloniaExtensionGenerator;
 
+/// <summary>
+/// Default config to generate extension for Avalonia framework built-in controls
+/// </summary>
+/// <param name="basePath">Path where generated classes will be put</param>
 public class DefaultAvaloniaConfig(string basePath) : IConfig
 {
     public Type[] TypesToProcess => AppDomain.CurrentDomain

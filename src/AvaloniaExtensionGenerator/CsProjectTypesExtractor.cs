@@ -1,140 +1,244 @@
 ﻿using NuGet.Common;
 using NuGet.Configuration;
-using NuGet.Packaging;
+using NuGet.Frameworks;
+using NuGet.Packaging.Core;
+using NuGet.Protocol;
 using NuGet.Protocol.Core.Types;
+using NuGet.Versioning;
+using System.Diagnostics;
 using System.Reflection;
 using System.Xml.Linq;
 
-namespace AvaloniaExtensionGenerator;
-
-internal class CsProjectTypesExtractor
+namespace AvaloniaExtensionGenerator
 {
-    private static List<PackageReference> GetPackageReferences(string csprojPath)
+    internal class CsProjectTypesExtractor
     {
-        var packages = new List<PackageReference>();
-        var doc = XDocument.Load(csprojPath);
-
-        var packageReferences = doc.Descendants("PackageReference");
-        foreach (var reference in packageReferences)
+        private static List<PackageReference> GetPackageReferences(string csprojPath)
         {
-            var name = reference.Attribute("Include")?.Value;
-            var version = reference.Attribute("Version")?.Value;
-            if (name != null && version != null)
+            var packages = new List<PackageReference>();
+            var doc = XDocument.Load(csprojPath);
+
+            var packageReferences = doc.Descendants("PackageReference");
+            foreach (var reference in packageReferences)
             {
-                packages.Add(new PackageReference { Name = name, Version = version });
+                var name = reference.Attribute("Include")?.Value;
+                var version = reference.Attribute("Version")?.Value;
+                if (name != null && version != null)
+                {
+                    packages.Add(new PackageReference { Name = name, Version = version });
+                }
+            }
+
+            return packages;
+        }
+
+        private static string GetTargetFramework(string csprojPath)
+        {
+            var doc = XDocument.Load(csprojPath);
+            var targetFramework = doc.Descendants("TargetFramework").FirstOrDefault()?.Value;
+            return targetFramework ?? string.Empty;
+        }
+
+        private static async Task RestoreNuGetPackages(string projectPath)
+        {
+            var processStartInfo = new ProcessStartInfo
+            {
+                FileName = "dotnet",
+                Arguments = $"restore \"{projectPath}\"",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            };
+
+            using var process = new Process { StartInfo = processStartInfo };
+            process.Start();
+            string output = await process.StandardOutput.ReadToEndAsync();
+            string error = await process.StandardError.ReadToEndAsync();
+
+            process.WaitForExit();
+
+            if (process.ExitCode != 0)
+            {
+                Console.WriteLine($"Failed to restore NuGet packages: {error}");
+                throw new Exception($"NuGet restore failed: {error}");
+            }
+            else
+            {
+                Console.WriteLine($"NuGet restore succeeded: {output}");
             }
         }
 
-        return packages;
-    }
-
-    private static async Task<string> GetNuGetPackage(string packageName, string packageVersion)
-    {
-        string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        string localCachePath = Path.Combine(userProfile, ".nuget", "packages", packageName.ToLower(), packageVersion);
-
-        if (Directory.Exists(localCachePath))
+        private static async Task<List<string>> GetAllDependencyPackages(string packageName, string packageVersion, string targetFramework)
         {
-            Console.WriteLine("Package found in local cache.");
-            return Path.Combine(localCachePath, $"{packageName}.{packageVersion}.nupkg");
-        }
+            var result = new List<string>();
+            var cache = new SourceCacheContext();
+            var repositories = Repository.Provider.GetCoreV3();
+            var packageSource = new PackageSource("https://api.nuget.org/v3/index.json");
+            var repository = new SourceRepository(packageSource, repositories);
+            var resource = await repository.GetResourceAsync<DependencyInfoResource>();
+            var identity = new PackageIdentity(packageName, NuGetVersion.Parse(packageVersion));
+            var nuGetFramework = NuGetFramework.ParseFolder(targetFramework);
 
-        Console.WriteLine("Package not found in local cache. Downloading...");
-        return await DownloadNuGetPackage(packageName, packageVersion);
-    }
+            var packageDependencies = await resource.ResolvePackage(
+                identity,
+                nuGetFramework,
+                cache,
+                NullLogger.Instance,
+                CancellationToken.None);
 
-    private static async Task<string> DownloadNuGetPackage(string packageName, string packageVersion)
-    {
-        var providers = Repository.Provider.GetCoreV3();
-        var source = new PackageSource("https://api.nuget.org/v3/index.json");
-        var sourceRepository = new SourceRepository(source, providers);
-        var resource = await sourceRepository.GetResourceAsync<FindPackageByIdResource>();
-
-        using var cacheContext = new SourceCacheContext();
-        var logger = NullLogger.Instance;
-        var packageIdentity = new NuGet.Packaging.Core.PackageIdentity(packageName, new NuGet.Versioning.NuGetVersion(packageVersion));
-        var downloadPath = Path.Combine(Path.GetTempPath(), $"{packageName}.{packageVersion}.nupkg");
-
-        using (var downloadStream = File.Create(downloadPath))
-        {
-            await resource.CopyNupkgToStreamAsync(packageIdentity.Id, packageIdentity.Version, downloadStream, cacheContext, logger, default);
-        }
-
-        return downloadPath;
-    }
-
-    private static string ExtractPackage(string packagePath)
-    {
-        var extractionPath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(packagePath));
-        if (!Directory.Exists(extractionPath))
-        {
-            Directory.CreateDirectory(extractionPath);
-        }
-
-        using var packageStream = File.OpenRead(packagePath);
-        using var packageArchiveReader = new PackageArchiveReader(packageStream);
-        foreach (var file in packageArchiveReader.GetFiles())
-        {
-            var filePath = Path.Combine(extractionPath, file);
-            var directoryPath = Path.GetDirectoryName(filePath);
-
-            if (!Directory.Exists(directoryPath))
+            if (packageDependencies == null)
             {
-                Directory.CreateDirectory(directoryPath!);
+                throw new Exception($"Package {packageName} {packageVersion} not found.");
             }
 
-            using var fileStream = File.Create(filePath);
-            using var sourceStream = packageArchiveReader.GetStream(file);
-            sourceStream.CopyTo(fileStream);
+            void AddDependencies(PackageDependencyInfo package)
+            {
+                if (!result.Contains($"{package.Id},{package.Version}"))
+                {
+                    result.Add($"{package.Id},{package.Version}");
+                    foreach (var dependency in package.Dependencies)
+                    {
+                        var depPackage = resource.ResolvePackage(
+                            new PackageIdentity(dependency.Id, dependency.VersionRange.MinVersion),
+                            nuGetFramework,
+                            cache,
+                            NullLogger.Instance,
+                            CancellationToken.None).Result;
+
+                        if (depPackage != null)
+                        {
+                            AddDependencies(depPackage);
+                        }
+                    }
+                }
+            }
+
+            AddDependencies(packageDependencies);
+            return result;
         }
 
-        return extractionPath;
-    }
-
-    private static List<string> GetClassesFromDlls(string extractionPath)
-    {
-        var classNames = new List<string>();
-
-        foreach (var dll in Directory.GetFiles(extractionPath, "*.dll", SearchOption.AllDirectories))
+        private static Dictionary<string, Assembly> LoadAssembliesIntoDictionary(string targetFramework)
         {
-            try
+            var assembliesDict = new Dictionary<string, Assembly>();
+            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string packagesPath = Path.Combine(userProfile, ".nuget", "packages");
+
+            if (Directory.Exists(packagesPath))
             {
-                var assembly = Assembly.LoadFrom(dll);
-                var types = assembly.GetTypes();
-                classNames.AddRange(types.Select(t => t.FullName)!);
+                foreach (var packageDir in Directory.GetDirectories(packagesPath))
+                {
+                    foreach (var versionDir in Directory.GetDirectories(packageDir))
+                    {
+                        var frameworkPath = Path.Combine(versionDir, "lib", targetFramework);
+                        if (Directory.Exists(frameworkPath))
+                        {
+                            foreach (var dll in Directory.GetFiles(frameworkPath, "*.dll", SearchOption.AllDirectories))
+                            {
+                                if (!assembliesDict.ContainsKey(dll))
+                                {
+                                    try
+                                    {
+                                        var assembly = Assembly.LoadFrom(dll);
+                                        assembliesDict[dll] = assembly;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine($"Failed to load assembly {dll}: {ex.Message}");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Failed to load assembly {dll}: {ex.Message}");
+                Console.WriteLine("NuGet cache directory not found.");
             }
+
+            return assembliesDict;
         }
 
-        return classNames;
-    }
-
-    private class PackageReference
-    {
-        public string Name { get; init; } = null!;
-        public string Version { get; init; } = null!;
-    }
-
-    public static async Task LoadTypesFromProject(string projectPath)
-    {
-        List<PackageReference> packages = GetPackageReferences(projectPath);
-        Console.WriteLine("Packages found in the .csproj file:");
-        foreach (var package in packages)
+        private class PackageReference
         {
-            Console.WriteLine($"{package.Name} {package.Version}");
+            public string Name { get; init; } = null!;
+            public string Version { get; init; } = null!;
+        }
 
-            string packagePath = await GetNuGetPackage(package.Name, package.Version);
-            string extractionPath = ExtractPackage(packagePath);
-            List<string> classes = GetClassesFromDlls(extractionPath);
+        public static async Task<IReadOnlyList<Type>> LoadTypesFromProject(string projectPath)
+        {
+            string targetFramework = GetTargetFramework(projectPath);
+            await RestoreNuGetPackages(projectPath);
+            List<PackageReference> packages = GetPackageReferences(projectPath);
+            Console.WriteLine("Packages found in the .csproj file:");
 
-            Console.WriteLine($"Classes found in {package.Name} {package.Version}:");
-            foreach (var className in classes)
+            var assembliesDict = LoadAssembliesIntoDictionary(targetFramework);
+            var result = new List<Type>();
+
+            foreach (var package in packages)
             {
-                Console.WriteLine(className);
+                Console.WriteLine($"{package.Name} {package.Version}");
+
+                // Load the main package's assemblies
+                string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                string packagePath = Path.Combine(userProfile, ".nuget", "packages", package.Name.ToLower(), package.Version);
+                string frameworkPath = Path.Combine(packagePath, "lib", targetFramework);
+
+                if (Directory.Exists(frameworkPath))
+                {
+                    foreach (var dll in Directory.GetFiles(frameworkPath, "*.dll", SearchOption.AllDirectories))
+                    {
+                        if (assembliesDict.TryGetValue(dll, out var assembly))
+                        {
+                            try
+                            {
+                                var types = assembly.GetTypes();
+                                result.AddRange(types);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"Failed to get types from assembly {dll}: {ex.Message}");
+                            }
+                        }
+                    }
+                }
+
+                // Load dependencies to dictionary
+                var dependencies = await GetAllDependencyPackages(package.Name, package.Version, targetFramework);
+                foreach (var dep in dependencies)
+                {
+                    var parts = dep.Split(',');
+                    if (parts.Length == 2)
+                    {
+                        var depName = parts[0];
+                        var depVersion = parts[1];
+                        string depPackagePath = Path.Combine(userProfile, ".nuget", "packages", depName.ToLower(), depVersion);
+                        string depFrameworkPath = Path.Combine(depPackagePath, "lib", targetFramework);
+
+                        if (Directory.Exists(depFrameworkPath))
+                        {
+                            foreach (var dll in Directory.GetFiles(depFrameworkPath, "*.dll", SearchOption.AllDirectories))
+                            {
+                                if (!assembliesDict.ContainsKey(dll))
+                                {
+                                    try
+                                    {
+                                        var assembly = Assembly.LoadFrom(dll);
+                                        assembliesDict[dll] = assembly;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine($"Failed to load assembly {dll}: {ex.Message}");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
+
+            return result;
         }
     }
 }

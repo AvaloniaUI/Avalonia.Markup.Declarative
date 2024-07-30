@@ -47,4 +47,8 @@
 		<Using Include="Avalonia.Layout" />
 		<Using Include="Avalonia.Media" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ControlExtensions.Generated\" />
+	</ItemGroup>
 </Project>

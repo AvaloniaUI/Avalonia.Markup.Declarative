@@ -1,4 +1,6 @@
-﻿using AvaloniaExtensionGenerator.Generators;
+﻿using Avalonia;
+using Avalonia.Controls;
+using AvaloniaExtensionGenerator.Generators;
 using AvaloniaExtensionGenerator.Generators.EventGenerators;
 using AvaloniaExtensionGenerator.Generators.SetterGenerators;
 using AvaloniaExtensionGenerator.Generators.StyleSetterGenerators;
@@ -16,11 +18,16 @@ public class GeneratorHost
 
     public void GenerateExtensions()
     {
-        new EventsExtensionGenerator(_config, $@"{_config.BasePath}\ControlEventExtensions.Generated.cs",
+        if (!Directory.Exists(_config.BasePath))
+        {
+            Directory.CreateDirectory(_config.BasePath);
+        }
+
+        new EventsExtensionGenerator(_config, $@"{_config.BasePath}\ControlEventExtensions.g.cs",
             new ActionToEventGenerator()
             ).Generate();
 
-        new PropertyExtensionsGenerator(_config, $@"{_config.BasePath}\ControlPropertyExtensions.Generated.cs",
+        new PropertyExtensionsGenerator(_config, $@"{_config.BasePath}\ControlPropertyExtensions.g.cs",
             // new ValueSetterGenerator(),
             new BindSetterGenerator(),
             new AvaloniaPropertyBindSetterGenerator(),
@@ -30,7 +37,7 @@ public class GeneratorHost
             new ValueOverloadsSetterGenerator()
             ).Generate();
 
-        new StylePropertyExtensionsGenerator(_config, $@"{_config.BasePath}\StylePropertyExtensions.Generated.cs",
+        new StylePropertyExtensionsGenerator(_config, $@"{_config.BasePath}\StylePropertyExtensions.g.cs",
             new ValueStyleSetterGenerator(),
             new BindingStyleSetterGenerator(),
             new ValueOverloadsStyleSetterGenerator()
@@ -59,5 +66,26 @@ public class GeneratorHost
 
             path = Path.Combine(path, "..");
         }
+    }
+
+    internal static void RunControlTypeGenerators(IReadOnlyList<Type> types, Type[] skipTypesFromProcess, string projectDirPath)
+    {
+        var outputPath = Path.Combine(projectDirPath, "ControlExtensions.Generated");
+        var baseType = typeof(UserControl);
+
+        var typeToProcess = types.Where(baseType.IsAssignableFrom).ToArray();
+
+        var config = new ExtensionGeneratorConfig(outputPath)
+        {
+            TypesToProcess = typeToProcess,
+            //don't generate avalonia default extensions
+            Exclude = skipTypesFromProcess,
+            //BaseTypes = defaultAvaloniaConfig.BaseTypes,
+        };
+
+        Console.WriteLine($"Using output path: {outputPath}");
+
+        var host = new GeneratorHost(config);
+        host.GenerateExtensions();
     }
 }

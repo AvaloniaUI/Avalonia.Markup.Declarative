@@ -43,7 +43,12 @@ internal class Program
 
         try
         {
-            await CsProjectTypesExtractor.LoadTypesFromProject(projectPath);
+            var defaultAvaloniaConfig = new DefaultAvaloniaConfig("");
+            var skipTypesFromProcess = defaultAvaloniaConfig.TypesToProcess.ToArray();
+
+            var types = await CsProjectTypesExtractor.LoadTypesFromProject(projectPath);
+            var projectDirPath = Path.GetDirectoryName(projectPath);
+            GeneratorHost.RunControlTypeGenerators(types, skipTypesFromProcess, projectDirPath);
         }
         catch (Exception ex)
         {
