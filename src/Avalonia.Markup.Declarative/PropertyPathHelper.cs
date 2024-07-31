@@ -2,9 +2,9 @@
 
 namespace Avalonia.Markup.Declarative;
 
-public static class PropertyPathHelper
+internal static class PropertyPathHelper
 {
-    private static readonly char[] StopChars = {' ', '?', ',', '\"', '@', '\t', '\n'};
+    private static readonly char[] StopChars = [' ', '?', ',', '\"', '@', '\t', '\n'];
 
     public static string GetNameFromPropertyPath(string? path)
     {
