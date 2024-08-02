@@ -159,9 +159,14 @@ public static class ControlPropertyExtensions
 			{
 				Path = PropertyPathHelper.GetNameFromPropertyPath(sourcePropertyPathString),
 				Mode = bindingMode ?? BindingMode.Default,
-				Converter = converter,
-				Source = bindingSource
+				Converter = converter
 			};
+
+			// This is needed as setting a null Source breaks the Binding
+			if (bindingSource != null)
+			{
+				binding.Source = bindingSource;
+			}
 
 			//for components the default binding context is the component itself instead of the control's data context
 			var view = ViewBuildContext.CurrentView;
