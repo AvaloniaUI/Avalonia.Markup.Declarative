@@ -5,7 +5,7 @@
 		<IsPackable>true</IsPackable>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
-		<Version>11.2.999-preview1</Version>
+		<Version>11.2.999-preview2</Version>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 
 		<Authors>Avalonia Team</Authors>
