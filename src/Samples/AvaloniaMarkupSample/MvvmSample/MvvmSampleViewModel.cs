@@ -3,18 +3,21 @@ using System.Runtime.CompilerServices;
 
 namespace AvaloniaMarkupSample.MvvmSample;
 
+public record struct MyObject(
+    string MyProperty);
+
 public class MvvmSampleViewModel : INotifyPropertyChanged
 {
-    private string? _myProperty;
+    private MyObject _myObject = new("Click the button below.");
 
-    public string? MyProperty
+    public MyObject MyObject
     {
-        get => _myProperty;
+        get => _myObject;
         set
         {
-            if (_myProperty != value)
+            if (_myObject != value)
             {
-                _myProperty = value;
+                _myObject = value;
                 OnPropertyChanged();
             }
         }
@@ -22,7 +25,7 @@ public class MvvmSampleViewModel : INotifyPropertyChanged
 
     public void MyCommand(object? commandParameter)
     {
-        MyProperty = $"You called command with parameter: {commandParameter}";
+        MyObject = new($"You called command with parameter: {commandParameter}");
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

@@ -41,7 +41,7 @@ public static class HotReloadManager
 
         if (IsEnabled)
             ReloadInstances(types);
-    
+
         OnHotReloaded(types);
     }
 
@@ -76,6 +76,12 @@ public static class HotReloadManager
         if (!IsEnabled) return;
 
         var type = instance.GetType();
+
+        if (type.IsGenericType)
+        {
+            type = type.GetGenericTypeDefinition();
+        }
+
         if (!Instances.TryGetValue(type, out var instances))
         {
             instances = new HashSet<IReloadable>();
@@ -93,6 +99,12 @@ public static class HotReloadManager
         if (!IsEnabled) return;
 
         var type = instance.GetType();
+
+        if (type.IsGenericType)
+        {
+            type = type.GetGenericTypeDefinition();
+        }
+
         if (!Instances.TryGetValue(type, out var instances)) return;
 
         if (instances.Contains(instance))

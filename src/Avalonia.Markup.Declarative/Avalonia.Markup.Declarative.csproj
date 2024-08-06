@@ -18,6 +18,9 @@
 		<PackageTags>avalonia;avaloniaui;mvvm;mvp;csharpmarjup;android;ios;mac;forms;wpf;net;netstandard;net461;uwp;xamarin</PackageTags>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="Avalonia.Markup.Declarative.Tests" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="icon.png" Pack="true" PackagePath="\" />

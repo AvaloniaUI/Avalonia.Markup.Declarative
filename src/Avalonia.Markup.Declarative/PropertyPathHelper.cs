@@ -2,10 +2,9 @@
 
 namespace Avalonia.Markup.Declarative;
 
-public static class PropertyPathHelper
+internal static class PropertyPathHelper
 {
-    private static readonly char[] StopChars = {' ', '?', ',', '\"', '@', '\t', '\n'};
-
+    private static readonly char[] StopChars = [' ', '?', ',', '\"', '@', '\t', '\n'];
     public static string GetNameFromPropertyPath(string? path)
     {
         if (path == null)
@@ -21,8 +20,8 @@ public static class PropertyPathHelper
             //found special characters after property name, ie: @vm.Property ?? 0
             if (propFound && Array.IndexOf(StopChars, curChar) > -1)
                 return path.Substring(startIndex, i - startIndex);
-            
-            if (curChar == '.')
+          
+            if (!propFound && curChar == '.')
             {
                 //found start of property name
                 startIndex = ++i;

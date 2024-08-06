@@ -20,7 +20,7 @@ public class MvvmSampleView() : ViewBase<MvvmSampleViewModel>(new MvvmSampleView
         new StackPanel()
             .Children(
                 new TextBlock()
-                    .Text(@vm.MyProperty),
+                    .Text(@vm.MyObject.MyProperty),
 
                 new Button()
                     .Content("Execute Command")
