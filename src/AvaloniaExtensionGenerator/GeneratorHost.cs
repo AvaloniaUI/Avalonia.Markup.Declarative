@@ -71,7 +71,7 @@ public class GeneratorHost
     internal static void RunControlTypeGenerators(IReadOnlyList<Type> types, Type[] skipTypesFromProcess, string projectDirPath)
     {
         var outputPath = Path.Combine(projectDirPath, "ControlExtensions.Generated");
-        var baseType = typeof(UserControl);
+        var baseType = typeof(Control);
 
         var typeToProcess = types.Where(baseType.IsAssignableFrom).ToArray();
 

@@ -46,7 +46,9 @@ internal class Program
             var defaultAvaloniaConfig = new DefaultAvaloniaConfig("");
             var skipTypesFromProcess = defaultAvaloniaConfig.TypesToProcess.ToArray();
 
-            var types = await CsProjectTypesExtractor.LoadTypesFromProject(projectPath);
+            var types = await CsProjectTypesExtractor.LoadTypesFromProject(
+                projectPath, typeof(Avalonia.AvaloniaObject));
+
             var projectDirPath = Path.GetDirectoryName(projectPath);
             GeneratorHost.RunControlTypeGenerators(types, skipTypesFromProcess, projectDirPath);
         }
