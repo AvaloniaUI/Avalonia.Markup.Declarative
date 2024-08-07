@@ -14,4 +14,18 @@ public class ChartViewModel
                 Fill = null
             }
         };
+
+    public void UpdateData()
+    {
+        var rnd = new Random();
+        Series =
+        [
+            new LineSeries<double>
+            {
+                Values = Enumerable.Range(0,10).Select(x=> rnd.NextDouble()*10).ToArray(),
+                Fill = null
+            }
+        ];
+
+    }
 }

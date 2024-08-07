@@ -47,7 +47,9 @@ public class GeneratorHost
 
     public static void RunDefaultAvaloniaFrameworkGenerators()
     {
+        //use directory info to get absolute path
         var basePath = new DirectoryInfo(GetBasePath(AppDomain.CurrentDomain.BaseDirectory)).FullName;
+        basePath = Path.Combine(basePath, "ControlExtensions.Generated");
         var config = new DefaultAvaloniaConfig(basePath);
         Console.WriteLine($"Using output path: {basePath}");
 
@@ -81,6 +83,16 @@ public class GeneratorHost
             //don't generate avalonia default extensions
             Exclude = skipTypesFromProcess,
             //BaseTypes = defaultAvaloniaConfig.BaseTypes,
+            InitialNamespaces =
+            [
+                "Avalonia.Data",
+                "Avalonia.Data.Converters",
+                "System",
+                "System.Numerics",
+                "System.Linq.Expressions",
+                "System.Runtime.CompilerServices"
+
+            ]
         };
 
         Console.WriteLine($"Using output path: {outputPath}");

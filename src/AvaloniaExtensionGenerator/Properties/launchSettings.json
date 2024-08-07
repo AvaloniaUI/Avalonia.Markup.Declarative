@@ -1,7 +1,8 @@
 {
   "profiles": {
     "AvaloniaExtensionGenerator": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "--framework"
     },
     "ExternalLibraryBuilder": {
       "commandName": "Project",

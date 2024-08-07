@@ -10,7 +10,7 @@
 		<ToolCommandName>avalonia-amd-gen</ToolCommandName>
 		<PackageOutputPath>./nupkg</PackageOutputPath>
 
-		<Version>11.2.999-preview1</Version>
+		<Version>11.2.999-preview4</Version>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 
 		<Authors>Avalonia Team</Authors>

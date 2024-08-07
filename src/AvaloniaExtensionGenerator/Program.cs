@@ -4,19 +4,9 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
-        if (args.Length == 0)
+        if (args is ["--framework"])
         {
-            Console.WriteLine("Please provide the path to the .csproj file using the argument '--projectPath'.");
-
-
-            Console.WriteLine("\n Or do you want to process Avalonia Framework itself?\nPress Y to start or any key to exit!");
-
-            var keyInfo = Console.ReadKey();
-            if (keyInfo.Key == ConsoleKey.Y)
-            {
-                Console.WriteLine("\nYou pressed 'Y'. Staring processing...");
-                GeneratorHost.RunDefaultAvaloniaFrameworkGenerators();
-            }
+            GeneratorHost.RunDefaultAvaloniaFrameworkGenerators();
             return;
         }
 
@@ -29,9 +19,23 @@ internal class Program
             }
         }
 
+        if (args.Length == 0)
+        {
+            var curDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            var projectFiles = curDir.GetFiles("*.csproj");
+
+            if (projectFiles.Length == 1)
+            {
+                Console.WriteLine("'--projectPath' is not set. Using current directory as a root project path");
+                Console.WriteLine($"project found: {projectFiles.First().Name}");
+
+                projectPath = projectFiles.First().FullName;
+            }
+        }
+
         if (projectPath == null)
         {
-            Console.WriteLine("Please provide the path to the .csproj file using the argument '--projectPath'.");
+            Console.WriteLine("Project file not found. Please provide the path to the .csproj file using the argument '--projectPath' or run AvaloniaExtensionGenerator from directory that contains csproj");
             return;
         }
 

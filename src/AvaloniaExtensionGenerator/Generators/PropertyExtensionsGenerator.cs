@@ -27,21 +27,35 @@ public class PropertyExtensionsGenerator
     {
         var controlTypes = GetControlTypes(Config);
 
-        var nameSpaces = new HashSet<string>(Config.InitialNamespaces);
-        var extensionClassesString = GetExtensionClasses(controlTypes, ref nameSpaces);
+        foreach (var controlType in controlTypes)
+        {
 
-        var sb = new StringBuilder();
-        
-        sb.AppendLine("#nullable enable");
-        
-        foreach (var ns in nameSpaces.OrderBy(x => x))
-            sb.AppendLine($"using {ns};");
+            var nameSpaces = new HashSet<string>(Config.InitialNamespaces);
+            var extensionClassesString = GetExtensionClasses([controlType], ref nameSpaces);
 
-        sb.AppendLine();
-        sb.AppendLine("namespace Avalonia.Markup.Declarative;");
-        sb.AppendLine(extensionClassesString);
+            if (string.IsNullOrWhiteSpace(extensionClassesString))
+                continue;
 
-        File.WriteAllText(OutputPath, sb.ToString());
+            var sb = new StringBuilder();
+
+            sb.AppendLine("#nullable enable");
+
+            foreach (var ns in nameSpaces.OrderBy(x => x))
+                sb.AppendLine($"using {ns};");
+
+            sb.AppendLine();
+            sb.AppendLine("namespace Avalonia.Markup.Declarative;");
+            sb.AppendLine(extensionClassesString);
+
+            var dirPath = Path.Combine(Path.GetDirectoryName(OutputPath), "Properties");
+
+            if (!Directory.Exists(dirPath))
+                Directory.CreateDirectory(dirPath);
+
+            var outputPath = Path.Combine(dirPath, $"{controlType.Name}_PropertyExtensions.g.cs");
+
+            File.WriteAllText(outputPath, sb.ToString());
+        }
     }
 
     private string GetExtensionClasses(IEnumerable<Type> controlTypes, ref HashSet<string> namespaces)
@@ -61,7 +75,7 @@ public class PropertyExtensionsGenerator
 
             if (!fields.Any())
                 continue;
-           
+
             Console.WriteLine($"{objIndex:N} {controlType.Name}");
 
             sb.AppendLine($"public static partial class {controlType.Name}Extensions");
@@ -82,7 +96,7 @@ public class PropertyExtensionsGenerator
                     sb.AppendLine(setterExtension);
                 }
             }
-            
+
             sb.AppendLine("}");
         }
         return sb.ToString();
@@ -95,7 +109,8 @@ public class PropertyExtensionsGenerator
 
         if (field.FieldType.Name.StartsWith("DirectProperty") ||
             field.FieldType.Name.StartsWith("StyledProperty") ||
-            field.FieldType.Name.StartsWith("AttachedProperty"))
+            field.FieldType.Name.StartsWith("AttachedProperty") ||
+            field.FieldType.Name.StartsWith("AvaloniaProperty"))
         {
             return !IsReadOnlyField(field);
         }

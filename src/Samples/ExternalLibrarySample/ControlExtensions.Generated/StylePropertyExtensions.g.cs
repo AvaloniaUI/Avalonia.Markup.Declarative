@@ -1,3 +1,0 @@
-
-namespace Avalonia.Markup.Declarative;
-

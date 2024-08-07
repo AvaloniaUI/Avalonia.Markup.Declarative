@@ -26,18 +26,31 @@ public class EventsExtensionGenerator
     {
         var controlTypes = GetControlTypes(Config);
 
-        var nameSpaces = new HashSet<string>(Config.InitialNamespaces);
-        var extensionClassesString = GetExtensionClasses(controlTypes, ref nameSpaces);
+        foreach (var controlType in controlTypes)
+        {
+            var nameSpaces = new HashSet<string>(Config.InitialNamespaces);
+            var extensionClassesString = GetExtensionClasses([controlType], ref nameSpaces);
 
-        var sb = new StringBuilder();
-        foreach (var ns in nameSpaces.OrderBy(x => x))
-            sb.AppendLine($"using {ns};");
+            if (string.IsNullOrWhiteSpace(extensionClassesString))
+                continue;
 
-        sb.AppendLine();
-        sb.AppendLine("namespace Avalonia.Markup.Declarative;");
-        sb.AppendLine(extensionClassesString);
+            var sb = new StringBuilder();
+            foreach (var ns in nameSpaces.OrderBy(x => x))
+                sb.AppendLine($"using {ns};");
 
-        File.WriteAllText(OutputPath, sb.ToString());
+            sb.AppendLine();
+            sb.AppendLine("namespace Avalonia.Markup.Declarative;");
+            sb.AppendLine(extensionClassesString);
+
+            var dirPath = Path.Combine(Path.GetDirectoryName(OutputPath), "Events");
+
+            if (!Directory.Exists(dirPath))
+                Directory.CreateDirectory(dirPath);
+
+            var outputPath = Path.Combine(dirPath, $"{controlType.Name}_EventExtensions.g.cs");
+
+            File.WriteAllText(outputPath, sb.ToString());
+        }
     }
 
 
@@ -51,11 +64,11 @@ public class EventsExtensionGenerator
             if (Config.Exclude.Contains(controlType))
                 continue;
 
-            var events = controlType.GetEvents().Where(x=>x.DeclaringType == controlType).ToArray();
+            var events = controlType.GetEvents().Where(x => x.DeclaringType == controlType && x.EventHandlerType is EventHandler).ToArray();
 
             if (!events.Any())
                 continue;
-               
+
             Console.WriteLine(controlType.Name);
 
             sb.AppendLine($"public static partial class {controlType.Name}EventsExtensions");
@@ -76,7 +89,7 @@ public class EventsExtensionGenerator
                     sb.AppendLine(setterExtension);
                 }
             }
-                
+
             sb.AppendLine("}");
         }
         return sb.ToString();

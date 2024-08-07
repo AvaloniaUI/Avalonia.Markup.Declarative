@@ -27,18 +27,32 @@ public class StylePropertyExtensionsGenerator
     {
         var controlTypes = GetControlTypes(Config);
 
-        var nameSpaces = new HashSet<string>(Config.InitialNamespaces);
-        var extensionClassesString = GetExtensionClasses(controlTypes, ref nameSpaces);
+        foreach (var controlType in controlTypes)
+        {
 
-        var sb = new StringBuilder();
-        foreach (var ns in nameSpaces.OrderBy(x => x))
-            sb.AppendLine($"using {ns};");
+            var nameSpaces = new HashSet<string>(Config.InitialNamespaces);
+            var extensionClassesString = GetExtensionClasses([controlType], ref nameSpaces);
+            
+            if (string.IsNullOrWhiteSpace(extensionClassesString))
+                continue;
 
-        sb.AppendLine();
-        sb.AppendLine("namespace Avalonia.Markup.Declarative;");
-        sb.AppendLine(extensionClassesString);
+            var sb = new StringBuilder();
+            foreach (var ns in nameSpaces.OrderBy(x => x))
+                sb.AppendLine($"using {ns};");
 
-        File.WriteAllText(OutputPath, sb.ToString());
+            sb.AppendLine();
+            sb.AppendLine("namespace Avalonia.Markup.Declarative;");
+            sb.AppendLine(extensionClassesString);
+
+            var dirPath = Path.Combine(Path.GetDirectoryName(OutputPath), "Styles");
+
+            if (!Directory.Exists(dirPath))
+                Directory.CreateDirectory(dirPath);
+
+            var outputPath = Path.Combine(dirPath, $"{controlType.Name}_StyleExtensions.g.cs");
+
+            File.WriteAllText(outputPath, sb.ToString());
+        }
     }
 
     private string GetExtensionClasses(IEnumerable<Type> controlTypes, ref HashSet<string> namespaces)

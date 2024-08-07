@@ -24,6 +24,7 @@ public class DefaultAvaloniaConfig(string basePath) : IConfig
     [
         "Avalonia.Data",
         "Avalonia.Data.Converters",
+        "System",
         "System.Numerics",
         "System.Linq.Expressions",
         "System.Runtime.CompilerServices"

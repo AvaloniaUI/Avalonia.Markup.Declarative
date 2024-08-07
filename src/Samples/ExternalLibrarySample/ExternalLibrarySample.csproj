@@ -50,5 +50,6 @@
 
 	<ItemGroup>
 	  <Folder Include="ControlExtensions.Generated\" />
+	  <Folder Include="ControlExtensions.Generated\Events\" />
 	</ItemGroup>
 </Project>

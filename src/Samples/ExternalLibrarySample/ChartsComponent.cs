@@ -7,23 +7,30 @@ namespace ExternalLibrarySample;
 [method: DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(ChartsComponent))]
 public class ChartsComponent() : ComponentBase
 {
-	//Styles
-	protected override StyleGroup? BuildStyles() => [];
+    //Styles
+    protected override StyleGroup? BuildStyles() => [];
 
-	//Markup
+    //Markup
     protected override object Build() =>
         new Grid().Cols("150, *")
             .Children(
-                new CartesianChart()
-                {
-                    DataContext = new ChartViewModel(),
-                    [!CartesianChart.SeriesProperty] = new Binding("Series")
-                }.Col(1)
+                new Button()
+                    .Content("Update data")
+                    .VerticalAlignment(VerticalAlignment.Top)
+                    .HorizontalAlignment(HorizontalAlignment.Center)
+                    .Margin(top:16)
+                    .OnClick(_ =>
+                    {
+                        ViewModel?.UpdateData();
+                        StateHasChanged();
+                    }),
+
+                new CartesianChart().Col(1)
+                    .Series(() => ViewModel?.Series)
+                    .Background(Brushes.WhiteSmoke)
+                    .AnimationsSpeed(TimeSpan.FromMilliseconds(1500))
             );
 
     //Code
-
-    protected override void OnAfterInitialized()
-    {
-    }
+    public ChartViewModel? ViewModel { get; set; } = new();
 }
