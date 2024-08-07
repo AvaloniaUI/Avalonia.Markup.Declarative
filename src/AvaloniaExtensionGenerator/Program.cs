@@ -1,49 +1,64 @@
-using AvaloniaExtensionGenerator;
-using AvaloniaExtensionGenerator.EventGenerators;
-using AvaloniaExtensionGenerator.SetterGenerators;
-using AvaloniaExtensionGenerator.StyleSetterGenerators;
+namespace AvaloniaExtensionGenerator;
 
-var config = new Config();
-
-var basePath = new DirectoryInfo(GetBasePath(AppDomain.CurrentDomain.BaseDirectory)).FullName;
-
-Console.WriteLine($"Using output path: {basePath}");
-
-new EventsExtensionGenerator(config, $@"{basePath}\ControlEventExtensions.Generated.cs",
-    new ActionToEventGenerator()
-    ).Generate();
-
-new PropertyExtensionsGenerator(config, $@"{basePath}\ControlPropertyExtensions.Generated.cs",
-    // new ValueSetterGenerator(),
-    new BindSetterGenerator(),
-    new AvaloniaPropertyBindSetterGenerator(),
-    new BindFromExpressionSetterGenerator(),
-    new MagicalSetterGenerator(),
-    new MagicalSetterWithConverterGenerator(),
-    new ValueOverloadsSetterGenerator()
-    ).Generate();
-
-new StylePropertyExtensionsGenerator(config, $@"{basePath}\StylePropertyExtensions.Generated.cs",
-    new ValueStyleSetterGenerator(),
-    new BindingStyleSetterGenerator(),
-    new ValueOverloadsStyleSetterGenerator()
-    ).Generate();
-
-return;
-
-string GetBasePath(string path)
+internal class Program
 {
-    while (true)
+    static async Task Main(string[] args)
     {
-        var directories = Directory.EnumerateDirectories(path);
-        foreach (var dir in directories)
+        if (args is ["--framework"])
         {
-            if (dir.EndsWith("Avalonia.Markup.Declarative"))
+            GeneratorHost.RunDefaultAvaloniaFrameworkGenerators();
+            return;
+        }
+
+        string? projectPath = null;
+        foreach (var arg in args)
+        {
+            if (arg.StartsWith("--projectPath="))
             {
-                return dir;
+                projectPath = arg.Substring("--projectPath=".Length);
             }
         }
 
-        path = Path.Combine(path, "..");
+        if (args.Length == 0)
+        {
+            var curDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            var projectFiles = curDir.GetFiles("*.csproj");
+
+            if (projectFiles.Length == 1)
+            {
+                Console.WriteLine("'--projectPath' is not set. Using current directory as a root project path");
+                Console.WriteLine($"project found: {projectFiles.First().Name}");
+
+                projectPath = projectFiles.First().FullName;
+            }
+        }
+
+        if (projectPath == null)
+        {
+            Console.WriteLine("Project file not found. Please provide the path to the .csproj file using the argument '--projectPath' or run AvaloniaExtensionGenerator from directory that contains csproj");
+            return;
+        }
+
+        if (!File.Exists(projectPath))
+        {
+            Console.WriteLine($"The file {projectPath} does not exist.");
+            return;
+        }
+
+        try
+        {
+            var defaultAvaloniaConfig = new DefaultAvaloniaConfig("");
+            var skipTypesFromProcess = defaultAvaloniaConfig.TypesToProcess.ToArray();
+
+            var types = await CsProjectTypesExtractor.LoadTypesFromProject(
+                projectPath, typeof(Avalonia.AvaloniaObject));
+
+            var projectDirPath = Path.GetDirectoryName(projectPath);
+            GeneratorHost.RunControlTypeGenerators(types, skipTypesFromProcess, projectDirPath);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
     }
 }

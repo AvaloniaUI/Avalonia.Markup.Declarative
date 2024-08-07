@@ -1,14 +1,50 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.1.0" />
-  </ItemGroup>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>avalonia-amd-gen</ToolCommandName>
+		<PackageOutputPath>./nupkg</PackageOutputPath>
 
+		<Version>11.2.999-preview4</Version>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+
+		<Authors>Avalonia Team</Authors>
+		<PackageProjectUrl>https://github.com/AvaloniaUI/Avalonia.Markup.Declarative</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/AvaloniaUI/Avalonia.Markup.Declarative</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Description>The set of base classes and extension methods over Avalonia's controls to define views/markup with C# code instead of XAML.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageTags>avalonia;avaloniaui;mvvm;mvp;csharpmarjup;android;ios;mac;forms;wpf;net;netstandard;net461;uwp;xamarin</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <AvaloniaXaml Remove="nupkg\**" />
+	  <Compile Remove="nupkg\**" />
+	  <EmbeddedResource Remove="nupkg\**" />
+	  <None Remove="nupkg\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="icon.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.1.0" />
+		<PackageReference Include="NuGet.Configuration" Version="6.10.1" />
+		<PackageReference Include="NuGet.Protocol" Version="6.10.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="readme.txt" Pack="true" PackagePath="." />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
 </Project>
