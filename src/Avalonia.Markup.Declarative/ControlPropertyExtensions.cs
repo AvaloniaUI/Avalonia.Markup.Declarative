@@ -9,12 +9,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Avalonia.Markup.Xaml.MarkupExtensions;
-using Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -167,15 +163,19 @@ public static class ControlPropertyExtensions
 			{
 				binding.Source = bindingSource;
 			}
+            else
+            {
+                //for components the default binding context is the component itself instead of the control's data context
+				// except cases, where the binding source is defined directly
+                var view = ViewBuildContext.CurrentView;
+                if (view is IMvuComponent component)
+                {
+                    binding.Source ??= component;
+                }
+            }
 
-			//for components the default binding context is the component itself instead of the control's data context
-			var view = ViewBuildContext.CurrentView;
-			if (view is IMvuComponent component)
-			{
-				binding.Source ??= component;
-			}
 
-			setAction();
+            setAction();
 			control.Bind(destProperty, binding);
 		}
 		else
