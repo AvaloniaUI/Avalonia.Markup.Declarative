@@ -343,21 +343,15 @@ public static class ControlPropertyExtensions
 		Func<TItem, Control> build) =>
 		ItemTemplate<TItem, SelectingItemsControl>(control, build);
 
-    //public static ItemsControl ItemTemplate<TItem>(this ItemsControl control, Func<TItem, Control> build) =>
-    //    ItemTemplate<TItem, ItemsControl>(control, build);
+	//public static ItemsControl ItemTemplate<TItem>(this ItemsControl control, Func<TItem, Control> build) =>
+	//	ItemTemplate<TItem, ItemsControl>(control, build);
 
-    public class SimpleView<T>(Func<T, Control> build, T vm) : ComponentBase
-    {
-        protected override object Build() => build?.Invoke(vm);
-    }
-
-    public static TItemsControl ItemTemplate<TItem, TItemsControl>(this TItemsControl control,
+	public static TItemsControl ItemTemplate<TItem, TItemsControl>(this TItemsControl control,
 		Func<TItem, Control> build)
 		where TItemsControl : ItemsControl
 	{
-		control.ItemTemplate =
-			new FuncDataTemplate<TItem>((val, _) => new SimpleView<TItem>(build, val));
-		return control;
+		control.ItemTemplate = control.ItemTemplate = new FuncDataTemplate<TItem>((val, _) => build(val));
+        return control;
 	}
 
     public static MenuFlyout ItemTemplate<TItem>(this MenuFlyout control, Func<TItem, Control> build)

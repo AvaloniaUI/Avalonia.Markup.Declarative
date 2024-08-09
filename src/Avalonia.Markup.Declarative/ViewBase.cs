@@ -33,7 +33,7 @@ public abstract class ViewBase<TViewModel> : ViewBase
 /// </summary>
 public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 {
-    internal HashSet<ViewPropertyComputedState> __viewComputedStates { get; set; } = [];
+    internal List<ViewPropertyComputedState> __viewComputedStates { get; set; } = [];
 
     private INameScope? _nameScope;
 
@@ -111,6 +111,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     {
         Dispatcher.UIThread.InvokeAsync(() =>
         {
+            __viewComputedStates.Clear();
             OnBeforeReload();
             Child = null;
             VisualChildren.Clear();

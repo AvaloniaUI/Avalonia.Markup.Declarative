@@ -6,27 +6,30 @@ public class ItemControlSampleView : ComponentBase
         new StackPanel()
             .Children(
                 new ListBox()
-                    .HorizontalAlignment(Avalonia.Layout.HorizontalAlignment.Center)
+                    .HorizontalAlignment(HorizontalAlignment.Center)
                     .ItemsSource(Bind(Items))
-                    .ItemTemplate<string>(s =>
-                        new TextBlock()
+                    .ItemTemplate<string>(item =>
+                        //needed to keep current view context for lambda bindings
+                        new FuncComponent<string>(item, s =>
+                            new TextBlock()
                             .Background(Brushes.Beige)
-                            .Text(s)
+                            .Text(() => s))
                     )
-                    .SelectedItem(Bind(SelectedItem)),
+                    .SelectedItem(() => SelectedItem, v => SelectedItem = (string)v),
 
                 new TextBlock()
-                    .HorizontalAlignment(Avalonia.Layout.HorizontalAlignment.Center)
-                    .Text(Bind(SelectedItem))
+                    .HorizontalAlignment(HorizontalAlignment.Center)
+                    .Text(() => SelectedItem)
             );
 
-    private string? _selectedItem = "one";
-    public string? SelectedItem
+    private string _selectedItem = "one";
+    public string SelectedItem
     {
         get => _selectedItem;
         set
         {
             _selectedItem = value;
+            StateHasChanged();
             OnPropertyChanged();
         }
     }
