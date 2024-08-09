@@ -11,9 +11,11 @@ internal static class PropertyPathHelper
             return "";
 
         var propFound = false;
-        var startIndex = 0;
 
-        for (var i = 0; i < path.Length; i++)
+        //found closing bracket - ignore all characters that was before
+        var startIndex = Math.Max(0,path.LastIndexOf(')'));
+
+        for (var i = startIndex; i < path.Length; i++)
         {
             var curChar = path[i];
 
