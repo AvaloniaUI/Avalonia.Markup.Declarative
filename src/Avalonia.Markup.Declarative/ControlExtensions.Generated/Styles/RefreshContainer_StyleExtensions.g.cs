@@ -10,13 +10,13 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class RefreshContainerExtensions
 {
-public static Style<RefreshContainer> Visualizer(this Style<RefreshContainer> style, RefreshVisualizer value)
+public static Style<T> Visualizer<T>(this Style<T> style, RefreshVisualizer value) where T : RefreshContainer
 => style._addSetter(RefreshContainer.VisualizerProperty, value);
-public static Style<RefreshContainer> Visualizer(this Style<RefreshContainer> style, IBinding binding)
+public static Style<T> Visualizer<T>(this Style<T> style, IBinding binding) where T : RefreshContainer
 => style._addSetter(RefreshContainer.VisualizerProperty, binding);
-public static Style<RefreshContainer> PullDirection(this Style<RefreshContainer> style, PullDirection value)
+public static Style<T> PullDirection<T>(this Style<T> style, PullDirection value) where T : RefreshContainer
 => style._addSetter(RefreshContainer.PullDirectionProperty, value);
-public static Style<RefreshContainer> PullDirection(this Style<RefreshContainer> style, IBinding binding)
+public static Style<T> PullDirection<T>(this Style<T> style, IBinding binding) where T : RefreshContainer
 => style._addSetter(RefreshContainer.PullDirectionProperty, binding);
 }
 

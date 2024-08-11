@@ -10,7 +10,7 @@ public class BindFromExpressionSetterGenerator : SetterGeneratorBase
             $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, func, onChanged, expression);";
 
         //base type generic acess
-        if (Config.BaseTypes.Contains(info.ControlType))
+        if (info.CanBeGenericConstraint)
         {
             extensionText =
                 $"public static T {info.ExtensionName}<T>(this T control, Func<{info.ValueTypeSource}> func, Action<{info.ValueTypeSource}>? onChanged = null, [CallerArgumentExpression(\"func\")] string? expression = null) where T : {info.ControlTypeName}{Environment.NewLine}" +

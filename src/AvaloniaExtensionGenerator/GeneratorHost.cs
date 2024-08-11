@@ -1,5 +1,4 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using AvaloniaExtensionGenerator.Generators;
 using AvaloniaExtensionGenerator.Generators.EventGenerators;
 using AvaloniaExtensionGenerator.Generators.SetterGenerators;
@@ -73,13 +72,9 @@ public class GeneratorHost
     internal static void RunControlTypeGenerators(IReadOnlyList<Type> types, Type[] skipTypesFromProcess, string projectDirPath)
     {
         var outputPath = Path.Combine(projectDirPath, "ControlExtensions.Generated");
-        var baseType = typeof(Control);
-
-        var typeToProcess = types.Where(baseType.IsAssignableFrom).ToArray();
-
         var config = new ExtensionGeneratorConfig(outputPath)
         {
-            TypesToProcess = typeToProcess,
+            TypesToProcess = types.ToArray(),
             //don't generate avalonia default extensions
             Exclude = skipTypesFromProcess,
             //BaseTypes = defaultAvaloniaConfig.BaseTypes,

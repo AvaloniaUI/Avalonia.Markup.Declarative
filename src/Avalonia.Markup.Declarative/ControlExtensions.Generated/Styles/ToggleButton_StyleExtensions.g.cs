@@ -9,13 +9,13 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ToggleButtonExtensions
 {
-public static Style<ToggleButton> IsChecked(this Style<ToggleButton> style, Nullable<Boolean> value)
+public static Style<T> IsChecked<T>(this Style<T> style, Nullable<Boolean> value) where T : ToggleButton
 => style._addSetter(ToggleButton.IsCheckedProperty, value);
-public static Style<ToggleButton> IsChecked(this Style<ToggleButton> style, IBinding binding)
+public static Style<T> IsChecked<T>(this Style<T> style, IBinding binding) where T : ToggleButton
 => style._addSetter(ToggleButton.IsCheckedProperty, binding);
-public static Style<ToggleButton> IsThreeState(this Style<ToggleButton> style, Boolean value)
+public static Style<T> IsThreeState<T>(this Style<T> style, Boolean value) where T : ToggleButton
 => style._addSetter(ToggleButton.IsThreeStateProperty, value);
-public static Style<ToggleButton> IsThreeState(this Style<ToggleButton> style, IBinding binding)
+public static Style<T> IsThreeState<T>(this Style<T> style, IBinding binding) where T : ToggleButton
 => style._addSetter(ToggleButton.IsThreeStateProperty, binding);
 }
 

@@ -9,17 +9,17 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ButtonSpinnerExtensions
 {
-public static Style<ButtonSpinner> AllowSpin(this Style<ButtonSpinner> style, Boolean value)
+public static Style<T> AllowSpin<T>(this Style<T> style, Boolean value) where T : ButtonSpinner
 => style._addSetter(ButtonSpinner.AllowSpinProperty, value);
-public static Style<ButtonSpinner> AllowSpin(this Style<ButtonSpinner> style, IBinding binding)
+public static Style<T> AllowSpin<T>(this Style<T> style, IBinding binding) where T : ButtonSpinner
 => style._addSetter(ButtonSpinner.AllowSpinProperty, binding);
-public static Style<ButtonSpinner> ShowButtonSpinner(this Style<ButtonSpinner> style, Boolean value)
+public static Style<T> ShowButtonSpinner<T>(this Style<T> style, Boolean value) where T : ButtonSpinner
 => style._addSetter(ButtonSpinner.ShowButtonSpinnerProperty, value);
-public static Style<ButtonSpinner> ShowButtonSpinner(this Style<ButtonSpinner> style, IBinding binding)
+public static Style<T> ShowButtonSpinner<T>(this Style<T> style, IBinding binding) where T : ButtonSpinner
 => style._addSetter(ButtonSpinner.ShowButtonSpinnerProperty, binding);
-public static Style<ButtonSpinner> ButtonSpinnerLocation(this Style<ButtonSpinner> style, Location value)
+public static Style<T> ButtonSpinnerLocation<T>(this Style<T> style, Location value) where T : ButtonSpinner
 => style._addSetter(ButtonSpinner.ButtonSpinnerLocationProperty, value);
-public static Style<ButtonSpinner> ButtonSpinnerLocation(this Style<ButtonSpinner> style, IBinding binding)
+public static Style<T> ButtonSpinnerLocation<T>(this Style<T> style, IBinding binding) where T : ButtonSpinner
 => style._addSetter(ButtonSpinner.ButtonSpinnerLocationProperty, binding);
 }
 

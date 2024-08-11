@@ -11,21 +11,21 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class TabControlExtensions
 {
-public static Style<TabControl> TabStripPlacement(this Style<TabControl> style, Avalonia.Controls.Dock value)
+public static Style<T> TabStripPlacement<T>(this Style<T> style, Dock value) where T : TabControl
 => style._addSetter(TabControl.TabStripPlacementProperty, value);
-public static Style<TabControl> TabStripPlacement(this Style<TabControl> style, IBinding binding)
+public static Style<T> TabStripPlacement<T>(this Style<T> style, IBinding binding) where T : TabControl
 => style._addSetter(TabControl.TabStripPlacementProperty, binding);
-public static Style<TabControl> HorizontalContentAlignment(this Style<TabControl> style, HorizontalAlignment value)
+public static Style<T> HorizontalContentAlignment<T>(this Style<T> style, HorizontalAlignment value) where T : TabControl
 => style._addSetter(TabControl.HorizontalContentAlignmentProperty, value);
-public static Style<TabControl> HorizontalContentAlignment(this Style<TabControl> style, IBinding binding)
+public static Style<T> HorizontalContentAlignment<T>(this Style<T> style, IBinding binding) where T : TabControl
 => style._addSetter(TabControl.HorizontalContentAlignmentProperty, binding);
-public static Style<TabControl> VerticalContentAlignment(this Style<TabControl> style, VerticalAlignment value)
+public static Style<T> VerticalContentAlignment<T>(this Style<T> style, VerticalAlignment value) where T : TabControl
 => style._addSetter(TabControl.VerticalContentAlignmentProperty, value);
-public static Style<TabControl> VerticalContentAlignment(this Style<TabControl> style, IBinding binding)
+public static Style<T> VerticalContentAlignment<T>(this Style<T> style, IBinding binding) where T : TabControl
 => style._addSetter(TabControl.VerticalContentAlignmentProperty, binding);
-public static Style<TabControl> ContentTemplate(this Style<TabControl> style, IDataTemplate value)
+public static Style<T> ContentTemplate<T>(this Style<T> style, IDataTemplate value) where T : TabControl
 => style._addSetter(TabControl.ContentTemplateProperty, value);
-public static Style<TabControl> ContentTemplate(this Style<TabControl> style, IBinding binding)
+public static Style<T> ContentTemplate<T>(this Style<T> style, IBinding binding) where T : TabControl
 => style._addSetter(TabControl.ContentTemplateProperty, binding);
 }
 

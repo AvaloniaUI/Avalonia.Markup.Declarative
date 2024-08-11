@@ -10,13 +10,13 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class LayoutTransformControlExtensions
 {
-public static Style<LayoutTransformControl> LayoutTransform(this Style<LayoutTransformControl> style, ITransform value)
+public static Style<T> LayoutTransform<T>(this Style<T> style, ITransform value) where T : LayoutTransformControl
 => style._addSetter(LayoutTransformControl.LayoutTransformProperty, value);
-public static Style<LayoutTransformControl> LayoutTransform(this Style<LayoutTransformControl> style, IBinding binding)
+public static Style<T> LayoutTransform<T>(this Style<T> style, IBinding binding) where T : LayoutTransformControl
 => style._addSetter(LayoutTransformControl.LayoutTransformProperty, binding);
-public static Style<LayoutTransformControl> UseRenderTransform(this Style<LayoutTransformControl> style, Boolean value)
+public static Style<T> UseRenderTransform<T>(this Style<T> style, Boolean value) where T : LayoutTransformControl
 => style._addSetter(LayoutTransformControl.UseRenderTransformProperty, value);
-public static Style<LayoutTransformControl> UseRenderTransform(this Style<LayoutTransformControl> style, IBinding binding)
+public static Style<T> UseRenderTransform<T>(this Style<T> style, IBinding binding) where T : LayoutTransformControl
 => style._addSetter(LayoutTransformControl.UseRenderTransformProperty, binding);
 }
 

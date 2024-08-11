@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class RefreshVisualizerExtensions
 {
-public static Style<RefreshVisualizer> Orientation(this Style<RefreshVisualizer> style, RefreshVisualizerOrientation value)
+public static Style<T> Orientation<T>(this Style<T> style, RefreshVisualizerOrientation value) where T : RefreshVisualizer
 => style._addSetter(RefreshVisualizer.OrientationProperty, value);
-public static Style<RefreshVisualizer> Orientation(this Style<RefreshVisualizer> style, IBinding binding)
+public static Style<T> Orientation<T>(this Style<T> style, IBinding binding) where T : RefreshVisualizer
 => style._addSetter(RefreshVisualizer.OrientationProperty, binding);
 }
 

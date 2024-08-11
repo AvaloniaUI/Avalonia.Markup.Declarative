@@ -9,13 +9,13 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class HyperlinkButtonExtensions
 {
-public static Style<HyperlinkButton> IsVisited(this Style<HyperlinkButton> style, Boolean value)
+public static Style<T> IsVisited<T>(this Style<T> style, Boolean value) where T : HyperlinkButton
 => style._addSetter(HyperlinkButton.IsVisitedProperty, value);
-public static Style<HyperlinkButton> IsVisited(this Style<HyperlinkButton> style, IBinding binding)
+public static Style<T> IsVisited<T>(this Style<T> style, IBinding binding) where T : HyperlinkButton
 => style._addSetter(HyperlinkButton.IsVisitedProperty, binding);
-public static Style<HyperlinkButton> NavigateUri(this Style<HyperlinkButton> style, Uri value)
+public static Style<T> NavigateUri<T>(this Style<T> style, Uri value) where T : HyperlinkButton
 => style._addSetter(HyperlinkButton.NavigateUriProperty, value);
-public static Style<HyperlinkButton> NavigateUri(this Style<HyperlinkButton> style, IBinding binding)
+public static Style<T> NavigateUri<T>(this Style<T> style, IBinding binding) where T : HyperlinkButton
 => style._addSetter(HyperlinkButton.NavigateUriProperty, binding);
 }
 

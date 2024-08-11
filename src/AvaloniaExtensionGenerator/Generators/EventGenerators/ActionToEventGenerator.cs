@@ -26,7 +26,7 @@ public class ActionToEventGenerator : EventGeneratorBase
             + $"(this {controlTypeName} control, {argsString}) => {Environment.NewLine}"
             + $"        control._setEvent(({eventHandler}) ((_, args) => {actionCallStr}), h => control.{eventName} += h);";
 
-        if (Config.BaseTypes.Contains(@event.ControlType))
+        if (@event.CanBeGenericConstraint)
         {
             extensionText =
                 $"    public static T {extensionName}<T>"

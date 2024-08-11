@@ -10,61 +10,61 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class CalendarDatePickerExtensions
 {
-public static Style<CalendarDatePicker> DisplayDate(this Style<CalendarDatePicker> style, DateTime value)
+public static Style<T> DisplayDate<T>(this Style<T> style, DateTime value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.DisplayDateProperty, value);
-public static Style<CalendarDatePicker> DisplayDate(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> DisplayDate<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.DisplayDateProperty, binding);
-public static Style<CalendarDatePicker> DisplayDateStart(this Style<CalendarDatePicker> style, Nullable<DateTime> value)
+public static Style<T> DisplayDateStart<T>(this Style<T> style, Nullable<DateTime> value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.DisplayDateStartProperty, value);
-public static Style<CalendarDatePicker> DisplayDateStart(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> DisplayDateStart<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.DisplayDateStartProperty, binding);
-public static Style<CalendarDatePicker> DisplayDateEnd(this Style<CalendarDatePicker> style, Nullable<DateTime> value)
+public static Style<T> DisplayDateEnd<T>(this Style<T> style, Nullable<DateTime> value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.DisplayDateEndProperty, value);
-public static Style<CalendarDatePicker> DisplayDateEnd(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> DisplayDateEnd<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.DisplayDateEndProperty, binding);
-public static Style<CalendarDatePicker> FirstDayOfWeek(this Style<CalendarDatePicker> style, DayOfWeek value)
+public static Style<T> FirstDayOfWeek<T>(this Style<T> style, DayOfWeek value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.FirstDayOfWeekProperty, value);
-public static Style<CalendarDatePicker> FirstDayOfWeek(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> FirstDayOfWeek<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.FirstDayOfWeekProperty, binding);
-public static Style<CalendarDatePicker> IsDropDownOpen(this Style<CalendarDatePicker> style, Boolean value)
+public static Style<T> IsDropDownOpen<T>(this Style<T> style, Boolean value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.IsDropDownOpenProperty, value);
-public static Style<CalendarDatePicker> IsDropDownOpen(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> IsDropDownOpen<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.IsDropDownOpenProperty, binding);
-public static Style<CalendarDatePicker> IsTodayHighlighted(this Style<CalendarDatePicker> style, Boolean value)
+public static Style<T> IsTodayHighlighted<T>(this Style<T> style, Boolean value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.IsTodayHighlightedProperty, value);
-public static Style<CalendarDatePicker> IsTodayHighlighted(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> IsTodayHighlighted<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.IsTodayHighlightedProperty, binding);
-public static Style<CalendarDatePicker> SelectedDate(this Style<CalendarDatePicker> style, Nullable<DateTime> value)
+public static Style<T> SelectedDate<T>(this Style<T> style, Nullable<DateTime> value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.SelectedDateProperty, value);
-public static Style<CalendarDatePicker> SelectedDate(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> SelectedDate<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.SelectedDateProperty, binding);
-public static Style<CalendarDatePicker> SelectedDateFormat(this Style<CalendarDatePicker> style, CalendarDatePickerFormat value)
+public static Style<T> SelectedDateFormat<T>(this Style<T> style, CalendarDatePickerFormat value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.SelectedDateFormatProperty, value);
-public static Style<CalendarDatePicker> SelectedDateFormat(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> SelectedDateFormat<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.SelectedDateFormatProperty, binding);
-public static Style<CalendarDatePicker> CustomDateFormatString(this Style<CalendarDatePicker> style, String value)
+public static Style<T> CustomDateFormatString<T>(this Style<T> style, String value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.CustomDateFormatStringProperty, value);
-public static Style<CalendarDatePicker> CustomDateFormatString(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> CustomDateFormatString<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.CustomDateFormatStringProperty, binding);
-public static Style<CalendarDatePicker> Text(this Style<CalendarDatePicker> style, String value)
+public static Style<T> Text<T>(this Style<T> style, String value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.TextProperty, value);
-public static Style<CalendarDatePicker> Text(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> Text<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.TextProperty, binding);
-public static Style<CalendarDatePicker> Watermark(this Style<CalendarDatePicker> style, String value)
+public static Style<T> Watermark<T>(this Style<T> style, String value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.WatermarkProperty, value);
-public static Style<CalendarDatePicker> Watermark(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> Watermark<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.WatermarkProperty, binding);
-public static Style<CalendarDatePicker> UseFloatingWatermark(this Style<CalendarDatePicker> style, Boolean value)
+public static Style<T> UseFloatingWatermark<T>(this Style<T> style, Boolean value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.UseFloatingWatermarkProperty, value);
-public static Style<CalendarDatePicker> UseFloatingWatermark(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> UseFloatingWatermark<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.UseFloatingWatermarkProperty, binding);
-public static Style<CalendarDatePicker> HorizontalContentAlignment(this Style<CalendarDatePicker> style, HorizontalAlignment value)
+public static Style<T> HorizontalContentAlignment<T>(this Style<T> style, HorizontalAlignment value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.HorizontalContentAlignmentProperty, value);
-public static Style<CalendarDatePicker> HorizontalContentAlignment(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> HorizontalContentAlignment<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.HorizontalContentAlignmentProperty, binding);
-public static Style<CalendarDatePicker> VerticalContentAlignment(this Style<CalendarDatePicker> style, VerticalAlignment value)
+public static Style<T> VerticalContentAlignment<T>(this Style<T> style, VerticalAlignment value) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.VerticalContentAlignmentProperty, value);
-public static Style<CalendarDatePicker> VerticalContentAlignment(this Style<CalendarDatePicker> style, IBinding binding)
+public static Style<T> VerticalContentAlignment<T>(this Style<T> style, IBinding binding) where T : CalendarDatePicker
 => style._addSetter(CalendarDatePicker.VerticalContentAlignmentProperty, binding);
 }
 

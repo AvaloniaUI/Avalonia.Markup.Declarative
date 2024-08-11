@@ -1,10 +1,3 @@
-using Avalonia;
-using Avalonia.Animation;
-using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Input;
-using Avalonia.Layout;
-
 namespace AvaloniaExtensionGenerator;
 
 /// <summary>
@@ -31,39 +24,9 @@ public class DefaultAvaloniaConfig(string basePath) : IConfig
     ];
 
     /// <summary>
-    /// Set types that will be written into generated extensions with full qualified namespace 
-    /// </summary>
-    public Type[] UseFullNamespace { get; }=
-    [
-        typeof(Avalonia.Controls.Calendar),
-        typeof(ContextMenu),
-        typeof(Animation),
-        typeof(Dock)
-    ];
-
-    /// <summary>
     /// Defines types that must be excluded from processing
     /// </summary>
     public Type[] Exclude { get; } = [];
-
-    /// <summary>
-    /// Those types will be generated as Generic extension methods instead of using direct control type
-    /// </summary>
-    public List<Type> BaseTypes { get; } =
-    [
-        typeof(Control),
-        typeof(FlyoutBase),
-        typeof(PopupFlyoutBase),
-        typeof(Layoutable),
-        typeof(Panel),
-        typeof(Visual),
-        typeof(TemplatedControl),
-        typeof(ItemsControl),
-        typeof(InputElement),
-        typeof(ContentControl),
-        typeof(SelectingItemsControl),
-        typeof(HeaderedSelectingItemsControl)
-    ];
 
     public string BasePath { get; set; } = basePath;
 }

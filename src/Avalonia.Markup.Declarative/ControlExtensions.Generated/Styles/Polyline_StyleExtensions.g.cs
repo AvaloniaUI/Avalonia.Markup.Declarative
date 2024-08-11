@@ -11,9 +11,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class PolylineExtensions
 {
-public static Style<Polyline> Points(this Style<Polyline> style, IList<Point> value)
+public static Style<T> Points<T>(this Style<T> style, IList<Point> value) where T : Polyline
 => style._addSetter(Polyline.PointsProperty, value);
-public static Style<Polyline> Points(this Style<Polyline> style, IBinding binding)
+public static Style<T> Points<T>(this Style<T> style, IBinding binding) where T : Polyline
 => style._addSetter(Polyline.PointsProperty, binding);
 }
 

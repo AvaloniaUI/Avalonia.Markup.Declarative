@@ -10,41 +10,41 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class CalendarExtensions
 {
-public static Style<Avalonia.Controls.Calendar> FirstDayOfWeek(this Style<Avalonia.Controls.Calendar> style, DayOfWeek value)
-=> style._addSetter(Avalonia.Controls.Calendar.FirstDayOfWeekProperty, value);
-public static Style<Avalonia.Controls.Calendar> FirstDayOfWeek(this Style<Avalonia.Controls.Calendar> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.Calendar.FirstDayOfWeekProperty, binding);
-public static Style<Avalonia.Controls.Calendar> IsTodayHighlighted(this Style<Avalonia.Controls.Calendar> style, Boolean value)
-=> style._addSetter(Avalonia.Controls.Calendar.IsTodayHighlightedProperty, value);
-public static Style<Avalonia.Controls.Calendar> IsTodayHighlighted(this Style<Avalonia.Controls.Calendar> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.Calendar.IsTodayHighlightedProperty, binding);
-public static Style<Avalonia.Controls.Calendar> HeaderBackground(this Style<Avalonia.Controls.Calendar> style, IBrush value)
-=> style._addSetter(Avalonia.Controls.Calendar.HeaderBackgroundProperty, value);
-public static Style<Avalonia.Controls.Calendar> HeaderBackground(this Style<Avalonia.Controls.Calendar> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.Calendar.HeaderBackgroundProperty, binding);
-public static Style<Avalonia.Controls.Calendar> DisplayMode(this Style<Avalonia.Controls.Calendar> style, CalendarMode value)
-=> style._addSetter(Avalonia.Controls.Calendar.DisplayModeProperty, value);
-public static Style<Avalonia.Controls.Calendar> DisplayMode(this Style<Avalonia.Controls.Calendar> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.Calendar.DisplayModeProperty, binding);
-public static Style<Avalonia.Controls.Calendar> SelectionMode(this Style<Avalonia.Controls.Calendar> style, CalendarSelectionMode value)
-=> style._addSetter(Avalonia.Controls.Calendar.SelectionModeProperty, value);
-public static Style<Avalonia.Controls.Calendar> SelectionMode(this Style<Avalonia.Controls.Calendar> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.Calendar.SelectionModeProperty, binding);
-public static Style<Avalonia.Controls.Calendar> SelectedDate(this Style<Avalonia.Controls.Calendar> style, Nullable<DateTime> value)
-=> style._addSetter(Avalonia.Controls.Calendar.SelectedDateProperty, value);
-public static Style<Avalonia.Controls.Calendar> SelectedDate(this Style<Avalonia.Controls.Calendar> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.Calendar.SelectedDateProperty, binding);
-public static Style<Avalonia.Controls.Calendar> DisplayDate(this Style<Avalonia.Controls.Calendar> style, DateTime value)
-=> style._addSetter(Avalonia.Controls.Calendar.DisplayDateProperty, value);
-public static Style<Avalonia.Controls.Calendar> DisplayDate(this Style<Avalonia.Controls.Calendar> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.Calendar.DisplayDateProperty, binding);
-public static Style<Avalonia.Controls.Calendar> DisplayDateStart(this Style<Avalonia.Controls.Calendar> style, Nullable<DateTime> value)
-=> style._addSetter(Avalonia.Controls.Calendar.DisplayDateStartProperty, value);
-public static Style<Avalonia.Controls.Calendar> DisplayDateStart(this Style<Avalonia.Controls.Calendar> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.Calendar.DisplayDateStartProperty, binding);
-public static Style<Avalonia.Controls.Calendar> DisplayDateEnd(this Style<Avalonia.Controls.Calendar> style, Nullable<DateTime> value)
-=> style._addSetter(Avalonia.Controls.Calendar.DisplayDateEndProperty, value);
-public static Style<Avalonia.Controls.Calendar> DisplayDateEnd(this Style<Avalonia.Controls.Calendar> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.Calendar.DisplayDateEndProperty, binding);
+public static Style<T> FirstDayOfWeek<T>(this Style<T> style, DayOfWeek value) where T : Calendar
+=> style._addSetter(Calendar.FirstDayOfWeekProperty, value);
+public static Style<T> FirstDayOfWeek<T>(this Style<T> style, IBinding binding) where T : Calendar
+=> style._addSetter(Calendar.FirstDayOfWeekProperty, binding);
+public static Style<T> IsTodayHighlighted<T>(this Style<T> style, Boolean value) where T : Calendar
+=> style._addSetter(Calendar.IsTodayHighlightedProperty, value);
+public static Style<T> IsTodayHighlighted<T>(this Style<T> style, IBinding binding) where T : Calendar
+=> style._addSetter(Calendar.IsTodayHighlightedProperty, binding);
+public static Style<T> HeaderBackground<T>(this Style<T> style, IBrush value) where T : Calendar
+=> style._addSetter(Calendar.HeaderBackgroundProperty, value);
+public static Style<T> HeaderBackground<T>(this Style<T> style, IBinding binding) where T : Calendar
+=> style._addSetter(Calendar.HeaderBackgroundProperty, binding);
+public static Style<T> DisplayMode<T>(this Style<T> style, CalendarMode value) where T : Calendar
+=> style._addSetter(Calendar.DisplayModeProperty, value);
+public static Style<T> DisplayMode<T>(this Style<T> style, IBinding binding) where T : Calendar
+=> style._addSetter(Calendar.DisplayModeProperty, binding);
+public static Style<T> SelectionMode<T>(this Style<T> style, CalendarSelectionMode value) where T : Calendar
+=> style._addSetter(Calendar.SelectionModeProperty, value);
+public static Style<T> SelectionMode<T>(this Style<T> style, IBinding binding) where T : Calendar
+=> style._addSetter(Calendar.SelectionModeProperty, binding);
+public static Style<T> SelectedDate<T>(this Style<T> style, Nullable<DateTime> value) where T : Calendar
+=> style._addSetter(Calendar.SelectedDateProperty, value);
+public static Style<T> SelectedDate<T>(this Style<T> style, IBinding binding) where T : Calendar
+=> style._addSetter(Calendar.SelectedDateProperty, binding);
+public static Style<T> DisplayDate<T>(this Style<T> style, DateTime value) where T : Calendar
+=> style._addSetter(Calendar.DisplayDateProperty, value);
+public static Style<T> DisplayDate<T>(this Style<T> style, IBinding binding) where T : Calendar
+=> style._addSetter(Calendar.DisplayDateProperty, binding);
+public static Style<T> DisplayDateStart<T>(this Style<T> style, Nullable<DateTime> value) where T : Calendar
+=> style._addSetter(Calendar.DisplayDateStartProperty, value);
+public static Style<T> DisplayDateStart<T>(this Style<T> style, IBinding binding) where T : Calendar
+=> style._addSetter(Calendar.DisplayDateStartProperty, binding);
+public static Style<T> DisplayDateEnd<T>(this Style<T> style, Nullable<DateTime> value) where T : Calendar
+=> style._addSetter(Calendar.DisplayDateEndProperty, value);
+public static Style<T> DisplayDateEnd<T>(this Style<T> style, IBinding binding) where T : Calendar
+=> style._addSetter(Calendar.DisplayDateEndProperty, binding);
 }
 

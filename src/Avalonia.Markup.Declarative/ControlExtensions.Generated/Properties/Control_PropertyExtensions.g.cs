@@ -35,11 +35,11 @@ public static T ContextMenu<T>(this T control, IBinding binding) where T : Contr
    => control._set(Control.ContextMenuProperty, binding);
 public static T ContextMenu<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Control
    => control._set(Control.ContextMenuProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static T ContextMenu<T>(this T control, Func<Avalonia.Controls.ContextMenu> func, Action<Avalonia.Controls.ContextMenu>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Control
+public static T ContextMenu<T>(this T control, Func<ContextMenu> func, Action<ContextMenu>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Control
    => control._set(Control.ContextMenuProperty, func, onChanged, expression);
-public static T ContextMenu<T>(this T control, Avalonia.Controls.ContextMenu value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Control
+public static T ContextMenu<T>(this T control, ContextMenu value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Control
 => control._setEx(Control.ContextMenuProperty, ps, () => control.ContextMenu = value, bindingMode, converter, bindingSource);
-public static T ContextMenu<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ContextMenu> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Control
+public static T ContextMenu<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, ContextMenu> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Control
 => control._setEx(Control.ContextMenuProperty, ps, () => control.ContextMenu = converter.TryConvert(value), bindingMode, converter, bindingSource);
 public static T ContextFlyout<T>(this T control, IBinding binding) where T : Control
    => control._set(Control.ContextFlyoutProperty, binding);

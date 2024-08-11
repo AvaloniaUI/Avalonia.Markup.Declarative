@@ -11,41 +11,41 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ContextMenuExtensions
 {
-public static Style<Avalonia.Controls.ContextMenu> HorizontalOffset(this Style<Avalonia.Controls.ContextMenu> style, Double value)
-=> style._addSetter(Avalonia.Controls.ContextMenu.HorizontalOffsetProperty, value);
-public static Style<Avalonia.Controls.ContextMenu> HorizontalOffset(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.ContextMenu.HorizontalOffsetProperty, binding);
-public static Style<Avalonia.Controls.ContextMenu> VerticalOffset(this Style<Avalonia.Controls.ContextMenu> style, Double value)
-=> style._addSetter(Avalonia.Controls.ContextMenu.VerticalOffsetProperty, value);
-public static Style<Avalonia.Controls.ContextMenu> VerticalOffset(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.ContextMenu.VerticalOffsetProperty, binding);
-public static Style<Avalonia.Controls.ContextMenu> PlacementAnchor(this Style<Avalonia.Controls.ContextMenu> style, PopupAnchor value)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementAnchorProperty, value);
-public static Style<Avalonia.Controls.ContextMenu> PlacementAnchor(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementAnchorProperty, binding);
-public static Style<Avalonia.Controls.ContextMenu> PlacementConstraintAdjustment(this Style<Avalonia.Controls.ContextMenu> style, PopupPositionerConstraintAdjustment value)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementConstraintAdjustmentProperty, value);
-public static Style<Avalonia.Controls.ContextMenu> PlacementConstraintAdjustment(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementConstraintAdjustmentProperty, binding);
-public static Style<Avalonia.Controls.ContextMenu> PlacementGravity(this Style<Avalonia.Controls.ContextMenu> style, PopupGravity value)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementGravityProperty, value);
-public static Style<Avalonia.Controls.ContextMenu> PlacementGravity(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementGravityProperty, binding);
-public static Style<Avalonia.Controls.ContextMenu> Placement(this Style<Avalonia.Controls.ContextMenu> style, PlacementMode value)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementProperty, value);
-public static Style<Avalonia.Controls.ContextMenu> Placement(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementProperty, binding);
-public static Style<Avalonia.Controls.ContextMenu> PlacementRect(this Style<Avalonia.Controls.ContextMenu> style, Nullable<Rect> value)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementRectProperty, value);
-public static Style<Avalonia.Controls.ContextMenu> PlacementRect(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementRectProperty, binding);
-public static Style<Avalonia.Controls.ContextMenu> WindowManagerAddShadowHint(this Style<Avalonia.Controls.ContextMenu> style, Boolean value)
-=> style._addSetter(Avalonia.Controls.ContextMenu.WindowManagerAddShadowHintProperty, value);
-public static Style<Avalonia.Controls.ContextMenu> WindowManagerAddShadowHint(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.ContextMenu.WindowManagerAddShadowHintProperty, binding);
-public static Style<Avalonia.Controls.ContextMenu> PlacementTarget(this Style<Avalonia.Controls.ContextMenu> style, Control value)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementTargetProperty, value);
-public static Style<Avalonia.Controls.ContextMenu> PlacementTarget(this Style<Avalonia.Controls.ContextMenu> style, IBinding binding)
-=> style._addSetter(Avalonia.Controls.ContextMenu.PlacementTargetProperty, binding);
+public static Style<T> HorizontalOffset<T>(this Style<T> style, Double value) where T : ContextMenu
+=> style._addSetter(ContextMenu.HorizontalOffsetProperty, value);
+public static Style<T> HorizontalOffset<T>(this Style<T> style, IBinding binding) where T : ContextMenu
+=> style._addSetter(ContextMenu.HorizontalOffsetProperty, binding);
+public static Style<T> VerticalOffset<T>(this Style<T> style, Double value) where T : ContextMenu
+=> style._addSetter(ContextMenu.VerticalOffsetProperty, value);
+public static Style<T> VerticalOffset<T>(this Style<T> style, IBinding binding) where T : ContextMenu
+=> style._addSetter(ContextMenu.VerticalOffsetProperty, binding);
+public static Style<T> PlacementAnchor<T>(this Style<T> style, PopupAnchor value) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementAnchorProperty, value);
+public static Style<T> PlacementAnchor<T>(this Style<T> style, IBinding binding) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementAnchorProperty, binding);
+public static Style<T> PlacementConstraintAdjustment<T>(this Style<T> style, PopupPositionerConstraintAdjustment value) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementConstraintAdjustmentProperty, value);
+public static Style<T> PlacementConstraintAdjustment<T>(this Style<T> style, IBinding binding) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementConstraintAdjustmentProperty, binding);
+public static Style<T> PlacementGravity<T>(this Style<T> style, PopupGravity value) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementGravityProperty, value);
+public static Style<T> PlacementGravity<T>(this Style<T> style, IBinding binding) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementGravityProperty, binding);
+public static Style<T> Placement<T>(this Style<T> style, PlacementMode value) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementProperty, value);
+public static Style<T> Placement<T>(this Style<T> style, IBinding binding) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementProperty, binding);
+public static Style<T> PlacementRect<T>(this Style<T> style, Nullable<Rect> value) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementRectProperty, value);
+public static Style<T> PlacementRect<T>(this Style<T> style, IBinding binding) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementRectProperty, binding);
+public static Style<T> WindowManagerAddShadowHint<T>(this Style<T> style, Boolean value) where T : ContextMenu
+=> style._addSetter(ContextMenu.WindowManagerAddShadowHintProperty, value);
+public static Style<T> WindowManagerAddShadowHint<T>(this Style<T> style, IBinding binding) where T : ContextMenu
+=> style._addSetter(ContextMenu.WindowManagerAddShadowHintProperty, binding);
+public static Style<T> PlacementTarget<T>(this Style<T> style, Control value) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementTargetProperty, value);
+public static Style<T> PlacementTarget<T>(this Style<T> style, IBinding binding) where T : ContextMenu
+=> style._addSetter(ContextMenu.PlacementTargetProperty, binding);
 }
 

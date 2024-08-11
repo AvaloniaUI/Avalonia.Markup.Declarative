@@ -63,7 +63,7 @@ public class StylePropertyExtensionsGenerator
         foreach (var controlType in controlTypes)
         {
             //skip all not styled types
-            if (!typeof(Avalonia.StyledElement).IsAssignableFrom(controlType))
+            if (!IsStyledElement(controlType))
                 continue;
 
             if (Config.Exclude.Contains(controlType))

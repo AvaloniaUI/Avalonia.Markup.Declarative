@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class LabelExtensions
 {
-public static Style<Label> Target(this Style<Label> style, IInputElement value)
+public static Style<T> Target<T>(this Style<T> style, IInputElement value) where T : Label
 => style._addSetter(Label.TargetProperty, value);
-public static Style<Label> Target(this Style<Label> style, IBinding binding)
+public static Style<T> Target<T>(this Style<T> style, IBinding binding) where T : Label
 => style._addSetter(Label.TargetProperty, binding);
 }
 

@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ToggleSplitButtonExtensions
 {
-public static Style<ToggleSplitButton> IsChecked(this Style<ToggleSplitButton> style, Boolean value)
+public static Style<T> IsChecked<T>(this Style<T> style, Boolean value) where T : ToggleSplitButton
 => style._addSetter(ToggleSplitButton.IsCheckedProperty, value);
-public static Style<ToggleSplitButton> IsChecked(this Style<ToggleSplitButton> style, IBinding binding)
+public static Style<T> IsChecked<T>(this Style<T> style, IBinding binding) where T : ToggleSplitButton
 => style._addSetter(ToggleSplitButton.IsCheckedProperty, binding);
 }
 

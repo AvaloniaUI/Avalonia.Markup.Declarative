@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class RadioButtonExtensions
 {
-public static Style<RadioButton> GroupName(this Style<RadioButton> style, String value)
+public static Style<T> GroupName<T>(this Style<T> style, String value) where T : RadioButton
 => style._addSetter(RadioButton.GroupNameProperty, value);
-public static Style<RadioButton> GroupName(this Style<RadioButton> style, IBinding binding)
+public static Style<T> GroupName<T>(this Style<T> style, IBinding binding) where T : RadioButton
 => style._addSetter(RadioButton.GroupNameProperty, binding);
 }
 

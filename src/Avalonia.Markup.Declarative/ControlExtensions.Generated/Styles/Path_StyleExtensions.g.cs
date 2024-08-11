@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class PathExtensions
 {
-public static Style<Path> Data(this Style<Path> style, Geometry value)
+public static Style<T> Data<T>(this Style<T> style, Geometry value) where T : Path
 => style._addSetter(Path.DataProperty, value);
-public static Style<Path> Data(this Style<Path> style, IBinding binding)
+public static Style<T> Data<T>(this Style<T> style, IBinding binding) where T : Path
 => style._addSetter(Path.DataProperty, binding);
 }
 

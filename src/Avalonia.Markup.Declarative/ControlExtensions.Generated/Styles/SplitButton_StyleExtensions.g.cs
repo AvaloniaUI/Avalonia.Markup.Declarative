@@ -12,21 +12,21 @@ using System.Windows.Input;
 namespace Avalonia.Markup.Declarative;
 public static partial class SplitButtonExtensions
 {
-public static Style<SplitButton> Command(this Style<SplitButton> style, ICommand value)
+public static Style<T> Command<T>(this Style<T> style, ICommand value) where T : SplitButton
 => style._addSetter(SplitButton.CommandProperty, value);
-public static Style<SplitButton> Command(this Style<SplitButton> style, IBinding binding)
+public static Style<T> Command<T>(this Style<T> style, IBinding binding) where T : SplitButton
 => style._addSetter(SplitButton.CommandProperty, binding);
-public static Style<SplitButton> CommandParameter(this Style<SplitButton> style, Object value)
+public static Style<T> CommandParameter<T>(this Style<T> style, Object value) where T : SplitButton
 => style._addSetter(SplitButton.CommandParameterProperty, value);
-public static Style<SplitButton> CommandParameter(this Style<SplitButton> style, IBinding binding)
+public static Style<T> CommandParameter<T>(this Style<T> style, IBinding binding) where T : SplitButton
 => style._addSetter(SplitButton.CommandParameterProperty, binding);
-public static Style<SplitButton> Flyout(this Style<SplitButton> style, FlyoutBase value)
+public static Style<T> Flyout<T>(this Style<T> style, FlyoutBase value) where T : SplitButton
 => style._addSetter(SplitButton.FlyoutProperty, value);
-public static Style<SplitButton> Flyout(this Style<SplitButton> style, IBinding binding)
+public static Style<T> Flyout<T>(this Style<T> style, IBinding binding) where T : SplitButton
 => style._addSetter(SplitButton.FlyoutProperty, binding);
-public static Style<SplitButton> HotKey(this Style<SplitButton> style, KeyGesture value)
+public static Style<T> HotKey<T>(this Style<T> style, KeyGesture value) where T : SplitButton
 => style._addSetter(SplitButton.HotKeyProperty, value);
-public static Style<SplitButton> HotKey(this Style<SplitButton> style, IBinding binding)
+public static Style<T> HotKey<T>(this Style<T> style, IBinding binding) where T : SplitButton
 => style._addSetter(SplitButton.HotKeyProperty, binding);
 }
 

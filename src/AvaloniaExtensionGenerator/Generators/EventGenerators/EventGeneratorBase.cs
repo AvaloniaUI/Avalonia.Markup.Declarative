@@ -40,7 +40,15 @@ public abstract class EventGeneratorBase : IEventExtensionGenerator
             result += $"<{args}>";
         }
 
-        if (Config.UseFullNamespace.Contains(valueType))
+        var hasConflictingNamespace = namespaces.Any(x => x.EndsWith(result));
+
+        //handle cases when Type is equal namespace name, i.e.
+        //Avalonia.Controls.Calendar
+        //ContextMenu
+        //Animation
+        //Dock
+
+        if (hasConflictingNamespace)
         {
             result = valueType.Namespace + "." + result;
         }

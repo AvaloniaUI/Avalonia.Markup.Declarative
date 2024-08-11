@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ItemsPresenterExtensions
 {
-public static Style<ItemsPresenter> ItemsPanel(this Style<ItemsPresenter> style, ITemplate<Panel> value)
+public static Style<T> ItemsPanel<T>(this Style<T> style, ITemplate<Panel> value) where T : ItemsPresenter
 => style._addSetter(ItemsPresenter.ItemsPanelProperty, value);
-public static Style<ItemsPresenter> ItemsPanel(this Style<ItemsPresenter> style, IBinding binding)
+public static Style<T> ItemsPanel<T>(this Style<T> style, IBinding binding) where T : ItemsPresenter
 => style._addSetter(ItemsPresenter.ItemsPanelProperty, binding);
 }
 

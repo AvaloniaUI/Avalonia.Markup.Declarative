@@ -2,12 +2,10 @@
 using NuGet.Configuration;
 using NuGet.Frameworks;
 using NuGet.Packaging.Core;
-using NuGet.Protocol;
 using NuGet.Protocol.Core.Types;
 using NuGet.Versioning;
 using System.Diagnostics;
 using System.Reflection;
-using System.Security.AccessControl;
 using System.Xml.Linq;
 
 namespace AvaloniaExtensionGenerator
@@ -152,13 +150,17 @@ namespace AvaloniaExtensionGenerator
                         {
                             if (!loadedAssembliesCache.TryGetValue(dll, out var assembly))
                             {
-                                assembly = Assembly.LoadFrom(dll);
-                                loadedAssembliesCache[dll] = assembly;
+                                assembly = Assembly.LoadFile(dll);
+                                if (assembly == null)
+                                {
+                                    assembly = Assembly.LoadFrom(dll);
+                                    loadedAssembliesCache[dll] = assembly;
+                                }
                             }
-                            
+
                             await LoadDependencyAssemblies(package, targetFramework, userProfile, loadedAssembliesCache);
 
-                            var types = assembly.GetTypes();
+                            var types = assembly.ExportedTypes;
 
                             if (baseTypeToFilter != default)
                                 types = types.Where(baseTypeToFilter.IsAssignableFrom).ToArray();
@@ -167,7 +169,7 @@ namespace AvaloniaExtensionGenerator
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine($"Failed to get types from assembly {dll}: {ex.Message}");
+                             Console.WriteLine($"Failed to get types from assembly {dll}: {ex.Message}");
                         }
                     }
                 }
@@ -200,13 +202,17 @@ namespace AvaloniaExtensionGenerator
                             {
                                 if (!loadedAssembliesCache.TryGetValue(dll, out var assembly))
                                 {
-                                    assembly = Assembly.LoadFrom(dll);
-                                    loadedAssembliesCache[dll] = assembly;
+                                    var isLoadedAlready = Assembly.LoadFile(dll) != null;
+                                    if (!isLoadedAlready)
+                                    {
+                                        assembly = Assembly.LoadFrom(dll);
+                                        loadedAssembliesCache[dll] = assembly;
+                                    }
                                 }
                             }
                             catch (Exception ex)
                             {
-                                Console.WriteLine($"Failed to load assembly {dll}: {ex.Message}");
+                                Console.WriteLine($"Failed to load dependency assembly {dll}: {ex.Message}");
                             }
                         }
                     }

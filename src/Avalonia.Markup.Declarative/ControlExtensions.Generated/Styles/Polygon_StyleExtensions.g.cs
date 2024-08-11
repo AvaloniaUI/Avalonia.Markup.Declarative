@@ -11,9 +11,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class PolygonExtensions
 {
-public static Style<Polygon> Points(this Style<Polygon> style, IList<Point> value)
+public static Style<T> Points<T>(this Style<T> style, IList<Point> value) where T : Polygon
 => style._addSetter(Polygon.PointsProperty, value);
-public static Style<Polygon> Points(this Style<Polygon> style, IBinding binding)
+public static Style<T> Points<T>(this Style<T> style, IBinding binding) where T : Polygon
 => style._addSetter(Polygon.PointsProperty, binding);
 }
 

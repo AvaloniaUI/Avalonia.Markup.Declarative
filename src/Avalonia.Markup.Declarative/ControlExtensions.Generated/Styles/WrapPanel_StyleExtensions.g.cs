@@ -10,17 +10,17 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class WrapPanelExtensions
 {
-public static Style<WrapPanel> Orientation(this Style<WrapPanel> style, Orientation value)
+public static Style<T> Orientation<T>(this Style<T> style, Orientation value) where T : WrapPanel
 => style._addSetter(WrapPanel.OrientationProperty, value);
-public static Style<WrapPanel> Orientation(this Style<WrapPanel> style, IBinding binding)
+public static Style<T> Orientation<T>(this Style<T> style, IBinding binding) where T : WrapPanel
 => style._addSetter(WrapPanel.OrientationProperty, binding);
-public static Style<WrapPanel> ItemWidth(this Style<WrapPanel> style, Double value)
+public static Style<T> ItemWidth<T>(this Style<T> style, Double value) where T : WrapPanel
 => style._addSetter(WrapPanel.ItemWidthProperty, value);
-public static Style<WrapPanel> ItemWidth(this Style<WrapPanel> style, IBinding binding)
+public static Style<T> ItemWidth<T>(this Style<T> style, IBinding binding) where T : WrapPanel
 => style._addSetter(WrapPanel.ItemWidthProperty, binding);
-public static Style<WrapPanel> ItemHeight(this Style<WrapPanel> style, Double value)
+public static Style<T> ItemHeight<T>(this Style<T> style, Double value) where T : WrapPanel
 => style._addSetter(WrapPanel.ItemHeightProperty, value);
-public static Style<WrapPanel> ItemHeight(this Style<WrapPanel> style, IBinding binding)
+public static Style<T> ItemHeight<T>(this Style<T> style, IBinding binding) where T : WrapPanel
 => style._addSetter(WrapPanel.ItemHeightProperty, binding);
 }
 

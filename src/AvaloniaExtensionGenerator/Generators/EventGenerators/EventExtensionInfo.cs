@@ -15,6 +15,7 @@ public class EventExtensionInfo
     public string EventArguments { get; }
     public string? ObsoleteMessage { get; } = null;
     public bool IsObsolete => ObsoleteMessage != null;
+    public bool CanBeGenericConstraint { get; }
     public EventExtensionInfo(EventInfo eventInfo, Func<Type, string> TypeDeclarationFunc)
     {
         if (eventInfo.DeclaringType == null)
@@ -30,5 +31,7 @@ public class EventExtensionInfo
         EventHandler = TypeDeclarationFunc(EventInfo.EventHandlerType);
         EventArguments = string.Join(",", EventInfo.EventHandlerType.GenericTypeArguments.Select(x => x.Name));
         ObsoleteMessage = eventInfo.GetCustomAttribute<ObsoleteAttribute>()?.Message;
+        
+        CanBeGenericConstraint = !eventInfo.DeclaringType.IsSealed;
     }
 }

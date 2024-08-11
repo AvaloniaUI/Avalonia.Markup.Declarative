@@ -19,7 +19,7 @@ public class ValueOverloadsStyleSetterGenerator : SetterGeneratorBase
                 var argDefs = string.Join(", ", ps.Select(x => $"{x.ParameterType.Name} {x.Name}"));
                 var argVals = string.Join(", ", ps.Select(x => x.Name)); ;
 
-                if (Config.BaseTypes.Contains(info.ControlType))
+                if (info.CanBeGenericConstraint)
                 {
                     extensionText += nl +
                                      $"public static Style<T> {info.ExtensionName}<T>(this Style<T> style, {argDefs})"

@@ -15,15 +15,15 @@ public static class AvaloniaTypeHelper
         }
 
         var controlTypes = config.TypesToProcess
-            .Where(p => IsAccepatbleControlType(p) && baseControlType.IsAssignableFrom(p))
+            .Where(p => IsAcceptableControlType(p) && baseControlType.IsAssignableFrom(p))
             .ToList();
 
-        controlTypes.AddRange(config.BaseTypes);
+        //controlTypes.AddRange(config.BaseTypes);
 
         return controlTypes.Distinct();
     }
 
-    private static bool IsAccepatbleControlType(Type controlType)
+    private static bool IsAcceptableControlType(Type controlType)
     {
         if(!controlType.IsPublic)
             return false;
@@ -41,4 +41,7 @@ public static class AvaloniaTypeHelper
     }
 
 
+    public static bool IsStyledElement(Type controlType) => !typeof(Avalonia.StyledElement).IsAssignableFrom(controlType);
+
+    public static Type? GetAvaloniaObjectType() => typeof(Avalonia.AvaloniaObject);
 }

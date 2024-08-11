@@ -11,13 +11,15 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class CarouselExtensions
 {
-public static Carousel PageTransition(this Carousel control, IBinding binding)
+public static T PageTransition<T>(this T control, IBinding binding) where T : Carousel
    => control._set(Carousel.PageTransitionProperty, binding);
-public static Carousel PageTransition(this Carousel control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+public static T PageTransition<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Carousel
    => control._set(Carousel.PageTransitionProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static Carousel PageTransition(this Carousel control, Func<IPageTransition> func, Action<IPageTransition>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+public static T PageTransition<T>(this T control, Func<IPageTransition> func, Action<IPageTransition>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Carousel
    => control._set(Carousel.PageTransitionProperty, func, onChanged, expression);
-public static Carousel PageTransition(this Carousel control, IPageTransition value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Carousel.PageTransitionProperty, ps, () => control.PageTransition = value, bindingMode, converter, bindingSource);
-public static Carousel PageTransition<TValue>(this Carousel control, TValue value, FuncValueConverter<TValue, IPageTransition> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Carousel.PageTransitionProperty, ps, () => control.PageTransition = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T PageTransition<T>(this T control, IPageTransition value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Carousel
+=> control._setEx(Carousel.PageTransitionProperty, ps, () => control.PageTransition = value, bindingMode, converter, bindingSource);
+public static T PageTransition<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IPageTransition> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Carousel
+=> control._setEx(Carousel.PageTransitionProperty, ps, () => control.PageTransition = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 

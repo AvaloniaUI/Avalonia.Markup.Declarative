@@ -10,13 +10,13 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class HeaderedContentControlExtensions
 {
-public static Style<HeaderedContentControl> Header(this Style<HeaderedContentControl> style, Object value)
+public static Style<T> Header<T>(this Style<T> style, Object value) where T : HeaderedContentControl
 => style._addSetter(HeaderedContentControl.HeaderProperty, value);
-public static Style<HeaderedContentControl> Header(this Style<HeaderedContentControl> style, IBinding binding)
+public static Style<T> Header<T>(this Style<T> style, IBinding binding) where T : HeaderedContentControl
 => style._addSetter(HeaderedContentControl.HeaderProperty, binding);
-public static Style<HeaderedContentControl> HeaderTemplate(this Style<HeaderedContentControl> style, IDataTemplate value)
+public static Style<T> HeaderTemplate<T>(this Style<T> style, IDataTemplate value) where T : HeaderedContentControl
 => style._addSetter(HeaderedContentControl.HeaderTemplateProperty, value);
-public static Style<HeaderedContentControl> HeaderTemplate(this Style<HeaderedContentControl> style, IBinding binding)
+public static Style<T> HeaderTemplate<T>(this Style<T> style, IBinding binding) where T : HeaderedContentControl
 => style._addSetter(HeaderedContentControl.HeaderTemplateProperty, binding);
 }
 

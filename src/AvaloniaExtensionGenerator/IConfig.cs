@@ -13,11 +13,6 @@ public interface IConfig
     string[] InitialNamespaces { get; }
 
     /// <summary>
-    /// Set types that will be written into generated extensions with full qualified namespace 
-    /// </summary>
-    Type[] UseFullNamespace { get; }
-
-    /// <summary>
     /// Defines types that must be excluded from processing
     /// </summary>
     Type[] Exclude { get; }
@@ -25,7 +20,7 @@ public interface IConfig
     /// <summary>
     /// Those types will be generated as Generic extension methods instead of using direct control type
     /// </summary>
-    List<Type> BaseTypes { get; }
+    //List<Type> BaseTypes { get; }
 
     string BasePath { get; }
 }

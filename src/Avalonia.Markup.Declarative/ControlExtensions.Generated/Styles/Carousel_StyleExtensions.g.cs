@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class CarouselExtensions
 {
-public static Style<Carousel> PageTransition(this Style<Carousel> style, IPageTransition value)
+public static Style<T> PageTransition<T>(this Style<T> style, IPageTransition value) where T : Carousel
 => style._addSetter(Carousel.PageTransitionProperty, value);
-public static Style<Carousel> PageTransition(this Style<Carousel> style, IBinding binding)
+public static Style<T> PageTransition<T>(this Style<T> style, IBinding binding) where T : Carousel
 => style._addSetter(Carousel.PageTransitionProperty, binding);
 }
 

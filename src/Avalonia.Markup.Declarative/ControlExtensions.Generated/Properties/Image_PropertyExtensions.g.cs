@@ -11,29 +11,35 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ImageExtensions
 {
-public static Image Source(this Image control, IBinding binding)
+public static T Source<T>(this T control, IBinding binding) where T : Image
    => control._set(Image.SourceProperty, binding);
-public static Image Source(this Image control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+public static T Source<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Image
    => control._set(Image.SourceProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static Image Source(this Image control, Func<IImage> func, Action<IImage>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+public static T Source<T>(this T control, Func<IImage> func, Action<IImage>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Image
    => control._set(Image.SourceProperty, func, onChanged, expression);
-public static Image Source(this Image control, IImage value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Image.SourceProperty, ps, () => control.Source = value, bindingMode, converter, bindingSource);
-public static Image Source<TValue>(this Image control, TValue value, FuncValueConverter<TValue, IImage> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Image.SourceProperty, ps, () => control.Source = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static Image Stretch(this Image control, IBinding binding)
+public static T Source<T>(this T control, IImage value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Image
+=> control._setEx(Image.SourceProperty, ps, () => control.Source = value, bindingMode, converter, bindingSource);
+public static T Source<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, IImage> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Image
+=> control._setEx(Image.SourceProperty, ps, () => control.Source = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Stretch<T>(this T control, IBinding binding) where T : Image
    => control._set(Image.StretchProperty, binding);
-public static Image Stretch(this Image control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+public static T Stretch<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Image
    => control._set(Image.StretchProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static Image Stretch(this Image control, Func<Stretch> func, Action<Stretch>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+public static T Stretch<T>(this T control, Func<Stretch> func, Action<Stretch>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Image
    => control._set(Image.StretchProperty, func, onChanged, expression);
-public static Image Stretch(this Image control, Stretch value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Image.StretchProperty, ps, () => control.Stretch = value, bindingMode, converter, bindingSource);
-public static Image Stretch<TValue>(this Image control, TValue value, FuncValueConverter<TValue, Stretch> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Image.StretchProperty, ps, () => control.Stretch = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static Image StretchDirection(this Image control, IBinding binding)
+public static T Stretch<T>(this T control, Stretch value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Image
+=> control._setEx(Image.StretchProperty, ps, () => control.Stretch = value, bindingMode, converter, bindingSource);
+public static T Stretch<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Stretch> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Image
+=> control._setEx(Image.StretchProperty, ps, () => control.Stretch = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T StretchDirection<T>(this T control, IBinding binding) where T : Image
    => control._set(Image.StretchDirectionProperty, binding);
-public static Image StretchDirection(this Image control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+public static T StretchDirection<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Image
    => control._set(Image.StretchDirectionProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static Image StretchDirection(this Image control, Func<StretchDirection> func, Action<StretchDirection>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+public static T StretchDirection<T>(this T control, Func<StretchDirection> func, Action<StretchDirection>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Image
    => control._set(Image.StretchDirectionProperty, func, onChanged, expression);
-public static Image StretchDirection(this Image control, StretchDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Image.StretchDirectionProperty, ps, () => control.StretchDirection = value, bindingMode, converter, bindingSource);
-public static Image StretchDirection<TValue>(this Image control, TValue value, FuncValueConverter<TValue, StretchDirection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Image.StretchDirectionProperty, ps, () => control.StretchDirection = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T StretchDirection<T>(this T control, StretchDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Image
+=> control._setEx(Image.StretchDirectionProperty, ps, () => control.StretchDirection = value, bindingMode, converter, bindingSource);
+public static T StretchDirection<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, StretchDirection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Image
+=> control._setEx(Image.StretchDirectionProperty, ps, () => control.StretchDirection = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 

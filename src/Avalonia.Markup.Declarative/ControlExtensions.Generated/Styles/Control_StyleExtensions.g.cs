@@ -18,7 +18,7 @@ public static Style<T> Tag<T>(this Style<T> style, Object value) where T : Contr
 => style._addSetter(Control.TagProperty, value);
 public static Style<T> Tag<T>(this Style<T> style, IBinding binding) where T : Control
 => style._addSetter(Control.TagProperty, binding);
-public static Style<T> ContextMenu<T>(this Style<T> style, Avalonia.Controls.ContextMenu value) where T : Control
+public static Style<T> ContextMenu<T>(this Style<T> style, ContextMenu value) where T : Control
 => style._addSetter(Control.ContextMenuProperty, value);
 public static Style<T> ContextMenu<T>(this Style<T> style, IBinding binding) where T : Control
 => style._addSetter(Control.ContextMenuProperty, binding);

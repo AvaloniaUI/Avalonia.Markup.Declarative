@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class PullGestureRecognizerExtensions
 {
-public static Style<PullGestureRecognizer> PullDirection(this Style<PullGestureRecognizer> style, PullDirection value)
+public static Style<T> PullDirection<T>(this Style<T> style, PullDirection value) where T : PullGestureRecognizer
 => style._addSetter(PullGestureRecognizer.PullDirectionProperty, value);
-public static Style<PullGestureRecognizer> PullDirection(this Style<PullGestureRecognizer> style, IBinding binding)
+public static Style<T> PullDirection<T>(this Style<T> style, IBinding binding) where T : PullGestureRecognizer
 => style._addSetter(PullGestureRecognizer.PullDirectionProperty, binding);
 }
 

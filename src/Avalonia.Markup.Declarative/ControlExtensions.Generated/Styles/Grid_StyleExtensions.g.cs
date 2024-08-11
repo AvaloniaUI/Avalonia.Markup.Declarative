@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class GridExtensions
 {
-public static Style<Grid> ShowGridLines(this Style<Grid> style, Boolean value)
+public static Style<T> ShowGridLines<T>(this Style<T> style, Boolean value) where T : Grid
 => style._addSetter(Grid.ShowGridLinesProperty, value);
-public static Style<Grid> ShowGridLines(this Style<Grid> style, IBinding binding)
+public static Style<T> ShowGridLines<T>(this Style<T> style, IBinding binding) where T : Grid
 => style._addSetter(Grid.ShowGridLinesProperty, binding);
 }
 

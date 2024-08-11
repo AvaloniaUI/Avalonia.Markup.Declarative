@@ -1,4 +1,5 @@
 using System.Reflection;
+using Avalonia.Controls.Documents;
 
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
 
@@ -14,6 +15,8 @@ public class PropertyExtensionInfo
     public bool IsObsolete => ObsoleteMessage != null;
     public string? ObsoleteMessage { get; } = null;
 
+    public bool CanBeGenericConstraint { get; }
+
     public PropertyExtensionInfo(FieldInfo field, Func<Type, string> TypeDeclarationFunc)
     {
         if (field.DeclaringType == null)
@@ -26,6 +29,8 @@ public class PropertyExtensionInfo
         ValueType = field.FieldType.GetGenericArguments().Last();
         ControlTypeName = TypeDeclarationFunc(ControlType);
         ValueTypeSource = TypeDeclarationFunc(ValueType);
+
+        CanBeGenericConstraint = !field.DeclaringType.IsSealed;
 
         ObsoleteMessage = field.GetCustomAttribute<ObsoleteAttribute>()?.Message;
     }

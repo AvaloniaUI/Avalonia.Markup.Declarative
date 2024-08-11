@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class AccessTextExtensions
 {
-public static Style<AccessText> ShowAccessKey(this Style<AccessText> style, Boolean value)
+public static Style<T> ShowAccessKey<T>(this Style<T> style, Boolean value) where T : AccessText
 => style._addSetter(AccessText.ShowAccessKeyProperty, value);
-public static Style<AccessText> ShowAccessKey(this Style<AccessText> style, IBinding binding)
+public static Style<T> ShowAccessKey<T>(this Style<T> style, IBinding binding) where T : AccessText
 => style._addSetter(AccessText.ShowAccessKeyProperty, binding);
 }
 

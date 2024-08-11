@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class AdornerLayerExtensions
 {
-public static Style<AdornerLayer> DefaultFocusAdorner(this Style<AdornerLayer> style, ITemplate<Control> value)
+public static Style<T> DefaultFocusAdorner<T>(this Style<T> style, ITemplate<Control> value) where T : AdornerLayer
 => style._addSetter(AdornerLayer.DefaultFocusAdornerProperty, value);
-public static Style<AdornerLayer> DefaultFocusAdorner(this Style<AdornerLayer> style, IBinding binding)
+public static Style<T> DefaultFocusAdorner<T>(this Style<T> style, IBinding binding) where T : AdornerLayer
 => style._addSetter(AdornerLayer.DefaultFocusAdornerProperty, binding);
 }
 

@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ThemeVariantScopeExtensions
 {
-public static Style<ThemeVariantScope> RequestedThemeVariant(this Style<ThemeVariantScope> style, ThemeVariant value)
+public static Style<T> RequestedThemeVariant<T>(this Style<T> style, ThemeVariant value) where T : ThemeVariantScope
 => style._addSetter(ThemeVariantScope.RequestedThemeVariantProperty, value);
-public static Style<ThemeVariantScope> RequestedThemeVariant(this Style<ThemeVariantScope> style, IBinding binding)
+public static Style<T> RequestedThemeVariant<T>(this Style<T> style, IBinding binding) where T : ThemeVariantScope
 => style._addSetter(ThemeVariantScope.RequestedThemeVariantProperty, binding);
 }
 

@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class OverlayPopupHostExtensions
 {
-public static Style<OverlayPopupHost> Transform(this Style<OverlayPopupHost> style, Transform value)
+public static Style<T> Transform<T>(this Style<T> style, Transform value) where T : OverlayPopupHost
 => style._addSetter(OverlayPopupHost.TransformProperty, value);
-public static Style<OverlayPopupHost> Transform(this Style<OverlayPopupHost> style, IBinding binding)
+public static Style<T> Transform<T>(this Style<T> style, IBinding binding) where T : OverlayPopupHost
 => style._addSetter(OverlayPopupHost.TransformProperty, binding);
 }
 

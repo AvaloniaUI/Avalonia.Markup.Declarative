@@ -9,13 +9,13 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class NotificationCardExtensions
 {
-public static Style<NotificationCard> IsClosed(this Style<NotificationCard> style, Boolean value)
+public static Style<T> IsClosed<T>(this Style<T> style, Boolean value) where T : NotificationCard
 => style._addSetter(NotificationCard.IsClosedProperty, value);
-public static Style<NotificationCard> IsClosed(this Style<NotificationCard> style, IBinding binding)
+public static Style<T> IsClosed<T>(this Style<T> style, IBinding binding) where T : NotificationCard
 => style._addSetter(NotificationCard.IsClosedProperty, binding);
-public static Style<NotificationCard> NotificationType(this Style<NotificationCard> style, NotificationType value)
+public static Style<T> NotificationType<T>(this Style<T> style, NotificationType value) where T : NotificationCard
 => style._addSetter(NotificationCard.NotificationTypeProperty, value);
-public static Style<NotificationCard> NotificationType(this Style<NotificationCard> style, IBinding binding)
+public static Style<T> NotificationType<T>(this Style<T> style, IBinding binding) where T : NotificationCard
 => style._addSetter(NotificationCard.NotificationTypeProperty, binding);
 }
 

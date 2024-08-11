@@ -2,7 +2,7 @@
 
 public class ExtensionGeneratorConfig(string basePath) : IConfig
 {
-    required public Type[] TypesToProcess { get; init; }
+    public required Type[] TypesToProcess { get; init; }
 
     /// <summary>
     /// This namespaces will be added to each generated file

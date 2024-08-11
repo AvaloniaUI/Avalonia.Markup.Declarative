@@ -9,13 +9,13 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ArcExtensions
 {
-public static Style<Arc> StartAngle(this Style<Arc> style, Double value)
+public static Style<T> StartAngle<T>(this Style<T> style, Double value) where T : Arc
 => style._addSetter(Arc.StartAngleProperty, value);
-public static Style<Arc> StartAngle(this Style<Arc> style, IBinding binding)
+public static Style<T> StartAngle<T>(this Style<T> style, IBinding binding) where T : Arc
 => style._addSetter(Arc.StartAngleProperty, binding);
-public static Style<Arc> SweepAngle(this Style<Arc> style, Double value)
+public static Style<T> SweepAngle<T>(this Style<T> style, Double value) where T : Arc
 => style._addSetter(Arc.SweepAngleProperty, value);
-public static Style<Arc> SweepAngle(this Style<Arc> style, IBinding binding)
+public static Style<T> SweepAngle<T>(this Style<T> style, IBinding binding) where T : Arc
 => style._addSetter(Arc.SweepAngleProperty, binding);
 }
 

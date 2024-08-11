@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class InlineUIContainerExtensions
 {
-public static Style<InlineUIContainer> Child(this Style<InlineUIContainer> style, Control value)
+public static Style<T> Child<T>(this Style<T> style, Control value) where T : InlineUIContainer
 => style._addSetter(InlineUIContainer.ChildProperty, value);
-public static Style<InlineUIContainer> Child(this Style<InlineUIContainer> style, IBinding binding)
+public static Style<T> Child<T>(this Style<T> style, IBinding binding) where T : InlineUIContainer
 => style._addSetter(InlineUIContainer.ChildProperty, binding);
 }
 
