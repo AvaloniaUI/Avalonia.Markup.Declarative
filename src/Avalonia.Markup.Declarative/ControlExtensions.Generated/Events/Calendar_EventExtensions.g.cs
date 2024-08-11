@@ -9,11 +9,11 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class CalendarEventsExtensions
 {
-    public static Calendar OnSelectedDatesChanged(this Calendar control, Action<SelectionChangedEventArgs> action) => 
+    public static T OnSelectedDatesChanged<T>(this T control, Action<SelectionChangedEventArgs> action) where T : Calendar => 
         control._setEvent((EventHandler<SelectionChangedEventArgs>) ((_, args) => action(args)), h => control.SelectedDatesChanged += h);
-    public static Calendar OnDisplayDateChanged(this Calendar control, Action<CalendarDateChangedEventArgs> action) => 
+    public static T OnDisplayDateChanged<T>(this T control, Action<CalendarDateChangedEventArgs> action) where T : Calendar => 
         control._setEvent((EventHandler<CalendarDateChangedEventArgs>) ((_, args) => action(args)), h => control.DisplayDateChanged += h);
-    public static Calendar OnDisplayModeChanged(this Calendar control, Action<CalendarModeChangedEventArgs> action) => 
+    public static T OnDisplayModeChanged<T>(this T control, Action<CalendarModeChangedEventArgs> action) where T : Calendar => 
         control._setEvent((EventHandler<CalendarModeChangedEventArgs>) ((_, args) => action(args)), h => control.DisplayModeChanged += h);
 }
 

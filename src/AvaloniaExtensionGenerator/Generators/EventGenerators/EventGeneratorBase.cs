@@ -4,7 +4,7 @@ namespace AvaloniaExtensionGenerator.Generators.EventGenerators;
 
 public abstract class EventGeneratorBase : IEventExtensionGenerator
 {
-    public IConfig Config { get; set; } = null!;
+    public ExtensionGeneratorConfig Config { get; set; } = null!;
 
     public string? GetEventExtension(EventInfo @event, out IEnumerable<string> usedNamespaces)
     {

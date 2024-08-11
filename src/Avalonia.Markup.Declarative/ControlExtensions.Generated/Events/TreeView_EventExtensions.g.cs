@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class TreeViewEventsExtensions
 {
-    public static TreeView OnSelectionChanged(this TreeView control, Action<SelectionChangedEventArgs> action) => 
+    public static T OnSelectionChanged<T>(this T control, Action<SelectionChangedEventArgs> action) where T : TreeView => 
         control._setEvent((EventHandler<SelectionChangedEventArgs>) ((_, args) => action(args)), h => control.SelectionChanged += h);
 }
 

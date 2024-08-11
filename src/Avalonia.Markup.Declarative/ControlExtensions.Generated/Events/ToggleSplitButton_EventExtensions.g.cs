@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ToggleSplitButtonEventsExtensions
 {
-    public static ToggleSplitButton OnIsCheckedChanged(this ToggleSplitButton control, Action<RoutedEventArgs> action) => 
+    public static T OnIsCheckedChanged<T>(this T control, Action<RoutedEventArgs> action) where T : ToggleSplitButton => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.IsCheckedChanged += h);
 }
 

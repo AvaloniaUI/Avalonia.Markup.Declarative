@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class DatePickerEventsExtensions
 {
-    public static DatePicker OnSelectedDateChanged(this DatePicker control, Action<DatePickerSelectedValueChangedEventArgs> action) => 
+    public static T OnSelectedDateChanged<T>(this T control, Action<DatePickerSelectedValueChangedEventArgs> action) where T : DatePicker => 
         control._setEvent((EventHandler<DatePickerSelectedValueChangedEventArgs>) ((_, args) => action(args)), h => control.SelectedDateChanged += h);
 }
 

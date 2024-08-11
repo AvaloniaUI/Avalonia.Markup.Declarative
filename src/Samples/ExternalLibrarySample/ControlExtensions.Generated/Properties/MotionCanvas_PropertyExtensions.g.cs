@@ -13,13 +13,15 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class MotionCanvasExtensions
 {
-public static MotionCanvas PaintTasks(this MotionCanvas control, IBinding binding)
+public static T PaintTasks<T>(this T control, IBinding binding) where T : MotionCanvas
    => control._set(MotionCanvas.PaintTasksProperty, binding);
-public static MotionCanvas PaintTasks(this MotionCanvas control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+public static T PaintTasks<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : MotionCanvas
    => control._set(MotionCanvas.PaintTasksProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static MotionCanvas PaintTasks(this MotionCanvas control, Func<List<PaintSchedule<SkiaSharpDrawingContext>>> func, Action<List<PaintSchedule<SkiaSharpDrawingContext>>>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+public static T PaintTasks<T>(this T control, Func<List<PaintSchedule<SkiaSharpDrawingContext>>> func, Action<List<PaintSchedule<SkiaSharpDrawingContext>>>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : MotionCanvas
    => control._set(MotionCanvas.PaintTasksProperty, func, onChanged, expression);
-public static MotionCanvas PaintTasks(this MotionCanvas control, List<PaintSchedule<SkiaSharpDrawingContext>> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MotionCanvas.PaintTasksProperty, ps, () => control.PaintTasks = value, bindingMode, converter, bindingSource);
-public static MotionCanvas PaintTasks<TValue>(this MotionCanvas control, TValue value, FuncValueConverter<TValue, List<PaintSchedule<SkiaSharpDrawingContext>>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(MotionCanvas.PaintTasksProperty, ps, () => control.PaintTasks = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T PaintTasks<T>(this T control, List<PaintSchedule<SkiaSharpDrawingContext>> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : MotionCanvas
+=> control._setEx(MotionCanvas.PaintTasksProperty, ps, () => control.PaintTasks = value, bindingMode, converter, bindingSource);
+public static T PaintTasks<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, List<PaintSchedule<SkiaSharpDrawingContext>>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : MotionCanvas
+=> control._setEx(MotionCanvas.PaintTasksProperty, ps, () => control.PaintTasks = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 

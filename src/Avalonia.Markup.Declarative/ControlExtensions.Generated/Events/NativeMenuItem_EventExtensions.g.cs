@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class NativeMenuItemEventsExtensions
 {
-    public static NativeMenuItem OnClick(this NativeMenuItem control, Action action) => 
+    public static T OnClick<T>(this T control, Action action) where T : NativeMenuItem => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Click += h);
 }
 

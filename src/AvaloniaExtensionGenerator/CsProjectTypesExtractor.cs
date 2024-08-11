@@ -123,13 +123,18 @@ namespace AvaloniaExtensionGenerator
             public string Version { get; init; } = null!;
         }
 
-        public static async Task<IReadOnlyList<Type>> LoadTypesFromProject(string projectPath, Type? baseTypeToFilter = default)
+        public static async Task<IReadOnlyList<Type>> LoadTypesFromProject(
+            string projectPath,
+            string baseTypeNameToFilter,
+            string[] ignoreAssemblies)
         {
             string targetFramework = GetTargetFramework(projectPath);
             await RestoreNuGetPackages(projectPath);
             List<PackageReference> packages = GetPackageReferences(projectPath);
             Console.WriteLine("Packages found in the .csproj file:");
             Dictionary<string, Assembly> loadedAssembliesCache = new();
+
+            Type? filterBaseType = null;
 
             var result = new List<Type>();
 
@@ -148,28 +153,32 @@ namespace AvaloniaExtensionGenerator
                     {
                         try
                         {
-                            if (!loadedAssembliesCache.TryGetValue(dll, out var assembly))
-                            {
-                                assembly = Assembly.LoadFile(dll);
-                                if (assembly == null)
-                                {
-                                    assembly = Assembly.LoadFrom(dll);
-                                    loadedAssembliesCache[dll] = assembly;
-                                }
-                            }
+                            TryLoadAssembly(dll, loadedAssembliesCache, out var assembly);
 
                             await LoadDependencyAssemblies(package, targetFramework, userProfile, loadedAssembliesCache);
 
-                            var types = assembly.ExportedTypes;
+                            if (ignoreAssemblies.Contains(assembly.GetName().Name))
+                            {
+                                Console.WriteLine($"Skipping base assembly, {assembly.GetName().Name}");
+                            }
+                            else
+                            {
+                                //initialize filter type only after loading assembly dependencies
+                                filterBaseType ??= loadedAssembliesCache.Values
+                                    .SelectMany(x => x.ExportedTypes)
+                                    .FirstOrDefault(x => x.FullName == baseTypeNameToFilter);
 
-                            if (baseTypeToFilter != default)
-                                types = types.Where(baseTypeToFilter.IsAssignableFrom).ToArray();
-
-                            result.AddRange(types);
+                                if (filterBaseType != null)
+                                {
+                                    var types = assembly.ExportedTypes.Where(filterBaseType.IsAssignableFrom).ToArray();
+                                    result.AddRange(types);
+                                }
+                            }
                         }
                         catch (Exception ex)
                         {
-                             Console.WriteLine($"Failed to get types from assembly {dll}: {ex.Message}");
+                            if (!ex.Message.StartsWith("Assembly with same name is already loaded"))
+                                Console.WriteLine($"Failed to get types from assembly {dll}: {ex.Message}");
                         }
                     }
                 }
@@ -177,6 +186,22 @@ namespace AvaloniaExtensionGenerator
             }
 
             return result;
+        }
+
+        private static bool TryLoadAssembly(string dll, Dictionary<string, Assembly> loadedAssembliesCache,
+            out Assembly asm)
+        {
+            asm = null;
+
+            if (!loadedAssembliesCache.TryGetValue(dll, out var assembly))
+            {
+                assembly = Assembly.LoadFrom(dll);
+                loadedAssembliesCache[dll] = assembly;
+                Console.WriteLine($"-{assembly.GetName().Name}");
+            }
+
+            asm = assembly;
+            return true;
         }
 
         private static async Task LoadDependencyAssemblies(PackageReference package, string targetFramework,
@@ -200,19 +225,12 @@ namespace AvaloniaExtensionGenerator
                         {
                             try
                             {
-                                if (!loadedAssembliesCache.TryGetValue(dll, out var assembly))
-                                {
-                                    var isLoadedAlready = Assembly.LoadFile(dll) != null;
-                                    if (!isLoadedAlready)
-                                    {
-                                        assembly = Assembly.LoadFrom(dll);
-                                        loadedAssembliesCache[dll] = assembly;
-                                    }
-                                }
+                                TryLoadAssembly(dll, loadedAssembliesCache, out _);
                             }
                             catch (Exception ex)
                             {
-                                Console.WriteLine($"Failed to load dependency assembly {dll}: {ex.Message}");
+                                if (!ex.Message.StartsWith("Assembly with same name is already loaded"))
+                                    Console.WriteLine($"Failed to load dependency assembly {dll}: {ex.Message}");
                             }
                         }
                     }

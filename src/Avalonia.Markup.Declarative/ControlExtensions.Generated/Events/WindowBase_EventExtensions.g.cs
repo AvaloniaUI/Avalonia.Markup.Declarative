@@ -9,13 +9,13 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class WindowBaseEventsExtensions
 {
-    public static WindowBase OnActivated(this WindowBase control, Action action) => 
+    public static T OnActivated<T>(this T control, Action action) where T : WindowBase => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Activated += h);
-    public static WindowBase OnDeactivated(this WindowBase control, Action action) => 
+    public static T OnDeactivated<T>(this T control, Action action) where T : WindowBase => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Deactivated += h);
-    public static WindowBase OnPositionChanged(this WindowBase control, Action<PixelPointEventArgs> action) => 
+    public static T OnPositionChanged<T>(this T control, Action<PixelPointEventArgs> action) where T : WindowBase => 
         control._setEvent((EventHandler<PixelPointEventArgs>) ((_, args) => action(args)), h => control.PositionChanged += h);
-    public static WindowBase OnResized(this WindowBase control, Action<WindowResizedEventArgs> action) => 
+    public static T OnResized<T>(this T control, Action<WindowResizedEventArgs> action) where T : WindowBase => 
         control._setEvent((EventHandler<WindowResizedEventArgs>) ((_, args) => action(args)), h => control.Resized += h);
 }
 

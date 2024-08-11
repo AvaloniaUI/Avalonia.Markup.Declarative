@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class SelectableTextBlockEventsExtensions
 {
-    public static SelectableTextBlock OnCopyingToClipboard(this SelectableTextBlock control, Action<RoutedEventArgs> action) => 
+    public static T OnCopyingToClipboard<T>(this T control, Action<RoutedEventArgs> action) where T : SelectableTextBlock => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.CopyingToClipboard += h);
 }
 

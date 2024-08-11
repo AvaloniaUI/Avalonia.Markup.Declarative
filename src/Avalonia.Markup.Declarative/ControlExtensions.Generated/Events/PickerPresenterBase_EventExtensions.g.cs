@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class PickerPresenterBaseEventsExtensions
 {
-    public static PickerPresenterBase OnConfirmed(this PickerPresenterBase control, Action action) => 
+    public static T OnConfirmed<T>(this T control, Action action) where T : PickerPresenterBase => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Confirmed += h);
-    public static PickerPresenterBase OnDismissed(this PickerPresenterBase control, Action action) => 
+    public static T OnDismissed<T>(this T control, Action action) where T : PickerPresenterBase => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Dismissed += h);
 }
 

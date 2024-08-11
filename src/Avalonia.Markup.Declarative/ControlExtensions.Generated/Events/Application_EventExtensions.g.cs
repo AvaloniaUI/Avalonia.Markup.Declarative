@@ -10,12 +10,12 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ApplicationEventsExtensions
 {
-    public static Application OnResourcesChanged(this Application control, Action<ResourcesChangedEventArgs> action) => 
+    public static T OnResourcesChanged<T>(this T control, Action<ResourcesChangedEventArgs> action) where T : Application => 
         control._setEvent((EventHandler<ResourcesChangedEventArgs>) ((_, args) => action(args)), h => control.ResourcesChanged += h);
 	[Obsolete("Use Application.Current.TryGetFeature<IActivatableLifetime>() instead.")]
-    public static Application OnUrlsOpened(this Application control, Action<UrlOpenedEventArgs> action) => 
+    public static T OnUrlsOpened<T>(this T control, Action<UrlOpenedEventArgs> action) where T : Application => 
         control._setEvent((EventHandler<UrlOpenedEventArgs>) ((_, args) => action(args)), h => control.UrlsOpened += h);
-    public static Application OnActualThemeVariantChanged(this Application control, Action action) => 
+    public static T OnActualThemeVariantChanged<T>(this T control, Action action) where T : Application => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.ActualThemeVariantChanged += h);
 }
 

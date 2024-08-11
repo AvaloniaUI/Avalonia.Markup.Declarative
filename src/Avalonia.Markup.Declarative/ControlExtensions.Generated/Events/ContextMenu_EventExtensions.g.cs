@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ContextMenuEventsExtensions
 {
-    public static ContextMenu OnOpening(this ContextMenu control, Action action) => 
+    public static T OnOpening<T>(this T control, Action action) where T : ContextMenu => 
         control._setEvent((CancelEventHandler) ((_, args) => action()), h => control.Opening += h);
-    public static ContextMenu OnClosing(this ContextMenu control, Action action) => 
+    public static T OnClosing<T>(this T control, Action action) where T : ContextMenu => 
         control._setEvent((CancelEventHandler) ((_, args) => action()), h => control.Closing += h);
 }
 

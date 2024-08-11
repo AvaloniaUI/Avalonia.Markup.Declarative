@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class TimePickerEventsExtensions
 {
-    public static TimePicker OnSelectedTimeChanged(this TimePicker control, Action<TimePickerSelectedValueChangedEventArgs> action) => 
+    public static T OnSelectedTimeChanged<T>(this T control, Action<TimePickerSelectedValueChangedEventArgs> action) where T : TimePicker => 
         control._setEvent((EventHandler<TimePickerSelectedValueChangedEventArgs>) ((_, args) => action(args)), h => control.SelectedTimeChanged += h);
 }
 

@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class TrayIconEventsExtensions
 {
-    public static TrayIcon OnClicked(this TrayIcon control, Action action) => 
+    public static T OnClicked<T>(this T control, Action action) where T : TrayIcon => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.Clicked += h);
 }
 

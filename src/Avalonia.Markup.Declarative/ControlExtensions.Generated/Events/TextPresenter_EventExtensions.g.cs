@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class TextPresenterEventsExtensions
 {
-    public static TextPresenter OnCaretBoundsChanged(this TextPresenter control, Action action) => 
+    public static T OnCaretBoundsChanged<T>(this T control, Action action) where T : TextPresenter => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.CaretBoundsChanged += h);
 }
 

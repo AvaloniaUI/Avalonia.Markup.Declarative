@@ -10,15 +10,15 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class TextBoxEventsExtensions
 {
-    public static TextBox OnCopyingToClipboard(this TextBox control, Action<RoutedEventArgs> action) => 
+    public static T OnCopyingToClipboard<T>(this T control, Action<RoutedEventArgs> action) where T : TextBox => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.CopyingToClipboard += h);
-    public static TextBox OnCuttingToClipboard(this TextBox control, Action<RoutedEventArgs> action) => 
+    public static T OnCuttingToClipboard<T>(this T control, Action<RoutedEventArgs> action) where T : TextBox => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.CuttingToClipboard += h);
-    public static TextBox OnPastingFromClipboard(this TextBox control, Action<RoutedEventArgs> action) => 
+    public static T OnPastingFromClipboard<T>(this T control, Action<RoutedEventArgs> action) where T : TextBox => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.PastingFromClipboard += h);
-    public static TextBox OnTextChanged(this TextBox control, Action<TextChangedEventArgs> action) => 
+    public static T OnTextChanged<T>(this T control, Action<TextChangedEventArgs> action) where T : TextBox => 
         control._setEvent((EventHandler<TextChangedEventArgs>) ((_, args) => action(args)), h => control.TextChanged += h);
-    public static TextBox OnTextChanging(this TextBox control, Action<TextChangingEventArgs> action) => 
+    public static T OnTextChanging<T>(this T control, Action<TextChangingEventArgs> action) where T : TextBox => 
         control._setEvent((EventHandler<TextChangingEventArgs>) ((_, args) => action(args)), h => control.TextChanging += h);
 }
 

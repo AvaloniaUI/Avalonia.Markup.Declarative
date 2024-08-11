@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class NotificationCardEventsExtensions
 {
-    public static NotificationCard OnNotificationClosed(this NotificationCard control, Action<RoutedEventArgs> action) => 
+    public static T OnNotificationClosed<T>(this T control, Action<RoutedEventArgs> action) where T : NotificationCard => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.NotificationClosed += h);
 }
 

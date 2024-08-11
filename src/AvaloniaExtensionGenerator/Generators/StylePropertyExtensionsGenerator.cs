@@ -8,11 +8,11 @@ public class StylePropertyExtensionsGenerator
 {
     public string OutputPath { get; set; }
 
-    public IConfig Config { get; set; }
+    public ExtensionGeneratorConfig Config { get; set; }
 
     public ISetterExtensionGenerator[] Generators { get; private set; }
 
-    public StylePropertyExtensionsGenerator(IConfig config, string outputPath, params ISetterExtensionGenerator[] generators)
+    public StylePropertyExtensionsGenerator(ExtensionGeneratorConfig config, string outputPath, params ISetterExtensionGenerator[] generators)
     {
         Config = config;
         OutputPath = outputPath;

@@ -7,11 +7,11 @@ public class EventsExtensionGenerator
 {
     public string OutputPath { get; set; }
 
-    public IConfig Config { get; set; }
+    public ExtensionGeneratorConfig Config { get; set; }
 
     public IEventExtensionGenerator[] Generators { get; private set; }
 
-    public EventsExtensionGenerator(IConfig config, string outputPath, params IEventExtensionGenerator[] generators)
+    public EventsExtensionGenerator(ExtensionGeneratorConfig config, string outputPath, params IEventExtensionGenerator[] generators)
     {
         Config = config;
         OutputPath = outputPath;
@@ -64,7 +64,7 @@ public class EventsExtensionGenerator
             if (Config.Exclude.Contains(controlType))
                 continue;
 
-            var events = controlType.GetEvents().Where(x => x.DeclaringType == controlType && x.EventHandlerType is EventHandler).ToArray();
+            var events = controlType.GetEvents().Where(x => x.DeclaringType == controlType).ToArray();
 
             if (!events.Any())
                 continue;

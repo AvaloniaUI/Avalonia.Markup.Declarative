@@ -11,15 +11,15 @@ namespace Avalonia.Markup.Declarative;
 public static partial class ToggleButtonEventsExtensions
 {
 	[Obsolete("Use IsCheckedChanged instead.")]
-    public static ToggleButton OnChecked(this ToggleButton control, Action<RoutedEventArgs> action) => 
+    public static T OnChecked<T>(this T control, Action<RoutedEventArgs> action) where T : ToggleButton => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Checked += h);
 	[Obsolete("Use IsCheckedChanged instead.")]
-    public static ToggleButton OnUnchecked(this ToggleButton control, Action<RoutedEventArgs> action) => 
+    public static T OnUnchecked<T>(this T control, Action<RoutedEventArgs> action) where T : ToggleButton => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Unchecked += h);
 	[Obsolete("Use IsCheckedChanged instead.")]
-    public static ToggleButton OnIndeterminate(this ToggleButton control, Action<RoutedEventArgs> action) => 
+    public static T OnIndeterminate<T>(this T control, Action<RoutedEventArgs> action) where T : ToggleButton => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Indeterminate += h);
-    public static ToggleButton OnIsCheckedChanged(this ToggleButton control, Action<RoutedEventArgs> action) => 
+    public static T OnIsCheckedChanged<T>(this T control, Action<RoutedEventArgs> action) where T : ToggleButton => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.IsCheckedChanged += h);
 }
 

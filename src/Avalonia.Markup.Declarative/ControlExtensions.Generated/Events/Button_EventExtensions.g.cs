@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ButtonEventsExtensions
 {
-    public static Button OnClick(this Button control, Action<RoutedEventArgs> action) => 
+    public static T OnClick<T>(this T control, Action<RoutedEventArgs> action) where T : Button => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Click += h);
 }
 

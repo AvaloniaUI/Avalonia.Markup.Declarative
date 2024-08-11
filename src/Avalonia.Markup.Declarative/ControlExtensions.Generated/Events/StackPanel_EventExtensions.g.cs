@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class StackPanelEventsExtensions
 {
-    public static StackPanel OnHorizontalSnapPointsChanged(this StackPanel control, Action<RoutedEventArgs> action) => 
+    public static T OnHorizontalSnapPointsChanged<T>(this T control, Action<RoutedEventArgs> action) where T : StackPanel => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.HorizontalSnapPointsChanged += h);
-    public static StackPanel OnVerticalSnapPointsChanged(this StackPanel control, Action<RoutedEventArgs> action) => 
+    public static T OnVerticalSnapPointsChanged<T>(this T control, Action<RoutedEventArgs> action) where T : StackPanel => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.VerticalSnapPointsChanged += h);
 }
 

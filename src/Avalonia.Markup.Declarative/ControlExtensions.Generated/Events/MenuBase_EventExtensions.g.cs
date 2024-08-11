@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class MenuBaseEventsExtensions
 {
-    public static MenuBase OnOpened(this MenuBase control, Action<RoutedEventArgs> action) => 
+    public static T OnOpened<T>(this T control, Action<RoutedEventArgs> action) where T : MenuBase => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Opened += h);
-    public static MenuBase OnClosed(this MenuBase control, Action<RoutedEventArgs> action) => 
+    public static T OnClosed<T>(this T control, Action<RoutedEventArgs> action) where T : MenuBase => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Closed += h);
 }
 

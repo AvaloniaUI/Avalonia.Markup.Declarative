@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ScrollViewerEventsExtensions
 {
-    public static ScrollViewer OnScrollChanged(this ScrollViewer control, Action<ScrollChangedEventArgs> action) => 
+    public static T OnScrollChanged<T>(this T control, Action<ScrollChangedEventArgs> action) where T : ScrollViewer => 
         control._setEvent((EventHandler<ScrollChangedEventArgs>) ((_, args) => action(args)), h => control.ScrollChanged += h);
 }
 

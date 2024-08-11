@@ -48,4 +48,8 @@
 		<None Include="readme.txt" Pack="true" PackagePath="." />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="ControlExtensions.Generated\" />
+	</ItemGroup>
+
 </Project>

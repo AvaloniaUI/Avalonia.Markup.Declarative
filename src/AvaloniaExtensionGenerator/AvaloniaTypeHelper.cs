@@ -1,26 +1,17 @@
 using System.Reflection;
-using Avalonia;
 
 namespace AvaloniaExtensionGenerator;
 
 public static class AvaloniaTypeHelper
 {
-    public static IEnumerable<Type> GetControlTypes(IConfig config)
+    private static Type? _styledElementType;
+
+    public static IEnumerable<Type> GetControlTypes(ExtensionGeneratorConfig config)
     {
-        var baseControlType = typeof(AvaloniaObject);
-
         if (config.TypesToProcess == null)
-        {
             throw new NullReferenceException("List of types is not set");
-        }
-
-        var controlTypes = config.TypesToProcess
-            .Where(p => IsAcceptableControlType(p) && baseControlType.IsAssignableFrom(p))
-            .ToList();
-
-        //controlTypes.AddRange(config.BaseTypes);
-
-        return controlTypes.Distinct();
+        
+        return config.TypesToProcess.Where(IsAcceptableControlType).Distinct();
     }
 
     private static bool IsAcceptableControlType(Type controlType)
@@ -39,9 +30,15 @@ public static class AvaloniaTypeHelper
         foreach (var ns in usedNamespaces)
             namespaces.Add(ns);
     }
+    public static bool IsStyledElement(Type controlType)
+    {
+        _styledElementType ??= AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.ExportedTypes)
+            .FirstOrDefault(x => x.FullName == "Avalonia.StyledElement");
 
+        if (_styledElementType == null)
+            throw new NullReferenceException("Styled element Type can't be loaded");
 
-    public static bool IsStyledElement(Type controlType) => !typeof(Avalonia.StyledElement).IsAssignableFrom(controlType);
-
-    public static Type? GetAvaloniaObjectType() => typeof(Avalonia.AvaloniaObject);
+        return _styledElementType?.IsAssignableFrom(controlType) ?? false;
+    }
+    public static string GetAvaloniaObjectTypeName() => "Avalonia.AvaloniaObject";
 }

@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class DateTimePickerPanelEventsExtensions
 {
-    public static DateTimePickerPanel OnScrollInvalidated(this DateTimePickerPanel control, Action action) => 
+    public static T OnScrollInvalidated<T>(this T control, Action action) where T : DateTimePickerPanel => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.ScrollInvalidated += h);
-    public static DateTimePickerPanel OnSelectionChanged(this DateTimePickerPanel control, Action action) => 
+    public static T OnSelectionChanged<T>(this T control, Action action) where T : DateTimePickerPanel => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.SelectionChanged += h);
 }
 

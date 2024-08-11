@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class TransitioningContentControlEventsExtensions
 {
-    public static TransitioningContentControl OnTransitionCompleted(this TransitioningContentControl control, Action<TransitionCompletedEventArgs> action) => 
+    public static T OnTransitionCompleted<T>(this T control, Action<TransitionCompletedEventArgs> action) where T : TransitioningContentControl => 
         control._setEvent((EventHandler<TransitionCompletedEventArgs>) ((_, args) => action(args)), h => control.TransitionCompleted += h);
 }
 

@@ -9,13 +9,13 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class CalendarDatePickerEventsExtensions
 {
-    public static CalendarDatePicker OnCalendarClosed(this CalendarDatePicker control, Action action) => 
+    public static T OnCalendarClosed<T>(this T control, Action action) where T : CalendarDatePicker => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.CalendarClosed += h);
-    public static CalendarDatePicker OnCalendarOpened(this CalendarDatePicker control, Action action) => 
+    public static T OnCalendarOpened<T>(this T control, Action action) where T : CalendarDatePicker => 
         control._setEvent((EventHandler) ((_, args) => action()), h => control.CalendarOpened += h);
-    public static CalendarDatePicker OnDateValidationError(this CalendarDatePicker control, Action<CalendarDatePickerDateValidationErrorEventArgs> action) => 
+    public static T OnDateValidationError<T>(this T control, Action<CalendarDatePickerDateValidationErrorEventArgs> action) where T : CalendarDatePicker => 
         control._setEvent((EventHandler<CalendarDatePickerDateValidationErrorEventArgs>) ((_, args) => action(args)), h => control.DateValidationError += h);
-    public static CalendarDatePicker OnSelectedDateChanged(this CalendarDatePicker control, Action<SelectionChangedEventArgs> action) => 
+    public static T OnSelectedDateChanged<T>(this T control, Action<SelectionChangedEventArgs> action) where T : CalendarDatePicker => 
         control._setEvent((EventHandler<SelectionChangedEventArgs>) ((_, args) => action(args)), h => control.SelectedDateChanged += h);
 }
 

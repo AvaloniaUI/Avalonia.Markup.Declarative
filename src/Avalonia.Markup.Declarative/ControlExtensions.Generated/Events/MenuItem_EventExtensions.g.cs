@@ -10,13 +10,13 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class MenuItemEventsExtensions
 {
-    public static MenuItem OnClick(this MenuItem control, Action<RoutedEventArgs> action) => 
+    public static T OnClick<T>(this T control, Action<RoutedEventArgs> action) where T : MenuItem => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Click += h);
-    public static MenuItem OnPointerEnteredItem(this MenuItem control, Action<RoutedEventArgs> action) => 
+    public static T OnPointerEnteredItem<T>(this T control, Action<RoutedEventArgs> action) where T : MenuItem => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.PointerEnteredItem += h);
-    public static MenuItem OnPointerExitedItem(this MenuItem control, Action<RoutedEventArgs> action) => 
+    public static T OnPointerExitedItem<T>(this T control, Action<RoutedEventArgs> action) where T : MenuItem => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.PointerExitedItem += h);
-    public static MenuItem OnSubmenuOpened(this MenuItem control, Action<RoutedEventArgs> action) => 
+    public static T OnSubmenuOpened<T>(this T control, Action<RoutedEventArgs> action) where T : MenuItem => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.SubmenuOpened += h);
 }
 

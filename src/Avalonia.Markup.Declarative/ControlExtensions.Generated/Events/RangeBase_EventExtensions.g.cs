@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class RangeBaseEventsExtensions
 {
-    public static RangeBase OnValueChanged(this RangeBase control, Action<RangeBaseValueChangedEventArgs> action) => 
+    public static T OnValueChanged<T>(this T control, Action<RangeBaseValueChangedEventArgs> action) where T : RangeBase => 
         control._setEvent((EventHandler<RangeBaseValueChangedEventArgs>) ((_, args) => action(args)), h => control.ValueChanged += h);
 }
 

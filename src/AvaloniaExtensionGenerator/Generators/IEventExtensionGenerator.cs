@@ -4,6 +4,6 @@ namespace AvaloniaExtensionGenerator.Generators;
 
 public interface IEventExtensionGenerator
 {
-    IConfig Config { set; }
+    ExtensionGeneratorConfig Config { set; }
     string? GetEventExtension(EventInfo @event, out IEnumerable<string> usedNamespaces);
 }

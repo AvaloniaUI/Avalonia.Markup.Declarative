@@ -1,12 +1,10 @@
-using Avalonia.Animation;
-using Avalonia.Controls;
 using System.Reflection;
 
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
 
 public abstract class SetterGeneratorBase : ISetterExtensionGenerator
 {
-    public IConfig Config { get; set; } = null!;
+    public ExtensionGeneratorConfig Config { get; set; } = null!;
 
     public string? GetSetterExtension(FieldInfo field, out IEnumerable<string> usedNamespaces)
     {

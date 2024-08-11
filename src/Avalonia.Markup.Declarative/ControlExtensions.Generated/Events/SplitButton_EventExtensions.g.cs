@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class SplitButtonEventsExtensions
 {
-    public static SplitButton OnClick(this SplitButton control, Action<RoutedEventArgs> action) => 
+    public static T OnClick<T>(this T control, Action<RoutedEventArgs> action) where T : SplitButton => 
         control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.Click += h);
 }
 
