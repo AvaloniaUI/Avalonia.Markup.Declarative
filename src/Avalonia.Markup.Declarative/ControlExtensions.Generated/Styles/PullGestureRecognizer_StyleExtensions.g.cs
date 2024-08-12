@@ -1,0 +1,17 @@
+using Avalonia.Data;
+using Avalonia.Data.Converters;
+using Avalonia.Input;
+using System;
+using System.Linq.Expressions;
+using System.Numerics;
+using System.Runtime.CompilerServices;
+
+namespace Avalonia.Markup.Declarative;
+public static partial class PullGestureRecognizerExtensions
+{
+public static Style<T> PullDirection<T>(this Style<T> style, PullDirection value) where T : PullGestureRecognizer
+=> style._addSetter(PullGestureRecognizer.PullDirectionProperty, value);
+public static Style<T> PullDirection<T>(this Style<T> style, IBinding binding) where T : PullGestureRecognizer
+=> style._addSetter(PullGestureRecognizer.PullDirectionProperty, binding);
+}
+
