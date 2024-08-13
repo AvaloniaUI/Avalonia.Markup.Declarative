@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Text;
 using static AvaloniaExtensionGenerator.AvaloniaTypeHelper;
 
@@ -69,7 +68,7 @@ public class StylePropertyExtensionsGenerator
             if (Config.Exclude.Contains(controlType))
                 continue;
 
-            var fields = controlType.GetFields().Where(IsAcceptableField).ToArray();
+            var fields = controlType.GetFields().Where(IsAcceptableStyledField).ToArray();
 
             if (!fields.Any())
                 continue;
@@ -98,33 +97,5 @@ public class StylePropertyExtensionsGenerator
             sb.AppendLine("}");
         }
         return sb.ToString();
-    }
-
-    private static bool IsAcceptableField(FieldInfo field)
-    {
-        if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
-            return false;
-
-        if (field.FieldType.Name.StartsWith("DirectProperty") ||
-            field.FieldType.Name.StartsWith("StyledProperty") ||
-            field.FieldType.Name.StartsWith("AttachedProperty"))
-        {
-            return !IsReadOnlyField(field);
-        }
-        return false;
-    }
-
-    public static bool IsReadOnlyField(FieldInfo field)
-    {
-        var controlType = field.DeclaringType;
-        var extensionName = field.Name.Replace("Property", "");
-        var propertyName = field.Name.Replace("Property", "");
-
-        var propInfo = controlType?.GetProperty(propertyName);
-        if (propInfo != null)
-        {
-            return propInfo.GetSetMethod() == null && propInfo.CanRead;
-        }
-        return true;
     }
 }

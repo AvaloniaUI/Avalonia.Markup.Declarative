@@ -140,6 +140,13 @@ namespace AvaloniaExtensionGenerator
 
             foreach (var package in packages)
             {
+                if (package.Name == "Avalonia.Markup.Declarative")
+                    continue;
+
+                var dependencyPackages = await GetAllDependencyPackages(package.Name, package.Version, targetFramework);
+                //skip all packages that not depend on Avalonia => can't contain Avalonia Controls
+                if (!dependencyPackages.Any(x => x.StartsWith("Avalonia,")))
+                    continue;
                 Console.WriteLine($"{package.Name} {package.Version}");
 
                 // Load the main package's assemblies
@@ -151,16 +158,13 @@ namespace AvaloniaExtensionGenerator
                 {
                     foreach (var dll in Directory.GetFiles(frameworkPath, "*.dll", SearchOption.AllDirectories))
                     {
+                        TryLoadAssembly(dll, loadedAssembliesCache, out var assembly);
+                        await LoadDependencyAssemblies(package, targetFramework, userProfile, loadedAssembliesCache);
+
                         try
                         {
-                            TryLoadAssembly(dll, loadedAssembliesCache, out var assembly);
-
-                            await LoadDependencyAssemblies(package, targetFramework, userProfile, loadedAssembliesCache);
-
                             if (ignoreAssemblies.Contains(assembly.GetName().Name))
-                            {
                                 Console.WriteLine($"Skipping base assembly, {assembly.GetName().Name}");
-                            }
                             else
                             {
                                 //initialize filter type only after loading assembly dependencies
@@ -177,8 +181,7 @@ namespace AvaloniaExtensionGenerator
                         }
                         catch (Exception ex)
                         {
-                            if (!ex.Message.StartsWith("Assembly with same name is already loaded"))
-                                Console.WriteLine($"Failed to get types from assembly {dll}: {ex.Message}");
+                            Console.WriteLine($"Failed to get types from assembly {dll}: {ex.Message}");
                         }
                     }
                 }
@@ -193,15 +196,32 @@ namespace AvaloniaExtensionGenerator
         {
             asm = null;
 
-            if (!loadedAssembliesCache.TryGetValue(dll, out var assembly))
+            try
             {
-                assembly = Assembly.LoadFrom(dll);
-                loadedAssembliesCache[dll] = assembly;
-                Console.WriteLine($"-{assembly.GetName().Name}");
+
+                if (!loadedAssembliesCache.TryGetValue(dll, out var assembly))
+                {
+                    assembly = Assembly.LoadFrom(dll);
+                    loadedAssembliesCache[dll] = assembly;
+                    Console.WriteLine($"-{assembly.GetName().Name}");
+                }
+
+                asm = assembly;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                if (!ex.Message.StartsWith("Assembly with same name is already loaded"))
+                    Console.WriteLine($"Failed to load assembly {dll}: {ex.Message}");
+                else
+                {
+                    var assembly = Assembly.LoadFile(dll);
+                    loadedAssembliesCache[dll] = assembly;
+                    asm = assembly;
+                }
             }
 
-            asm = assembly;
-            return true;
+            return false;
         }
 
         private static async Task LoadDependencyAssemblies(PackageReference package, string targetFramework,
@@ -220,20 +240,8 @@ namespace AvaloniaExtensionGenerator
                         Path.Combine(userProfile, ".nuget", "packages", depName.ToLower(), depVersion);
 
                     if (TryToFindFrameworkPath(Path.Combine(depPackagePath, "lib"), targetFramework, out var depFrameworkPath))
-                    {
                         foreach (var dll in Directory.GetFiles(depFrameworkPath, "*.dll", SearchOption.AllDirectories))
-                        {
-                            try
-                            {
-                                TryLoadAssembly(dll, loadedAssembliesCache, out _);
-                            }
-                            catch (Exception ex)
-                            {
-                                if (!ex.Message.StartsWith("Assembly with same name is already loaded"))
-                                    Console.WriteLine($"Failed to load dependency assembly {dll}: {ex.Message}");
-                            }
-                        }
-                    }
+                            TryLoadAssembly(dll, loadedAssembliesCache, out _);
                 }
             }
         }

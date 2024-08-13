@@ -79,7 +79,7 @@ internal class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred: {ex.Message}");
+            Console.WriteLine($"An error occurred: {ex.Message}\n{ex.StackTrace}");
         }
     }
 
