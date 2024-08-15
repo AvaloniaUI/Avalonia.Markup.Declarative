@@ -11,12 +11,6 @@
   <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
     <PublishAot>true</PublishAot>
   </PropertyGroup>
-  <ItemGroup>
-    <AvaloniaXaml Remove="ControlExtensions.Generated\Events\**" />
-    <Compile Remove="ControlExtensions.Generated\Events\**" />
-    <EmbeddedResource Remove="ControlExtensions.Generated\Events\**" />
-    <None Remove="ControlExtensions.Generated\Events\**" />
-  </ItemGroup>
 	<ItemGroup>
 		<None Remove=".gitignore" />
 	</ItemGroup>
@@ -52,9 +46,5 @@
 		<Using Include="Avalonia.Themes.Fluent" />
 		<Using Include="Avalonia.Layout" />
 		<Using Include="Avalonia.Media" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ControlExtensions.Generated\" />
 	</ItemGroup>
 </Project>

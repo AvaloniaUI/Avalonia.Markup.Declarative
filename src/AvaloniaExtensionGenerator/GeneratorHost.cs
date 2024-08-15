@@ -40,7 +40,8 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
     {
         var outputPath = Path.Combine(projectDirPath, "ControlExtensions.Generated");
 
-        Directory.Delete(outputPath, true);
+        if(Directory.Exists(outputPath))
+            Directory.Delete(outputPath, true);
 
         var config = new ExtensionGeneratorConfig(outputPath)
         {
