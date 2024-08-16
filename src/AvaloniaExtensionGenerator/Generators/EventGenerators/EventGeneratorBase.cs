@@ -42,13 +42,13 @@ public abstract class EventGeneratorBase : IEventExtensionGenerator
 
         var hasConflictingNamespace = namespaces.Any(x => x.EndsWith(result));
 
-        //handle cases when Type is equal namespace name, i.e.
+        //todo: handle cases when Type is equal namespace name, i.e.
         //Avalonia.Controls.Calendar
         //ContextMenu
         //Animation
         //Dock
 
-        if (hasConflictingNamespace)
+        if (!string.IsNullOrWhiteSpace(valueType.Namespace))
         {
             result = valueType.Namespace + "." + result;
         }

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 
 namespace AvaloniaExtensionGenerator;
@@ -90,4 +91,18 @@ public static class AvaloniaTypeHelper
         return _styledElementType?.IsAssignableFrom(controlType) ?? false;
     }
     public static string GetAvaloniaObjectTypeName() => "Avalonia.AvaloniaObject";
+
+    public static bool HasPublicTypesWithSameName(Type type)
+    {
+        if (type.Name == "DatePicker")
+        {
+            //Debugger.Break();
+        }
+        Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+        return assemblies
+            .Where(assembly => type.Assembly != assembly)
+            .Any(assembly => assembly.GetType(type.Name, false) != null);
+    }
+
 }

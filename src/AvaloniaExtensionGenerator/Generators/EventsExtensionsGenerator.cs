@@ -90,6 +90,9 @@ public class EventsExtensionGenerator
                 }
             }
 
+            //add control fullname binding to avoid conflicts
+            namespaces.Add($"{controlType.Name} = {controlType.FullName}");
+
             sb.AppendLine("}");
         }
         return sb.ToString();

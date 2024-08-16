@@ -98,7 +98,11 @@ public class PropertyExtensionsGenerator
             }
 
             sb.AppendLine("}");
+
+            //add control fullname binding to avoid conflicts
+            namespaces.Add($"{controlType.Name} = {controlType.FullName}");
         }
+
         return sb.ToString();
     }
 }

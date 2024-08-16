@@ -92,6 +92,9 @@ public class StylePropertyExtensionsGenerator
 
                     sb.AppendLine(setterExtension);
                 }
+
+                //add control fullname binding to avoid conflicts
+                namespaces.Add($"{controlType.Name} = {controlType.FullName}");
             }
 
             sb.AppendLine("}");

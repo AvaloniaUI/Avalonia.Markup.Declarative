@@ -30,7 +30,7 @@ public class ActionToEventGenerator : EventGeneratorBase
 
         var eventName = @event.EventName;
         var extensionName = "On" + eventName;
-        var controlTypeName = @event.ControlType.Name;
+        var controlTypeName = @event.ControlType.FullName;
 
         var extensionText =
             $"    public static {controlTypeName} {extensionName}"
