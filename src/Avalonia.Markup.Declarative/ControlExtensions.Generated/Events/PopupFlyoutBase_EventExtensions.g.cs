@@ -1,6 +1,7 @@
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
+using PopupFlyoutBase = Avalonia.Controls.Primitives.PopupFlyoutBase;
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
@@ -10,9 +11,9 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class PopupFlyoutBaseEventsExtensions
 {
-    public static T OnClosing<T>(this T control, Action<CancelEventArgs> action) where T : PopupFlyoutBase => 
-        control._setEvent((EventHandler<CancelEventArgs>) ((_, args) => action(args)), h => control.Closing += h);
-    public static T OnOpening<T>(this T control, Action action) where T : PopupFlyoutBase => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.Opening += h);
+    public static T OnClosing<T>(this T control, Action<System.ComponentModel.CancelEventArgs> action) where T : Avalonia.Controls.Primitives.PopupFlyoutBase => 
+        control._setEvent((System.EventHandler<System.ComponentModel.CancelEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Closing += h);
+    public static T OnOpening<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.Controls.Primitives.PopupFlyoutBase => 
+        control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.Opening += h);
 }
 

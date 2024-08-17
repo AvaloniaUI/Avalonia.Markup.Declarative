@@ -5,16 +5,13 @@ namespace AvaloniaExtensionGenerator.Generators;
 
 public class StylePropertyExtensionsGenerator
 {
-    public string OutputPath { get; set; }
-
     public ExtensionGeneratorConfig Config { get; set; }
 
     public ISetterExtensionGenerator[] Generators { get; private set; }
 
-    public StylePropertyExtensionsGenerator(ExtensionGeneratorConfig config, string outputPath, params ISetterExtensionGenerator[] generators)
+    public StylePropertyExtensionsGenerator(ExtensionGeneratorConfig config, params ISetterExtensionGenerator[] generators)
     {
         Config = config;
-        OutputPath = outputPath;
         Generators = generators;
 
         foreach (var generator in Generators)
@@ -43,7 +40,7 @@ public class StylePropertyExtensionsGenerator
             sb.AppendLine("namespace Avalonia.Markup.Declarative;");
             sb.AppendLine(extensionClassesString);
 
-            var dirPath = Path.Combine(Path.GetDirectoryName(OutputPath), "Styles");
+            var dirPath = Path.Combine(Config.OutputPath, "Styles");
 
             if (!Directory.Exists(dirPath))
                 Directory.CreateDirectory(dirPath);

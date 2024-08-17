@@ -6,16 +6,13 @@ namespace AvaloniaExtensionGenerator.Generators;
 
 public class PropertyExtensionsGenerator
 {
-    public string OutputPath { get; set; }
-
     public ExtensionGeneratorConfig Config { get; set; }
 
     public ISetterExtensionGenerator[] Generators { get; private set; }
 
-    public PropertyExtensionsGenerator(ExtensionGeneratorConfig config, string outputPath, params ISetterExtensionGenerator[] generators)
+    public PropertyExtensionsGenerator(ExtensionGeneratorConfig config, params ISetterExtensionGenerator[] generators)
     {
         Config = config;
-        OutputPath = outputPath;
         Generators = generators;
 
         foreach (var generator in Generators)
@@ -47,7 +44,7 @@ public class PropertyExtensionsGenerator
             sb.AppendLine("namespace Avalonia.Markup.Declarative;");
             sb.AppendLine(extensionClassesString);
 
-            var dirPath = Path.Combine(Path.GetDirectoryName(OutputPath), "Properties");
+            var dirPath = Path.Combine(Config.OutputPath, "Properties");
 
             if (!Directory.Exists(dirPath))
                 Directory.CreateDirectory(dirPath);

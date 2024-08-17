@@ -40,6 +40,7 @@ namespace AvaloniaExtensionGenerator
 
         private static async Task RestoreNuGetPackages(string projectPath)
         {
+            Console.WriteLine($"Restoring nuget packages for project: {projectPath}");
             var processStartInfo = new ProcessStartInfo
             {
                 FileName = "dotnet",

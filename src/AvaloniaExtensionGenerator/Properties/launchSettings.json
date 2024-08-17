@@ -11,6 +11,10 @@
     "ExternalLibraryBuilderKubeUI": {
       "commandName": "Project",
       "commandLineArgs": "--projectPath=C:\\Users\\igor\\Downloads\\KubeUI-alpha\\KubeUI-alpha\\src\\KubeUI\\KubeUI.csproj"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
     }
   }
 }

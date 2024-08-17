@@ -1,6 +1,6 @@
 ﻿namespace AvaloniaExtensionGenerator;
 
-public class ExtensionGeneratorConfig(string basePath)
+public class ExtensionGeneratorConfig(string outputPath)
 {
     public required Type[] TypesToProcess { get; init; }
 
@@ -14,5 +14,5 @@ public class ExtensionGeneratorConfig(string basePath)
     /// </summary>
     public Type[] Exclude { get; init; } = [];
 
-    public string BasePath { get; set; } = basePath;
+    public string OutputPath { get; set; } = outputPath;
 }

@@ -28,6 +28,12 @@ public class ActionToEventGenerator : EventGeneratorBase
             lambdaParameters = "args";
         }
 
+        if (@event.HasStandardSignature)
+        {
+            argsString = $"Action<{string.Join(", ", eventParameterTypes.Skip(1))}> action";
+            actionCallStr = actionCallStr.Replace("arg0, ", "");
+        }
+
         var eventName = @event.EventName;
         var extensionName = "On" + eventName;
         var controlTypeName = @event.ControlType.FullName;

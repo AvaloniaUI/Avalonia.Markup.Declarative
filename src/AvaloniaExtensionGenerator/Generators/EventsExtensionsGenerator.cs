@@ -5,16 +5,13 @@ namespace AvaloniaExtensionGenerator.Generators;
 
 public class EventsExtensionGenerator
 {
-    public string OutputPath { get; set; }
-
     public ExtensionGeneratorConfig Config { get; set; }
 
     public IEventExtensionGenerator[] Generators { get; private set; }
 
-    public EventsExtensionGenerator(ExtensionGeneratorConfig config, string outputPath, params IEventExtensionGenerator[] generators)
+    public EventsExtensionGenerator(ExtensionGeneratorConfig config, params IEventExtensionGenerator[] generators)
     {
         Config = config;
-        OutputPath = outputPath;
         Generators = generators;
 
         foreach (var generator in Generators)
@@ -42,7 +39,7 @@ public class EventsExtensionGenerator
             sb.AppendLine("namespace Avalonia.Markup.Declarative;");
             sb.AppendLine(extensionClassesString);
 
-            var dirPath = Path.Combine(Path.GetDirectoryName(OutputPath), "Events");
+            var dirPath = Path.Combine(Config.OutputPath, "Events");
 
             if (!Directory.Exists(dirPath))
                 Directory.CreateDirectory(dirPath);

@@ -40,7 +40,7 @@ public class EventExtensionInfo
     }
 
     public bool HasStandardSignature =>
-        EventParameterTypes.Count == 2 && EventParameterTypes[0] == "object" &&
+        EventParameterTypes.Count == 2 && EventParameterTypes[0] == "System.Object" &&
         EventParameterTypes[1].EndsWith("EventArgs");
 
     public bool HasSingleParameter => EventParameterTypes.Count == 1;

@@ -47,7 +47,7 @@ public class SimpleComponent() : ComponentBase
 						new TextBlock()
 							.Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"), //expression binding with dynamic string result
 						new NumericUpDown()
-							.Value(() => Counter, onChanged: v => Counter = v), //two-side binding sample
+							.Value(() => Counter, onChanged: v => Counter = v), //two-way binding sample
 						new Button()
 							.HorizontalAlignment(HorizontalAlignment.Center)
 							.Content("Click me")

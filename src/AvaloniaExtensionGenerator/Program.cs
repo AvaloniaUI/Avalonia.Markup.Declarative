@@ -67,11 +67,13 @@ internal class Program
 
         try
         {
+            var projectDirPath = Path.GetDirectoryName(projectPath);
+            var outputPath = Path.Combine(projectDirPath, "ControlExtensions.Generated");
+
             var types = await CsProjectTypesExtractor
                 .LoadTypesFromProject(projectPath, AvaloniaTypeHelper.GetAvaloniaObjectTypeName(), ignoreAssemblies);
 
-            var projectDirPath = Path.GetDirectoryName(projectPath);
-            var extensionsOutputPath = GeneratorHost.RunControlTypeGenerators(types, projectDirPath);
+            var extensionsOutputPath = GeneratorHost.RunControlTypeGenerators(types, outputPath);
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine($"Written extensions into folder: {extensionsOutputPath}");

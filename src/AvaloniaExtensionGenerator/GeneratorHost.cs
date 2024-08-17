@@ -9,16 +9,16 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
 {
     public void GenerateExtensions()
     {
-        if (!Directory.Exists(config.BasePath))
+        if (!Directory.Exists(config.OutputPath))
         {
-            Directory.CreateDirectory(config.BasePath);
+            Directory.CreateDirectory(config.OutputPath);
         }
 
-        new EventsExtensionGenerator(config, $@"{config.BasePath}\ControlEventExtensions.g.cs",
+        new EventsExtensionGenerator(config,
             new ActionToEventGenerator()
             ).Generate();
 
-        new PropertyExtensionsGenerator(config, $@"{config.BasePath}\ControlPropertyExtensions.g.cs",
+        new PropertyExtensionsGenerator(config,
             // new ValueSetterGenerator(),
             new BindSetterGenerator(),
             new AvaloniaPropertyBindSetterGenerator(),
@@ -28,7 +28,7 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
             new ValueOverloadsSetterGenerator()
             ).Generate();
 
-        new StylePropertyExtensionsGenerator(config, $@"{config.BasePath}\StylePropertyExtensions.g.cs",
+        new StylePropertyExtensionsGenerator(config,
             new ValueStyleSetterGenerator(),
             new BindingStyleSetterGenerator(),
             new ValueOverloadsStyleSetterGenerator()
@@ -36,10 +36,8 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
 
     }
     
-    internal static string RunControlTypeGenerators(IReadOnlyList<Type> types, string projectDirPath)
+    internal static string RunControlTypeGenerators(IReadOnlyList<Type> types, string outputPath)
     {
-        var outputPath = Path.Combine(projectDirPath, "ControlExtensions.Generated");
-
         if(Directory.Exists(outputPath))
             Directory.Delete(outputPath, true);
 
