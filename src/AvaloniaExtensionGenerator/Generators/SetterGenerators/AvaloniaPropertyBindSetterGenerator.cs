@@ -10,7 +10,7 @@ public class AvaloniaPropertyBindSetterGenerator : SetterGeneratorBase
             $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, avaloniaProperty, bindingMode, converter, overrideView);";
 
         //base type generic acess
-        if (Config.BaseTypes.Contains(info.ControlType))
+        if (info.CanBeGenericConstraint)
         {
             extensionText =
                 $"public static T {info.ExtensionName}<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : {info.ControlTypeName}{Environment.NewLine}" +

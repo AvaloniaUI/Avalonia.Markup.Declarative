@@ -6,17 +6,18 @@ using System;
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using TopLevel = Avalonia.Controls.TopLevel;
 
 namespace Avalonia.Markup.Declarative;
 public static partial class TopLevelEventsExtensions
 {
-    public static TopLevel OnOpened(this TopLevel control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.Opened += h);
-    public static TopLevel OnClosed(this TopLevel control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.Closed += h);
-    public static TopLevel OnScalingChanged(this TopLevel control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.ScalingChanged += h);
-    public static TopLevel OnBackRequested(this TopLevel control, Action<RoutedEventArgs> action) => 
-        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.BackRequested += h);
+    public static T OnOpened<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.Controls.TopLevel => 
+        control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.Opened += h);
+    public static T OnClosed<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.Controls.TopLevel => 
+        control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.Closed += h);
+    public static T OnScalingChanged<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.Controls.TopLevel => 
+        control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.ScalingChanged += h);
+    public static T OnBackRequested<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.TopLevel => 
+        control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.BackRequested += h);
 }
 

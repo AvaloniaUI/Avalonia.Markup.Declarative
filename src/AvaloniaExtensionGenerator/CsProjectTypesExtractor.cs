@@ -2,12 +2,10 @@
 using NuGet.Configuration;
 using NuGet.Frameworks;
 using NuGet.Packaging.Core;
-using NuGet.Protocol;
 using NuGet.Protocol.Core.Types;
 using NuGet.Versioning;
 using System.Diagnostics;
 using System.Reflection;
-using System.Security.AccessControl;
 using System.Xml.Linq;
 
 namespace AvaloniaExtensionGenerator
@@ -42,6 +40,7 @@ namespace AvaloniaExtensionGenerator
 
         private static async Task RestoreNuGetPackages(string projectPath)
         {
+            Console.WriteLine($"Restoring nuget packages for project: {projectPath}");
             var processStartInfo = new ProcessStartInfo
             {
                 FileName = "dotnet",
@@ -57,7 +56,7 @@ namespace AvaloniaExtensionGenerator
             string output = await process.StandardOutput.ReadToEndAsync();
             string error = await process.StandardError.ReadToEndAsync();
 
-            process.WaitForExit();
+            await process.WaitForExitAsync();
 
             if (process.ExitCode != 0)
             {
@@ -125,7 +124,10 @@ namespace AvaloniaExtensionGenerator
             public string Version { get; init; } = null!;
         }
 
-        public static async Task<IReadOnlyList<Type>> LoadTypesFromProject(string projectPath, Type? baseTypeToFilter = default)
+        public static async Task<IReadOnlyList<Type>> LoadTypesFromProject(
+            string projectPath,
+            string baseTypeNameToFilter,
+            string[] ignoreAssemblies)
         {
             string targetFramework = GetTargetFramework(projectPath);
             await RestoreNuGetPackages(projectPath);
@@ -133,10 +135,19 @@ namespace AvaloniaExtensionGenerator
             Console.WriteLine("Packages found in the .csproj file:");
             Dictionary<string, Assembly> loadedAssembliesCache = new();
 
+            Type? filterBaseType = null;
+
             var result = new List<Type>();
 
             foreach (var package in packages)
             {
+                if (package.Name == "Avalonia.Markup.Declarative")
+                    continue;
+
+                var dependencyPackages = await GetAllDependencyPackages(package.Name, package.Version, targetFramework);
+                //skip all packages that not depend on Avalonia => can't contain Avalonia Controls
+                if (!dependencyPackages.Any(x => x.StartsWith("Avalonia,")))
+                    continue;
                 Console.WriteLine($"{package.Name} {package.Version}");
 
                 // Load the main package's assemblies
@@ -148,22 +159,26 @@ namespace AvaloniaExtensionGenerator
                 {
                     foreach (var dll in Directory.GetFiles(frameworkPath, "*.dll", SearchOption.AllDirectories))
                     {
+                        TryLoadAssembly(dll, loadedAssembliesCache, out var assembly);
+                        await LoadDependencyAssemblies(package, targetFramework, userProfile, loadedAssembliesCache);
+
                         try
                         {
-                            if (!loadedAssembliesCache.TryGetValue(dll, out var assembly))
+                            if (ignoreAssemblies.Contains(assembly.GetName().Name))
+                                Console.WriteLine($"Skipping base assembly, {assembly.GetName().Name}");
+                            else
                             {
-                                assembly = Assembly.LoadFrom(dll);
-                                loadedAssembliesCache[dll] = assembly;
+                                //initialize filter type only after loading assembly dependencies
+                                filterBaseType ??= loadedAssembliesCache.Values
+                                    .SelectMany(x => x.ExportedTypes)
+                                    .FirstOrDefault(x => x.FullName == baseTypeNameToFilter);
+
+                                if (filterBaseType != null)
+                                {
+                                    var types = assembly.ExportedTypes.Where(filterBaseType.IsAssignableFrom).ToArray();
+                                    result.AddRange(types);
+                                }
                             }
-                            
-                            await LoadDependencyAssemblies(package, targetFramework, userProfile, loadedAssembliesCache);
-
-                            var types = assembly.GetTypes();
-
-                            if (baseTypeToFilter != default)
-                                types = types.Where(baseTypeToFilter.IsAssignableFrom).ToArray();
-
-                            result.AddRange(types);
                         }
                         catch (Exception ex)
                         {
@@ -175,6 +190,39 @@ namespace AvaloniaExtensionGenerator
             }
 
             return result;
+        }
+
+        private static bool TryLoadAssembly(string dll, Dictionary<string, Assembly> loadedAssembliesCache,
+            out Assembly asm)
+        {
+            asm = null;
+
+            try
+            {
+
+                if (!loadedAssembliesCache.TryGetValue(dll, out var assembly))
+                {
+                    assembly = Assembly.LoadFrom(dll);
+                    loadedAssembliesCache[dll] = assembly;
+                    Console.WriteLine($"-{assembly.GetName().Name}");
+                }
+
+                asm = assembly;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                if (!ex.Message.StartsWith("Assembly with same name is already loaded"))
+                    Console.WriteLine($"Failed to load assembly {dll}: {ex.Message}");
+                else
+                {
+                    var assembly = Assembly.LoadFile(dll);
+                    loadedAssembliesCache[dll] = assembly;
+                    asm = assembly;
+                }
+            }
+
+            return false;
         }
 
         private static async Task LoadDependencyAssemblies(PackageReference package, string targetFramework,
@@ -193,23 +241,8 @@ namespace AvaloniaExtensionGenerator
                         Path.Combine(userProfile, ".nuget", "packages", depName.ToLower(), depVersion);
 
                     if (TryToFindFrameworkPath(Path.Combine(depPackagePath, "lib"), targetFramework, out var depFrameworkPath))
-                    {
                         foreach (var dll in Directory.GetFiles(depFrameworkPath, "*.dll", SearchOption.AllDirectories))
-                        {
-                            try
-                            {
-                                if (!loadedAssembliesCache.TryGetValue(dll, out var assembly))
-                                {
-                                    assembly = Assembly.LoadFrom(dll);
-                                    loadedAssembliesCache[dll] = assembly;
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine($"Failed to load assembly {dll}: {ex.Message}");
-                            }
-                        }
-                    }
+                            TryLoadAssembly(dll, loadedAssembliesCache, out _);
                 }
             }
         }

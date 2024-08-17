@@ -11,7 +11,7 @@ public class ValueSetterGenerator : SetterGeneratorBase
             + getSetterBody();
 
         //base type generic acess
-        if (Config.BaseTypes.Contains(info.ControlType))
+        if (info.CanBeGenericConstraint)
         {
             extensionText =
                 $"public static T {info.ExtensionName}<T>(this T control, {info.ValueTypeSource} value)"

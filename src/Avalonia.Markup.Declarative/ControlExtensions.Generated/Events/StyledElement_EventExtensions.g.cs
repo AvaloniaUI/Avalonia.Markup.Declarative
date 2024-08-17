@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.LogicalTree;
+using StyledElement = Avalonia.StyledElement;
 using System;
 using System.Linq.Expressions;
 using System.Numerics;
@@ -11,17 +12,17 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class StyledElementEventsExtensions
 {
-    public static StyledElement OnAttachedToLogicalTree(this StyledElement control, Action<LogicalTreeAttachmentEventArgs> action) => 
-        control._setEvent((EventHandler<LogicalTreeAttachmentEventArgs>) ((_, args) => action(args)), h => control.AttachedToLogicalTree += h);
-    public static StyledElement OnDetachedFromLogicalTree(this StyledElement control, Action<LogicalTreeAttachmentEventArgs> action) => 
-        control._setEvent((EventHandler<LogicalTreeAttachmentEventArgs>) ((_, args) => action(args)), h => control.DetachedFromLogicalTree += h);
-    public static StyledElement OnDataContextChanged(this StyledElement control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.DataContextChanged += h);
-    public static StyledElement OnInitialized(this StyledElement control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.Initialized += h);
-    public static StyledElement OnResourcesChanged(this StyledElement control, Action<ResourcesChangedEventArgs> action) => 
-        control._setEvent((EventHandler<ResourcesChangedEventArgs>) ((_, args) => action(args)), h => control.ResourcesChanged += h);
-    public static StyledElement OnActualThemeVariantChanged(this StyledElement control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.ActualThemeVariantChanged += h);
+    public static T OnAttachedToLogicalTree<T>(this T control, Action<Avalonia.LogicalTree.LogicalTreeAttachmentEventArgs> action) where T : Avalonia.StyledElement => 
+        control._setEvent((System.EventHandler<Avalonia.LogicalTree.LogicalTreeAttachmentEventArgs>) ((arg0, arg1) => action(arg1)), h => control.AttachedToLogicalTree += h);
+    public static T OnDetachedFromLogicalTree<T>(this T control, Action<Avalonia.LogicalTree.LogicalTreeAttachmentEventArgs> action) where T : Avalonia.StyledElement => 
+        control._setEvent((System.EventHandler<Avalonia.LogicalTree.LogicalTreeAttachmentEventArgs>) ((arg0, arg1) => action(arg1)), h => control.DetachedFromLogicalTree += h);
+    public static T OnDataContextChanged<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.StyledElement => 
+        control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.DataContextChanged += h);
+    public static T OnInitialized<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.StyledElement => 
+        control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.Initialized += h);
+    public static T OnResourcesChanged<T>(this T control, Action<Avalonia.Controls.ResourcesChangedEventArgs> action) where T : Avalonia.StyledElement => 
+        control._setEvent((System.EventHandler<Avalonia.Controls.ResourcesChangedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.ResourcesChanged += h);
+    public static T OnActualThemeVariantChanged<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.StyledElement => 
+        control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.ActualThemeVariantChanged += h);
 }
 

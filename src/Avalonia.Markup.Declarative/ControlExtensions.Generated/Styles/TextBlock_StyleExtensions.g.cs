@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Documents;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
@@ -8,96 +7,61 @@ using System;
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using TextBlock = Avalonia.Controls.TextBlock;
 
 namespace Avalonia.Markup.Declarative;
 public static partial class TextBlockExtensions
 {
-public static Style<TextBlock> Background(this Style<TextBlock> style, IBrush value)
-=> style._addSetter(TextBlock.BackgroundProperty, value);
-public static Style<TextBlock> Background(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.BackgroundProperty, binding);
-public static Style<TextBlock> Padding(this Style<TextBlock> style, Thickness value)
-=> style._addSetter(TextBlock.PaddingProperty, value);
-public static Style<TextBlock> Padding(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.PaddingProperty, binding);
+public static Style<T> Background<T>(this Style<T> style, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.BackgroundProperty, value);
+public static Style<T> Background<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.BackgroundProperty, binding);
+public static Style<T> Padding<T>(this Style<T> style, Avalonia.Thickness value) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.PaddingProperty, value);
+public static Style<T> Padding<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.PaddingProperty, binding);
 
-public static Style<TextBlock> Padding(this Style<TextBlock> style, Double uniformLength)
-   => style._addSetter(TextBlock.PaddingProperty, new Thickness(uniformLength));
-public static Style<TextBlock> Padding(this Style<TextBlock> style, Double horizontal, Double vertical)
-   => style._addSetter(TextBlock.PaddingProperty, new Thickness(horizontal, vertical));
-public static Style<TextBlock> Padding(this Style<TextBlock> style, Double left, Double top, Double right, Double bottom)
-   => style._addSetter(TextBlock.PaddingProperty, new Thickness(left, top, right, bottom));
-public static Style<TextBlock> FontFamily(this Style<TextBlock> style, FontFamily value)
-=> style._addSetter(TextBlock.FontFamilyProperty, value);
-public static Style<TextBlock> FontFamily(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.FontFamilyProperty, binding);
-public static Style<TextBlock> FontSize(this Style<TextBlock> style, Double value)
-=> style._addSetter(TextBlock.FontSizeProperty, value);
-public static Style<TextBlock> FontSize(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.FontSizeProperty, binding);
-public static Style<TextBlock> FontStyle(this Style<TextBlock> style, FontStyle value)
-=> style._addSetter(TextBlock.FontStyleProperty, value);
-public static Style<TextBlock> FontStyle(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.FontStyleProperty, binding);
-public static Style<TextBlock> FontWeight(this Style<TextBlock> style, FontWeight value)
-=> style._addSetter(TextBlock.FontWeightProperty, value);
-public static Style<TextBlock> FontWeight(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.FontWeightProperty, binding);
-public static Style<TextBlock> FontStretch(this Style<TextBlock> style, FontStretch value)
-=> style._addSetter(TextBlock.FontStretchProperty, value);
-public static Style<TextBlock> FontStretch(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.FontStretchProperty, binding);
-public static Style<TextBlock> Foreground(this Style<TextBlock> style, IBrush value)
-=> style._addSetter(TextBlock.ForegroundProperty, value);
-public static Style<TextBlock> Foreground(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.ForegroundProperty, binding);
-public static Style<TextBlock> BaselineOffset(this Style<TextBlock> style, Double value)
-=> style._addSetter(TextBlock.BaselineOffsetProperty, value);
-public static Style<TextBlock> BaselineOffset(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.BaselineOffsetProperty, binding);
-public static Style<TextBlock> LineHeight(this Style<TextBlock> style, Double value)
-=> style._addSetter(TextBlock.LineHeightProperty, value);
-public static Style<TextBlock> LineHeight(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.LineHeightProperty, binding);
-public static Style<TextBlock> LineSpacing(this Style<TextBlock> style, Double value)
-=> style._addSetter(TextBlock.LineSpacingProperty, value);
-public static Style<TextBlock> LineSpacing(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.LineSpacingProperty, binding);
-public static Style<TextBlock> LetterSpacing(this Style<TextBlock> style, Double value)
-=> style._addSetter(TextBlock.LetterSpacingProperty, value);
-public static Style<TextBlock> LetterSpacing(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.LetterSpacingProperty, binding);
-public static Style<TextBlock> MaxLines(this Style<TextBlock> style, Int32 value)
-=> style._addSetter(TextBlock.MaxLinesProperty, value);
-public static Style<TextBlock> MaxLines(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.MaxLinesProperty, binding);
-public static Style<TextBlock> Text(this Style<TextBlock> style, String value)
-=> style._addSetter(TextBlock.TextProperty, value);
-public static Style<TextBlock> Text(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.TextProperty, binding);
-public static Style<TextBlock> TextAlignment(this Style<TextBlock> style, TextAlignment value)
-=> style._addSetter(TextBlock.TextAlignmentProperty, value);
-public static Style<TextBlock> TextAlignment(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.TextAlignmentProperty, binding);
-public static Style<TextBlock> TextWrapping(this Style<TextBlock> style, TextWrapping value)
-=> style._addSetter(TextBlock.TextWrappingProperty, value);
-public static Style<TextBlock> TextWrapping(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.TextWrappingProperty, binding);
-public static Style<TextBlock> TextTrimming(this Style<TextBlock> style, TextTrimming value)
-=> style._addSetter(TextBlock.TextTrimmingProperty, value);
-public static Style<TextBlock> TextTrimming(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.TextTrimmingProperty, binding);
-public static Style<TextBlock> TextDecorations(this Style<TextBlock> style, TextDecorationCollection value)
-=> style._addSetter(TextBlock.TextDecorationsProperty, value);
-public static Style<TextBlock> TextDecorations(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.TextDecorationsProperty, binding);
-public static Style<TextBlock> FontFeatures(this Style<TextBlock> style, FontFeatureCollection value)
-=> style._addSetter(TextBlock.FontFeaturesProperty, value);
-public static Style<TextBlock> FontFeatures(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.FontFeaturesProperty, binding);
-public static Style<TextBlock> Inlines(this Style<TextBlock> style, InlineCollection value)
-=> style._addSetter(TextBlock.InlinesProperty, value);
-public static Style<TextBlock> Inlines(this Style<TextBlock> style, IBinding binding)
-=> style._addSetter(TextBlock.InlinesProperty, binding);
+public static Style<T> Padding<T>(this Style<T> style, Double uniformLength) where T : Avalonia.Controls.TextBlock
+   => style._addSetter(Avalonia.Controls.TextBlock.PaddingProperty, new Avalonia.Thickness(uniformLength));
+public static Style<T> Padding<T>(this Style<T> style, Double horizontal, Double vertical) where T : Avalonia.Controls.TextBlock
+   => style._addSetter(Avalonia.Controls.TextBlock.PaddingProperty, new Avalonia.Thickness(horizontal, vertical));
+public static Style<T> Padding<T>(this Style<T> style, Double left, Double top, Double right, Double bottom) where T : Avalonia.Controls.TextBlock
+   => style._addSetter(Avalonia.Controls.TextBlock.PaddingProperty, new Avalonia.Thickness(left, top, right, bottom));
+public static Style<T> FontFamily<T>(this Style<T> style, Avalonia.Media.FontFamily value) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontFamilyProperty, value);
+public static Style<T> FontFamily<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontFamilyProperty, binding);
+public static Style<T> FontSize<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontSizeProperty, value);
+public static Style<T> FontSize<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontSizeProperty, binding);
+public static Style<T> FontStyle<T>(this Style<T> style, Avalonia.Media.FontStyle value) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontStyleProperty, value);
+public static Style<T> FontStyle<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontStyleProperty, binding);
+public static Style<T> FontWeight<T>(this Style<T> style, Avalonia.Media.FontWeight value) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontWeightProperty, value);
+public static Style<T> FontWeight<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontWeightProperty, binding);
+public static Style<T> FontStretch<T>(this Style<T> style, Avalonia.Media.FontStretch value) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontStretchProperty, value);
+public static Style<T> FontStretch<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontStretchProperty, binding);
+public static Style<T> Foreground<T>(this Style<T> style, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.ForegroundProperty, value);
+public static Style<T> Foreground<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.ForegroundProperty, binding);
+public static Style<T> Text<T>(this Style<T> style, System.String value) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.TextProperty, value);
+public static Style<T> Text<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.TextProperty, binding);
+public static Style<T> TextDecorations<T>(this Style<T> style, Avalonia.Media.TextDecorationCollection value) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.TextDecorationsProperty, value);
+public static Style<T> TextDecorations<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.TextDecorationsProperty, binding);
+public static Style<T> FontFeatures<T>(this Style<T> style, Avalonia.Media.FontFeatureCollection value) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontFeaturesProperty, value);
+public static Style<T> FontFeatures<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBlock
+=> style._addSetter(Avalonia.Controls.TextBlock.FontFeaturesProperty, binding);
 }
 

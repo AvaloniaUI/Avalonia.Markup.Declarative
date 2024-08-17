@@ -5,16 +5,13 @@ namespace AvaloniaExtensionGenerator.Generators;
 
 public class EventsExtensionGenerator
 {
-    public string OutputPath { get; set; }
-
-    public IConfig Config { get; set; }
+    public ExtensionGeneratorConfig Config { get; set; }
 
     public IEventExtensionGenerator[] Generators { get; private set; }
 
-    public EventsExtensionGenerator(IConfig config, string outputPath, params IEventExtensionGenerator[] generators)
+    public EventsExtensionGenerator(ExtensionGeneratorConfig config, params IEventExtensionGenerator[] generators)
     {
         Config = config;
-        OutputPath = outputPath;
         Generators = generators;
 
         foreach (var generator in Generators)
@@ -42,7 +39,7 @@ public class EventsExtensionGenerator
             sb.AppendLine("namespace Avalonia.Markup.Declarative;");
             sb.AppendLine(extensionClassesString);
 
-            var dirPath = Path.Combine(Path.GetDirectoryName(OutputPath), "Events");
+            var dirPath = Path.Combine(Config.OutputPath, "Events");
 
             if (!Directory.Exists(dirPath))
                 Directory.CreateDirectory(dirPath);
@@ -64,7 +61,7 @@ public class EventsExtensionGenerator
             if (Config.Exclude.Contains(controlType))
                 continue;
 
-            var events = controlType.GetEvents().Where(x => x.DeclaringType == controlType && x.EventHandlerType is EventHandler).ToArray();
+            var events = controlType.GetEvents().Where(x => x.DeclaringType == controlType).ToArray();
 
             if (!events.Any())
                 continue;
@@ -89,6 +86,9 @@ public class EventsExtensionGenerator
                     sb.AppendLine(setterExtension);
                 }
             }
+
+            //add control fullname binding to avoid conflicts
+            namespaces.Add($"{controlType.Name} = {controlType.FullName}");
 
             sb.AppendLine("}");
         }

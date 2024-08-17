@@ -15,7 +15,7 @@ public class ValueStyleSetterGenerator : SetterGeneratorBase
             + getSetterBody();
 
         //base type generic acess
-        if (Config.BaseTypes.Contains(info.ControlType))
+        if (info.CanBeGenericConstraint)
         {
             extensionText =
                 $"public static Style<T> {info.ExtensionName}<T>(this Style<T> style, {info.ValueTypeSource} value)"

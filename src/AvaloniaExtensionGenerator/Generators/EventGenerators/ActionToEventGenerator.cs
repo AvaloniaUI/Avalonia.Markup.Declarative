@@ -5,33 +5,50 @@ public class ActionToEventGenerator : EventGeneratorBase
     public override string GetEventExtensionOverride(EventExtensionInfo @event)
     {
         var eventHandler = @event.EventHandler;
-        var eventArgsType = @event.EventArguments;
-        var argsString = $"Action<{eventArgsType}> action";
+        var eventParameterTypes = @event.EventParameterTypes;
+        var argsString = $"Action<{string.Join(", ", eventParameterTypes)}> action";
 
-        var actionCallStr = "action(args)";
+        // Generate the lambda parameter names (arg0, arg1, etc.)
+        var lambdaParameters = string.Join(", ", eventParameterTypes.Select((type, index) => $"arg{index}"));
 
-        if (string.IsNullOrWhiteSpace(eventArgsType))
+        // Generate the action call string
+        var actionCallStr = $"action({lambdaParameters})";
+
+        // If the delegate has more than one parameter, split them into individual arguments
+        if (@event.HasMultipleParameters)
         {
-            argsString = $"Action action";
-            eventArgsType = "EventArgs";
-            actionCallStr = "action()";
+            lambdaParameters = string.Join(", ", eventParameterTypes.Select((type, index) => $"arg{index}"));
+        }
+        else if (@event.HasSingleParameter)
+        {
+            lambdaParameters = "arg0";
+        }
+        else
+        {
+            lambdaParameters = "args";
+        }
+
+        if (@event.HasStandardSignature)
+        {
+            argsString = $"Action<{string.Join(", ", eventParameterTypes.Skip(1))}> action";
+            actionCallStr = actionCallStr.Replace("arg0, ", "");
         }
 
         var eventName = @event.EventName;
         var extensionName = "On" + eventName;
-        var controlTypeName = @event.ControlType.Name;
+        var controlTypeName = @event.ControlType.FullName;
 
         var extensionText =
             $"    public static {controlTypeName} {extensionName}"
             + $"(this {controlTypeName} control, {argsString}) => {Environment.NewLine}"
-            + $"        control._setEvent(({eventHandler}) ((_, args) => {actionCallStr}), h => control.{eventName} += h);";
+            + $"        control._setEvent(({eventHandler}) (({lambdaParameters}) => {actionCallStr}), h => control.{eventName} += h);";
 
-        if (Config.BaseTypes.Contains(@event.ControlType))
+        if (@event.CanBeGenericConstraint)
         {
             extensionText =
                 $"    public static T {extensionName}<T>"
                 + $"(this T control, {argsString}) where T : {controlTypeName} => {Environment.NewLine}"
-                + $"        control._setEvent(({eventHandler}) ((_, args) => {actionCallStr}), h => control.{eventName} += h);";
+                + $"        control._setEvent(({eventHandler}) (({lambdaParameters}) => {actionCallStr}), h => control.{eventName} += h);";
         }
 
         return extensionText;

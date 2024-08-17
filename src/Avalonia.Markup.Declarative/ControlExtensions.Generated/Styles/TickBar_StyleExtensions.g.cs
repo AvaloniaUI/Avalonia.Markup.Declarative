@@ -9,54 +9,55 @@ using System;
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using TickBar = Avalonia.Controls.TickBar;
 
 namespace Avalonia.Markup.Declarative;
 public static partial class TickBarExtensions
 {
-public static Style<TickBar> Fill(this Style<TickBar> style, IBrush value)
-=> style._addSetter(TickBar.FillProperty, value);
-public static Style<TickBar> Fill(this Style<TickBar> style, IBinding binding)
-=> style._addSetter(TickBar.FillProperty, binding);
-public static Style<TickBar> Minimum(this Style<TickBar> style, Double value)
-=> style._addSetter(TickBar.MinimumProperty, value);
-public static Style<TickBar> Minimum(this Style<TickBar> style, IBinding binding)
-=> style._addSetter(TickBar.MinimumProperty, binding);
-public static Style<TickBar> Maximum(this Style<TickBar> style, Double value)
-=> style._addSetter(TickBar.MaximumProperty, value);
-public static Style<TickBar> Maximum(this Style<TickBar> style, IBinding binding)
-=> style._addSetter(TickBar.MaximumProperty, binding);
-public static Style<TickBar> TickFrequency(this Style<TickBar> style, Double value)
-=> style._addSetter(TickBar.TickFrequencyProperty, value);
-public static Style<TickBar> TickFrequency(this Style<TickBar> style, IBinding binding)
-=> style._addSetter(TickBar.TickFrequencyProperty, binding);
-public static Style<TickBar> Orientation(this Style<TickBar> style, Orientation value)
-=> style._addSetter(TickBar.OrientationProperty, value);
-public static Style<TickBar> Orientation(this Style<TickBar> style, IBinding binding)
-=> style._addSetter(TickBar.OrientationProperty, binding);
-public static Style<TickBar> Ticks(this Style<TickBar> style, AvaloniaList<Double> value)
-=> style._addSetter(TickBar.TicksProperty, value);
-public static Style<TickBar> Ticks(this Style<TickBar> style, IBinding binding)
-=> style._addSetter(TickBar.TicksProperty, binding);
-public static Style<TickBar> IsDirectionReversed(this Style<TickBar> style, Boolean value)
-=> style._addSetter(TickBar.IsDirectionReversedProperty, value);
-public static Style<TickBar> IsDirectionReversed(this Style<TickBar> style, IBinding binding)
-=> style._addSetter(TickBar.IsDirectionReversedProperty, binding);
-public static Style<TickBar> Placement(this Style<TickBar> style, TickBarPlacement value)
-=> style._addSetter(TickBar.PlacementProperty, value);
-public static Style<TickBar> Placement(this Style<TickBar> style, IBinding binding)
-=> style._addSetter(TickBar.PlacementProperty, binding);
-public static Style<TickBar> ReservedSpace(this Style<TickBar> style, Rect value)
-=> style._addSetter(TickBar.ReservedSpaceProperty, value);
-public static Style<TickBar> ReservedSpace(this Style<TickBar> style, IBinding binding)
-=> style._addSetter(TickBar.ReservedSpaceProperty, binding);
+public static Style<T> Fill<T>(this Style<T> style, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.FillProperty, value);
+public static Style<T> Fill<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.FillProperty, binding);
+public static Style<T> Minimum<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.MinimumProperty, value);
+public static Style<T> Minimum<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.MinimumProperty, binding);
+public static Style<T> Maximum<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.MaximumProperty, value);
+public static Style<T> Maximum<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.MaximumProperty, binding);
+public static Style<T> TickFrequency<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.TickFrequencyProperty, value);
+public static Style<T> TickFrequency<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.TickFrequencyProperty, binding);
+public static Style<T> Orientation<T>(this Style<T> style, Avalonia.Layout.Orientation value) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.OrientationProperty, value);
+public static Style<T> Orientation<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.OrientationProperty, binding);
+public static Style<T> Ticks<T>(this Style<T> style, Avalonia.Collections.AvaloniaList<System.Double> value) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.TicksProperty, value);
+public static Style<T> Ticks<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.TicksProperty, binding);
+public static Style<T> IsDirectionReversed<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.IsDirectionReversedProperty, value);
+public static Style<T> IsDirectionReversed<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.IsDirectionReversedProperty, binding);
+public static Style<T> Placement<T>(this Style<T> style, Avalonia.Controls.TickBarPlacement value) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.PlacementProperty, value);
+public static Style<T> Placement<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.PlacementProperty, binding);
+public static Style<T> ReservedSpace<T>(this Style<T> style, Avalonia.Rect value) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.ReservedSpaceProperty, value);
+public static Style<T> ReservedSpace<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar
+=> style._addSetter(Avalonia.Controls.TickBar.ReservedSpaceProperty, binding);
 
-public static Style<TickBar> ReservedSpace(this Style<TickBar> style, Double x, Double y, Double width, Double height)
-   => style._addSetter(TickBar.ReservedSpaceProperty, new Rect(x, y, width, height));
-public static Style<TickBar> ReservedSpace(this Style<TickBar> style, Size size)
-   => style._addSetter(TickBar.ReservedSpaceProperty, new Rect(size));
-public static Style<TickBar> ReservedSpace(this Style<TickBar> style, Point position, Size size)
-   => style._addSetter(TickBar.ReservedSpaceProperty, new Rect(position, size));
-public static Style<TickBar> ReservedSpace(this Style<TickBar> style, Point topLeft, Point bottomRight)
-   => style._addSetter(TickBar.ReservedSpaceProperty, new Rect(topLeft, bottomRight));
+public static Style<T> ReservedSpace<T>(this Style<T> style, Double x, Double y, Double width, Double height) where T : Avalonia.Controls.TickBar
+   => style._addSetter(Avalonia.Controls.TickBar.ReservedSpaceProperty, new Avalonia.Rect(x, y, width, height));
+public static Style<T> ReservedSpace<T>(this Style<T> style, Size size) where T : Avalonia.Controls.TickBar
+   => style._addSetter(Avalonia.Controls.TickBar.ReservedSpaceProperty, new Avalonia.Rect(size));
+public static Style<T> ReservedSpace<T>(this Style<T> style, Point position, Size size) where T : Avalonia.Controls.TickBar
+   => style._addSetter(Avalonia.Controls.TickBar.ReservedSpaceProperty, new Avalonia.Rect(position, size));
+public static Style<T> ReservedSpace<T>(this Style<T> style, Point topLeft, Point bottomRight) where T : Avalonia.Controls.TickBar
+   => style._addSetter(Avalonia.Controls.TickBar.ReservedSpaceProperty, new Avalonia.Rect(topLeft, bottomRight));
 }
 

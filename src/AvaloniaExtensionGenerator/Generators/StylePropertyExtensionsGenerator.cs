@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Text;
 using static AvaloniaExtensionGenerator.AvaloniaTypeHelper;
 
@@ -6,16 +5,13 @@ namespace AvaloniaExtensionGenerator.Generators;
 
 public class StylePropertyExtensionsGenerator
 {
-    public string OutputPath { get; set; }
-
-    public IConfig Config { get; set; }
+    public ExtensionGeneratorConfig Config { get; set; }
 
     public ISetterExtensionGenerator[] Generators { get; private set; }
 
-    public StylePropertyExtensionsGenerator(IConfig config, string outputPath, params ISetterExtensionGenerator[] generators)
+    public StylePropertyExtensionsGenerator(ExtensionGeneratorConfig config, params ISetterExtensionGenerator[] generators)
     {
         Config = config;
-        OutputPath = outputPath;
         Generators = generators;
 
         foreach (var generator in Generators)
@@ -44,7 +40,7 @@ public class StylePropertyExtensionsGenerator
             sb.AppendLine("namespace Avalonia.Markup.Declarative;");
             sb.AppendLine(extensionClassesString);
 
-            var dirPath = Path.Combine(Path.GetDirectoryName(OutputPath), "Styles");
+            var dirPath = Path.Combine(Config.OutputPath, "Styles");
 
             if (!Directory.Exists(dirPath))
                 Directory.CreateDirectory(dirPath);
@@ -63,13 +59,13 @@ public class StylePropertyExtensionsGenerator
         foreach (var controlType in controlTypes)
         {
             //skip all not styled types
-            if (!typeof(Avalonia.StyledElement).IsAssignableFrom(controlType))
+            if (!IsStyledElement(controlType))
                 continue;
 
             if (Config.Exclude.Contains(controlType))
                 continue;
 
-            var fields = controlType.GetFields().Where(IsAcceptableField).ToArray();
+            var fields = controlType.GetFields().Where(IsAcceptableStyledField).ToArray();
 
             if (!fields.Any())
                 continue;
@@ -93,38 +89,13 @@ public class StylePropertyExtensionsGenerator
 
                     sb.AppendLine(setterExtension);
                 }
+
+                //add control fullname binding to avoid conflicts
+                namespaces.Add($"{controlType.Name} = {controlType.FullName}");
             }
 
             sb.AppendLine("}");
         }
         return sb.ToString();
-    }
-
-    private static bool IsAcceptableField(FieldInfo field)
-    {
-        if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
-            return false;
-
-        if (field.FieldType.Name.StartsWith("DirectProperty") ||
-            field.FieldType.Name.StartsWith("StyledProperty") ||
-            field.FieldType.Name.StartsWith("AttachedProperty"))
-        {
-            return !IsReadOnlyField(field);
-        }
-        return false;
-    }
-
-    public static bool IsReadOnlyField(FieldInfo field)
-    {
-        var controlType = field.DeclaringType;
-        var extensionName = field.Name.Replace("Property", "");
-        var propertyName = field.Name.Replace("Property", "");
-
-        var propInfo = controlType?.GetProperty(propertyName);
-        if (propInfo != null)
-        {
-            return propInfo.GetSetMethod() == null && propInfo.CanRead;
-        }
-        return true;
     }
 }

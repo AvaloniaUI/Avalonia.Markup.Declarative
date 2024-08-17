@@ -389,7 +389,7 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
-	public static TElement Name<TElement>(this TElement control, string name, INameScope? ns = null)
+	public static TElement Name<TElement>(this TElement control, string name, INameScope ns)
 		where TElement : Control
 	{
 		ns?.Register(name, control);

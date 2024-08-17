@@ -7,57 +7,70 @@ using System.Linq.Expressions;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using TrayIcon = Avalonia.Controls.TrayIcon;
 
 namespace Avalonia.Markup.Declarative;
 public static partial class TrayIconExtensions
 {
-public static TrayIcon Command(this TrayIcon control, IBinding binding)
-   => control._set(TrayIcon.CommandProperty, binding);
-public static TrayIcon Command(this TrayIcon control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
-   => control._set(TrayIcon.CommandProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static TrayIcon Command(this TrayIcon control, Func<ICommand> func, Action<ICommand>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
-   => control._set(TrayIcon.CommandProperty, func, onChanged, expression);
-public static TrayIcon Command(this TrayIcon control, ICommand value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.CommandProperty, ps, () => control.Command = value, bindingMode, converter, bindingSource);
-public static TrayIcon Command<TValue>(this TrayIcon control, TValue value, FuncValueConverter<TValue, ICommand> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.CommandProperty, ps, () => control.Command = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static TrayIcon CommandParameter(this TrayIcon control, IBinding binding)
-   => control._set(TrayIcon.CommandParameterProperty, binding);
-public static TrayIcon CommandParameter(this TrayIcon control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
-   => control._set(TrayIcon.CommandParameterProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static TrayIcon CommandParameter(this TrayIcon control, Func<Object> func, Action<Object>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
-   => control._set(TrayIcon.CommandParameterProperty, func, onChanged, expression);
-public static TrayIcon CommandParameter(this TrayIcon control, Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.CommandParameterProperty, ps, () => control.CommandParameter = value, bindingMode, converter, bindingSource);
-public static TrayIcon CommandParameter<TValue>(this TrayIcon control, TValue value, FuncValueConverter<TValue, Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.CommandParameterProperty, ps, () => control.CommandParameter = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static TrayIcon Menu(this TrayIcon control, IBinding binding)
-   => control._set(TrayIcon.MenuProperty, binding);
-public static TrayIcon Menu(this TrayIcon control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
-   => control._set(TrayIcon.MenuProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static TrayIcon Menu(this TrayIcon control, Func<NativeMenu> func, Action<NativeMenu>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
-   => control._set(TrayIcon.MenuProperty, func, onChanged, expression);
-public static TrayIcon Menu(this TrayIcon control, NativeMenu value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.MenuProperty, ps, () => control.Menu = value, bindingMode, converter, bindingSource);
-public static TrayIcon Menu<TValue>(this TrayIcon control, TValue value, FuncValueConverter<TValue, NativeMenu> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.MenuProperty, ps, () => control.Menu = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static TrayIcon Icon(this TrayIcon control, IBinding binding)
-   => control._set(TrayIcon.IconProperty, binding);
-public static TrayIcon Icon(this TrayIcon control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
-   => control._set(TrayIcon.IconProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static TrayIcon Icon(this TrayIcon control, Func<WindowIcon> func, Action<WindowIcon>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
-   => control._set(TrayIcon.IconProperty, func, onChanged, expression);
-public static TrayIcon Icon(this TrayIcon control, WindowIcon value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.IconProperty, ps, () => control.Icon = value, bindingMode, converter, bindingSource);
-public static TrayIcon Icon<TValue>(this TrayIcon control, TValue value, FuncValueConverter<TValue, WindowIcon> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.IconProperty, ps, () => control.Icon = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static TrayIcon ToolTipText(this TrayIcon control, IBinding binding)
-   => control._set(TrayIcon.ToolTipTextProperty, binding);
-public static TrayIcon ToolTipText(this TrayIcon control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
-   => control._set(TrayIcon.ToolTipTextProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static TrayIcon ToolTipText(this TrayIcon control, Func<String> func, Action<String>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
-   => control._set(TrayIcon.ToolTipTextProperty, func, onChanged, expression);
-public static TrayIcon ToolTipText(this TrayIcon control, String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.ToolTipTextProperty, ps, () => control.ToolTipText = value, bindingMode, converter, bindingSource);
-public static TrayIcon ToolTipText<TValue>(this TrayIcon control, TValue value, FuncValueConverter<TValue, String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.ToolTipTextProperty, ps, () => control.ToolTipText = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static TrayIcon IsVisible(this TrayIcon control, IBinding binding)
-   => control._set(TrayIcon.IsVisibleProperty, binding);
-public static TrayIcon IsVisible(this TrayIcon control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
-   => control._set(TrayIcon.IsVisibleProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static TrayIcon IsVisible(this TrayIcon control, Func<Boolean> func, Action<Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
-   => control._set(TrayIcon.IsVisibleProperty, func, onChanged, expression);
-public static TrayIcon IsVisible(this TrayIcon control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.IsVisibleProperty, ps, () => control.IsVisible = value, bindingMode, converter, bindingSource);
-public static TrayIcon IsVisible<TValue>(this TrayIcon control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TrayIcon.IsVisibleProperty, ps, () => control.IsVisible = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Command<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.CommandProperty, binding);
+public static T Command<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.CommandProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T Command<T>(this T control, Func<System.Windows.Input.ICommand> func, Action<System.Windows.Input.ICommand>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.CommandProperty, func, onChanged, expression);
+public static T Command<T>(this T control, System.Windows.Input.ICommand value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.CommandProperty, ps, () => control.Command = value, bindingMode, converter, bindingSource);
+public static T Command<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.Windows.Input.ICommand> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.CommandProperty, ps, () => control.Command = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T CommandParameter<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.CommandParameterProperty, binding);
+public static T CommandParameter<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.CommandParameterProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T CommandParameter<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.CommandParameterProperty, func, onChanged, expression);
+public static T CommandParameter<T>(this T control, System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.CommandParameterProperty, ps, () => control.CommandParameter = value, bindingMode, converter, bindingSource);
+public static T CommandParameter<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.CommandParameterProperty, ps, () => control.CommandParameter = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Menu<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.MenuProperty, binding);
+public static T Menu<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.MenuProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T Menu<T>(this T control, Func<Avalonia.Controls.NativeMenu> func, Action<Avalonia.Controls.NativeMenu>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.MenuProperty, func, onChanged, expression);
+public static T Menu<T>(this T control, Avalonia.Controls.NativeMenu value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.MenuProperty, ps, () => control.Menu = value, bindingMode, converter, bindingSource);
+public static T Menu<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.NativeMenu> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.MenuProperty, ps, () => control.Menu = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Icon<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.IconProperty, binding);
+public static T Icon<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.IconProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T Icon<T>(this T control, Func<Avalonia.Controls.WindowIcon> func, Action<Avalonia.Controls.WindowIcon>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.IconProperty, func, onChanged, expression);
+public static T Icon<T>(this T control, Avalonia.Controls.WindowIcon value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.IconProperty, ps, () => control.Icon = value, bindingMode, converter, bindingSource);
+public static T Icon<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.WindowIcon> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.IconProperty, ps, () => control.Icon = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ToolTipText<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.ToolTipTextProperty, binding);
+public static T ToolTipText<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.ToolTipTextProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T ToolTipText<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.ToolTipTextProperty, func, onChanged, expression);
+public static T ToolTipText<T>(this T control, System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.ToolTipTextProperty, ps, () => control.ToolTipText = value, bindingMode, converter, bindingSource);
+public static T ToolTipText<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.ToolTipTextProperty, ps, () => control.ToolTipText = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T IsVisible<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.IsVisibleProperty, binding);
+public static T IsVisible<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.IsVisibleProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T IsVisible<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.IsVisibleProperty, func, onChanged, expression);
+public static T IsVisible<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.IsVisibleProperty, ps, () => control.IsVisible = value, bindingMode, converter, bindingSource);
+public static T IsVisible<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.IsVisibleProperty, ps, () => control.IsVisible = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 

@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
+using Image = Avalonia.Controls.Image;
 using System;
 using System.Linq.Expressions;
 using System.Numerics;
@@ -10,17 +11,17 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ImageExtensions
 {
-public static Style<Image> Source(this Style<Image> style, IImage value)
-=> style._addSetter(Image.SourceProperty, value);
-public static Style<Image> Source(this Style<Image> style, IBinding binding)
-=> style._addSetter(Image.SourceProperty, binding);
-public static Style<Image> Stretch(this Style<Image> style, Stretch value)
-=> style._addSetter(Image.StretchProperty, value);
-public static Style<Image> Stretch(this Style<Image> style, IBinding binding)
-=> style._addSetter(Image.StretchProperty, binding);
-public static Style<Image> StretchDirection(this Style<Image> style, StretchDirection value)
-=> style._addSetter(Image.StretchDirectionProperty, value);
-public static Style<Image> StretchDirection(this Style<Image> style, IBinding binding)
-=> style._addSetter(Image.StretchDirectionProperty, binding);
+public static Style<T> Source<T>(this Style<T> style, Avalonia.Media.IImage value) where T : Avalonia.Controls.Image
+=> style._addSetter(Avalonia.Controls.Image.SourceProperty, value);
+public static Style<T> Source<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Image
+=> style._addSetter(Avalonia.Controls.Image.SourceProperty, binding);
+public static Style<T> Stretch<T>(this Style<T> style, Avalonia.Media.Stretch value) where T : Avalonia.Controls.Image
+=> style._addSetter(Avalonia.Controls.Image.StretchProperty, value);
+public static Style<T> Stretch<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Image
+=> style._addSetter(Avalonia.Controls.Image.StretchProperty, binding);
+public static Style<T> StretchDirection<T>(this Style<T> style, Avalonia.Media.StretchDirection value) where T : Avalonia.Controls.Image
+=> style._addSetter(Avalonia.Controls.Image.StretchDirectionProperty, value);
+public static Style<T> StretchDirection<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Image
+=> style._addSetter(Avalonia.Controls.Image.StretchDirectionProperty, binding);
 }
 

@@ -3,6 +3,7 @@ using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
+using ScrollContentPresenter = Avalonia.Controls.Presenters.ScrollContentPresenter;
 using System;
 using System.Linq.Expressions;
 using System.Numerics;
@@ -11,37 +12,37 @@ using System.Runtime.CompilerServices;
 namespace Avalonia.Markup.Declarative;
 public static partial class ScrollContentPresenterExtensions
 {
-public static Style<ScrollContentPresenter> CanHorizontallyScroll(this Style<ScrollContentPresenter> style, Boolean value)
-=> style._addSetter(ScrollContentPresenter.CanHorizontallyScrollProperty, value);
-public static Style<ScrollContentPresenter> CanHorizontallyScroll(this Style<ScrollContentPresenter> style, IBinding binding)
-=> style._addSetter(ScrollContentPresenter.CanHorizontallyScrollProperty, binding);
-public static Style<ScrollContentPresenter> CanVerticallyScroll(this Style<ScrollContentPresenter> style, Boolean value)
-=> style._addSetter(ScrollContentPresenter.CanVerticallyScrollProperty, value);
-public static Style<ScrollContentPresenter> CanVerticallyScroll(this Style<ScrollContentPresenter> style, IBinding binding)
-=> style._addSetter(ScrollContentPresenter.CanVerticallyScrollProperty, binding);
-public static Style<ScrollContentPresenter> Offset(this Style<ScrollContentPresenter> style, Vector value)
-=> style._addSetter(ScrollContentPresenter.OffsetProperty, value);
-public static Style<ScrollContentPresenter> Offset(this Style<ScrollContentPresenter> style, IBinding binding)
-=> style._addSetter(ScrollContentPresenter.OffsetProperty, binding);
-public static Style<ScrollContentPresenter> HorizontalSnapPointsType(this Style<ScrollContentPresenter> style, SnapPointsType value)
-=> style._addSetter(ScrollContentPresenter.HorizontalSnapPointsTypeProperty, value);
-public static Style<ScrollContentPresenter> HorizontalSnapPointsType(this Style<ScrollContentPresenter> style, IBinding binding)
-=> style._addSetter(ScrollContentPresenter.HorizontalSnapPointsTypeProperty, binding);
-public static Style<ScrollContentPresenter> VerticalSnapPointsType(this Style<ScrollContentPresenter> style, SnapPointsType value)
-=> style._addSetter(ScrollContentPresenter.VerticalSnapPointsTypeProperty, value);
-public static Style<ScrollContentPresenter> VerticalSnapPointsType(this Style<ScrollContentPresenter> style, IBinding binding)
-=> style._addSetter(ScrollContentPresenter.VerticalSnapPointsTypeProperty, binding);
-public static Style<ScrollContentPresenter> HorizontalSnapPointsAlignment(this Style<ScrollContentPresenter> style, SnapPointsAlignment value)
-=> style._addSetter(ScrollContentPresenter.HorizontalSnapPointsAlignmentProperty, value);
-public static Style<ScrollContentPresenter> HorizontalSnapPointsAlignment(this Style<ScrollContentPresenter> style, IBinding binding)
-=> style._addSetter(ScrollContentPresenter.HorizontalSnapPointsAlignmentProperty, binding);
-public static Style<ScrollContentPresenter> VerticalSnapPointsAlignment(this Style<ScrollContentPresenter> style, SnapPointsAlignment value)
-=> style._addSetter(ScrollContentPresenter.VerticalSnapPointsAlignmentProperty, value);
-public static Style<ScrollContentPresenter> VerticalSnapPointsAlignment(this Style<ScrollContentPresenter> style, IBinding binding)
-=> style._addSetter(ScrollContentPresenter.VerticalSnapPointsAlignmentProperty, binding);
-public static Style<ScrollContentPresenter> IsScrollChainingEnabled(this Style<ScrollContentPresenter> style, Boolean value)
-=> style._addSetter(ScrollContentPresenter.IsScrollChainingEnabledProperty, value);
-public static Style<ScrollContentPresenter> IsScrollChainingEnabled(this Style<ScrollContentPresenter> style, IBinding binding)
-=> style._addSetter(ScrollContentPresenter.IsScrollChainingEnabledProperty, binding);
+public static Style<T> CanHorizontallyScroll<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.CanHorizontallyScrollProperty, value);
+public static Style<T> CanHorizontallyScroll<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.CanHorizontallyScrollProperty, binding);
+public static Style<T> CanVerticallyScroll<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.CanVerticallyScrollProperty, value);
+public static Style<T> CanVerticallyScroll<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.CanVerticallyScrollProperty, binding);
+public static Style<T> Offset<T>(this Style<T> style, Avalonia.Vector value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.OffsetProperty, value);
+public static Style<T> Offset<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.OffsetProperty, binding);
+public static Style<T> HorizontalSnapPointsType<T>(this Style<T> style, Avalonia.Controls.Primitives.SnapPointsType value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.HorizontalSnapPointsTypeProperty, value);
+public static Style<T> HorizontalSnapPointsType<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.HorizontalSnapPointsTypeProperty, binding);
+public static Style<T> VerticalSnapPointsType<T>(this Style<T> style, Avalonia.Controls.Primitives.SnapPointsType value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.VerticalSnapPointsTypeProperty, value);
+public static Style<T> VerticalSnapPointsType<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.VerticalSnapPointsTypeProperty, binding);
+public static Style<T> HorizontalSnapPointsAlignment<T>(this Style<T> style, Avalonia.Controls.Primitives.SnapPointsAlignment value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.HorizontalSnapPointsAlignmentProperty, value);
+public static Style<T> HorizontalSnapPointsAlignment<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.HorizontalSnapPointsAlignmentProperty, binding);
+public static Style<T> VerticalSnapPointsAlignment<T>(this Style<T> style, Avalonia.Controls.Primitives.SnapPointsAlignment value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.VerticalSnapPointsAlignmentProperty, value);
+public static Style<T> VerticalSnapPointsAlignment<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.VerticalSnapPointsAlignmentProperty, binding);
+public static Style<T> IsScrollChainingEnabled<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.IsScrollChainingEnabledProperty, value);
+public static Style<T> IsScrollChainingEnabled<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Presenters.ScrollContentPresenter
+=> style._addSetter(Avalonia.Controls.Presenters.ScrollContentPresenter.IsScrollChainingEnabledProperty, binding);
 }
 

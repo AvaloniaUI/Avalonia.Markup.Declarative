@@ -3,6 +3,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
+using Button = Avalonia.Controls.Button;
 using System;
 using System.Linq.Expressions;
 using System.Numerics;
@@ -12,33 +13,33 @@ using System.Windows.Input;
 namespace Avalonia.Markup.Declarative;
 public static partial class ButtonExtensions
 {
-public static Style<Button> ClickMode(this Style<Button> style, ClickMode value)
-=> style._addSetter(Button.ClickModeProperty, value);
-public static Style<Button> ClickMode(this Style<Button> style, IBinding binding)
-=> style._addSetter(Button.ClickModeProperty, binding);
-public static Style<Button> Command(this Style<Button> style, ICommand value)
-=> style._addSetter(Button.CommandProperty, value);
-public static Style<Button> Command(this Style<Button> style, IBinding binding)
-=> style._addSetter(Button.CommandProperty, binding);
-public static Style<Button> HotKey(this Style<Button> style, KeyGesture value)
-=> style._addSetter(Button.HotKeyProperty, value);
-public static Style<Button> HotKey(this Style<Button> style, IBinding binding)
-=> style._addSetter(Button.HotKeyProperty, binding);
-public static Style<Button> CommandParameter(this Style<Button> style, Object value)
-=> style._addSetter(Button.CommandParameterProperty, value);
-public static Style<Button> CommandParameter(this Style<Button> style, IBinding binding)
-=> style._addSetter(Button.CommandParameterProperty, binding);
-public static Style<Button> IsDefault(this Style<Button> style, Boolean value)
-=> style._addSetter(Button.IsDefaultProperty, value);
-public static Style<Button> IsDefault(this Style<Button> style, IBinding binding)
-=> style._addSetter(Button.IsDefaultProperty, binding);
-public static Style<Button> IsCancel(this Style<Button> style, Boolean value)
-=> style._addSetter(Button.IsCancelProperty, value);
-public static Style<Button> IsCancel(this Style<Button> style, IBinding binding)
-=> style._addSetter(Button.IsCancelProperty, binding);
-public static Style<Button> Flyout(this Style<Button> style, FlyoutBase value)
-=> style._addSetter(Button.FlyoutProperty, value);
-public static Style<Button> Flyout(this Style<Button> style, IBinding binding)
-=> style._addSetter(Button.FlyoutProperty, binding);
+public static Style<T> ClickMode<T>(this Style<T> style, Avalonia.Controls.ClickMode value) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.ClickModeProperty, value);
+public static Style<T> ClickMode<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.ClickModeProperty, binding);
+public static Style<T> Command<T>(this Style<T> style, System.Windows.Input.ICommand value) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.CommandProperty, value);
+public static Style<T> Command<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.CommandProperty, binding);
+public static Style<T> HotKey<T>(this Style<T> style, Avalonia.Input.KeyGesture value) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.HotKeyProperty, value);
+public static Style<T> HotKey<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.HotKeyProperty, binding);
+public static Style<T> CommandParameter<T>(this Style<T> style, System.Object value) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.CommandParameterProperty, value);
+public static Style<T> CommandParameter<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.CommandParameterProperty, binding);
+public static Style<T> IsDefault<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.IsDefaultProperty, value);
+public static Style<T> IsDefault<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.IsDefaultProperty, binding);
+public static Style<T> IsCancel<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.IsCancelProperty, value);
+public static Style<T> IsCancel<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.IsCancelProperty, binding);
+public static Style<T> Flyout<T>(this Style<T> style, Avalonia.Controls.Primitives.FlyoutBase value) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.FlyoutProperty, value);
+public static Style<T> Flyout<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Button
+=> style._addSetter(Avalonia.Controls.Button.FlyoutProperty, binding);
 }
 

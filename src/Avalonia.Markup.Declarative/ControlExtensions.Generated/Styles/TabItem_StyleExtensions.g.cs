@@ -5,13 +5,14 @@ using System;
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using TabItem = Avalonia.Controls.TabItem;
 
 namespace Avalonia.Markup.Declarative;
 public static partial class TabItemExtensions
 {
-public static Style<TabItem> IsSelected(this Style<TabItem> style, Boolean value)
-=> style._addSetter(TabItem.IsSelectedProperty, value);
-public static Style<TabItem> IsSelected(this Style<TabItem> style, IBinding binding)
-=> style._addSetter(TabItem.IsSelectedProperty, binding);
+public static Style<T> IsSelected<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.TabItem
+=> style._addSetter(Avalonia.Controls.TabItem.IsSelectedProperty, value);
+public static Style<T> IsSelected<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TabItem
+=> style._addSetter(Avalonia.Controls.TabItem.IsSelectedProperty, binding);
 }
 

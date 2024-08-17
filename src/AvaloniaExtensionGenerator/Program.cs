@@ -4,13 +4,24 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
-        if (args is ["--framework"])
-        {
-            GeneratorHost.RunDefaultAvaloniaFrameworkGenerators();
-            return;
-        }
-
         string? projectPath = null;
+
+        //for non framework mode ignore types from following base avalonia assemblies
+        string[] ignoreAssemblies =
+        [
+            "Avalonia.Base",
+            "Avalonia.Controls",
+            "Avalonia.DesignerSupport",
+            "Avalonia.Dialogs",
+            "Avalonia",
+            "Avalonia.Markup",
+            "Avalonia.Markup.Xaml",
+            "Avalonia.Metal",
+            "Avalonia.MicroCom",
+            "Avalonia.OpenGL",
+            "Avalonia.Vulkan",
+        ];
+
         foreach (var arg in args)
         {
             if (arg.StartsWith("--projectPath="))
@@ -19,7 +30,7 @@ internal class Program
             }
         }
 
-        if (args.Length == 0)
+        if (args.Length == 0 && string.IsNullOrWhiteSpace(projectPath))
         {
             var curDir = new DirectoryInfo(Directory.GetCurrentDirectory());
             var projectFiles = curDir.GetFiles("*.csproj");
@@ -31,6 +42,15 @@ internal class Program
 
                 projectPath = projectFiles.First().FullName;
             }
+        }
+
+        if (args is ["--framework"])
+        {
+            //generate extensions for base avalonia types
+            ignoreAssemblies = [];
+            var projectDir = new DirectoryInfo(
+                GetAvaloniaMarkupDeclarativeProjectPath(AppDomain.CurrentDomain.BaseDirectory)).FullName;
+            projectPath = Path.Combine(projectDir, "Avalonia.Markup.Declarative.csproj");
         }
 
         if (projectPath == null)
@@ -47,18 +67,35 @@ internal class Program
 
         try
         {
-            var defaultAvaloniaConfig = new DefaultAvaloniaConfig("");
-            var skipTypesFromProcess = defaultAvaloniaConfig.TypesToProcess.ToArray();
-
-            var types = await CsProjectTypesExtractor.LoadTypesFromProject(
-                projectPath, typeof(Avalonia.AvaloniaObject));
-
             var projectDirPath = Path.GetDirectoryName(projectPath);
-            GeneratorHost.RunControlTypeGenerators(types, skipTypesFromProcess, projectDirPath);
+            var outputPath = Path.Combine(projectDirPath, "ControlExtensions.Generated");
+
+            var types = await CsProjectTypesExtractor
+                .LoadTypesFromProject(projectPath, AvaloniaTypeHelper.GetAvaloniaObjectTypeName(), ignoreAssemblies);
+
+            var extensionsOutputPath = GeneratorHost.RunControlTypeGenerators(types, outputPath);
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"Written extensions into folder: {extensionsOutputPath}");
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred: {ex.Message}");
+            Console.WriteLine($"An error occurred: {ex.Message}\n{ex.StackTrace}");
         }
     }
+
+    private static string GetAvaloniaMarkupDeclarativeProjectPath(string path)
+    {
+        while (true)
+        {
+            var directories = Directory.EnumerateDirectories(path);
+            foreach (var dir in directories)
+                if (dir.EndsWith("Avalonia.Markup.Declarative"))
+                    return dir;
+
+            path = Path.Combine(path, "..");
+        }
+    }
+
 }

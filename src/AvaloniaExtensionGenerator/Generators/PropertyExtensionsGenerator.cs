@@ -6,16 +6,13 @@ namespace AvaloniaExtensionGenerator.Generators;
 
 public class PropertyExtensionsGenerator
 {
-    public string OutputPath { get; set; }
-
-    public IConfig Config { get; set; }
+    public ExtensionGeneratorConfig Config { get; set; }
 
     public ISetterExtensionGenerator[] Generators { get; private set; }
 
-    public PropertyExtensionsGenerator(IConfig config, string outputPath, params ISetterExtensionGenerator[] generators)
+    public PropertyExtensionsGenerator(ExtensionGeneratorConfig config, params ISetterExtensionGenerator[] generators)
     {
         Config = config;
-        OutputPath = outputPath;
         Generators = generators;
 
         foreach (var generator in Generators)
@@ -47,7 +44,7 @@ public class PropertyExtensionsGenerator
             sb.AppendLine("namespace Avalonia.Markup.Declarative;");
             sb.AppendLine(extensionClassesString);
 
-            var dirPath = Path.Combine(Path.GetDirectoryName(OutputPath), "Properties");
+            var dirPath = Path.Combine(Config.OutputPath, "Properties");
 
             if (!Directory.Exists(dirPath))
                 Directory.CreateDirectory(dirPath);
@@ -98,36 +95,11 @@ public class PropertyExtensionsGenerator
             }
 
             sb.AppendLine("}");
+
+            //add control fullname binding to avoid conflicts
+            namespaces.Add($"{controlType.Name} = {controlType.FullName}");
         }
+
         return sb.ToString();
-    }
-
-    private static bool IsAcceptableField(FieldInfo field)
-    {
-        if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
-            return false;
-
-        if (field.FieldType.Name.StartsWith("DirectProperty") ||
-            field.FieldType.Name.StartsWith("StyledProperty") ||
-            field.FieldType.Name.StartsWith("AttachedProperty") ||
-            field.FieldType.Name.StartsWith("AvaloniaProperty"))
-        {
-            return !IsReadOnlyField(field);
-        }
-        return false;
-    }
-
-    public static bool IsReadOnlyField(FieldInfo field)
-    {
-        var controlType = field.DeclaringType;
-        var extensionName = field.Name.Replace("Property", "");
-        var propertyName = field.Name.Replace("Property", "");
-
-        var propInfo = controlType?.GetProperty(propertyName);
-        if (propInfo != null)
-        {
-            return propInfo.GetSetMethod() == null && propInfo.CanRead;
-        }
-        return true;
     }
 }

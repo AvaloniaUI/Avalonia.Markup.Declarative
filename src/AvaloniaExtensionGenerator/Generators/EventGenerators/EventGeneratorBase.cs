@@ -4,7 +4,7 @@ namespace AvaloniaExtensionGenerator.Generators.EventGenerators;
 
 public abstract class EventGeneratorBase : IEventExtensionGenerator
 {
-    public IConfig Config { get; set; } = null!;
+    public ExtensionGeneratorConfig Config { get; set; } = null!;
 
     public string? GetEventExtension(EventInfo @event, out IEnumerable<string> usedNamespaces)
     {
@@ -40,7 +40,15 @@ public abstract class EventGeneratorBase : IEventExtensionGenerator
             result += $"<{args}>";
         }
 
-        if (Config.UseFullNamespace.Contains(valueType))
+        var hasConflictingNamespace = namespaces.Any(x => x.EndsWith(result));
+
+        //todo: handle cases when Type is equal namespace name, i.e.
+        //Avalonia.Controls.Calendar
+        //ContextMenu
+        //Animation
+        //Dock
+
+        if (!string.IsNullOrWhiteSpace(valueType.Namespace))
         {
             result = valueType.Namespace + "." + result;
         }

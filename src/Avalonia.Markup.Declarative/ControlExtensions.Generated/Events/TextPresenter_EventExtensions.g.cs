@@ -5,11 +5,12 @@ using System;
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using TextPresenter = Avalonia.Controls.Presenters.TextPresenter;
 
 namespace Avalonia.Markup.Declarative;
 public static partial class TextPresenterEventsExtensions
 {
-    public static TextPresenter OnCaretBoundsChanged(this TextPresenter control, Action action) => 
-        control._setEvent((EventHandler) ((_, args) => action()), h => control.CaretBoundsChanged += h);
+    public static T OnCaretBoundsChanged<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.Controls.Presenters.TextPresenter => 
+        control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.CaretBoundsChanged += h);
 }
 

@@ -17,7 +17,7 @@ public class ValueOverloadsSetterGenerator : SetterGeneratorBase
                     var argDefs = string.Join(", ", ps.Select(x => $"{x.ParameterType.Name} {x.Name} = default"));
                     var argVals = string.Join(", ", ps.Select(x => x.Name)); ;
 
-                    if (Config.BaseTypes.Contains(info.ControlType))
+                    if (info.CanBeGenericConstraint)
                     {
                         extensionText += nl +
                             $"public static T {info.ExtensionName}<T>(this T control, {argDefs}) where T : {info.ControlTypeName}{nl}" +

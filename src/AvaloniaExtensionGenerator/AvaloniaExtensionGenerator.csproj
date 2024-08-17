@@ -35,7 +35,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="11.1.0" />
 		<PackageReference Include="NuGet.Configuration" Version="6.10.1" />
 		<PackageReference Include="NuGet.Protocol" Version="6.10.1" />
 	</ItemGroup>

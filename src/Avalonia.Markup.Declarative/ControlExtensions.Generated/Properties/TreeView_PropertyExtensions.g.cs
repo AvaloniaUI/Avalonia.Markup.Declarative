@@ -7,41 +7,50 @@ using System.Collections;
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using TreeView = Avalonia.Controls.TreeView;
 
 namespace Avalonia.Markup.Declarative;
 public static partial class TreeViewExtensions
 {
-public static TreeView AutoScrollToSelectedItem(this TreeView control, IBinding binding)
-   => control._set(TreeView.AutoScrollToSelectedItemProperty, binding);
-public static TreeView AutoScrollToSelectedItem(this TreeView control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
-   => control._set(TreeView.AutoScrollToSelectedItemProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static TreeView AutoScrollToSelectedItem(this TreeView control, Func<Boolean> func, Action<Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
-   => control._set(TreeView.AutoScrollToSelectedItemProperty, func, onChanged, expression);
-public static TreeView AutoScrollToSelectedItem(this TreeView control, Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TreeView.AutoScrollToSelectedItemProperty, ps, () => control.AutoScrollToSelectedItem = value, bindingMode, converter, bindingSource);
-public static TreeView AutoScrollToSelectedItem<TValue>(this TreeView control, TValue value, FuncValueConverter<TValue, Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TreeView.AutoScrollToSelectedItemProperty, ps, () => control.AutoScrollToSelectedItem = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static TreeView SelectedItem(this TreeView control, IBinding binding)
-   => control._set(TreeView.SelectedItemProperty, binding);
-public static TreeView SelectedItem(this TreeView control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
-   => control._set(TreeView.SelectedItemProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static TreeView SelectedItem(this TreeView control, Func<Object> func, Action<Object>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
-   => control._set(TreeView.SelectedItemProperty, func, onChanged, expression);
-public static TreeView SelectedItem(this TreeView control, Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TreeView.SelectedItemProperty, ps, () => control.SelectedItem = value, bindingMode, converter, bindingSource);
-public static TreeView SelectedItem<TValue>(this TreeView control, TValue value, FuncValueConverter<TValue, Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TreeView.SelectedItemProperty, ps, () => control.SelectedItem = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static TreeView SelectedItems(this TreeView control, IBinding binding)
-   => control._set(TreeView.SelectedItemsProperty, binding);
-public static TreeView SelectedItems(this TreeView control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
-   => control._set(TreeView.SelectedItemsProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static TreeView SelectedItems(this TreeView control, Func<IList> func, Action<IList>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
-   => control._set(TreeView.SelectedItemsProperty, func, onChanged, expression);
-public static TreeView SelectedItems(this TreeView control, IList value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TreeView.SelectedItemsProperty, ps, () => control.SelectedItems = value, bindingMode, converter, bindingSource);
-public static TreeView SelectedItems<TValue>(this TreeView control, TValue value, FuncValueConverter<TValue, IList> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TreeView.SelectedItemsProperty, ps, () => control.SelectedItems = converter.TryConvert(value), bindingMode, converter, bindingSource);
-public static TreeView SelectionMode(this TreeView control, IBinding binding)
-   => control._set(TreeView.SelectionModeProperty, binding);
-public static TreeView SelectionMode(this TreeView control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
-   => control._set(TreeView.SelectionModeProperty, avaloniaProperty, bindingMode, converter, overrideView);
-public static TreeView SelectionMode(this TreeView control, Func<SelectionMode> func, Action<SelectionMode>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
-   => control._set(TreeView.SelectionModeProperty, func, onChanged, expression);
-public static TreeView SelectionMode(this TreeView control, SelectionMode value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TreeView.SelectionModeProperty, ps, () => control.SelectionMode = value, bindingMode, converter, bindingSource);
-public static TreeView SelectionMode<TValue>(this TreeView control, TValue value, FuncValueConverter<TValue, SelectionMode> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(TreeView.SelectionModeProperty, ps, () => control.SelectionMode = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T AutoScrollToSelectedItem<T>(this T control, IBinding binding) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.AutoScrollToSelectedItemProperty, binding);
+public static T AutoScrollToSelectedItem<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.AutoScrollToSelectedItemProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T AutoScrollToSelectedItem<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.AutoScrollToSelectedItemProperty, func, onChanged, expression);
+public static T AutoScrollToSelectedItem<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TreeView
+=> control._setEx(Avalonia.Controls.TreeView.AutoScrollToSelectedItemProperty, ps, () => control.AutoScrollToSelectedItem = value, bindingMode, converter, bindingSource);
+public static T AutoScrollToSelectedItem<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TreeView
+=> control._setEx(Avalonia.Controls.TreeView.AutoScrollToSelectedItemProperty, ps, () => control.AutoScrollToSelectedItem = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T SelectedItem<T>(this T control, IBinding binding) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.SelectedItemProperty, binding);
+public static T SelectedItem<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.SelectedItemProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T SelectedItem<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.SelectedItemProperty, func, onChanged, expression);
+public static T SelectedItem<T>(this T control, System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TreeView
+=> control._setEx(Avalonia.Controls.TreeView.SelectedItemProperty, ps, () => control.SelectedItem = value, bindingMode, converter, bindingSource);
+public static T SelectedItem<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TreeView
+=> control._setEx(Avalonia.Controls.TreeView.SelectedItemProperty, ps, () => control.SelectedItem = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T SelectedItems<T>(this T control, IBinding binding) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.SelectedItemsProperty, binding);
+public static T SelectedItems<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.SelectedItemsProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T SelectedItems<T>(this T control, Func<System.Collections.IList> func, Action<System.Collections.IList>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.SelectedItemsProperty, func, onChanged, expression);
+public static T SelectedItems<T>(this T control, System.Collections.IList value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TreeView
+=> control._setEx(Avalonia.Controls.TreeView.SelectedItemsProperty, ps, () => control.SelectedItems = value, bindingMode, converter, bindingSource);
+public static T SelectedItems<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.Collections.IList> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TreeView
+=> control._setEx(Avalonia.Controls.TreeView.SelectedItemsProperty, ps, () => control.SelectedItems = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T SelectionMode<T>(this T control, IBinding binding) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.SelectionModeProperty, binding);
+public static T SelectionMode<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.SelectionModeProperty, avaloniaProperty, bindingMode, converter, overrideView);
+public static T SelectionMode<T>(this T control, Func<Avalonia.Controls.SelectionMode> func, Action<Avalonia.Controls.SelectionMode>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TreeView
+   => control._set(Avalonia.Controls.TreeView.SelectionModeProperty, func, onChanged, expression);
+public static T SelectionMode<T>(this T control, Avalonia.Controls.SelectionMode value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TreeView
+=> control._setEx(Avalonia.Controls.TreeView.SelectionModeProperty, ps, () => control.SelectionMode = value, bindingMode, converter, bindingSource);
+public static T SelectionMode<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.SelectionMode> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TreeView
+=> control._setEx(Avalonia.Controls.TreeView.SelectionModeProperty, ps, () => control.SelectionMode = converter.TryConvert(value), bindingMode, converter, bindingSource);
 }
 

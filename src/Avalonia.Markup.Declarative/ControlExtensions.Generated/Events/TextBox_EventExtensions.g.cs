@@ -6,19 +6,20 @@ using System;
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using TextBox = Avalonia.Controls.TextBox;
 
 namespace Avalonia.Markup.Declarative;
 public static partial class TextBoxEventsExtensions
 {
-    public static TextBox OnCopyingToClipboard(this TextBox control, Action<RoutedEventArgs> action) => 
-        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.CopyingToClipboard += h);
-    public static TextBox OnCuttingToClipboard(this TextBox control, Action<RoutedEventArgs> action) => 
-        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.CuttingToClipboard += h);
-    public static TextBox OnPastingFromClipboard(this TextBox control, Action<RoutedEventArgs> action) => 
-        control._setEvent((EventHandler<RoutedEventArgs>) ((_, args) => action(args)), h => control.PastingFromClipboard += h);
-    public static TextBox OnTextChanged(this TextBox control, Action<TextChangedEventArgs> action) => 
-        control._setEvent((EventHandler<TextChangedEventArgs>) ((_, args) => action(args)), h => control.TextChanged += h);
-    public static TextBox OnTextChanging(this TextBox control, Action<TextChangingEventArgs> action) => 
-        control._setEvent((EventHandler<TextChangingEventArgs>) ((_, args) => action(args)), h => control.TextChanging += h);
+    public static T OnCopyingToClipboard<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.TextBox => 
+        control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.CopyingToClipboard += h);
+    public static T OnCuttingToClipboard<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.TextBox => 
+        control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.CuttingToClipboard += h);
+    public static T OnPastingFromClipboard<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.TextBox => 
+        control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PastingFromClipboard += h);
+    public static T OnTextChanged<T>(this T control, Action<Avalonia.Controls.TextChangedEventArgs> action) where T : Avalonia.Controls.TextBox => 
+        control._setEvent((System.EventHandler<Avalonia.Controls.TextChangedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.TextChanged += h);
+    public static T OnTextChanging<T>(this T control, Action<Avalonia.Controls.TextChangingEventArgs> action) where T : Avalonia.Controls.TextBox => 
+        control._setEvent((System.EventHandler<Avalonia.Controls.TextChangingEventArgs>) ((arg0, arg1) => action(arg1)), h => control.TextChanging += h);
 }
 

@@ -1,10 +1,11 @@
+using System.Diagnostics;
 using System.Reflection;
 
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
 
 public abstract class SetterGeneratorBase : ISetterExtensionGenerator
 {
-    public IConfig Config { get; set; } = null!;
+    public ExtensionGeneratorConfig Config { get; set; } = null!;
 
     public string? GetSetterExtension(FieldInfo field, out IEnumerable<string> usedNamespaces)
     {
@@ -49,7 +50,15 @@ public abstract class SetterGeneratorBase : ISetterExtensionGenerator
             result += $"<{args}>";
         }
 
-        if (Config.UseFullNamespace.Contains(valueType))
+        var hasConflictingNamespace = namespaces.Any(x => x.EndsWith(result));
+
+        //todo: handle cases when Type is equal namespace name, i.e.
+        //Avalonia.Controls.Calendar
+        //ContextMenu
+        //Animation
+        //Dock
+
+        if (!string.IsNullOrWhiteSpace(valueType.Namespace))
         {
             result = valueType.Namespace + "." + result;
         }
