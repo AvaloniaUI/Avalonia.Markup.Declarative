@@ -1,48 +1,71 @@
-﻿namespace AvaloniaMarkupSample.MvuSample;
+﻿using Avalonia.Controls.Primitives;
+using Avalonia.Styling;
+
+namespace AvaloniaMarkupSample.MvuSample;
 
 public class SampleMvuView : ComponentBase
 {
+    protected override StyleGroup BuildStyles() =>
+    [
+        //general
+        new Style<TextBlock>(x => x.Class("beautiful-textblock"))
+            .Foreground(Brushes.CornflowerBlue)
+            .TextAlignment(TextAlignment.Center)
+            .FontSize(22),
+
+            new Style<ScrollViewer>(s => s.OfType<SampleMvuView>().Descendant().OfType<ScrollViewer>())
+                .VerticalScrollBarVisibility(ScrollBarVisibility.Disabled)
+                .HorizontalScrollBarVisibility(ScrollBarVisibility.Hidden),
+    ];
+
+
     protected override object Build() =>
-        new StackPanel()
-            .Children(
-                new TextBlock()
-                    .Name("NamedTextBlock")
-                    .Text("NamedTextBlock"),
+        new ScrollViewer()
+            .VerticalScrollBarVisibility(ScrollBarVisibility.Hidden)
+            .Content(
 
-                new TextBlock()
-                    .Text(Bind(MyProperty)),
+                new StackPanel()
+                    .Children(
+                        new TextBlock()
+                            .Classes("beautiful-textblock")
+                            .Name("NamedTextBlock")
+                            .Text("NamedTextBlock"),
 
-                new TextBlock()
-                    .Text(Bind(State.StateProperty)),
+                        new TextBlock()
+                            .Text(Bind(MyProperty)),
 
-                new Button()
-                    .Content(Bind(MyNotifiedProperty))
-                    .OnClick(OnButtonClick),
+                        new TextBlock()
+                            .Text(Bind(State.StateProperty)),
 
-                new Button()
-                    .Content("Update separate state")
-                    .OnClick(OnButton2Click),
+                        new Button()
+                            .Content(Bind(MyNotifiedProperty))
+                            .OnClick(OnButtonClick),
 
-                new Border()
-                    .Background(Bind(BorderColor))
-                    .Child(
-                        new Component()
-                            .InnerContent(Bind(MvuComponentParam))
-                    ),
+                        new Button()
+                            .Content("Update separate state")
+                            .OnClick(OnButton2Click),
 
-                new Button()
-                    .Content("Change nested component parameter")
-                    .OnClick(OnButton3Click),
+                        new Border()
+                            .Background(Bind(BorderColor))
+                            .Child(
+                                new Component()
+                                    .InnerContent(Bind(MvuComponentParam))
+                            ),
+
+                        new Button()
+                            .Content("Change nested component parameter")
+                            .OnClick(OnButton3Click),
 
 
-                new TextBlock()
-                    .Text("lambda binding sample")
-                    .FontSize(24),
-                new TextBlock()
-                    .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"),
-                new NumericUpDown()
-                    .Value(() => Counter, v => Counter = v)
+                        new TextBlock()
+                            .Text("lambda binding sample")
+                            .FontSize(24),
+                        new TextBlock()
+                            .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"),
+                        new NumericUpDown()
+                            .Value(() => Counter, v => Counter = v)
 
+                    )
             );
 
     private decimal? Counter { get; set; } = 0;

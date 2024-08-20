@@ -202,7 +202,16 @@ namespace AvaloniaExtensionGenerator
 
                 if (!loadedAssembliesCache.TryGetValue(dll, out var assembly))
                 {
-                    assembly = Assembly.LoadFrom(dll);
+                    //searching assembly in tha current app domain to avoid exceptions
+                    var asmName = Path.GetFileNameWithoutExtension(dll);
+                    assembly = AppDomain.CurrentDomain.GetAssemblies()
+                        .FirstOrDefault(x => asmName == x.GetName().Name);
+
+                    //not found - try to load from file
+                    if(assembly == null)
+                        assembly = Assembly.LoadFrom(dll);
+
+                    //cache assembly
                     loadedAssembliesCache[dll] = assembly;
                     Console.WriteLine($"-{assembly.GetName().Name}");
                 }

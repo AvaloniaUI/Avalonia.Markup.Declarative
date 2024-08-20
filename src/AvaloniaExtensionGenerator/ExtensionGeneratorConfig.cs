@@ -9,10 +9,5 @@ public class ExtensionGeneratorConfig(string outputPath)
     /// </summary>
     public string[] InitialNamespaces { get; init; } = [];
 
-    /// <summary>
-    /// Defines types that must be excluded from processing
-    /// </summary>
-    public Type[] Exclude { get; init; } = [];
-
     public string OutputPath { get; set; } = outputPath;
 }

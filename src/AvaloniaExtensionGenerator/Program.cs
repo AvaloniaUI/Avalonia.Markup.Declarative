@@ -71,7 +71,7 @@ internal class Program
             var outputPath = Path.Combine(projectDirPath, "ControlExtensions.Generated");
 
             var types = await CsProjectTypesExtractor
-                .LoadTypesFromProject(projectPath, AvaloniaTypeHelper.GetAvaloniaObjectTypeName(), ignoreAssemblies);
+                .LoadTypesFromProject(projectPath, "Avalonia.AvaloniaObject", ignoreAssemblies);
 
             var extensionsOutputPath = GeneratorHost.RunControlTypeGenerators(types, outputPath);
 
