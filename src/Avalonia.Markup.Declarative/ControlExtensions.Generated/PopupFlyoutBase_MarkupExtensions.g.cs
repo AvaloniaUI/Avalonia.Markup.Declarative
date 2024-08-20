@@ -148,6 +148,29 @@ public static T ShowMode<T,TValue>(this T control, TValue value, FuncValueConver
 => control._setEx(Avalonia.Controls.Primitives.PopupFlyoutBase.ShowModeProperty, ps, () => control.ShowMode = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+ // OverlayDismissEventPassThroughProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static T OverlayDismissEventPassThrough<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Primitives.PopupFlyoutBase
+   => control._set(Avalonia.Controls.Primitives.PopupFlyoutBase.OverlayDismissEventPassThroughProperty, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+public static T OverlayDismissEventPassThrough<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.PopupFlyoutBase
+=> control._setEx(Avalonia.Controls.Primitives.PopupFlyoutBase.OverlayDismissEventPassThroughProperty, ps, () => control.OverlayDismissEventPassThrough = value, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T OverlayDismissEventPassThrough<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.PopupFlyoutBase
+   => control._set(Avalonia.Controls.Primitives.PopupFlyoutBase.OverlayDismissEventPassThroughProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T OverlayDismissEventPassThrough<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.Primitives.PopupFlyoutBase
+   => control._set(Avalonia.Controls.Primitives.PopupFlyoutBase.OverlayDismissEventPassThroughProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+public static T OverlayDismissEventPassThrough<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.PopupFlyoutBase
+=> control._setEx(Avalonia.Controls.Primitives.PopupFlyoutBase.OverlayDismissEventPassThroughProperty, ps, () => control.OverlayDismissEventPassThrough = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
  // OverlayInputPassThroughElementProperty
 
 /*BindFromExpressionSetterGenerator*/
