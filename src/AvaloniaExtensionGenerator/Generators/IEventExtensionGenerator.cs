@@ -2,8 +2,7 @@ using System.Reflection;
 
 namespace AvaloniaExtensionGenerator.Generators;
 
-public interface IEventExtensionGenerator
+public interface IMemberExtensionGenerator<in TMember> where TMember : MemberInfo
 {
-    ExtensionGeneratorConfig Config { set; }
-    string? GetEventExtension(EventInfo @event, out IEnumerable<string> usedNamespaces);
+    string? GetExtension(TMember info, out IEnumerable<string> usedNamespaces);
 }

@@ -186,18 +186,6 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
-	public static TElement DataContext<TElement>(
-		this TElement control,
-		object value,
-		BindingMode? bindingMode = null,
-		IValueConverter? converter = null,
-		[CallerArgumentExpression("value")] string? ps = null)
-		where TElement : StyledElement
-	{
-		return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode,
-			converter, null);
-	}
-
 	public static TElement DataContext<TElement, TDataContext>(
 		this TElement control,
 		TDataContext value,

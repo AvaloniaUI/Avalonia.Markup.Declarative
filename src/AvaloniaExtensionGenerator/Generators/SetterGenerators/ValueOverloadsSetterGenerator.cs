@@ -14,7 +14,7 @@ public class ValueOverloadsSetterGenerator : SetterGeneratorBase
                 foreach (var constructor in info.ValueType.GetConstructors())
                 {
                     var ps = constructor.GetParameters();
-                    var argDefs = string.Join(", ", ps.Select(x => $"{x.ParameterType.Name} {x.Name} = default"));
+                    var argDefs = string.Join(", ", ps.Select(x => $"{x.ParameterType.FullName} {x.Name} = default"));
                     var argVals = string.Join(", ", ps.Select(x => x.Name)); ;
 
                     if (info.CanBeGenericConstraint)

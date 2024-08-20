@@ -1,0 +1,74 @@
+#nullable enable
+using Avalonia.Data;
+using Avalonia.Data.Converters;
+using System;
+using System.Linq.Expressions;
+using System.Numerics;
+using System.Runtime.CompilerServices;
+
+namespace Avalonia.Markup.Declarative;
+public static partial class LinearGradientBrush_MarkupExtensions
+{
+//================= Properties ======================//
+ // StartPointProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static Avalonia.Media.LinearGradientBrush StartPoint(this Avalonia.Media.LinearGradientBrush control, Func<Avalonia.RelativePoint> func, Action<Avalonia.RelativePoint>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(Avalonia.Media.LinearGradientBrush.StartPointProperty, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+public static Avalonia.Media.LinearGradientBrush StartPoint(this Avalonia.Media.LinearGradientBrush control, Avalonia.RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Avalonia.Media.LinearGradientBrush.StartPointProperty, ps, () => control.StartPoint = value, bindingMode, converter, bindingSource);
+
+/*ValueOverloadsSetterGenerator*/
+
+public static Avalonia.Media.LinearGradientBrush StartPoint(this Avalonia.Media.LinearGradientBrush control, System.Double x = default, System.Double y = default, Avalonia.RelativeUnit unit = default)
+   => control._set(() => control.StartPoint = new Avalonia.RelativePoint(x, y, unit));
+public static Avalonia.Media.LinearGradientBrush StartPoint(this Avalonia.Media.LinearGradientBrush control, Avalonia.Point point = default, Avalonia.RelativeUnit unit = default)
+   => control._set(() => control.StartPoint = new Avalonia.RelativePoint(point, unit));
+
+/*BindSetterGenerator*/
+public static Avalonia.Media.LinearGradientBrush StartPoint(this Avalonia.Media.LinearGradientBrush control, IBinding binding)
+   => control._set(Avalonia.Media.LinearGradientBrush.StartPointProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static Avalonia.Media.LinearGradientBrush StartPoint(this Avalonia.Media.LinearGradientBrush control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(Avalonia.Media.LinearGradientBrush.StartPointProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+public static Avalonia.Media.LinearGradientBrush StartPoint<TValue>(this Avalonia.Media.LinearGradientBrush control, TValue value, FuncValueConverter<TValue, Avalonia.RelativePoint> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Avalonia.Media.LinearGradientBrush.StartPointProperty, ps, () => control.StartPoint = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+ // EndPointProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static Avalonia.Media.LinearGradientBrush EndPoint(this Avalonia.Media.LinearGradientBrush control, Func<Avalonia.RelativePoint> func, Action<Avalonia.RelativePoint>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)
+   => control._set(Avalonia.Media.LinearGradientBrush.EndPointProperty, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+public static Avalonia.Media.LinearGradientBrush EndPoint(this Avalonia.Media.LinearGradientBrush control, Avalonia.RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Avalonia.Media.LinearGradientBrush.EndPointProperty, ps, () => control.EndPoint = value, bindingMode, converter, bindingSource);
+
+/*ValueOverloadsSetterGenerator*/
+
+public static Avalonia.Media.LinearGradientBrush EndPoint(this Avalonia.Media.LinearGradientBrush control, System.Double x = default, System.Double y = default, Avalonia.RelativeUnit unit = default)
+   => control._set(() => control.EndPoint = new Avalonia.RelativePoint(x, y, unit));
+public static Avalonia.Media.LinearGradientBrush EndPoint(this Avalonia.Media.LinearGradientBrush control, Avalonia.Point point = default, Avalonia.RelativeUnit unit = default)
+   => control._set(() => control.EndPoint = new Avalonia.RelativePoint(point, unit));
+
+/*BindSetterGenerator*/
+public static Avalonia.Media.LinearGradientBrush EndPoint(this Avalonia.Media.LinearGradientBrush control, IBinding binding)
+   => control._set(Avalonia.Media.LinearGradientBrush.EndPointProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static Avalonia.Media.LinearGradientBrush EndPoint(this Avalonia.Media.LinearGradientBrush control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null)
+   => control._set(Avalonia.Media.LinearGradientBrush.EndPointProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+public static Avalonia.Media.LinearGradientBrush EndPoint<TValue>(this Avalonia.Media.LinearGradientBrush control, TValue value, FuncValueConverter<TValue, Avalonia.RelativePoint> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Avalonia.Media.LinearGradientBrush.EndPointProperty, ps, () => control.EndPoint = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+
+//================= Events ======================//
+
+//================= Styles ======================//
+
+}

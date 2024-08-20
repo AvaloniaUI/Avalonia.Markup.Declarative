@@ -6,9 +6,6 @@ public class BindingStyleSetterGenerator : SetterGeneratorBase
 {
     public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
     {
-//    public static Style<TElement> Background<TElement>(this Style<TElement> style, Brush brush) where TElement : TemplatedControl =>
-//        AddSetter(style, new Setter(TemplatedControl.BackgroundProperty, brush));
-
         if (info.ValueType.Name == "IBinding")
             return $"//Skipped {info.ExtensionName} because already exist in value setters";
 

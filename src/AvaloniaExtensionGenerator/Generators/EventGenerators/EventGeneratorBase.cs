@@ -2,11 +2,9 @@ using System.Reflection;
 
 namespace AvaloniaExtensionGenerator.Generators.EventGenerators;
 
-public abstract class EventGeneratorBase : IEventExtensionGenerator
+public abstract class EventGeneratorBase : IMemberExtensionGenerator<EventInfo>
 {
-    public ExtensionGeneratorConfig Config { get; set; } = null!;
-
-    public string? GetEventExtension(EventInfo @event, out IEnumerable<string> usedNamespaces)
+    public string? GetExtension(EventInfo @event, out IEnumerable<string> usedNamespaces)
     {
         var namespaces = new HashSet<string>();
         var info = new EventExtensionInfo(@event, t => GetTypeDeclarationSourceCode(t, namespaces));

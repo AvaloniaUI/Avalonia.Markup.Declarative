@@ -1,13 +1,10 @@
-using System.Diagnostics;
 using System.Reflection;
 
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
 
-public abstract class SetterGeneratorBase : ISetterExtensionGenerator
+public abstract class SetterGeneratorBase : IMemberExtensionGenerator<FieldInfo>
 {
-    public ExtensionGeneratorConfig Config { get; set; } = null!;
-
-    public string? GetSetterExtension(FieldInfo field, out IEnumerable<string> usedNamespaces)
+    public string? GetExtension(FieldInfo field, out IEnumerable<string> usedNamespaces)
     {
         var namespaces = new HashSet<string>();
         var info = new PropertyExtensionInfo(field, t => GetTypeDeclarationSourceCode(t, namespaces));
@@ -65,6 +62,4 @@ public abstract class SetterGeneratorBase : ISetterExtensionGenerator
 
         return result;
     }
-
-    private static bool IsNullable(Type type) => Nullable.GetUnderlyingType(type) != null;
 }
