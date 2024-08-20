@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.Data.Common;
 using System.Reflection;
 using System.Text;
 using AvaloniaExtensionGenerator.Generators;
@@ -128,6 +127,7 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
 
         if (field.FieldType.Name.StartsWith("DirectProperty") ||
             field.FieldType.Name.StartsWith("StyledProperty") ||
+            field.FieldType.Name.StartsWith("AttachedProperty") ||
             field.FieldType.Name.StartsWith("AvaloniaProperty"))
         {
             var isReadOnly = IsReadOnlyField(field);

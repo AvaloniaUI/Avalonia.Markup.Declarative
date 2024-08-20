@@ -201,6 +201,29 @@ public static T RenderTransformOrigin<T,TValue>(this T control, TValue value, Fu
 => control._setEx(Avalonia.Visual.RenderTransformOriginProperty, ps, () => control.RenderTransformOrigin = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+ // FlowDirectionProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static T FlowDirection<T>(this T control, Func<Avalonia.Media.FlowDirection> func, Action<Avalonia.Media.FlowDirection>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Visual
+   => control._set(Avalonia.Visual.FlowDirectionProperty, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+public static T FlowDirection<T>(this T control, Avalonia.Media.FlowDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
+=> control._setEx(Avalonia.Visual.FlowDirectionProperty, ps, () => control.FlowDirection = value, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T FlowDirection<T>(this T control, IBinding binding) where T : Avalonia.Visual
+   => control._set(Avalonia.Visual.FlowDirectionProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T FlowDirection<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Visual
+   => control._set(Avalonia.Visual.FlowDirectionProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+public static T FlowDirection<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FlowDirection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
+=> control._setEx(Avalonia.Visual.FlowDirectionProperty, ps, () => control.FlowDirection = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
  // ZIndexProperty
 
 /*BindFromExpressionSetterGenerator*/

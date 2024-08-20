@@ -28,6 +28,7 @@ public class SampleMvuView : ComponentBase
                     .Children(
                         new TextBlock()
                             .Classes("beautiful-textblock")
+                            .TextWrapping(TextWrapping.Wrap)
                             .Name("NamedTextBlock")
                             .Text("NamedTextBlock"),
 
