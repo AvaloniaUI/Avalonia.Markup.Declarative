@@ -71,6 +71,8 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
             )
         ];
         
+        var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0.0";
+
         foreach (var controlType in config.TypesToProcess)
         {
             var totalGenerated = 0;
@@ -95,6 +97,8 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
 
             sb.AppendLine();
             sb.AppendLine("namespace Avalonia.Markup.Declarative;");
+            sb.AppendLine($@"[global::System.CodeDom.Compiler.GeneratedCode(""AvaloniaExtensionGenerator"", ""{version}"")]");
+            sb.AppendLine(@"[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]");
 
             sb.AppendLine($"public static partial class {controlType.Name}_MarkupExtensions");
             sb.AppendLine("{");
