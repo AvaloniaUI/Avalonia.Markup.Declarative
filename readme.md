@@ -77,7 +77,7 @@ public class MainView : ViewBase<MainViewModel>
   ```
   
 ## Properties support on custom controls
-There are two source generators to add Markup Extensions on your own controls. If you downloaded source code or clonned this repo, add them by referencing `Avalonia.Markup.Declarative.SourceGenerator` project in your csproj file like this:
+There are two source generators to add Markup Extensions on your own controls. If you downloaded source code or cloned this repo, add them by referencing `Avalonia.Markup.Declarative.SourceGenerator` project in your csproj file like this:
 
 ```xml
 	<ItemGroup>
@@ -136,7 +136,7 @@ public class Component : ComponentBase
 ## External libraries support
 
 By default *Avalonia.Markup.Declarative* contains only extension from Avalonia Framework controls and also has source generator, that adds Extensions from sources of your project. 
-But sometimes you need to use third-party controls form Nuget Packages. For that cases you need to use AvaloniaExtensionGenerator tool ( https://www.nuget.org/packages/AvaloniaExtensionGenerator/ ).
+But sometimes you need to use third-party controls from Nuget Packages. For that cases you need to use AvaloniaExtensionGenerator tool ( https://www.nuget.org/packages/AvaloniaExtensionGenerator/ ).
 
 ##Installation
 ```
@@ -147,7 +147,7 @@ dotnet tool install --global AvaloniaExtensionGenerator
 
 tool should be run from the folder where **.csproj** file is located 
 ```
-cd c:\your\porject\
+cd c:\your\project\
 ```
 
 call the command
