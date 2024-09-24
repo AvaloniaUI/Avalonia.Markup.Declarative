@@ -263,11 +263,23 @@ namespace AvaloniaExtensionGenerator
             if (Directory.Exists(frameworkPath))
                 return true;
 
-            frameworkPath = Path.Combine(libPath, "netstandard2.0");
+            var framework = NuGetFramework.ParseFolder(targetFramework);
+
+            if (framework.Framework == ".NETCoreApp")
+            {
+                for (int i = framework.Version.Major; i >= 6; i--)
+                {
+                    frameworkPath = Path.Combine(libPath, $"net{i}.0");
+                    if (Directory.Exists(frameworkPath))
+                        return true;
+                }
+            }
+
+            frameworkPath = Path.Combine(libPath, "netstandard2.1");
             if (Directory.Exists(frameworkPath))
                 return true;
 
-            frameworkPath = Path.Combine(libPath, "netstandard2.1");
+            frameworkPath = Path.Combine(libPath, "netstandard2.0");
             if (Directory.Exists(frameworkPath))
                 return true;
 
