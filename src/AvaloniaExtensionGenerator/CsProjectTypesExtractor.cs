@@ -267,7 +267,7 @@ namespace AvaloniaExtensionGenerator
 
             if (framework.Framework == ".NETCoreApp")
             {
-                for (int i = framework.Version.Major; i >= 6; i--)
+                for (int i = framework.Version.Major - 1; i >= 6; i--)
                 {
                     frameworkPath = Path.Combine(libPath, $"net{i}.0");
                     if (Directory.Exists(frameworkPath))
