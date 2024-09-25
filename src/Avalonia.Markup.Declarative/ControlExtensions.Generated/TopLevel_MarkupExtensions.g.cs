@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class TopLevel_MarkupExtensions
 {
 //================= Properties ======================//
@@ -77,6 +79,22 @@ public static T RequestedThemeVariant<T>(this T control, AvaloniaProperty avalon
 /*MagicalSetterWithConverterGenerator*/
 public static T RequestedThemeVariant<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Styling.ThemeVariant> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel
 => control._setEx(Avalonia.Controls.TopLevel.RequestedThemeVariantProperty, ps, () => control.RequestedThemeVariant = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+
+//================= Attached Properties ======================//
+ // SystemBarColorProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T SystemBarColor<T>(this T control, Avalonia.Media.SolidColorBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.TopLevel.SystemBarColorProperty, ps, () => Avalonia.Controls.TopLevel.SetSystemBarColor(control, value), bindingMode, converter, bindingSource);
+
+
+ // AutoSafeAreaPaddingProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T AutoSafeAreaPadding<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.TopLevel.AutoSafeAreaPaddingProperty, ps, () => Avalonia.Controls.TopLevel.SetAutoSafeAreaPadding(control, value), bindingMode, converter, bindingSource);
 
 
 

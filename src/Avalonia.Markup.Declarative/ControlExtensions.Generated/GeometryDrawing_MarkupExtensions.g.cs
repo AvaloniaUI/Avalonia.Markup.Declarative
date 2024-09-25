@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class GeometryDrawing_MarkupExtensions
 {
 //================= Properties ======================//
@@ -73,6 +75,8 @@ public static Avalonia.Media.GeometryDrawing Pen(this Avalonia.Media.GeometryDra
 public static Avalonia.Media.GeometryDrawing Pen<TValue>(this Avalonia.Media.GeometryDrawing control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IPen> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Avalonia.Media.GeometryDrawing.PenProperty, ps, () => control.Pen = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+
+//================= Attached Properties ======================//
 
 //================= Events ======================//
 

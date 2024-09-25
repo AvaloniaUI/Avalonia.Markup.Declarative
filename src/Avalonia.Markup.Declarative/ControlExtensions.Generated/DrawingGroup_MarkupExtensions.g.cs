@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class DrawingGroup_MarkupExtensions
 {
 //================= Properties ======================//
@@ -115,6 +117,8 @@ public static Avalonia.Media.DrawingGroup Children(this Avalonia.Media.DrawingGr
 public static Avalonia.Media.DrawingGroup Children<TValue>(this Avalonia.Media.DrawingGroup control, TValue value, FuncValueConverter<TValue, Avalonia.Media.DrawingCollection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Avalonia.Media.DrawingGroup.ChildrenProperty, ps, () => control.Children = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+
+//================= Attached Properties ======================//
 
 //================= Events ======================//
 

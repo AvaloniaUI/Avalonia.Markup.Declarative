@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class VisualBrush_MarkupExtensions
 {
 //================= Properties ======================//
@@ -31,6 +33,8 @@ public static Avalonia.Media.VisualBrush Visual(this Avalonia.Media.VisualBrush 
 public static Avalonia.Media.VisualBrush Visual<TValue>(this Avalonia.Media.VisualBrush control, TValue value, FuncValueConverter<TValue, Avalonia.Visual> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Avalonia.Media.VisualBrush.VisualProperty, ps, () => control.Visual = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+
+//================= Attached Properties ======================//
 
 //================= Events ======================//
 

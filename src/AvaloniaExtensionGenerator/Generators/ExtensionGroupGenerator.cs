@@ -1,15 +1,16 @@
 using System.Reflection;
-using System.Reflection.Emit;
 using System.Text;
+using AvaloniaExtensionGenerator.Generators.EventGenerators;
+using AvaloniaExtensionGenerator.Generators.SetterGenerators;
 
 namespace AvaloniaExtensionGenerator.Generators;
 
 public class ExtensionGroupGenerator<TMember>(
     string groupName,
-    Func<Type, IEnumerable<TMember>> membersQuery,
-    params IMemberExtensionGenerator<TMember>[] generators)
+    Func<Type, IEnumerable<MemberInfo>> membersQuery,
+    params IMemberExtensionGenerator[] generators)
     : IExtensionGroupGenerator
-    where TMember : MemberInfo
+    where TMember : IMemberExtensionInfo
 {
     public string GroupName { get; } = groupName;
 
@@ -23,18 +24,23 @@ public class ExtensionGroupGenerator<TMember>(
 
         var sb = new StringBuilder();
         var i = 0;
-        foreach (var info in members)
+        foreach (var memberInfo in members)
         {
-            sb.AppendLine($" // {info.Name}");
+            sb.AppendLine($" // {memberInfo.Name}");
 
-            foreach (var generator in generators)
+            var extensionInfo = GetExtensionInfo(memberInfo);
+            foreach (var generator in generators.Where(x=>x.CanGenerate(extensionInfo)))
             {
-                var setterExtension = generator.GetExtension(info, out var usedNamespaces);
-                if (!string.IsNullOrWhiteSpace(setterExtension))
+                var extensionCode = generator.GetExtension(extensionInfo);
+                if (!string.IsNullOrWhiteSpace(extensionCode))
                 {
                     sb.AppendLine();
                     sb.AppendLine($"/*{generator.GetType().Name}*/");
-                    sb.AppendLine(setterExtension);
+                    
+                    if(extensionInfo.IsObsolete)
+                        sb.AppendLine($"\t[Obsolete(\"{extensionInfo.ObsoleteMessage}\")]");
+                    
+                    sb.AppendLine(extensionCode);
                     generationsCount++;
                 }
             }
@@ -44,5 +50,16 @@ public class ExtensionGroupGenerator<TMember>(
         }
 
         return sb.ToString();
+    }
+
+    private static IMemberExtensionInfo GetExtensionInfo(MemberInfo info)
+    {
+        if (info is FieldInfo fi)
+            return new PropertyExtensionInfo(fi);
+
+        if (info is EventInfo ei)
+            return new EventExtensionInfo(ei);
+
+        throw new ArgumentException($"{info.GetType().Name} is not valid member info");
     }
 }

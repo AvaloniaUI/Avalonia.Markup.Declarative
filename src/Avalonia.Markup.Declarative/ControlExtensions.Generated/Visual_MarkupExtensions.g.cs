@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class Visual_MarkupExtensions
 {
 //================= Properties ======================//
@@ -201,29 +203,6 @@ public static T RenderTransformOrigin<T,TValue>(this T control, TValue value, Fu
 => control._setEx(Avalonia.Visual.RenderTransformOriginProperty, ps, () => control.RenderTransformOrigin = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
- // FlowDirectionProperty
-
-/*BindFromExpressionSetterGenerator*/
-public static T FlowDirection<T>(this T control, Func<Avalonia.Media.FlowDirection> func, Action<Avalonia.Media.FlowDirection>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Visual
-   => control._set(Avalonia.Visual.FlowDirectionProperty, func, onChanged, expression);
-
-/*MagicalSetterGenerator*/
-public static T FlowDirection<T>(this T control, Avalonia.Media.FlowDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
-=> control._setEx(Avalonia.Visual.FlowDirectionProperty, ps, () => control.FlowDirection = value, bindingMode, converter, bindingSource);
-
-/*BindSetterGenerator*/
-public static T FlowDirection<T>(this T control, IBinding binding) where T : Avalonia.Visual
-   => control._set(Avalonia.Visual.FlowDirectionProperty, binding);
-
-/*AvaloniaPropertyBindSetterGenerator*/
-public static T FlowDirection<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Visual
-   => control._set(Avalonia.Visual.FlowDirectionProperty, avaloniaProperty, bindingMode, converter, overrideView);
-
-/*MagicalSetterWithConverterGenerator*/
-public static T FlowDirection<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FlowDirection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
-=> control._setEx(Avalonia.Visual.FlowDirectionProperty, ps, () => control.FlowDirection = converter.TryConvert(value), bindingMode, converter, bindingSource);
-
-
  // ZIndexProperty
 
 /*BindFromExpressionSetterGenerator*/
@@ -245,6 +224,15 @@ public static T ZIndex<T>(this T control, AvaloniaProperty avaloniaProperty, Bin
 /*MagicalSetterWithConverterGenerator*/
 public static T ZIndex<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
 => control._setEx(Avalonia.Visual.ZIndexProperty, ps, () => control.ZIndex = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+
+//================= Attached Properties ======================//
+ // FlowDirectionProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T FlowDirection<T>(this T control, Avalonia.Media.FlowDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
+ => control._setEx(Avalonia.Visual.FlowDirectionProperty, ps, () => Avalonia.Visual.SetFlowDirection(control, value), bindingMode, converter, bindingSource);
 
 
 
@@ -359,14 +347,6 @@ public static Style<T> RenderTransformOrigin<T>(this Style<T> style, System.Doub
 
 
  // FlowDirectionProperty
-
-/*ValueStyleSetterGenerator*/
-public static Style<T> FlowDirection<T>(this Style<T> style, Avalonia.Media.FlowDirection value) where T : Avalonia.Visual
-=> style._addSetter(Avalonia.Visual.FlowDirectionProperty, value);
-
-/*BindingStyleSetterGenerator*/
-public static Style<T> FlowDirection<T>(this Style<T> style, IBinding binding) where T : Avalonia.Visual
-=> style._addSetter(Avalonia.Visual.FlowDirectionProperty, binding);
 
 
  // ZIndexProperty

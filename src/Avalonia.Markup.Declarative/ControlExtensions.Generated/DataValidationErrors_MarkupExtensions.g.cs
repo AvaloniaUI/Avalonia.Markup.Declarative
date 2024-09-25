@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class DataValidationErrors_MarkupExtensions
 {
 //================= Properties ======================//
@@ -54,6 +56,22 @@ public static T Owner<T>(this T control, AvaloniaProperty avaloniaProperty, Bind
 /*MagicalSetterWithConverterGenerator*/
 public static T Owner<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Control> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.DataValidationErrors
 => control._setEx(Avalonia.Controls.DataValidationErrors.OwnerProperty, ps, () => control.Owner = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+
+//================= Attached Properties ======================//
+ // ErrorsProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T Errors<T>(this T control, System.Collections.Generic.IEnumerable<System.Object> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.DataValidationErrors.ErrorsProperty, ps, () => Avalonia.Controls.DataValidationErrors.SetErrors(control, value), bindingMode, converter, bindingSource);
+
+
+ // ErrorConverterProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T ErrorConverter<T>(this T control, System.Func<System.Object,System.Object> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.DataValidationErrors.ErrorConverterProperty, ps, () => Avalonia.Controls.DataValidationErrors.SetErrorConverter(control, value), bindingMode, converter, bindingSource);
 
 
 

@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class TrayIcon_MarkupExtensions
 {
 //================= Properties ======================//
@@ -146,6 +148,23 @@ public static T IsVisible<T>(this T control, AvaloniaProperty avaloniaProperty, 
 /*MagicalSetterWithConverterGenerator*/
 public static T IsVisible<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
 => control._setEx(Avalonia.Controls.TrayIcon.IsVisibleProperty, ps, () => control.IsVisible = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+
+//================= Attached Properties ======================//
+ // IconsProperty
+
+/*BindSetterGenerator*/
+public static T Icons<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.IconsProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T Icons<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TrayIcon
+   => control._set(Avalonia.Controls.TrayIcon.IconsProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+public static T Icons<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.TrayIcons> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
+=> control._setEx(Avalonia.Controls.TrayIcon.IconsProperty, ps, () => control.Icons = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

@@ -1,8 +1,12 @@
 namespace AvaloniaExtensionGenerator.Generators.EventGenerators;
 
-public class ActionToEventGenerator : EventGeneratorBase
+public class ActionToEventGenerator : IMemberExtensionGenerator
 {
-    public override string GetEventExtensionOverride(EventExtensionInfo @event)
+    public bool CanGenerate(IMemberExtensionInfo info) => info is EventExtensionInfo;
+
+    public string? GetExtension(IMemberExtensionInfo info) => GetEventExtensionOverride((EventExtensionInfo)info);
+
+    public string GetEventExtensionOverride(EventExtensionInfo @event)
     {
         var eventHandler = @event.EventHandler;
         var eventParameterTypes = @event.EventParameterTypes;

@@ -7,9 +7,20 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class FlyoutBase_MarkupExtensions
 {
 //================= Properties ======================//
+
+//================= Attached Properties ======================//
+ // AttachedFlyoutProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T AttachedFlyout<T>(this T control, Avalonia.Controls.Primitives.FlyoutBase value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.Primitives.FlyoutBase.AttachedFlyoutProperty, ps, () => Avalonia.Controls.Primitives.FlyoutBase.SetAttachedFlyout(control, value), bindingMode, converter, bindingSource);
+
+
 
 //================= Events ======================//
  // Opened

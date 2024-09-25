@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class PopupFlyoutBase_MarkupExtensions
 {
 //================= Properties ======================//
@@ -217,6 +219,8 @@ public static T PlacementConstraintAdjustment<T,TValue>(this T control, TValue v
 => control._setEx(Avalonia.Controls.Primitives.PopupFlyoutBase.PlacementConstraintAdjustmentProperty, ps, () => control.PlacementConstraintAdjustment = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+
+//================= Attached Properties ======================//
 
 //================= Events ======================//
  // Closing

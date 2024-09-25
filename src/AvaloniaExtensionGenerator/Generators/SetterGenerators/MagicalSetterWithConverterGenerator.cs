@@ -1,6 +1,8 @@
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
 public class MagicalSetterWithConverterGenerator : SetterGeneratorBase
 {
+    public override bool CanGenerateOverride(PropertyExtensionInfo info) => !info.IsAttachedProperty;
+
     public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
     {
         var argsString = $"TValue value, FuncValueConverter<TValue, {info.ValueTypeSource}> converter, BindingMode? bindingMode = null, object? bindingSource = null,"

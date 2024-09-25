@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class AdornerLayer_MarkupExtensions
 {
 //================= Properties ======================//
@@ -31,6 +33,29 @@ public static T DefaultFocusAdorner<T>(this T control, AvaloniaProperty avalonia
 /*MagicalSetterWithConverterGenerator*/
 public static T DefaultFocusAdorner<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ITemplate<Avalonia.Controls.Control>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.AdornerLayer
 => control._setEx(Avalonia.Controls.Primitives.AdornerLayer.DefaultFocusAdornerProperty, ps, () => control.DefaultFocusAdorner = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+
+//================= Attached Properties ======================//
+ // AdornedElementProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T AdornedElement<T>(this T control, Avalonia.Visual value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
+ => control._setEx(Avalonia.Controls.Primitives.AdornerLayer.AdornedElementProperty, ps, () => Avalonia.Controls.Primitives.AdornerLayer.SetAdornedElement(control, value), bindingMode, converter, bindingSource);
+
+
+ // IsClipEnabledProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T IsClipEnabled<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
+ => control._setEx(Avalonia.Controls.Primitives.AdornerLayer.IsClipEnabledProperty, ps, () => Avalonia.Controls.Primitives.AdornerLayer.SetIsClipEnabled(control, value), bindingMode, converter, bindingSource);
+
+
+ // AdornerProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T Adorner<T>(this T control, Avalonia.Controls.Control value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
+ => control._setEx(Avalonia.Controls.Primitives.AdornerLayer.AdornerProperty, ps, () => Avalonia.Controls.Primitives.AdornerLayer.SetAdorner(control, value), bindingMode, converter, bindingSource);
 
 
 

@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Text;
 using AvaloniaExtensionGenerator.Generators;
+using AvaloniaExtensionGenerator.Generators.AttachedPropertySetterGenerator;
 using AvaloniaExtensionGenerator.Generators.EventGenerators;
 using AvaloniaExtensionGenerator.Generators.SetterGenerators;
 using AvaloniaExtensionGenerator.Generators.StyleSetterGenerators;
@@ -49,7 +50,7 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
 
         List<IExtensionGroupGenerator> groupGenerators =
         [
-            new ExtensionGroupGenerator<FieldInfo>("Properties", t => t.GetFields().Where(IsAcceptableField),
+            new ExtensionGroupGenerator<PropertyExtensionInfo>("Properties", t => t.GetFields().Where(IsAvaloniaPropertyField),
                 new BindFromExpressionSetterGenerator(),
                 new MagicalSetterGenerator(),
                 new ValueOverloadsSetterGenerator(),
@@ -60,10 +61,19 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
                 new MagicalSetterWithConverterGenerator()
             ),
 
-            new ExtensionGroupGenerator<EventInfo>("Events", t => t.GetEvents().Where(x => x.DeclaringType == t),
+            new ExtensionGroupGenerator<PropertyExtensionInfo>("Attached Properties", t => t.GetFields().Where(IsAttachedPropertyField),
+                new AttachedPropertyMagicalSetterGenerator(),
+
+                //obsolete candidates
+                new BindSetterGenerator(),
+                new AvaloniaPropertyBindSetterGenerator(),
+                new MagicalSetterWithConverterGenerator()
+            ),
+
+            new ExtensionGroupGenerator<EventExtensionInfo>("Events", t => t.GetEvents().Where(x => x.DeclaringType == t),
                 new ActionToEventGenerator()),
 
-            new ExtensionGroupGenerator<FieldInfo>("Styles",
+            new ExtensionGroupGenerator<PropertyExtensionInfo>("Styles",
                 t => !IsStyledElement(t) ? [] : t.GetFields().Where(IsAcceptableStyledField),
                 new ValueStyleSetterGenerator(),
                 new BindingStyleSetterGenerator(),
@@ -116,22 +126,13 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
         }
     }
 
-    private static bool IsAcceptableField(FieldInfo field)
+    private static bool IsAvaloniaPropertyField(FieldInfo field)
     {
         if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
             return false;
 
-        //if (field.FieldType.Name.StartsWith("AttachedProperty"))
-        //{
-        //    Console.ForegroundColor = ConsoleColor.Magenta;
-        //    Console.WriteLine($"{field.Name} is Attached Property.");
-        //    Console.ForegroundColor = ConsoleColor.Gray;
-        //    return true;
-        //}
-
         if (field.FieldType.Name.StartsWith("DirectProperty") ||
             field.FieldType.Name.StartsWith("StyledProperty") ||
-            field.FieldType.Name.StartsWith("AttachedProperty") ||
             field.FieldType.Name.StartsWith("AvaloniaProperty"))
         {
             var isReadOnly = IsReadOnlyField(field);
@@ -145,6 +146,30 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
             return !isReadOnly;
         }
 
+        return false;
+    }
+    private static bool IsAttachedPropertyField(FieldInfo field)
+    {
+        if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
+            return false;
+
+        if (field.FieldType.Name.StartsWith("AttachedProperty"))
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine($"{field.Name} is Attached Property.");
+
+            var isReadOnly = IsReadOnlyAttachedField(field);
+            if (isReadOnly)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"{field.Name} is read only - skipped.");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                return false;
+            }
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+            return true;
+        }
         return false;
     }
 
@@ -165,13 +190,36 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
         try
         {
             var controlType = field.DeclaringType;
-            var extensionName = field.Name.Replace("Property", "");
             var propertyName = field.Name.Replace("Property", "");
 
             var propInfo = controlType?.GetProperty(propertyName);
             if (propInfo != null)
             {
                 return propInfo.GetSetMethod() == null && propInfo.CanRead;
+            }
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Console.WriteLine("skipped");
+        }
+
+        return false;
+    }
+    private static bool IsReadOnlyAttachedField(FieldInfo field)
+    {
+        try
+        {
+            var controlType = field.DeclaringType;
+            var setterMethodName = "Set" + field.Name.Replace("Property", "");
+
+            var methodInfo = controlType?.GetMethod(setterMethodName);
+            if (methodInfo != null)
+            {
+                if (methodInfo is { IsPublic: true, IsStatic: true })
+                    return false;
             }
 
             return true;

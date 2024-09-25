@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class ImageBrush_MarkupExtensions
 {
 //================= Properties ======================//
@@ -31,6 +33,8 @@ public static Avalonia.Media.ImageBrush Source(this Avalonia.Media.ImageBrush co
 public static Avalonia.Media.ImageBrush Source<TValue>(this Avalonia.Media.ImageBrush control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IImageBrushSource> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Avalonia.Media.ImageBrush.SourceProperty, ps, () => control.Source = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+
+//================= Attached Properties ======================//
 
 //================= Events ======================//
 

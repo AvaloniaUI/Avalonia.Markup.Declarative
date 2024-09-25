@@ -4,6 +4,8 @@ namespace AvaloniaExtensionGenerator.Generators.StyleSetterGenerators;
 
 public class ValueOverloadsStyleSetterGenerator : SetterGeneratorBase
 {
+    public override bool CanGenerateOverride(PropertyExtensionInfo info) => !info.IsAttachedProperty;
+
     public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
     {
         var extensionText = "";

@@ -2,7 +2,7 @@ using System.Reflection;
 
 namespace AvaloniaExtensionGenerator.Generators.EventGenerators;
 
-public class EventExtensionInfo
+public class EventExtensionInfo : IMemberExtensionInfo
 {
     public EventInfo EventInfo { get; }
     public Type ControlType { get; }
@@ -13,7 +13,7 @@ public class EventExtensionInfo
     public bool IsObsolete => ObsoleteMessage != null;
     public bool CanBeGenericConstraint { get; }
 
-    public EventExtensionInfo(EventInfo eventInfo, Func<Type, string> typeDeclarationFunc)
+    public EventExtensionInfo(EventInfo eventInfo)
     {
         if (eventInfo.DeclaringType == null)
             throw new NullReferenceException("Control type cannot be NULL");
@@ -24,14 +24,14 @@ public class EventExtensionInfo
         EventInfo = eventInfo;
         ControlType = eventInfo.DeclaringType;
         EventName = EventInfo.Name;
-        EventHandler = typeDeclarationFunc(EventInfo.EventHandlerType);
+        EventHandler = EventInfo.EventHandlerType.GetTypeDeclarationSourceCode();
 
         var methodInfo = eventInfo.EventHandlerType.GetMethod("Invoke");
         if (methodInfo != null)
         {
             foreach (var parameter in methodInfo.GetParameters())
             {
-                EventParameterTypes.Add(typeDeclarationFunc(parameter.ParameterType));
+                EventParameterTypes.Add(parameter.ParameterType.GetTypeDeclarationSourceCode());
             }
         }
 

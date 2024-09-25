@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class NotificationCard_MarkupExtensions
 {
 //================= Properties ======================//
@@ -54,6 +56,15 @@ public static T NotificationType<T>(this T control, AvaloniaProperty avaloniaPro
 /*MagicalSetterWithConverterGenerator*/
 public static T NotificationType<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Notifications.NotificationType> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Notifications.NotificationCard
 => control._setEx(Avalonia.Controls.Notifications.NotificationCard.NotificationTypeProperty, ps, () => control.NotificationType = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+
+//================= Attached Properties ======================//
+ // CloseOnClickProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T CloseOnClick<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Button
+ => control._setEx(Avalonia.Controls.Notifications.NotificationCard.CloseOnClickProperty, ps, () => Avalonia.Controls.Notifications.NotificationCard.SetCloseOnClick(control, value), bindingMode, converter, bindingSource);
 
 
 

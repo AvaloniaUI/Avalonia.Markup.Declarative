@@ -2,6 +2,8 @@
 
 public class BindFromExpressionSetterGenerator : SetterGeneratorBase
 {
+    public override bool CanGenerateOverride(PropertyExtensionInfo info) => !info.IsAttachedProperty;
+
     public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
     {
         //direct type access

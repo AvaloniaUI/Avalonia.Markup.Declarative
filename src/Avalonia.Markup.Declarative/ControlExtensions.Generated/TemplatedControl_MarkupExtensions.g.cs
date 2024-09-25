@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class TemplatedControl_MarkupExtensions
 {
 //================= Properties ======================//
@@ -357,6 +359,15 @@ public static T Template<T>(this T control, AvaloniaProperty avaloniaProperty, B
 /*MagicalSetterWithConverterGenerator*/
 public static T Template<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Templates.IControlTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl
 => control._setEx(Avalonia.Controls.Primitives.TemplatedControl.TemplateProperty, ps, () => control.Template = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+
+//================= Attached Properties ======================//
+ // IsTemplateFocusTargetProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T IsTemplateFocusTarget<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.Primitives.TemplatedControl.IsTemplateFocusTargetProperty, ps, () => Avalonia.Controls.Primitives.TemplatedControl.SetIsTemplateFocusTarget(control, value), bindingMode, converter, bindingSource);
 
 
 

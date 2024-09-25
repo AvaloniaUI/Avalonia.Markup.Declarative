@@ -1,6 +1,8 @@
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
 public class MagicalSetterGenerator : SetterGeneratorBase
 {
+    public override bool CanGenerateOverride(PropertyExtensionInfo info) => !info.IsAttachedProperty;
+
     public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
     {
         var argsString = $"{info.ValueTypeSource} value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null,"
@@ -11,7 +13,7 @@ public class MagicalSetterGenerator : SetterGeneratorBase
             + $"(this {info.ControlTypeName} control, {argsString}"
             + getSetterBody();
 
-        //base type generic acess
+        //base type generic access
         if (info.CanBeGenericConstraint)
         {
             extensionText =
@@ -20,6 +22,7 @@ public class MagicalSetterGenerator : SetterGeneratorBase
                 + $" where T : {info.ControlTypeName}{Environment.NewLine}"
                 + getSetterBody();
         }
+
 
         string getSetterBody() => $"=> control._setEx({info.ControlTypeName}.{info.FieldInfo.Name}, ps, () => control.{info.PropertyName} = value, bindingMode, converter, bindingSource);";
 

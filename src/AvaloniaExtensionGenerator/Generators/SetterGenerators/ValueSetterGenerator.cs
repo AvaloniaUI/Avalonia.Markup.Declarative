@@ -1,8 +1,10 @@
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
 
-
+[Obsolete]
 public class ValueSetterGenerator : SetterGeneratorBase
 {
+    public override bool CanGenerateOverride(PropertyExtensionInfo info) => !info.IsAttachedProperty;
+
     public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
     {
         //direct type access

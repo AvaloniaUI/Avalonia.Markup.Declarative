@@ -2,6 +2,8 @@ namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
 
 public class ValueOverloadsSetterGenerator : SetterGeneratorBase
 {
+    public override bool CanGenerateOverride(PropertyExtensionInfo info) => !info.IsAttachedProperty;
+
     public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
     {
             var nl = Environment.NewLine;

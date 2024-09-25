@@ -1,8 +1,8 @@
-using System.Reflection;
-
 namespace AvaloniaExtensionGenerator.Generators;
 
-public interface IMemberExtensionGenerator<in TMember> where TMember : MemberInfo
+public interface IMemberExtensionGenerator
 {
-    string? GetExtension(TMember info, out IEnumerable<string> usedNamespaces);
+    bool CanGenerate(IMemberExtensionInfo info);
+
+    string? GetExtension(IMemberExtensionInfo info);
 }

@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class ArcSegment_MarkupExtensions
 {
 //================= Properties ======================//
@@ -122,6 +124,8 @@ public static Avalonia.Media.ArcSegment SweepDirection(this Avalonia.Media.ArcSe
 public static Avalonia.Media.ArcSegment SweepDirection<TValue>(this Avalonia.Media.ArcSegment control, TValue value, FuncValueConverter<TValue, Avalonia.Media.SweepDirection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)=> control._setEx(Avalonia.Media.ArcSegment.SweepDirectionProperty, ps, () => control.SweepDirection = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+
+//================= Attached Properties ======================//
 
 //================= Events ======================//
 

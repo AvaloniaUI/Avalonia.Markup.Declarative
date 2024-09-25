@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class StackPanel_MarkupExtensions
 {
 //================= Properties ======================//
@@ -102,6 +104,8 @@ public static T AreVerticalSnapPointsRegular<T,TValue>(this T control, TValue va
 => control._setEx(Avalonia.Controls.StackPanel.AreVerticalSnapPointsRegularProperty, ps, () => control.AreVerticalSnapPointsRegular = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+
+//================= Attached Properties ======================//
 
 //================= Events ======================//
  // HorizontalSnapPointsChanged

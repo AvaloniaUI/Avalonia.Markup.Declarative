@@ -4,6 +4,8 @@ namespace AvaloniaExtensionGenerator.Generators.StyleSetterGenerators;
 
 public class BindingStyleSetterGenerator : SetterGeneratorBase
 {
+    public override bool CanGenerateOverride(PropertyExtensionInfo info) => !info.IsAttachedProperty;
+
     public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
     {
         if (info.ValueType.Name == "IBinding")

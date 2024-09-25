@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class CroppedBitmap_MarkupExtensions
 {
 //================= Properties ======================//
@@ -67,6 +69,8 @@ public static T SourceRect<T,TValue>(this T control, TValue value, FuncValueConv
 => control._setEx(Avalonia.Media.Imaging.CroppedBitmap.SourceRectProperty, ps, () => control.SourceRect = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+
+//================= Attached Properties ======================//
 
 //================= Events ======================//
  // Invalidated

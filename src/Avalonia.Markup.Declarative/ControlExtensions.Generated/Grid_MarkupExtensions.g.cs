@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class Grid_MarkupExtensions
 {
 //================= Properties ======================//
@@ -31,6 +33,43 @@ public static T ShowGridLines<T>(this T control, AvaloniaProperty avaloniaProper
 /*MagicalSetterWithConverterGenerator*/
 public static T ShowGridLines<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Grid
 => control._setEx(Avalonia.Controls.Grid.ShowGridLinesProperty, ps, () => control.ShowGridLines = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+
+//================= Attached Properties ======================//
+ // ColumnProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T Column<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.Grid.ColumnProperty, ps, () => Avalonia.Controls.Grid.SetColumn(control, value), bindingMode, converter, bindingSource);
+
+
+ // RowProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T Row<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.Grid.RowProperty, ps, () => Avalonia.Controls.Grid.SetRow(control, value), bindingMode, converter, bindingSource);
+
+
+ // ColumnSpanProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T ColumnSpan<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.Grid.ColumnSpanProperty, ps, () => Avalonia.Controls.Grid.SetColumnSpan(control, value), bindingMode, converter, bindingSource);
+
+
+ // RowSpanProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T RowSpan<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.Grid.RowSpanProperty, ps, () => Avalonia.Controls.Grid.SetRowSpan(control, value), bindingMode, converter, bindingSource);
+
+
+ // IsSharedSizeScopeProperty
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T IsSharedSizeScope<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.Grid.IsSharedSizeScopeProperty, ps, () => Avalonia.Controls.Grid.SetIsSharedSizeScope(control, value), bindingMode, converter, bindingSource);
 
 
 
