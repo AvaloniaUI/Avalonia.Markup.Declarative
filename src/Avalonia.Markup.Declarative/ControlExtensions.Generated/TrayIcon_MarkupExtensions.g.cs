@@ -154,18 +154,6 @@ public static T IsVisible<T,TValue>(this T control, TValue value, FuncValueConve
 //================= Attached Properties ======================//
  // IconsProperty
 
-/*BindSetterGenerator*/
-public static T Icons<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon
-   => control._set(Avalonia.Controls.TrayIcon.IconsProperty, binding);
-
-/*AvaloniaPropertyBindSetterGenerator*/
-public static T Icons<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TrayIcon
-   => control._set(Avalonia.Controls.TrayIcon.IconsProperty, avaloniaProperty, bindingMode, converter, overrideView);
-
-/*MagicalSetterWithConverterGenerator*/
-public static T Icons<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.TrayIcons> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon
-=> control._setEx(Avalonia.Controls.TrayIcon.IconsProperty, ps, () => control.Icons = converter.TryConvert(value), bindingMode, converter, bindingSource);
-
 
 
 //================= Events ======================//

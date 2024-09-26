@@ -37,16 +37,17 @@ public class PropertyExtensionInfo : IMemberExtensionInfo
             try
             {
                 var attachedProperty = field.GetValue(null);
-                var avaloniaPropertyType = attachedProperty.GetType().BaseType.BaseType.BaseType;
+                var declaredType = field.DeclaringType;
 
-                var fieldInfo = avaloniaPropertyType.GetField("_metadata", BindingFlags.NonPublic | BindingFlags.Instance);
-                var fieldValue = fieldInfo.GetValue(attachedProperty) as IDictionary;
-
-                var hostType = fieldValue.Keys.Cast<Type>().FirstOrDefault();
-                if (hostType != null)
+                var method = declaredType.GetMethod($"Set{PropertyName}");
+                if (method != null)
                 {
-                    AttachedPropertyHostType = hostType;
-                    AttachedPropertyHostTypeName = hostType.GetTypeDeclarationSourceCode();
+                    var par = method.GetParameters().FirstOrDefault();
+                    if (par != null)
+                    {
+                        AttachedPropertyHostType = par.ParameterType;
+                        AttachedPropertyHostTypeName = par.ParameterType.GetTypeDeclarationSourceCode();
+                    }
                 }
                 // Cast the field value to the expected type (Dictionary<Type, AvaloniaPropertyMetadata>)
                 //return fieldValue as Dictionary<Type, AvaloniaPropertyMetadata>;

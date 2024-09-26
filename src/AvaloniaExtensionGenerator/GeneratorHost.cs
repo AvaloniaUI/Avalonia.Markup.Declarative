@@ -62,12 +62,7 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
             ),
 
             new ExtensionGroupGenerator<PropertyExtensionInfo>("Attached Properties", t => t.GetFields().Where(IsAttachedPropertyField),
-                new AttachedPropertyMagicalSetterGenerator(),
-
-                //obsolete candidates
-                new BindSetterGenerator(),
-                new AvaloniaPropertyBindSetterGenerator(),
-                new MagicalSetterWithConverterGenerator()
+                new AttachedPropertyMagicalSetterGenerator()
             ),
 
             new ExtensionGroupGenerator<EventExtensionInfo>("Events", t => t.GetEvents().Where(x => x.DeclaringType == t),
