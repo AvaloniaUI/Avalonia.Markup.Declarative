@@ -18,6 +18,10 @@ public static partial class AccessText_MarkupExtensions
 public static T AccessText_ShowAccessKey<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Primitives.AccessText
    => control._set(Avalonia.Controls.Primitives.AccessText.ShowAccessKeyProperty, func, onChanged, expression);
 
+/*MagicalSetterGenerator*/
+public static T AccessText_ShowAccessKey<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.AccessText
+=> control._setEx(Avalonia.Controls.Primitives.AccessText.ShowAccessKeyProperty, ps, () => control.ShowAccessKey = value, bindingMode, converter, bindingSource);
+
 
 
 //================= Attached Properties ======================//

@@ -209,6 +209,10 @@ public static T RenderTransformOrigin<T,TValue>(this T control, TValue value, Fu
 public static T Visual_FlowDirection<T>(this T control, Func<Avalonia.Media.FlowDirection> func, Action<Avalonia.Media.FlowDirection>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Visual
    => control._set(Avalonia.Visual.FlowDirectionProperty, func, onChanged, expression);
 
+/*MagicalSetterGenerator*/
+public static T Visual_FlowDirection<T>(this T control, Avalonia.Media.FlowDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
+=> control._setEx(Avalonia.Visual.FlowDirectionProperty, ps, () => control.FlowDirection = value, bindingMode, converter, bindingSource);
+
 
  // ZIndexProperty
 
