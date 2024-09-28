@@ -128,6 +128,9 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
 
         if (field.FieldType.Name.StartsWith("DirectProperty") ||
             field.FieldType.Name.StartsWith("StyledProperty") ||
+            //some attached properties Mapped to properties of controls, i.e. TextBlock.TextWrapping
+            //so we need to add direct Extensions for them, additionally to AttachedProperty extensions
+            field.FieldType.Name.StartsWith("AttachedProperty") ||
             field.FieldType.Name.StartsWith("AvaloniaProperty"))
         {
             var isReadOnly = IsReadOnlyField(field);

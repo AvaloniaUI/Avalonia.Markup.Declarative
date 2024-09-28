@@ -203,6 +203,13 @@ public static T RenderTransformOrigin<T,TValue>(this T control, TValue value, Fu
 => control._setEx(Avalonia.Visual.RenderTransformOriginProperty, ps, () => control.RenderTransformOrigin = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+ // FlowDirectionProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static T Visual_FlowDirection<T>(this T control, Func<Avalonia.Media.FlowDirection> func, Action<Avalonia.Media.FlowDirection>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Visual
+   => control._set(Avalonia.Visual.FlowDirectionProperty, func, onChanged, expression);
+
+
  // ZIndexProperty
 
 /*BindFromExpressionSetterGenerator*/

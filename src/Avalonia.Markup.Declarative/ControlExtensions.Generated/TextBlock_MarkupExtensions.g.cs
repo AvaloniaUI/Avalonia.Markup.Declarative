@@ -205,6 +205,41 @@ public static T Foreground<T,TValue>(this T control, TValue value, FuncValueConv
 => control._setEx(Avalonia.Controls.TextBlock.ForegroundProperty, ps, () => control.Foreground = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+ // BaselineOffsetProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static T TextBlock_BaselineOffset<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TextBlock
+   => control._set(Avalonia.Controls.TextBlock.BaselineOffsetProperty, func, onChanged, expression);
+
+
+ // LineHeightProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static T TextBlock_LineHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TextBlock
+   => control._set(Avalonia.Controls.TextBlock.LineHeightProperty, func, onChanged, expression);
+
+
+ // LineSpacingProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static T TextBlock_LineSpacing<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TextBlock
+   => control._set(Avalonia.Controls.TextBlock.LineSpacingProperty, func, onChanged, expression);
+
+
+ // LetterSpacingProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static T TextBlock_LetterSpacing<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TextBlock
+   => control._set(Avalonia.Controls.TextBlock.LetterSpacingProperty, func, onChanged, expression);
+
+
+ // MaxLinesProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static T TextBlock_MaxLines<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TextBlock
+   => control._set(Avalonia.Controls.TextBlock.MaxLinesProperty, func, onChanged, expression);
+
+
  // TextProperty
 
 /*BindFromExpressionSetterGenerator*/
@@ -226,6 +261,27 @@ public static T Text<T>(this T control, AvaloniaProperty avaloniaProperty, Bindi
 /*MagicalSetterWithConverterGenerator*/
 public static T Text<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TextBlock
 => control._setEx(Avalonia.Controls.TextBlock.TextProperty, ps, () => control.Text = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+ // TextAlignmentProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static T TextBlock_TextAlignment<T>(this T control, Func<Avalonia.Media.TextAlignment> func, Action<Avalonia.Media.TextAlignment>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TextBlock
+   => control._set(Avalonia.Controls.TextBlock.TextAlignmentProperty, func, onChanged, expression);
+
+
+ // TextWrappingProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static T TextBlock_TextWrapping<T>(this T control, Func<Avalonia.Media.TextWrapping> func, Action<Avalonia.Media.TextWrapping>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TextBlock
+   => control._set(Avalonia.Controls.TextBlock.TextWrappingProperty, func, onChanged, expression);
+
+
+ // TextTrimmingProperty
+
+/*BindFromExpressionSetterGenerator*/
+public static T TextBlock_TextTrimming<T>(this T control, Func<Avalonia.Media.TextTrimming> func, Action<Avalonia.Media.TextTrimming>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.TextBlock
+   => control._set(Avalonia.Controls.TextBlock.TextTrimmingProperty, func, onChanged, expression);
 
 
  // TextDecorationsProperty
