@@ -9,8 +9,6 @@ public class EventExtensionInfo : IMemberExtensionInfo
     public string EventHandler { get; }
     public string EventName { get; }
     public List<string> EventParameterTypes { get; } = new List<string>();
-    public string? ObsoleteMessage { get; } = null;
-    public bool IsObsolete => ObsoleteMessage != null;
     public bool CanBeGenericConstraint { get; }
 
     public EventExtensionInfo(EventInfo eventInfo)
@@ -35,7 +33,6 @@ public class EventExtensionInfo : IMemberExtensionInfo
             }
         }
 
-        ObsoleteMessage = eventInfo.GetCustomAttribute<ObsoleteAttribute>()?.Message;
         CanBeGenericConstraint = !eventInfo.DeclaringType.IsSealed;
     }
 

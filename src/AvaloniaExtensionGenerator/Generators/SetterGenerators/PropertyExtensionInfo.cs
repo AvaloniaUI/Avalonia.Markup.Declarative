@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Reflection;
 
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
@@ -12,9 +11,6 @@ public class PropertyExtensionInfo : IMemberExtensionInfo
     public string PropertyName { get; }
     public Type ValueType { get; }
     public object ValueTypeSource { get; }
-    public bool IsObsolete => ObsoleteMessage != null;
-    public string? ObsoleteMessage { get; } = null;
-
     public bool CanBeGenericConstraint { get; }
     public bool IsAttachedProperty { get; set; }
     public Type? AttachedPropertyHostType { get; set; }
@@ -59,7 +55,5 @@ public class PropertyExtensionInfo : IMemberExtensionInfo
             //Debugger.Break();
         }
         CanBeGenericConstraint = !field.DeclaringType.IsSealed;
-
-        ObsoleteMessage = field.GetCustomAttribute<ObsoleteAttribute>()?.Message;
     }
 }

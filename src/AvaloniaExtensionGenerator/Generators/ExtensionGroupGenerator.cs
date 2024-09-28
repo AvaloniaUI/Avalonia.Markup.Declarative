@@ -36,10 +36,6 @@ public class ExtensionGroupGenerator<TMember>(
                 {
                     sb.AppendLine();
                     sb.AppendLine($"/*{generator.GetType().Name}*/");
-                    
-                    if(extensionInfo.IsObsolete)
-                        sb.AppendLine($"\t[Obsolete(\"{extensionInfo.ObsoleteMessage}\")]");
-                    
                     sb.AppendLine(extensionCode);
                     generationsCount++;
                 }
