@@ -17,7 +17,7 @@ public static partial class FlyoutBase_MarkupExtensions
  // AttachedFlyoutProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T AttachedFlyout<T>(this T control, Avalonia.Controls.Primitives.FlyoutBase value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T FlyoutBase_AttachedFlyout<T>(this T control, Avalonia.Controls.Primitives.FlyoutBase value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Primitives.FlyoutBase.AttachedFlyoutProperty, ps, () => Avalonia.Controls.Primitives.FlyoutBase.SetAttachedFlyout(control, value), bindingMode, converter, bindingSource);
 
 

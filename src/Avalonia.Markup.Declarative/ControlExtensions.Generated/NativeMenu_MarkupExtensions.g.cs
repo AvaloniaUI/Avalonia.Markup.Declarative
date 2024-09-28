@@ -17,7 +17,7 @@ public static partial class NativeMenu_MarkupExtensions
  // MenuProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T Menu<T>(this T control, Avalonia.Controls.NativeMenu value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.AvaloniaObject
+public static T NativeMenu_Menu<T>(this T control, Avalonia.Controls.NativeMenu value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.AvaloniaObject
  => control._setEx(Avalonia.Controls.NativeMenu.MenuProperty, ps, () => Avalonia.Controls.NativeMenu.SetMenu(control, value), bindingMode, converter, bindingSource);
 
 

@@ -63,14 +63,14 @@ public static T Owner<T,TValue>(this T control, TValue value, FuncValueConverter
  // ErrorsProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T Errors<T>(this T control, System.Collections.Generic.IEnumerable<System.Object> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T DataValidationErrors_Errors<T>(this T control, System.Collections.Generic.IEnumerable<System.Object> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.DataValidationErrors.ErrorsProperty, ps, () => Avalonia.Controls.DataValidationErrors.SetErrors(control, value), bindingMode, converter, bindingSource);
 
 
  // ErrorConverterProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T ErrorConverter<T>(this T control, System.Func<System.Object,System.Object> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T DataValidationErrors_ErrorConverter<T>(this T control, System.Func<System.Object,System.Object> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.DataValidationErrors.ErrorConverterProperty, ps, () => Avalonia.Controls.DataValidationErrors.SetErrorConverter(control, value), bindingMode, converter, bindingSource);
 
 

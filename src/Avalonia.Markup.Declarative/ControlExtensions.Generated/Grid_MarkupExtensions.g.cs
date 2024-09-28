@@ -40,35 +40,35 @@ public static T ShowGridLines<T,TValue>(this T control, TValue value, FuncValueC
  // ColumnProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T Column<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T Grid_Column<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Grid.ColumnProperty, ps, () => Avalonia.Controls.Grid.SetColumn(control, value), bindingMode, converter, bindingSource);
 
 
  // RowProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T Row<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T Grid_Row<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Grid.RowProperty, ps, () => Avalonia.Controls.Grid.SetRow(control, value), bindingMode, converter, bindingSource);
 
 
  // ColumnSpanProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T ColumnSpan<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T Grid_ColumnSpan<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Grid.ColumnSpanProperty, ps, () => Avalonia.Controls.Grid.SetColumnSpan(control, value), bindingMode, converter, bindingSource);
 
 
  // RowSpanProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T RowSpan<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T Grid_RowSpan<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Grid.RowSpanProperty, ps, () => Avalonia.Controls.Grid.SetRowSpan(control, value), bindingMode, converter, bindingSource);
 
 
  // IsSharedSizeScopeProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T IsSharedSizeScope<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T Grid_IsSharedSizeScope<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Grid.IsSharedSizeScopeProperty, ps, () => Avalonia.Controls.Grid.SetIsSharedSizeScope(control, value), bindingMode, converter, bindingSource);
 
 

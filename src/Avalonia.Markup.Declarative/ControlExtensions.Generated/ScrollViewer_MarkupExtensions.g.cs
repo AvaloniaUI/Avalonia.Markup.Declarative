@@ -40,77 +40,77 @@ public static T Offset<T,TValue>(this T control, TValue value, FuncValueConverte
  // BringIntoViewOnFocusChangeProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T BringIntoViewOnFocusChange<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T ScrollViewer_BringIntoViewOnFocusChange<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.ScrollViewer.BringIntoViewOnFocusChangeProperty, ps, () => Avalonia.Controls.ScrollViewer.SetBringIntoViewOnFocusChange(control, value), bindingMode, converter, bindingSource);
 
 
  // HorizontalScrollBarVisibilityProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T HorizontalScrollBarVisibility<T>(this T control, Avalonia.Controls.Primitives.ScrollBarVisibility value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T ScrollViewer_HorizontalScrollBarVisibility<T>(this T control, Avalonia.Controls.Primitives.ScrollBarVisibility value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.ScrollViewer.HorizontalScrollBarVisibilityProperty, ps, () => Avalonia.Controls.ScrollViewer.SetHorizontalScrollBarVisibility(control, value), bindingMode, converter, bindingSource);
 
 
  // HorizontalSnapPointsTypeProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T HorizontalSnapPointsType<T>(this T control, Avalonia.Controls.Primitives.SnapPointsType value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T ScrollViewer_HorizontalSnapPointsType<T>(this T control, Avalonia.Controls.Primitives.SnapPointsType value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.ScrollViewer.HorizontalSnapPointsTypeProperty, ps, () => Avalonia.Controls.ScrollViewer.SetHorizontalSnapPointsType(control, value), bindingMode, converter, bindingSource);
 
 
  // VerticalSnapPointsTypeProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T VerticalSnapPointsType<T>(this T control, Avalonia.Controls.Primitives.SnapPointsType value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T ScrollViewer_VerticalSnapPointsType<T>(this T control, Avalonia.Controls.Primitives.SnapPointsType value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.ScrollViewer.VerticalSnapPointsTypeProperty, ps, () => Avalonia.Controls.ScrollViewer.SetVerticalSnapPointsType(control, value), bindingMode, converter, bindingSource);
 
 
  // HorizontalSnapPointsAlignmentProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T HorizontalSnapPointsAlignment<T>(this T control, Avalonia.Controls.Primitives.SnapPointsAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T ScrollViewer_HorizontalSnapPointsAlignment<T>(this T control, Avalonia.Controls.Primitives.SnapPointsAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.ScrollViewer.HorizontalSnapPointsAlignmentProperty, ps, () => Avalonia.Controls.ScrollViewer.SetHorizontalSnapPointsAlignment(control, value), bindingMode, converter, bindingSource);
 
 
  // VerticalSnapPointsAlignmentProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T VerticalSnapPointsAlignment<T>(this T control, Avalonia.Controls.Primitives.SnapPointsAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T ScrollViewer_VerticalSnapPointsAlignment<T>(this T control, Avalonia.Controls.Primitives.SnapPointsAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.ScrollViewer.VerticalSnapPointsAlignmentProperty, ps, () => Avalonia.Controls.ScrollViewer.SetVerticalSnapPointsAlignment(control, value), bindingMode, converter, bindingSource);
 
 
  // VerticalScrollBarVisibilityProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T VerticalScrollBarVisibility<T>(this T control, Avalonia.Controls.Primitives.ScrollBarVisibility value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T ScrollViewer_VerticalScrollBarVisibility<T>(this T control, Avalonia.Controls.Primitives.ScrollBarVisibility value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.ScrollViewer.VerticalScrollBarVisibilityProperty, ps, () => Avalonia.Controls.ScrollViewer.SetVerticalScrollBarVisibility(control, value), bindingMode, converter, bindingSource);
 
 
  // AllowAutoHideProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T AllowAutoHide<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T ScrollViewer_AllowAutoHide<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.ScrollViewer.AllowAutoHideProperty, ps, () => Avalonia.Controls.ScrollViewer.SetAllowAutoHide(control, value), bindingMode, converter, bindingSource);
 
 
  // IsScrollChainingEnabledProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T IsScrollChainingEnabled<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T ScrollViewer_IsScrollChainingEnabled<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.ScrollViewer.IsScrollChainingEnabledProperty, ps, () => Avalonia.Controls.ScrollViewer.SetIsScrollChainingEnabled(control, value), bindingMode, converter, bindingSource);
 
 
  // IsScrollInertiaEnabledProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T IsScrollInertiaEnabled<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T ScrollViewer_IsScrollInertiaEnabled<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.ScrollViewer.IsScrollInertiaEnabledProperty, ps, () => Avalonia.Controls.ScrollViewer.SetIsScrollInertiaEnabled(control, value), bindingMode, converter, bindingSource);
 
 
  // IsDeferredScrollingEnabledProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T IsDeferredScrollingEnabled<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T ScrollViewer_IsDeferredScrollingEnabled<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.ScrollViewer.IsDeferredScrollingEnabledProperty, ps, () => Avalonia.Controls.ScrollViewer.SetIsDeferredScrollingEnabled(control, value), bindingMode, converter, bindingSource);
 
 
@@ -127,6 +127,14 @@ public static T IsDeferredScrollingEnabled<T>(this T control, System.Boolean val
 //================= Styles ======================//
  // BringIntoViewOnFocusChangeProperty
 
+/*ValueStyleSetterGenerator*/
+public static Style<T> ScrollViewer_BringIntoViewOnFocusChange<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.BringIntoViewOnFocusChangeProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ScrollViewer_BringIntoViewOnFocusChange<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.BringIntoViewOnFocusChangeProperty, binding);
+
 
  // OffsetProperty
 
@@ -141,32 +149,112 @@ public static Style<T> Offset<T>(this Style<T> style, IBinding binding) where T 
 
  // HorizontalScrollBarVisibilityProperty
 
+/*ValueStyleSetterGenerator*/
+public static Style<T> ScrollViewer_HorizontalScrollBarVisibility<T>(this Style<T> style, Avalonia.Controls.Primitives.ScrollBarVisibility value) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.HorizontalScrollBarVisibilityProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ScrollViewer_HorizontalScrollBarVisibility<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.HorizontalScrollBarVisibilityProperty, binding);
+
 
  // HorizontalSnapPointsTypeProperty
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> ScrollViewer_HorizontalSnapPointsType<T>(this Style<T> style, Avalonia.Controls.Primitives.SnapPointsType value) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.HorizontalSnapPointsTypeProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ScrollViewer_HorizontalSnapPointsType<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.HorizontalSnapPointsTypeProperty, binding);
 
 
  // VerticalSnapPointsTypeProperty
 
+/*ValueStyleSetterGenerator*/
+public static Style<T> ScrollViewer_VerticalSnapPointsType<T>(this Style<T> style, Avalonia.Controls.Primitives.SnapPointsType value) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.VerticalSnapPointsTypeProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ScrollViewer_VerticalSnapPointsType<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.VerticalSnapPointsTypeProperty, binding);
+
 
  // HorizontalSnapPointsAlignmentProperty
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> ScrollViewer_HorizontalSnapPointsAlignment<T>(this Style<T> style, Avalonia.Controls.Primitives.SnapPointsAlignment value) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.HorizontalSnapPointsAlignmentProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ScrollViewer_HorizontalSnapPointsAlignment<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.HorizontalSnapPointsAlignmentProperty, binding);
 
 
  // VerticalSnapPointsAlignmentProperty
 
+/*ValueStyleSetterGenerator*/
+public static Style<T> ScrollViewer_VerticalSnapPointsAlignment<T>(this Style<T> style, Avalonia.Controls.Primitives.SnapPointsAlignment value) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.VerticalSnapPointsAlignmentProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ScrollViewer_VerticalSnapPointsAlignment<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.VerticalSnapPointsAlignmentProperty, binding);
+
 
  // VerticalScrollBarVisibilityProperty
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> ScrollViewer_VerticalScrollBarVisibility<T>(this Style<T> style, Avalonia.Controls.Primitives.ScrollBarVisibility value) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.VerticalScrollBarVisibilityProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ScrollViewer_VerticalScrollBarVisibility<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.VerticalScrollBarVisibilityProperty, binding);
 
 
  // AllowAutoHideProperty
 
+/*ValueStyleSetterGenerator*/
+public static Style<T> ScrollViewer_AllowAutoHide<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.AllowAutoHideProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ScrollViewer_AllowAutoHide<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.AllowAutoHideProperty, binding);
+
 
  // IsScrollChainingEnabledProperty
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> ScrollViewer_IsScrollChainingEnabled<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.IsScrollChainingEnabledProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ScrollViewer_IsScrollChainingEnabled<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.IsScrollChainingEnabledProperty, binding);
 
 
  // IsScrollInertiaEnabledProperty
 
+/*ValueStyleSetterGenerator*/
+public static Style<T> ScrollViewer_IsScrollInertiaEnabled<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.IsScrollInertiaEnabledProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ScrollViewer_IsScrollInertiaEnabled<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.IsScrollInertiaEnabledProperty, binding);
+
 
  // IsDeferredScrollingEnabledProperty
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> ScrollViewer_IsDeferredScrollingEnabled<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.IsDeferredScrollingEnabledProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ScrollViewer_IsDeferredScrollingEnabled<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ScrollViewer
+=> style._addSetter(Avalonia.Controls.ScrollViewer.IsDeferredScrollingEnabledProperty, binding);
 
 
 

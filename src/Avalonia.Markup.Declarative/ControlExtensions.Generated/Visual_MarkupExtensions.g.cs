@@ -231,7 +231,7 @@ public static T ZIndex<T,TValue>(this T control, TValue value, FuncValueConverte
  // FlowDirectionProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T FlowDirection<T>(this T control, Avalonia.Media.FlowDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
+public static T Visual_FlowDirection<T>(this T control, Avalonia.Media.FlowDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
  => control._setEx(Avalonia.Visual.FlowDirectionProperty, ps, () => Avalonia.Visual.SetFlowDirection(control, value), bindingMode, converter, bindingSource);
 
 
@@ -347,6 +347,14 @@ public static Style<T> RenderTransformOrigin<T>(this Style<T> style, System.Doub
 
 
  // FlowDirectionProperty
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> Visual_FlowDirection<T>(this Style<T> style, Avalonia.Media.FlowDirection value) where T : Avalonia.Visual
+=> style._addSetter(Avalonia.Visual.FlowDirectionProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> Visual_FlowDirection<T>(this Style<T> style, IBinding binding) where T : Avalonia.Visual
+=> style._addSetter(Avalonia.Visual.FlowDirectionProperty, binding);
 
 
  // ZIndexProperty

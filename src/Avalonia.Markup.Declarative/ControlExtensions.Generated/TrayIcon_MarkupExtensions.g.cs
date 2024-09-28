@@ -154,6 +154,10 @@ public static T IsVisible<T,TValue>(this T control, TValue value, FuncValueConve
 //================= Attached Properties ======================//
  // IconsProperty
 
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T TrayIcon_Icons<T>(this T control, Avalonia.Controls.TrayIcons value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Application
+ => control._setEx(Avalonia.Controls.TrayIcon.IconsProperty, ps, () => Avalonia.Controls.TrayIcon.SetIcons(control, value), bindingMode, converter, bindingSource);
+
 
 
 //================= Events ======================//

@@ -86,14 +86,14 @@ public static T RequestedThemeVariant<T,TValue>(this T control, TValue value, Fu
  // SystemBarColorProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T SystemBarColor<T>(this T control, Avalonia.Media.SolidColorBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T TopLevel_SystemBarColor<T>(this T control, Avalonia.Media.SolidColorBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.TopLevel.SystemBarColorProperty, ps, () => Avalonia.Controls.TopLevel.SetSystemBarColor(control, value), bindingMode, converter, bindingSource);
 
 
  // AutoSafeAreaPaddingProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T AutoSafeAreaPadding<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T TopLevel_AutoSafeAreaPadding<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.TopLevel.AutoSafeAreaPaddingProperty, ps, () => Avalonia.Controls.TopLevel.SetAutoSafeAreaPadding(control, value), bindingMode, converter, bindingSource);
 
 

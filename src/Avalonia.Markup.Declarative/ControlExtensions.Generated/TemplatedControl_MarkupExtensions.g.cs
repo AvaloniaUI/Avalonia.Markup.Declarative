@@ -366,7 +366,7 @@ public static T Template<T,TValue>(this T control, TValue value, FuncValueConver
  // IsTemplateFocusTargetProperty
 
 /*AttachedPropertyMagicalSetterGenerator*/
-public static T IsTemplateFocusTarget<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
+public static T TemplatedControl_IsTemplateFocusTarget<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Primitives.TemplatedControl.IsTemplateFocusTargetProperty, ps, () => Avalonia.Controls.Primitives.TemplatedControl.SetIsTemplateFocusTarget(control, value), bindingMode, converter, bindingSource);
 
 

@@ -209,6 +209,13 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+    /// <summary>
+    /// It's a shortcut for Grid_Column (in xaml: Grid.Column) extension 
+    /// </summary>
+    /// <typeparam name="TElement"></typeparam>
+    /// <param name="control">Control for positioning</param>
+    /// <param name="value">Grid.Column value</param>
+    /// <returns></returns>
 	public static TElement Col<TElement>(this TElement control, int value)
 		where TElement : Control
 	{
@@ -216,6 +223,13 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+	/// <summary>
+	/// It's a shortcut for Grid_Row (in xaml: Grid.Row) extension 
+	/// </summary>
+	/// <typeparam name="TElement">Control type</typeparam>
+	/// <param name="control">Control for positioning</param>
+	/// <param name="value">Grid.Row value</param>
+	/// <returns></returns>
 	public static TElement Row<TElement>(this TElement control, int value)
 		where TElement : Control
 	{
@@ -223,6 +237,13 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+    /// <summary>
+    /// It's a shortcut for Grid_ColumnDefinitions (in xaml: Grid.ColumnDefinitions) extension 
+    /// </summary>
+    /// <typeparam name="TElement">Grid</typeparam>
+    /// <param name="control">Grid control</param>
+    /// <param name="value">Grid.ColumnDefinitions value</param>
+    /// <returns></returns>
 	public static TElement Cols<TElement>(this TElement control, ColumnDefinitions value)
 		where TElement : Grid
 	{
@@ -230,6 +251,13 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+    /// <summary>
+    /// It's a shortcut for Grid_RowDefinitions (in xaml: Grid.RowDefinitions) extension 
+    /// </summary>
+    /// <typeparam name="TElement">Grid</typeparam>
+    /// <param name="control">Grid control</param>
+    /// <param name="value">Grid.RowDefinitions value</param>
+    /// <returns></returns>
 	public static TElement Rows<TElement>(this TElement control, RowDefinitions value)
 		where TElement : Grid
 	{
@@ -237,6 +265,13 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+    /// <summary>
+    /// It's a shortcut for Grid_ColumnDefinitions (in xaml: Grid.ColumnDefinitions) extension 
+    /// </summary>
+    /// <typeparam name="TElement">Grid</typeparam>
+    /// <param name="control">Grid control</param>
+    /// <param name="value">String representing ColumnDefinitions i.e. "0,*,30,Auto" </param>
+    /// <returns></returns>
 	public static TElement Cols<TElement>(this TElement control, string value)
 		where TElement : Grid
 	{
@@ -244,6 +279,13 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+    /// <summary>
+    /// It's a shortcut for Grid_RowDefinitions (in xaml: Grid.RowDefinitions) extension 
+    /// </summary>
+    /// <typeparam name="TElement">Grid</typeparam>
+    /// <param name="control">Grid control</param>
+    /// <param name="value">String representing RowDefinitions i.e. "0,*,30,Auto" </param>
+    /// <returns></returns>
 	public static TElement Rows<TElement>(this TElement control, string value)
 		where TElement : Grid
 	{
@@ -251,6 +293,13 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+    /// <summary>
+    /// It's a shortcut for Grid_ColumnSpan (in xaml: Grid.ColumnSpan) extension 
+    /// </summary>
+    /// <typeparam name="TElement">Control Type</typeparam>
+    /// <param name="control">Control for positioning</param>
+    /// <param name="value">Grid.ColumnSpan value</param>
+    /// <returns></returns>
 	public static TElement ColSpan<TElement>(this TElement control, int value)
 		where TElement : Control
 	{
@@ -258,6 +307,13 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+    /// <summary>
+    /// It's a shortcut for Grid_RowSpan (in xaml: Grid.RowSpan) extension 
+    /// </summary>
+    /// <typeparam name="TElement">Control type</typeparam>
+    /// <param name="control">Control for positioning</param>
+    /// <param name="value">Grid.RowSpan value</param>
+    /// <returns></returns>
 	public static TElement RowSpan<TElement>(this TElement control, int value)
 		where TElement : Control
 	{
@@ -265,6 +321,7 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+    [Obsolete("Use Canvas_Top extension instead")]
 	public static TElement Top<TElement>(this TElement control, double value)
 		where TElement : Control
 	{
@@ -272,6 +329,7 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+	[Obsolete("Use Canvas_Left extension instead")]
 	public static TElement Left<TElement>(this TElement control, double value)
 		where TElement : Control
 	{
@@ -279,6 +337,7 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+    [Obsolete("Use Canvas_Bottom extension instead")]
 	public static TElement Bottom<TElement>(this TElement control, double value)
 		where TElement : Control
 	{
@@ -286,6 +345,7 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
+    [Obsolete("Use Canvas_Right extension instead")]
 	public static TElement Right<TElement>(this TElement control, double value)
 		where TElement : Control
 	{
@@ -293,13 +353,15 @@ public static class ControlPropertyExtensions
 		return control;
 	}
 
-	public static TElement HorizontalScrollBarVisibility<TElement>(this TElement control, ScrollBarVisibility value)
+    [Obsolete("Use ScrollViewer_HorizontalScrollBarVisibility extension instead")]
+    public static TElement HorizontalScrollBarVisibility<TElement>(this TElement control, ScrollBarVisibility value)
 		where TElement : Control
 	{
 		ScrollViewer.SetHorizontalScrollBarVisibility(control, value);
 		return control;
 	}
 
+    [Obsolete("Use ScrollViewer_VerticalScrollBarVisibility extension instead")]
 	public static TElement VerticalScrollBarVisibility<TElement>(this TElement control, ScrollBarVisibility value)
 		where TElement : Control
 	{

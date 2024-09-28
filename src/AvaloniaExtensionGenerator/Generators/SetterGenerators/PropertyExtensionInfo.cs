@@ -36,7 +36,7 @@ public class PropertyExtensionInfo : IMemberExtensionInfo
         {
             try
             {
-                var attachedProperty = field.GetValue(null);
+                ExtensionName = $"{ControlType.Name}_{ExtensionName}";
                 var declaredType = field.DeclaringType;
 
                 var method = declaredType.GetMethod($"Set{PropertyName}");
