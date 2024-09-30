@@ -1,12 +1,11 @@
+using AvaloniaExtensionGenerator.ExtensionInfos;
+
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
 
-public class ValueOverloadsSetterGenerator : SetterGeneratorBase
+public class ValueOverloadsSetterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
 {
-    public override bool CanGenerateOverride(PropertyExtensionInfo info) => !info.IsAttachedProperty;
-
-    public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
+    protected override string GetExtension(PropertyExtensionInfo info)
     {
-            var nl = Environment.NewLine;
             var extensionText = "";
             // overloads for primitive types like margin
             if (!info.ValueType.Module.ScopeName.StartsWith("System")
@@ -19,18 +18,9 @@ public class ValueOverloadsSetterGenerator : SetterGeneratorBase
                     var argDefs = string.Join(", ", ps.Select(x => $"{x.ParameterType.FullName} {x.Name} = default"));
                     var argVals = string.Join(", ", ps.Select(x => x.Name)); ;
 
-                    if (info.CanBeGenericConstraint)
-                    {
-                        extensionText += nl +
-                            $"public static T {info.ExtensionName}<T>(this T control, {argDefs}) where T : {info.ControlTypeName}{nl}" +
-                            $"   => control._set(() => control.{info.PropertyName} = new {info.ValueTypeSource}({argVals}));";
-                    }
-                    else
-                    {
-                        extensionText += nl +
-                            $"public static {info.ControlTypeName} {info.ExtensionName}(this {info.ControlTypeName} control, {argDefs}){nl}" +
-                            $"   => control._set(() => control.{info.PropertyName} = new {info.ValueTypeSource}({argVals}));";
-                    }
+                        extensionText += Environment.NewLine +
+                                         $"public static {info.ReturnType} {info.ExtensionName}{info.GenericArg}(this {info.ReturnType} control, {argDefs}) {info.GenericConstraint} {Environment.NewLine}" +
+                                         $"   => control._set(() => control.{info.MemberName} = new {info.ValueTypeSource}({argVals}));";
                 }
             }
             return extensionText;

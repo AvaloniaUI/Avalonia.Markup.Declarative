@@ -1,12 +1,10 @@
+using AvaloniaExtensionGenerator.ExtensionInfos;
+
 namespace AvaloniaExtensionGenerator.Generators.EventGenerators;
 
-public class ActionToEventGenerator : IMemberExtensionGenerator
+public class ActionToEventGenerator : ExtensionGeneratorBase<EventExtensionInfo>
 {
-    public bool CanGenerate(IMemberExtensionInfo info) => info is EventExtensionInfo;
-
-    public string? GetExtension(IMemberExtensionInfo info) => GetEventExtensionOverride((EventExtensionInfo)info);
-
-    public string GetEventExtensionOverride(EventExtensionInfo @event)
+    protected override string? GetExtension(EventExtensionInfo @event)
     {
         var eventHandler = @event.EventHandler;
         var eventParameterTypes = @event.EventParameterTypes;
@@ -47,7 +45,7 @@ public class ActionToEventGenerator : IMemberExtensionGenerator
             + $"(this {controlTypeName} control, {argsString}) => {Environment.NewLine}"
             + $"        control._setEvent(({eventHandler}) (({lambdaParameters}) => {actionCallStr}), h => control.{eventName} += h);";
 
-        if (@event.CanBeGenericConstraint)
+        if (@event.IsGeneric)
         {
             extensionText =
                 $"    public static T {extensionName}<T>"
@@ -57,4 +55,5 @@ public class ActionToEventGenerator : IMemberExtensionGenerator
 
         return extensionText;
     }
+
 }

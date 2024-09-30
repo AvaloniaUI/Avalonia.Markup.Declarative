@@ -1,12 +1,10 @@
-using AvaloniaExtensionGenerator.Generators.SetterGenerators;
+using AvaloniaExtensionGenerator.ExtensionInfos;
 
 namespace AvaloniaExtensionGenerator.Generators.StyleSetterGenerators;
 
-public class ValueOverloadsStyleSetterGenerator : SetterGeneratorBase
+public class ValueOverloadsStyleSetterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
 {
-    public override bool CanGenerateOverride(PropertyExtensionInfo info) => true;
-
-    public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
+    protected override string? GetExtension(PropertyExtensionInfo info)
     {
         var extensionText = "";
         // overloads for primitive types like margin
@@ -20,17 +18,8 @@ public class ValueOverloadsStyleSetterGenerator : SetterGeneratorBase
                 var argDefs = string.Join(", ", ps.Select(x => $"{x.ParameterType.FullName} {x.Name}"));
                 var argVals = string.Join(", ", ps.Select(x => x.Name)); ;
 
-                if (info.CanBeGenericConstraint)
-                {
-                    extensionText += $"public static Style<T> {info.ExtensionName}<T>(this Style<T> style, {argDefs})"
-                                     + $" where T : {info.ControlTypeName}{Environment.NewLine}"
-                                     + $"   => style._addSetter({info.ControlTypeName}.{info.PropertyName}Property, new {info.ValueTypeSource}({argVals}));";
-                }
-                else
-                {
-                    extensionText += $"public static Style<{info.ControlTypeName}> {info.ExtensionName}(this Style<{info.ControlTypeName}> style, {argDefs}){Environment.NewLine}" +
-                                     $"   => style._addSetter({info.ControlTypeName}.{info.PropertyName}Property, new {info.ValueTypeSource}({argVals}));";
-                }
+                extensionText += $"public static Style<{info.ReturnType}> {info.ExtensionName}{info.GenericArg}(this Style<{info.ReturnType}> style, {argDefs}) {info.GenericConstraint} {Environment.NewLine}" +
+                                 $"   => style._addSetter({info.ControlTypeName}.{info.MemberName}Property, new {info.ValueTypeSource}({argVals}));";
             }
         }
         return extensionText;

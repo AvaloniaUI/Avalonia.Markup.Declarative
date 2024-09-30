@@ -14,28 +14,28 @@ public static partial class Canvas_MarkupExtensions
 //================= Properties ======================//
 
 //================= Attached Properties ======================//
- // LeftProperty
+ // Left
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T Canvas_Left<T>(this T control, System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.AvaloniaObject
  => control._setEx(Avalonia.Controls.Canvas.LeftProperty, ps, () => Avalonia.Controls.Canvas.SetLeft(control, value), bindingMode, converter, bindingSource);
 
 
- // TopProperty
+ // Top
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T Canvas_Top<T>(this T control, System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.AvaloniaObject
  => control._setEx(Avalonia.Controls.Canvas.TopProperty, ps, () => Avalonia.Controls.Canvas.SetTop(control, value), bindingMode, converter, bindingSource);
 
 
- // RightProperty
+ // Right
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T Canvas_Right<T>(this T control, System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.AvaloniaObject
  => control._setEx(Avalonia.Controls.Canvas.RightProperty, ps, () => Avalonia.Controls.Canvas.SetRight(control, value), bindingMode, converter, bindingSource);
 
 
- // BottomProperty
+ // Bottom
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T Canvas_Bottom<T>(this T control, System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.AvaloniaObject

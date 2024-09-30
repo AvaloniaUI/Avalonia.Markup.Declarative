@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Reflection;
 using System.Text;
+using AvaloniaExtensionGenerator.ExtensionInfos;
 using AvaloniaExtensionGenerator.Generators;
 using AvaloniaExtensionGenerator.Generators.AttachedPropertySetterGenerator;
 using AvaloniaExtensionGenerator.Generators.EventGenerators;
@@ -45,12 +46,16 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
 
     private void GenerateExtensions()
     {
-        if (!Directory.Exists(config.OutputPath)) 
+        if (!Directory.Exists(config.OutputPath))
             Directory.CreateDirectory(config.OutputPath);
 
-        List<IExtensionGroupGenerator> groupGenerators =
+        List<ExtensionGroupGenerator> groupGenerators =
         [
-            new ExtensionGroupGenerator<PropertyExtensionInfo>("Properties", t => t.GetFields().Where(IsAvaloniaPropertyField),
+            new("Properties", 
+                t => t.GetFields()
+                    .Where(IsAvaloniaPropertyField)
+                    .Select(x => new PropertyExtensionInfo(x)),
+                
                 new BindFromExpressionSetterGenerator(),
                 new MagicalSetterGenerator(),
                 new ValueOverloadsSetterGenerator(),
@@ -61,21 +66,33 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
                 new MagicalSetterWithConverterGenerator()
             ),
 
-            new ExtensionGroupGenerator<PropertyExtensionInfo>("Attached Properties", t => t.GetFields().Where(IsAttachedPropertyField),
+            new("Attached Properties", 
+                t => t.GetFields()
+                    .Where(IsAttachedPropertyField)
+                    .Select(x => new AttachedPropertyExtensionInfo(x)),
+                
                 new AttachedPropertyMagicalSetterGenerator()
             ),
 
-            new ExtensionGroupGenerator<EventExtensionInfo>("Events", t => t.GetEvents().Where(x => x.DeclaringType == t),
+            new("Events", 
+                t => t.GetEvents()
+                    .Where(x => x.DeclaringType == t)
+                    .Select(x => new EventExtensionInfo(x)),
+                
                 new ActionToEventGenerator()),
 
-            new ExtensionGroupGenerator<PropertyExtensionInfo>("Styles",
-                t => !IsStyledElement(t) ? [] : t.GetFields().Where(IsAcceptableStyledField),
+            new("Styles", 
+                t => !IsStyledElement(t) ? [] : t
+                    .GetFields()
+                    .Where(IsAcceptableStyledField)
+                    .Select(x => new PropertyExtensionInfo(x)),
+                
                 new ValueStyleSetterGenerator(),
                 new BindingStyleSetterGenerator(),
                 new ValueOverloadsStyleSetterGenerator()
             )
         ];
-        
+
         var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0.0";
 
         foreach (var controlType in config.TypesToProcess)
@@ -89,7 +106,7 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
             }).ToImmutableList();
 
             //skip types without extensions
-            if(extensionGroups.All(x=>x.amount == 0))
+            if (extensionGroups.All(x => x.amount == 0))
                 continue;
 
             Console.WriteLine($"{controlType.Name} : generated {totalGenerated} extensions");

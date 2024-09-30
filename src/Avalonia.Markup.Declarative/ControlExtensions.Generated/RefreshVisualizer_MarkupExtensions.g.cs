@@ -12,27 +12,25 @@ namespace Avalonia.Markup.Declarative;
 public static partial class RefreshVisualizer_MarkupExtensions
 {
 //================= Properties ======================//
- // OrientationProperty
+ // Orientation
 
 /*BindFromExpressionSetterGenerator*/
-public static T Orientation<T>(this T control, Func<Avalonia.Controls.RefreshVisualizerOrientation> func, Action<Avalonia.Controls.RefreshVisualizerOrientation>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.RefreshVisualizer
+public static T Orientation<T>(this T control, Func<Avalonia.Controls.RefreshVisualizerOrientation> func, Action<Avalonia.Controls.RefreshVisualizerOrientation>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.RefreshVisualizer 
    => control._set(Avalonia.Controls.RefreshVisualizer.OrientationProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static T Orientation<T>(this T control, Avalonia.Controls.RefreshVisualizerOrientation value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RefreshVisualizer
-=> control._setEx(Avalonia.Controls.RefreshVisualizer.OrientationProperty, ps, () => control.Orientation = value, bindingMode, converter, bindingSource);
+public static Avalonia.Controls.RefreshVisualizer Orientation<T>(this T control,Avalonia.Controls.RefreshVisualizerOrientation value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RefreshVisualizer=> control._setEx(Avalonia.Controls.RefreshVisualizer.OrientationProperty, ps, () => control.Orientation = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
-public static T Orientation<T>(this T control, IBinding binding) where T : Avalonia.Controls.RefreshVisualizer
+public static T Orientation<T>(this T control, IBinding binding) where T : Avalonia.Controls.RefreshVisualizer 
    => control._set(Avalonia.Controls.RefreshVisualizer.OrientationProperty, binding);
 
 /*AvaloniaPropertyBindSetterGenerator*/
-public static T Orientation<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.RefreshVisualizer
+public static T Orientation<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.RefreshVisualizer 
    => control._set(Avalonia.Controls.RefreshVisualizer.OrientationProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Orientation<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.RefreshVisualizerOrientation> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RefreshVisualizer
-=> control._setEx(Avalonia.Controls.RefreshVisualizer.OrientationProperty, ps, () => control.Orientation = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Orientation<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.RefreshVisualizerOrientation> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RefreshVisualizer=> control._setEx(Avalonia.Controls.RefreshVisualizer.OrientationProperty, ps, () => control.Orientation = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

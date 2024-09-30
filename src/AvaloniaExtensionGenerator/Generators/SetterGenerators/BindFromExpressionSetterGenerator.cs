@@ -1,24 +1,11 @@
-﻿namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
+﻿using AvaloniaExtensionGenerator.ExtensionInfos;
 
-public class BindFromExpressionSetterGenerator : SetterGeneratorBase
+namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
+
+public class BindFromExpressionSetterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
 {
-    public override bool CanGenerateOverride(PropertyExtensionInfo info) => true;
+    protected override string? GetExtension(PropertyExtensionInfo info) =>
+        $"public static {info.ReturnType} {info.ExtensionName}{info.GenericArg}(this {info.ReturnType} control, Func<{info.ValueTypeSource}> func, Action<{info.ValueTypeSource}>? onChanged = null, [CallerArgumentExpression(\"func\")] string? expression = null) {info.GenericConstraint} {Environment.NewLine}" +
+        $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, func, onChanged, expression);";
 
-    public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
-    {
-        //direct type access
-        var extensionText =
-            $"public static {info.ControlTypeName} {info.ExtensionName}(this {info.ControlTypeName} control, Func<{info.ValueTypeSource}> func, Action<{info.ValueTypeSource}>? onChanged = null, [CallerArgumentExpression(\"func\")] string? expression = null){Environment.NewLine}" +
-            $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, func, onChanged, expression);";
-
-        //base type generic acess
-        if (info.CanBeGenericConstraint)
-        {
-            extensionText =
-                $"public static T {info.ExtensionName}<T>(this T control, Func<{info.ValueTypeSource}> func, Action<{info.ValueTypeSource}>? onChanged = null, [CallerArgumentExpression(\"func\")] string? expression = null) where T : {info.ControlTypeName}{Environment.NewLine}" +
-                $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, func, onChanged, expression);";
-        }
-
-        return extensionText;
-    }
 }

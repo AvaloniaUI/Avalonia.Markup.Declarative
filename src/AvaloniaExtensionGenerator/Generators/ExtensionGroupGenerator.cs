@@ -1,16 +1,11 @@
-using System.Reflection;
 using System.Text;
-using AvaloniaExtensionGenerator.Generators.EventGenerators;
-using AvaloniaExtensionGenerator.Generators.SetterGenerators;
 
 namespace AvaloniaExtensionGenerator.Generators;
 
-public class ExtensionGroupGenerator<TMember>(
+public class ExtensionGroupGenerator(
     string groupName,
-    Func<Type, IEnumerable<MemberInfo>> membersQuery,
-    params IMemberExtensionGenerator[] generators)
-    : IExtensionGroupGenerator
-    where TMember : IMemberExtensionInfo
+    Func<Type, IEnumerable<IMemberExtensionInfo>> membersQuery,
+    params ExtensionGeneratorBase[] generators)
 {
     public string GroupName { get; } = groupName;
 
@@ -18,18 +13,12 @@ public class ExtensionGroupGenerator<TMember>(
     {
         generationsCount = 0;
 
-        var members = membersQuery(avaloniaControlType).ToArray();
-        if (!members.Any())
-            return null;
-
         var sb = new StringBuilder();
-        var i = 0;
-        foreach (var memberInfo in members)
+        foreach (var extensionInfo in membersQuery(avaloniaControlType))
         {
-            sb.AppendLine($" // {memberInfo.Name}");
+            sb.AppendLine($" // {extensionInfo.MemberName}");
 
-            var extensionInfo = GetExtensionInfo(memberInfo);
-            foreach (var generator in generators.Where(x=>x.CanGenerate(extensionInfo)))
+            foreach (var generator in generators)
             {
                 var extensionCode = generator.GetExtension(extensionInfo);
                 if (!string.IsNullOrWhiteSpace(extensionCode))
@@ -46,16 +35,5 @@ public class ExtensionGroupGenerator<TMember>(
         }
 
         return sb.ToString();
-    }
-
-    private static IMemberExtensionInfo GetExtensionInfo(MemberInfo info)
-    {
-        if (info is FieldInfo fi)
-            return new PropertyExtensionInfo(fi);
-
-        if (info is EventInfo ei)
-            return new EventExtensionInfo(ei);
-
-        throw new ArgumentException($"{info.GetType().Name} is not valid member info");
     }
 }

@@ -14,7 +14,7 @@ public static partial class NativeMenuBar_MarkupExtensions
 //================= Properties ======================//
 
 //================= Attached Properties ======================//
- // EnableMenuItemClickForwardingProperty
+ // EnableMenuItemClickForwarding
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T NativeMenuBar_EnableMenuItemClickForwarding<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.MenuItem

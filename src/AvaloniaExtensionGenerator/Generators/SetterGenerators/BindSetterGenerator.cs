@@ -1,24 +1,11 @@
+using AvaloniaExtensionGenerator.ExtensionInfos;
+
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
 
-public class BindSetterGenerator : SetterGeneratorBase
+public class BindSetterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
 {
-    public override bool CanGenerateOverride(PropertyExtensionInfo info) => !info.IsAttachedProperty;
+    protected override string? GetExtension(PropertyExtensionInfo info) =>
+        $"public static {info.ReturnType} {info.ExtensionName}{info.GenericArg}(this {info.ReturnType} control, IBinding binding) {info.GenericConstraint} {Environment.NewLine}" +
+        $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, binding);";
 
-    public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
-    {
-        //direct type access
-        var extensionText =
-            $"public static {info.ControlTypeName} {info.ExtensionName}(this {info.ControlTypeName} control, IBinding binding){Environment.NewLine}" +
-            $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, binding);";
-
-        //base type generic acess
-        if (info.CanBeGenericConstraint)
-        {
-            extensionText =
-                $"public static T {info.ExtensionName}<T>(this T control, IBinding binding) where T : {info.ControlTypeName}{Environment.NewLine}" +
-                $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, binding);";
-        }
-
-        return extensionText;
-    }
 }

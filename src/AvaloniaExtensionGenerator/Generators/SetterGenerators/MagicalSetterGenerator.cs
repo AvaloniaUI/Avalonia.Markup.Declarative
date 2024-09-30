@@ -1,31 +1,13 @@
+using AvaloniaExtensionGenerator.ExtensionInfos;
+
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
-public class MagicalSetterGenerator : SetterGeneratorBase
+public class MagicalSetterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
 {
-    public override bool CanGenerateOverride(PropertyExtensionInfo info) => true;
+    protected override string? GetExtension(PropertyExtensionInfo info)=>
+        $"public static {info.ControlTypeName} {info.ExtensionName}{info.GenericArg}"
+        + $"(this {info.ReturnType} control,"
+        + $"{info.ValueTypeSource} value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null,"
+        + $" [CallerArgumentExpression(\"value\")] string? ps = null) {info.GenericConstraint}"
+        + $"=> control._setEx({info.ControlTypeName}.{info.FieldInfo.Name}, ps, () => control.{info.MemberName} = value, bindingMode, converter, bindingSource);";
 
-    public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
-    {
-        var argsString = $"{info.ValueTypeSource} value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null,"
-                + $" [CallerArgumentExpression(\"value\")] string? ps = null)";
-        //direct type access
-        var extensionText =
-            $"public static {info.ControlTypeName} {info.ExtensionName}"
-            + $"(this {info.ControlTypeName} control, {argsString}"
-            + getSetterBody();
-
-        //base type generic access
-        if (info.CanBeGenericConstraint)
-        {
-            extensionText =
-                $"public static T {info.ExtensionName}<T>"
-                + $"(this T control, {argsString}"
-                + $" where T : {info.ControlTypeName}{Environment.NewLine}"
-                + getSetterBody();
-        }
-
-
-        string getSetterBody() => $"=> control._setEx({info.ControlTypeName}.{info.FieldInfo.Name}, ps, () => control.{info.PropertyName} = value, bindingMode, converter, bindingSource);";
-
-        return extensionText;
-    }
 }

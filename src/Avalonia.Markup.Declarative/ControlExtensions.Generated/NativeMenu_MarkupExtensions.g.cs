@@ -14,7 +14,7 @@ public static partial class NativeMenu_MarkupExtensions
 //================= Properties ======================//
 
 //================= Attached Properties ======================//
- // MenuProperty
+ // Menu
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T NativeMenu_Menu<T>(this T control, Avalonia.Controls.NativeMenu value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.AvaloniaObject
