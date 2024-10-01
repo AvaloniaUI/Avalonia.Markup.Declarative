@@ -361,7 +361,7 @@ public static class ControlPropertyExtensions
 		return container;
 	}
 
-	public static TItemsControl Items<TItemsControl>(this TItemsControl container, params Control[] items)
+	public static TItemsControl Items<TItemsControl>(this TItemsControl container, params AvaloniaObject[] items)
 		where TItemsControl : ItemsControl
 	{
 		if (container.Items is IList itemsCollection)
@@ -370,7 +370,7 @@ public static class ControlPropertyExtensions
 		return container;
 	}
 
-	public static TabControl ItemTemplate<TItem>(this TabControl control, Func<TItem, Control> build) =>
+    public static TabControl ItemTemplate<TItem>(this TabControl control, Func<TItem, Control> build) =>
 		ItemTemplate<TItem, TabControl>(control, build);
 
 	public static SelectingItemsControl ItemTemplate<TItem>(this SelectingItemsControl control,
