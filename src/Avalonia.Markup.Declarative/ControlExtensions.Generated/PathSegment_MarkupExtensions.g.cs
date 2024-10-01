@@ -19,7 +19,8 @@ public static T IsStroked<T>(this T control, Func<System.Boolean> func, Action<S
    => control._set(Avalonia.Media.PathSegment.IsStrokedProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Media.PathSegment IsStroked<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathSegment=> control._setEx(Avalonia.Media.PathSegment.IsStrokedProperty, ps, () => control.IsStroked = value, bindingMode, converter, bindingSource);
+public static T IsStroked<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathSegment 
+=> control._setEx(Avalonia.Media.PathSegment.IsStrokedProperty, ps, () => control.IsStroked = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsStroked<T>(this T control, IBinding binding) where T : Avalonia.Media.PathSegment 
@@ -30,7 +31,8 @@ public static T IsStroked<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Media.PathSegment.IsStrokedProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T IsStroked<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathSegment=> control._setEx(Avalonia.Media.PathSegment.IsStrokedProperty, ps, () => control.IsStroked = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T IsStroked<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathSegment 
+=> control._setEx(Avalonia.Media.PathSegment.IsStrokedProperty, ps, () => control.IsStroked = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

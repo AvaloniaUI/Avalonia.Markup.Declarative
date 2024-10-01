@@ -19,7 +19,8 @@ public static T SizeToContent<T>(this T control, Func<Avalonia.Controls.SizeToCo
    => control._set(Avalonia.Controls.Window.SizeToContentProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window SizeToContent<T>(this T control,Avalonia.Controls.SizeToContent value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.SizeToContentProperty, ps, () => control.SizeToContent = value, bindingMode, converter, bindingSource);
+public static T SizeToContent<T>(this T control,Avalonia.Controls.SizeToContent value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.SizeToContentProperty, ps, () => control.SizeToContent = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T SizeToContent<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -30,7 +31,8 @@ public static T SizeToContent<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.Window.SizeToContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T SizeToContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.SizeToContent> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.SizeToContentProperty, ps, () => control.SizeToContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T SizeToContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.SizeToContent> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.SizeToContentProperty, ps, () => control.SizeToContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ExtendClientAreaToDecorationsHint
@@ -40,7 +42,8 @@ public static T ExtendClientAreaToDecorationsHint<T>(this T control, Func<System
    => control._set(Avalonia.Controls.Window.ExtendClientAreaToDecorationsHintProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window ExtendClientAreaToDecorationsHint<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaToDecorationsHintProperty, ps, () => control.ExtendClientAreaToDecorationsHint = value, bindingMode, converter, bindingSource);
+public static T ExtendClientAreaToDecorationsHint<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaToDecorationsHintProperty, ps, () => control.ExtendClientAreaToDecorationsHint = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ExtendClientAreaToDecorationsHint<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -51,7 +54,8 @@ public static T ExtendClientAreaToDecorationsHint<T>(this T control, AvaloniaPro
    => control._set(Avalonia.Controls.Window.ExtendClientAreaToDecorationsHintProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ExtendClientAreaToDecorationsHint<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaToDecorationsHintProperty, ps, () => control.ExtendClientAreaToDecorationsHint = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ExtendClientAreaToDecorationsHint<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaToDecorationsHintProperty, ps, () => control.ExtendClientAreaToDecorationsHint = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ExtendClientAreaChromeHints
@@ -61,7 +65,8 @@ public static T ExtendClientAreaChromeHints<T>(this T control, Func<Avalonia.Pla
    => control._set(Avalonia.Controls.Window.ExtendClientAreaChromeHintsProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window ExtendClientAreaChromeHints<T>(this T control,Avalonia.Platform.ExtendClientAreaChromeHints value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaChromeHintsProperty, ps, () => control.ExtendClientAreaChromeHints = value, bindingMode, converter, bindingSource);
+public static T ExtendClientAreaChromeHints<T>(this T control,Avalonia.Platform.ExtendClientAreaChromeHints value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaChromeHintsProperty, ps, () => control.ExtendClientAreaChromeHints = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ExtendClientAreaChromeHints<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -72,7 +77,8 @@ public static T ExtendClientAreaChromeHints<T>(this T control, AvaloniaProperty 
    => control._set(Avalonia.Controls.Window.ExtendClientAreaChromeHintsProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ExtendClientAreaChromeHints<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Platform.ExtendClientAreaChromeHints> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaChromeHintsProperty, ps, () => control.ExtendClientAreaChromeHints = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ExtendClientAreaChromeHints<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Platform.ExtendClientAreaChromeHints> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaChromeHintsProperty, ps, () => control.ExtendClientAreaChromeHints = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ExtendClientAreaTitleBarHeightHint
@@ -82,7 +88,8 @@ public static T ExtendClientAreaTitleBarHeightHint<T>(this T control, Func<Syste
    => control._set(Avalonia.Controls.Window.ExtendClientAreaTitleBarHeightHintProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window ExtendClientAreaTitleBarHeightHint<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaTitleBarHeightHintProperty, ps, () => control.ExtendClientAreaTitleBarHeightHint = value, bindingMode, converter, bindingSource);
+public static T ExtendClientAreaTitleBarHeightHint<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaTitleBarHeightHintProperty, ps, () => control.ExtendClientAreaTitleBarHeightHint = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ExtendClientAreaTitleBarHeightHint<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -93,7 +100,8 @@ public static T ExtendClientAreaTitleBarHeightHint<T>(this T control, AvaloniaPr
    => control._set(Avalonia.Controls.Window.ExtendClientAreaTitleBarHeightHintProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ExtendClientAreaTitleBarHeightHint<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaTitleBarHeightHintProperty, ps, () => control.ExtendClientAreaTitleBarHeightHint = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ExtendClientAreaTitleBarHeightHint<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ExtendClientAreaTitleBarHeightHintProperty, ps, () => control.ExtendClientAreaTitleBarHeightHint = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // SystemDecorations
@@ -103,7 +111,8 @@ public static T SystemDecorations<T>(this T control, Func<Avalonia.Controls.Syst
    => control._set(Avalonia.Controls.Window.SystemDecorationsProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window SystemDecorations<T>(this T control,Avalonia.Controls.SystemDecorations value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.SystemDecorationsProperty, ps, () => control.SystemDecorations = value, bindingMode, converter, bindingSource);
+public static T SystemDecorations<T>(this T control,Avalonia.Controls.SystemDecorations value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.SystemDecorationsProperty, ps, () => control.SystemDecorations = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T SystemDecorations<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -114,7 +123,8 @@ public static T SystemDecorations<T>(this T control, AvaloniaProperty avaloniaPr
    => control._set(Avalonia.Controls.Window.SystemDecorationsProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T SystemDecorations<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.SystemDecorations> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.SystemDecorationsProperty, ps, () => control.SystemDecorations = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T SystemDecorations<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.SystemDecorations> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.SystemDecorationsProperty, ps, () => control.SystemDecorations = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ShowActivated
@@ -124,7 +134,8 @@ public static T ShowActivated<T>(this T control, Func<System.Boolean> func, Acti
    => control._set(Avalonia.Controls.Window.ShowActivatedProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window ShowActivated<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ShowActivatedProperty, ps, () => control.ShowActivated = value, bindingMode, converter, bindingSource);
+public static T ShowActivated<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ShowActivatedProperty, ps, () => control.ShowActivated = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ShowActivated<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -135,7 +146,8 @@ public static T ShowActivated<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.Window.ShowActivatedProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ShowActivated<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ShowActivatedProperty, ps, () => control.ShowActivated = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ShowActivated<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ShowActivatedProperty, ps, () => control.ShowActivated = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ShowInTaskbar
@@ -145,7 +157,8 @@ public static T ShowInTaskbar<T>(this T control, Func<System.Boolean> func, Acti
    => control._set(Avalonia.Controls.Window.ShowInTaskbarProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window ShowInTaskbar<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ShowInTaskbarProperty, ps, () => control.ShowInTaskbar = value, bindingMode, converter, bindingSource);
+public static T ShowInTaskbar<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ShowInTaskbarProperty, ps, () => control.ShowInTaskbar = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ShowInTaskbar<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -156,7 +169,8 @@ public static T ShowInTaskbar<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.Window.ShowInTaskbarProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ShowInTaskbar<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ShowInTaskbarProperty, ps, () => control.ShowInTaskbar = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ShowInTaskbar<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ShowInTaskbarProperty, ps, () => control.ShowInTaskbar = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ClosingBehavior
@@ -166,7 +180,8 @@ public static T ClosingBehavior<T>(this T control, Func<Avalonia.Controls.Window
    => control._set(Avalonia.Controls.Window.ClosingBehaviorProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window ClosingBehavior<T>(this T control,Avalonia.Controls.WindowClosingBehavior value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ClosingBehaviorProperty, ps, () => control.ClosingBehavior = value, bindingMode, converter, bindingSource);
+public static T ClosingBehavior<T>(this T control,Avalonia.Controls.WindowClosingBehavior value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ClosingBehaviorProperty, ps, () => control.ClosingBehavior = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ClosingBehavior<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -177,7 +192,8 @@ public static T ClosingBehavior<T>(this T control, AvaloniaProperty avaloniaProp
    => control._set(Avalonia.Controls.Window.ClosingBehaviorProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ClosingBehavior<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.WindowClosingBehavior> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.ClosingBehaviorProperty, ps, () => control.ClosingBehavior = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ClosingBehavior<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.WindowClosingBehavior> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.ClosingBehaviorProperty, ps, () => control.ClosingBehavior = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // WindowState
@@ -187,7 +203,8 @@ public static T WindowState<T>(this T control, Func<Avalonia.Controls.WindowStat
    => control._set(Avalonia.Controls.Window.WindowStateProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window WindowState<T>(this T control,Avalonia.Controls.WindowState value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.WindowStateProperty, ps, () => control.WindowState = value, bindingMode, converter, bindingSource);
+public static T WindowState<T>(this T control,Avalonia.Controls.WindowState value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.WindowStateProperty, ps, () => control.WindowState = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T WindowState<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -198,7 +215,8 @@ public static T WindowState<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.Window.WindowStateProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T WindowState<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.WindowState> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.WindowStateProperty, ps, () => control.WindowState = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T WindowState<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.WindowState> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.WindowStateProperty, ps, () => control.WindowState = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Title
@@ -208,7 +226,8 @@ public static T Title<T>(this T control, Func<System.String> func, Action<System
    => control._set(Avalonia.Controls.Window.TitleProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window Title<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.TitleProperty, ps, () => control.Title = value, bindingMode, converter, bindingSource);
+public static T Title<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.TitleProperty, ps, () => control.Title = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Title<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -219,7 +238,8 @@ public static T Title<T>(this T control, AvaloniaProperty avaloniaProperty, Bind
    => control._set(Avalonia.Controls.Window.TitleProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Title<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.TitleProperty, ps, () => control.Title = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Title<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.TitleProperty, ps, () => control.Title = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Icon
@@ -229,7 +249,8 @@ public static T Icon<T>(this T control, Func<Avalonia.Controls.WindowIcon> func,
    => control._set(Avalonia.Controls.Window.IconProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window Icon<T>(this T control,Avalonia.Controls.WindowIcon value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.IconProperty, ps, () => control.Icon = value, bindingMode, converter, bindingSource);
+public static T Icon<T>(this T control,Avalonia.Controls.WindowIcon value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.IconProperty, ps, () => control.Icon = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Icon<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -240,7 +261,8 @@ public static T Icon<T>(this T control, AvaloniaProperty avaloniaProperty, Bindi
    => control._set(Avalonia.Controls.Window.IconProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Icon<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.WindowIcon> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.IconProperty, ps, () => control.Icon = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Icon<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.WindowIcon> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.IconProperty, ps, () => control.Icon = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // WindowStartupLocation
@@ -250,7 +272,8 @@ public static T WindowStartupLocation<T>(this T control, Func<Avalonia.Controls.
    => control._set(Avalonia.Controls.Window.WindowStartupLocationProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window WindowStartupLocation<T>(this T control,Avalonia.Controls.WindowStartupLocation value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.WindowStartupLocationProperty, ps, () => control.WindowStartupLocation = value, bindingMode, converter, bindingSource);
+public static T WindowStartupLocation<T>(this T control,Avalonia.Controls.WindowStartupLocation value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.WindowStartupLocationProperty, ps, () => control.WindowStartupLocation = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T WindowStartupLocation<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -261,7 +284,8 @@ public static T WindowStartupLocation<T>(this T control, AvaloniaProperty avalon
    => control._set(Avalonia.Controls.Window.WindowStartupLocationProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T WindowStartupLocation<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.WindowStartupLocation> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.WindowStartupLocationProperty, ps, () => control.WindowStartupLocation = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T WindowStartupLocation<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.WindowStartupLocation> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.WindowStartupLocationProperty, ps, () => control.WindowStartupLocation = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // CanResize
@@ -271,7 +295,8 @@ public static T CanResize<T>(this T control, Func<System.Boolean> func, Action<S
    => control._set(Avalonia.Controls.Window.CanResizeProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Window CanResize<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.CanResizeProperty, ps, () => control.CanResize = value, bindingMode, converter, bindingSource);
+public static T CanResize<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.CanResizeProperty, ps, () => control.CanResize = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T CanResize<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
@@ -282,7 +307,8 @@ public static T CanResize<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.Window.CanResizeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T CanResize<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window=> control._setEx(Avalonia.Controls.Window.CanResizeProperty, ps, () => control.CanResize = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T CanResize<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.CanResizeProperty, ps, () => control.CanResize = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

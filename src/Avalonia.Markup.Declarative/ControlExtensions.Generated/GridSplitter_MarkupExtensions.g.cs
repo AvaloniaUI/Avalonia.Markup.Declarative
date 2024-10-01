@@ -19,7 +19,8 @@ public static T ResizeDirection<T>(this T control, Func<Avalonia.Controls.GridRe
    => control._set(Avalonia.Controls.GridSplitter.ResizeDirectionProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.GridSplitter ResizeDirection<T>(this T control,Avalonia.Controls.GridResizeDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.ResizeDirectionProperty, ps, () => control.ResizeDirection = value, bindingMode, converter, bindingSource);
+public static T ResizeDirection<T>(this T control,Avalonia.Controls.GridResizeDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.ResizeDirectionProperty, ps, () => control.ResizeDirection = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ResizeDirection<T>(this T control, IBinding binding) where T : Avalonia.Controls.GridSplitter 
@@ -30,7 +31,8 @@ public static T ResizeDirection<T>(this T control, AvaloniaProperty avaloniaProp
    => control._set(Avalonia.Controls.GridSplitter.ResizeDirectionProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ResizeDirection<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.GridResizeDirection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.ResizeDirectionProperty, ps, () => control.ResizeDirection = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ResizeDirection<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.GridResizeDirection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.ResizeDirectionProperty, ps, () => control.ResizeDirection = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ResizeBehavior
@@ -40,7 +42,8 @@ public static T ResizeBehavior<T>(this T control, Func<Avalonia.Controls.GridRes
    => control._set(Avalonia.Controls.GridSplitter.ResizeBehaviorProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.GridSplitter ResizeBehavior<T>(this T control,Avalonia.Controls.GridResizeBehavior value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.ResizeBehaviorProperty, ps, () => control.ResizeBehavior = value, bindingMode, converter, bindingSource);
+public static T ResizeBehavior<T>(this T control,Avalonia.Controls.GridResizeBehavior value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.ResizeBehaviorProperty, ps, () => control.ResizeBehavior = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ResizeBehavior<T>(this T control, IBinding binding) where T : Avalonia.Controls.GridSplitter 
@@ -51,7 +54,8 @@ public static T ResizeBehavior<T>(this T control, AvaloniaProperty avaloniaPrope
    => control._set(Avalonia.Controls.GridSplitter.ResizeBehaviorProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ResizeBehavior<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.GridResizeBehavior> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.ResizeBehaviorProperty, ps, () => control.ResizeBehavior = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ResizeBehavior<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.GridResizeBehavior> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.ResizeBehaviorProperty, ps, () => control.ResizeBehavior = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ShowsPreview
@@ -61,7 +65,8 @@ public static T ShowsPreview<T>(this T control, Func<System.Boolean> func, Actio
    => control._set(Avalonia.Controls.GridSplitter.ShowsPreviewProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.GridSplitter ShowsPreview<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.ShowsPreviewProperty, ps, () => control.ShowsPreview = value, bindingMode, converter, bindingSource);
+public static T ShowsPreview<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.ShowsPreviewProperty, ps, () => control.ShowsPreview = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ShowsPreview<T>(this T control, IBinding binding) where T : Avalonia.Controls.GridSplitter 
@@ -72,7 +77,8 @@ public static T ShowsPreview<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.GridSplitter.ShowsPreviewProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ShowsPreview<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.ShowsPreviewProperty, ps, () => control.ShowsPreview = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ShowsPreview<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.ShowsPreviewProperty, ps, () => control.ShowsPreview = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // KeyboardIncrement
@@ -82,7 +88,8 @@ public static T KeyboardIncrement<T>(this T control, Func<System.Double> func, A
    => control._set(Avalonia.Controls.GridSplitter.KeyboardIncrementProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.GridSplitter KeyboardIncrement<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.KeyboardIncrementProperty, ps, () => control.KeyboardIncrement = value, bindingMode, converter, bindingSource);
+public static T KeyboardIncrement<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.KeyboardIncrementProperty, ps, () => control.KeyboardIncrement = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T KeyboardIncrement<T>(this T control, IBinding binding) where T : Avalonia.Controls.GridSplitter 
@@ -93,7 +100,8 @@ public static T KeyboardIncrement<T>(this T control, AvaloniaProperty avaloniaPr
    => control._set(Avalonia.Controls.GridSplitter.KeyboardIncrementProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T KeyboardIncrement<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.KeyboardIncrementProperty, ps, () => control.KeyboardIncrement = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T KeyboardIncrement<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.KeyboardIncrementProperty, ps, () => control.KeyboardIncrement = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // DragIncrement
@@ -103,7 +111,8 @@ public static T DragIncrement<T>(this T control, Func<System.Double> func, Actio
    => control._set(Avalonia.Controls.GridSplitter.DragIncrementProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.GridSplitter DragIncrement<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.DragIncrementProperty, ps, () => control.DragIncrement = value, bindingMode, converter, bindingSource);
+public static T DragIncrement<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.DragIncrementProperty, ps, () => control.DragIncrement = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T DragIncrement<T>(this T control, IBinding binding) where T : Avalonia.Controls.GridSplitter 
@@ -114,7 +123,8 @@ public static T DragIncrement<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.GridSplitter.DragIncrementProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T DragIncrement<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.DragIncrementProperty, ps, () => control.DragIncrement = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T DragIncrement<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.DragIncrementProperty, ps, () => control.DragIncrement = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // PreviewContent
@@ -124,7 +134,8 @@ public static T PreviewContent<T>(this T control, Func<Avalonia.Controls.ITempla
    => control._set(Avalonia.Controls.GridSplitter.PreviewContentProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.GridSplitter PreviewContent<T>(this T control,Avalonia.Controls.ITemplate<Avalonia.Controls.Control> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.PreviewContentProperty, ps, () => control.PreviewContent = value, bindingMode, converter, bindingSource);
+public static T PreviewContent<T>(this T control,Avalonia.Controls.ITemplate<Avalonia.Controls.Control> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.PreviewContentProperty, ps, () => control.PreviewContent = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T PreviewContent<T>(this T control, IBinding binding) where T : Avalonia.Controls.GridSplitter 
@@ -135,7 +146,8 @@ public static T PreviewContent<T>(this T control, AvaloniaProperty avaloniaPrope
    => control._set(Avalonia.Controls.GridSplitter.PreviewContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T PreviewContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ITemplate<Avalonia.Controls.Control>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter=> control._setEx(Avalonia.Controls.GridSplitter.PreviewContentProperty, ps, () => control.PreviewContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T PreviewContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ITemplate<Avalonia.Controls.Control>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.GridSplitter 
+=> control._setEx(Avalonia.Controls.GridSplitter.PreviewContentProperty, ps, () => control.PreviewContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

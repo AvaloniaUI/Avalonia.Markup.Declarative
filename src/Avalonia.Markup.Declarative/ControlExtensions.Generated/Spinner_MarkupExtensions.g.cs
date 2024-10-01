@@ -19,7 +19,8 @@ public static T ValidSpinDirection<T>(this T control, Func<Avalonia.Controls.Val
    => control._set(Avalonia.Controls.Spinner.ValidSpinDirectionProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Spinner ValidSpinDirection<T>(this T control,Avalonia.Controls.ValidSpinDirections value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Spinner=> control._setEx(Avalonia.Controls.Spinner.ValidSpinDirectionProperty, ps, () => control.ValidSpinDirection = value, bindingMode, converter, bindingSource);
+public static T ValidSpinDirection<T>(this T control,Avalonia.Controls.ValidSpinDirections value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Spinner 
+=> control._setEx(Avalonia.Controls.Spinner.ValidSpinDirectionProperty, ps, () => control.ValidSpinDirection = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ValidSpinDirection<T>(this T control, IBinding binding) where T : Avalonia.Controls.Spinner 
@@ -30,7 +31,8 @@ public static T ValidSpinDirection<T>(this T control, AvaloniaProperty avaloniaP
    => control._set(Avalonia.Controls.Spinner.ValidSpinDirectionProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ValidSpinDirection<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ValidSpinDirections> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Spinner=> control._setEx(Avalonia.Controls.Spinner.ValidSpinDirectionProperty, ps, () => control.ValidSpinDirection = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ValidSpinDirection<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ValidSpinDirections> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Spinner 
+=> control._setEx(Avalonia.Controls.Spinner.ValidSpinDirectionProperty, ps, () => control.ValidSpinDirection = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

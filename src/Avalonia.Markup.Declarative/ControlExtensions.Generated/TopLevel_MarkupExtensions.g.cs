@@ -19,7 +19,8 @@ public static T TransparencyLevelHint<T>(this T control, Func<System.Collections
    => control._set(Avalonia.Controls.TopLevel.TransparencyLevelHintProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TopLevel TransparencyLevelHint<T>(this T control,System.Collections.Generic.IReadOnlyList<Avalonia.Controls.WindowTransparencyLevel> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel=> control._setEx(Avalonia.Controls.TopLevel.TransparencyLevelHintProperty, ps, () => control.TransparencyLevelHint = value, bindingMode, converter, bindingSource);
+public static T TransparencyLevelHint<T>(this T control,System.Collections.Generic.IReadOnlyList<Avalonia.Controls.WindowTransparencyLevel> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel 
+=> control._setEx(Avalonia.Controls.TopLevel.TransparencyLevelHintProperty, ps, () => control.TransparencyLevelHint = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T TransparencyLevelHint<T>(this T control, IBinding binding) where T : Avalonia.Controls.TopLevel 
@@ -30,7 +31,8 @@ public static T TransparencyLevelHint<T>(this T control, AvaloniaProperty avalon
    => control._set(Avalonia.Controls.TopLevel.TransparencyLevelHintProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T TransparencyLevelHint<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Collections.Generic.IReadOnlyList<Avalonia.Controls.WindowTransparencyLevel>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel=> control._setEx(Avalonia.Controls.TopLevel.TransparencyLevelHintProperty, ps, () => control.TransparencyLevelHint = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T TransparencyLevelHint<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Collections.Generic.IReadOnlyList<Avalonia.Controls.WindowTransparencyLevel>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel 
+=> control._setEx(Avalonia.Controls.TopLevel.TransparencyLevelHintProperty, ps, () => control.TransparencyLevelHint = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // TransparencyBackgroundFallback
@@ -40,7 +42,8 @@ public static T TransparencyBackgroundFallback<T>(this T control, Func<Avalonia.
    => control._set(Avalonia.Controls.TopLevel.TransparencyBackgroundFallbackProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TopLevel TransparencyBackgroundFallback<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel=> control._setEx(Avalonia.Controls.TopLevel.TransparencyBackgroundFallbackProperty, ps, () => control.TransparencyBackgroundFallback = value, bindingMode, converter, bindingSource);
+public static T TransparencyBackgroundFallback<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel 
+=> control._setEx(Avalonia.Controls.TopLevel.TransparencyBackgroundFallbackProperty, ps, () => control.TransparencyBackgroundFallback = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T TransparencyBackgroundFallback<T>(this T control, IBinding binding) where T : Avalonia.Controls.TopLevel 
@@ -51,7 +54,8 @@ public static T TransparencyBackgroundFallback<T>(this T control, AvaloniaProper
    => control._set(Avalonia.Controls.TopLevel.TransparencyBackgroundFallbackProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T TransparencyBackgroundFallback<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel=> control._setEx(Avalonia.Controls.TopLevel.TransparencyBackgroundFallbackProperty, ps, () => control.TransparencyBackgroundFallback = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T TransparencyBackgroundFallback<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel 
+=> control._setEx(Avalonia.Controls.TopLevel.TransparencyBackgroundFallbackProperty, ps, () => control.TransparencyBackgroundFallback = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // RequestedThemeVariant
@@ -61,7 +65,8 @@ public static T RequestedThemeVariant<T>(this T control, Func<Avalonia.Styling.T
    => control._set(Avalonia.Controls.TopLevel.RequestedThemeVariantProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TopLevel RequestedThemeVariant<T>(this T control,Avalonia.Styling.ThemeVariant value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel=> control._setEx(Avalonia.Controls.TopLevel.RequestedThemeVariantProperty, ps, () => control.RequestedThemeVariant = value, bindingMode, converter, bindingSource);
+public static T RequestedThemeVariant<T>(this T control,Avalonia.Styling.ThemeVariant value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel 
+=> control._setEx(Avalonia.Controls.TopLevel.RequestedThemeVariantProperty, ps, () => control.RequestedThemeVariant = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T RequestedThemeVariant<T>(this T control, IBinding binding) where T : Avalonia.Controls.TopLevel 
@@ -72,7 +77,8 @@ public static T RequestedThemeVariant<T>(this T control, AvaloniaProperty avalon
    => control._set(Avalonia.Controls.TopLevel.RequestedThemeVariantProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T RequestedThemeVariant<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Styling.ThemeVariant> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel=> control._setEx(Avalonia.Controls.TopLevel.RequestedThemeVariantProperty, ps, () => control.RequestedThemeVariant = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T RequestedThemeVariant<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Styling.ThemeVariant> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TopLevel 
+=> control._setEx(Avalonia.Controls.TopLevel.RequestedThemeVariantProperty, ps, () => control.RequestedThemeVariant = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

@@ -19,7 +19,8 @@ public static T CanHorizontallyScroll<T>(this T control, Func<System.Boolean> fu
    => control._set(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanHorizontallyScrollProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer CanHorizontallyScroll<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanHorizontallyScrollProperty, ps, () => control.CanHorizontallyScroll = value, bindingMode, converter, bindingSource);
+public static T CanHorizontallyScroll<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanHorizontallyScrollProperty, ps, () => control.CanHorizontallyScroll = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T CanHorizontallyScroll<T>(this T control, IBinding binding) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
@@ -30,7 +31,8 @@ public static T CanHorizontallyScroll<T>(this T control, AvaloniaProperty avalon
    => control._set(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanHorizontallyScrollProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T CanHorizontallyScroll<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanHorizontallyScrollProperty, ps, () => control.CanHorizontallyScroll = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T CanHorizontallyScroll<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanHorizontallyScrollProperty, ps, () => control.CanHorizontallyScroll = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // CanVerticallyScroll
@@ -40,7 +42,8 @@ public static T CanVerticallyScroll<T>(this T control, Func<System.Boolean> func
    => control._set(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanVerticallyScrollProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer CanVerticallyScroll<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanVerticallyScrollProperty, ps, () => control.CanVerticallyScroll = value, bindingMode, converter, bindingSource);
+public static T CanVerticallyScroll<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanVerticallyScrollProperty, ps, () => control.CanVerticallyScroll = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T CanVerticallyScroll<T>(this T control, IBinding binding) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
@@ -51,7 +54,8 @@ public static T CanVerticallyScroll<T>(this T control, AvaloniaProperty avalonia
    => control._set(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanVerticallyScrollProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T CanVerticallyScroll<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanVerticallyScrollProperty, ps, () => control.CanVerticallyScroll = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T CanVerticallyScroll<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanVerticallyScrollProperty, ps, () => control.CanVerticallyScroll = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // IsScrollInertiaEnabled
@@ -61,7 +65,8 @@ public static T IsScrollInertiaEnabled<T>(this T control, Func<System.Boolean> f
    => control._set(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.IsScrollInertiaEnabledProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer IsScrollInertiaEnabled<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.IsScrollInertiaEnabledProperty, ps, () => control.IsScrollInertiaEnabled = value, bindingMode, converter, bindingSource);
+public static T IsScrollInertiaEnabled<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.IsScrollInertiaEnabledProperty, ps, () => control.IsScrollInertiaEnabled = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsScrollInertiaEnabled<T>(this T control, IBinding binding) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
@@ -72,7 +77,8 @@ public static T IsScrollInertiaEnabled<T>(this T control, AvaloniaProperty avalo
    => control._set(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.IsScrollInertiaEnabledProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T IsScrollInertiaEnabled<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.IsScrollInertiaEnabledProperty, ps, () => control.IsScrollInertiaEnabled = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T IsScrollInertiaEnabled<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.IsScrollInertiaEnabledProperty, ps, () => control.IsScrollInertiaEnabled = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ScrollStartDistance
@@ -82,7 +88,8 @@ public static T ScrollStartDistance<T>(this T control, Func<System.Int32> func, 
    => control._set(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.ScrollStartDistanceProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer ScrollStartDistance<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.ScrollStartDistanceProperty, ps, () => control.ScrollStartDistance = value, bindingMode, converter, bindingSource);
+public static T ScrollStartDistance<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.ScrollStartDistanceProperty, ps, () => control.ScrollStartDistance = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ScrollStartDistance<T>(this T control, IBinding binding) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
@@ -93,7 +100,8 @@ public static T ScrollStartDistance<T>(this T control, AvaloniaProperty avalonia
    => control._set(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.ScrollStartDistanceProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ScrollStartDistance<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.ScrollStartDistanceProperty, ps, () => control.ScrollStartDistance = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ScrollStartDistance<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._setEx(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.ScrollStartDistanceProperty, ps, () => control.ScrollStartDistance = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

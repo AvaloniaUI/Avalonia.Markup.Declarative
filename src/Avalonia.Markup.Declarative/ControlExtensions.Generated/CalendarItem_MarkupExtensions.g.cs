@@ -19,7 +19,8 @@ public static Avalonia.Controls.Primitives.CalendarItem HeaderBackground(this Av
    => control._set(Avalonia.Controls.Primitives.CalendarItem.HeaderBackgroundProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.CalendarItem HeaderBackground(this Avalonia.Controls.Primitives.CalendarItem control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Controls.Primitives.CalendarItem.HeaderBackgroundProperty, ps, () => control.HeaderBackground = value, bindingMode, converter, bindingSource);
+public static Avalonia.Controls.Primitives.CalendarItem HeaderBackground(this Avalonia.Controls.Primitives.CalendarItem control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Controls.Primitives.CalendarItem.HeaderBackgroundProperty, ps, () => control.HeaderBackground = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Controls.Primitives.CalendarItem HeaderBackground(this Avalonia.Controls.Primitives.CalendarItem control, IBinding binding)  
@@ -30,7 +31,8 @@ public static Avalonia.Controls.Primitives.CalendarItem HeaderBackground(this Av
    => control._set(Avalonia.Controls.Primitives.CalendarItem.HeaderBackgroundProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Controls.Primitives.CalendarItem HeaderBackground<TValue>(this Avalonia.Controls.Primitives.CalendarItem control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Controls.Primitives.CalendarItem.HeaderBackgroundProperty, ps, () => control.HeaderBackground = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Controls.Primitives.CalendarItem HeaderBackground<TValue>(this Avalonia.Controls.Primitives.CalendarItem control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Controls.Primitives.CalendarItem.HeaderBackgroundProperty, ps, () => control.HeaderBackground = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // DayTitleTemplate
@@ -40,7 +42,8 @@ public static Avalonia.Controls.Primitives.CalendarItem DayTitleTemplate(this Av
    => control._set(Avalonia.Controls.Primitives.CalendarItem.DayTitleTemplateProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.CalendarItem DayTitleTemplate(this Avalonia.Controls.Primitives.CalendarItem control,Avalonia.Controls.ITemplate<Avalonia.Controls.Control> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Controls.Primitives.CalendarItem.DayTitleTemplateProperty, ps, () => control.DayTitleTemplate = value, bindingMode, converter, bindingSource);
+public static Avalonia.Controls.Primitives.CalendarItem DayTitleTemplate(this Avalonia.Controls.Primitives.CalendarItem control,Avalonia.Controls.ITemplate<Avalonia.Controls.Control> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Controls.Primitives.CalendarItem.DayTitleTemplateProperty, ps, () => control.DayTitleTemplate = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Controls.Primitives.CalendarItem DayTitleTemplate(this Avalonia.Controls.Primitives.CalendarItem control, IBinding binding)  
@@ -51,7 +54,8 @@ public static Avalonia.Controls.Primitives.CalendarItem DayTitleTemplate(this Av
    => control._set(Avalonia.Controls.Primitives.CalendarItem.DayTitleTemplateProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Controls.Primitives.CalendarItem DayTitleTemplate<TValue>(this Avalonia.Controls.Primitives.CalendarItem control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ITemplate<Avalonia.Controls.Control>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Controls.Primitives.CalendarItem.DayTitleTemplateProperty, ps, () => control.DayTitleTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Controls.Primitives.CalendarItem DayTitleTemplate<TValue>(this Avalonia.Controls.Primitives.CalendarItem control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ITemplate<Avalonia.Controls.Control>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Controls.Primitives.CalendarItem.DayTitleTemplateProperty, ps, () => control.DayTitleTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

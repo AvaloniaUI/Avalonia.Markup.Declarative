@@ -19,7 +19,8 @@ public static Avalonia.Animation.Animation Duration(this Avalonia.Animation.Anim
    => control._set(Avalonia.Animation.Animation.DurationProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Animation.Animation Duration(this Avalonia.Animation.Animation control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.DurationProperty, ps, () => control.Duration = value, bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation Duration(this Avalonia.Animation.Animation control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.DurationProperty, ps, () => control.Duration = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Animation.Animation Duration(this Avalonia.Animation.Animation control, IBinding binding)  
@@ -30,7 +31,8 @@ public static Avalonia.Animation.Animation Duration(this Avalonia.Animation.Anim
    => control._set(Avalonia.Animation.Animation.DurationProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Animation.Animation Duration<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.DurationProperty, ps, () => control.Duration = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation Duration<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.DurationProperty, ps, () => control.Duration = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // IterationCount
@@ -40,7 +42,8 @@ public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animatio
    => control._set(Avalonia.Animation.Animation.IterationCountProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animation.Animation control,Avalonia.Animation.IterationCount value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.IterationCountProperty, ps, () => control.IterationCount = value, bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animation.Animation control,Avalonia.Animation.IterationCount value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.IterationCountProperty, ps, () => control.IterationCount = value, bindingMode, converter, bindingSource);
 
 /*ValueOverloadsSetterGenerator*/
 
@@ -58,7 +61,8 @@ public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animatio
    => control._set(Avalonia.Animation.Animation.IterationCountProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Animation.Animation IterationCount<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, Avalonia.Animation.IterationCount> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.IterationCountProperty, ps, () => control.IterationCount = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation IterationCount<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, Avalonia.Animation.IterationCount> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.IterationCountProperty, ps, () => control.IterationCount = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // PlaybackDirection
@@ -68,7 +72,8 @@ public static Avalonia.Animation.Animation PlaybackDirection(this Avalonia.Anima
    => control._set(Avalonia.Animation.Animation.PlaybackDirectionProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Animation.Animation PlaybackDirection(this Avalonia.Animation.Animation control,Avalonia.Animation.PlaybackDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.PlaybackDirectionProperty, ps, () => control.PlaybackDirection = value, bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation PlaybackDirection(this Avalonia.Animation.Animation control,Avalonia.Animation.PlaybackDirection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.PlaybackDirectionProperty, ps, () => control.PlaybackDirection = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Animation.Animation PlaybackDirection(this Avalonia.Animation.Animation control, IBinding binding)  
@@ -79,7 +84,8 @@ public static Avalonia.Animation.Animation PlaybackDirection(this Avalonia.Anima
    => control._set(Avalonia.Animation.Animation.PlaybackDirectionProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Animation.Animation PlaybackDirection<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, Avalonia.Animation.PlaybackDirection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.PlaybackDirectionProperty, ps, () => control.PlaybackDirection = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation PlaybackDirection<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, Avalonia.Animation.PlaybackDirection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.PlaybackDirectionProperty, ps, () => control.PlaybackDirection = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FillMode
@@ -89,7 +95,8 @@ public static Avalonia.Animation.Animation FillMode(this Avalonia.Animation.Anim
    => control._set(Avalonia.Animation.Animation.FillModeProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Animation.Animation FillMode(this Avalonia.Animation.Animation control,Avalonia.Animation.FillMode value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.FillModeProperty, ps, () => control.FillMode = value, bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation FillMode(this Avalonia.Animation.Animation control,Avalonia.Animation.FillMode value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.FillModeProperty, ps, () => control.FillMode = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Animation.Animation FillMode(this Avalonia.Animation.Animation control, IBinding binding)  
@@ -100,7 +107,8 @@ public static Avalonia.Animation.Animation FillMode(this Avalonia.Animation.Anim
    => control._set(Avalonia.Animation.Animation.FillModeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Animation.Animation FillMode<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, Avalonia.Animation.FillMode> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.FillModeProperty, ps, () => control.FillMode = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation FillMode<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, Avalonia.Animation.FillMode> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.FillModeProperty, ps, () => control.FillMode = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Easing
@@ -110,7 +118,8 @@ public static Avalonia.Animation.Animation Easing(this Avalonia.Animation.Animat
    => control._set(Avalonia.Animation.Animation.EasingProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Animation.Animation Easing(this Avalonia.Animation.Animation control,Avalonia.Animation.Easings.Easing value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.EasingProperty, ps, () => control.Easing = value, bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation Easing(this Avalonia.Animation.Animation control,Avalonia.Animation.Easings.Easing value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.EasingProperty, ps, () => control.Easing = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Animation.Animation Easing(this Avalonia.Animation.Animation control, IBinding binding)  
@@ -121,7 +130,8 @@ public static Avalonia.Animation.Animation Easing(this Avalonia.Animation.Animat
    => control._set(Avalonia.Animation.Animation.EasingProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Animation.Animation Easing<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, Avalonia.Animation.Easings.Easing> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.EasingProperty, ps, () => control.Easing = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation Easing<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, Avalonia.Animation.Easings.Easing> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.EasingProperty, ps, () => control.Easing = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Delay
@@ -131,7 +141,8 @@ public static Avalonia.Animation.Animation Delay(this Avalonia.Animation.Animati
    => control._set(Avalonia.Animation.Animation.DelayProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Animation.Animation Delay(this Avalonia.Animation.Animation control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.DelayProperty, ps, () => control.Delay = value, bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation Delay(this Avalonia.Animation.Animation control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.DelayProperty, ps, () => control.Delay = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Animation.Animation Delay(this Avalonia.Animation.Animation control, IBinding binding)  
@@ -142,7 +153,8 @@ public static Avalonia.Animation.Animation Delay(this Avalonia.Animation.Animati
    => control._set(Avalonia.Animation.Animation.DelayProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Animation.Animation Delay<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.DelayProperty, ps, () => control.Delay = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation Delay<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.DelayProperty, ps, () => control.Delay = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // DelayBetweenIterations
@@ -152,7 +164,8 @@ public static Avalonia.Animation.Animation DelayBetweenIterations(this Avalonia.
    => control._set(Avalonia.Animation.Animation.DelayBetweenIterationsProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Animation.Animation DelayBetweenIterations(this Avalonia.Animation.Animation control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.DelayBetweenIterationsProperty, ps, () => control.DelayBetweenIterations = value, bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation DelayBetweenIterations(this Avalonia.Animation.Animation control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.DelayBetweenIterationsProperty, ps, () => control.DelayBetweenIterations = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Animation.Animation DelayBetweenIterations(this Avalonia.Animation.Animation control, IBinding binding)  
@@ -163,7 +176,8 @@ public static Avalonia.Animation.Animation DelayBetweenIterations(this Avalonia.
    => control._set(Avalonia.Animation.Animation.DelayBetweenIterationsProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Animation.Animation DelayBetweenIterations<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.DelayBetweenIterationsProperty, ps, () => control.DelayBetweenIterations = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation DelayBetweenIterations<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.DelayBetweenIterationsProperty, ps, () => control.DelayBetweenIterations = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // SpeedRatio
@@ -173,7 +187,8 @@ public static Avalonia.Animation.Animation SpeedRatio(this Avalonia.Animation.An
    => control._set(Avalonia.Animation.Animation.SpeedRatioProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Animation.Animation SpeedRatio(this Avalonia.Animation.Animation control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.SpeedRatioProperty, ps, () => control.SpeedRatio = value, bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation SpeedRatio(this Avalonia.Animation.Animation control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.SpeedRatioProperty, ps, () => control.SpeedRatio = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Animation.Animation SpeedRatio(this Avalonia.Animation.Animation control, IBinding binding)  
@@ -184,7 +199,8 @@ public static Avalonia.Animation.Animation SpeedRatio(this Avalonia.Animation.An
    => control._set(Avalonia.Animation.Animation.SpeedRatioProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Animation.Animation SpeedRatio<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Animation.Animation.SpeedRatioProperty, ps, () => control.SpeedRatio = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Animation.Animation SpeedRatio<TValue>(this Avalonia.Animation.Animation control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Animation.Animation.SpeedRatioProperty, ps, () => control.SpeedRatio = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

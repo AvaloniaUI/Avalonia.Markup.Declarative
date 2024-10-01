@@ -19,7 +19,8 @@ public static T Background<T>(this T control, Func<Avalonia.Media.IBrush> func, 
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.BackgroundProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl Background<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
+public static T Background<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Background<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -30,7 +31,8 @@ public static T Background<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.BackgroundProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Background<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BackgroundProperty, ps, () => control.Background = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Background<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BackgroundProperty, ps, () => control.Background = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // BackgroundSizing
@@ -40,7 +42,8 @@ public static T BackgroundSizing<T>(this T control, Func<Avalonia.Media.Backgrou
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.BackgroundSizingProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl BackgroundSizing<T>(this T control,Avalonia.Media.BackgroundSizing value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BackgroundSizingProperty, ps, () => control.BackgroundSizing = value, bindingMode, converter, bindingSource);
+public static T BackgroundSizing<T>(this T control,Avalonia.Media.BackgroundSizing value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BackgroundSizingProperty, ps, () => control.BackgroundSizing = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T BackgroundSizing<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -51,7 +54,8 @@ public static T BackgroundSizing<T>(this T control, AvaloniaProperty avaloniaPro
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.BackgroundSizingProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T BackgroundSizing<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.BackgroundSizing> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BackgroundSizingProperty, ps, () => control.BackgroundSizing = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T BackgroundSizing<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.BackgroundSizing> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BackgroundSizingProperty, ps, () => control.BackgroundSizing = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // BorderBrush
@@ -61,7 +65,8 @@ public static T BorderBrush<T>(this T control, Func<Avalonia.Media.IBrush> func,
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.BorderBrushProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl BorderBrush<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BorderBrushProperty, ps, () => control.BorderBrush = value, bindingMode, converter, bindingSource);
+public static T BorderBrush<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BorderBrushProperty, ps, () => control.BorderBrush = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T BorderBrush<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -72,7 +77,8 @@ public static T BorderBrush<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.BorderBrushProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T BorderBrush<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BorderBrushProperty, ps, () => control.BorderBrush = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T BorderBrush<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BorderBrushProperty, ps, () => control.BorderBrush = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // BorderThickness
@@ -82,7 +88,8 @@ public static T BorderThickness<T>(this T control, Func<Avalonia.Thickness> func
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.BorderThicknessProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl BorderThickness<T>(this T control,Avalonia.Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BorderThicknessProperty, ps, () => control.BorderThickness = value, bindingMode, converter, bindingSource);
+public static T BorderThickness<T>(this T control,Avalonia.Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BorderThicknessProperty, ps, () => control.BorderThickness = value, bindingMode, converter, bindingSource);
 
 /*ValueOverloadsSetterGenerator*/
 
@@ -102,7 +109,8 @@ public static T BorderThickness<T>(this T control, AvaloniaProperty avaloniaProp
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.BorderThicknessProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T BorderThickness<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BorderThicknessProperty, ps, () => control.BorderThickness = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T BorderThickness<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.BorderThicknessProperty, ps, () => control.BorderThickness = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // CornerRadius
@@ -112,7 +120,8 @@ public static T CornerRadius<T>(this T control, Func<Avalonia.CornerRadius> func
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.CornerRadiusProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl CornerRadius<T>(this T control,Avalonia.CornerRadius value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.CornerRadiusProperty, ps, () => control.CornerRadius = value, bindingMode, converter, bindingSource);
+public static T CornerRadius<T>(this T control,Avalonia.CornerRadius value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.CornerRadiusProperty, ps, () => control.CornerRadius = value, bindingMode, converter, bindingSource);
 
 /*ValueOverloadsSetterGenerator*/
 
@@ -132,7 +141,8 @@ public static T CornerRadius<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.CornerRadiusProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T CornerRadius<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.CornerRadius> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.CornerRadiusProperty, ps, () => control.CornerRadius = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T CornerRadius<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.CornerRadius> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.CornerRadiusProperty, ps, () => control.CornerRadius = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FontFamily
@@ -142,7 +152,8 @@ public static T FontFamily<T>(this T control, Func<Avalonia.Media.FontFamily> fu
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontFamilyProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl FontFamily<T>(this T control,Avalonia.Media.FontFamily value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontFamilyProperty, ps, () => control.FontFamily = value, bindingMode, converter, bindingSource);
+public static T FontFamily<T>(this T control,Avalonia.Media.FontFamily value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontFamilyProperty, ps, () => control.FontFamily = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FontFamily<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -153,7 +164,8 @@ public static T FontFamily<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontFamilyProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FontFamily<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontFamily> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontFamilyProperty, ps, () => control.FontFamily = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontFamily<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontFamily> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontFamilyProperty, ps, () => control.FontFamily = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FontFeatures
@@ -163,7 +175,8 @@ public static T FontFeatures<T>(this T control, Func<Avalonia.Media.FontFeatureC
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontFeaturesProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl FontFeatures<T>(this T control,Avalonia.Media.FontFeatureCollection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontFeaturesProperty, ps, () => control.FontFeatures = value, bindingMode, converter, bindingSource);
+public static T FontFeatures<T>(this T control,Avalonia.Media.FontFeatureCollection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontFeaturesProperty, ps, () => control.FontFeatures = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FontFeatures<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -174,7 +187,8 @@ public static T FontFeatures<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontFeaturesProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FontFeatures<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontFeatureCollection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontFeaturesProperty, ps, () => control.FontFeatures = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontFeatures<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontFeatureCollection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontFeaturesProperty, ps, () => control.FontFeatures = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FontSize
@@ -184,7 +198,8 @@ public static T FontSize<T>(this T control, Func<System.Double> func, Action<Sys
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontSizeProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl FontSize<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontSizeProperty, ps, () => control.FontSize = value, bindingMode, converter, bindingSource);
+public static T FontSize<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontSizeProperty, ps, () => control.FontSize = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FontSize<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -195,7 +210,8 @@ public static T FontSize<T>(this T control, AvaloniaProperty avaloniaProperty, B
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontSizeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FontSize<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontSizeProperty, ps, () => control.FontSize = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontSize<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontSizeProperty, ps, () => control.FontSize = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FontStyle
@@ -205,7 +221,8 @@ public static T FontStyle<T>(this T control, Func<Avalonia.Media.FontStyle> func
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontStyleProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl FontStyle<T>(this T control,Avalonia.Media.FontStyle value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontStyleProperty, ps, () => control.FontStyle = value, bindingMode, converter, bindingSource);
+public static T FontStyle<T>(this T control,Avalonia.Media.FontStyle value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontStyleProperty, ps, () => control.FontStyle = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FontStyle<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -216,7 +233,8 @@ public static T FontStyle<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontStyleProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FontStyle<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontStyle> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontStyleProperty, ps, () => control.FontStyle = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontStyle<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontStyle> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontStyleProperty, ps, () => control.FontStyle = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FontWeight
@@ -226,7 +244,8 @@ public static T FontWeight<T>(this T control, Func<Avalonia.Media.FontWeight> fu
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontWeightProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl FontWeight<T>(this T control,Avalonia.Media.FontWeight value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontWeightProperty, ps, () => control.FontWeight = value, bindingMode, converter, bindingSource);
+public static T FontWeight<T>(this T control,Avalonia.Media.FontWeight value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontWeightProperty, ps, () => control.FontWeight = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FontWeight<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -237,7 +256,8 @@ public static T FontWeight<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontWeightProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FontWeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontWeight> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontWeightProperty, ps, () => control.FontWeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontWeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontWeight> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontWeightProperty, ps, () => control.FontWeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FontStretch
@@ -247,7 +267,8 @@ public static T FontStretch<T>(this T control, Func<Avalonia.Media.FontStretch> 
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontStretchProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl FontStretch<T>(this T control,Avalonia.Media.FontStretch value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontStretchProperty, ps, () => control.FontStretch = value, bindingMode, converter, bindingSource);
+public static T FontStretch<T>(this T control,Avalonia.Media.FontStretch value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontStretchProperty, ps, () => control.FontStretch = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FontStretch<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -258,7 +279,8 @@ public static T FontStretch<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontStretchProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FontStretch<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontStretch> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontStretchProperty, ps, () => control.FontStretch = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontStretch<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontStretch> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.FontStretchProperty, ps, () => control.FontStretch = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Foreground
@@ -268,7 +290,8 @@ public static T Foreground<T>(this T control, Func<Avalonia.Media.IBrush> func, 
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.ForegroundProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl Foreground<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.ForegroundProperty, ps, () => control.Foreground = value, bindingMode, converter, bindingSource);
+public static T Foreground<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.ForegroundProperty, ps, () => control.Foreground = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Foreground<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -279,7 +302,8 @@ public static T Foreground<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.ForegroundProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Foreground<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.ForegroundProperty, ps, () => control.Foreground = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Foreground<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.ForegroundProperty, ps, () => control.Foreground = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Padding
@@ -289,7 +313,8 @@ public static T Padding<T>(this T control, Func<Avalonia.Thickness> func, Action
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.PaddingProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl Padding<T>(this T control,Avalonia.Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.PaddingProperty, ps, () => control.Padding = value, bindingMode, converter, bindingSource);
+public static T Padding<T>(this T control,Avalonia.Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.PaddingProperty, ps, () => control.Padding = value, bindingMode, converter, bindingSource);
 
 /*ValueOverloadsSetterGenerator*/
 
@@ -309,7 +334,8 @@ public static T Padding<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.PaddingProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Padding<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.PaddingProperty, ps, () => control.Padding = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Padding<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.PaddingProperty, ps, () => control.Padding = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Template
@@ -319,7 +345,8 @@ public static T Template<T>(this T control, Func<Avalonia.Controls.Templates.ICo
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.TemplateProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.TemplatedControl Template<T>(this T control,Avalonia.Controls.Templates.IControlTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.TemplateProperty, ps, () => control.Template = value, bindingMode, converter, bindingSource);
+public static T Template<T>(this T control,Avalonia.Controls.Templates.IControlTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.TemplateProperty, ps, () => control.Template = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Template<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -330,7 +357,8 @@ public static T Template<T>(this T control, AvaloniaProperty avaloniaProperty, B
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.TemplateProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Template<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Templates.IControlTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.TemplateProperty, ps, () => control.Template = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Template<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Templates.IControlTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._setEx(Avalonia.Controls.Primitives.TemplatedControl.TemplateProperty, ps, () => control.Template = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

@@ -19,7 +19,8 @@ public static T OffContent<T>(this T control, Func<System.Object> func, Action<S
    => control._set(Avalonia.Controls.ToggleSwitch.OffContentProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.ToggleSwitch OffContent<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch=> control._setEx(Avalonia.Controls.ToggleSwitch.OffContentProperty, ps, () => control.OffContent = value, bindingMode, converter, bindingSource);
+public static T OffContent<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch 
+=> control._setEx(Avalonia.Controls.ToggleSwitch.OffContentProperty, ps, () => control.OffContent = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T OffContent<T>(this T control, IBinding binding) where T : Avalonia.Controls.ToggleSwitch 
@@ -30,7 +31,8 @@ public static T OffContent<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.ToggleSwitch.OffContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T OffContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch=> control._setEx(Avalonia.Controls.ToggleSwitch.OffContentProperty, ps, () => control.OffContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T OffContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch 
+=> control._setEx(Avalonia.Controls.ToggleSwitch.OffContentProperty, ps, () => control.OffContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // OffContentTemplate
@@ -40,7 +42,8 @@ public static T OffContentTemplate<T>(this T control, Func<Avalonia.Controls.Tem
    => control._set(Avalonia.Controls.ToggleSwitch.OffContentTemplateProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.ToggleSwitch OffContentTemplate<T>(this T control,Avalonia.Controls.Templates.IDataTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch=> control._setEx(Avalonia.Controls.ToggleSwitch.OffContentTemplateProperty, ps, () => control.OffContentTemplate = value, bindingMode, converter, bindingSource);
+public static T OffContentTemplate<T>(this T control,Avalonia.Controls.Templates.IDataTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch 
+=> control._setEx(Avalonia.Controls.ToggleSwitch.OffContentTemplateProperty, ps, () => control.OffContentTemplate = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T OffContentTemplate<T>(this T control, IBinding binding) where T : Avalonia.Controls.ToggleSwitch 
@@ -51,7 +54,8 @@ public static T OffContentTemplate<T>(this T control, AvaloniaProperty avaloniaP
    => control._set(Avalonia.Controls.ToggleSwitch.OffContentTemplateProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T OffContentTemplate<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Templates.IDataTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch=> control._setEx(Avalonia.Controls.ToggleSwitch.OffContentTemplateProperty, ps, () => control.OffContentTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T OffContentTemplate<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Templates.IDataTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch 
+=> control._setEx(Avalonia.Controls.ToggleSwitch.OffContentTemplateProperty, ps, () => control.OffContentTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // OnContent
@@ -61,7 +65,8 @@ public static T OnContent<T>(this T control, Func<System.Object> func, Action<Sy
    => control._set(Avalonia.Controls.ToggleSwitch.OnContentProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.ToggleSwitch OnContent<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch=> control._setEx(Avalonia.Controls.ToggleSwitch.OnContentProperty, ps, () => control.OnContent = value, bindingMode, converter, bindingSource);
+public static T OnContent<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch 
+=> control._setEx(Avalonia.Controls.ToggleSwitch.OnContentProperty, ps, () => control.OnContent = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T OnContent<T>(this T control, IBinding binding) where T : Avalonia.Controls.ToggleSwitch 
@@ -72,7 +77,8 @@ public static T OnContent<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.ToggleSwitch.OnContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T OnContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch=> control._setEx(Avalonia.Controls.ToggleSwitch.OnContentProperty, ps, () => control.OnContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T OnContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch 
+=> control._setEx(Avalonia.Controls.ToggleSwitch.OnContentProperty, ps, () => control.OnContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // OnContentTemplate
@@ -82,7 +88,8 @@ public static T OnContentTemplate<T>(this T control, Func<Avalonia.Controls.Temp
    => control._set(Avalonia.Controls.ToggleSwitch.OnContentTemplateProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.ToggleSwitch OnContentTemplate<T>(this T control,Avalonia.Controls.Templates.IDataTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch=> control._setEx(Avalonia.Controls.ToggleSwitch.OnContentTemplateProperty, ps, () => control.OnContentTemplate = value, bindingMode, converter, bindingSource);
+public static T OnContentTemplate<T>(this T control,Avalonia.Controls.Templates.IDataTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch 
+=> control._setEx(Avalonia.Controls.ToggleSwitch.OnContentTemplateProperty, ps, () => control.OnContentTemplate = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T OnContentTemplate<T>(this T control, IBinding binding) where T : Avalonia.Controls.ToggleSwitch 
@@ -93,7 +100,8 @@ public static T OnContentTemplate<T>(this T control, AvaloniaProperty avaloniaPr
    => control._set(Avalonia.Controls.ToggleSwitch.OnContentTemplateProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T OnContentTemplate<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Templates.IDataTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch=> control._setEx(Avalonia.Controls.ToggleSwitch.OnContentTemplateProperty, ps, () => control.OnContentTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T OnContentTemplate<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Templates.IDataTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch 
+=> control._setEx(Avalonia.Controls.ToggleSwitch.OnContentTemplateProperty, ps, () => control.OnContentTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // KnobTransitions
@@ -103,7 +111,8 @@ public static T KnobTransitions<T>(this T control, Func<Avalonia.Animation.Trans
    => control._set(Avalonia.Controls.ToggleSwitch.KnobTransitionsProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.ToggleSwitch KnobTransitions<T>(this T control,Avalonia.Animation.Transitions value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch=> control._setEx(Avalonia.Controls.ToggleSwitch.KnobTransitionsProperty, ps, () => control.KnobTransitions = value, bindingMode, converter, bindingSource);
+public static T KnobTransitions<T>(this T control,Avalonia.Animation.Transitions value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch 
+=> control._setEx(Avalonia.Controls.ToggleSwitch.KnobTransitionsProperty, ps, () => control.KnobTransitions = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T KnobTransitions<T>(this T control, IBinding binding) where T : Avalonia.Controls.ToggleSwitch 
@@ -114,7 +123,8 @@ public static T KnobTransitions<T>(this T control, AvaloniaProperty avaloniaProp
    => control._set(Avalonia.Controls.ToggleSwitch.KnobTransitionsProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T KnobTransitions<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Animation.Transitions> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch=> control._setEx(Avalonia.Controls.ToggleSwitch.KnobTransitionsProperty, ps, () => control.KnobTransitions = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T KnobTransitions<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Animation.Transitions> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSwitch 
+=> control._setEx(Avalonia.Controls.ToggleSwitch.KnobTransitionsProperty, ps, () => control.KnobTransitions = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

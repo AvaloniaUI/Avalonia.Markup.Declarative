@@ -19,7 +19,8 @@ public static T ItemHeight<T>(this T control, Func<System.Double> func, Action<S
    => control._set(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemHeightProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.DateTimePickerPanel ItemHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemHeightProperty, ps, () => control.ItemHeight = value, bindingMode, converter, bindingSource);
+public static T ItemHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemHeightProperty, ps, () => control.ItemHeight = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ItemHeight<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
@@ -30,7 +31,8 @@ public static T ItemHeight<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemHeightProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ItemHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemHeightProperty, ps, () => control.ItemHeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ItemHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemHeightProperty, ps, () => control.ItemHeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // PanelType
@@ -40,7 +42,8 @@ public static T PanelType<T>(this T control, Func<Avalonia.Controls.Primitives.D
    => control._set(Avalonia.Controls.Primitives.DateTimePickerPanel.PanelTypeProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.DateTimePickerPanel PanelType<T>(this T control,Avalonia.Controls.Primitives.DateTimePickerPanelType value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.PanelTypeProperty, ps, () => control.PanelType = value, bindingMode, converter, bindingSource);
+public static T PanelType<T>(this T control,Avalonia.Controls.Primitives.DateTimePickerPanelType value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.PanelTypeProperty, ps, () => control.PanelType = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T PanelType<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
@@ -51,7 +54,8 @@ public static T PanelType<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.Primitives.DateTimePickerPanel.PanelTypeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T PanelType<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Primitives.DateTimePickerPanelType> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.PanelTypeProperty, ps, () => control.PanelType = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T PanelType<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Primitives.DateTimePickerPanelType> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.PanelTypeProperty, ps, () => control.PanelType = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ItemFormat
@@ -61,7 +65,8 @@ public static T ItemFormat<T>(this T control, Func<System.String> func, Action<S
    => control._set(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemFormatProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.DateTimePickerPanel ItemFormat<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemFormatProperty, ps, () => control.ItemFormat = value, bindingMode, converter, bindingSource);
+public static T ItemFormat<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemFormatProperty, ps, () => control.ItemFormat = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ItemFormat<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
@@ -72,7 +77,8 @@ public static T ItemFormat<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemFormatProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ItemFormat<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemFormatProperty, ps, () => control.ItemFormat = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ItemFormat<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemFormatProperty, ps, () => control.ItemFormat = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ShouldLoop
@@ -82,7 +88,8 @@ public static T ShouldLoop<T>(this T control, Func<System.Boolean> func, Action<
    => control._set(Avalonia.Controls.Primitives.DateTimePickerPanel.ShouldLoopProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.DateTimePickerPanel ShouldLoop<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ShouldLoopProperty, ps, () => control.ShouldLoop = value, bindingMode, converter, bindingSource);
+public static T ShouldLoop<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ShouldLoopProperty, ps, () => control.ShouldLoop = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ShouldLoop<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
@@ -93,7 +100,8 @@ public static T ShouldLoop<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Primitives.DateTimePickerPanel.ShouldLoopProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ShouldLoop<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ShouldLoopProperty, ps, () => control.ShouldLoop = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ShouldLoop<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._setEx(Avalonia.Controls.Primitives.DateTimePickerPanel.ShouldLoopProperty, ps, () => control.ShouldLoop = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

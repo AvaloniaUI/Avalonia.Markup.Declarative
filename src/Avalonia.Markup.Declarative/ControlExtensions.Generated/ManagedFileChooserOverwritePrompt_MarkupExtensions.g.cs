@@ -19,7 +19,8 @@ public static T FileName<T>(this T control, Func<System.String> func, Action<Sys
    => control._set(Avalonia.Dialogs.ManagedFileChooserOverwritePrompt.FileNameProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Dialogs.ManagedFileChooserOverwritePrompt FileName<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Dialogs.ManagedFileChooserOverwritePrompt=> control._setEx(Avalonia.Dialogs.ManagedFileChooserOverwritePrompt.FileNameProperty, ps, () => control.FileName = value, bindingMode, converter, bindingSource);
+public static T FileName<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Dialogs.ManagedFileChooserOverwritePrompt 
+=> control._setEx(Avalonia.Dialogs.ManagedFileChooserOverwritePrompt.FileNameProperty, ps, () => control.FileName = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FileName<T>(this T control, IBinding binding) where T : Avalonia.Dialogs.ManagedFileChooserOverwritePrompt 
@@ -30,7 +31,8 @@ public static T FileName<T>(this T control, AvaloniaProperty avaloniaProperty, B
    => control._set(Avalonia.Dialogs.ManagedFileChooserOverwritePrompt.FileNameProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FileName<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Dialogs.ManagedFileChooserOverwritePrompt=> control._setEx(Avalonia.Dialogs.ManagedFileChooserOverwritePrompt.FileNameProperty, ps, () => control.FileName = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FileName<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Dialogs.ManagedFileChooserOverwritePrompt 
+=> control._setEx(Avalonia.Dialogs.ManagedFileChooserOverwritePrompt.FileNameProperty, ps, () => control.FileName = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

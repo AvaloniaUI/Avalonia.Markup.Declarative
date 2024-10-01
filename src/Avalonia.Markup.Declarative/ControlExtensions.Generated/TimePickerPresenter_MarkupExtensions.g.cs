@@ -19,7 +19,8 @@ public static T MinuteIncrement<T>(this T control, Func<System.Int32> func, Acti
    => control._set(Avalonia.Controls.TimePickerPresenter.MinuteIncrementProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TimePickerPresenter MinuteIncrement<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter=> control._setEx(Avalonia.Controls.TimePickerPresenter.MinuteIncrementProperty, ps, () => control.MinuteIncrement = value, bindingMode, converter, bindingSource);
+public static T MinuteIncrement<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter 
+=> control._setEx(Avalonia.Controls.TimePickerPresenter.MinuteIncrementProperty, ps, () => control.MinuteIncrement = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T MinuteIncrement<T>(this T control, IBinding binding) where T : Avalonia.Controls.TimePickerPresenter 
@@ -30,7 +31,8 @@ public static T MinuteIncrement<T>(this T control, AvaloniaProperty avaloniaProp
    => control._set(Avalonia.Controls.TimePickerPresenter.MinuteIncrementProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T MinuteIncrement<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter=> control._setEx(Avalonia.Controls.TimePickerPresenter.MinuteIncrementProperty, ps, () => control.MinuteIncrement = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T MinuteIncrement<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter 
+=> control._setEx(Avalonia.Controls.TimePickerPresenter.MinuteIncrementProperty, ps, () => control.MinuteIncrement = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ClockIdentifier
@@ -40,7 +42,8 @@ public static T ClockIdentifier<T>(this T control, Func<System.String> func, Act
    => control._set(Avalonia.Controls.TimePickerPresenter.ClockIdentifierProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TimePickerPresenter ClockIdentifier<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter=> control._setEx(Avalonia.Controls.TimePickerPresenter.ClockIdentifierProperty, ps, () => control.ClockIdentifier = value, bindingMode, converter, bindingSource);
+public static T ClockIdentifier<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter 
+=> control._setEx(Avalonia.Controls.TimePickerPresenter.ClockIdentifierProperty, ps, () => control.ClockIdentifier = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ClockIdentifier<T>(this T control, IBinding binding) where T : Avalonia.Controls.TimePickerPresenter 
@@ -51,7 +54,8 @@ public static T ClockIdentifier<T>(this T control, AvaloniaProperty avaloniaProp
    => control._set(Avalonia.Controls.TimePickerPresenter.ClockIdentifierProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ClockIdentifier<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter=> control._setEx(Avalonia.Controls.TimePickerPresenter.ClockIdentifierProperty, ps, () => control.ClockIdentifier = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ClockIdentifier<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter 
+=> control._setEx(Avalonia.Controls.TimePickerPresenter.ClockIdentifierProperty, ps, () => control.ClockIdentifier = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Time
@@ -61,7 +65,8 @@ public static T Time<T>(this T control, Func<System.TimeSpan> func, Action<Syste
    => control._set(Avalonia.Controls.TimePickerPresenter.TimeProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TimePickerPresenter Time<T>(this T control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter=> control._setEx(Avalonia.Controls.TimePickerPresenter.TimeProperty, ps, () => control.Time = value, bindingMode, converter, bindingSource);
+public static T Time<T>(this T control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter 
+=> control._setEx(Avalonia.Controls.TimePickerPresenter.TimeProperty, ps, () => control.Time = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Time<T>(this T control, IBinding binding) where T : Avalonia.Controls.TimePickerPresenter 
@@ -72,7 +77,8 @@ public static T Time<T>(this T control, AvaloniaProperty avaloniaProperty, Bindi
    => control._set(Avalonia.Controls.TimePickerPresenter.TimeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Time<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter=> control._setEx(Avalonia.Controls.TimePickerPresenter.TimeProperty, ps, () => control.Time = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Time<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TimePickerPresenter 
+=> control._setEx(Avalonia.Controls.TimePickerPresenter.TimeProperty, ps, () => control.Time = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

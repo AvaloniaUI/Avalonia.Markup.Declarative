@@ -352,23 +352,7 @@ public static class ControlPropertyExtensions
 		Canvas.SetRight(control, value);
 		return control;
 	}
-
-    [Obsolete("Use ScrollViewer_HorizontalScrollBarVisibility extension instead")]
-    public static TElement HorizontalScrollBarVisibility<TElement>(this TElement control, ScrollBarVisibility value)
-		where TElement : Control
-	{
-		ScrollViewer.SetHorizontalScrollBarVisibility(control, value);
-		return control;
-	}
-
-    [Obsolete("Use ScrollViewer_VerticalScrollBarVisibility extension instead")]
-	public static TElement VerticalScrollBarVisibility<TElement>(this TElement control, ScrollBarVisibility value)
-		where TElement : Control
-	{
-		ScrollViewer.SetVerticalScrollBarVisibility(control, value);
-		return control;
-	}
-
+	
 	public static TPanel Children<TPanel>(this TPanel container, params Control[] children)
 		where TPanel : Panel
 	{

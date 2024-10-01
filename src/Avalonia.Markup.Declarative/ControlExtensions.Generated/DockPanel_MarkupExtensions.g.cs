@@ -19,7 +19,8 @@ public static T LastChildFill<T>(this T control, Func<System.Boolean> func, Acti
    => control._set(Avalonia.Controls.DockPanel.LastChildFillProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.DockPanel LastChildFill<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.DockPanel=> control._setEx(Avalonia.Controls.DockPanel.LastChildFillProperty, ps, () => control.LastChildFill = value, bindingMode, converter, bindingSource);
+public static T LastChildFill<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.DockPanel 
+=> control._setEx(Avalonia.Controls.DockPanel.LastChildFillProperty, ps, () => control.LastChildFill = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T LastChildFill<T>(this T control, IBinding binding) where T : Avalonia.Controls.DockPanel 
@@ -30,7 +31,8 @@ public static T LastChildFill<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.DockPanel.LastChildFillProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T LastChildFill<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.DockPanel=> control._setEx(Avalonia.Controls.DockPanel.LastChildFillProperty, ps, () => control.LastChildFill = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T LastChildFill<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.DockPanel 
+=> control._setEx(Avalonia.Controls.DockPanel.LastChildFillProperty, ps, () => control.LastChildFill = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

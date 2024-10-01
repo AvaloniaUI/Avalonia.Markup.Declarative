@@ -19,7 +19,8 @@ public static T Command<T>(this T control, Func<System.Windows.Input.ICommand> f
    => control._set(Avalonia.Controls.TrayIcon.CommandProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TrayIcon Command<T>(this T control,System.Windows.Input.ICommand value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.CommandProperty, ps, () => control.Command = value, bindingMode, converter, bindingSource);
+public static T Command<T>(this T control,System.Windows.Input.ICommand value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.CommandProperty, ps, () => control.Command = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Command<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon 
@@ -30,7 +31,8 @@ public static T Command<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.TrayIcon.CommandProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Command<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Windows.Input.ICommand> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.CommandProperty, ps, () => control.Command = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Command<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Windows.Input.ICommand> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.CommandProperty, ps, () => control.Command = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // CommandParameter
@@ -40,7 +42,8 @@ public static T CommandParameter<T>(this T control, Func<System.Object> func, Ac
    => control._set(Avalonia.Controls.TrayIcon.CommandParameterProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TrayIcon CommandParameter<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.CommandParameterProperty, ps, () => control.CommandParameter = value, bindingMode, converter, bindingSource);
+public static T CommandParameter<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.CommandParameterProperty, ps, () => control.CommandParameter = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T CommandParameter<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon 
@@ -51,7 +54,8 @@ public static T CommandParameter<T>(this T control, AvaloniaProperty avaloniaPro
    => control._set(Avalonia.Controls.TrayIcon.CommandParameterProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T CommandParameter<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.CommandParameterProperty, ps, () => control.CommandParameter = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T CommandParameter<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.CommandParameterProperty, ps, () => control.CommandParameter = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Menu
@@ -61,7 +65,8 @@ public static T Menu<T>(this T control, Func<Avalonia.Controls.NativeMenu> func,
    => control._set(Avalonia.Controls.TrayIcon.MenuProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TrayIcon Menu<T>(this T control,Avalonia.Controls.NativeMenu value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.MenuProperty, ps, () => control.Menu = value, bindingMode, converter, bindingSource);
+public static T Menu<T>(this T control,Avalonia.Controls.NativeMenu value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.MenuProperty, ps, () => control.Menu = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Menu<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon 
@@ -72,7 +77,8 @@ public static T Menu<T>(this T control, AvaloniaProperty avaloniaProperty, Bindi
    => control._set(Avalonia.Controls.TrayIcon.MenuProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Menu<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.NativeMenu> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.MenuProperty, ps, () => control.Menu = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Menu<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.NativeMenu> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.MenuProperty, ps, () => control.Menu = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Icon
@@ -82,7 +88,8 @@ public static T Icon<T>(this T control, Func<Avalonia.Controls.WindowIcon> func,
    => control._set(Avalonia.Controls.TrayIcon.IconProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TrayIcon Icon<T>(this T control,Avalonia.Controls.WindowIcon value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.IconProperty, ps, () => control.Icon = value, bindingMode, converter, bindingSource);
+public static T Icon<T>(this T control,Avalonia.Controls.WindowIcon value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.IconProperty, ps, () => control.Icon = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Icon<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon 
@@ -93,7 +100,8 @@ public static T Icon<T>(this T control, AvaloniaProperty avaloniaProperty, Bindi
    => control._set(Avalonia.Controls.TrayIcon.IconProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Icon<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.WindowIcon> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.IconProperty, ps, () => control.Icon = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Icon<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.WindowIcon> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.IconProperty, ps, () => control.Icon = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ToolTipText
@@ -103,7 +111,8 @@ public static T ToolTipText<T>(this T control, Func<System.String> func, Action<
    => control._set(Avalonia.Controls.TrayIcon.ToolTipTextProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TrayIcon ToolTipText<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.ToolTipTextProperty, ps, () => control.ToolTipText = value, bindingMode, converter, bindingSource);
+public static T ToolTipText<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.ToolTipTextProperty, ps, () => control.ToolTipText = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ToolTipText<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon 
@@ -114,7 +123,8 @@ public static T ToolTipText<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.TrayIcon.ToolTipTextProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ToolTipText<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.ToolTipTextProperty, ps, () => control.ToolTipText = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ToolTipText<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.ToolTipTextProperty, ps, () => control.ToolTipText = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // IsVisible
@@ -124,7 +134,8 @@ public static T IsVisible<T>(this T control, Func<System.Boolean> func, Action<S
    => control._set(Avalonia.Controls.TrayIcon.IsVisibleProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.TrayIcon IsVisible<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.IsVisibleProperty, ps, () => control.IsVisible = value, bindingMode, converter, bindingSource);
+public static T IsVisible<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.IsVisibleProperty, ps, () => control.IsVisible = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsVisible<T>(this T control, IBinding binding) where T : Avalonia.Controls.TrayIcon 
@@ -135,7 +146,8 @@ public static T IsVisible<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.TrayIcon.IsVisibleProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T IsVisible<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon=> control._setEx(Avalonia.Controls.TrayIcon.IsVisibleProperty, ps, () => control.IsVisible = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T IsVisible<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.TrayIcon 
+=> control._setEx(Avalonia.Controls.TrayIcon.IsVisibleProperty, ps, () => control.IsVisible = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

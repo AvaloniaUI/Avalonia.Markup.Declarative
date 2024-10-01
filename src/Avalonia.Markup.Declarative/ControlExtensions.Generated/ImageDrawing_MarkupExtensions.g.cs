@@ -19,7 +19,8 @@ public static Avalonia.Media.ImageDrawing ImageSource(this Avalonia.Media.ImageD
    => control._set(Avalonia.Media.ImageDrawing.ImageSourceProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Media.ImageDrawing ImageSource(this Avalonia.Media.ImageDrawing control,Avalonia.Media.IImage value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.ImageDrawing.ImageSourceProperty, ps, () => control.ImageSource = value, bindingMode, converter, bindingSource);
+public static Avalonia.Media.ImageDrawing ImageSource(this Avalonia.Media.ImageDrawing control,Avalonia.Media.IImage value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.ImageDrawing.ImageSourceProperty, ps, () => control.ImageSource = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.ImageDrawing ImageSource(this Avalonia.Media.ImageDrawing control, IBinding binding)  
@@ -30,7 +31,8 @@ public static Avalonia.Media.ImageDrawing ImageSource(this Avalonia.Media.ImageD
    => control._set(Avalonia.Media.ImageDrawing.ImageSourceProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Media.ImageDrawing ImageSource<TValue>(this Avalonia.Media.ImageDrawing control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IImage> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.ImageDrawing.ImageSourceProperty, ps, () => control.ImageSource = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Media.ImageDrawing ImageSource<TValue>(this Avalonia.Media.ImageDrawing control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IImage> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.ImageDrawing.ImageSourceProperty, ps, () => control.ImageSource = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Rect
@@ -40,7 +42,8 @@ public static Avalonia.Media.ImageDrawing Rect(this Avalonia.Media.ImageDrawing 
    => control._set(Avalonia.Media.ImageDrawing.RectProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Media.ImageDrawing Rect(this Avalonia.Media.ImageDrawing control,Avalonia.Rect value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.ImageDrawing.RectProperty, ps, () => control.Rect = value, bindingMode, converter, bindingSource);
+public static Avalonia.Media.ImageDrawing Rect(this Avalonia.Media.ImageDrawing control,Avalonia.Rect value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.ImageDrawing.RectProperty, ps, () => control.Rect = value, bindingMode, converter, bindingSource);
 
 /*ValueOverloadsSetterGenerator*/
 
@@ -62,7 +65,8 @@ public static Avalonia.Media.ImageDrawing Rect(this Avalonia.Media.ImageDrawing 
    => control._set(Avalonia.Media.ImageDrawing.RectProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Media.ImageDrawing Rect<TValue>(this Avalonia.Media.ImageDrawing control, TValue value, FuncValueConverter<TValue, Avalonia.Rect> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.ImageDrawing.RectProperty, ps, () => control.Rect = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Media.ImageDrawing Rect<TValue>(this Avalonia.Media.ImageDrawing control, TValue value, FuncValueConverter<TValue, Avalonia.Rect> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.ImageDrawing.RectProperty, ps, () => control.Rect = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

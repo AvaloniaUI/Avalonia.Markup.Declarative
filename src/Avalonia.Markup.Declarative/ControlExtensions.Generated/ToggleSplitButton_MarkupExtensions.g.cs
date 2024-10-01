@@ -19,7 +19,8 @@ public static T IsChecked<T>(this T control, Func<System.Boolean> func, Action<S
    => control._set(Avalonia.Controls.ToggleSplitButton.IsCheckedProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.ToggleSplitButton IsChecked<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSplitButton=> control._setEx(Avalonia.Controls.ToggleSplitButton.IsCheckedProperty, ps, () => control.IsChecked = value, bindingMode, converter, bindingSource);
+public static T IsChecked<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSplitButton 
+=> control._setEx(Avalonia.Controls.ToggleSplitButton.IsCheckedProperty, ps, () => control.IsChecked = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsChecked<T>(this T control, IBinding binding) where T : Avalonia.Controls.ToggleSplitButton 
@@ -30,7 +31,8 @@ public static T IsChecked<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.ToggleSplitButton.IsCheckedProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T IsChecked<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSplitButton=> control._setEx(Avalonia.Controls.ToggleSplitButton.IsCheckedProperty, ps, () => control.IsChecked = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T IsChecked<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ToggleSplitButton 
+=> control._setEx(Avalonia.Controls.ToggleSplitButton.IsCheckedProperty, ps, () => control.IsChecked = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

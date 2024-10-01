@@ -19,7 +19,8 @@ public static Avalonia.Media.ScaleTransform ScaleX(this Avalonia.Media.ScaleTran
    => control._set(Avalonia.Media.ScaleTransform.ScaleXProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Media.ScaleTransform ScaleX(this Avalonia.Media.ScaleTransform control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.ScaleTransform.ScaleXProperty, ps, () => control.ScaleX = value, bindingMode, converter, bindingSource);
+public static Avalonia.Media.ScaleTransform ScaleX(this Avalonia.Media.ScaleTransform control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.ScaleTransform.ScaleXProperty, ps, () => control.ScaleX = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.ScaleTransform ScaleX(this Avalonia.Media.ScaleTransform control, IBinding binding)  
@@ -30,7 +31,8 @@ public static Avalonia.Media.ScaleTransform ScaleX(this Avalonia.Media.ScaleTran
    => control._set(Avalonia.Media.ScaleTransform.ScaleXProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Media.ScaleTransform ScaleX<TValue>(this Avalonia.Media.ScaleTransform control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.ScaleTransform.ScaleXProperty, ps, () => control.ScaleX = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Media.ScaleTransform ScaleX<TValue>(this Avalonia.Media.ScaleTransform control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.ScaleTransform.ScaleXProperty, ps, () => control.ScaleX = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ScaleY
@@ -40,7 +42,8 @@ public static Avalonia.Media.ScaleTransform ScaleY(this Avalonia.Media.ScaleTran
    => control._set(Avalonia.Media.ScaleTransform.ScaleYProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Media.ScaleTransform ScaleY(this Avalonia.Media.ScaleTransform control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.ScaleTransform.ScaleYProperty, ps, () => control.ScaleY = value, bindingMode, converter, bindingSource);
+public static Avalonia.Media.ScaleTransform ScaleY(this Avalonia.Media.ScaleTransform control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.ScaleTransform.ScaleYProperty, ps, () => control.ScaleY = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.ScaleTransform ScaleY(this Avalonia.Media.ScaleTransform control, IBinding binding)  
@@ -51,7 +54,8 @@ public static Avalonia.Media.ScaleTransform ScaleY(this Avalonia.Media.ScaleTran
    => control._set(Avalonia.Media.ScaleTransform.ScaleYProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Media.ScaleTransform ScaleY<TValue>(this Avalonia.Media.ScaleTransform control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.ScaleTransform.ScaleYProperty, ps, () => control.ScaleY = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Media.ScaleTransform ScaleY<TValue>(this Avalonia.Media.ScaleTransform control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.ScaleTransform.ScaleYProperty, ps, () => control.ScaleY = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

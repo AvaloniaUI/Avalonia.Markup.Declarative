@@ -19,7 +19,8 @@ public static T IsSelected<T>(this T control, Func<System.Boolean> func, Action<
    => control._set(Avalonia.Controls.ListBoxItem.IsSelectedProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.ListBoxItem IsSelected<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ListBoxItem=> control._setEx(Avalonia.Controls.ListBoxItem.IsSelectedProperty, ps, () => control.IsSelected = value, bindingMode, converter, bindingSource);
+public static T IsSelected<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ListBoxItem 
+=> control._setEx(Avalonia.Controls.ListBoxItem.IsSelectedProperty, ps, () => control.IsSelected = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsSelected<T>(this T control, IBinding binding) where T : Avalonia.Controls.ListBoxItem 
@@ -30,7 +31,8 @@ public static T IsSelected<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.ListBoxItem.IsSelectedProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T IsSelected<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ListBoxItem=> control._setEx(Avalonia.Controls.ListBoxItem.IsSelectedProperty, ps, () => control.IsSelected = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T IsSelected<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ListBoxItem 
+=> control._setEx(Avalonia.Controls.ListBoxItem.IsSelectedProperty, ps, () => control.IsSelected = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

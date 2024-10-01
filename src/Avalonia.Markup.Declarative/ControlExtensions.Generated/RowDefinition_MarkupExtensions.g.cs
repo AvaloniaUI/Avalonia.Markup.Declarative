@@ -19,7 +19,8 @@ public static T MaxHeight<T>(this T control, Func<System.Double> func, Action<Sy
    => control._set(Avalonia.Controls.RowDefinition.MaxHeightProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.RowDefinition MaxHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition=> control._setEx(Avalonia.Controls.RowDefinition.MaxHeightProperty, ps, () => control.MaxHeight = value, bindingMode, converter, bindingSource);
+public static T MaxHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition 
+=> control._setEx(Avalonia.Controls.RowDefinition.MaxHeightProperty, ps, () => control.MaxHeight = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T MaxHeight<T>(this T control, IBinding binding) where T : Avalonia.Controls.RowDefinition 
@@ -30,7 +31,8 @@ public static T MaxHeight<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.RowDefinition.MaxHeightProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T MaxHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition=> control._setEx(Avalonia.Controls.RowDefinition.MaxHeightProperty, ps, () => control.MaxHeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T MaxHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition 
+=> control._setEx(Avalonia.Controls.RowDefinition.MaxHeightProperty, ps, () => control.MaxHeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // MinHeight
@@ -40,7 +42,8 @@ public static T MinHeight<T>(this T control, Func<System.Double> func, Action<Sy
    => control._set(Avalonia.Controls.RowDefinition.MinHeightProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.RowDefinition MinHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition=> control._setEx(Avalonia.Controls.RowDefinition.MinHeightProperty, ps, () => control.MinHeight = value, bindingMode, converter, bindingSource);
+public static T MinHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition 
+=> control._setEx(Avalonia.Controls.RowDefinition.MinHeightProperty, ps, () => control.MinHeight = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T MinHeight<T>(this T control, IBinding binding) where T : Avalonia.Controls.RowDefinition 
@@ -51,7 +54,8 @@ public static T MinHeight<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.RowDefinition.MinHeightProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T MinHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition=> control._setEx(Avalonia.Controls.RowDefinition.MinHeightProperty, ps, () => control.MinHeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T MinHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition 
+=> control._setEx(Avalonia.Controls.RowDefinition.MinHeightProperty, ps, () => control.MinHeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Height
@@ -61,7 +65,8 @@ public static T Height<T>(this T control, Func<Avalonia.Controls.GridLength> fun
    => control._set(Avalonia.Controls.RowDefinition.HeightProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.RowDefinition Height<T>(this T control,Avalonia.Controls.GridLength value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition=> control._setEx(Avalonia.Controls.RowDefinition.HeightProperty, ps, () => control.Height = value, bindingMode, converter, bindingSource);
+public static T Height<T>(this T control,Avalonia.Controls.GridLength value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition 
+=> control._setEx(Avalonia.Controls.RowDefinition.HeightProperty, ps, () => control.Height = value, bindingMode, converter, bindingSource);
 
 /*ValueOverloadsSetterGenerator*/
 
@@ -79,7 +84,8 @@ public static T Height<T>(this T control, AvaloniaProperty avaloniaProperty, Bin
    => control._set(Avalonia.Controls.RowDefinition.HeightProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Height<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.GridLength> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition=> control._setEx(Avalonia.Controls.RowDefinition.HeightProperty, ps, () => control.Height = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Height<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.GridLength> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RowDefinition 
+=> control._setEx(Avalonia.Controls.RowDefinition.HeightProperty, ps, () => control.Height = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

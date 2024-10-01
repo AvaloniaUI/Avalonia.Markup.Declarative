@@ -19,7 +19,8 @@ public static T Figures<T>(this T control, Func<Avalonia.Media.PathFigures> func
    => control._set(Avalonia.Media.PathGeometry.FiguresProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Media.PathGeometry Figures<T>(this T control,Avalonia.Media.PathFigures value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathGeometry=> control._setEx(Avalonia.Media.PathGeometry.FiguresProperty, ps, () => control.Figures = value, bindingMode, converter, bindingSource);
+public static T Figures<T>(this T control,Avalonia.Media.PathFigures value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathGeometry 
+=> control._setEx(Avalonia.Media.PathGeometry.FiguresProperty, ps, () => control.Figures = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Figures<T>(this T control, IBinding binding) where T : Avalonia.Media.PathGeometry 
@@ -30,7 +31,8 @@ public static T Figures<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Media.PathGeometry.FiguresProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Figures<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.PathFigures> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathGeometry=> control._setEx(Avalonia.Media.PathGeometry.FiguresProperty, ps, () => control.Figures = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Figures<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.PathFigures> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathGeometry 
+=> control._setEx(Avalonia.Media.PathGeometry.FiguresProperty, ps, () => control.Figures = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FillRule
@@ -40,7 +42,8 @@ public static T FillRule<T>(this T control, Func<Avalonia.Media.FillRule> func, 
    => control._set(Avalonia.Media.PathGeometry.FillRuleProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Media.PathGeometry FillRule<T>(this T control,Avalonia.Media.FillRule value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathGeometry=> control._setEx(Avalonia.Media.PathGeometry.FillRuleProperty, ps, () => control.FillRule = value, bindingMode, converter, bindingSource);
+public static T FillRule<T>(this T control,Avalonia.Media.FillRule value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathGeometry 
+=> control._setEx(Avalonia.Media.PathGeometry.FillRuleProperty, ps, () => control.FillRule = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FillRule<T>(this T control, IBinding binding) where T : Avalonia.Media.PathGeometry 
@@ -51,7 +54,8 @@ public static T FillRule<T>(this T control, AvaloniaProperty avaloniaProperty, B
    => control._set(Avalonia.Media.PathGeometry.FillRuleProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FillRule<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FillRule> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathGeometry=> control._setEx(Avalonia.Media.PathGeometry.FillRuleProperty, ps, () => control.FillRule = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FillRule<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FillRule> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Media.PathGeometry 
+=> control._setEx(Avalonia.Media.PathGeometry.FillRuleProperty, ps, () => control.FillRule = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

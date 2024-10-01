@@ -19,7 +19,8 @@ public static T Topmost<T>(this T control, Func<System.Boolean> func, Action<Sys
    => control._set(Avalonia.Controls.WindowBase.TopmostProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.WindowBase Topmost<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WindowBase=> control._setEx(Avalonia.Controls.WindowBase.TopmostProperty, ps, () => control.Topmost = value, bindingMode, converter, bindingSource);
+public static T Topmost<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WindowBase 
+=> control._setEx(Avalonia.Controls.WindowBase.TopmostProperty, ps, () => control.Topmost = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Topmost<T>(this T control, IBinding binding) where T : Avalonia.Controls.WindowBase 
@@ -30,7 +31,8 @@ public static T Topmost<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.WindowBase.TopmostProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Topmost<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WindowBase=> control._setEx(Avalonia.Controls.WindowBase.TopmostProperty, ps, () => control.Topmost = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Topmost<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WindowBase 
+=> control._setEx(Avalonia.Controls.WindowBase.TopmostProperty, ps, () => control.Topmost = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

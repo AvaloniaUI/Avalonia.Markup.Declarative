@@ -19,7 +19,8 @@ public static Avalonia.Media.GlyphRunDrawing Foreground(this Avalonia.Media.Glyp
    => control._set(Avalonia.Media.GlyphRunDrawing.ForegroundProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Media.GlyphRunDrawing Foreground(this Avalonia.Media.GlyphRunDrawing control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.GlyphRunDrawing.ForegroundProperty, ps, () => control.Foreground = value, bindingMode, converter, bindingSource);
+public static Avalonia.Media.GlyphRunDrawing Foreground(this Avalonia.Media.GlyphRunDrawing control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.GlyphRunDrawing.ForegroundProperty, ps, () => control.Foreground = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.GlyphRunDrawing Foreground(this Avalonia.Media.GlyphRunDrawing control, IBinding binding)  
@@ -30,7 +31,8 @@ public static Avalonia.Media.GlyphRunDrawing Foreground(this Avalonia.Media.Glyp
    => control._set(Avalonia.Media.GlyphRunDrawing.ForegroundProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Media.GlyphRunDrawing Foreground<TValue>(this Avalonia.Media.GlyphRunDrawing control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.GlyphRunDrawing.ForegroundProperty, ps, () => control.Foreground = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Media.GlyphRunDrawing Foreground<TValue>(this Avalonia.Media.GlyphRunDrawing control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.GlyphRunDrawing.ForegroundProperty, ps, () => control.Foreground = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // GlyphRun
@@ -40,7 +42,8 @@ public static Avalonia.Media.GlyphRunDrawing GlyphRun(this Avalonia.Media.GlyphR
    => control._set(Avalonia.Media.GlyphRunDrawing.GlyphRunProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Media.GlyphRunDrawing GlyphRun(this Avalonia.Media.GlyphRunDrawing control,Avalonia.Media.GlyphRun value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.GlyphRunDrawing.GlyphRunProperty, ps, () => control.GlyphRun = value, bindingMode, converter, bindingSource);
+public static Avalonia.Media.GlyphRunDrawing GlyphRun(this Avalonia.Media.GlyphRunDrawing control,Avalonia.Media.GlyphRun value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.GlyphRunDrawing.GlyphRunProperty, ps, () => control.GlyphRun = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.GlyphRunDrawing GlyphRun(this Avalonia.Media.GlyphRunDrawing control, IBinding binding)  
@@ -51,7 +54,8 @@ public static Avalonia.Media.GlyphRunDrawing GlyphRun(this Avalonia.Media.GlyphR
    => control._set(Avalonia.Media.GlyphRunDrawing.GlyphRunProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Media.GlyphRunDrawing GlyphRun<TValue>(this Avalonia.Media.GlyphRunDrawing control, TValue value, FuncValueConverter<TValue, Avalonia.Media.GlyphRun> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.GlyphRunDrawing.GlyphRunProperty, ps, () => control.GlyphRun = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Media.GlyphRunDrawing GlyphRun<TValue>(this Avalonia.Media.GlyphRunDrawing control, TValue value, FuncValueConverter<TValue, Avalonia.Media.GlyphRun> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.GlyphRunDrawing.GlyphRunProperty, ps, () => control.GlyphRun = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

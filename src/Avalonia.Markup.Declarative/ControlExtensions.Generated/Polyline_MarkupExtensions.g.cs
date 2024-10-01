@@ -19,7 +19,8 @@ public static T Points<T>(this T control, Func<System.Collections.Generic.IList<
    => control._set(Avalonia.Controls.Shapes.Polyline.PointsProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Shapes.Polyline Points<T>(this T control,System.Collections.Generic.IList<Avalonia.Point> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Shapes.Polyline=> control._setEx(Avalonia.Controls.Shapes.Polyline.PointsProperty, ps, () => control.Points = value, bindingMode, converter, bindingSource);
+public static T Points<T>(this T control,System.Collections.Generic.IList<Avalonia.Point> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Shapes.Polyline 
+=> control._setEx(Avalonia.Controls.Shapes.Polyline.PointsProperty, ps, () => control.Points = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Points<T>(this T control, IBinding binding) where T : Avalonia.Controls.Shapes.Polyline 
@@ -30,7 +31,8 @@ public static T Points<T>(this T control, AvaloniaProperty avaloniaProperty, Bin
    => control._set(Avalonia.Controls.Shapes.Polyline.PointsProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Points<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Collections.Generic.IList<Avalonia.Point>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Shapes.Polyline=> control._setEx(Avalonia.Controls.Shapes.Polyline.PointsProperty, ps, () => control.Points = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Points<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Collections.Generic.IList<Avalonia.Point>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Shapes.Polyline 
+=> control._setEx(Avalonia.Controls.Shapes.Polyline.PointsProperty, ps, () => control.Points = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

@@ -19,7 +19,8 @@ public static T Data<T>(this T control, Func<Avalonia.Media.Geometry> func, Acti
    => control._set(Avalonia.Controls.Shapes.Path.DataProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Shapes.Path Data<T>(this T control,Avalonia.Media.Geometry value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Shapes.Path=> control._setEx(Avalonia.Controls.Shapes.Path.DataProperty, ps, () => control.Data = value, bindingMode, converter, bindingSource);
+public static T Data<T>(this T control,Avalonia.Media.Geometry value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Shapes.Path 
+=> control._setEx(Avalonia.Controls.Shapes.Path.DataProperty, ps, () => control.Data = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Data<T>(this T control, IBinding binding) where T : Avalonia.Controls.Shapes.Path 
@@ -30,7 +31,8 @@ public static T Data<T>(this T control, AvaloniaProperty avaloniaProperty, Bindi
    => control._set(Avalonia.Controls.Shapes.Path.DataProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Data<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.Geometry> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Shapes.Path=> control._setEx(Avalonia.Controls.Shapes.Path.DataProperty, ps, () => control.Data = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Data<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.Geometry> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Shapes.Path 
+=> control._setEx(Avalonia.Controls.Shapes.Path.DataProperty, ps, () => control.Data = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

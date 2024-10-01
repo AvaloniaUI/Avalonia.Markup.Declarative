@@ -19,7 +19,8 @@ public static T CaretIndex<T>(this T control, Func<System.Int32> func, Action<Sy
    => control._set(Avalonia.Controls.AutoCompleteBox.CaretIndexProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox CaretIndex<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.CaretIndexProperty, ps, () => control.CaretIndex = value, bindingMode, converter, bindingSource);
+public static T CaretIndex<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.CaretIndexProperty, ps, () => control.CaretIndex = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T CaretIndex<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -30,7 +31,8 @@ public static T CaretIndex<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.AutoCompleteBox.CaretIndexProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T CaretIndex<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.CaretIndexProperty, ps, () => control.CaretIndex = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T CaretIndex<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.CaretIndexProperty, ps, () => control.CaretIndex = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Watermark
@@ -40,7 +42,8 @@ public static T Watermark<T>(this T control, Func<System.String> func, Action<Sy
    => control._set(Avalonia.Controls.AutoCompleteBox.WatermarkProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox Watermark<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.WatermarkProperty, ps, () => control.Watermark = value, bindingMode, converter, bindingSource);
+public static T Watermark<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.WatermarkProperty, ps, () => control.Watermark = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Watermark<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -51,7 +54,8 @@ public static T Watermark<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.AutoCompleteBox.WatermarkProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Watermark<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.WatermarkProperty, ps, () => control.Watermark = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Watermark<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.WatermarkProperty, ps, () => control.Watermark = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // MinimumPrefixLength
@@ -61,7 +65,8 @@ public static T MinimumPrefixLength<T>(this T control, Func<System.Int32> func, 
    => control._set(Avalonia.Controls.AutoCompleteBox.MinimumPrefixLengthProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox MinimumPrefixLength<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.MinimumPrefixLengthProperty, ps, () => control.MinimumPrefixLength = value, bindingMode, converter, bindingSource);
+public static T MinimumPrefixLength<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.MinimumPrefixLengthProperty, ps, () => control.MinimumPrefixLength = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T MinimumPrefixLength<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -72,7 +77,8 @@ public static T MinimumPrefixLength<T>(this T control, AvaloniaProperty avalonia
    => control._set(Avalonia.Controls.AutoCompleteBox.MinimumPrefixLengthProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T MinimumPrefixLength<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.MinimumPrefixLengthProperty, ps, () => control.MinimumPrefixLength = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T MinimumPrefixLength<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.MinimumPrefixLengthProperty, ps, () => control.MinimumPrefixLength = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // MinimumPopulateDelay
@@ -82,7 +88,8 @@ public static T MinimumPopulateDelay<T>(this T control, Func<System.TimeSpan> fu
    => control._set(Avalonia.Controls.AutoCompleteBox.MinimumPopulateDelayProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox MinimumPopulateDelay<T>(this T control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.MinimumPopulateDelayProperty, ps, () => control.MinimumPopulateDelay = value, bindingMode, converter, bindingSource);
+public static T MinimumPopulateDelay<T>(this T control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.MinimumPopulateDelayProperty, ps, () => control.MinimumPopulateDelay = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T MinimumPopulateDelay<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -93,7 +100,8 @@ public static T MinimumPopulateDelay<T>(this T control, AvaloniaProperty avaloni
    => control._set(Avalonia.Controls.AutoCompleteBox.MinimumPopulateDelayProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T MinimumPopulateDelay<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.MinimumPopulateDelayProperty, ps, () => control.MinimumPopulateDelay = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T MinimumPopulateDelay<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.MinimumPopulateDelayProperty, ps, () => control.MinimumPopulateDelay = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // MaxDropDownHeight
@@ -103,7 +111,8 @@ public static T MaxDropDownHeight<T>(this T control, Func<System.Double> func, A
    => control._set(Avalonia.Controls.AutoCompleteBox.MaxDropDownHeightProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox MaxDropDownHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.MaxDropDownHeightProperty, ps, () => control.MaxDropDownHeight = value, bindingMode, converter, bindingSource);
+public static T MaxDropDownHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.MaxDropDownHeightProperty, ps, () => control.MaxDropDownHeight = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T MaxDropDownHeight<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -114,7 +123,8 @@ public static T MaxDropDownHeight<T>(this T control, AvaloniaProperty avaloniaPr
    => control._set(Avalonia.Controls.AutoCompleteBox.MaxDropDownHeightProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T MaxDropDownHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.MaxDropDownHeightProperty, ps, () => control.MaxDropDownHeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T MaxDropDownHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.MaxDropDownHeightProperty, ps, () => control.MaxDropDownHeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // IsTextCompletionEnabled
@@ -124,7 +134,8 @@ public static T IsTextCompletionEnabled<T>(this T control, Func<System.Boolean> 
    => control._set(Avalonia.Controls.AutoCompleteBox.IsTextCompletionEnabledProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox IsTextCompletionEnabled<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.IsTextCompletionEnabledProperty, ps, () => control.IsTextCompletionEnabled = value, bindingMode, converter, bindingSource);
+public static T IsTextCompletionEnabled<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.IsTextCompletionEnabledProperty, ps, () => control.IsTextCompletionEnabled = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsTextCompletionEnabled<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -135,7 +146,8 @@ public static T IsTextCompletionEnabled<T>(this T control, AvaloniaProperty aval
    => control._set(Avalonia.Controls.AutoCompleteBox.IsTextCompletionEnabledProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T IsTextCompletionEnabled<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.IsTextCompletionEnabledProperty, ps, () => control.IsTextCompletionEnabled = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T IsTextCompletionEnabled<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.IsTextCompletionEnabledProperty, ps, () => control.IsTextCompletionEnabled = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ItemTemplate
@@ -145,7 +157,8 @@ public static T ItemTemplate<T>(this T control, Func<Avalonia.Controls.Templates
    => control._set(Avalonia.Controls.AutoCompleteBox.ItemTemplateProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox ItemTemplate<T>(this T control,Avalonia.Controls.Templates.IDataTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemTemplateProperty, ps, () => control.ItemTemplate = value, bindingMode, converter, bindingSource);
+public static T ItemTemplate<T>(this T control,Avalonia.Controls.Templates.IDataTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemTemplateProperty, ps, () => control.ItemTemplate = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ItemTemplate<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -156,7 +169,8 @@ public static T ItemTemplate<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.AutoCompleteBox.ItemTemplateProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ItemTemplate<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Templates.IDataTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemTemplateProperty, ps, () => control.ItemTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ItemTemplate<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Templates.IDataTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemTemplateProperty, ps, () => control.ItemTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // IsDropDownOpen
@@ -166,7 +180,8 @@ public static T IsDropDownOpen<T>(this T control, Func<System.Boolean> func, Act
    => control._set(Avalonia.Controls.AutoCompleteBox.IsDropDownOpenProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox IsDropDownOpen<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.IsDropDownOpenProperty, ps, () => control.IsDropDownOpen = value, bindingMode, converter, bindingSource);
+public static T IsDropDownOpen<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.IsDropDownOpenProperty, ps, () => control.IsDropDownOpen = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsDropDownOpen<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -177,7 +192,8 @@ public static T IsDropDownOpen<T>(this T control, AvaloniaProperty avaloniaPrope
    => control._set(Avalonia.Controls.AutoCompleteBox.IsDropDownOpenProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T IsDropDownOpen<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.IsDropDownOpenProperty, ps, () => control.IsDropDownOpen = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T IsDropDownOpen<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.IsDropDownOpenProperty, ps, () => control.IsDropDownOpen = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // SelectedItem
@@ -187,7 +203,8 @@ public static T SelectedItem<T>(this T control, Func<System.Object> func, Action
    => control._set(Avalonia.Controls.AutoCompleteBox.SelectedItemProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox SelectedItem<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.SelectedItemProperty, ps, () => control.SelectedItem = value, bindingMode, converter, bindingSource);
+public static T SelectedItem<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.SelectedItemProperty, ps, () => control.SelectedItem = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T SelectedItem<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -198,7 +215,8 @@ public static T SelectedItem<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.AutoCompleteBox.SelectedItemProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T SelectedItem<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.SelectedItemProperty, ps, () => control.SelectedItem = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T SelectedItem<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.SelectedItemProperty, ps, () => control.SelectedItem = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Text
@@ -208,7 +226,8 @@ public static T Text<T>(this T control, Func<System.String> func, Action<System.
    => control._set(Avalonia.Controls.AutoCompleteBox.TextProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox Text<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextProperty, ps, () => control.Text = value, bindingMode, converter, bindingSource);
+public static T Text<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextProperty, ps, () => control.Text = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Text<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -219,7 +238,8 @@ public static T Text<T>(this T control, AvaloniaProperty avaloniaProperty, Bindi
    => control._set(Avalonia.Controls.AutoCompleteBox.TextProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Text<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextProperty, ps, () => control.Text = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Text<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextProperty, ps, () => control.Text = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FilterMode
@@ -229,7 +249,8 @@ public static T FilterMode<T>(this T control, Func<Avalonia.Controls.AutoComplet
    => control._set(Avalonia.Controls.AutoCompleteBox.FilterModeProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox FilterMode<T>(this T control,Avalonia.Controls.AutoCompleteFilterMode value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.FilterModeProperty, ps, () => control.FilterMode = value, bindingMode, converter, bindingSource);
+public static T FilterMode<T>(this T control,Avalonia.Controls.AutoCompleteFilterMode value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.FilterModeProperty, ps, () => control.FilterMode = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FilterMode<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -240,7 +261,8 @@ public static T FilterMode<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.AutoCompleteBox.FilterModeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FilterMode<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.AutoCompleteFilterMode> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.FilterModeProperty, ps, () => control.FilterMode = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FilterMode<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.AutoCompleteFilterMode> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.FilterModeProperty, ps, () => control.FilterMode = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ItemFilter
@@ -250,7 +272,8 @@ public static T ItemFilter<T>(this T control, Func<Avalonia.Controls.AutoComplet
    => control._set(Avalonia.Controls.AutoCompleteBox.ItemFilterProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox ItemFilter<T>(this T control,Avalonia.Controls.AutoCompleteFilterPredicate<System.Object> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemFilterProperty, ps, () => control.ItemFilter = value, bindingMode, converter, bindingSource);
+public static T ItemFilter<T>(this T control,Avalonia.Controls.AutoCompleteFilterPredicate<System.Object> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemFilterProperty, ps, () => control.ItemFilter = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ItemFilter<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -261,7 +284,8 @@ public static T ItemFilter<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.AutoCompleteBox.ItemFilterProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ItemFilter<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.AutoCompleteFilterPredicate<System.Object>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemFilterProperty, ps, () => control.ItemFilter = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ItemFilter<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.AutoCompleteFilterPredicate<System.Object>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemFilterProperty, ps, () => control.ItemFilter = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // TextFilter
@@ -271,7 +295,8 @@ public static T TextFilter<T>(this T control, Func<Avalonia.Controls.AutoComplet
    => control._set(Avalonia.Controls.AutoCompleteBox.TextFilterProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox TextFilter<T>(this T control,Avalonia.Controls.AutoCompleteFilterPredicate<System.String> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextFilterProperty, ps, () => control.TextFilter = value, bindingMode, converter, bindingSource);
+public static T TextFilter<T>(this T control,Avalonia.Controls.AutoCompleteFilterPredicate<System.String> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextFilterProperty, ps, () => control.TextFilter = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T TextFilter<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -282,7 +307,8 @@ public static T TextFilter<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.AutoCompleteBox.TextFilterProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T TextFilter<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.AutoCompleteFilterPredicate<System.String>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextFilterProperty, ps, () => control.TextFilter = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T TextFilter<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.AutoCompleteFilterPredicate<System.String>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextFilterProperty, ps, () => control.TextFilter = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ItemSelector
@@ -292,7 +318,8 @@ public static T ItemSelector<T>(this T control, Func<Avalonia.Controls.AutoCompl
    => control._set(Avalonia.Controls.AutoCompleteBox.ItemSelectorProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox ItemSelector<T>(this T control,Avalonia.Controls.AutoCompleteSelector<System.Object> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemSelectorProperty, ps, () => control.ItemSelector = value, bindingMode, converter, bindingSource);
+public static T ItemSelector<T>(this T control,Avalonia.Controls.AutoCompleteSelector<System.Object> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemSelectorProperty, ps, () => control.ItemSelector = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ItemSelector<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -303,7 +330,8 @@ public static T ItemSelector<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.AutoCompleteBox.ItemSelectorProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ItemSelector<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.AutoCompleteSelector<System.Object>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemSelectorProperty, ps, () => control.ItemSelector = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ItemSelector<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.AutoCompleteSelector<System.Object>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemSelectorProperty, ps, () => control.ItemSelector = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // TextSelector
@@ -313,7 +341,8 @@ public static T TextSelector<T>(this T control, Func<Avalonia.Controls.AutoCompl
    => control._set(Avalonia.Controls.AutoCompleteBox.TextSelectorProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox TextSelector<T>(this T control,Avalonia.Controls.AutoCompleteSelector<System.String> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextSelectorProperty, ps, () => control.TextSelector = value, bindingMode, converter, bindingSource);
+public static T TextSelector<T>(this T control,Avalonia.Controls.AutoCompleteSelector<System.String> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextSelectorProperty, ps, () => control.TextSelector = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T TextSelector<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -324,7 +353,8 @@ public static T TextSelector<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.AutoCompleteBox.TextSelectorProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T TextSelector<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.AutoCompleteSelector<System.String>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextSelectorProperty, ps, () => control.TextSelector = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T TextSelector<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.AutoCompleteSelector<System.String>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.TextSelectorProperty, ps, () => control.TextSelector = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ItemsSource
@@ -334,7 +364,8 @@ public static T ItemsSource<T>(this T control, Func<System.Collections.IEnumerab
    => control._set(Avalonia.Controls.AutoCompleteBox.ItemsSourceProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox ItemsSource<T>(this T control,System.Collections.IEnumerable value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemsSourceProperty, ps, () => control.ItemsSource = value, bindingMode, converter, bindingSource);
+public static T ItemsSource<T>(this T control,System.Collections.IEnumerable value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemsSourceProperty, ps, () => control.ItemsSource = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ItemsSource<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -345,7 +376,8 @@ public static T ItemsSource<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.AutoCompleteBox.ItemsSourceProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ItemsSource<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Collections.IEnumerable> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemsSourceProperty, ps, () => control.ItemsSource = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ItemsSource<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Collections.IEnumerable> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.ItemsSourceProperty, ps, () => control.ItemsSource = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // AsyncPopulator
@@ -355,7 +387,8 @@ public static T AsyncPopulator<T>(this T control, Func<System.Func<System.String
    => control._set(Avalonia.Controls.AutoCompleteBox.AsyncPopulatorProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox AsyncPopulator<T>(this T control,System.Func<System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<System.Object>>> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.AsyncPopulatorProperty, ps, () => control.AsyncPopulator = value, bindingMode, converter, bindingSource);
+public static T AsyncPopulator<T>(this T control,System.Func<System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<System.Object>>> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.AsyncPopulatorProperty, ps, () => control.AsyncPopulator = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T AsyncPopulator<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -366,7 +399,8 @@ public static T AsyncPopulator<T>(this T control, AvaloniaProperty avaloniaPrope
    => control._set(Avalonia.Controls.AutoCompleteBox.AsyncPopulatorProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T AsyncPopulator<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Func<System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<System.Object>>>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.AsyncPopulatorProperty, ps, () => control.AsyncPopulator = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T AsyncPopulator<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Func<System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<System.Object>>>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.AsyncPopulatorProperty, ps, () => control.AsyncPopulator = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // MaxLength
@@ -376,7 +410,8 @@ public static T MaxLength<T>(this T control, Func<System.Int32> func, Action<Sys
    => control._set(Avalonia.Controls.AutoCompleteBox.MaxLengthProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox MaxLength<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.MaxLengthProperty, ps, () => control.MaxLength = value, bindingMode, converter, bindingSource);
+public static T MaxLength<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.MaxLengthProperty, ps, () => control.MaxLength = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T MaxLength<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -387,7 +422,8 @@ public static T MaxLength<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.AutoCompleteBox.MaxLengthProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T MaxLength<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.MaxLengthProperty, ps, () => control.MaxLength = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T MaxLength<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.MaxLengthProperty, ps, () => control.MaxLength = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // InnerLeftContent
@@ -397,7 +433,8 @@ public static T InnerLeftContent<T>(this T control, Func<System.Object> func, Ac
    => control._set(Avalonia.Controls.AutoCompleteBox.InnerLeftContentProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox InnerLeftContent<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.InnerLeftContentProperty, ps, () => control.InnerLeftContent = value, bindingMode, converter, bindingSource);
+public static T InnerLeftContent<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.InnerLeftContentProperty, ps, () => control.InnerLeftContent = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T InnerLeftContent<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -408,7 +445,8 @@ public static T InnerLeftContent<T>(this T control, AvaloniaProperty avaloniaPro
    => control._set(Avalonia.Controls.AutoCompleteBox.InnerLeftContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T InnerLeftContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.InnerLeftContentProperty, ps, () => control.InnerLeftContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T InnerLeftContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.InnerLeftContentProperty, ps, () => control.InnerLeftContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // InnerRightContent
@@ -418,7 +456,8 @@ public static T InnerRightContent<T>(this T control, Func<System.Object> func, A
    => control._set(Avalonia.Controls.AutoCompleteBox.InnerRightContentProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.AutoCompleteBox InnerRightContent<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.InnerRightContentProperty, ps, () => control.InnerRightContent = value, bindingMode, converter, bindingSource);
+public static T InnerRightContent<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.InnerRightContentProperty, ps, () => control.InnerRightContent = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T InnerRightContent<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
@@ -429,7 +468,8 @@ public static T InnerRightContent<T>(this T control, AvaloniaProperty avaloniaPr
    => control._set(Avalonia.Controls.AutoCompleteBox.InnerRightContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T InnerRightContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox=> control._setEx(Avalonia.Controls.AutoCompleteBox.InnerRightContentProperty, ps, () => control.InnerRightContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T InnerRightContent<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.InnerRightContentProperty, ps, () => control.InnerRightContent = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

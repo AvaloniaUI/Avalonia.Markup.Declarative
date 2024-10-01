@@ -19,7 +19,8 @@ public static T ShowAccessKey<T>(this T control, Func<System.Boolean> func, Acti
    => control._set(Avalonia.Controls.Primitives.AccessText.ShowAccessKeyProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.AccessText ShowAccessKey<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.AccessText=> control._setEx(Avalonia.Controls.Primitives.AccessText.ShowAccessKeyProperty, ps, () => control.ShowAccessKey = value, bindingMode, converter, bindingSource);
+public static T ShowAccessKey<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.AccessText 
+=> control._setEx(Avalonia.Controls.Primitives.AccessText.ShowAccessKeyProperty, ps, () => control.ShowAccessKey = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ShowAccessKey<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.AccessText 
@@ -30,7 +31,8 @@ public static T ShowAccessKey<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.Primitives.AccessText.ShowAccessKeyProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ShowAccessKey<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.AccessText=> control._setEx(Avalonia.Controls.Primitives.AccessText.ShowAccessKeyProperty, ps, () => control.ShowAccessKey = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ShowAccessKey<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.AccessText 
+=> control._setEx(Avalonia.Controls.Primitives.AccessText.ShowAccessKeyProperty, ps, () => control.ShowAccessKey = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

@@ -19,7 +19,8 @@ public static T DefaultFocusAdorner<T>(this T control, Func<Avalonia.Controls.IT
    => control._set(Avalonia.Controls.Primitives.AdornerLayer.DefaultFocusAdornerProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Primitives.AdornerLayer DefaultFocusAdorner<T>(this T control,Avalonia.Controls.ITemplate<Avalonia.Controls.Control> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.AdornerLayer=> control._setEx(Avalonia.Controls.Primitives.AdornerLayer.DefaultFocusAdornerProperty, ps, () => control.DefaultFocusAdorner = value, bindingMode, converter, bindingSource);
+public static T DefaultFocusAdorner<T>(this T control,Avalonia.Controls.ITemplate<Avalonia.Controls.Control> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.AdornerLayer 
+=> control._setEx(Avalonia.Controls.Primitives.AdornerLayer.DefaultFocusAdornerProperty, ps, () => control.DefaultFocusAdorner = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T DefaultFocusAdorner<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.AdornerLayer 
@@ -30,7 +31,8 @@ public static T DefaultFocusAdorner<T>(this T control, AvaloniaProperty avalonia
    => control._set(Avalonia.Controls.Primitives.AdornerLayer.DefaultFocusAdornerProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T DefaultFocusAdorner<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ITemplate<Avalonia.Controls.Control>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.AdornerLayer=> control._setEx(Avalonia.Controls.Primitives.AdornerLayer.DefaultFocusAdornerProperty, ps, () => control.DefaultFocusAdorner = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T DefaultFocusAdorner<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ITemplate<Avalonia.Controls.Control>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Primitives.AdornerLayer 
+=> control._setEx(Avalonia.Controls.Primitives.AdornerLayer.DefaultFocusAdornerProperty, ps, () => control.DefaultFocusAdorner = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

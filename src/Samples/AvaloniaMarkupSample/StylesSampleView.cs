@@ -29,7 +29,6 @@ public class StylesSampleView : ViewBase
                     .Classes("nested-button")
                     .HorizontalAlignment(Avalonia.Layout.HorizontalAlignment.Center)
                     .Content("Hello styles!")
-                    .Width(100)
                     .Height(50)
                     .Styles(
                         // Typed generic style

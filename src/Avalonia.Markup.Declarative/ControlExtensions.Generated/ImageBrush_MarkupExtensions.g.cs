@@ -19,7 +19,8 @@ public static Avalonia.Media.ImageBrush Source(this Avalonia.Media.ImageBrush co
    => control._set(Avalonia.Media.ImageBrush.SourceProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Media.ImageBrush Source(this Avalonia.Media.ImageBrush control,Avalonia.Media.IImageBrushSource value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.ImageBrush.SourceProperty, ps, () => control.Source = value, bindingMode, converter, bindingSource);
+public static Avalonia.Media.ImageBrush Source(this Avalonia.Media.ImageBrush control,Avalonia.Media.IImageBrushSource value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.ImageBrush.SourceProperty, ps, () => control.Source = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.ImageBrush Source(this Avalonia.Media.ImageBrush control, IBinding binding)  
@@ -30,7 +31,8 @@ public static Avalonia.Media.ImageBrush Source(this Avalonia.Media.ImageBrush co
    => control._set(Avalonia.Media.ImageBrush.SourceProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Media.ImageBrush Source<TValue>(this Avalonia.Media.ImageBrush control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IImageBrushSource> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) => control._setEx(Avalonia.Media.ImageBrush.SourceProperty, ps, () => control.Source = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static Avalonia.Media.ImageBrush Source<TValue>(this Avalonia.Media.ImageBrush control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IImageBrushSource> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+=> control._setEx(Avalonia.Media.ImageBrush.SourceProperty, ps, () => control.Source = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

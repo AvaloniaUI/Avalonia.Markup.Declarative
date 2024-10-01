@@ -19,7 +19,8 @@ public static T Background<T>(this T control, Func<Avalonia.Media.IBrush> func, 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BackgroundProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter Background<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
+public static T Background<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Background<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -30,7 +31,8 @@ public static T Background<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BackgroundProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Background<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BackgroundProperty, ps, () => control.Background = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Background<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BackgroundProperty, ps, () => control.Background = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // BackgroundSizing
@@ -40,7 +42,8 @@ public static T BackgroundSizing<T>(this T control, Func<Avalonia.Media.Backgrou
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BackgroundSizingProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter BackgroundSizing<T>(this T control,Avalonia.Media.BackgroundSizing value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BackgroundSizingProperty, ps, () => control.BackgroundSizing = value, bindingMode, converter, bindingSource);
+public static T BackgroundSizing<T>(this T control,Avalonia.Media.BackgroundSizing value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BackgroundSizingProperty, ps, () => control.BackgroundSizing = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T BackgroundSizing<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -51,7 +54,8 @@ public static T BackgroundSizing<T>(this T control, AvaloniaProperty avaloniaPro
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BackgroundSizingProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T BackgroundSizing<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.BackgroundSizing> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BackgroundSizingProperty, ps, () => control.BackgroundSizing = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T BackgroundSizing<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.BackgroundSizing> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BackgroundSizingProperty, ps, () => control.BackgroundSizing = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // BorderBrush
@@ -61,7 +65,8 @@ public static T BorderBrush<T>(this T control, Func<Avalonia.Media.IBrush> func,
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BorderBrushProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter BorderBrush<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BorderBrushProperty, ps, () => control.BorderBrush = value, bindingMode, converter, bindingSource);
+public static T BorderBrush<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BorderBrushProperty, ps, () => control.BorderBrush = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T BorderBrush<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -72,7 +77,8 @@ public static T BorderBrush<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BorderBrushProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T BorderBrush<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BorderBrushProperty, ps, () => control.BorderBrush = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T BorderBrush<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BorderBrushProperty, ps, () => control.BorderBrush = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // BorderThickness
@@ -82,7 +88,8 @@ public static T BorderThickness<T>(this T control, Func<Avalonia.Thickness> func
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BorderThicknessProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter BorderThickness<T>(this T control,Avalonia.Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BorderThicknessProperty, ps, () => control.BorderThickness = value, bindingMode, converter, bindingSource);
+public static T BorderThickness<T>(this T control,Avalonia.Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BorderThicknessProperty, ps, () => control.BorderThickness = value, bindingMode, converter, bindingSource);
 
 /*ValueOverloadsSetterGenerator*/
 
@@ -102,7 +109,8 @@ public static T BorderThickness<T>(this T control, AvaloniaProperty avaloniaProp
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BorderThicknessProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T BorderThickness<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BorderThicknessProperty, ps, () => control.BorderThickness = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T BorderThickness<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BorderThicknessProperty, ps, () => control.BorderThickness = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // CornerRadius
@@ -112,7 +120,8 @@ public static T CornerRadius<T>(this T control, Func<Avalonia.CornerRadius> func
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.CornerRadiusProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter CornerRadius<T>(this T control,Avalonia.CornerRadius value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.CornerRadiusProperty, ps, () => control.CornerRadius = value, bindingMode, converter, bindingSource);
+public static T CornerRadius<T>(this T control,Avalonia.CornerRadius value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.CornerRadiusProperty, ps, () => control.CornerRadius = value, bindingMode, converter, bindingSource);
 
 /*ValueOverloadsSetterGenerator*/
 
@@ -132,7 +141,8 @@ public static T CornerRadius<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.CornerRadiusProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T CornerRadius<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.CornerRadius> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.CornerRadiusProperty, ps, () => control.CornerRadius = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T CornerRadius<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.CornerRadius> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.CornerRadiusProperty, ps, () => control.CornerRadius = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // BoxShadow
@@ -142,7 +152,8 @@ public static T BoxShadow<T>(this T control, Func<Avalonia.Media.BoxShadows> fun
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BoxShadowProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter BoxShadow<T>(this T control,Avalonia.Media.BoxShadows value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BoxShadowProperty, ps, () => control.BoxShadow = value, bindingMode, converter, bindingSource);
+public static T BoxShadow<T>(this T control,Avalonia.Media.BoxShadows value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BoxShadowProperty, ps, () => control.BoxShadow = value, bindingMode, converter, bindingSource);
 
 /*ValueOverloadsSetterGenerator*/
 
@@ -160,7 +171,8 @@ public static T BoxShadow<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BoxShadowProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T BoxShadow<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.BoxShadows> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BoxShadowProperty, ps, () => control.BoxShadow = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T BoxShadow<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.BoxShadows> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.BoxShadowProperty, ps, () => control.BoxShadow = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Foreground
@@ -170,7 +182,8 @@ public static T Foreground<T>(this T control, Func<Avalonia.Media.IBrush> func, 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.ForegroundProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter Foreground<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ForegroundProperty, ps, () => control.Foreground = value, bindingMode, converter, bindingSource);
+public static T Foreground<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ForegroundProperty, ps, () => control.Foreground = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Foreground<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -181,7 +194,8 @@ public static T Foreground<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.ForegroundProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Foreground<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ForegroundProperty, ps, () => control.Foreground = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Foreground<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ForegroundProperty, ps, () => control.Foreground = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FontFamily
@@ -191,7 +205,8 @@ public static T FontFamily<T>(this T control, Func<Avalonia.Media.FontFamily> fu
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontFamilyProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter FontFamily<T>(this T control,Avalonia.Media.FontFamily value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontFamilyProperty, ps, () => control.FontFamily = value, bindingMode, converter, bindingSource);
+public static T FontFamily<T>(this T control,Avalonia.Media.FontFamily value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontFamilyProperty, ps, () => control.FontFamily = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FontFamily<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -202,7 +217,8 @@ public static T FontFamily<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontFamilyProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FontFamily<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontFamily> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontFamilyProperty, ps, () => control.FontFamily = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontFamily<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontFamily> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontFamilyProperty, ps, () => control.FontFamily = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FontSize
@@ -212,7 +228,8 @@ public static T FontSize<T>(this T control, Func<System.Double> func, Action<Sys
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontSizeProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter FontSize<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontSizeProperty, ps, () => control.FontSize = value, bindingMode, converter, bindingSource);
+public static T FontSize<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontSizeProperty, ps, () => control.FontSize = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FontSize<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -223,7 +240,8 @@ public static T FontSize<T>(this T control, AvaloniaProperty avaloniaProperty, B
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontSizeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FontSize<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontSizeProperty, ps, () => control.FontSize = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontSize<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontSizeProperty, ps, () => control.FontSize = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FontStyle
@@ -233,7 +251,8 @@ public static T FontStyle<T>(this T control, Func<Avalonia.Media.FontStyle> func
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontStyleProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter FontStyle<T>(this T control,Avalonia.Media.FontStyle value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontStyleProperty, ps, () => control.FontStyle = value, bindingMode, converter, bindingSource);
+public static T FontStyle<T>(this T control,Avalonia.Media.FontStyle value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontStyleProperty, ps, () => control.FontStyle = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FontStyle<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -244,7 +263,8 @@ public static T FontStyle<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontStyleProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FontStyle<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontStyle> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontStyleProperty, ps, () => control.FontStyle = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontStyle<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontStyle> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontStyleProperty, ps, () => control.FontStyle = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FontWeight
@@ -254,7 +274,8 @@ public static T FontWeight<T>(this T control, Func<Avalonia.Media.FontWeight> fu
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontWeightProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter FontWeight<T>(this T control,Avalonia.Media.FontWeight value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontWeightProperty, ps, () => control.FontWeight = value, bindingMode, converter, bindingSource);
+public static T FontWeight<T>(this T control,Avalonia.Media.FontWeight value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontWeightProperty, ps, () => control.FontWeight = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FontWeight<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -265,7 +286,8 @@ public static T FontWeight<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontWeightProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FontWeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontWeight> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontWeightProperty, ps, () => control.FontWeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontWeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontWeight> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontWeightProperty, ps, () => control.FontWeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // FontStretch
@@ -275,7 +297,8 @@ public static T FontStretch<T>(this T control, Func<Avalonia.Media.FontStretch> 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontStretchProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter FontStretch<T>(this T control,Avalonia.Media.FontStretch value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontStretchProperty, ps, () => control.FontStretch = value, bindingMode, converter, bindingSource);
+public static T FontStretch<T>(this T control,Avalonia.Media.FontStretch value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontStretchProperty, ps, () => control.FontStretch = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FontStretch<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -286,7 +309,8 @@ public static T FontStretch<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontStretchProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T FontStretch<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontStretch> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontStretchProperty, ps, () => control.FontStretch = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T FontStretch<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.FontStretch> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.FontStretchProperty, ps, () => control.FontStretch = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // TextAlignment
@@ -296,7 +320,8 @@ public static T TextAlignment<T>(this T control, Func<Avalonia.Media.TextAlignme
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.TextAlignmentProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter TextAlignment<T>(this T control,Avalonia.Media.TextAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextAlignmentProperty, ps, () => control.TextAlignment = value, bindingMode, converter, bindingSource);
+public static T TextAlignment<T>(this T control,Avalonia.Media.TextAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextAlignmentProperty, ps, () => control.TextAlignment = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T TextAlignment<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -307,7 +332,8 @@ public static T TextAlignment<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.TextAlignmentProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T TextAlignment<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.TextAlignment> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextAlignmentProperty, ps, () => control.TextAlignment = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T TextAlignment<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.TextAlignment> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextAlignmentProperty, ps, () => control.TextAlignment = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // TextWrapping
@@ -317,7 +343,8 @@ public static T TextWrapping<T>(this T control, Func<Avalonia.Media.TextWrapping
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.TextWrappingProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter TextWrapping<T>(this T control,Avalonia.Media.TextWrapping value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextWrappingProperty, ps, () => control.TextWrapping = value, bindingMode, converter, bindingSource);
+public static T TextWrapping<T>(this T control,Avalonia.Media.TextWrapping value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextWrappingProperty, ps, () => control.TextWrapping = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T TextWrapping<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -328,7 +355,8 @@ public static T TextWrapping<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.TextWrappingProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T TextWrapping<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.TextWrapping> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextWrappingProperty, ps, () => control.TextWrapping = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T TextWrapping<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.TextWrapping> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextWrappingProperty, ps, () => control.TextWrapping = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // TextTrimming
@@ -338,7 +366,8 @@ public static T TextTrimming<T>(this T control, Func<Avalonia.Media.TextTrimming
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.TextTrimmingProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter TextTrimming<T>(this T control,Avalonia.Media.TextTrimming value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextTrimmingProperty, ps, () => control.TextTrimming = value, bindingMode, converter, bindingSource);
+public static T TextTrimming<T>(this T control,Avalonia.Media.TextTrimming value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextTrimmingProperty, ps, () => control.TextTrimming = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T TextTrimming<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -349,7 +378,8 @@ public static T TextTrimming<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.TextTrimmingProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T TextTrimming<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.TextTrimming> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextTrimmingProperty, ps, () => control.TextTrimming = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T TextTrimming<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.TextTrimming> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.TextTrimmingProperty, ps, () => control.TextTrimming = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // LineHeight
@@ -359,7 +389,8 @@ public static T LineHeight<T>(this T control, Func<System.Double> func, Action<S
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.LineHeightProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter LineHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.LineHeightProperty, ps, () => control.LineHeight = value, bindingMode, converter, bindingSource);
+public static T LineHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.LineHeightProperty, ps, () => control.LineHeight = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T LineHeight<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -370,7 +401,8 @@ public static T LineHeight<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.LineHeightProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T LineHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.LineHeightProperty, ps, () => control.LineHeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T LineHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.LineHeightProperty, ps, () => control.LineHeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // MaxLines
@@ -380,7 +412,8 @@ public static T MaxLines<T>(this T control, Func<System.Int32> func, Action<Syst
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.MaxLinesProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter MaxLines<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.MaxLinesProperty, ps, () => control.MaxLines = value, bindingMode, converter, bindingSource);
+public static T MaxLines<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.MaxLinesProperty, ps, () => control.MaxLines = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T MaxLines<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -391,7 +424,8 @@ public static T MaxLines<T>(this T control, AvaloniaProperty avaloniaProperty, B
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.MaxLinesProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T MaxLines<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.MaxLinesProperty, ps, () => control.MaxLines = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T MaxLines<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.MaxLinesProperty, ps, () => control.MaxLines = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Content
@@ -401,7 +435,8 @@ public static T Content<T>(this T control, Func<System.Object> func, Action<Syst
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.ContentProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter Content<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ContentProperty, ps, () => control.Content = value, bindingMode, converter, bindingSource);
+public static T Content<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ContentProperty, ps, () => control.Content = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Content<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -412,7 +447,8 @@ public static T Content<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.ContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Content<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ContentProperty, ps, () => control.Content = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Content<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ContentProperty, ps, () => control.Content = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ContentTemplate
@@ -422,7 +458,8 @@ public static T ContentTemplate<T>(this T control, Func<Avalonia.Controls.Templa
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.ContentTemplateProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter ContentTemplate<T>(this T control,Avalonia.Controls.Templates.IDataTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ContentTemplateProperty, ps, () => control.ContentTemplate = value, bindingMode, converter, bindingSource);
+public static T ContentTemplate<T>(this T control,Avalonia.Controls.Templates.IDataTemplate value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ContentTemplateProperty, ps, () => control.ContentTemplate = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ContentTemplate<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -433,7 +470,8 @@ public static T ContentTemplate<T>(this T control, AvaloniaProperty avaloniaProp
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.ContentTemplateProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ContentTemplate<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Templates.IDataTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ContentTemplateProperty, ps, () => control.ContentTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T ContentTemplate<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Templates.IDataTemplate> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.ContentTemplateProperty, ps, () => control.ContentTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // HorizontalContentAlignment
@@ -443,7 +481,8 @@ public static T HorizontalContentAlignment<T>(this T control, Func<Avalonia.Layo
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.HorizontalContentAlignmentProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter HorizontalContentAlignment<T>(this T control,Avalonia.Layout.HorizontalAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.HorizontalContentAlignmentProperty, ps, () => control.HorizontalContentAlignment = value, bindingMode, converter, bindingSource);
+public static T HorizontalContentAlignment<T>(this T control,Avalonia.Layout.HorizontalAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.HorizontalContentAlignmentProperty, ps, () => control.HorizontalContentAlignment = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T HorizontalContentAlignment<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -454,7 +493,8 @@ public static T HorizontalContentAlignment<T>(this T control, AvaloniaProperty a
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.HorizontalContentAlignmentProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T HorizontalContentAlignment<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Layout.HorizontalAlignment> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.HorizontalContentAlignmentProperty, ps, () => control.HorizontalContentAlignment = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T HorizontalContentAlignment<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Layout.HorizontalAlignment> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.HorizontalContentAlignmentProperty, ps, () => control.HorizontalContentAlignment = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // VerticalContentAlignment
@@ -464,7 +504,8 @@ public static T VerticalContentAlignment<T>(this T control, Func<Avalonia.Layout
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.VerticalContentAlignmentProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter VerticalContentAlignment<T>(this T control,Avalonia.Layout.VerticalAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.VerticalContentAlignmentProperty, ps, () => control.VerticalContentAlignment = value, bindingMode, converter, bindingSource);
+public static T VerticalContentAlignment<T>(this T control,Avalonia.Layout.VerticalAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.VerticalContentAlignmentProperty, ps, () => control.VerticalContentAlignment = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T VerticalContentAlignment<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -475,7 +516,8 @@ public static T VerticalContentAlignment<T>(this T control, AvaloniaProperty ava
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.VerticalContentAlignmentProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T VerticalContentAlignment<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Layout.VerticalAlignment> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.VerticalContentAlignmentProperty, ps, () => control.VerticalContentAlignment = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T VerticalContentAlignment<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Layout.VerticalAlignment> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.VerticalContentAlignmentProperty, ps, () => control.VerticalContentAlignment = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Padding
@@ -485,7 +527,8 @@ public static T Padding<T>(this T control, Func<Avalonia.Thickness> func, Action
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.PaddingProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter Padding<T>(this T control,Avalonia.Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.PaddingProperty, ps, () => control.Padding = value, bindingMode, converter, bindingSource);
+public static T Padding<T>(this T control,Avalonia.Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.PaddingProperty, ps, () => control.Padding = value, bindingMode, converter, bindingSource);
 
 /*ValueOverloadsSetterGenerator*/
 
@@ -505,7 +548,8 @@ public static T Padding<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.PaddingProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Padding<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.PaddingProperty, ps, () => control.Padding = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T Padding<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.PaddingProperty, ps, () => control.Padding = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // RecognizesAccessKey
@@ -515,7 +559,8 @@ public static T RecognizesAccessKey<T>(this T control, Func<System.Boolean> func
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.RecognizesAccessKeyProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Controls.Presenters.ContentPresenter RecognizesAccessKey<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.RecognizesAccessKeyProperty, ps, () => control.RecognizesAccessKey = value, bindingMode, converter, bindingSource);
+public static T RecognizesAccessKey<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.RecognizesAccessKeyProperty, ps, () => control.RecognizesAccessKey = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T RecognizesAccessKey<T>(this T control, IBinding binding) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -526,7 +571,8 @@ public static T RecognizesAccessKey<T>(this T control, AvaloniaProperty avalonia
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.RecognizesAccessKeyProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T RecognizesAccessKey<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.RecognizesAccessKeyProperty, ps, () => control.RecognizesAccessKey = converter.TryConvert(value), bindingMode, converter, bindingSource);
+public static T RecognizesAccessKey<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._setEx(Avalonia.Controls.Presenters.ContentPresenter.RecognizesAccessKeyProperty, ps, () => control.RecognizesAccessKey = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 
