@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls.Presenters;
-using Avalonia.Controls.Templates;
+﻿using Avalonia.Controls.Templates;
 using Avalonia.Styling;
 
 namespace AvaloniaMarkupSample;
