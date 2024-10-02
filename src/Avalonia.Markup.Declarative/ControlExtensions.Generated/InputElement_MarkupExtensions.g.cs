@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.2.999.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class InputElement_MarkupExtensions
 {
@@ -157,113 +157,161 @@ public static T TabIndex<TValue,T>(this T control, TValue value, FuncValueConver
  // GotFocus
 
 /*ActionToEventGenerator*/
-    public static T OnGotFocus<T>(this T control, Action<Avalonia.Input.GotFocusEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.GotFocusEventArgs>) ((arg0, arg1) => action(arg1)), h => control.GotFocus += h);
+public static T OnGotFocus<T>(this T control, Action<Avalonia.Input.GotFocusEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.GotFocusEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // LostFocus
 
 /*ActionToEventGenerator*/
-    public static T OnLostFocus<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.LostFocus += h);
+public static T OnLostFocus<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Input.InputElement  => 
+ control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.LostFocus += h);
 
 
  // KeyDown
 
 /*ActionToEventGenerator*/
-    public static T OnKeyDown<T>(this T control, Action<Avalonia.Input.KeyEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.KeyEventArgs>) ((arg0, arg1) => action(arg1)), h => control.KeyDown += h);
+public static T OnKeyDown<T>(this T control, Action<Avalonia.Input.KeyEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.KeyDownEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // KeyUp
 
 /*ActionToEventGenerator*/
-    public static T OnKeyUp<T>(this T control, Action<Avalonia.Input.KeyEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.KeyEventArgs>) ((arg0, arg1) => action(arg1)), h => control.KeyUp += h);
+public static T OnKeyUp<T>(this T control, Action<Avalonia.Input.KeyEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.KeyUpEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // TextInput
 
 /*ActionToEventGenerator*/
-    public static T OnTextInput<T>(this T control, Action<Avalonia.Input.TextInputEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.TextInputEventArgs>) ((arg0, arg1) => action(arg1)), h => control.TextInput += h);
+public static T OnTextInput<T>(this T control, Action<Avalonia.Input.TextInputEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.TextInputEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // TextInputMethodClientRequested
 
 /*ActionToEventGenerator*/
-    public static T OnTextInputMethodClientRequested<T>(this T control, Action<Avalonia.Input.TextInput.TextInputMethodClientRequestedEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.TextInput.TextInputMethodClientRequestedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.TextInputMethodClientRequested += h);
+public static T OnTextInputMethodClientRequested<T>(this T control, Action<Avalonia.Input.TextInput.TextInputMethodClientRequestedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.TextInputMethodClientRequestedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // PointerEntered
 
 /*ActionToEventGenerator*/
-    public static T OnPointerEntered<T>(this T control, Action<Avalonia.Input.PointerEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.PointerEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerEntered += h);
+public static T OnPointerEntered<T>(this T control, Action<Avalonia.Input.PointerEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.PointerEnteredEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // PointerExited
 
 /*ActionToEventGenerator*/
-    public static T OnPointerExited<T>(this T control, Action<Avalonia.Input.PointerEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.PointerEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerExited += h);
+public static T OnPointerExited<T>(this T control, Action<Avalonia.Input.PointerEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.PointerExitedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // PointerMoved
 
 /*ActionToEventGenerator*/
-    public static T OnPointerMoved<T>(this T control, Action<Avalonia.Input.PointerEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.PointerEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerMoved += h);
+public static T OnPointerMoved<T>(this T control, Action<Avalonia.Input.PointerEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.PointerMovedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // PointerPressed
 
 /*ActionToEventGenerator*/
-    public static T OnPointerPressed<T>(this T control, Action<Avalonia.Input.PointerPressedEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.PointerPressedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerPressed += h);
+public static T OnPointerPressed<T>(this T control, Action<Avalonia.Input.PointerPressedEventArgs> action) where T : Avalonia.Input.InputElement  => 
+ control._setEvent((System.EventHandler<Avalonia.Input.PointerPressedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerPressed += h);
 
 
  // PointerReleased
 
 /*ActionToEventGenerator*/
-    public static T OnPointerReleased<T>(this T control, Action<Avalonia.Input.PointerReleasedEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.PointerReleasedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerReleased += h);
+public static T OnPointerReleased<T>(this T control, Action<Avalonia.Input.PointerReleasedEventArgs> action) where T : Avalonia.Input.InputElement  => 
+ control._setEvent((System.EventHandler<Avalonia.Input.PointerReleasedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerReleased += h);
 
 
  // PointerCaptureLost
 
 /*ActionToEventGenerator*/
-    public static T OnPointerCaptureLost<T>(this T control, Action<Avalonia.Input.PointerCaptureLostEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.PointerCaptureLostEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerCaptureLost += h);
+public static T OnPointerCaptureLost<T>(this T control, Action<Avalonia.Input.PointerCaptureLostEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.PointerCaptureLostEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // PointerWheelChanged
 
 /*ActionToEventGenerator*/
-    public static T OnPointerWheelChanged<T>(this T control, Action<Avalonia.Input.PointerWheelEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.PointerWheelEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerWheelChanged += h);
+public static T OnPointerWheelChanged<T>(this T control, Action<Avalonia.Input.PointerWheelEventArgs> action) where T : Avalonia.Input.InputElement  => 
+ control._setEvent((System.EventHandler<Avalonia.Input.PointerWheelEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerWheelChanged += h);
 
 
  // Tapped
 
 /*ActionToEventGenerator*/
-    public static T OnTapped<T>(this T control, Action<Avalonia.Input.TappedEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.TappedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Tapped += h);
+public static T OnTapped<T>(this T control, Action<Avalonia.Input.TappedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.TappedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // Holding
 
 /*ActionToEventGenerator*/
-    public static T OnHolding<T>(this T control, Action<Avalonia.Input.HoldingRoutedEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.HoldingRoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Holding += h);
+public static T OnHolding<T>(this T control, Action<Avalonia.Input.HoldingRoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.HoldingEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // DoubleTapped
 
 /*ActionToEventGenerator*/
-    public static T OnDoubleTapped<T>(this T control, Action<Avalonia.Input.TappedEventArgs> action) where T : Avalonia.Input.InputElement => 
-        control._setEvent((System.EventHandler<Avalonia.Input.TappedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.DoubleTapped += h);
+public static T OnDoubleTapped<T>(this T control, Action<Avalonia.Input.TappedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.DoubleTappedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
 

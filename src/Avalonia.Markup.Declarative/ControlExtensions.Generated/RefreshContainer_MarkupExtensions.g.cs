@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.2.999.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class RefreshContainer_MarkupExtensions
 {
@@ -65,8 +65,12 @@ public static T PullDirection<TValue,T>(this T control, TValue value, FuncValueC
  // RefreshRequested
 
 /*ActionToEventGenerator*/
-    public static T OnRefreshRequested<T>(this T control, Action<Avalonia.Controls.RefreshRequestedEventArgs> action) where T : Avalonia.Controls.RefreshContainer => 
-        control._setEvent((System.EventHandler<Avalonia.Controls.RefreshRequestedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.RefreshRequested += h);
+public static T OnRefreshRequested<T>(this T control, Action<Avalonia.Controls.RefreshRequestedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.RefreshContainer 
+{
+  control.AddHandler(Avalonia.Controls.RefreshContainer.RefreshRequestedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
 
