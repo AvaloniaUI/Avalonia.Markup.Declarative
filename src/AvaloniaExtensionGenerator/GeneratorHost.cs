@@ -1,7 +1,9 @@
 ﻿using System.Collections.Immutable;
 using System.Reflection;
 using System.Text;
+using AvaloniaExtensionGenerator.ExtensionInfos;
 using AvaloniaExtensionGenerator.Generators;
+using AvaloniaExtensionGenerator.Generators.AttachedPropertySetterGenerator;
 using AvaloniaExtensionGenerator.Generators.EventGenerators;
 using AvaloniaExtensionGenerator.Generators.SetterGenerators;
 using AvaloniaExtensionGenerator.Generators.StyleSetterGenerators;
@@ -44,12 +46,16 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
 
     private void GenerateExtensions()
     {
-        if (!Directory.Exists(config.OutputPath)) 
+        if (!Directory.Exists(config.OutputPath))
             Directory.CreateDirectory(config.OutputPath);
 
-        List<IExtensionGroupGenerator> groupGenerators =
+        List<ExtensionGroupGenerator> groupGenerators =
         [
-            new ExtensionGroupGenerator<FieldInfo>("Properties", t => t.GetFields().Where(IsAcceptableField),
+            new("Properties", 
+                t => t.GetFields()
+                    .Where(IsAvaloniaPropertyField)
+                    .Select(x => new PropertyExtensionInfo(x)),
+                
                 new BindFromExpressionSetterGenerator(),
                 new MagicalSetterGenerator(),
                 new ValueOverloadsSetterGenerator(),
@@ -60,17 +66,34 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
                 new MagicalSetterWithConverterGenerator()
             ),
 
-            new ExtensionGroupGenerator<EventInfo>("Events", t => t.GetEvents().Where(x => x.DeclaringType == t),
+            new("Attached Properties", 
+                t => t.GetFields()
+                    .Where(IsAttachedPropertyField)
+                    .Select(x => new AttachedPropertyExtensionInfo(x)),
+                
+                new AttachedPropertyMagicalSetterGenerator(),
+                new AttachedPropertyBindFromExpressionSetterGenerator()
+            ),
+
+            new("Events", 
+                t => t.GetEvents()
+                    .Where(x => x.DeclaringType == t)
+                    .Select(x => new EventExtensionInfo(x)),
+                
                 new ActionToEventGenerator()),
 
-            new ExtensionGroupGenerator<FieldInfo>("Styles",
-                t => !IsStyledElement(t) ? [] : t.GetFields().Where(IsAcceptableStyledField),
+            new("Styles", 
+                t => !IsStyledElement(t) ? [] : t
+                    .GetFields()
+                    .Where(IsAcceptableStyledField)
+                    .Select(x => new PropertyExtensionInfo(x)),
+                
                 new ValueStyleSetterGenerator(),
                 new BindingStyleSetterGenerator(),
                 new ValueOverloadsStyleSetterGenerator()
             )
         ];
-        
+
         var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0.0";
 
         foreach (var controlType in config.TypesToProcess)
@@ -84,7 +107,7 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
             }).ToImmutableList();
 
             //skip types without extensions
-            if(extensionGroups.All(x=>x.amount == 0))
+            if (extensionGroups.All(x => x.amount == 0))
                 continue;
 
             Console.WriteLine($"{controlType.Name} : generated {totalGenerated} extensions");
@@ -116,21 +139,15 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
         }
     }
 
-    private static bool IsAcceptableField(FieldInfo field)
+    private static bool IsAvaloniaPropertyField(FieldInfo field)
     {
         if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
             return false;
 
-        //if (field.FieldType.Name.StartsWith("AttachedProperty"))
-        //{
-        //    Console.ForegroundColor = ConsoleColor.Magenta;
-        //    Console.WriteLine($"{field.Name} is Attached Property.");
-        //    Console.ForegroundColor = ConsoleColor.Gray;
-        //    return true;
-        //}
-
         if (field.FieldType.Name.StartsWith("DirectProperty") ||
             field.FieldType.Name.StartsWith("StyledProperty") ||
+            //some attached properties Mapped to properties of controls, i.e. TextBlock.TextWrapping
+            //so we need to add direct Extensions for them, additionally to AttachedProperty extensions
             field.FieldType.Name.StartsWith("AttachedProperty") ||
             field.FieldType.Name.StartsWith("AvaloniaProperty"))
         {
@@ -145,6 +162,30 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
             return !isReadOnly;
         }
 
+        return false;
+    }
+    private static bool IsAttachedPropertyField(FieldInfo field)
+    {
+        if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
+            return false;
+
+        if (field.FieldType.Name.StartsWith("AttachedProperty"))
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine($"{field.Name} is Attached Property.");
+
+            var isReadOnly = IsReadOnlyAttachedField(field);
+            if (isReadOnly)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"{field.Name} is read only - skipped.");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                return false;
+            }
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+            return true;
+        }
         return false;
     }
 
@@ -165,13 +206,36 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
         try
         {
             var controlType = field.DeclaringType;
-            var extensionName = field.Name.Replace("Property", "");
             var propertyName = field.Name.Replace("Property", "");
 
             var propInfo = controlType?.GetProperty(propertyName);
             if (propInfo != null)
             {
                 return propInfo.GetSetMethod() == null && propInfo.CanRead;
+            }
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Console.WriteLine("skipped");
+        }
+
+        return false;
+    }
+    private static bool IsReadOnlyAttachedField(FieldInfo field)
+    {
+        try
+        {
+            var controlType = field.DeclaringType;
+            var setterMethodName = "Set" + field.Name.Replace("Property", "");
+
+            var methodInfo = controlType?.GetMethod(setterMethodName);
+            if (methodInfo != null)
+            {
+                if (methodInfo is { IsPublic: true, IsStatic: true })
+                    return false;
             }
 
             return true;

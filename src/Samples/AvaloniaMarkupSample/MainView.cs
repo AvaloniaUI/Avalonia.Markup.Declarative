@@ -81,6 +81,17 @@ public class MainView : ViewBase
                     ),
 
                 new TabItem()
+                    .Header("Canvas sample")
+                    .Content(
+                        new Border()
+                            .BorderBrush(Brushes.Gray)
+                            .BorderThickness(1)
+                            .Child(
+                                new CanvasSampleMvuView()
+                            )
+                    ),
+
+                new TabItem()
                     .Header("Styles")
                     .Content(
                         new Border()

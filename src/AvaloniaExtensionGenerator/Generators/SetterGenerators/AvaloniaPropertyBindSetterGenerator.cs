@@ -1,22 +1,11 @@
-﻿namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
+﻿using AvaloniaExtensionGenerator.ExtensionInfos;
 
-public class AvaloniaPropertyBindSetterGenerator : SetterGeneratorBase
+namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
+
+public class AvaloniaPropertyBindSetterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
 {
-    public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
-    {
-        //direct type access
-        var extensionText =
-            $"public static {info.ControlTypeName} {info.ExtensionName}(this {info.ControlTypeName} control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null){Environment.NewLine}" +
-            $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, avaloniaProperty, bindingMode, converter, overrideView);";
+    protected override string? GetExtension(PropertyExtensionInfo info)=>
+        $"public static {info.ReturnType} {info.ExtensionName}{info.GenericArg}(this {info.ReturnType} control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) {info.GenericConstraint} {Environment.NewLine}" +
+        $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, avaloniaProperty, bindingMode, converter, overrideView);";
 
-        //base type generic acess
-        if (info.CanBeGenericConstraint)
-        {
-            extensionText =
-                $"public static T {info.ExtensionName}<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : {info.ControlTypeName}{Environment.NewLine}" +
-                $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, avaloniaProperty, bindingMode, converter, overrideView);";
-        }
-
-        return extensionText;
-    }
 }

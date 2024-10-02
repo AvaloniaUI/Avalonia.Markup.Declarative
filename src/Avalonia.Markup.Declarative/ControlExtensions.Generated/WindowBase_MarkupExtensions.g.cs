@@ -7,32 +7,36 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class WindowBase_MarkupExtensions
 {
 //================= Properties ======================//
- // TopmostProperty
+ // Topmost
 
 /*BindFromExpressionSetterGenerator*/
-public static T Topmost<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.WindowBase
+public static T Topmost<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.WindowBase 
    => control._set(Avalonia.Controls.WindowBase.TopmostProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static T Topmost<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WindowBase
+public static T Topmost<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WindowBase 
 => control._setEx(Avalonia.Controls.WindowBase.TopmostProperty, ps, () => control.Topmost = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
-public static T Topmost<T>(this T control, IBinding binding) where T : Avalonia.Controls.WindowBase
+public static T Topmost<T>(this T control, IBinding binding) where T : Avalonia.Controls.WindowBase 
    => control._set(Avalonia.Controls.WindowBase.TopmostProperty, binding);
 
 /*AvaloniaPropertyBindSetterGenerator*/
-public static T Topmost<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.WindowBase
+public static T Topmost<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.WindowBase 
    => control._set(Avalonia.Controls.WindowBase.TopmostProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Topmost<T,TValue>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WindowBase
+public static T Topmost<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WindowBase 
 => control._setEx(Avalonia.Controls.WindowBase.TopmostProperty, ps, () => control.Topmost = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+
+//================= Attached Properties ======================//
 
 //================= Events ======================//
  // Activated
@@ -65,14 +69,14 @@ public static T Topmost<T,TValue>(this T control, TValue value, FuncValueConvert
 
 
 //================= Styles ======================//
- // TopmostProperty
+ // Topmost
 
 /*ValueStyleSetterGenerator*/
-public static Style<T> Topmost<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.WindowBase
+public static Style<T> Topmost<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.WindowBase 
 => style._addSetter(Avalonia.Controls.WindowBase.TopmostProperty, value);
 
 /*BindingStyleSetterGenerator*/
-public static Style<T> Topmost<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.WindowBase
+public static Style<T> Topmost<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.WindowBase 
 => style._addSetter(Avalonia.Controls.WindowBase.TopmostProperty, binding);
 
 

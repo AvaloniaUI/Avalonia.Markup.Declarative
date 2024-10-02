@@ -1,33 +1,12 @@
+using AvaloniaExtensionGenerator.ExtensionInfos;
+
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
-public class MagicalSetterWithConverterGenerator : SetterGeneratorBase
+public class MagicalSetterWithConverterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
 {
-    public override string GetPropertySetterExtensionOverride(PropertyExtensionInfo info)
-    {
-        var argsString = $"TValue value, FuncValueConverter<TValue, {info.ValueTypeSource}> converter, BindingMode? bindingMode = null, object? bindingSource = null,"
-                + $" [CallerArgumentExpression(\"value\")] string? ps = null)";
-        //direct type access
-        var extensionText =
-            $"public static {info.ControlTypeName} {info.ExtensionName}<TValue>"
-            + $"(this {info.ControlTypeName} control, {argsString}"
-            + getSetterBody();
-
-        //base type generic acess
-        if (info.CanBeGenericConstraint)
-        {
-            extensionText =
-                $"public static T {info.ExtensionName}<T,TValue>"
-                + $"(this T control, {argsString}"
-                + $" where T : {info.ControlTypeName}{Environment.NewLine}"
-                + getSetterBody();
-        }
-
-        string getSetterBody()
-        {
-            var setterAction = $"() => control.{info.ExtensionName} = converter.TryConvert(value)";
-            return
-                $"=> control._setEx({info.ControlTypeName}.{info.FieldInfo.Name}, ps, {setterAction}, bindingMode, converter, bindingSource);";
-        }
-
-        return extensionText;
-    }
+    protected override string GetExtension(PropertyExtensionInfo info) =>
+        $"public static {info.ReturnType} {info.ExtensionName}<TValue{(!info.IsGeneric ? "" : "," + info.ReturnType)}>"
+        + $"(this {info.ReturnType} control, "
+        + $"TValue value, FuncValueConverter<TValue, {info.ValueTypeSource}> converter, BindingMode? bindingMode = null, object? bindingSource = null,"
+        + $" [CallerArgumentExpression(\"value\")] string? ps = null) {info.GenericConstraint} {Environment.NewLine}"
+        + $"=> control._setEx({info.ControlTypeName}.{info.FieldInfo.Name}, ps, () => control.{info.ExtensionName} = converter.TryConvert(value), bindingMode, converter, bindingSource);";
 }
