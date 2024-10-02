@@ -66,6 +66,10 @@ public static T NotificationType<TValue,T>(this T control, TValue value, FuncVal
 public static T NotificationCard_CloseOnClick<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Button
  => control._setEx(Avalonia.Controls.Notifications.NotificationCard.CloseOnClickProperty, ps, () => Avalonia.Controls.Notifications.NotificationCard.SetCloseOnClick(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T NotificationCard_CloseOnClick<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Button 
+   => control._set(Avalonia.Controls.Notifications.NotificationCard.CloseOnClickProperty, func, onChanged, expression);
+
 
 
 //================= Events ======================//

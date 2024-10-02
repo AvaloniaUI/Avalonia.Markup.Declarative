@@ -489,12 +489,20 @@ public static T Inlines<TValue,T>(this T control, TValue value, FuncValueConvert
 public static T TextBlock_BaselineOffset<T>(this T control, System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.TextBlock.BaselineOffsetProperty, ps, () => Avalonia.Controls.TextBlock.SetBaselineOffset(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextBlock_BaselineOffset<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.TextBlock.BaselineOffsetProperty, func, onChanged, expression);
+
 
  // LineHeight
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T TextBlock_LineHeight<T>(this T control, System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.TextBlock.LineHeightProperty, ps, () => Avalonia.Controls.TextBlock.SetLineHeight(control, value), bindingMode, converter, bindingSource);
+
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextBlock_LineHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.TextBlock.LineHeightProperty, func, onChanged, expression);
 
 
  // LetterSpacing
@@ -503,12 +511,20 @@ public static T TextBlock_LineHeight<T>(this T control, System.Double value, Bin
 public static T TextBlock_LetterSpacing<T>(this T control, System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.TextBlock.LetterSpacingProperty, ps, () => Avalonia.Controls.TextBlock.SetLetterSpacing(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextBlock_LetterSpacing<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.TextBlock.LetterSpacingProperty, func, onChanged, expression);
+
 
  // MaxLines
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T TextBlock_MaxLines<T>(this T control, System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.TextBlock.MaxLinesProperty, ps, () => Avalonia.Controls.TextBlock.SetMaxLines(control, value), bindingMode, converter, bindingSource);
+
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextBlock_MaxLines<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.TextBlock.MaxLinesProperty, func, onChanged, expression);
 
 
  // TextAlignment
@@ -517,6 +533,10 @@ public static T TextBlock_MaxLines<T>(this T control, System.Int32 value, Bindin
 public static T TextBlock_TextAlignment<T>(this T control, Avalonia.Media.TextAlignment value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.TextBlock.TextAlignmentProperty, ps, () => Avalonia.Controls.TextBlock.SetTextAlignment(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextBlock_TextAlignment<T>(this T control, Func<Avalonia.Media.TextAlignment> func, Action<Avalonia.Media.TextAlignment>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.TextBlock.TextAlignmentProperty, func, onChanged, expression);
+
 
  // TextWrapping
 
@@ -524,12 +544,20 @@ public static T TextBlock_TextAlignment<T>(this T control, Avalonia.Media.TextAl
 public static T TextBlock_TextWrapping<T>(this T control, Avalonia.Media.TextWrapping value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.TextBlock.TextWrappingProperty, ps, () => Avalonia.Controls.TextBlock.SetTextWrapping(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextBlock_TextWrapping<T>(this T control, Func<Avalonia.Media.TextWrapping> func, Action<Avalonia.Media.TextWrapping>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.TextBlock.TextWrappingProperty, func, onChanged, expression);
+
 
  // TextTrimming
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T TextBlock_TextTrimming<T>(this T control, Avalonia.Media.TextTrimming value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.TextBlock.TextTrimmingProperty, ps, () => Avalonia.Controls.TextBlock.SetTextTrimming(control, value), bindingMode, converter, bindingSource);
+
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextBlock_TextTrimming<T>(this T control, Func<Avalonia.Media.TextTrimming> func, Action<Avalonia.Media.TextTrimming>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.TextBlock.TextTrimmingProperty, func, onChanged, expression);
 
 
 

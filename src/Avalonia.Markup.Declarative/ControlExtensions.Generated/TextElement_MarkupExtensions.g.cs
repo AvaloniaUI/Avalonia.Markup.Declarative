@@ -204,12 +204,20 @@ public static T Foreground<TValue,T>(this T control, TValue value, FuncValueConv
 public static T TextElement_FontFamily<T>(this T control, Avalonia.Media.FontFamily value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Documents.TextElement.FontFamilyProperty, ps, () => Avalonia.Controls.Documents.TextElement.SetFontFamily(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextElement_FontFamily<T>(this T control, Func<Avalonia.Media.FontFamily> func, Action<Avalonia.Media.FontFamily>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.Documents.TextElement.FontFamilyProperty, func, onChanged, expression);
+
 
  // FontFeatures
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T TextElement_FontFeatures<T>(this T control, Avalonia.Media.FontFeatureCollection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Documents.TextElement.FontFeaturesProperty, ps, () => Avalonia.Controls.Documents.TextElement.SetFontFeatures(control, value), bindingMode, converter, bindingSource);
+
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextElement_FontFeatures<T>(this T control, Func<Avalonia.Media.FontFeatureCollection> func, Action<Avalonia.Media.FontFeatureCollection>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.Documents.TextElement.FontFeaturesProperty, func, onChanged, expression);
 
 
  // FontSize
@@ -218,12 +226,20 @@ public static T TextElement_FontFeatures<T>(this T control, Avalonia.Media.FontF
 public static T TextElement_FontSize<T>(this T control, System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Documents.TextElement.FontSizeProperty, ps, () => Avalonia.Controls.Documents.TextElement.SetFontSize(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextElement_FontSize<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.Documents.TextElement.FontSizeProperty, func, onChanged, expression);
+
 
  // FontStyle
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T TextElement_FontStyle<T>(this T control, Avalonia.Media.FontStyle value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Documents.TextElement.FontStyleProperty, ps, () => Avalonia.Controls.Documents.TextElement.SetFontStyle(control, value), bindingMode, converter, bindingSource);
+
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextElement_FontStyle<T>(this T control, Func<Avalonia.Media.FontStyle> func, Action<Avalonia.Media.FontStyle>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.Documents.TextElement.FontStyleProperty, func, onChanged, expression);
 
 
  // FontWeight
@@ -232,6 +248,10 @@ public static T TextElement_FontStyle<T>(this T control, Avalonia.Media.FontStyl
 public static T TextElement_FontWeight<T>(this T control, Avalonia.Media.FontWeight value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Documents.TextElement.FontWeightProperty, ps, () => Avalonia.Controls.Documents.TextElement.SetFontWeight(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextElement_FontWeight<T>(this T control, Func<Avalonia.Media.FontWeight> func, Action<Avalonia.Media.FontWeight>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.Documents.TextElement.FontWeightProperty, func, onChanged, expression);
+
 
  // FontStretch
 
@@ -239,12 +259,20 @@ public static T TextElement_FontWeight<T>(this T control, Avalonia.Media.FontWei
 public static T TextElement_FontStretch<T>(this T control, Avalonia.Media.FontStretch value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Documents.TextElement.FontStretchProperty, ps, () => Avalonia.Controls.Documents.TextElement.SetFontStretch(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextElement_FontStretch<T>(this T control, Func<Avalonia.Media.FontStretch> func, Action<Avalonia.Media.FontStretch>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.Documents.TextElement.FontStretchProperty, func, onChanged, expression);
+
 
  // Foreground
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T TextElement_Foreground<T>(this T control, Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.Documents.TextElement.ForegroundProperty, ps, () => Avalonia.Controls.Documents.TextElement.SetForeground(control, value), bindingMode, converter, bindingSource);
+
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T TextElement_Foreground<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.Documents.TextElement.ForegroundProperty, func, onChanged, expression);
 
 
 

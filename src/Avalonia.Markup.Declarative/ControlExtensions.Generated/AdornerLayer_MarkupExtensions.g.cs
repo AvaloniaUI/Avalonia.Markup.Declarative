@@ -43,6 +43,10 @@ public static T DefaultFocusAdorner<TValue,T>(this T control, TValue value, Func
 public static T AdornerLayer_AdornedElement<T>(this T control, Avalonia.Visual value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
  => control._setEx(Avalonia.Controls.Primitives.AdornerLayer.AdornedElementProperty, ps, () => Avalonia.Controls.Primitives.AdornerLayer.SetAdornedElement(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T AdornerLayer_AdornedElement<T>(this T control, Func<Avalonia.Visual> func, Action<Avalonia.Visual>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Visual 
+   => control._set(Avalonia.Controls.Primitives.AdornerLayer.AdornedElementProperty, func, onChanged, expression);
+
 
  // IsClipEnabled
 
@@ -50,12 +54,20 @@ public static T AdornerLayer_AdornedElement<T>(this T control, Avalonia.Visual v
 public static T AdornerLayer_IsClipEnabled<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
  => control._setEx(Avalonia.Controls.Primitives.AdornerLayer.IsClipEnabledProperty, ps, () => Avalonia.Controls.Primitives.AdornerLayer.SetIsClipEnabled(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T AdornerLayer_IsClipEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Visual 
+   => control._set(Avalonia.Controls.Primitives.AdornerLayer.IsClipEnabledProperty, func, onChanged, expression);
+
 
  // Adorner
 
 /*AttachedPropertyMagicalSetterGenerator*/
 public static T AdornerLayer_Adorner<T>(this T control, Avalonia.Controls.Control value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Visual
  => control._setEx(Avalonia.Controls.Primitives.AdornerLayer.AdornerProperty, ps, () => Avalonia.Controls.Primitives.AdornerLayer.SetAdorner(control, value), bindingMode, converter, bindingSource);
+
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T AdornerLayer_Adorner<T>(this T control, Func<Avalonia.Controls.Control> func, Action<Avalonia.Controls.Control>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Visual 
+   => control._set(Avalonia.Controls.Primitives.AdornerLayer.AdornerProperty, func, onChanged, expression);
 
 
 

@@ -43,6 +43,10 @@ public static T LastChildFill<TValue,T>(this T control, TValue value, FuncValueC
 public static T DockPanel_Dock<T>(this T control, Avalonia.Controls.Dock value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Control
  => control._setEx(Avalonia.Controls.DockPanel.DockProperty, ps, () => Avalonia.Controls.DockPanel.SetDock(control, value), bindingMode, converter, bindingSource);
 
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T DockPanel_Dock<T>(this T control, Func<Avalonia.Controls.Dock> func, Action<Avalonia.Controls.Dock>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.DockPanel.DockProperty, func, onChanged, expression);
+
 
 
 //================= Events ======================//

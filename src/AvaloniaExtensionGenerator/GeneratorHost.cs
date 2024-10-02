@@ -71,7 +71,8 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
                     .Where(IsAttachedPropertyField)
                     .Select(x => new AttachedPropertyExtensionInfo(x)),
                 
-                new AttachedPropertyMagicalSetterGenerator()
+                new AttachedPropertyMagicalSetterGenerator(),
+                new AttachedPropertyBindFromExpressionSetterGenerator()
             ),
 
             new("Events", 
