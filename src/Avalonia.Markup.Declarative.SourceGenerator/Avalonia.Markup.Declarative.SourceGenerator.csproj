@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.1.3" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.5-beta1.23225.2" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0-2.final" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0-beta1.24415.1" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
