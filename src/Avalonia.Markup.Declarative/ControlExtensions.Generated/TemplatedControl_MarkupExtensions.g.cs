@@ -7,7 +7,11 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+<<<<<<< HEAD
 [global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
+=======
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.2.999.0")]
+>>>>>>> c1347bc81bdb20ad44b1fda7d31eecec56065f2f
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class TemplatedControl_MarkupExtensions
 {
@@ -379,8 +383,12 @@ public static T TemplatedControl_IsTemplateFocusTarget<T>(this T control, Func<S
  // TemplateApplied
 
 /*ActionToEventGenerator*/
-    public static T OnTemplateApplied<T>(this T control, Action<Avalonia.Controls.Primitives.TemplateAppliedEventArgs> action) where T : Avalonia.Controls.Primitives.TemplatedControl => 
-        control._setEvent((System.EventHandler<Avalonia.Controls.Primitives.TemplateAppliedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.TemplateApplied += h);
+public static T OnTemplateApplied<T>(this T control, Action<Avalonia.Controls.Primitives.TemplateAppliedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Primitives.TemplatedControl 
+{
+  control.AddHandler(Avalonia.Controls.Primitives.TemplatedControl.TemplateAppliedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
 

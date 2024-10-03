@@ -7,7 +7,11 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+<<<<<<< HEAD
 [global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
+=======
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.2.999.0")]
+>>>>>>> c1347bc81bdb20ad44b1fda7d31eecec56065f2f
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class TransitioningContentControl_MarkupExtensions
 {
@@ -63,8 +67,12 @@ public static T IsTransitionReversed<TValue,T>(this T control, TValue value, Fun
  // TransitionCompleted
 
 /*ActionToEventGenerator*/
-    public static T OnTransitionCompleted<T>(this T control, Action<Avalonia.Controls.TransitionCompletedEventArgs> action) where T : Avalonia.Controls.TransitioningContentControl => 
-        control._setEvent((System.EventHandler<Avalonia.Controls.TransitionCompletedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.TransitionCompleted += h);
+public static T OnTransitionCompleted<T>(this T control, Action<Avalonia.Controls.TransitionCompletedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.TransitioningContentControl 
+{
+  control.AddHandler(Avalonia.Controls.TransitioningContentControl.TransitionCompletedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
 

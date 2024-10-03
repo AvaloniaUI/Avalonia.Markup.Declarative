@@ -7,7 +7,11 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+<<<<<<< HEAD
 [global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
+=======
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.2.999.0")]
+>>>>>>> c1347bc81bdb20ad44b1fda7d31eecec56065f2f
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class NumericUpDown_MarkupExtensions
 {
@@ -477,15 +481,19 @@ public static T InnerRightContent<TValue,T>(this T control, TValue value, FuncVa
  // Spinned
 
 /*ActionToEventGenerator*/
-    public static T OnSpinned<T>(this T control, Action<Avalonia.Controls.SpinEventArgs> action) where T : Avalonia.Controls.NumericUpDown => 
-        control._setEvent((System.EventHandler<Avalonia.Controls.SpinEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Spinned += h);
+public static T OnSpinned<T>(this T control, Action<Avalonia.Controls.SpinEventArgs> action) where T : Avalonia.Controls.NumericUpDown  => 
+ control._setEvent((System.EventHandler<Avalonia.Controls.SpinEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Spinned += h);
 
 
  // ValueChanged
 
 /*ActionToEventGenerator*/
-    public static T OnValueChanged<T>(this T control, Action<Avalonia.Controls.NumericUpDownValueChangedEventArgs> action) where T : Avalonia.Controls.NumericUpDown => 
-        control._setEvent((System.EventHandler<Avalonia.Controls.NumericUpDownValueChangedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.ValueChanged += h);
+public static T OnValueChanged<T>(this T control, Action<Avalonia.Controls.NumericUpDownValueChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.NumericUpDown 
+{
+  control.AddHandler(Avalonia.Controls.NumericUpDown.ValueChangedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
 

@@ -7,7 +7,11 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
+<<<<<<< HEAD
 [global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
+=======
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.2.999.0")]
+>>>>>>> c1347bc81bdb20ad44b1fda7d31eecec56065f2f
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class Expander_MarkupExtensions
 {
@@ -86,29 +90,45 @@ public static T IsExpanded<TValue,T>(this T control, TValue value, FuncValueConv
  // Collapsed
 
 /*ActionToEventGenerator*/
-    public static T OnCollapsed<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.Expander => 
-        control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Collapsed += h);
+public static T OnCollapsed<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Expander 
+{
+  control.AddHandler(Avalonia.Controls.Expander.CollapsedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // Collapsing
 
 /*ActionToEventGenerator*/
-    public static T OnCollapsing<T>(this T control, Action<Avalonia.Interactivity.CancelRoutedEventArgs> action) where T : Avalonia.Controls.Expander => 
-        control._setEvent((System.EventHandler<Avalonia.Interactivity.CancelRoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Collapsing += h);
+public static T OnCollapsing<T>(this T control, Action<Avalonia.Interactivity.CancelRoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Expander 
+{
+  control.AddHandler(Avalonia.Controls.Expander.CollapsingEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // Expanded
 
 /*ActionToEventGenerator*/
-    public static T OnExpanded<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.Expander => 
-        control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Expanded += h);
+public static T OnExpanded<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Expander 
+{
+  control.AddHandler(Avalonia.Controls.Expander.ExpandedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // Expanding
 
 /*ActionToEventGenerator*/
-    public static T OnExpanding<T>(this T control, Action<Avalonia.Interactivity.CancelRoutedEventArgs> action) where T : Avalonia.Controls.Expander => 
-        control._setEvent((System.EventHandler<Avalonia.Interactivity.CancelRoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Expanding += h);
+public static T OnExpanding<T>(this T control, Action<Avalonia.Interactivity.CancelRoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Expander 
+{
+  control.AddHandler(Avalonia.Controls.Expander.ExpandingEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
 
