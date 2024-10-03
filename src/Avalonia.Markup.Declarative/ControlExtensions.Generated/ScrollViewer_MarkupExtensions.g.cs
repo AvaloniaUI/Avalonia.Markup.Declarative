@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.2.999.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class ScrollViewer_MarkupExtensions
 {
@@ -416,8 +416,12 @@ public static T ScrollViewer_IsDeferredScrollingEnabled<T>(this T control, Func<
  // ScrollChanged
 
 /*ActionToEventGenerator*/
-    public static T OnScrollChanged<T>(this T control, Action<Avalonia.Controls.ScrollChangedEventArgs> action) where T : Avalonia.Controls.ScrollViewer => 
-        control._setEvent((System.EventHandler<Avalonia.Controls.ScrollChangedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.ScrollChanged += h);
+public static T OnScrollChanged<T>(this T control, Action<Avalonia.Controls.ScrollChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.ScrollViewer 
+{
+  control.AddHandler(Avalonia.Controls.ScrollViewer.ScrollChangedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
 

@@ -93,7 +93,7 @@ public class SampleMvuView : ComponentBase
 
     public string MvuComponentParam { get; set; } = "Hello nested component";
 
-    private void OnButtonClick(RoutedEventArgs obj)
+    private void OnButtonClick(RoutedEventArgs args)
     {
         var tb = this.FindControl<TextBlock>("NamedTextBlock");
 

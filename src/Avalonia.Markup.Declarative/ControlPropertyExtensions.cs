@@ -3,6 +3,8 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
@@ -368,7 +370,11 @@ public static class ControlPropertyExtensions
         ScrollViewer.SetVerticalScrollBarVisibility(control, value);
         return control;
     }
-
+    public static T OnKeyDown<T>(this T control, Action<KeyEventArgs> action, RoutingStrategies routes = RoutingStrategies.Tunnel | RoutingStrategies.Bubble) where T : InputElement
+    {
+        control.AddHandler(InputElement.KeyDownEvent, (_, args) => action(args), routes);
+        return control;
+    }
     public static TPanel Children<TPanel>(this TPanel container, params Control[] children)
 		where TPanel : Panel
 	{

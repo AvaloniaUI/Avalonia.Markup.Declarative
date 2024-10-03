@@ -38,20 +38,25 @@ public class ActionToEventGenerator : ExtensionGeneratorBase<EventExtensionInfo>
 
         var eventName = @event.EventName;
         var extensionName = "On" + eventName;
-        var controlTypeName = @event.ControlType.FullName;
+
+        var extensionBody =
+            $" => {Environment.NewLine} control._setEvent(({eventHandler}) (({lambdaParameters}) => {actionCallStr}), h => control.{eventName} += h);";
+
+        if (@event.IsRoutedEvent)
+        {
+            argsString += ", Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble";
+
+            extensionBody = Environment.NewLine +"{"+ Environment.NewLine+
+                            $"  control.AddHandler({@event.ControlTypeName}.{@eventName}Event, (_, args) => action(args), routes);" + Environment.NewLine
+                            + "  return control; " + Environment.NewLine
+                            + "}" + Environment.NewLine;
+        }
+
 
         var extensionText =
-            $"    public static {controlTypeName} {extensionName}"
-            + $"(this {controlTypeName} control, {argsString}) => {Environment.NewLine}"
-            + $"        control._setEvent(({eventHandler}) (({lambdaParameters}) => {actionCallStr}), h => control.{eventName} += h);";
-
-        if (@event.IsGeneric)
-        {
-            extensionText =
-                $"    public static T {extensionName}<T>"
-                + $"(this T control, {argsString}) where T : {controlTypeName} => {Environment.NewLine}"
-                + $"        control._setEvent(({eventHandler}) (({lambdaParameters}) => {actionCallStr}), h => control.{eventName} += h);";
-        }
+            $"public static {@event.ReturnType} {extensionName}{@event.GenericArg}"
+            + $"(this {@event.ReturnType} control, {argsString}) {@event.GenericConstraint} "
+            + extensionBody;
 
         return extensionText;
     }

@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.2.999.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class TopLevel_MarkupExtensions
 {
@@ -110,29 +110,33 @@ public static T TopLevel_AutoSafeAreaPadding<T>(this T control, Func<System.Bool
  // Opened
 
 /*ActionToEventGenerator*/
-    public static T OnOpened<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.Controls.TopLevel => 
-        control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.Opened += h);
+public static T OnOpened<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.Controls.TopLevel  => 
+ control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.Opened += h);
 
 
  // Closed
 
 /*ActionToEventGenerator*/
-    public static T OnClosed<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.Controls.TopLevel => 
-        control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.Closed += h);
+public static T OnClosed<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.Controls.TopLevel  => 
+ control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.Closed += h);
 
 
  // ScalingChanged
 
 /*ActionToEventGenerator*/
-    public static T OnScalingChanged<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.Controls.TopLevel => 
-        control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.ScalingChanged += h);
+public static T OnScalingChanged<T>(this T control, Action<System.EventArgs> action) where T : Avalonia.Controls.TopLevel  => 
+ control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.ScalingChanged += h);
 
 
  // BackRequested
 
 /*ActionToEventGenerator*/
-    public static T OnBackRequested<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.TopLevel => 
-        control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.BackRequested += h);
+public static T OnBackRequested<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.TopLevel 
+{
+  control.AddHandler(Avalonia.Controls.TopLevel.BackRequestedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
 
