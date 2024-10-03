@@ -7,12 +7,10 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class RelativePanel_MarkupExtensions
 {
-//================= Properties ======================//
-
 //================= Attached Properties ======================//
  // Above
 
@@ -190,9 +188,5 @@ public static T RelativePanel_RightOf<T>(this T control, Func<System.Object> fun
    => control._set(Avalonia.Controls.RelativePanel.RightOfProperty, func, onChanged, expression);
 
 
-
-//================= Events ======================//
-
-//================= Styles ======================//
 
 }

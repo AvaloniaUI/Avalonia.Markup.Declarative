@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class TabControl_MarkupExtensions
 {
@@ -104,10 +104,6 @@ public static T ContentTemplate<TValue,T>(this T control, TValue value, FuncValu
 => control._setEx(Avalonia.Controls.TabControl.ContentTemplateProperty, ps, () => control.ContentTemplate = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
-
-//================= Attached Properties ======================//
-
-//================= Events ======================//
 
 //================= Styles ======================//
  // TabStripPlacement

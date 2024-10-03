@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class Animation_MarkupExtensions
 {
@@ -203,11 +203,5 @@ public static Avalonia.Animation.Animation SpeedRatio<TValue>(this Avalonia.Anim
 => control._setEx(Avalonia.Animation.Animation.SpeedRatioProperty, ps, () => control.SpeedRatio = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
-
-//================= Attached Properties ======================//
-
-//================= Events ======================//
-
-//================= Styles ======================//
 
 }

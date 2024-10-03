@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class TextElement_MarkupExtensions
 {
@@ -275,8 +275,6 @@ public static T TextElement_Foreground<T>(this T control, Func<Avalonia.Media.IB
    => control._set(Avalonia.Controls.Documents.TextElement.ForegroundProperty, func, onChanged, expression);
 
 
-
-//================= Events ======================//
 
 //================= Styles ======================//
  // Background

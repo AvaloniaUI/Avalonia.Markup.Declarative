@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class OverlayPopupHost_MarkupExtensions
 {
@@ -35,10 +35,6 @@ public static T Transform<TValue,T>(this T control, TValue value, FuncValueConve
 => control._setEx(Avalonia.Controls.Primitives.OverlayPopupHost.TransformProperty, ps, () => control.Transform = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
-
-//================= Attached Properties ======================//
-
-//================= Events ======================//
 
 //================= Styles ======================//
  // Transform

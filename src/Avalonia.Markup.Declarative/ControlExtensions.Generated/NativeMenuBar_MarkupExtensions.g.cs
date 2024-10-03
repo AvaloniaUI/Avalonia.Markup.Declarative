@@ -7,12 +7,10 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class NativeMenuBar_MarkupExtensions
 {
-//================= Properties ======================//
-
 //================= Attached Properties ======================//
  // EnableMenuItemClickForwarding
 
@@ -25,9 +23,5 @@ public static T NativeMenuBar_EnableMenuItemClickForwarding<T>(this T control, F
    => control._set(Avalonia.Controls.NativeMenuBar.EnableMenuItemClickForwardingProperty, func, onChanged, expression);
 
 
-
-//================= Events ======================//
-
-//================= Styles ======================//
 
 }

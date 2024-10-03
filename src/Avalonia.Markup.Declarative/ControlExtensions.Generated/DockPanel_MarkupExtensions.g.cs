@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class DockPanel_MarkupExtensions
 {
@@ -48,8 +48,6 @@ public static T DockPanel_Dock<T>(this T control, Func<Avalonia.Controls.Dock> f
    => control._set(Avalonia.Controls.DockPanel.DockProperty, func, onChanged, expression);
 
 
-
-//================= Events ======================//
 
 //================= Styles ======================//
  // LastChildFill

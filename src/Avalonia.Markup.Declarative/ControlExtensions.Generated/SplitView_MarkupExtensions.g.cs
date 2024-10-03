@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class SplitView_MarkupExtensions
 {
@@ -219,8 +219,6 @@ public static T UseLightDismissOverlayMode<TValue,T>(this T control, TValue valu
 => control._setEx(Avalonia.Controls.SplitView.UseLightDismissOverlayModeProperty, ps, () => control.UseLightDismissOverlayMode = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
-
-//================= Attached Properties ======================//
 
 //================= Events ======================//
  // PaneClosed

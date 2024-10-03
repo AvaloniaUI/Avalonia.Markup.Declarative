@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class TileBrush_MarkupExtensions
 {
@@ -176,11 +176,5 @@ public static T TileMode<TValue,T>(this T control, TValue value, FuncValueConver
 => control._setEx(Avalonia.Media.TileBrush.TileModeProperty, ps, () => control.TileMode = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
-
-//================= Attached Properties ======================//
-
-//================= Events ======================//
-
-//================= Styles ======================//
 
 }

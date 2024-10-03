@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class AdornerLayer_MarkupExtensions
 {
@@ -70,8 +70,6 @@ public static T AdornerLayer_Adorner<T>(this T control, Func<Avalonia.Controls.C
    => control._set(Avalonia.Controls.Primitives.AdornerLayer.AdornerProperty, func, onChanged, expression);
 
 
-
-//================= Events ======================//
 
 //================= Styles ======================//
  // DefaultFocusAdorner

@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class TextBlock_MarkupExtensions
 {
@@ -560,8 +560,6 @@ public static T TextBlock_TextTrimming<T>(this T control, Func<Avalonia.Media.Te
    => control._set(Avalonia.Controls.TextBlock.TextTrimmingProperty, func, onChanged, expression);
 
 
-
-//================= Events ======================//
 
 //================= Styles ======================//
  // Background

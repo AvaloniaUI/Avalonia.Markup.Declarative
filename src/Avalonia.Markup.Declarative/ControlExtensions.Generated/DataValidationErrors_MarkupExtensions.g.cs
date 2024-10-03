@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class DataValidationErrors_MarkupExtensions
 {
@@ -82,8 +82,6 @@ public static T DataValidationErrors_ErrorConverter<T>(this T control, Func<Syst
    => control._set(Avalonia.Controls.DataValidationErrors.ErrorConverterProperty, func, onChanged, expression);
 
 
-
-//================= Events ======================//
 
 //================= Styles ======================//
  // ErrorTemplate

@@ -7,12 +7,10 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class Canvas_MarkupExtensions
 {
-//================= Properties ======================//
-
 //================= Attached Properties ======================//
  // Left
 
@@ -58,9 +56,5 @@ public static T Canvas_Bottom<T>(this T control, Func<System.Double> func, Actio
    => control._set(Avalonia.Controls.Canvas.BottomProperty, func, onChanged, expression);
 
 
-
-//================= Events ======================//
-
-//================= Styles ======================//
 
 }

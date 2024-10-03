@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class PopupFlyoutBase_MarkupExtensions
 {
@@ -220,8 +220,6 @@ public static T PlacementConstraintAdjustment<TValue,T>(this T control, TValue v
 
 
 
-//================= Attached Properties ======================//
-
 //================= Events ======================//
  // Closing
 
@@ -237,7 +235,5 @@ public static T PlacementConstraintAdjustment<TValue,T>(this T control, TValue v
         control._setEvent((System.EventHandler) ((arg0, arg1) => action(arg1)), h => control.Opening += h);
 
 
-
-//================= Styles ======================//
 
 }

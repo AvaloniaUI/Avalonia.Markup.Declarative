@@ -34,6 +34,6 @@ public class ExtensionGroupGenerator(
             sb.AppendLine();
         }
 
-        return sb.ToString();
+        return generationsCount == 0 ? null : sb.ToString();
     }
 }

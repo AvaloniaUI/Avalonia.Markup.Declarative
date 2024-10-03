@@ -94,7 +94,7 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
             )
         ];
 
-        var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0.0";
+        var versionString = "1.0.0.0"; //not using Assembly.GetExecutingAssembly().GetName().Version because it affects to many unnecessary file changing on each new commit
 
         foreach (var controlType in config.TypesToProcess)
         {
@@ -120,13 +120,13 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
 
             sb.AppendLine();
             sb.AppendLine("namespace Avalonia.Markup.Declarative;");
-            sb.AppendLine($@"[global::System.CodeDom.Compiler.GeneratedCode(""AvaloniaExtensionGenerator"", ""{version}"")]");
+            sb.AppendLine($@"[global::System.CodeDom.Compiler.GeneratedCode(""AvaloniaExtensionGenerator"", ""{versionString}"")]");
             sb.AppendLine(@"[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]");
 
             sb.AppendLine($"public static partial class {controlType.Name}_MarkupExtensions");
             sb.AppendLine("{");
 
-            foreach (var group in extensionGroups)
+            foreach (var group in extensionGroups.Where(x=>x.extensions != null))
             {
                 sb.AppendLine($"//================= {group.GroupName} ======================//");
                 sb.AppendLine(group.extensions);

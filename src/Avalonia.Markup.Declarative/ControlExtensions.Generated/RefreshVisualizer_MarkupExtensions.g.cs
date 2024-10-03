@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
-[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "11.1.3.0")]
+[global::System.CodeDom.Compiler.GeneratedCode("AvaloniaExtensionGenerator", "1.0.0.0")]
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static partial class RefreshVisualizer_MarkupExtensions
 {
@@ -36,8 +36,6 @@ public static T Orientation<TValue,T>(this T control, TValue value, FuncValueCon
 
 
 
-//================= Attached Properties ======================//
-
 //================= Events ======================//
  // RefreshRequested
 
@@ -46,7 +44,5 @@ public static T Orientation<TValue,T>(this T control, TValue value, FuncValueCon
         control._setEvent((System.EventHandler<Avalonia.Controls.RefreshRequestedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.RefreshRequested += h);
 
 
-
-//================= Styles ======================//
 
 }
