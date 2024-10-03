@@ -111,8 +111,12 @@ public static T SelectionForegroundBrush<TValue,T>(this T control, TValue value,
  // CopyingToClipboard
 
 /*ActionToEventGenerator*/
-public static T OnCopyingToClipboard<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.SelectableTextBlock  => 
- control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.CopyingToClipboard += h);
+public static T OnCopyingToClipboard<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.SelectableTextBlock 
+{
+  control.AddHandler(Avalonia.Controls.SelectableTextBlock.CopyingToClipboardEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
 

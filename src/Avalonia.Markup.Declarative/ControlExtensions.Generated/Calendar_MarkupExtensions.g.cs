@@ -226,34 +226,22 @@ public static T DisplayDateEnd<TValue,T>(this T control, TValue value, FuncValue
  // SelectedDatesChanged
 
 /*ActionToEventGenerator*/
-public static T OnSelectedDatesChanged<T>(this T control, Action<Avalonia.Controls.SelectionChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Calendar 
-{
-  control.AddHandler(Avalonia.Controls.Calendar.SelectedDatesChangedEvent, (_, args) => action(args), routes);
-  return control; 
-}
-
+public static T OnSelectedDatesChanged<T>(this T control, Action<Avalonia.Controls.SelectionChangedEventArgs> action) where T : Avalonia.Controls.Calendar  => 
+ control._setEvent((System.EventHandler<Avalonia.Controls.SelectionChangedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.SelectedDatesChanged += h);
 
 
  // DisplayDateChanged
 
 /*ActionToEventGenerator*/
-public static T OnDisplayDateChanged<T>(this T control, Action<Avalonia.Controls.CalendarDateChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Calendar 
-{
-  control.AddHandler(Avalonia.Controls.Calendar.DisplayDateChangedEvent, (_, args) => action(args), routes);
-  return control; 
-}
-
+public static T OnDisplayDateChanged<T>(this T control, Action<Avalonia.Controls.CalendarDateChangedEventArgs> action) where T : Avalonia.Controls.Calendar  => 
+ control._setEvent((System.EventHandler<Avalonia.Controls.CalendarDateChangedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.DisplayDateChanged += h);
 
 
  // DisplayModeChanged
 
 /*ActionToEventGenerator*/
-public static T OnDisplayModeChanged<T>(this T control, Action<Avalonia.Controls.CalendarModeChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Calendar 
-{
-  control.AddHandler(Avalonia.Controls.Calendar.DisplayModeChangedEvent, (_, args) => action(args), routes);
-  return control; 
-}
-
+public static T OnDisplayModeChanged<T>(this T control, Action<Avalonia.Controls.CalendarModeChangedEventArgs> action) where T : Avalonia.Controls.Calendar  => 
+ control._setEvent((System.EventHandler<Avalonia.Controls.CalendarModeChangedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.DisplayModeChanged += h);
 
 
 

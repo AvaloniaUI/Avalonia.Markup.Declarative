@@ -131,8 +131,12 @@ public static T OnScalingChanged<T>(this T control, Action<System.EventArgs> act
  // BackRequested
 
 /*ActionToEventGenerator*/
-public static T OnBackRequested<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.TopLevel  => 
- control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.BackRequested += h);
+public static T OnBackRequested<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.TopLevel 
+{
+  control.AddHandler(Avalonia.Controls.TopLevel.BackRequestedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
 

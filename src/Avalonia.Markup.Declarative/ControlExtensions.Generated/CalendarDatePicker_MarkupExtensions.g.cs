@@ -362,12 +362,8 @@ public static T OnDateValidationError<T>(this T control, Action<Avalonia.Control
  // SelectedDateChanged
 
 /*ActionToEventGenerator*/
-public static T OnSelectedDateChanged<T>(this T control, Action<Avalonia.Controls.SelectionChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.CalendarDatePicker 
-{
-  control.AddHandler(Avalonia.Controls.CalendarDatePicker.SelectedDateChangedEvent, (_, args) => action(args), routes);
-  return control; 
-}
-
+public static T OnSelectedDateChanged<T>(this T control, Action<Avalonia.Controls.SelectionChangedEventArgs> action) where T : Avalonia.Controls.CalendarDatePicker  => 
+ control._setEvent((System.EventHandler<Avalonia.Controls.SelectionChangedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.SelectedDateChanged += h);
 
 
 

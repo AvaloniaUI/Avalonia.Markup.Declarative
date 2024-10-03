@@ -1,5 +1,6 @@
 using AvaloniaExtensionGenerator.Generators;
 using System.Reflection;
+using System.Reflection.Metadata;
 
 namespace AvaloniaExtensionGenerator.ExtensionInfos;
 
@@ -46,12 +47,16 @@ public class EventExtensionInfo : IMemberExtensionInfo
         var methodInfo = eventInfo.EventHandlerType.GetMethod("Invoke");
         if (methodInfo != null)
         {
-            foreach (var parameter in methodInfo.GetParameters())
-            {
+            var parameters = methodInfo.GetParameters();
+            foreach (var parameter in parameters) 
                 EventParameterTypes.Add(parameter.ParameterType.GetTypeDeclarationSourceCode());
-                if(parameter.ParameterType.BaseType?.Name == "RoutedEventArgs")
-                    IsRoutedEvent = true;
+
+            if (HasRoutedEventArgs(parameters))
+            {
+                var routedEventFieldInfo = ControlType.GetField(EventName + "Event", BindingFlags.Static | BindingFlags.Public); 
+                IsRoutedEvent = routedEventFieldInfo != null; //if routed event field located in base class, ignore it and cout it classic event
             }
+
         }
 
         IsGeneric = !eventInfo.DeclaringType.IsSealed;
@@ -66,4 +71,20 @@ public class EventExtensionInfo : IMemberExtensionInfo
 
     }
 
+    private static bool HasRoutedEventArgs(ParameterInfo[] parameters)
+    {
+        return parameters.Any(x => IsRoutedEventArgType(x.ParameterType));
+
+        bool IsRoutedEventArgType(Type? type)
+        {
+            while (type != null)
+            {
+                if (type.Name == "RoutedEventArgs")
+                    return true;
+
+                type = type.BaseType;
+            }
+            return false;
+        }
+    }
 }

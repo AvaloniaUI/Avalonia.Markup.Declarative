@@ -168,8 +168,12 @@ public static T OnGotFocus<T>(this T control, Action<Avalonia.Input.GotFocusEven
  // LostFocus
 
 /*ActionToEventGenerator*/
-public static T OnLostFocus<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Input.InputElement  => 
- control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.LostFocus += h);
+public static T OnLostFocus<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.LostFocusEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // KeyDown
@@ -252,15 +256,23 @@ public static T OnPointerMoved<T>(this T control, Action<Avalonia.Input.PointerE
  // PointerPressed
 
 /*ActionToEventGenerator*/
-public static T OnPointerPressed<T>(this T control, Action<Avalonia.Input.PointerPressedEventArgs> action) where T : Avalonia.Input.InputElement  => 
- control._setEvent((System.EventHandler<Avalonia.Input.PointerPressedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerPressed += h);
+public static T OnPointerPressed<T>(this T control, Action<Avalonia.Input.PointerPressedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.PointerPressedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // PointerReleased
 
 /*ActionToEventGenerator*/
-public static T OnPointerReleased<T>(this T control, Action<Avalonia.Input.PointerReleasedEventArgs> action) where T : Avalonia.Input.InputElement  => 
- control._setEvent((System.EventHandler<Avalonia.Input.PointerReleasedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerReleased += h);
+public static T OnPointerReleased<T>(this T control, Action<Avalonia.Input.PointerReleasedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.PointerReleasedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // PointerCaptureLost
@@ -277,8 +289,12 @@ public static T OnPointerCaptureLost<T>(this T control, Action<Avalonia.Input.Po
  // PointerWheelChanged
 
 /*ActionToEventGenerator*/
-public static T OnPointerWheelChanged<T>(this T control, Action<Avalonia.Input.PointerWheelEventArgs> action) where T : Avalonia.Input.InputElement  => 
- control._setEvent((System.EventHandler<Avalonia.Input.PointerWheelEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PointerWheelChanged += h);
+public static T OnPointerWheelChanged<T>(this T control, Action<Avalonia.Input.PointerWheelEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Input.InputElement 
+{
+  control.AddHandler(Avalonia.Input.InputElement.PointerWheelChangedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // Tapped

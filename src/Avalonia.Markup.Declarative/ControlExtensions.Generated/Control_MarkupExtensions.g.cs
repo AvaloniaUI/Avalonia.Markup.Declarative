@@ -122,15 +122,23 @@ public static T OnContextRequested<T>(this T control, Action<Avalonia.Controls.C
  // Loaded
 
 /*ActionToEventGenerator*/
-public static T OnLoaded<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.Control  => 
- control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Loaded += h);
+public static T OnLoaded<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Control 
+{
+  control.AddHandler(Avalonia.Controls.Control.LoadedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // Unloaded
 
 /*ActionToEventGenerator*/
-public static T OnUnloaded<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.Control  => 
- control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Unloaded += h);
+public static T OnUnloaded<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Control 
+{
+  control.AddHandler(Avalonia.Controls.Control.UnloadedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
  // SizeChanged

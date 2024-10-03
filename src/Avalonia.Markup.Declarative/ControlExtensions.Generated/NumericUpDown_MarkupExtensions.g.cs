@@ -479,12 +479,8 @@ public static T InnerRightContent<TValue,T>(this T control, TValue value, FuncVa
  // Spinned
 
 /*ActionToEventGenerator*/
-public static T OnSpinned<T>(this T control, Action<Avalonia.Controls.SpinEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.NumericUpDown 
-{
-  control.AddHandler(Avalonia.Controls.NumericUpDown.SpinnedEvent, (_, args) => action(args), routes);
-  return control; 
-}
-
+public static T OnSpinned<T>(this T control, Action<Avalonia.Controls.SpinEventArgs> action) where T : Avalonia.Controls.NumericUpDown  => 
+ control._setEvent((System.EventHandler<Avalonia.Controls.SpinEventArgs>) ((arg0, arg1) => action(arg1)), h => control.Spinned += h);
 
 
  // ValueChanged

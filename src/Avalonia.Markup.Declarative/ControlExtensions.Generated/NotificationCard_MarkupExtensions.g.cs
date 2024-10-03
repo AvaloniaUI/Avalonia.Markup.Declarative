@@ -76,8 +76,12 @@ public static T NotificationCard_CloseOnClick<T>(this T control, Func<System.Boo
  // NotificationClosed
 
 /*ActionToEventGenerator*/
-public static T OnNotificationClosed<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action) where T : Avalonia.Controls.Notifications.NotificationCard  => 
- control._setEvent((System.EventHandler<Avalonia.Interactivity.RoutedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.NotificationClosed += h);
+public static T OnNotificationClosed<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Notifications.NotificationCard 
+{
+  control.AddHandler(Avalonia.Controls.Notifications.NotificationCard.NotificationClosedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
 
 
 
