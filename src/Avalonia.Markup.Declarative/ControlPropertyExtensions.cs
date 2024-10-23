@@ -194,7 +194,7 @@ public static class ControlPropertyExtensions
 		out TDataContext dataContext,
 		BindingMode? bindingMode = null,
 		IValueConverter? converter = null,
-		[CallerArgumentExpression("value")] string? ps = null)
+		[CallerArgumentExpression(nameof(value))] string? ps = null)
 		where TElement : StyledElement where TDataContext : class
 	{
 		dataContext = value;
@@ -476,7 +476,7 @@ public static class ControlPropertyExtensions
 	}
 
 	public static TElement BindClass<TElement>(this TElement control, Func<bool> func, string className,
-		[CallerArgumentExpression("func")] string? ps = null)
+		[CallerArgumentExpression(nameof(func))] string? ps = null)
 		where TElement : Control
 	{
 
@@ -498,7 +498,7 @@ public static class ControlPropertyExtensions
 
 	public static TElement BindClass<TElement>(this TElement control, bool value, string className,
 		object? bindingSource = null, [CallerLineNumber] int line = 0, [CallerMemberName] string? caller = default,
-		[CallerArgumentExpression("value")] string? ps = null)
+		[CallerArgumentExpression(nameof(value))] string? ps = null)
 		where TElement : Control
 	{
 		var path = PropertyPathHelper.GetNameFromPropertyPath(ps);

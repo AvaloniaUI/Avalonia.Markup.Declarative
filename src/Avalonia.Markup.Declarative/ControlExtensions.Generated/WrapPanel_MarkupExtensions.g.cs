@@ -15,11 +15,11 @@ public static partial class WrapPanel_MarkupExtensions
  // Orientation
 
 /*BindFromExpressionSetterGenerator*/
-public static T Orientation<T>(this T control, Func<Avalonia.Layout.Orientation> func, Action<Avalonia.Layout.Orientation>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.WrapPanel 
+public static T Orientation<T>(this T control, Func<Avalonia.Layout.Orientation> func, Action<Avalonia.Layout.Orientation>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.WrapPanel 
    => control._set(Avalonia.Controls.WrapPanel.OrientationProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static T Orientation<T>(this T control,Avalonia.Layout.Orientation value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WrapPanel 
+public static T Orientation<T>(this T control,Avalonia.Layout.Orientation value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.WrapPanel 
 => control._setEx(Avalonia.Controls.WrapPanel.OrientationProperty, ps, () => control.Orientation = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
@@ -31,18 +31,18 @@ public static T Orientation<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.WrapPanel.OrientationProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Orientation<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Layout.Orientation> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WrapPanel 
+public static T Orientation<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Layout.Orientation> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.WrapPanel 
 => control._setEx(Avalonia.Controls.WrapPanel.OrientationProperty, ps, () => control.Orientation = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ItemWidth
 
 /*BindFromExpressionSetterGenerator*/
-public static T ItemWidth<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.WrapPanel 
+public static T ItemWidth<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.WrapPanel 
    => control._set(Avalonia.Controls.WrapPanel.ItemWidthProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static T ItemWidth<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WrapPanel 
+public static T ItemWidth<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.WrapPanel 
 => control._setEx(Avalonia.Controls.WrapPanel.ItemWidthProperty, ps, () => control.ItemWidth = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
@@ -54,18 +54,18 @@ public static T ItemWidth<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.WrapPanel.ItemWidthProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ItemWidth<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WrapPanel 
+public static T ItemWidth<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.WrapPanel 
 => control._setEx(Avalonia.Controls.WrapPanel.ItemWidthProperty, ps, () => control.ItemWidth = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // ItemHeight
 
 /*BindFromExpressionSetterGenerator*/
-public static T ItemHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.WrapPanel 
+public static T ItemHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.WrapPanel 
    => control._set(Avalonia.Controls.WrapPanel.ItemHeightProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static T ItemHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WrapPanel 
+public static T ItemHeight<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.WrapPanel 
 => control._setEx(Avalonia.Controls.WrapPanel.ItemHeightProperty, ps, () => control.ItemHeight = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
@@ -77,7 +77,7 @@ public static T ItemHeight<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.WrapPanel.ItemHeightProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ItemHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.WrapPanel 
+public static T ItemHeight<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.WrapPanel 
 => control._setEx(Avalonia.Controls.WrapPanel.ItemHeightProperty, ps, () => control.ItemHeight = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 

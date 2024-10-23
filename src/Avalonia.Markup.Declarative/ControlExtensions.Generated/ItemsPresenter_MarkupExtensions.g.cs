@@ -15,11 +15,11 @@ public static partial class ItemsPresenter_MarkupExtensions
  // ItemsPanel
 
 /*BindFromExpressionSetterGenerator*/
-public static T ItemsPanel<T>(this T control, Func<Avalonia.Controls.ITemplate<Avalonia.Controls.Panel>> func, Action<Avalonia.Controls.ITemplate<Avalonia.Controls.Panel>>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Presenters.ItemsPresenter 
+public static T ItemsPanel<T>(this T control, Func<Avalonia.Controls.ITemplate<Avalonia.Controls.Panel>> func, Action<Avalonia.Controls.ITemplate<Avalonia.Controls.Panel>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ItemsPresenter 
    => control._set(Avalonia.Controls.Presenters.ItemsPresenter.ItemsPanelProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static T ItemsPanel<T>(this T control,Avalonia.Controls.ITemplate<Avalonia.Controls.Panel> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ItemsPresenter 
+public static T ItemsPanel<T>(this T control,Avalonia.Controls.ITemplate<Avalonia.Controls.Panel> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Presenters.ItemsPresenter 
 => control._setEx(Avalonia.Controls.Presenters.ItemsPresenter.ItemsPanelProperty, ps, () => control.ItemsPanel = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
@@ -31,7 +31,7 @@ public static T ItemsPanel<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Presenters.ItemsPresenter.ItemsPanelProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T ItemsPanel<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ITemplate<Avalonia.Controls.Panel>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Presenters.ItemsPresenter 
+public static T ItemsPanel<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.ITemplate<Avalonia.Controls.Panel>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Presenters.ItemsPresenter 
 => control._setEx(Avalonia.Controls.Presenters.ItemsPresenter.ItemsPanelProperty, ps, () => control.ItemsPanel = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 

@@ -144,7 +144,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             _dependentViews.Add(view);
     }
 
-    protected Binding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression("value")] string? valueExpressionString = null)
+    protected Binding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression(nameof(value))] string? valueExpressionString = null)
     {
         return CreateMvuBinding(value, bindingMode, valueExpressionString);
     }

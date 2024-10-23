@@ -15,11 +15,11 @@ public static partial class Panel_MarkupExtensions
  // Background
 
 /*BindFromExpressionSetterGenerator*/
-public static T Background<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.Panel 
+public static T Background<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Panel 
    => control._set(Avalonia.Controls.Panel.BackgroundProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static T Background<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Panel 
+public static T Background<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Panel 
 => control._setEx(Avalonia.Controls.Panel.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
@@ -31,7 +31,7 @@ public static T Background<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Panel.BackgroundProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Background<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.Panel 
+public static T Background<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Panel 
 => control._setEx(Avalonia.Controls.Panel.BackgroundProperty, ps, () => control.Background = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
