@@ -15,11 +15,11 @@ public static partial class RepeatButton_MarkupExtensions
  // Interval
 
 /*BindFromExpressionSetterGenerator*/
-public static T Interval<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.RepeatButton 
+public static T Interval<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.RepeatButton 
    => control._set(Avalonia.Controls.RepeatButton.IntervalProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static T Interval<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RepeatButton 
+public static T Interval<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.RepeatButton 
 => control._setEx(Avalonia.Controls.RepeatButton.IntervalProperty, ps, () => control.Interval = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
@@ -31,18 +31,18 @@ public static T Interval<T>(this T control, AvaloniaProperty avaloniaProperty, B
    => control._set(Avalonia.Controls.RepeatButton.IntervalProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Interval<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RepeatButton 
+public static T Interval<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.RepeatButton 
 => control._setEx(Avalonia.Controls.RepeatButton.IntervalProperty, ps, () => control.Interval = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Delay
 
 /*BindFromExpressionSetterGenerator*/
-public static T Delay<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.RepeatButton 
+public static T Delay<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.RepeatButton 
    => control._set(Avalonia.Controls.RepeatButton.DelayProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static T Delay<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RepeatButton 
+public static T Delay<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.RepeatButton 
 => control._setEx(Avalonia.Controls.RepeatButton.DelayProperty, ps, () => control.Delay = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
@@ -54,7 +54,7 @@ public static T Delay<T>(this T control, AvaloniaProperty avaloniaProperty, Bind
    => control._set(Avalonia.Controls.RepeatButton.DelayProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Delay<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.RepeatButton 
+public static T Delay<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.RepeatButton 
 => control._setEx(Avalonia.Controls.RepeatButton.DelayProperty, ps, () => control.Delay = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 

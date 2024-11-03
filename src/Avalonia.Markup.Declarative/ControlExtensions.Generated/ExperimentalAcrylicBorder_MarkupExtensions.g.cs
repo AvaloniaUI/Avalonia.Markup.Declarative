@@ -15,11 +15,11 @@ public static partial class ExperimentalAcrylicBorder_MarkupExtensions
  // CornerRadius
 
 /*BindFromExpressionSetterGenerator*/
-public static T CornerRadius<T>(this T control, Func<Avalonia.CornerRadius> func, Action<Avalonia.CornerRadius>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
+public static T CornerRadius<T>(this T control, Func<Avalonia.CornerRadius> func, Action<Avalonia.CornerRadius>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
    => control._set(Avalonia.Controls.ExperimentalAcrylicBorder.CornerRadiusProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static T CornerRadius<T>(this T control,Avalonia.CornerRadius value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
+public static T CornerRadius<T>(this T control,Avalonia.CornerRadius value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
 => control._setEx(Avalonia.Controls.ExperimentalAcrylicBorder.CornerRadiusProperty, ps, () => control.CornerRadius = value, bindingMode, converter, bindingSource);
 
 /*ValueOverloadsSetterGenerator*/
@@ -40,18 +40,18 @@ public static T CornerRadius<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.ExperimentalAcrylicBorder.CornerRadiusProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T CornerRadius<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.CornerRadius> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
+public static T CornerRadius<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.CornerRadius> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
 => control._setEx(Avalonia.Controls.ExperimentalAcrylicBorder.CornerRadiusProperty, ps, () => control.CornerRadius = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
  // Material
 
 /*BindFromExpressionSetterGenerator*/
-public static T Material<T>(this T control, Func<Avalonia.Media.ExperimentalAcrylicMaterial> func, Action<Avalonia.Media.ExperimentalAcrylicMaterial>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
+public static T Material<T>(this T control, Func<Avalonia.Media.ExperimentalAcrylicMaterial> func, Action<Avalonia.Media.ExperimentalAcrylicMaterial>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
    => control._set(Avalonia.Controls.ExperimentalAcrylicBorder.MaterialProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static T Material<T>(this T control,Avalonia.Media.ExperimentalAcrylicMaterial value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
+public static T Material<T>(this T control,Avalonia.Media.ExperimentalAcrylicMaterial value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
 => control._setEx(Avalonia.Controls.ExperimentalAcrylicBorder.MaterialProperty, ps, () => control.Material = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
@@ -63,7 +63,7 @@ public static T Material<T>(this T control, AvaloniaProperty avaloniaProperty, B
    => control._set(Avalonia.Controls.ExperimentalAcrylicBorder.MaterialProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static T Material<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.ExperimentalAcrylicMaterial> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
+public static T Material<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.ExperimentalAcrylicMaterial> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
 => control._setEx(Avalonia.Controls.ExperimentalAcrylicBorder.MaterialProperty, ps, () => control.Material = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 

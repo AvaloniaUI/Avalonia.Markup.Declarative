@@ -15,11 +15,11 @@ public static partial class VisualBrush_MarkupExtensions
  // Visual
 
 /*BindFromExpressionSetterGenerator*/
-public static Avalonia.Media.VisualBrush Visual(this Avalonia.Media.VisualBrush control, Func<Avalonia.Visual> func, Action<Avalonia.Visual>? onChanged = null, [CallerArgumentExpression("func")] string? expression = null)  
+public static Avalonia.Media.VisualBrush Visual(this Avalonia.Media.VisualBrush control, Func<Avalonia.Visual> func, Action<Avalonia.Visual>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.VisualBrush.VisualProperty, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
-public static Avalonia.Media.VisualBrush Visual(this Avalonia.Media.VisualBrush control,Avalonia.Visual value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+public static Avalonia.Media.VisualBrush Visual(this Avalonia.Media.VisualBrush control,Avalonia.Visual value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
 => control._setEx(Avalonia.Media.VisualBrush.VisualProperty, ps, () => control.Visual = value, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
@@ -31,7 +31,7 @@ public static Avalonia.Media.VisualBrush Visual(this Avalonia.Media.VisualBrush 
    => control._set(Avalonia.Media.VisualBrush.VisualProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
-public static Avalonia.Media.VisualBrush Visual<TValue>(this Avalonia.Media.VisualBrush control, TValue value, FuncValueConverter<TValue, Avalonia.Visual> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression("value")] string? ps = null)  
+public static Avalonia.Media.VisualBrush Visual<TValue>(this Avalonia.Media.VisualBrush control, TValue value, FuncValueConverter<TValue, Avalonia.Visual> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
 => control._setEx(Avalonia.Media.VisualBrush.VisualProperty, ps, () => control.Visual = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
