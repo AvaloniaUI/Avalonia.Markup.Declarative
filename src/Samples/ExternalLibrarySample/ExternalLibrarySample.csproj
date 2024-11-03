@@ -49,7 +49,7 @@
 	</ItemGroup>
 
 	<Target Name="GenerateAvaloniaExtensions" AfterTargets="ResolveReferences">
-		<Exec Command="avalonia-amd-gen --dlls=&quot;@(ReferencePath->'%(FullPath)')&quot; --projectPath=&quot;$(MSBuildProjectFullPath)&quot;"/>
+		<Exec Command="dotnet tool run avalonia-amd-gen --dlls=&quot;@(ReferencePath->'%(FullPath)')&quot; --projectPath=&quot;$(MSBuildProjectFullPath)&quot;" />
 	</Target>
 
 </Project>

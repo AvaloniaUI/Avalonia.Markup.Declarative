@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "isRoot": false,
+  "tools": {
+    "avaloniaextensiongenerator": {
+      "version": "11.2.0-beta4",
+      "commands": [
+        "avalonia-amd-gen"
+      ],
+      "rollForward": false
+    }
+  }
+}
