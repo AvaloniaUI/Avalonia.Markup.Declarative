@@ -6,6 +6,8 @@ internal class Program
     {
         string? projectPath = null;
 
+        string[]? dllsPaths = null;
+
         //for non framework mode ignore types from following base avalonia assemblies
         string[] ignoreAssemblies =
         [
@@ -27,6 +29,11 @@ internal class Program
             if (arg.StartsWith("--projectPath="))
             {
                 projectPath = arg.Substring("--projectPath=".Length);
+            }
+
+            if (arg.StartsWith("--dlls="))
+            {
+                dllsPaths = arg.Substring("--dlls=".Length).Split(";");
             }
         }
 
@@ -69,9 +76,16 @@ internal class Program
         {
             var projectDirPath = Path.GetDirectoryName(projectPath);
             var outputPath = Path.Combine(projectDirPath, "ControlExtensions.Generated");
+            IReadOnlyList<Type>? types = null;
 
-            var types = await CsProjectTypesExtractor
-                .LoadTypesFromProject(projectPath, "Avalonia.AvaloniaObject", ignoreAssemblies);
+            if (dllsPaths != null)
+            {
+                types = await CsProjectTypesExtractor.LoadTypesFromDll(dllsPaths, "Avalonia.AvaloniaObject", ignoreAssemblies);
+            }
+            else
+            {
+                types = await CsProjectTypesExtractor.LoadTypesFromProject(projectPath, "Avalonia.AvaloniaObject", ignoreAssemblies);
+            }
 
             var extensionsOutputPath = GeneratorHost.RunControlTypeGenerators(types, outputPath);
 

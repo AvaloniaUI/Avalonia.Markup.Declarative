@@ -124,6 +124,67 @@ namespace AvaloniaExtensionGenerator
             public string Version { get; init; } = null!;
         }
 
+        public static async Task<IReadOnlyList<Type>> LoadTypesFromDll(
+            string[] dllPaths,
+            string baseTypeNameToFilter,
+            string[] ignoreAssemblies)
+        {
+            Dictionary<string, Assembly> loadedAssembliesCache = [];
+
+            Type? filterBaseType = null;
+
+            var result = new List<Type>();
+
+            foreach (var item in dllPaths)
+            {
+                TryLoadAssembly(item, loadedAssembliesCache, out var assembly);
+            }
+
+            foreach (var item in loadedAssembliesCache)
+            {
+                try
+                {
+                    var type = item.Value.GetType(baseTypeNameToFilter);
+
+                    if (type != null)
+                    {
+                        filterBaseType = type;
+
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to get types from assembly {item}: {ex.Message}");
+                }
+            }
+
+            if (filterBaseType == null)
+            {
+                throw new Exception("Unable to find: " + baseTypeNameToFilter);
+            }
+
+            foreach (var item in loadedAssembliesCache)
+            {
+                try
+                {
+                    if (ignoreAssemblies.Contains(item.Value.GetName().Name))
+                        Console.WriteLine($"Skipping base assembly, {item.Value.GetName().Name}");
+                    else
+                    {
+                        var types = item.Value.ExportedTypes.Where(filterBaseType.IsAssignableFrom).ToArray();
+                        result.AddRange(types);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to get types from assembly {item.Key}: {ex.Message}");
+                }
+            }
+
+            return result;
+        }
+
         public static async Task<IReadOnlyList<Type>> LoadTypesFromProject(
             string projectPath,
             string baseTypeNameToFilter,

@@ -47,4 +47,9 @@
 		<Using Include="Avalonia.Layout" />
 		<Using Include="Avalonia.Media" />
 	</ItemGroup>
+
+	<Target Name="EmbedResolveReferences" AfterTargets="ResolveReferences">
+		<Exec Command="avalonia-amd-gen --dlls=&quot;@(ReferencePath->'%(FullPath)')&quot; --projectPath=&quot;$(MSBuildProjectFullPath)&quot;"/>
+	</Target>
+
 </Project>
