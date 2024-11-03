@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "isRoot": false,
+  "isRoot": true,
   "tools": {
     "avaloniaextensiongenerator": {
       "version": "11.2.0-beta4",
