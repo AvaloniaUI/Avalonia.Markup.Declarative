@@ -22,13 +22,13 @@ public class OpenGlView() : ComponentBase
                         .Text(() => _glContainer.Info),
                     new Button()
                         .Content("Update")
-                        .OnClick(OnUpdateClocked)
+                        .OnClick(OnUpdateClicked)
                 )
             );
 
     private OpenGlPageControl _glContainer = null!;
 
-    private void OnUpdateClocked(RoutedEventArgs obj)
+    private void OnUpdateClicked(RoutedEventArgs obj)
     {
         _glContainer.Pitch += 0.1f;
         StateHasChanged();
