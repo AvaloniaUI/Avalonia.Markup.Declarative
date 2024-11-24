@@ -44,15 +44,12 @@ internal static class MarkupTypeHelpers
         return members.OfType<FieldDeclarationSyntax>().All(field => field.Declaration.Variables[0].Identifier.ToString() != avaloniaPropertyName);
     }
 
-    internal static bool HasAvaloniaPropertyPublicSetter(FieldDeclarationSyntax field, SyntaxList<MemberDeclarationSyntax> members)
+    internal static bool HasAvaloniaPropertyPublicSetter(ISymbol field, ImmutableArray<ISymbol> members)
     {
-        var backingPropertyName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
-
         var property = members
-            .OfType<PropertyDeclarationSyntax>()
-            .FirstOrDefault(x => x.Identifier.ValueText == backingPropertyName);
+            .FirstOrDefault(x => x.DeclaredAccessibility == Accessibility.Public && x.Name == field.Name);
 
-        return HasPublicSetter(property);
+        return property != null;
     }
 
     internal static bool HasPublicSetter(PropertyDeclarationSyntax? property)
@@ -79,6 +76,4 @@ internal static class MarkupTypeHelpers
 
         return !string.IsNullOrWhiteSpace(fullTypeName) ? fullTypeName : property.Type.ToString();
     }
-
-
 }

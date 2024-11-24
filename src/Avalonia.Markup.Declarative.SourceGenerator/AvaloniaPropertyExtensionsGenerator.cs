@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -17,105 +18,197 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
 #if DEBUG
         if (!Debugger.IsAttached)
         {
-            //Debugger.Launch();
+            Debugger.Launch();
         }
-#endif 
+#endif
         Debug.WriteLine("Execute AvaloniaPropertyExtensionsGenerator code generator");
 
         var comp = context.Compilation;
-
-        var views = FindAvaloniaMarkupViews(comp);
-
         var sb = new StringBuilder();
-        foreach (var type in views)
+
+        INamedTypeSymbol typeByMetadataName = comp.GetTypeByMetadataName("Avalonia.Markup.Declarative.GenerateMarkupForAssemblyAttribute");
+        ImmutableArray<IAssemblySymbol>.Builder builder = ImmutableArray.CreateBuilder<IAssemblySymbol>();
+
+        builder.Add(context.Compilation.Assembly);
+
+        foreach (AttributeData attributeData in comp.Assembly.GetAttributes())
         {
-            var root = type.SyntaxTree
-                .GetRoot();
-
-            var ns = root
-                .DescendantNodes()
-                .FirstOrDefault(x => x is BaseNamespaceDeclarationSyntax);
-
-            var typeNamespace = "";
-
-            if (ns is BaseNamespaceDeclarationSyntax nbs)
+            INamedTypeSymbol attributeClass = attributeData.AttributeClass;
+            if ((attributeClass != null ? (!attributeClass.Equals(typeByMetadataName, SymbolEqualityComparer.Default) ? 1 : 0) : 1) == 0)
             {
-                typeNamespace = nbs.Name.ToString();
+                TypedConstant constructorArgument = attributeData.ConstructorArguments[0];
+
+                if (constructorArgument.Value is INamedTypeSymbol iNamedTypeSymbol)
+                    builder.Add(iNamedTypeSymbol.ContainingAssembly);
             }
-
-            sb.Clear();
-
-            sb.AppendLine("#nullable enable");
-            sb.AppendLine("// Auto-generated code " + DateTime.Now.ToString("g"));
-            sb.AppendLine("using System;");
-            sb.AppendLine("using Avalonia.Data;");
-            sb.AppendLine("using Avalonia.Data.Converters;");
-            sb.AppendLine("using System.Runtime.CompilerServices;");
-
-            if (root is CompilationUnitSyntax compilationUnitSyntax)
-            {
-                foreach (var usingDirectiveSyntax in compilationUnitSyntax.Usings)
-                {
-                    sb.AppendLine(usingDirectiveSyntax.ToString());
-                }
-            }
-
-            if (!string.IsNullOrWhiteSpace(typeNamespace))
-                sb.AppendLine($"using {typeNamespace};");
-
-            var typeName = type.Identifier.ToString();
-
-            sb.AppendLine("namespace Avalonia.Markup.Declarative;");
-
-            sb.AppendLine($"public static partial class {typeName}Extensions");
-            sb.AppendLine("{");
-
-            var members = type.Members;
-
-            List<string> processedFields = [];
-            //PROCESS AVALONIA PROPERTIES
-            foreach (var field in members.OfType<FieldDeclarationSyntax>())
-            {
-                if (field.Declaration.Type is GenericNameSyntax
-                    {
-                        Identifier.ValueText: ("DirectProperty" or "StyledProperty" or "AttachedProperty")
-                    } && HasAvaloniaPropertyPublicSetter(field, members))
-                {
-                    sb.AppendLine($"//avalonia properties{Environment.NewLine}");
-
-                    AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
-                    AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
-
-                    var name = field.Declaration.Variables[0].Identifier.ValueText;
-                    processedFields.Add(name);
-                }
-            }
-
-            //PROCESS COMMON PROPERTIES
-            foreach (var property in members.OfType<PropertyDeclarationSyntax>())
-            {
-                //skip properties that already processed as Avalonia properties
-                if (!processedFields.Contains(property.Identifier + "Property")
-                    && IsPublic(property) && HasPublicSetter(property) &&
-                    IsCommonInstanceProperty(property, members))
-                {
-                    sb.AppendLine($"//common properties{Environment.NewLine}");
-
-                    AppendIfNotNull(sb, GetCommonPropertySetterExtension(typeName, property, comp));
-                    AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(typeName, property, comp));
-                    AppendIfNotNull(sb, GetCommonPropertyExpressionBindingSetterExtension(typeName, property, comp));
-
-                    processedFields.Add(property.Identifier.ToString());
-                }
-            }
-
-            sb.AppendLine("}");
-            // Add the source code to the compilation
-
-            if (processedFields.Count > 0)
-                context.AddSource($"{typeName}.g.cs", sb.ToString());
         }
 
+        foreach (IAssemblySymbol assembly in builder)
+        {
+            foreach (INamedTypeSymbol publicClass in GetPublicClasses(assembly.GlobalNamespace))
+            {
+                var members = publicClass.GetMembers();
+
+                sb.Clear();
+
+                sb.AppendLine("#nullable enable");
+                sb.AppendLine("// Auto-generated code " + DateTime.Now.ToString("g"));
+                sb.AppendLine("using System;");
+                sb.AppendLine("using Avalonia.Data;");
+                sb.AppendLine("using Avalonia.Data.Converters;");
+                sb.AppendLine("using System.Runtime.CompilerServices;");
+
+                //if (publicClass is CompilationUnitSyntax compilationUnitSyntax)
+                //{
+                //    foreach (var usingDirectiveSyntax in compilationUnitSyntax.Usings)
+                //    {
+                //        sb.AppendLine(usingDirectiveSyntax.ToString());
+                //    }
+                //}
+
+                sb.AppendLine($"using {publicClass.ContainingNamespace.Name};");
+
+                var typeName = publicClass.Name;
+
+                sb.AppendLine("namespace Avalonia.Markup.Declarative;");
+
+                sb.AppendLine($"public static partial class {typeName}Extensions");
+                sb.AppendLine("{");
+
+                List<string> processedFields = [];
+
+                //PROCESS AVALONIA PROPERTIES
+                foreach (var field in members)
+                {
+                    if (field.ContainingType.Name == "DirectProperty" || field.ContainingType.Name == "StyledProperty" || field.ContainingType.Name == "AttachedProperty"
+                        && HasAvaloniaPropertyPublicSetter(field, members))
+                    {
+                        //sb.AppendLine($"//avalonia properties{Environment.NewLine}");
+
+                        //AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
+                        //AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
+
+                        //var name = field.Declaration.Variables[0].Identifier.ValueText;
+                        //processedFields.Add(name);
+                    }
+                }
+
+                sb.AppendLine("}");
+                // Add the source code to the compilation
+                if (processedFields.Count > 0)
+                    context.AddSource($"{typeName}.g.cs", sb.ToString());
+            }
+        }
+
+        return;
+
+        //var views = FindAvaloniaMarkupViews(comp);
+
+        //foreach (var type in views)
+        //{
+        //    var root = type.SyntaxTree
+        //        .GetRoot();
+
+        //    var ns = root
+        //        .DescendantNodes()
+        //        .FirstOrDefault(x => x is BaseNamespaceDeclarationSyntax);
+
+        //    var typeNamespace = "";
+
+        //    if (ns is BaseNamespaceDeclarationSyntax nbs)
+        //    {
+        //        typeNamespace = nbs.Name.ToString();
+        //    }
+
+        //    sb.Clear();
+
+        //    sb.AppendLine("#nullable enable");
+        //    sb.AppendLine("// Auto-generated code " + DateTime.Now.ToString("g"));
+        //    sb.AppendLine("using System;");
+        //    sb.AppendLine("using Avalonia.Data;");
+        //    sb.AppendLine("using Avalonia.Data.Converters;");
+        //    sb.AppendLine("using System.Runtime.CompilerServices;");
+
+        //    if (root is CompilationUnitSyntax compilationUnitSyntax)
+        //    {
+        //        foreach (var usingDirectiveSyntax in compilationUnitSyntax.Usings)
+        //        {
+        //            sb.AppendLine(usingDirectiveSyntax.ToString());
+        //        }
+        //    }
+
+        //    if (!string.IsNullOrWhiteSpace(typeNamespace))
+        //        sb.AppendLine($"using {typeNamespace};");
+
+        //    var typeName = type.Identifier.ToString();
+
+        //    sb.AppendLine("namespace Avalonia.Markup.Declarative;");
+
+        //    sb.AppendLine($"public static partial class {typeName}Extensions");
+        //    sb.AppendLine("{");
+
+        //    var members = type.Members;
+
+        //    List<string> processedFields = [];
+        //    //PROCESS AVALONIA PROPERTIES
+        //    foreach (var field in members.OfType<FieldDeclarationSyntax>())
+        //    {
+        //        if (field.Declaration.Type is GenericNameSyntax
+        //            {
+        //                Identifier.ValueText: ("DirectProperty" or "StyledProperty" or "AttachedProperty")
+        //            } && HasAvaloniaPropertyPublicSetter(field, members))
+        //        {
+        //            sb.AppendLine($"//avalonia properties{Environment.NewLine}");
+
+        //            AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
+        //            AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
+
+        //            var name = field.Declaration.Variables[0].Identifier.ValueText;
+        //            processedFields.Add(name);
+        //        }
+        //    }
+
+        //    //PROCESS COMMON PROPERTIES
+        //    foreach (var property in members.OfType<PropertyDeclarationSyntax>())
+        //    {
+        //        //skip properties that already processed as Avalonia properties
+        //        if (!processedFields.Contains(property.Identifier + "Property")
+        //            && IsPublic(property) && HasPublicSetter(property) &&
+        //            IsCommonInstanceProperty(property, members))
+        //        {
+        //            sb.AppendLine($"//common properties{Environment.NewLine}");
+
+        //            AppendIfNotNull(sb, GetCommonPropertySetterExtension(typeName, property, comp));
+        //            AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(typeName, property, comp));
+        //            AppendIfNotNull(sb, GetCommonPropertyExpressionBindingSetterExtension(typeName, property, comp));
+
+        //            processedFields.Add(property.Identifier.ToString());
+        //        }
+        //    }
+
+        //    sb.AppendLine("}");
+        //    // Add the source code to the compilation
+
+        //    if (processedFields.Count > 0)
+        //        context.AddSource($"{typeName}.g.cs", sb.ToString());
+        //}
+    }
+
+    public IEnumerable<INamedTypeSymbol> GetPublicClasses(INamespaceSymbol sym)
+    {
+        foreach (INamedTypeSymbol typeMember in sym.GetTypeMembers())
+        {
+            if (typeMember.DeclaredAccessibility == Accessibility.Public && typeMember.TypeKind == TypeKind.Class)
+                yield return typeMember;
+        }
+        foreach (INamespaceSymbol namespaceMember in sym.GetNamespaceMembers())
+        {
+            foreach (INamedTypeSymbol publicClass in GetPublicClasses(namespaceMember))
+            {
+                if (publicClass.DeclaredAccessibility == Accessibility.Public && publicClass.TypeKind == TypeKind.Class)
+                    yield return publicClass;
+            }
+        }
     }
 
     private static void AppendIfNotNull(StringBuilder sb, string value)

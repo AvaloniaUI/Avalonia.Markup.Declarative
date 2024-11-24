@@ -1,5 +1,8 @@
 ﻿using ExternalLibrarySample;
+using LiveChartsCore;
 using Microsoft.Extensions.DependencyInjection;
+
+[assembly: GenerateMarkupForAssembly(typeof(ISeries))]
 
 var services = new ServiceCollection();
 
