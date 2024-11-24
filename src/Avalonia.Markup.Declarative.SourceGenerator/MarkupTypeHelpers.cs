@@ -49,24 +49,22 @@ internal static class MarkupTypeHelpers
         var property = members
             .FirstOrDefault(x => x.DeclaredAccessibility == Accessibility.Public && x.Name == field.Name.Replace("Property", ""));
 
-        return property != null;
+        return HasPublicSetter(property as IPropertySymbol);
     }
 
-    internal static bool HasPublicSetter(PropertyDeclarationSyntax? property)
+    internal static bool HasPublicSetter(IPropertySymbol? property)
     {
         if (property != null)
         {
-            var setter = property.AccessorList?.Accessors.FirstOrDefault(x => x.IsKind(SyntaxKind.SetAccessorDeclaration));
-            if (setter?.Modifiers.Any() == false)
-                return true;
+            return property.SetMethod != null && property.SetMethod.DeclaredAccessibility == Accessibility.Public;
         }
 
         return false;
     }
 
-    internal static bool IsPublic(PropertyDeclarationSyntax? property)
+    internal static bool IsPublic(IPropertySymbol? property)
     {
-        return property != null && property.Modifiers.Any(x => x.ValueText == "public");
+        return property != null && property.DeclaredAccessibility == Accessibility.Public;
     }
 
     internal static string GetPropertyTypeName(PropertyDeclarationSyntax property, Compilation compilation)
