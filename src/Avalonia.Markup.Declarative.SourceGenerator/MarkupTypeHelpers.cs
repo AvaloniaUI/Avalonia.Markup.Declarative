@@ -35,13 +35,13 @@ internal static class MarkupTypeHelpers
     /// <param name="property">target property</param>
     /// <param name="members"></param>
     /// <returns></returns>
-    internal static bool IsCommonInstanceProperty(PropertyDeclarationSyntax property, SyntaxList<MemberDeclarationSyntax> members)
+    internal static bool IsCommonInstanceProperty(IPropertySymbol property, ImmutableArray<ISymbol> members)
     {
-        if(property.Modifiers.Any(x=>x.Text == "static"))
+        if(property.IsStatic)
             return false;
 
-        var avaloniaPropertyName = property.Identifier + "Property";
-        return members.OfType<FieldDeclarationSyntax>().All(field => field.Declaration.Variables[0].Identifier.ToString() != avaloniaPropertyName);
+        var avaloniaPropertyName = property.Name + "Property";
+        return members.OfType<IFieldSymbol>().All(field => field.Name != avaloniaPropertyName);
     }
 
     internal static bool HasAvaloniaPropertyPublicSetter(ISymbol field, ImmutableArray<ISymbol> members)
@@ -54,12 +54,7 @@ internal static class MarkupTypeHelpers
 
     internal static bool HasPublicSetter(IPropertySymbol? property)
     {
-        if (property != null)
-        {
-            return property.SetMethod != null && property.SetMethod.DeclaredAccessibility == Accessibility.Public;
-        }
-
-        return false;
+        return property?.SetMethod != null && property.SetMethod.DeclaredAccessibility == Accessibility.Public;
     }
 
     internal static bool IsPublic(IPropertySymbol? property)
@@ -67,11 +62,11 @@ internal static class MarkupTypeHelpers
         return property != null && property.DeclaredAccessibility == Accessibility.Public;
     }
 
-    internal static string GetPropertyTypeName(PropertyDeclarationSyntax property, Compilation compilation)
+    internal static string GetPropertyTypeName(IPropertySymbol property)
     {
-        var semanticModel = compilation.GetSemanticModel(property.SyntaxTree);
-        var fullTypeName = semanticModel.GetTypeInfo(property.Type).Type?.ToString();
+        //var semanticModel = compilation.GetSemanticModel(property.SyntaxTree);
+        //var fullTypeName = semanticModel.GetTypeInfo(property.Type).Type?.ToString();
 
-        return !string.IsNullOrWhiteSpace(fullTypeName) ? fullTypeName : property.Type.ToString();
+        return property.Type.ToString();
     }
 }
