@@ -88,7 +88,7 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
                             sb.AppendLine($"//avalonia properties{Environment.NewLine}");
 
                             AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
-                            //AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
+                            AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
 
                             var name = field.Name.Replace("Property", "");
                             processedFields.Add(name);
@@ -230,9 +230,9 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
     {
         var extensionName = field.Name.Replace("Property", "");
 
-        var genericName = "test";//field.Declaration.Type as GenericNameSyntax;
+        var type = (field.Type as INamedTypeSymbol).TypeArguments[0];
 
-        var valueTypeSource = "test"; //genericName.TypeArgumentList.Arguments.Last();
+        var valueTypeSource = $"{type.ContainingNamespace.Name}.{type.Name}".TrimStart('.');
 
         var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null,"
                          + $" [CallerArgumentExpression(nameof(value))] string? ps = null";
@@ -276,13 +276,14 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
 
         return extensionText;
     }
-    public string GetExpressionBindingSetterExtension(string controlTypeName, FieldDeclarationSyntax field)
+
+    public string GetExpressionBindingSetterExtension(string controlTypeName, IFieldSymbol field)
     {
-        var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
+        var extensionName = field.Name.Replace("Property", "");
 
-        var genericName = field.Declaration.Type as GenericNameSyntax;
+        var type = (field.Type as INamedTypeSymbol).TypeArguments[0];
 
-        var valueTypeSource = genericName.TypeArgumentList.Arguments.Last();
+        var valueTypeSource = $"{type.ContainingNamespace.Name}.{type.Name}".TrimStart('.');
 
         var extensionText =
             $"public static {controlTypeName} {extensionName}(this {controlTypeName} control, Func<{valueTypeSource}> func, Action<{valueTypeSource}>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null){Environment.NewLine}" +
