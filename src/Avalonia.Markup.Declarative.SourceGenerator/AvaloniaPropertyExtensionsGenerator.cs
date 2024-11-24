@@ -77,19 +77,22 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
 
                 List<string> processedFields = [];
 
-                //PROCESS AVALONIA PROPERTIES
-                foreach (var field in members)
+                //PROCESS AVALONIA FIELDS
+                foreach (ISymbol member in members)
                 {
-                    if (field.ContainingType.Name == "DirectProperty" || field.ContainingType.Name == "StyledProperty" || field.ContainingType.Name == "AttachedProperty"
-                        && HasAvaloniaPropertyPublicSetter(field, members))
+                    if (member is IFieldSymbol field)
                     {
-                        //sb.AppendLine($"//avalonia properties{Environment.NewLine}");
+                        if (field.Type.Name == "DirectProperty" || field.Type.Name == "StyledProperty" || field.Type.Name == "AttachedProperty"
+                            && HasAvaloniaPropertyPublicSetter(field, members))
+                        {
+                            sb.AppendLine($"//avalonia properties{Environment.NewLine}");
 
-                        //AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
-                        //AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
+                            AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
+                            //AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
 
-                        //var name = field.Declaration.Variables[0].Identifier.ValueText;
-                        //processedFields.Add(name);
+                            var name = field.Name.Replace("Property", "");
+                            processedFields.Add(name);
+                        }
                     }
                 }
 
@@ -223,13 +226,13 @@ public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
         // No initialization required for this one
     }
 
-    public string GetPropertySetterExtension(string controlTypeName, FieldDeclarationSyntax field)
+    public string GetPropertySetterExtension(string controlTypeName, IFieldSymbol field)
     {
-        var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
+        var extensionName = field.Name.Replace("Property", "");
 
-        var genericName = field.Declaration.Type as GenericNameSyntax;
+        var genericName = "test";//field.Declaration.Type as GenericNameSyntax;
 
-        var valueTypeSource = genericName.TypeArgumentList.Arguments.Last();
+        var valueTypeSource = "test"; //genericName.TypeArgumentList.Arguments.Last();
 
         var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null,"
                          + $" [CallerArgumentExpression(nameof(value))] string? ps = null";

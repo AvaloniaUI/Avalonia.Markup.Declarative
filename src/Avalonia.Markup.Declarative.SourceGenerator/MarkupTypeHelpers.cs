@@ -47,7 +47,7 @@ internal static class MarkupTypeHelpers
     internal static bool HasAvaloniaPropertyPublicSetter(ISymbol field, ImmutableArray<ISymbol> members)
     {
         var property = members
-            .FirstOrDefault(x => x.DeclaredAccessibility == Accessibility.Public && x.Name == field.Name);
+            .FirstOrDefault(x => x.DeclaredAccessibility == Accessibility.Public && x.Name == field.Name.Replace("Property", ""));
 
         return property != null;
     }
