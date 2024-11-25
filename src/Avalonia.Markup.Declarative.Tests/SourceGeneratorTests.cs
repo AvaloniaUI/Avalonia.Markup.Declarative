@@ -39,7 +39,7 @@ namespace Avalonia.Markup.Declarative.Tests
             // remove // Auto-generated code <date/time>
             if (code != null)
             {
-                var lines = code.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                var lines = code.Split([Environment.NewLine], StringSplitOptions.None);
                 code = string.Join(Environment.NewLine, lines.Where(line => !line.TrimStart().StartsWith("// Auto-generated code")));
             }
 
@@ -52,7 +52,7 @@ namespace Avalonia.Markup.Declarative.Tests
             var inputSource = """
 using Avalonia.Markup.Declarative;
 using Avalonia;
-using Avalonia.Controls;
+using Avalonia.Controls
 
 namespace Tests;
 
