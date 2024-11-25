@@ -73,10 +73,12 @@ public class GeneratorHost()
 
         var sb = new StringBuilder();
         sb.AppendLine("#nullable enable");
-
-        //foreach (var ns in config.InitialNamespaces.OrderBy(x => x))
-        //    sb.AppendLine($"using {ns};");
-
+        sb.AppendLine($"using Avalonia.Data;");
+        sb.AppendLine($"using Avalonia.Data.Converters;");
+        sb.AppendLine($"using System;");
+        sb.AppendLine($"using System.Numerics;");
+        sb.AppendLine($"using System.Linq.Expressions;");
+        sb.AppendLine($"using System.Runtime.CompilerServices;");
         sb.AppendLine();
         sb.AppendLine("namespace Avalonia.Markup.Declarative;");
         sb.AppendLine();
