@@ -4,7 +4,6 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Text;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Avalonia.Markup.Declarative.SourceGenerator.MarkupTypeHelpers;
 
 namespace Avalonia.Markup.Declarative.SourceGenerator;
@@ -75,10 +74,14 @@ public class AvaloniaExtensionsGenerator : ISourceGenerator
                 {
                     if (member is IFieldSymbol field)
                     {
-                        if ((field.Type.Name == "DirectProperty" || field.Type.Name == "StyledProperty" || field.Type.Name == "AttachedProperty")
-                            && HasAvaloniaPropertyPublicSetter(field, members))
+                        if ((field.Type.Name == "DirectProperty" ||
+                            field.Type.Name == "StyledProperty" ||
+                            field.Type.Name == "AttachedProperty" ||
+                            field.Type.Name == "AvaloniaProperty") &&
+                            HasAvaloniaPropertyPublicSetter(field, members)
+                            )
                         {
-                            sb.AppendLine($"//avalonia properties{Environment.NewLine}");
+                            sb.AppendLine($"//Avalonia Properties{Environment.NewLine}");
 
                             AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
                             AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
@@ -98,7 +101,7 @@ public class AvaloniaExtensionsGenerator : ISourceGenerator
                         && IsPublic(property) && HasPublicSetter(property) &&
                         IsCommonInstanceProperty(property, members))
                         {
-                            sb.AppendLine($"//common properties{Environment.NewLine}");
+                            sb.AppendLine($"//Common Properties{Environment.NewLine}");
 
                             AppendIfNotNull(sb, GetCommonPropertySetterExtension(typeName, property));
                             AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(typeName, property));
@@ -245,10 +248,20 @@ public class AvaloniaExtensionsGenerator : ISourceGenerator
         return extensionText;
     }
 
+    //private string GetMagicalSetterGeneratorExtension(string controlTypeName, IPropertySymbol property)
+    //{
+    //    return
+    //    $"public static {info.ReturnType} {info.ExtensionName}{info.GenericArg}"
+    //    + $"(this {info.ReturnType} control,"
+    //    + $"{info.ValueTypeSource} value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null,"
+    //    + $" [CallerArgumentExpression(nameof(value))] string? ps = null) {info.GenericConstraint} {Environment.NewLine}"
+    //    + $"=> control._setEx({info.ControlTypeName}.{info.FieldInfo.Name}, ps, () => control.{info.MemberName} = value, bindingMode, converter, bindingSource);";
+    //}
     public string GetEventExtension(string controlTypeName, IEventSymbol @event)
     {
         var eventHandler = @event.Type.ToString();
 
+        //todo
         var eventArgsType = ""; // string.Join(",", @event.Declaration.Type.DescendantNodes().OfType<IdentifierNameSyntax>().Select(x => x.ToString()).ToArray());
 
         var argsString = $"Action<{eventArgsType}> action";
@@ -261,7 +274,8 @@ public class AvaloniaExtensionsGenerator : ISourceGenerator
             actionCallStr = "action()";
         }
 
-        var eventName = ""; // @event.Declaration.Variables[0].ToString();
+        //todo
+        var eventName = @event.Name; // @event.Declaration.Variables[0].ToString();
         var extensionName = "On" + eventName;
 
         var extensionText =
@@ -272,5 +286,4 @@ public class AvaloniaExtensionsGenerator : ISourceGenerator
 
         return extensionText;
     }
-
 }
