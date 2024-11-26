@@ -6,6 +6,7 @@ using AvaloniaExtensionGenerator.Generators;
 using AvaloniaExtensionGenerator.Generators.AttachedPropertySetterGenerator;
 using AvaloniaExtensionGenerator.Generators.EventGenerators;
 using AvaloniaExtensionGenerator.Generators.SetterGenerators;
+using AvaloniaExtensionGenerator.Generators.StyleSetterGenerators;
 using Microsoft.CodeAnalysis;
 
 namespace AvaloniaExtensionGenerator;
@@ -48,16 +49,17 @@ public class GeneratorHost()
 
             new ActionToEventGenerator()),
 
-        //new("Styles",
-        //    t => !IsStyledElement(t) ? [] : t
-        //        .GetFields()
-        //        .Where(IsAcceptableStyledField)
-        //        .Select(x => new PropertyExtensionInfo(x)),
+        new("Styles",
+            t => !IsStyledElement(t) ? [] : t
+                .GetMembers()
+                .OfType<IFieldSymbol>()
+                .Where(IsAcceptableStyledField)
+                .Select(x => new PropertyExtensionInfo(x)),
 
-        //    new ValueStyleSetterGenerator(),
-        //    new BindingStyleSetterGenerator(),
-        //    new ValueOverloadsStyleSetterGenerator()
-        //)
+            new ValueStyleSetterGenerator(),
+            new BindingStyleSetterGenerator(),
+            new ValueOverloadsStyleSetterGenerator()
+        )
     ];
 
     public string? GenerateExtensions(INamedTypeSymbol controlType)
@@ -140,17 +142,17 @@ public class GeneratorHost()
         return false;
     }
 
-    //private static bool IsAcceptableStyledField(IFieldSymbol field)
-    //{
-    //    if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
-    //        return false;
+    private static bool IsAcceptableStyledField(IFieldSymbol field)
+    {
+        if (field.GetAttributes().Any(x => x.AttributeClass?.Name == "ObsoleteAttribute"))
+            return false;
 
-    //    if (field.FieldType.Name.StartsWith("StyledProperty") ||
-    //        field.FieldType.Name.StartsWith("AttachedProperty"))
-    //        return !IsReadOnlyField(field);
+        if (field.Type.Name.StartsWith("StyledProperty") ||
+            field.Type.Name.StartsWith("AttachedProperty"))
+            return !IsReadOnlyField(field);
 
-    //    return false;
-    //}
+        return false;
+    }
 
     private static bool IsReadOnlyField(IFieldSymbol field)
     {
@@ -182,16 +184,8 @@ public class GeneratorHost()
         return false;
     }
 
-    //private static Type? _styledElementType;
-
-    //public static bool IsStyledElement(Type controlType)
-    //{
-    //    _styledElementType ??= AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.ExportedTypes)
-    //        .FirstOrDefault(x => x.FullName == "Avalonia.StyledElement");
-
-    //    if (_styledElementType == null)
-    //        throw new NullReferenceException("Styled element Type can't be loaded");
-
-    //    return _styledElementType?.IsAssignableFrom(controlType) ?? false;
-    //}
+    public static bool IsStyledElement(INamedTypeSymbol controlType)
+    {
+        return controlType.AllInterfaces.Any(x => x.Name == "IStyleable");
+    }
 }
