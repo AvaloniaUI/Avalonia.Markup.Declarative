@@ -4,6 +4,7 @@ using Avalonia.Markup.Declarative.SourceGenerator;
 using AvaloniaExtensionGenerator.ExtensionInfos;
 using AvaloniaExtensionGenerator.Generators;
 using AvaloniaExtensionGenerator.Generators.AttachedPropertySetterGenerator;
+using AvaloniaExtensionGenerator.Generators.EventGenerators;
 using AvaloniaExtensionGenerator.Generators.SetterGenerators;
 using Microsoft.CodeAnalysis;
 
@@ -39,12 +40,13 @@ public class GeneratorHost()
             new AttachedPropertyBindFromExpressionSetterGenerator()
         ),
 
-        //new("Events",
-        //    t => t.GetEvents()
-        //        .Where(x => x.DeclaringType == t)
-        //        .Select(x => new EventExtensionInfo(x)),
+        new("Events",
+            t => t.GetMembers()
+                .OfType<IEventSymbol>()
+                .Where(x => x.ContainingType == t)
+                .Select(x => new EventExtensionInfo(x)),
 
-        //    new ActionToEventGenerator()),
+            new ActionToEventGenerator()),
 
         //new("Styles",
         //    t => !IsStyledElement(t) ? [] : t
@@ -97,9 +99,8 @@ public class GeneratorHost()
 
     private static bool IsAvaloniaPropertyField(IFieldSymbol field)
     {
-        //todo
-        //if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
-        //    return false;
+        if (field.GetAttributes().Any(x => x.AttributeClass?.Name == "ObsoleteAttribute"))
+            return false;
 
         if (field.Type.Name.StartsWith("DirectProperty") ||
             field.Type.Name.StartsWith("StyledProperty") ||
@@ -116,9 +117,8 @@ public class GeneratorHost()
 
     private static bool IsAttachedPropertyField(IFieldSymbol field)
     {
-        //todo
-        //if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
-        //    return false;
+        if (field.GetAttributes().Any(x => x.AttributeClass?.Name == "ObsoleteAttribute"))
+            return false;
 
         if (field.Type.Name.StartsWith("AttachedProperty"))
         {

@@ -1,14 +1,15 @@
+using Avalonia.Markup.Declarative.SourceGenerator;
 using AvaloniaExtensionGenerator.Generators;
-using System.Reflection;
-using System.Reflection.Metadata;
+using Microsoft.CodeAnalysis;
+using System.Collections.Immutable;
 
 namespace AvaloniaExtensionGenerator.ExtensionInfos;
 
 public class EventExtensionInfo : IMemberExtensionInfo
 {
     public string MemberName { get; }
-    public EventInfo EventInfo { get; }
-    public Type ControlType { get; }
+    public IEventSymbol EventInfo { get; }
+    public ITypeSymbol ControlType { get; }
     public string ControlTypeName { get; }
 
     public string EventHandler { get; }
@@ -29,37 +30,37 @@ public class EventExtensionInfo : IMemberExtensionInfo
     public bool HasMultipleParameters => EventParameterTypes.Count > 1;
 
 
-    public EventExtensionInfo(EventInfo eventInfo)
+    public EventExtensionInfo(IEventSymbol eventInfo)
     {
-        if (eventInfo.DeclaringType == null)
+        if (eventInfo.ContainingType == null)
             throw new NullReferenceException("Control type cannot be NULL");
 
-        if (eventInfo.EventHandlerType == null)
+        if (eventInfo.Type == null)
             throw new NullReferenceException("Event handler type cannot be NULL");
 
         EventInfo = eventInfo;
-        ControlType = eventInfo.DeclaringType;
-        ControlTypeName = ControlType.GetTypeDeclarationSourceCode();
+        ControlType = eventInfo.ContainingType;
+        ControlTypeName = ControlType.GetFullName();
         EventName = EventInfo.Name;
         MemberName = EventName;
-        EventHandler = EventInfo.EventHandlerType.GetTypeDeclarationSourceCode();
+        EventHandler = EventInfo.Type.GetFullName();
 
-        var methodInfo = eventInfo.EventHandlerType.GetMethod("Invoke");
-        if (methodInfo != null)
+        var methodInfo = eventInfo.Type.GetMembers("Invoke").FirstOrDefault();
+        if (methodInfo is IMethodSymbol method)
         {
-            var parameters = methodInfo.GetParameters();
-            foreach (var parameter in parameters) 
-                EventParameterTypes.Add(parameter.ParameterType.GetTypeDeclarationSourceCode());
+            var parameters = method.Parameters;
+            foreach (var parameter in parameters)
+                EventParameterTypes.Add(parameter.Type.GetFullName());
 
             if (HasRoutedEventArgs(parameters))
             {
-                var routedEventFieldInfo = ControlType.GetField(EventName + "Event", BindingFlags.Static | BindingFlags.Public); 
-                IsRoutedEvent = routedEventFieldInfo != null; //if routed event field located in base class, ignore it and cout it classic event
+                var routedEventFieldInfo = ControlType.GetMembers(EventName + "Event").First(x => x.IsStatic && x.DeclaredAccessibility == Accessibility.Public);
+                IsRoutedEvent = routedEventFieldInfo != null; //if routed event field located in base class, ignore it and count it classic event
             }
 
         }
 
-        IsGeneric = !eventInfo.DeclaringType.IsSealed;
+        IsGeneric = !eventInfo.ContainingType.IsSealed;
 
         ReturnType = ControlTypeName;
         if (IsGeneric)
@@ -71,11 +72,11 @@ public class EventExtensionInfo : IMemberExtensionInfo
 
     }
 
-    private static bool HasRoutedEventArgs(ParameterInfo[] parameters)
+    private static bool HasRoutedEventArgs(ImmutableArray<IParameterSymbol> parameters)
     {
-        return parameters.Any(x => IsRoutedEventArgType(x.ParameterType));
+        return parameters.Any(x => IsRoutedEventArgType(x.Type));
 
-        bool IsRoutedEventArgType(Type? type)
+        bool IsRoutedEventArgType(ITypeSymbol? type)
         {
             while (type != null)
             {

@@ -1,3 +1,4 @@
+using Avalonia.Markup.Declarative.SourceGenerator;
 using AvaloniaExtensionGenerator.Generators;
 using Microsoft.CodeAnalysis;
 using System.Reflection;
@@ -13,14 +14,15 @@ public class AttachedPropertyExtensionInfo : PropertyExtensionInfo
         ExtensionName = $"{ControlType.Name}_{ExtensionName}";
         var declaredType = field.Type;
 
-        var method = declaredType.GetMembers().FirstOrDefault(x => x.Name == $"Set{MemberName}");
+        var symbol = declaredType.GetMembers().FirstOrDefault(x => x.Name == $"Set{MemberName}");
 
-        if (method == null) return;
-
-        //var par = method.GetParameters().FirstOrDefault();
-        //if (par != null)
-        //{
-        //    AttachedPropertyHostTypeName = par.ParameterType.GetTypeDeclarationSourceCode();
-        //}
+        if (symbol is IMethodSymbol method)
+        {
+            var par = method.Parameters.FirstOrDefault();
+            if (par != null)
+            {
+                AttachedPropertyHostTypeName = par.Type.GetFullName();
+            }
+        }
     }
 }
