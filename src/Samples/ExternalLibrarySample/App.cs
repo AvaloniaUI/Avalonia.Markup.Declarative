@@ -1,8 +1,7 @@
-﻿using ExternalLibrarySample;
-using LiveChartsCore;
+﻿using LiveChartsCore.SkiaSharpView.Avalonia;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: GenerateMarkupForAssembly(typeof(ISeries))]
+[assembly: GenerateMarkupForAssembly(typeof(CartesianChart))]
 
 var services = new ServiceCollection();
 
@@ -17,10 +16,11 @@ AppBuilder.Configure<Application>()
     .SetupWithLifetime(lifetime);
 
 lifetime.MainWindow = new Window()
-    .Title("Avalonia External Library Sample")
-    .Width(800)
-    .Height(600)
-    .Content(new ChartsComponent());
+    //.Title("Avalonia External Library Sample")
+    //.Width(800)
+    //.Height(600)
+    //.Content(new ChartsComponent())
+    ;
 
 #if DEBUG
 lifetime.MainWindow.AttachDevTools();
