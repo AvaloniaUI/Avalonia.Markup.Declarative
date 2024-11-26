@@ -40,17 +40,17 @@ public class EventExtensionInfo : IMemberExtensionInfo
 
         EventInfo = eventInfo;
         ControlType = eventInfo.ContainingType;
-        ControlTypeName = ControlType.GetFullName();
+        ControlTypeName = ControlType.ToString();
         EventName = EventInfo.Name;
         MemberName = EventName;
-        EventHandler = EventInfo.Type.GetFullName();
+        EventHandler = EventInfo.Type.ToString();
 
         var methodInfo = eventInfo.Type.GetMembers("Invoke").FirstOrDefault();
         if (methodInfo is IMethodSymbol method)
         {
             var parameters = method.Parameters;
             foreach (var parameter in parameters)
-                EventParameterTypes.Add(parameter.Type.GetFullName());
+                EventParameterTypes.Add(parameter.Type.ToString());
 
             if (HasRoutedEventArgs(parameters))
             {

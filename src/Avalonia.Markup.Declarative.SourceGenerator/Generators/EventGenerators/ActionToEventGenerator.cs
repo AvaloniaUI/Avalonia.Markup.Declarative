@@ -40,7 +40,7 @@ public class ActionToEventGenerator : ExtensionGeneratorBase<EventExtensionInfo>
         var extensionName = "On" + eventName;
 
         var extensionBody =
-            $" => {Environment.NewLine} control._setEvent(({eventHandler}) (({lambdaParameters}) => {actionCallStr}), h => control.{eventName} += h);";
+            $" =>{Environment.NewLine} control._setEvent(({eventHandler}) (({lambdaParameters}) => {actionCallStr}), h => control.{eventName} += h);";
 
         if (@event.IsRoutedEvent)
         {

@@ -102,6 +102,6 @@ internal static class MarkupTypeHelpers
     /// <returns></returns>
     internal static string GetFullName(this ISymbol? symbol)
     {
-        return (string.IsNullOrEmpty(symbol?.ContainingNamespace?.Name) ? "" : symbol.ContainingNamespace.ToString() + ".") + symbol.Name;
+        return (string.IsNullOrEmpty(symbol?.ContainingNamespace?.Name) ? "" : symbol.ContainingNamespace.ToString() + ".") + symbol;
     }
 }

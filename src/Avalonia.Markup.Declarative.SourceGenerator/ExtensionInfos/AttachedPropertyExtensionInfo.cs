@@ -21,7 +21,7 @@ public class AttachedPropertyExtensionInfo : PropertyExtensionInfo
             var par = method.Parameters.FirstOrDefault();
             if (par != null)
             {
-                AttachedPropertyHostTypeName = par.Type.GetFullName();
+                AttachedPropertyHostTypeName = par.Type.ToString();
             }
         }
     }

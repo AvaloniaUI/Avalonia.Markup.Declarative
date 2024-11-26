@@ -44,12 +44,11 @@ public class AvaloniaExtensionsGenerator : ISourceGenerator
         {
             foreach (INamedTypeSymbol publicClass in assembly.GlobalNamespace.GetPublicClasses())
             {
-
                 var code = generator.GenerateExtensions(publicClass);
 
                 if (code != null)
                 {
-                    context.AddSource($"{publicClass.GetFullName()}.g.cs".TrimStart('.'), code);
+                    context.AddSource($"{publicClass}.g.cs".TrimStart('.'), code);
                 }
             }
         }

@@ -99,11 +99,11 @@ namespace Avalonia.Markup.Declarative.Tests
                  // CanSave
 
                 /*BindFromExpressionSetterGenerator*/
-                public static T CanSave<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Tests.TestClass
+                public static T CanSave<T>(this T control, Func<bool> func, Action<bool>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Tests.TestClass
                    => control._set(Tests.TestClass.CanSaveProperty, func, onChanged, expression);
 
                 /*MagicalSetterGenerator*/
-                public static T CanSave<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
+                public static T CanSave<T>(this T control,bool value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
                 => control._setEx(Tests.TestClass.CanSaveProperty, ps, () => control.CanSave = value, bindingMode, converter, bindingSource);
 
                 /*BindSetterGenerator*/
@@ -115,7 +115,7 @@ namespace Avalonia.Markup.Declarative.Tests
                    => control._set(Tests.TestClass.CanSaveProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
                 /*MagicalSetterWithConverterGenerator*/
-                public static T CanSave<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
+                public static T CanSave<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, bool> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
                    => control._setEx(Tests.TestClass.CanSaveProperty, ps, () => control.CanSave = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
@@ -179,11 +179,11 @@ namespace Avalonia.Markup.Declarative.Tests
                  // CanSave
 
                 /*BindFromExpressionSetterGenerator*/
-                public static T CanSave<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Tests.TestClass
+                public static T CanSave<T>(this T control, Func<bool> func, Action<bool>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Tests.TestClass
                    => control._set(Tests.TestClass.CanSaveProperty, func, onChanged, expression);
 
                 /*MagicalSetterGenerator*/
-                public static T CanSave<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
+                public static T CanSave<T>(this T control,bool value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
                 => control._setEx(Tests.TestClass.CanSaveProperty, ps, () => control.CanSave = value, bindingMode, converter, bindingSource);
 
                 /*BindSetterGenerator*/
@@ -195,7 +195,7 @@ namespace Avalonia.Markup.Declarative.Tests
                    => control._set(Tests.TestClass.CanSaveProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
                 /*MagicalSetterWithConverterGenerator*/
-                public static T CanSave<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
+                public static T CanSave<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, bool> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
                    => control._setEx(Tests.TestClass.CanSaveProperty, ps, () => control.CanSave = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
@@ -272,11 +272,11 @@ namespace Avalonia.Markup.Declarative.Tests
                  // Command
 
                 /*AttachedPropertyMagicalSetterGenerator*/
-                public static T TestClass_Command<T>(this T control, ICommand value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : 
+                public static T TestClass_Command<T>(this T control, ICommand value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T :
                  => control._setEx(Tests.TestClass.CommandProperty, ps, () => Tests.TestClass.SetCommand(control, value), bindingMode, converter, bindingSource);
 
                 /*AttachedPropertyBindFromExpressionSetterGenerator*/
-                public static T TestClass_Command<T>(this T control, Func<ICommand> func, Action<ICommand>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T :  
+                public static T TestClass_Command<T>(this T control, Func<ICommand> func, Action<ICommand>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T :
                    => control._set(Tests.TestClass.CommandProperty, func, onChanged, expression);
 
 
@@ -334,11 +334,11 @@ namespace Avalonia.Markup.Declarative.Tests
                  // RepeatCount
 
                 /*BindFromExpressionSetterGenerator*/
-                public static T RepeatCount<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Tests.TestClass
+                public static T RepeatCount<T>(this T control, Func<int> func, Action<int>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Tests.TestClass
                    => control._set(Tests.TestClass.RepeatCountProperty, func, onChanged, expression);
 
                 /*MagicalSetterGenerator*/
-                public static T RepeatCount<T>(this T control,System.Int32 value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
+                public static T RepeatCount<T>(this T control,int value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
                 => control._setEx(Tests.TestClass.RepeatCountProperty, ps, () => control.RepeatCount = value, bindingMode, converter, bindingSource);
 
                 /*BindSetterGenerator*/
@@ -350,8 +350,88 @@ namespace Avalonia.Markup.Declarative.Tests
                    => control._set(Tests.TestClass.RepeatCountProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
                 /*MagicalSetterWithConverterGenerator*/
-                public static T RepeatCount<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Int32> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
+                public static T RepeatCount<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, int> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
                    => control._setEx(Tests.TestClass.RepeatCountProperty, ps, () => control.RepeatCount = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+
+                }
+                """;
+
+            output.Should().Be(expectedOutput);
+        }
+
+        [Fact]
+        public void ArrayValue()
+        {
+            var inputSource = """
+                using Avalonia.Markup.Declarative;
+                using Avalonia;
+                using Avalonia.Controls
+
+                namespace Tests;
+
+                public class TestClass : ViewBase
+                {
+                    private bool[] _canSave = default;
+
+                    public static readonly DirectProperty<TestClass, bool[]> CanSaveProperty =
+                        AvaloniaProperty.RegisterDirect<TestClass, bool[]>
+                        (
+                            nameof(CanSave),
+                            o => o.CanSave
+                        );
+
+                    public bool[] CanSave
+                    {
+                        get => _canSave;
+                        set => SetAndRaise(CanSaveProperty, ref _canSave, value);
+                    }
+
+                    protected override object Build()
+                    {
+                        return new TextBox();
+                    }
+                }
+                """;
+
+            var output = GetGeneratedOutput(inputSource);
+
+            var expectedOutput = """
+                #nullable enable
+                using Avalonia.Data;
+                using Avalonia.Data.Converters;
+                using System;
+                using System.Numerics;
+                using System.Linq.Expressions;
+                using System.Runtime.CompilerServices;
+
+                namespace Avalonia.Markup.Declarative;
+
+                public static partial class TestClass_MarkupExtensions
+                {
+                //================= Properties ======================//
+                 // CanSave
+
+                /*BindFromExpressionSetterGenerator*/
+                public static T CanSave<T>(this T control, Func<bool[]> func, Action<bool[]>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Tests.TestClass
+                   => control._set(Tests.TestClass.CanSaveProperty, func, onChanged, expression);
+
+                /*MagicalSetterGenerator*/
+                public static T CanSave<T>(this T control,bool[] value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
+                => control._setEx(Tests.TestClass.CanSaveProperty, ps, () => control.CanSave = value, bindingMode, converter, bindingSource);
+
+                /*BindSetterGenerator*/
+                public static T CanSave<T>(this T control, IBinding binding) where T : Tests.TestClass
+                   => control._set(Tests.TestClass.CanSaveProperty, binding);
+
+                /*AvaloniaPropertyBindSetterGenerator*/
+                public static T CanSave<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Tests.TestClass
+                   => control._set(Tests.TestClass.CanSaveProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+                /*MagicalSetterWithConverterGenerator*/
+                public static T CanSave<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, bool[]> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
+                   => control._setEx(Tests.TestClass.CanSaveProperty, ps, () => control.CanSave = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
 

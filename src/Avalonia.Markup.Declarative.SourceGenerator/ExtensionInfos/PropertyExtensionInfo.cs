@@ -26,11 +26,11 @@ public class PropertyExtensionInfo : IMemberExtensionInfo
         ExtensionName = field.Name.Replace("Property", "");
         MemberName = field.Name.Replace("Property", "");
         ValueType = field.Type;
-        ControlTypeName = ControlType.GetFullName();
+        ControlTypeName = ControlType.ToString();
 
         var type = (field.Type as INamedTypeSymbol).TypeArguments.Last(); //todo validate
 
-        ValueTypeSource = type.GetFullName();
+        ValueTypeSource = type.ToString();
 
         IsAttachedProperty = field.Type.Name.StartsWith("AttachedProperty");
         IsGeneric = !field.Type.IsSealed;
