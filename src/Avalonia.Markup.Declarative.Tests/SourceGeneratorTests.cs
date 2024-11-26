@@ -221,6 +221,11 @@ namespace Avalonia.Markup.Declarative.Tests
                 public static readonly AttachedProperty<ICommand> CommandProperty = AvaloniaProperty.RegisterAttached<TestClass, Interactive, ICommand>(
                 "Command", default(ICommand), false, BindingMode.OneTime);
 
+                public static void SetCommand(AvaloniaObject element, ICommand commandValue)
+                {
+
+                }
+
                     protected override object Build()
                     {
                         return new TextBox();
@@ -265,19 +270,6 @@ namespace Avalonia.Markup.Declarative.Tests
                 /*MagicalSetterWithConverterGenerator*/
                 public static T Command<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, ICommand> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Tests.TestClass
                    => control._setEx(Tests.TestClass.CommandProperty, ps, () => control.Command = converter.TryConvert(value), bindingMode, converter, bindingSource);
-
-
-
-                //================= Attached Properties ======================//
-                 // Command
-
-                /*AttachedPropertyMagicalSetterGenerator*/
-                public static T TestClass_Command<T>(this T control, ICommand value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T :
-                 => control._setEx(Tests.TestClass.CommandProperty, ps, () => Tests.TestClass.SetCommand(control, value), bindingMode, converter, bindingSource);
-
-                /*AttachedPropertyBindFromExpressionSetterGenerator*/
-                public static T TestClass_Command<T>(this T control, Func<ICommand> func, Action<ICommand>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T :
-                   => control._set(Tests.TestClass.CommandProperty, func, onChanged, expression);
 
 
 
