@@ -6,6 +6,7 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!--<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>-->  <!--todo enable this and fix errors-->
   </PropertyGroup>
 
   <ItemGroup>

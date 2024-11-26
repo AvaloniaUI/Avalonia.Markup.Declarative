@@ -3,6 +3,7 @@ using System.Text;
 using Avalonia.Markup.Declarative.SourceGenerator;
 using AvaloniaExtensionGenerator.ExtensionInfos;
 using AvaloniaExtensionGenerator.Generators;
+using AvaloniaExtensionGenerator.Generators.AttachedPropertySetterGenerator;
 using AvaloniaExtensionGenerator.Generators.SetterGenerators;
 using Microsoft.CodeAnalysis;
 
@@ -14,14 +15,13 @@ public class GeneratorHost()
     [
         new("Properties",
             t => t.GetMembers()
-                .Where(x => x is IFieldSymbol)
-                .Cast<IFieldSymbol>()
+                .OfType<IFieldSymbol>()
                 .Where(IsAvaloniaPropertyField)
                 .Select(x => new PropertyExtensionInfo(x)),
 
             new BindFromExpressionSetterGenerator(),
             new MagicalSetterGenerator(),
-            //new ValueOverloadsSetterGenerator(),
+            new ValueOverloadsSetterGenerator(),
 
             //obsolete candidates
             new BindSetterGenerator(),
@@ -29,16 +29,15 @@ public class GeneratorHost()
             new MagicalSetterWithConverterGenerator()
         ),
 
-        //new("Attached Properties",
-        //    t => t.GetMembers()
-        //        .Where(x => x is IFieldSymbol)
-        //        .Cast<IFieldSymbol>()
-        //        .Where(IsAttachedPropertyField)
-        //        .Select(x => new AttachedPropertyExtensionInfo(x)),
+        new("Attached Properties",
+            t => t.GetMembers()
+                .OfType<IFieldSymbol>()
+                .Where(IsAttachedPropertyField)
+                .Select(x => new AttachedPropertyExtensionInfo(x)),
 
-        //    new AttachedPropertyMagicalSetterGenerator(),
-        //    new AttachedPropertyBindFromExpressionSetterGenerator()
-        //),
+            new AttachedPropertyMagicalSetterGenerator(),
+            new AttachedPropertyBindFromExpressionSetterGenerator()
+        ),
 
         //new("Events",
         //    t => t.GetEvents()
@@ -98,6 +97,7 @@ public class GeneratorHost()
 
     private static bool IsAvaloniaPropertyField(IFieldSymbol field)
     {
+        //todo
         //if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
         //    return false;
 
@@ -114,30 +114,31 @@ public class GeneratorHost()
         return false;
     }
 
-    //private static bool IsAttachedPropertyField(IFieldSymbol field)
-    //{
-    //    if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
-    //        return false;
+    private static bool IsAttachedPropertyField(IFieldSymbol field)
+    {
+        //todo
+        //if (field.GetCustomAttribute<ObsoleteAttribute>() != null)
+        //    return false;
 
-    //    if (field.FieldType.Name.StartsWith("AttachedProperty"))
-    //    {
-    //        Console.ForegroundColor = ConsoleColor.Magenta;
-    //        Console.WriteLine($"{field.Name} is Attached Property.");
+        if (field.Type.Name.StartsWith("AttachedProperty"))
+        {
+            //Console.ForegroundColor = ConsoleColor.Magenta;
+            //Console.WriteLine($"{field.Name} is Attached Property.");
 
-    //        var isReadOnly = IsReadOnlyAttachedField(field);
-    //        if (isReadOnly)
-    //        {
-    //            Console.ForegroundColor = ConsoleColor.Cyan;
-    //            Console.WriteLine($"{field.Name} is read only - skipped.");
-    //            Console.ForegroundColor = ConsoleColor.Gray;
-    //            return false;
-    //        }
+            var isReadOnly = IsReadOnlyAttachedField(field);
+            if (isReadOnly)
+            {
+                //Console.ForegroundColor = ConsoleColor.Cyan;
+                //Console.WriteLine($"{field.Name} is read only - skipped.");
+                //Console.ForegroundColor = ConsoleColor.Gray;
+                return false;
+            }
 
-    //        Console.ForegroundColor = ConsoleColor.Gray;
-    //        return true;
-    //    }
-    //    return false;
-    //}
+            //Console.ForegroundColor = ConsoleColor.Gray;
+            return true;
+        }
+        return false;
+    }
 
     //private static bool IsAcceptableStyledField(IFieldSymbol field)
     //{
@@ -153,48 +154,33 @@ public class GeneratorHost()
 
     private static bool IsReadOnlyField(IFieldSymbol field)
     {
-        try
-        {
-            var controlType = field.Type;
-            var propertyName = field.Name.Replace("Property", "");
+        var controlType = field.ContainingType;
+        var propertyName = field.Name.Replace("Property", "");
 
-            var propInfo = controlType?.GetMembers(propertyName).FirstOrDefault();
+        var symbol = controlType?.GetMembers(propertyName).FirstOrDefault();
 
-            return (propInfo as IPropertySymbol).HasPublicSetter();
-        }
-        catch (Exception e)
+        if (symbol is IPropertySymbol prop)
         {
-            Console.WriteLine(e);
-            Console.WriteLine("skipped");
+            return !prop.HasPublicSetter();
         }
 
         return false;
     }
 
-    //private static bool IsReadOnlyAttachedField(IFieldSymbol field)
-    //{
-    //    try
-    //    {
-    //        var controlType = field.DeclaringType;
-    //        var setterMethodName = "Set" + field.Name.Replace("Property", "");
+    private static bool IsReadOnlyAttachedField(IFieldSymbol field)
+    {
+        var controlType = field.ContainingType;
+        var setterMethodName = "Set" + field.Name.Replace("Property", "");
 
-    //        var methodInfo = controlType?.GetMethod(setterMethodName);
-    //        if (methodInfo != null)
-    //        {
-    //            if (methodInfo is { IsPublic: true, IsStatic: true })
-    //                return false;
-    //        }
+        var methodInfo = controlType?.GetMembers(setterMethodName).FirstOrDefault();
 
-    //        return true;
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        Console.WriteLine(e);
-    //        Console.WriteLine("skipped");
-    //    }
+        if (methodInfo is IMethodSymbol method)
+        {
+            return method.DeclaredAccessibility == Accessibility.Public && method.IsStatic;
+        }
 
-    //    return false;
-    //}
+        return false;
+    }
 
     //private static Type? _styledElementType;
 

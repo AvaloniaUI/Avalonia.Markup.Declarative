@@ -8,5 +8,5 @@ public class MagicalSetterWithConverterGenerator : ExtensionGeneratorBase<Proper
         + $"(this {info.ReturnType} control, "
         + $"TValue value, FuncValueConverter<TValue, {info.ValueTypeSource}> converter, BindingMode? bindingMode = null, object? bindingSource = null,"
         + $" [CallerArgumentExpression(nameof(value))] string? ps = null) {info.GenericConstraint}{Environment.NewLine}"
-        + $"=> control._setEx({info.ControlTypeName}.{info.FieldInfo.Name}, ps, () => control.{info.ExtensionName} = converter.TryConvert(value), bindingMode, converter, bindingSource);";
+        + $"   => control._setEx({info.ControlTypeName}.{info.FieldInfo.Name}, ps, () => control.{info.ExtensionName} = converter.TryConvert(value), bindingMode, converter, bindingSource);";
 }

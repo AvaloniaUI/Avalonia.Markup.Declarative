@@ -85,8 +85,23 @@ internal static class MarkupTypeHelpers
         }
     }
 
+    /// <summary>
+    /// Gets the Symbol Namespace
+    /// </summary>
+    /// <param name="ns"></param>
+    /// <returns></returns>
     internal static string GetFullNamespace(this ISymbol ns)
     {
         return string.IsNullOrEmpty(ns.ContainingNamespace.Name) ? "" : ns.ContainingNamespace.ToString();
+    }
+
+    /// <summary>
+    /// Gets the Symbol full Name ie Namespace.Name
+    /// </summary>
+    /// <param name="symbol"></param>
+    /// <returns></returns>
+    internal static string GetFullName(this ISymbol? symbol)
+    {
+        return (string.IsNullOrEmpty(symbol.ContainingNamespace.Name) ? "" : symbol.ContainingNamespace.ToString() + ".") + symbol.Name;
     }
 }

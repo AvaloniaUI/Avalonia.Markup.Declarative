@@ -44,11 +44,16 @@ public class AvaloniaExtensionsGenerator : ISourceGenerator
         {
             foreach (INamedTypeSymbol publicClass in assembly.GlobalNamespace.GetPublicClasses())
             {
+                if (publicClass.Name == "CartesianChart")
+                {
+
+                }
+
                 var code = generator.GenerateExtensions(publicClass);
 
                 if (code != null)
                 {
-                    context.AddSource($"{publicClass.GetFullNamespace()}.{publicClass.Name}.g.cs".TrimStart('.'), code);
+                    context.AddSource($"{publicClass.GetFullName()}.g.cs".TrimStart('.'), code);
                 }
             }
         }
