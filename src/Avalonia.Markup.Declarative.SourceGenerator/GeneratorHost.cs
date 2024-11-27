@@ -166,7 +166,7 @@ public class GeneratorHost()
             return !prop.HasPublicSetter();
         }
 
-        return false;
+        return true;
     }
 
     private static bool IsReadOnlyAttachedField(IFieldSymbol field)

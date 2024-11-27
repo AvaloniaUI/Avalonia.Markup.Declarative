@@ -60,14 +60,6 @@ internal static class MarkupTypeHelpers
         return property != null && property.DeclaredAccessibility == Accessibility.Public;
     }
 
-    internal static string GetPropertyTypeName(IPropertySymbol property)
-    {
-        //var semanticModel = compilation.GetSemanticModel(property.SyntaxTree);
-        //var fullTypeName = semanticModel.GetTypeInfo(property.Type).Type?.ToString();
-
-        return property.Type.ToString();
-    }
-
     internal static IEnumerable<INamedTypeSymbol> GetPublicClasses(this INamespaceSymbol sym)
     {
         foreach (INamedTypeSymbol typeMember in sym.GetTypeMembers())
@@ -93,15 +85,5 @@ internal static class MarkupTypeHelpers
     internal static string GetFullNamespace(this ISymbol ns)
     {
         return string.IsNullOrEmpty(ns?.ContainingNamespace?.Name) ? "" : ns.ContainingNamespace.ToString();
-    }
-
-    /// <summary>
-    /// Gets the Symbol full Name ie Namespace.Name
-    /// </summary>
-    /// <param name="symbol"></param>
-    /// <returns></returns>
-    internal static string GetFullName(this ISymbol? symbol)
-    {
-        return (string.IsNullOrEmpty(symbol?.ContainingNamespace?.Name) ? "" : symbol.ContainingNamespace.ToString() + ".") + symbol;
     }
 }

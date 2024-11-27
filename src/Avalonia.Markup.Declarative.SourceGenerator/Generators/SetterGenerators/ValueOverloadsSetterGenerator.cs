@@ -17,7 +17,7 @@ public class ValueOverloadsSetterGenerator : ExtensionGeneratorBase<PropertyExte
             foreach (var constructor in info.ValueType.GetMembers().OfType<IMethodSymbol>().Where(m => m.MethodKind == MethodKind.Constructor))
             {
                 var ps = constructor.Parameters;
-                var argDefs = string.Join(", ", ps.Select(x => $"{x.Type.GetFullName()} {x.Name} = default"));
+                var argDefs = string.Join(", ", ps.Select(x => $"{x.Type} {x.Name} = default"));
                 var argVals = string.Join(", ", ps.Select(x => x.Name)); ;
 
                 extensionText += Environment.NewLine +
