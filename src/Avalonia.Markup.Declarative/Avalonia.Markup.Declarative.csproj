@@ -37,7 +37,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="bin\Debug\net7.0\/Avalonia.Markup.Declarative.SourceGenerator.dll" />
+	  <None Remove="bin\Debug\net8.0\/Avalonia.Markup.Declarative.SourceGenerator.dll" />
 	</ItemGroup>
 
 	<ItemGroup>
