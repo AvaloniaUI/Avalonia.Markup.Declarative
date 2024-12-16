@@ -25,10 +25,24 @@ public class PropertyExtensionInfo : IMemberExtensionInfo
         ControlType = field.ContainingType ?? throw new NullReferenceException("Control type can not be NULL");
         ExtensionName = field.Name.Replace("Property", "");
         MemberName = field.Name.Replace("Property", "");
+
+        if (field.AssociatedSymbol != null)
+        {
+            ExtensionName = field.AssociatedSymbol.Name.Replace("Property", "");
+            MemberName = field.AssociatedSymbol.Name.Replace("Property", "");
+        }
+
         ValueType = field.Type;
         ControlTypeName = ControlType.ToString();
 
-        var type = (field.Type as INamedTypeSymbol).TypeArguments.Last(); //todo validate
+        var t = field.Type as INamedTypeSymbol;
+
+        var type = t.TypeArguments.LastOrDefault();
+
+        if (type == null)
+        {
+            type = t;
+        }
 
         ValueTypeSource = type.ToString();
 

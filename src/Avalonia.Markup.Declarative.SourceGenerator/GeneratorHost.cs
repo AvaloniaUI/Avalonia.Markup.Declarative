@@ -18,7 +18,7 @@ public class GeneratorHost()
         new("Properties",
             t => t.GetMembers()
                 .OfType<IFieldSymbol>()
-                .Where(IsAvaloniaPropertyField)
+                .Where(x => IsAvaloniaPropertyField(x))
                 .Select(x => new PropertyExtensionInfo(x)),
 
             new BindFromExpressionSetterGenerator(),
@@ -39,6 +39,15 @@ public class GeneratorHost()
 
             new AttachedPropertyMagicalSetterGenerator(),
             new AttachedPropertyBindFromExpressionSetterGenerator()
+        ),
+
+        new("Common Properties",
+            t => t.GetMembers()
+                .OfType<IFieldSymbol>()
+                .Where(x => !IsAvaloniaPropertyField(x) && IsCommonPropertyField(x))
+                .Select(x => new PropertyExtensionInfo(x)),
+
+            new CommonPropertySetterExtension()
         ),
 
         new("Events",
@@ -117,6 +126,19 @@ public class GeneratorHost()
         return false;
     }
 
+    private static bool IsCommonPropertyField(IFieldSymbol field)
+    {
+        if (!IsDeclarativeViewBase(field.ContainingType))
+        {
+            return false;
+        }
+
+        if (field.GetAttributes().Any(x => x.AttributeClass?.Name == "ObsoleteAttribute"))
+            return false;
+
+        return !IsReadOnlyField(field);
+    }
+
     private static bool IsAttachedPropertyField(IFieldSymbol field)
     {
         if (field.GetAttributes().Any(x => x.AttributeClass?.Name == "ObsoleteAttribute"))
@@ -159,6 +181,11 @@ public class GeneratorHost()
         var controlType = field.ContainingType;
         var propertyName = field.Name.Replace("Property", "");
 
+        if (field.AssociatedSymbol != null)
+        {
+            propertyName = field.AssociatedSymbol.Name.Replace("Property", "");
+        }
+
         var symbol = controlType?.GetMembers(propertyName).FirstOrDefault();
 
         if (symbol is IPropertySymbol prop)
@@ -187,5 +214,10 @@ public class GeneratorHost()
     public static bool IsStyledElement(INamedTypeSymbol controlType)
     {
         return controlType.AllInterfaces.Any(x => x.Name == "IStyleable");
+    }
+
+    public static bool IsDeclarativeViewBase(INamedTypeSymbol controlType)
+    {
+        return controlType.AllInterfaces.Any(x => x.Name == "IDeclarativeViewBase");
     }
 }

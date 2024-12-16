@@ -11,6 +11,9 @@ namespace Avalonia.Markup.Declarative.Tests
     {
         private static string? GetGeneratedOutput(string sourceCode)
         {
+            var loadDll = typeof(AvaloniaObject);
+            var loadDll1 = typeof(ComponentBase);
+
             var syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
             var references = AppDomain.CurrentDomain.GetAssemblies()
                                       .Where(assembly => !assembly.IsDynamic)
@@ -200,6 +203,19 @@ namespace Avalonia.Markup.Declarative.Tests
 
 
 
+                //================= Styles ======================//
+                 // CanSave
+
+                /*ValueStyleSetterGenerator*/
+                public static Style<T> CanSave<T>(this Style<T> style, bool value) where T : Tests.TestClass 
+                => style._addSetter(Tests.TestClass.CanSaveProperty, value);
+
+                /*BindingStyleSetterGenerator*/
+                public static Style<T> CanSave<T>(this Style<T> style, IBinding binding) where T : Tests.TestClass 
+                => style._addSetter(Tests.TestClass.CanSaveProperty, binding);
+
+
+
                 }
                 """;
 
@@ -347,6 +363,19 @@ namespace Avalonia.Markup.Declarative.Tests
 
 
 
+                //================= Styles ======================//
+                 // RepeatCount
+
+                /*ValueStyleSetterGenerator*/
+                public static Style<T> RepeatCount<T>(this Style<T> style, int value) where T : Tests.TestClass 
+                => style._addSetter(Tests.TestClass.RepeatCountProperty, value);
+
+                /*BindingStyleSetterGenerator*/
+                public static Style<T> RepeatCount<T>(this Style<T> style, IBinding binding) where T : Tests.TestClass 
+                => style._addSetter(Tests.TestClass.RepeatCountProperty, binding);
+
+
+
                 }
                 """;
 
@@ -470,6 +499,62 @@ namespace Avalonia.Markup.Declarative.Tests
             var output = GetGeneratedOutput(inputSource);
 
             output.Should().BeNull();
+        }
+
+        [Fact]
+        public void CommonProperty()
+        {
+            var inputSource = """
+                using Avalonia.Markup.Declarative;
+                using Avalonia;
+                using Avalonia.Controls
+
+                namespace Tests;
+
+                public class Component : ComponentBase
+                {
+                    protected override object Build() =>
+                        new StackPanel()
+                            .Children(
+                                new TextBlock()
+                                    .Text("This is nested MVU Component"),
+
+                                new TextBlock()
+                                    .Text(Bind(InnerContent))
+                            );
+
+                    public string InnerContent { get; set; } = "Parameter value";
+                }
+                """;
+
+            var output = GetGeneratedOutput(inputSource);
+
+            var expectedOutput = """
+                #nullable enable
+                using Avalonia.Data;
+                using Avalonia.Data.Converters;
+                using System;
+                using System.Numerics;
+                using System.Linq.Expressions;
+                using System.Runtime.CompilerServices;
+
+                namespace Avalonia.Markup.Declarative;
+
+                public static partial class Component_MarkupExtensions
+                {
+                //================= Common Properties ======================//
+                 // InnerContent
+
+                /*CommonPropertySetterExtension*/
+                public static Tests.Component InnerContent(this Tests.Component control, string value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)
+                   => control._setCommonEx(ps, () => control.InnerContent = value, bindingMode, converter, bindingSource);
+
+
+
+                }
+                """;
+
+            output.Should().Be(expectedOutput);
         }
     }
 }
