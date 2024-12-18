@@ -47,7 +47,9 @@ public class GeneratorHost()
                 .Where(x => !IsAvaloniaPropertyField(x) && IsCommonPropertyField(x))
                 .Select(x => new PropertyExtensionInfo(x)),
 
-            new CommonPropertySetterExtension()
+            new CommonPropertySetterExtension(),
+            new CommonPropertyBindingSetterExtension(),
+            new CommonPropertyExpressionBindingSetterExtension()
         ),
 
         new("Events",
