@@ -9,7 +9,7 @@ public class CommonPropertyBindingSetterExtension : ExtensionGeneratorBase<Prope
     {
         var extensionText =
             $"public static {info.ControlTypeName} {info.ExtensionName}(this {info.ControlTypeName} control, IBinding binding){Environment.NewLine}"
-            + $"   => control._setCommonBindingEx(({info.ReturnType} value) => control.{info.ExtensionName} = value, binding);";
+            + $"   => control._setCommonBindingEx(({info.ValueType} value) => control.{info.ExtensionName} = value, binding);";
 
         return extensionText;
     }
