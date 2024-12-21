@@ -5,8 +5,6 @@ VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Markup.Declarative", "Avalonia.Markup.Declarative\Avalonia.Markup.Declarative.csproj", "{5B5C0172-0B35-470A-9A65-4679E6028454}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaExtensionGenerator", "AvaloniaExtensionGenerator\AvaloniaExtensionGenerator.csproj", "{5183B326-2752-4CA5-A233-D9F5B83324DF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaMarkupSample", "Samples\AvaloniaMarkupSample\AvaloniaMarkupSample.csproj", "{612D87E7-CF30-4E08-A7C3-AF4482924EBC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvuTemplate", "Samples\MvuTemplate\MvuTemplate.csproj", "{43B91641-30D5-448A-A996-16DFB85B7262}"
@@ -39,10 +37,6 @@ Global
 		{5B5C0172-0B35-470A-9A65-4679E6028454}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B5C0172-0B35-470A-9A65-4679E6028454}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B5C0172-0B35-470A-9A65-4679E6028454}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5183B326-2752-4CA5-A233-D9F5B83324DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5183B326-2752-4CA5-A233-D9F5B83324DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5183B326-2752-4CA5-A233-D9F5B83324DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5183B326-2752-4CA5-A233-D9F5B83324DF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{612D87E7-CF30-4E08-A7C3-AF4482924EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{612D87E7-CF30-4E08-A7C3-AF4482924EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{612D87E7-CF30-4E08-A7C3-AF4482924EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU

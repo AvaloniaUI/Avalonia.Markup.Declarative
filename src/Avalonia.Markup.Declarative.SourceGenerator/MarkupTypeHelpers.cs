@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
+﻿using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -9,25 +7,25 @@ namespace Avalonia.Markup.Declarative.SourceGenerator;
 
 internal static class MarkupTypeHelpers
 {
-    internal static ImmutableArray<ClassDeclarationSyntax> FindAvaloniaMarkupViews(Compilation compilation)
-    {
-        IEnumerable<SyntaxNode> allNodes = compilation.SyntaxTrees.SelectMany(s => s.GetRoot().DescendantNodes());
-        IEnumerable<ClassDeclarationSyntax> allClasses = allNodes
-            .Where(d => d.IsKind(SyntaxKind.ClassDeclaration))
-            .OfType<ClassDeclarationSyntax>();
+    //internal static ImmutableArray<ClassDeclarationSyntax> FindAvaloniaMarkupViews(Compilation compilation)
+    //{
+    //    IEnumerable<SyntaxNode> allNodes = compilation.SyntaxTrees.SelectMany(s => s.GetRoot().DescendantNodes());
+    //    IEnumerable<ClassDeclarationSyntax> allClasses = allNodes
+    //        .Where(d => d.IsKind(SyntaxKind.ClassDeclaration))
+    //        .OfType<ClassDeclarationSyntax>();
 
-        return allClasses
-            .Where(type => IsGenerateExtensionsView(compilation, type))
-            .ToImmutableArray();
-    }
+    //    return allClasses
+    //        .Where(type => IsGenerateExtensionsView(compilation, type))
+    //        .ToImmutableArray();
+    //}
 
-    private static bool IsGenerateExtensionsView(Compilation compilation, ClassDeclarationSyntax component)
-    {
-        var sModel = compilation.GetSemanticModel(component.SyntaxTree);
-        var classSymbol = ModelExtensions.GetDeclaredSymbol(sModel, component);
+    //private static bool IsGenerateExtensionsView(Compilation compilation, ClassDeclarationSyntax component)
+    //{
+    //    var sModel = compilation.GetSemanticModel(component.SyntaxTree);
+    //    var classSymbol = ModelExtensions.GetDeclaredSymbol(sModel, component);
 
-        return classSymbol is INamedTypeSymbol cs && cs.AllInterfaces.Any(x => x.Name == "IDeclarativeViewBase");
-    }
+    //    return classSymbol is INamedTypeSymbol cs && cs.AllInterfaces.Any(x => x.Name == "IDeclarativeViewBase");
+    //}
 
     /// <summary>
     /// Determines if property also has Avalonia property backend or not
@@ -35,50 +33,57 @@ internal static class MarkupTypeHelpers
     /// <param name="property">target property</param>
     /// <param name="members"></param>
     /// <returns></returns>
-    internal static bool IsCommonInstanceProperty(PropertyDeclarationSyntax property, SyntaxList<MemberDeclarationSyntax> members)
-    {
-        if(property.Modifiers.Any(x=>x.Text == "static"))
-            return false;
+    //internal static bool IsCommonInstanceProperty(IPropertySymbol property, ImmutableArray<ISymbol> members)
+    //{
+    //    if(property.IsStatic)
+    //        return false;
 
-        var avaloniaPropertyName = property.Identifier + "Property";
-        return members.OfType<FieldDeclarationSyntax>().All(field => field.Declaration.Variables[0].Identifier.ToString() != avaloniaPropertyName);
+    //    var avaloniaPropertyName = property.Name + "Property";
+    //    return members.OfType<IFieldSymbol>().All(field => field.Name != avaloniaPropertyName);
+    //}
+
+    //internal static bool HasAvaloniaPropertyPublicSetter(ISymbol field, ImmutableArray<ISymbol> members)
+    //{
+    //    var property = members
+    //        .FirstOrDefault(x => x.DeclaredAccessibility == Accessibility.Public && x.Name == field.Name.Replace("Property", ""));
+
+    //    return HasPublicSetter(property as IPropertySymbol);
+    //}
+
+    internal static bool HasPublicSetter(this IPropertySymbol? property)
+    {
+        return property?.SetMethod != null && property.SetMethod.DeclaredAccessibility == Accessibility.Public;
     }
 
-    internal static bool HasAvaloniaPropertyPublicSetter(FieldDeclarationSyntax field, SyntaxList<MemberDeclarationSyntax> members)
+    internal static bool IsPublic(ISymbol? property)
     {
-        var backingPropertyName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
-
-        var property = members
-            .OfType<PropertyDeclarationSyntax>()
-            .FirstOrDefault(x => x.Identifier.ValueText == backingPropertyName);
-
-        return HasPublicSetter(property);
+        return property != null && property.DeclaredAccessibility == Accessibility.Public;
     }
 
-    internal static bool HasPublicSetter(PropertyDeclarationSyntax? property)
+    internal static IEnumerable<INamedTypeSymbol> GetPublicClasses(this INamespaceSymbol sym)
     {
-        if (property != null)
+        foreach (INamedTypeSymbol typeMember in sym.GetTypeMembers())
         {
-            var setter = property.AccessorList?.Accessors.FirstOrDefault(x => x.IsKind(SyntaxKind.SetAccessorDeclaration));
-            if (setter?.Modifiers.Any() == false)
-                return true;
+            if (typeMember.DeclaredAccessibility == Accessibility.Public && typeMember.TypeKind == TypeKind.Class)
+                yield return typeMember;
         }
-
-        return false;
+        foreach (INamespaceSymbol namespaceMember in sym.GetNamespaceMembers())
+        {
+            foreach (INamedTypeSymbol publicClass in GetPublicClasses(namespaceMember))
+            {
+                if (publicClass.DeclaredAccessibility == Accessibility.Public && publicClass.TypeKind == TypeKind.Class)
+                    yield return publicClass;
+            }
+        }
     }
 
-    internal static bool IsPublic(PropertyDeclarationSyntax? property)
+    /// <summary>
+    /// Gets the Symbol Namespace
+    /// </summary>
+    /// <param name="ns"></param>
+    /// <returns></returns>
+    internal static string GetFullNamespace(this ISymbol ns)
     {
-        return property != null && property.Modifiers.Any(x => x.ValueText == "public");
+        return string.IsNullOrEmpty(ns?.ContainingNamespace?.Name) ? "" : ns.ContainingNamespace.ToString();
     }
-
-    internal static string GetPropertyTypeName(PropertyDeclarationSyntax property, Compilation compilation)
-    {
-        var semanticModel = compilation.GetSemanticModel(property.SyntaxTree);
-        var fullTypeName = semanticModel.GetTypeInfo(property.Type).Type?.ToString();
-
-        return !string.IsNullOrWhiteSpace(fullTypeName) ? fullTypeName : property.Type.ToString();
-    }
-
-
 }

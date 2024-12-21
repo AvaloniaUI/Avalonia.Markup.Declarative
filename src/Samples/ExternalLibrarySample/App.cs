@@ -1,5 +1,9 @@
 ﻿using ExternalLibrarySample;
+using LiveChartsCore.SkiaSharpView.Avalonia;
 using Microsoft.Extensions.DependencyInjection;
+
+// Generates Extensions for Avalonia Controls
+[assembly: GenerateMarkupForAssembly(typeof(CartesianChart))]
 
 var services = new ServiceCollection();
 
