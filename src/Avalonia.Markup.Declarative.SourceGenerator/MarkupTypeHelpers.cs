@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
+
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -9,6 +11,14 @@ namespace Avalonia.Markup.Declarative.SourceGenerator;
 
 internal static class MarkupTypeHelpers
 {
+    internal const string NewLine = "\n";
+
+    internal static bool IsAvaloniaMarkupView(INamedTypeSymbol typeSymbol)
+    {
+        return typeSymbol.AllInterfaces
+               .Any(x => x.Name == "IDeclarativeViewBase");
+    }
+
     internal static ImmutableArray<ClassDeclarationSyntax> FindAvaloniaMarkupViews(Compilation compilation)
     {
         IEnumerable<SyntaxNode> allNodes = compilation.SyntaxTrees.SelectMany(s => s.GetRoot().DescendantNodes());
@@ -72,12 +82,18 @@ internal static class MarkupTypeHelpers
         return property != null && property.Modifiers.Any(x => x.ValueText == "public");
     }
 
-    internal static string GetPropertyTypeName(PropertyDeclarationSyntax property, Compilation compilation)
-    {
-        var semanticModel = compilation.GetSemanticModel(property.SyntaxTree);
-        var fullTypeName = semanticModel.GetTypeInfo(property.Type).Type?.ToString();
+    //internal static string? GetPropertyTypeName(PropertyDeclarationSyntax property, Compilation compilation)
+    //{
+    //    var semanticModel = compilation.GetSemanticModel(property.SyntaxTree);
+    //    var fullTypeName = semanticModel.GetTypeInfo(property.Type).Type?.ToString();
 
-        return !string.IsNullOrWhiteSpace(fullTypeName) ? fullTypeName : property.Type.ToString();
+    //    return !string.IsNullOrWhiteSpace(fullTypeName) ? fullTypeName : property.Type.ToString();
+    //}
+
+    internal static string GetPropertyTypeName(PropertyDeclarationSyntax property, SemanticModel semanticModel)
+    {
+        var typeInfo = semanticModel.GetTypeInfo(property.Type);
+        return typeInfo.Type?.ToDisplayString() ?? property.Type.ToString();
     }
 
 

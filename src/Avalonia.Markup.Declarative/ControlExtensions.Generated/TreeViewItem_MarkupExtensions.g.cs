@@ -59,6 +59,30 @@ public static T IsSelected<TValue,T>(this T control, TValue value, FuncValueConv
 
 
 
+//================= Events ======================//
+ // Expanded
+
+/*ActionToEventGenerator*/
+public static T OnExpanded<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.TreeViewItem 
+{
+  control.AddHandler(Avalonia.Controls.TreeViewItem.ExpandedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
+
+
+ // Collapsed
+
+/*ActionToEventGenerator*/
+public static T OnCollapsed<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.TreeViewItem 
+{
+  control.AddHandler(Avalonia.Controls.TreeViewItem.CollapsedEvent, (_, args) => action(args), routes);
+  return control; 
+}
+
+
+
+
 //================= Styles ======================//
  // IsExpanded
 
