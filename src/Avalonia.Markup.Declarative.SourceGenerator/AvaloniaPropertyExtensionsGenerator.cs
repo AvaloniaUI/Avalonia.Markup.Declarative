@@ -1,122 +1,121 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Text;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Avalonia.Markup.Declarative.SourceGenerator.MarkupTypeHelpers;
 
 namespace Avalonia.Markup.Declarative.SourceGenerator;
 
 [Generator]
-public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
+public class AvaloniaPropertyExtensionsGenerator : ISourceGenerator
 {
-
-    public void Initialize(IncrementalGeneratorInitializationContext context)
+    public void Execute(GeneratorExecutionContext context)
     {
 #if DEBUG
         if (!Debugger.IsAttached)
         {
             //Debugger.Launch();
         }
-#endif
-        Debug.WriteLine("Initialize AvaloniaPropertyExtensionsGenerator code generator");
+#endif 
+        Debug.WriteLine("Execute AvaloniaPropertyExtensionsGenerator code generator");
 
-        var classDeclarations = context.SyntaxProvider
-            .CreateSyntaxProvider(
-                predicate: static (s, _) => s is ClassDeclarationSyntax,
-                transform: static (ctx, _) => GetSemanticTarget(ctx))
-            .Where(static c => c is not null);
+        var comp = context.Compilation;
 
-        context.RegisterSourceOutput(classDeclarations,
-            static (spc, data) => GenerateSource(spc, data.Value.Syntax, data.Value.Model));
-    }
+        var views = FindAvaloniaMarkupViews(comp);
 
-    private static (ClassDeclarationSyntax Syntax, SemanticModel Model)? GetSemanticTarget(GeneratorSyntaxContext context)
-    {
-        var classDecl = (ClassDeclarationSyntax)context.Node;
-        var symbol = context.SemanticModel.GetDeclaredSymbol(classDecl);
-        return symbol is INamedTypeSymbol typeSymbol &&
-               typeSymbol.AllInterfaces.Any(x => x.Name == "IDeclarativeViewBase")
-            ? (classDecl, context.SemanticModel)
-            : null;
-    }
-
-    private static void GenerateSource(SourceProductionContext context, ClassDeclarationSyntax type, SemanticModel semanticModel)
-    {
-        var root = type.SyntaxTree.GetRoot();
-        var ns = root.DescendantNodes()
-            .FirstOrDefault(x => x is BaseNamespaceDeclarationSyntax) as BaseNamespaceDeclarationSyntax;
-
-        var typeNamespace = ns?.Name.ToString() ?? string.Empty;
         var sb = new StringBuilder();
-
-        sb.AppendLine("#nullable enable");
-        sb.AppendLine($"// Auto-generated code {DateTime.Now:g}");
-        sb.AppendLine("using System;");
-        sb.AppendLine("using Avalonia.Data;");
-        sb.AppendLine("using Avalonia.Data.Converters;");
-        sb.AppendLine("using System.Runtime.CompilerServices;");
-
-        if (root is CompilationUnitSyntax compilationUnit)
+        foreach (var type in views)
         {
-            foreach (var usingDirective in compilationUnit.Usings)
+            var root = type.SyntaxTree
+                .GetRoot();
+
+            var ns = root
+                .DescendantNodes()
+                .FirstOrDefault(x => x is BaseNamespaceDeclarationSyntax);
+
+            var typeNamespace = "";
+
+            if (ns is BaseNamespaceDeclarationSyntax nbs)
             {
-                sb.AppendLine(usingDirective.ToString());
+                typeNamespace = nbs.Name.ToString();
             }
-        }
 
-        if (!string.IsNullOrWhiteSpace(typeNamespace))
-            sb.AppendLine($"using {typeNamespace};");
+            sb.Clear();
 
-        var typeName = type.Identifier.ToString();
-        sb.AppendLine("namespace Avalonia.Markup.Declarative;");
-        sb.AppendLine($"public static partial class {typeName}Extensions");
-        sb.AppendLine("{");
+            sb.AppendLine("#nullable enable");
+            sb.AppendLine("// Auto-generated code " + DateTime.Now.ToString("g"));
+            sb.AppendLine("using System;");
+            sb.AppendLine("using Avalonia.Data;");
+            sb.AppendLine("using Avalonia.Data.Converters;");
+            sb.AppendLine("using System.Runtime.CompilerServices;");
 
-        var members = type.Members;
-        var processedFields = new List<string>();
-
-        // PROCESS AVALONIA PROPERTIES
-        foreach (var field in members.OfType<FieldDeclarationSyntax>())
-        {
-            if (field.Declaration.Type is GenericNameSyntax { Identifier.ValueText: "DirectProperty" or "StyledProperty" or "AttachedProperty" }
-                && HasAvaloniaPropertyPublicSetter(field, members))
+            if (root is CompilationUnitSyntax compilationUnitSyntax)
             {
-                sb.AppendLine($"// avalonia properties\n");
-                AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
-                AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
-                processedFields.Add(field.Declaration.Variables[0].Identifier.ValueText);
+                foreach (var usingDirectiveSyntax in compilationUnitSyntax.Usings)
+                {
+                    sb.AppendLine(usingDirectiveSyntax.ToString());
+                }
             }
-        }
 
-        // PROCESS COMMON PROPERTIES
-        foreach (var property in members.OfType<PropertyDeclarationSyntax>())
-        {
-            var propertyName = property.Identifier.ToString();
-            if (!processedFields.Contains(propertyName + "Property")
-                && IsPublic(property)
-                && HasPublicSetter(property)
-                && IsCommonInstanceProperty(property, members))
+            if (!string.IsNullOrWhiteSpace(typeNamespace))
+                sb.AppendLine($"using {typeNamespace};");
+
+            var typeName = type.Identifier.ToString();
+
+            sb.AppendLine("namespace Avalonia.Markup.Declarative;");
+
+            sb.AppendLine($"public static partial class {typeName}Extensions");
+            sb.AppendLine("{");
+
+            var members = type.Members;
+
+            List<string> processedFields = [];
+            //PROCESS AVALONIA PROPERTIES
+            foreach (var field in members.OfType<FieldDeclarationSyntax>())
             {
-                sb.AppendLine($"// common properties\n");
+                if (field.Declaration.Type is GenericNameSyntax
+                    {
+                        Identifier.ValueText: ("DirectProperty" or "StyledProperty" or "AttachedProperty")
+                    } && HasAvaloniaPropertyPublicSetter(field, members))
+                {
+                    sb.AppendLine($"//avalonia properties{Environment.NewLine}");
 
-                AppendIfNotNull(sb, GetCommonPropertySetterExtension(typeName, property, semanticModel));
-                AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(typeName, property, semanticModel));
-                AppendIfNotNull(sb, GetCommonPropertyExpressionBindingSetterExtension(typeName, property, semanticModel));
+                    AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
+                    AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
 
-                processedFields.Add(propertyName);
+                    var name = field.Declaration.Variables[0].Identifier.ValueText;
+                    processedFields.Add(name);
+                }
             }
+
+            //PROCESS COMMON PROPERTIES
+            foreach (var property in members.OfType<PropertyDeclarationSyntax>())
+            {
+                //skip properties that already processed as Avalonia properties
+                if (!processedFields.Contains(property.Identifier + "Property")
+                    && IsPublic(property) && HasPublicSetter(property) &&
+                    IsCommonInstanceProperty(property, members))
+                {
+                    sb.AppendLine($"//common properties{Environment.NewLine}");
+
+                    AppendIfNotNull(sb, GetCommonPropertySetterExtension(typeName, property, comp));
+                    AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(typeName, property, comp));
+                    AppendIfNotNull(sb, GetCommonPropertyExpressionBindingSetterExtension(typeName, property, comp));
+
+                    processedFields.Add(property.Identifier.ToString());
+                }
+            }
+
+            sb.AppendLine("}");
+            // Add the source code to the compilation
+
+            if (processedFields.Count > 0)
+                context.AddSource($"{typeName}.g.cs", sb.ToString());
         }
 
-        sb.AppendLine("}");
-
-        if (processedFields.Count > 0)
-        {
-            context.AddSource($"{typeName}Extensions.g.cs", SourceText.From(sb.ToString(), Encoding.UTF8));
-        }
     }
 
     private static void AppendIfNotNull(StringBuilder sb, string value)
@@ -125,7 +124,13 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         sb.AppendLine(value);
     }
 
-    public static string GetPropertySetterExtension(string controlTypeName, FieldDeclarationSyntax field)
+    public void Initialize(GeneratorInitializationContext context)
+    {
+        Debug.WriteLine("Initalize code generator");
+        // No initialization required for this one
+    }
+
+    public string GetPropertySetterExtension(string controlTypeName, FieldDeclarationSyntax field)
     {
         var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
 
@@ -139,16 +144,17 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         var extensionText =
             $"public static {controlTypeName} {extensionName}"
             + $"(this {controlTypeName} control, {argsString})"
-            + $"=>{NewLine} control._setEx({controlTypeName}.{extensionName}Property, ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
+            + $"=>{Environment.NewLine} control._setEx({controlTypeName}.{extensionName}Property, ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
 
         return extensionText;
     }
 
-    private static string GetCommonPropertySetterExtension(string controlTypeName, PropertyDeclarationSyntax property, SemanticModel semanticModel)
+    private string GetCommonPropertySetterExtension(string controlTypeName, PropertyDeclarationSyntax property,
+        Compilation compilation)
     {
         var extensionName = property.Identifier.ToString();
 
-        var valueTypeSource = GetPropertyTypeName(property, semanticModel);
+        var valueTypeSource = GetPropertyTypeName(property, compilation);
 
         var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null,"
                          + $" [CallerArgumentExpression(nameof(value))] string? ps = null";
@@ -156,24 +162,25 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         var extensionText =
             $"public static {controlTypeName} {extensionName}"
             + $"(this {controlTypeName} control, {argsString})"
-            + $"=>{NewLine} control._setCommonEx(ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
+            + $"=>{Environment.NewLine} control._setCommonEx(ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
 
         return extensionText;
     }
 
-    private static string GetCommonPropertyBindingSetterExtension(string controlTypeName, PropertyDeclarationSyntax property, SemanticModel semanticModel)
+    private string GetCommonPropertyBindingSetterExtension(string controlTypeName, PropertyDeclarationSyntax property,
+        Compilation compilation)
     {
         var extensionName = property.Identifier.ToString();
-        var valueTypeSource = GetPropertyTypeName(property, semanticModel);
+        var valueTypeSource = GetPropertyTypeName(property, compilation);
 
         var extensionText =
             $"public static {controlTypeName} {extensionName}"
             + $"(this {controlTypeName} control, IBinding binding)"
-            + $"=>{NewLine} control._setCommonBindingEx(({valueTypeSource} value) => control.{extensionName} = value, binding);";
+            + $"=>{Environment.NewLine} control._setCommonBindingEx(({valueTypeSource} value) => control.{extensionName} = value, binding);";
 
         return extensionText;
     }
-    public static string GetExpressionBindingSetterExtension(string controlTypeName, FieldDeclarationSyntax field)
+    public string GetExpressionBindingSetterExtension(string controlTypeName, FieldDeclarationSyntax field)
     {
         var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
 
@@ -182,20 +189,20 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         var valueTypeSource = genericName.TypeArgumentList.Arguments.Last();
 
         var extensionText =
-            $"public static {controlTypeName} {extensionName}(this {controlTypeName} control, Func<{valueTypeSource}> func, Action<{valueTypeSource}>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null){NewLine}" +
+            $"public static {controlTypeName} {extensionName}(this {controlTypeName} control, Func<{valueTypeSource}> func, Action<{valueTypeSource}>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null){Environment.NewLine}" +
             $"   => control._set({controlTypeName}.{extensionName}Property, func, onChanged, expression);";
 
         return extensionText;
     }
 
-    private static string GetCommonPropertyExpressionBindingSetterExtension(string controlTypeName, PropertyDeclarationSyntax property, SemanticModel semanticModel)
+    private string GetCommonPropertyExpressionBindingSetterExtension(string controlTypeName, PropertyDeclarationSyntax property, Compilation compilation)
     {
         var extensionName = property.Identifier.ToString();
-        var valueTypeSource = GetPropertyTypeName(property, semanticModel);
+        var valueTypeSource = GetPropertyTypeName(property, compilation);
 
         var extensionText =
-            $"//Generated by GetCommonPropertyExpressionBindingSetterExtension{NewLine}" +
-            $"public static {controlTypeName} {extensionName}(this {controlTypeName} control, Func<{valueTypeSource}> func, Action<{valueTypeSource}>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null){NewLine}" +
+            $"//Generated by GetCommonPropertyExpressionBindingSetterExtension{Environment.NewLine}" +
+            $"public static {controlTypeName} {extensionName}(this {controlTypeName} control, Func<{valueTypeSource}> func, Action<{valueTypeSource}>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null){Environment.NewLine}" +
             $"   => control._set((v) => control.{extensionName} = v, func, onChanged, expression);";
 
 
