@@ -12,6 +12,52 @@ namespace Avalonia.Markup.Declarative;
 public static partial class TextBox_MarkupExtensions
 {
 //================= Properties ======================//
+ // IsInactiveSelectionHighlightEnabled
+
+/*BindFromExpressionSetterGenerator*/
+public static T IsInactiveSelectionHighlightEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
+   => control._set(Avalonia.Controls.TextBox.IsInactiveSelectionHighlightEnabledProperty, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+public static T IsInactiveSelectionHighlightEnabled<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TextBox 
+=> control._setEx(Avalonia.Controls.TextBox.IsInactiveSelectionHighlightEnabledProperty, ps, () => control.IsInactiveSelectionHighlightEnabled = value, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T IsInactiveSelectionHighlightEnabled<T>(this T control, IBinding binding) where T : Avalonia.Controls.TextBox 
+   => control._set(Avalonia.Controls.TextBox.IsInactiveSelectionHighlightEnabledProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T IsInactiveSelectionHighlightEnabled<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TextBox 
+   => control._set(Avalonia.Controls.TextBox.IsInactiveSelectionHighlightEnabledProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+public static T IsInactiveSelectionHighlightEnabled<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TextBox 
+=> control._setEx(Avalonia.Controls.TextBox.IsInactiveSelectionHighlightEnabledProperty, ps, () => control.IsInactiveSelectionHighlightEnabled = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+ // ClearSelectionOnLostFocus
+
+/*BindFromExpressionSetterGenerator*/
+public static T ClearSelectionOnLostFocus<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
+   => control._set(Avalonia.Controls.TextBox.ClearSelectionOnLostFocusProperty, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+public static T ClearSelectionOnLostFocus<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TextBox 
+=> control._setEx(Avalonia.Controls.TextBox.ClearSelectionOnLostFocusProperty, ps, () => control.ClearSelectionOnLostFocus = value, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T ClearSelectionOnLostFocus<T>(this T control, IBinding binding) where T : Avalonia.Controls.TextBox 
+   => control._set(Avalonia.Controls.TextBox.ClearSelectionOnLostFocusProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T ClearSelectionOnLostFocus<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.TextBox 
+   => control._set(Avalonia.Controls.TextBox.ClearSelectionOnLostFocusProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+public static T ClearSelectionOnLostFocus<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TextBox 
+=> control._setEx(Avalonia.Controls.TextBox.ClearSelectionOnLostFocusProperty, ps, () => control.ClearSelectionOnLostFocus = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
  // AcceptsReturn
 
 /*BindFromExpressionSetterGenerator*/
@@ -738,6 +784,28 @@ public static T OnTextChanging<T>(this T control, Action<Avalonia.Controls.TextC
 
 
 //================= Styles ======================//
+ // IsInactiveSelectionHighlightEnabled
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> IsInactiveSelectionHighlightEnabled<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.TextBox 
+=> style._addSetter(Avalonia.Controls.TextBox.IsInactiveSelectionHighlightEnabledProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> IsInactiveSelectionHighlightEnabled<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBox 
+=> style._addSetter(Avalonia.Controls.TextBox.IsInactiveSelectionHighlightEnabledProperty, binding);
+
+
+ // ClearSelectionOnLostFocus
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> ClearSelectionOnLostFocus<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.TextBox 
+=> style._addSetter(Avalonia.Controls.TextBox.ClearSelectionOnLostFocusProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ClearSelectionOnLostFocus<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TextBox 
+=> style._addSetter(Avalonia.Controls.TextBox.ClearSelectionOnLostFocusProperty, binding);
+
+
  // AcceptsReturn
 
 /*ValueStyleSetterGenerator*/

@@ -127,6 +127,29 @@ public static T PlacementGravity<TValue,T>(this T control, TValue value, FuncVal
 => control._setEx(Avalonia.Controls.Primitives.PopupFlyoutBase.PlacementGravityProperty, ps, () => control.PlacementGravity = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+ // CustomPopupPlacementCallback
+
+/*BindFromExpressionSetterGenerator*/
+public static T CustomPopupPlacementCallback<T>(this T control, Func<Avalonia.Controls.Primitives.PopupPositioning.CustomPopupPlacementCallback> func, Action<Avalonia.Controls.Primitives.PopupPositioning.CustomPopupPlacementCallback>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.PopupFlyoutBase 
+   => control._set(Avalonia.Controls.Primitives.PopupFlyoutBase.CustomPopupPlacementCallbackProperty, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+public static T CustomPopupPlacementCallback<T>(this T control,Avalonia.Controls.Primitives.PopupPositioning.CustomPopupPlacementCallback value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.PopupFlyoutBase 
+=> control._setEx(Avalonia.Controls.Primitives.PopupFlyoutBase.CustomPopupPlacementCallbackProperty, ps, () => control.CustomPopupPlacementCallback = value, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T CustomPopupPlacementCallback<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.PopupFlyoutBase 
+   => control._set(Avalonia.Controls.Primitives.PopupFlyoutBase.CustomPopupPlacementCallbackProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T CustomPopupPlacementCallback<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.Primitives.PopupFlyoutBase 
+   => control._set(Avalonia.Controls.Primitives.PopupFlyoutBase.CustomPopupPlacementCallbackProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+public static T CustomPopupPlacementCallback<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Primitives.PopupPositioning.CustomPopupPlacementCallback> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.PopupFlyoutBase 
+=> control._setEx(Avalonia.Controls.Primitives.PopupFlyoutBase.CustomPopupPlacementCallbackProperty, ps, () => control.CustomPopupPlacementCallback = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
  // ShowMode
 
 /*BindFromExpressionSetterGenerator*/
