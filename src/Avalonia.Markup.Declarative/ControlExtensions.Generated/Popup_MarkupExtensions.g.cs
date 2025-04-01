@@ -242,6 +242,29 @@ public static T PlacementTarget<TValue,T>(this T control, TValue value, FuncValu
 => control._setEx(Avalonia.Controls.Primitives.Popup.PlacementTargetProperty, ps, () => control.PlacementTarget = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+ // CustomPopupPlacementCallback
+
+/*BindFromExpressionSetterGenerator*/
+public static T CustomPopupPlacementCallback<T>(this T control, Func<Avalonia.Controls.Primitives.PopupPositioning.CustomPopupPlacementCallback> func, Action<Avalonia.Controls.Primitives.PopupPositioning.CustomPopupPlacementCallback>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.Popup 
+   => control._set(Avalonia.Controls.Primitives.Popup.CustomPopupPlacementCallbackProperty, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+public static T CustomPopupPlacementCallback<T>(this T control,Avalonia.Controls.Primitives.PopupPositioning.CustomPopupPlacementCallback value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.Popup 
+=> control._setEx(Avalonia.Controls.Primitives.Popup.CustomPopupPlacementCallbackProperty, ps, () => control.CustomPopupPlacementCallback = value, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T CustomPopupPlacementCallback<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.Popup 
+   => control._set(Avalonia.Controls.Primitives.Popup.CustomPopupPlacementCallbackProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T CustomPopupPlacementCallback<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.Primitives.Popup 
+   => control._set(Avalonia.Controls.Primitives.Popup.CustomPopupPlacementCallbackProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+public static T CustomPopupPlacementCallback<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Primitives.PopupPositioning.CustomPopupPlacementCallback> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.Popup 
+=> control._setEx(Avalonia.Controls.Primitives.Popup.CustomPopupPlacementCallbackProperty, ps, () => control.CustomPopupPlacementCallback = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
  // OverlayDismissEventPassThrough
 
 /*BindFromExpressionSetterGenerator*/
@@ -380,6 +403,42 @@ public static T Topmost<TValue,T>(this T control, TValue value, FuncValueConvert
 => control._setEx(Avalonia.Controls.Primitives.Popup.TopmostProperty, ps, () => control.Topmost = converter.TryConvert(value), bindingMode, converter, bindingSource);
 
 
+ // TakesFocusFromNativeControl
+
+/*BindFromExpressionSetterGenerator*/
+public static T TakesFocusFromNativeControl<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.Popup 
+   => control._set(Avalonia.Controls.Primitives.Popup.TakesFocusFromNativeControlProperty, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+public static T TakesFocusFromNativeControl<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.Popup 
+=> control._setEx(Avalonia.Controls.Primitives.Popup.TakesFocusFromNativeControlProperty, ps, () => control.TakesFocusFromNativeControl = value, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T TakesFocusFromNativeControl<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.Popup 
+   => control._set(Avalonia.Controls.Primitives.Popup.TakesFocusFromNativeControlProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T TakesFocusFromNativeControl<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.Primitives.Popup 
+   => control._set(Avalonia.Controls.Primitives.Popup.TakesFocusFromNativeControlProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+public static T TakesFocusFromNativeControl<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.Popup 
+=> control._setEx(Avalonia.Controls.Primitives.Popup.TakesFocusFromNativeControlProperty, ps, () => control.TakesFocusFromNativeControl = converter.TryConvert(value), bindingMode, converter, bindingSource);
+
+
+
+//================= Attached Properties ======================//
+ // TakesFocusFromNativeControl
+
+/*AttachedPropertyMagicalSetterGenerator*/
+public static T Popup_TakesFocusFromNativeControl<T>(this T control, System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Control
+ => control._setEx(Avalonia.Controls.Primitives.Popup.TakesFocusFromNativeControlProperty, ps, () => Avalonia.Controls.Primitives.Popup.SetTakesFocusFromNativeControl(control, value), bindingMode, converter, bindingSource);
+
+/*AttachedPropertyBindFromExpressionSetterGenerator*/
+public static T Popup_TakesFocusFromNativeControl<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
+   => control._set(Avalonia.Controls.Primitives.Popup.TakesFocusFromNativeControlProperty, func, onChanged, expression);
+
+
 
 //================= Events ======================//
  // Closed
@@ -508,6 +567,17 @@ public static Style<T> PlacementTarget<T>(this Style<T> style, IBinding binding)
 => style._addSetter(Avalonia.Controls.Primitives.Popup.PlacementTargetProperty, binding);
 
 
+ // CustomPopupPlacementCallback
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> CustomPopupPlacementCallback<T>(this Style<T> style, Avalonia.Controls.Primitives.PopupPositioning.CustomPopupPlacementCallback value) where T : Avalonia.Controls.Primitives.Popup 
+=> style._addSetter(Avalonia.Controls.Primitives.Popup.CustomPopupPlacementCallbackProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> CustomPopupPlacementCallback<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.Popup 
+=> style._addSetter(Avalonia.Controls.Primitives.Popup.CustomPopupPlacementCallbackProperty, binding);
+
+
  // OverlayDismissEventPassThrough
 
 /*ValueStyleSetterGenerator*/
@@ -572,6 +642,17 @@ public static Style<T> Topmost<T>(this Style<T> style, System.Boolean value) whe
 /*BindingStyleSetterGenerator*/
 public static Style<T> Topmost<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.Popup 
 => style._addSetter(Avalonia.Controls.Primitives.Popup.TopmostProperty, binding);
+
+
+ // TakesFocusFromNativeControl
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> TakesFocusFromNativeControl<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.Primitives.Popup 
+=> style._addSetter(Avalonia.Controls.Primitives.Popup.TakesFocusFromNativeControlProperty, value);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> TakesFocusFromNativeControl<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.Popup 
+=> style._addSetter(Avalonia.Controls.Primitives.Popup.TakesFocusFromNativeControlProperty, binding);
 
 
 
