@@ -6,7 +6,17 @@ namespace Avalonia.Markup.Declarative;
 
 public abstract class MvuView : ViewBase, IMvuComponent
 {
+    public class ItemComponent<TViewModel>(TViewModel model, Func<TViewModel, Control> build) : MvuView
+    {
+        protected override object Build() => build.Invoke(model);
+    }
+
     private List<IMvuComponent>? _observerViews;
+
+    protected ItemComponent<TViewModel> BuildItem<TViewModel>(TViewModel model, Func<TViewModel, Control> build)
+    {
+        return new ItemComponent<TViewModel>(model, build);
+    }
 
     public MvuView()
         : base()

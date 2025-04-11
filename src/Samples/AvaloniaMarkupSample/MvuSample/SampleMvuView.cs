@@ -46,12 +46,12 @@ public class SampleMvuView : ComponentBase
                             .Content("Update separate state")
                             .OnClick(OnButton2Click),
 
-                        new Border()
-                            .Background(Bind(BorderColor))
-                            .Child(
-                                new Component()
-                                    .InnerContent(Bind(MvuComponentParam))
-                            ),
+                        //new Border()
+                        //    .Background(Bind(BorderColor))
+                        //    .Child(
+                        //        new Component()
+                        //            .InnerContent(Bind(MvuComponentParam))
+                        //    ),
 
                         new Button()
                             .Content("Change nested component parameter")

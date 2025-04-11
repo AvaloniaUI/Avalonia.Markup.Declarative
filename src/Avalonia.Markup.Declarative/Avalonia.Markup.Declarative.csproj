@@ -5,17 +5,19 @@
 		<IsPackable>true</IsPackable>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
-		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 
 		<Authors>Avalonia Team</Authors>
-		<PackageProjectUrl>https://github.com/AvaloniaUI/Avalonia.Markup.Declarative</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/AvaloniaUI/Avalonia.Markup.Declarative</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/nscript-site/Avalonia.Markup.Declarative</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/nscript-site/Avalonia.Markup.Declarative</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<Description>The set of base classes and extension methods over Avalonia's controls to define views/markup with C# code instead of XAML.</Description>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>avalonia;avaloniaui;mvvm;mvp;csharpmarjup;android;ios;mac;forms;wpf;net;netstandard;net461;uwp;xamarin</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageId>navalonia.markup</PackageId>
+		<Title>navalonia.markup</Title>
 	</PropertyGroup>
 	
 	<ItemGroup>
