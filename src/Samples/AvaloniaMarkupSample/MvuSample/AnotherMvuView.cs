@@ -11,6 +11,11 @@ internal class CounterState
 
 public class AnotherMvuView : MvuView
 {
+    public AnotherMvuView()
+        : base(true)
+    {
+    }
+
     protected override object Build() =>
     new StackPanel().Spacing(10).HorizontalAlignment(HorizontalAlignment.Center)
             .Children(

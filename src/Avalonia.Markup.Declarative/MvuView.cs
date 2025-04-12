@@ -18,9 +18,18 @@ public abstract class MvuView : ViewBase, IMvuComponent
         return new ItemComponent<TViewModel>(model, build);
     }
 
+    private bool deferredLoading;
+    private bool deferredLoaded;
+
     public MvuView()
-        : base()
+        : this(false)
     {
+    }
+
+    public MvuView(bool deferredLoading)
+        : base(deferredLoading)
+    {
+        this.deferredLoading = deferredLoading;
     }
 
     protected override void OnCreated()
@@ -36,6 +45,18 @@ public abstract class MvuView : ViewBase, IMvuComponent
     {
         updateStateAction?.Invoke();
         StateHasChanged();
+    }
+
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        if(this.deferredLoading == true && deferredLoaded == false)
+        {
+            deferredLoaded = true;
+            OnCreatedCore();
+            Initialize();
+        }
+
+        base.OnAttachedToVisualTree(e);
     }
 
     internal Action? setStateAction;
