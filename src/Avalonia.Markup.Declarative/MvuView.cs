@@ -1,17 +1,24 @@
 ﻿using Avalonia.Controls;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Avalonia.Markup.Declarative;
 
 public abstract class MvuView : ViewBase, IMvuComponent
 {
+    // 全局的 update 版本号
+    internal static long __GlobalViewUpdateVersion = 0;
+
+    // 当前 view 的 update 版本号
+    protected long CurrentViewUpdateVersion = 0;
+
     public class ItemComponent<TViewModel>(TViewModel model, Func<TViewModel, Control> build) : MvuView
     {
         protected override object Build() => build.Invoke(model);
     }
 
-    private List<IMvuComponent>? _observerViews;
+    private List<MvuView>? _observerViews;
 
     protected ItemComponent<TViewModel> BuildItem<TViewModel>(TViewModel model, Func<TViewModel, Control> build)
     {
@@ -41,15 +48,9 @@ public abstract class MvuView : ViewBase, IMvuComponent
     {
     }
 
-    public void UpdateState(Action? updateStateAction = default)
-    {
-        updateStateAction?.Invoke();
-        StateHasChanged();
-    }
-
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
-        if(this.deferredLoading == true && deferredLoaded == false)
+        if (this.deferredLoading == true && deferredLoaded == false)
         {
             deferredLoaded = true;
             OnCreatedCore();
@@ -59,15 +60,41 @@ public abstract class MvuView : ViewBase, IMvuComponent
         base.OnAttachedToVisualTree(e);
     }
 
+    public void UpdateState(Action? updateStateAction = default)
+    {
+        Interlocked.Increment(ref __GlobalViewUpdateVersion);
+
+        updateStateAction?.Invoke();
+        StateHasChanged();
+    }
+
+    protected void UpdateStateTriggerByObserver()
+    {
+        // 版本号一样，不更新，避免循环触发
+        if(this.CurrentViewUpdateVersion == __GlobalViewUpdateVersion)
+            return;
+
+        // 触发更新
+        this.CurrentViewUpdateVersion = __GlobalViewUpdateVersion;
+        StateHasChanged();
+    }
+
     internal Action? setStateAction;
 
+    /// <summary>
+    /// 一般来说，在应用中不要直接调用 StateHasChanged，而应该调用 UpdateState。
+    /// 
+    /// 为了避免循环引用，在观察者体系中，维护了版本号机制。UpdateState 会正确的触发观察者的更新逻辑，
+    /// StateHasChanged 则可能无法触发观察者的更新。
+    /// 
+    /// </summary>
     protected virtual void StateHasChanged()
     {
         if (setStateAction != null) setStateAction();
 
         if (_observerViews != null)
             foreach (var view in _observerViews)
-                view.UpdateState();
+                view.UpdateStateTriggerByObserver();  // 只有当版本号不一样时，才会触发观察者
 
         foreach (var computedState in __viewComputedStates)
             computedState.OnPropertyChanged();
@@ -84,15 +111,15 @@ public abstract class MvuView : ViewBase, IMvuComponent
         return list.ToArray();
     }
 
-    public void AddObserverView(IMvuComponent view)
+    public void AddObserverView(MvuView view)
     {
-        _observerViews ??= new List<IMvuComponent>();
+        _observerViews ??= new List<MvuView>();
 
         if (!_observerViews.Contains(view))
             _observerViews.Add(view);
     }
 
-    public void RemoveObserverView(IMvuComponent view)
+    public void RemoveObserverView(MvuView view)
     {
         _observerViews?.Remove(view);
     }
@@ -130,5 +157,12 @@ public static class MvuViewExtensions
         action.Invoke(targetView);
         targetView.UpdateState();
         return targetView;
+    }
+
+    public static T Observable<T, TProperty>(this T ctrl, AvaloniaProperty<TProperty?> property, Action<TProperty?> onUpdate) where T : Control
+    {
+        ctrl.GetObservable(property)
+            .Subscribe(onUpdate);
+        return ctrl;
     }
 }

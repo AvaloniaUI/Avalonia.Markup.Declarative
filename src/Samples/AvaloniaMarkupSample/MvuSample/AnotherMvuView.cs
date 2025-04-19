@@ -11,10 +11,12 @@ internal class CounterState
 
 public class AnotherMvuView : MvuView
 {
-    public AnotherMvuView()
-        : base(true)
-    {
-    }
+    //public AnotherMvuView()
+    //    : base(true)
+    //{
+    //}
+
+    EmbedMvuView? view;
 
     protected override object Build() =>
     new StackPanel().Spacing(10).HorizontalAlignment(HorizontalAlignment.Center)
@@ -27,37 +29,49 @@ public class AnotherMvuView : MvuView
                      new EmbedMvuView().Name("Set Before Update")
                             .SetState(x => { x.State = State; }, false)
                             .Observe(this),
+                     new EmbedMvuView().Name("Cycle Reference")
+                            .SetState(x => { x.State = State; }, false)
+                            .Ref(out view)!
+                            .Observe(this.Observe(view!)),
                      new Button().Content("Click me [Button1]")
                                 .OnClick(OnButtonClick1),
                      new Button().Content("Click me [Button2]")
                                 .OnClick(OnButtonClick2),
-                     new Button().Content("Reload")
-                                .OnClick(OnButtonReloadClick),
-                     new ItemControlSampleView()
+                     new Button().Content("Click me [Button3]")
+                                .OnClick(OnButtonClick3)
+            //new Button().Content("Reload")
+            //           .OnClick(OnButtonReloadClick),
+            //new ItemControlSampleView()
             );
 
-    [Bindable(true)]
     internal CounterState State { get; set; } = new CounterState();
 
     private void OnButtonClick1(RoutedEventArgs e)
     {
         this.State.Counter++;
-        StateHasChanged();
+        UpdateState();
     }
 
     private void OnButtonClick2(RoutedEventArgs e)
     {
         int count = State.Counter + 1;
         this.State = new CounterState() { Counter = count };
-        StateHasChanged();
+        UpdateState();
     }
 
-    private void OnButtonReloadClick(RoutedEventArgs e)
+    private void OnButtonClick3(RoutedEventArgs e)
     {
-        this.State.Counter = 0;
-        this.ClearObserverViews();
-        this.Reload();
+        int count = State.Counter + 1;
+        this.State = new CounterState() { Counter = count };
+        this.StateHasChanged();
     }
+
+    //private void OnButtonReloadClick(RoutedEventArgs e)
+    //{
+    //    this.State.Counter = 0;
+    //    this.ClearObserverViews();
+    //    this.Reload();
+    //}
 }
 
 public class EmbedMvuView : MvuView
@@ -79,7 +93,7 @@ public class ItemControlSampleView : MvuView
             .Children(
                 new ListBox()
                     .HorizontalAlignment(HorizontalAlignment.Center)
-                    .ItemsSource(() => State.Items)
+                    .ItemsSource(State.Items)
                     .ItemTemplate<string>(item =>
                         BuildItem(item, s =>
                             new TextBlock()
@@ -92,14 +106,12 @@ public class ItemControlSampleView : MvuView
                     .HorizontalAlignment(HorizontalAlignment.Center)
                     .Text(() => State.SelectedItem),
 
-                new Button().Content("Add One")
+                new Button().Content("Add")
                                 .OnClick(_ => {
                                     State.Items.Add(DateTime.Now.ToFileTime().ToString());
                                     this.UpdateState();
                                 })
             );
-
-
 
     public ListState State { get; set; } = new ListState();
 }

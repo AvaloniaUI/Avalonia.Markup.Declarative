@@ -76,6 +76,9 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         sb.AppendLine($"public static partial class {typeName}Extensions");
         sb.AppendLine("{");
 
+        sb.AppendLine($"// by nscript");
+        sb.AppendLine($"public static {typeName} {typeName}(this Control c){{ return new {typeName}(); }}");
+
         var members = type.Members;
         var processedFields = new List<string>();
 
