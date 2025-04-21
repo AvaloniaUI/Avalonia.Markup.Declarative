@@ -109,10 +109,10 @@ public static T HotKey<TValue,T>(this T control, TValue value, FuncValueConverte
  // Click
 
 /*ActionToEventGenerator*/
-public static T OnClick<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.SplitButton 
+public static T OnClick<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.SplitButton 
 {
-  control.AddHandler(Avalonia.Controls.SplitButton.ClickEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.SplitButton.ClickEvent, (_, args) => action(args), routes ?? Avalonia.Controls.SplitButton.ClickEvent.RoutingStrategies);
+  return control;
 }
 
 

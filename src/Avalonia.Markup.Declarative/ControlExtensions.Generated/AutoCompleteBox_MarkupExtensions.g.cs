@@ -477,10 +477,10 @@ public static T InnerRightContent<TValue,T>(this T control, TValue value, FuncVa
  // TextChanged
 
 /*ActionToEventGenerator*/
-public static T OnTextChanged<T>(this T control, Action<Avalonia.Controls.TextChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.AutoCompleteBox 
+public static T OnTextChanged<T>(this T control, Action<Avalonia.Controls.TextChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.AutoCompleteBox 
 {
-  control.AddHandler(Avalonia.Controls.AutoCompleteBox.TextChangedEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.AutoCompleteBox.TextChangedEvent, (_, args) => action(args), routes ?? Avalonia.Controls.AutoCompleteBox.TextChangedEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -530,10 +530,10 @@ public static T OnDropDownClosed<T>(this T control, Action<System.EventArgs> act
  // SelectionChanged
 
 /*ActionToEventGenerator*/
-public static T OnSelectionChanged<T>(this T control, Action<Avalonia.Controls.SelectionChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.AutoCompleteBox 
+public static T OnSelectionChanged<T>(this T control, Action<Avalonia.Controls.SelectionChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.AutoCompleteBox 
 {
-  control.AddHandler(Avalonia.Controls.AutoCompleteBox.SelectionChangedEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.AutoCompleteBox.SelectionChangedEvent, (_, args) => action(args), routes ?? Avalonia.Controls.AutoCompleteBox.SelectionChangedEvent.RoutingStrategies);
+  return control;
 }
 
 

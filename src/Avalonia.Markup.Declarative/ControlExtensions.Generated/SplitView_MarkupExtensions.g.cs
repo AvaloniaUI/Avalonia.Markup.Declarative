@@ -224,10 +224,10 @@ public static T UseLightDismissOverlayMode<TValue,T>(this T control, TValue valu
  // PaneClosed
 
 /*ActionToEventGenerator*/
-public static T OnPaneClosed<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.SplitView 
+public static T OnPaneClosed<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.SplitView 
 {
-  control.AddHandler(Avalonia.Controls.SplitView.PaneClosedEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.SplitView.PaneClosedEvent, (_, args) => action(args), routes ?? Avalonia.Controls.SplitView.PaneClosedEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -235,10 +235,10 @@ public static T OnPaneClosed<T>(this T control, Action<Avalonia.Interactivity.Ro
  // PaneClosing
 
 /*ActionToEventGenerator*/
-public static T OnPaneClosing<T>(this T control, Action<Avalonia.Interactivity.CancelRoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.SplitView 
+public static T OnPaneClosing<T>(this T control, Action<Avalonia.Interactivity.CancelRoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.SplitView 
 {
-  control.AddHandler(Avalonia.Controls.SplitView.PaneClosingEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.SplitView.PaneClosingEvent, (_, args) => action(args), routes ?? Avalonia.Controls.SplitView.PaneClosingEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -246,10 +246,10 @@ public static T OnPaneClosing<T>(this T control, Action<Avalonia.Interactivity.C
  // PaneOpened
 
 /*ActionToEventGenerator*/
-public static T OnPaneOpened<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.SplitView 
+public static T OnPaneOpened<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.SplitView 
 {
-  control.AddHandler(Avalonia.Controls.SplitView.PaneOpenedEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.SplitView.PaneOpenedEvent, (_, args) => action(args), routes ?? Avalonia.Controls.SplitView.PaneOpenedEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -257,10 +257,10 @@ public static T OnPaneOpened<T>(this T control, Action<Avalonia.Interactivity.Ro
  // PaneOpening
 
 /*ActionToEventGenerator*/
-public static T OnPaneOpening<T>(this T control, Action<Avalonia.Interactivity.CancelRoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.SplitView 
+public static T OnPaneOpening<T>(this T control, Action<Avalonia.Interactivity.CancelRoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.SplitView 
 {
-  control.AddHandler(Avalonia.Controls.SplitView.PaneOpeningEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.SplitView.PaneOpeningEvent, (_, args) => action(args), routes ?? Avalonia.Controls.SplitView.PaneOpeningEvent.RoutingStrategies);
+  return control;
 }
 
 

@@ -730,10 +730,10 @@ public static T UndoLimit<TValue,T>(this T control, TValue value, FuncValueConve
  // CopyingToClipboard
 
 /*ActionToEventGenerator*/
-public static T OnCopyingToClipboard<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.TextBox 
+public static T OnCopyingToClipboard<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.TextBox 
 {
-  control.AddHandler(Avalonia.Controls.TextBox.CopyingToClipboardEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.TextBox.CopyingToClipboardEvent, (_, args) => action(args), routes ?? Avalonia.Controls.TextBox.CopyingToClipboardEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -741,10 +741,10 @@ public static T OnCopyingToClipboard<T>(this T control, Action<Avalonia.Interact
  // CuttingToClipboard
 
 /*ActionToEventGenerator*/
-public static T OnCuttingToClipboard<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.TextBox 
+public static T OnCuttingToClipboard<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.TextBox 
 {
-  control.AddHandler(Avalonia.Controls.TextBox.CuttingToClipboardEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.TextBox.CuttingToClipboardEvent, (_, args) => action(args), routes ?? Avalonia.Controls.TextBox.CuttingToClipboardEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -752,10 +752,10 @@ public static T OnCuttingToClipboard<T>(this T control, Action<Avalonia.Interact
  // PastingFromClipboard
 
 /*ActionToEventGenerator*/
-public static T OnPastingFromClipboard<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.TextBox 
+public static T OnPastingFromClipboard<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.TextBox 
 {
-  control.AddHandler(Avalonia.Controls.TextBox.PastingFromClipboardEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.TextBox.PastingFromClipboardEvent, (_, args) => action(args), routes ?? Avalonia.Controls.TextBox.PastingFromClipboardEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -763,10 +763,10 @@ public static T OnPastingFromClipboard<T>(this T control, Action<Avalonia.Intera
  // TextChanged
 
 /*ActionToEventGenerator*/
-public static T OnTextChanged<T>(this T control, Action<Avalonia.Controls.TextChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.TextBox 
+public static T OnTextChanged<T>(this T control, Action<Avalonia.Controls.TextChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.TextBox 
 {
-  control.AddHandler(Avalonia.Controls.TextBox.TextChangedEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.TextBox.TextChangedEvent, (_, args) => action(args), routes ?? Avalonia.Controls.TextBox.TextChangedEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -774,10 +774,10 @@ public static T OnTextChanged<T>(this T control, Action<Avalonia.Controls.TextCh
  // TextChanging
 
 /*ActionToEventGenerator*/
-public static T OnTextChanging<T>(this T control, Action<Avalonia.Controls.TextChangingEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.TextBox 
+public static T OnTextChanging<T>(this T control, Action<Avalonia.Controls.TextChangingEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.TextBox 
 {
-  control.AddHandler(Avalonia.Controls.TextBox.TextChangingEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.TextBox.TextChangingEvent, (_, args) => action(args), routes ?? Avalonia.Controls.TextBox.TextChangingEvent.RoutingStrategies);
+  return control;
 }
 
 
