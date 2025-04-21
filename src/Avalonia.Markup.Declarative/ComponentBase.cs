@@ -162,7 +162,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         if (splitterIndex > -1)
         {
             var startIndex = valueExpressionString.StartsWith("@") ? 1 : 0;
-            stateName = valueExpressionString.Substring(0, splitterIndex - startIndex);
+            stateName = valueExpressionString.Substring(startIndex, splitterIndex - startIndex);
 
             useStateValueAsSource = true;
         }
