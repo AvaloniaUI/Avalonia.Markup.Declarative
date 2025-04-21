@@ -484,8 +484,9 @@ public static T OnSpinned<T>(this T control, Action<Avalonia.Controls.SpinEventA
  // ValueChanged
 
 /*ActionToEventGenerator*/
-public static T OnValueChanged<T>(this T control, Action<Avalonia.Controls.NumericUpDownValueChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.NumericUpDown 
+public static T OnValueChanged<T>(this T control, Action<Avalonia.Controls.NumericUpDownValueChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.NumericUpDown 
 {
+  if (routes == 0) routes = Avalonia.Controls.NumericUpDown.ValueChangedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.NumericUpDown.ValueChangedEvent, (_, args) => action(args), routes);
   return control; 
 }

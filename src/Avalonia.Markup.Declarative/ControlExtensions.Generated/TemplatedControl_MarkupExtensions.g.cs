@@ -379,8 +379,9 @@ public static T TemplatedControl_IsTemplateFocusTarget<T>(this T control, Func<S
  // TemplateApplied
 
 /*ActionToEventGenerator*/
-public static T OnTemplateApplied<T>(this T control, Action<Avalonia.Controls.Primitives.TemplateAppliedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Primitives.TemplatedControl 
+public static T OnTemplateApplied<T>(this T control, Action<Avalonia.Controls.Primitives.TemplateAppliedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.Primitives.TemplatedControl 
 {
+  if (routes == 0) routes = Avalonia.Controls.Primitives.TemplatedControl.TemplateAppliedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.Primitives.TemplatedControl.TemplateAppliedEvent, (_, args) => action(args), routes);
   return control; 
 }

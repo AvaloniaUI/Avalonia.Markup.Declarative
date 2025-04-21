@@ -40,8 +40,9 @@ public static T IsChecked<TValue,T>(this T control, TValue value, FuncValueConve
  // IsCheckedChanged
 
 /*ActionToEventGenerator*/
-public static T OnIsCheckedChanged<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.ToggleSplitButton 
+public static T OnIsCheckedChanged<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.ToggleSplitButton 
 {
+  if (routes == 0) routes = Avalonia.Controls.ToggleSplitButton.IsCheckedChangedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.ToggleSplitButton.IsCheckedChangedEvent, (_, args) => action(args), routes);
   return control; 
 }

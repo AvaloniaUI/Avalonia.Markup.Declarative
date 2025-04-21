@@ -132,8 +132,9 @@ public static T LargeChange<TValue,T>(this T control, TValue value, FuncValueCon
  // ValueChanged
 
 /*ActionToEventGenerator*/
-public static T OnValueChanged<T>(this T control, Action<Avalonia.Controls.Primitives.RangeBaseValueChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Primitives.RangeBase 
+public static T OnValueChanged<T>(this T control, Action<Avalonia.Controls.Primitives.RangeBaseValueChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.Primitives.RangeBase 
 {
+  if (routes == 0) routes = Avalonia.Controls.Primitives.RangeBase.ValueChangedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.Primitives.RangeBase.ValueChangedEvent, (_, args) => action(args), routes);
   return control; 
 }

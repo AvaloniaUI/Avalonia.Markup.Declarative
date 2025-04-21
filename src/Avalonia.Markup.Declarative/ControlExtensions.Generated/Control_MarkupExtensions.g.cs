@@ -109,8 +109,9 @@ public static T ContextFlyout<TValue,T>(this T control, TValue value, FuncValueC
  // ContextRequested
 
 /*ActionToEventGenerator*/
-public static T OnContextRequested<T>(this T control, Action<Avalonia.Controls.ContextRequestedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Control 
+public static T OnContextRequested<T>(this T control, Action<Avalonia.Controls.ContextRequestedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.Control 
 {
+  if (routes == 0) routes = Avalonia.Controls.Control.ContextRequestedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.Control.ContextRequestedEvent, (_, args) => action(args), routes);
   return control; 
 }
@@ -120,8 +121,9 @@ public static T OnContextRequested<T>(this T control, Action<Avalonia.Controls.C
  // Loaded
 
 /*ActionToEventGenerator*/
-public static T OnLoaded<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Control 
+public static T OnLoaded<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.Control 
 {
+  if (routes == 0) routes = Avalonia.Controls.Control.LoadedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.Control.LoadedEvent, (_, args) => action(args), routes);
   return control; 
 }
@@ -131,8 +133,9 @@ public static T OnLoaded<T>(this T control, Action<Avalonia.Interactivity.Routed
  // Unloaded
 
 /*ActionToEventGenerator*/
-public static T OnUnloaded<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Control 
+public static T OnUnloaded<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.Control 
 {
+  if (routes == 0) routes = Avalonia.Controls.Control.UnloadedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.Control.UnloadedEvent, (_, args) => action(args), routes);
   return control; 
 }
@@ -142,8 +145,9 @@ public static T OnUnloaded<T>(this T control, Action<Avalonia.Interactivity.Rout
  // SizeChanged
 
 /*ActionToEventGenerator*/
-public static T OnSizeChanged<T>(this T control, Action<Avalonia.Controls.SizeChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Control 
+public static T OnSizeChanged<T>(this T control, Action<Avalonia.Controls.SizeChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.Control 
 {
+  if (routes == 0) routes = Avalonia.Controls.Control.SizeChangedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.Control.SizeChangedEvent, (_, args) => action(args), routes);
   return control; 
 }

@@ -416,8 +416,9 @@ public static T ScrollViewer_IsDeferredScrollingEnabled<T>(this T control, Func<
  // ScrollChanged
 
 /*ActionToEventGenerator*/
-public static T OnScrollChanged<T>(this T control, Action<Avalonia.Controls.ScrollChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.ScrollViewer 
+public static T OnScrollChanged<T>(this T control, Action<Avalonia.Controls.ScrollChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.ScrollViewer 
 {
+  if (routes == 0) routes = Avalonia.Controls.ScrollViewer.ScrollChangedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.ScrollViewer.ScrollChangedEvent, (_, args) => action(args), routes);
   return control; 
 }

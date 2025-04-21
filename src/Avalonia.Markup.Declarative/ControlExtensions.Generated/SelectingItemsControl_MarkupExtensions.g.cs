@@ -178,8 +178,9 @@ public static T WrapSelection<TValue,T>(this T control, TValue value, FuncValueC
  // SelectionChanged
 
 /*ActionToEventGenerator*/
-public static T OnSelectionChanged<T>(this T control, Action<Avalonia.Controls.SelectionChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
+public static T OnSelectionChanged<T>(this T control, Action<Avalonia.Controls.SelectionChangedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
 {
+  if (routes == 0) routes = Avalonia.Controls.Primitives.SelectingItemsControl.SelectionChangedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.Primitives.SelectingItemsControl.SelectionChangedEvent, (_, args) => action(args), routes);
   return control; 
 }

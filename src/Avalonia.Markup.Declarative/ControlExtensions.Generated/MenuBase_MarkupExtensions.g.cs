@@ -15,8 +15,9 @@ public static partial class MenuBase_MarkupExtensions
  // Opened
 
 /*ActionToEventGenerator*/
-public static T OnOpened<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.MenuBase 
+public static T OnOpened<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.MenuBase 
 {
+  if (routes == 0) routes = Avalonia.Controls.MenuBase.OpenedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.MenuBase.OpenedEvent, (_, args) => action(args), routes);
   return control; 
 }
@@ -26,8 +27,9 @@ public static T OnOpened<T>(this T control, Action<Avalonia.Interactivity.Routed
  // Closed
 
 /*ActionToEventGenerator*/
-public static T OnClosed<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.MenuBase 
+public static T OnClosed<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.MenuBase 
 {
+  if (routes == 0) routes = Avalonia.Controls.MenuBase.ClosedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.MenuBase.ClosedEvent, (_, args) => action(args), routes);
   return control; 
 }

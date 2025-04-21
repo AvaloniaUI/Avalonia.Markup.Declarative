@@ -44,11 +44,12 @@ public class ActionToEventGenerator : ExtensionGeneratorBase<EventExtensionInfo>
 
         if (@event.IsRoutedEvent)
         {
-            argsString += ", Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble";
+            argsString += ", Avalonia.Interactivity.RoutingStrategies routes = 0";
 
             extensionBody = Environment.NewLine +"{"+ Environment.NewLine+
-                            $"  control.AddHandler({@event.ControlTypeName}.{@eventName}Event, (_, args) => action(args), routes);" + Environment.NewLine
-                            + "  return control; " + Environment.NewLine
+                              $"  if (routes == 0) routes = {@event.ControlTypeName}.{@eventName}Event.RoutingStrategies;" + Environment.NewLine
+                            + $"  control.AddHandler({@event.ControlTypeName}.{@eventName}Event, (_, args) => action(args), routes);" + Environment.NewLine
+                            + $"  return control; " + Environment.NewLine
                             + "}" + Environment.NewLine;
         }
 

@@ -15,8 +15,9 @@ public static partial class Thumb_MarkupExtensions
  // DragStarted
 
 /*ActionToEventGenerator*/
-public static T OnDragStarted<T>(this T control, Action<Avalonia.Input.VectorEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Primitives.Thumb 
+public static T OnDragStarted<T>(this T control, Action<Avalonia.Input.VectorEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.Primitives.Thumb 
 {
+  if (routes == 0) routes = Avalonia.Controls.Primitives.Thumb.DragStartedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.Primitives.Thumb.DragStartedEvent, (_, args) => action(args), routes);
   return control; 
 }
@@ -26,8 +27,9 @@ public static T OnDragStarted<T>(this T control, Action<Avalonia.Input.VectorEve
  // DragDelta
 
 /*ActionToEventGenerator*/
-public static T OnDragDelta<T>(this T control, Action<Avalonia.Input.VectorEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Primitives.Thumb 
+public static T OnDragDelta<T>(this T control, Action<Avalonia.Input.VectorEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.Primitives.Thumb 
 {
+  if (routes == 0) routes = Avalonia.Controls.Primitives.Thumb.DragDeltaEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.Primitives.Thumb.DragDeltaEvent, (_, args) => action(args), routes);
   return control; 
 }
@@ -37,8 +39,9 @@ public static T OnDragDelta<T>(this T control, Action<Avalonia.Input.VectorEvent
  // DragCompleted
 
 /*ActionToEventGenerator*/
-public static T OnDragCompleted<T>(this T control, Action<Avalonia.Input.VectorEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Primitives.Thumb 
+public static T OnDragCompleted<T>(this T control, Action<Avalonia.Input.VectorEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.Primitives.Thumb 
 {
+  if (routes == 0) routes = Avalonia.Controls.Primitives.Thumb.DragCompletedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.Primitives.Thumb.DragCompletedEvent, (_, args) => action(args), routes);
   return control; 
 }

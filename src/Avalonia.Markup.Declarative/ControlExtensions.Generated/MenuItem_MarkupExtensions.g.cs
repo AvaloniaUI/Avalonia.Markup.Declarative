@@ -247,8 +247,9 @@ public static T GroupName<TValue,T>(this T control, TValue value, FuncValueConve
  // Click
 
 /*ActionToEventGenerator*/
-public static T OnClick<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.MenuItem 
+public static T OnClick<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.MenuItem 
 {
+  if (routes == 0) routes = Avalonia.Controls.MenuItem.ClickEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.MenuItem.ClickEvent, (_, args) => action(args), routes);
   return control; 
 }
@@ -258,8 +259,9 @@ public static T OnClick<T>(this T control, Action<Avalonia.Interactivity.RoutedE
  // PointerEnteredItem
 
 /*ActionToEventGenerator*/
-public static T OnPointerEnteredItem<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.MenuItem 
+public static T OnPointerEnteredItem<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.MenuItem 
 {
+  if (routes == 0) routes = Avalonia.Controls.MenuItem.PointerEnteredItemEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.MenuItem.PointerEnteredItemEvent, (_, args) => action(args), routes);
   return control; 
 }
@@ -269,8 +271,9 @@ public static T OnPointerEnteredItem<T>(this T control, Action<Avalonia.Interact
  // PointerExitedItem
 
 /*ActionToEventGenerator*/
-public static T OnPointerExitedItem<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.MenuItem 
+public static T OnPointerExitedItem<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.MenuItem 
 {
+  if (routes == 0) routes = Avalonia.Controls.MenuItem.PointerExitedItemEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.MenuItem.PointerExitedItemEvent, (_, args) => action(args), routes);
   return control; 
 }
@@ -280,8 +283,9 @@ public static T OnPointerExitedItem<T>(this T control, Action<Avalonia.Interacti
  // SubmenuOpened
 
 /*ActionToEventGenerator*/
-public static T OnSubmenuOpened<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.MenuItem 
+public static T OnSubmenuOpened<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.MenuItem 
 {
+  if (routes == 0) routes = Avalonia.Controls.MenuItem.SubmenuOpenedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.MenuItem.SubmenuOpenedEvent, (_, args) => action(args), routes);
   return control; 
 }

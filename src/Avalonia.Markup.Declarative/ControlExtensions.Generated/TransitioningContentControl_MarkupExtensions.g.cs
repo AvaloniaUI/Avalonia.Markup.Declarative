@@ -63,8 +63,9 @@ public static T IsTransitionReversed<TValue,T>(this T control, TValue value, Fun
  // TransitionCompleted
 
 /*ActionToEventGenerator*/
-public static T OnTransitionCompleted<T>(this T control, Action<Avalonia.Controls.TransitionCompletedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.TransitioningContentControl 
+public static T OnTransitionCompleted<T>(this T control, Action<Avalonia.Controls.TransitionCompletedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.TransitioningContentControl 
 {
+  if (routes == 0) routes = Avalonia.Controls.TransitioningContentControl.TransitionCompletedEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.TransitioningContentControl.TransitionCompletedEvent, (_, args) => action(args), routes);
   return control; 
 }

@@ -178,8 +178,9 @@ public static T Flyout<TValue,T>(this T control, TValue value, FuncValueConverte
  // Click
 
 /*ActionToEventGenerator*/
-public static T OnClick<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Button 
+public static T OnClick<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = 0) where T : Avalonia.Controls.Button 
 {
+  if (routes == 0) routes = Avalonia.Controls.Button.ClickEvent.RoutingStrategies;
   control.AddHandler(Avalonia.Controls.Button.ClickEvent, (_, args) => action(args), routes);
   return control; 
 }
