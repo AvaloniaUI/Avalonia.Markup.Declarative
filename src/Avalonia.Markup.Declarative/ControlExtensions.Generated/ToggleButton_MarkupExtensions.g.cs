@@ -63,10 +63,10 @@ public static T IsThreeState<TValue,T>(this T control, TValue value, FuncValueCo
  // Checked
 
 /*ActionToEventGenerator*/
-public static T OnChecked<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Primitives.ToggleButton 
+public static T OnChecked<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.Primitives.ToggleButton 
 {
-  control.AddHandler(Avalonia.Controls.Primitives.ToggleButton.CheckedEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.Primitives.ToggleButton.CheckedEvent, (_, args) => action(args), routes ?? Avalonia.Controls.Primitives.ToggleButton.CheckedEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -74,10 +74,10 @@ public static T OnChecked<T>(this T control, Action<Avalonia.Interactivity.Route
  // Unchecked
 
 /*ActionToEventGenerator*/
-public static T OnUnchecked<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Primitives.ToggleButton 
+public static T OnUnchecked<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.Primitives.ToggleButton 
 {
-  control.AddHandler(Avalonia.Controls.Primitives.ToggleButton.UncheckedEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.Primitives.ToggleButton.UncheckedEvent, (_, args) => action(args), routes ?? Avalonia.Controls.Primitives.ToggleButton.UncheckedEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -85,10 +85,10 @@ public static T OnUnchecked<T>(this T control, Action<Avalonia.Interactivity.Rou
  // Indeterminate
 
 /*ActionToEventGenerator*/
-public static T OnIndeterminate<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Primitives.ToggleButton 
+public static T OnIndeterminate<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.Primitives.ToggleButton 
 {
-  control.AddHandler(Avalonia.Controls.Primitives.ToggleButton.IndeterminateEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.Primitives.ToggleButton.IndeterminateEvent, (_, args) => action(args), routes ?? Avalonia.Controls.Primitives.ToggleButton.IndeterminateEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -96,10 +96,10 @@ public static T OnIndeterminate<T>(this T control, Action<Avalonia.Interactivity
  // IsCheckedChanged
 
 /*ActionToEventGenerator*/
-public static T OnIsCheckedChanged<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Primitives.ToggleButton 
+public static T OnIsCheckedChanged<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.Primitives.ToggleButton 
 {
-  control.AddHandler(Avalonia.Controls.Primitives.ToggleButton.IsCheckedChangedEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.Primitives.ToggleButton.IsCheckedChangedEvent, (_, args) => action(args), routes ?? Avalonia.Controls.Primitives.ToggleButton.IsCheckedChangedEvent.RoutingStrategies);
+  return control;
 }
 
 

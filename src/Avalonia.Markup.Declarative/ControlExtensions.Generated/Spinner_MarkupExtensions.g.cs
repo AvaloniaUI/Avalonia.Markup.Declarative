@@ -40,10 +40,10 @@ public static T ValidSpinDirection<TValue,T>(this T control, TValue value, FuncV
  // Spin
 
 /*ActionToEventGenerator*/
-public static T OnSpin<T>(this T control, Action<Avalonia.Controls.SpinEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.Spinner 
+public static T OnSpin<T>(this T control, Action<Avalonia.Controls.SpinEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.Spinner 
 {
-  control.AddHandler(Avalonia.Controls.Spinner.SpinEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.Spinner.SpinEvent, (_, args) => action(args), routes ?? Avalonia.Controls.Spinner.SpinEvent.RoutingStrategies);
+  return control;
 }
 
 
