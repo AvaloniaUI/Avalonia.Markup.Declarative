@@ -16,11 +16,12 @@ public static partial class Label_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static T Target<T>(this T control, Func<Avalonia.Input.IInputElement> func, Action<Avalonia.Input.IInputElement>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Label 
-   => control._set(Avalonia.Controls.Label.TargetProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Label.TargetProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Target<T>(this T control,Avalonia.Input.IInputElement value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Label 
-=> control._setEx(Avalonia.Controls.Label.TargetProperty, ps, () => control.Target = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Label.TargetProperty, ps, () => control.Target = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Target<T>(this T control, IBinding binding) where T : Avalonia.Controls.Label 
@@ -31,8 +32,9 @@ public static T Target<T>(this T control, AvaloniaProperty avaloniaProperty, Bin
    => control._set(Avalonia.Controls.Label.TargetProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Target<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Input.IInputElement> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Label 
-=> control._setEx(Avalonia.Controls.Label.TargetProperty, ps, () => control.Target = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Label.TargetProperty, ps, () => control.Target = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -41,7 +43,7 @@ public static T Target<TValue,T>(this T control, TValue value, FuncValueConverte
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Target<T>(this Style<T> style, Avalonia.Input.IInputElement value) where T : Avalonia.Controls.Label 
-=> style._addSetter(Avalonia.Controls.Label.TargetProperty, value);
+=> style._addSetter(Avalonia.Controls.Label.TargetProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Target<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Label 

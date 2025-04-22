@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Avalonia.Styling;
 
 namespace Avalonia.Markup.Declarative;
 

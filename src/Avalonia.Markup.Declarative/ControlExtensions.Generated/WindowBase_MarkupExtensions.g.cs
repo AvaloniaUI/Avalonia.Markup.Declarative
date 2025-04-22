@@ -16,11 +16,12 @@ public static partial class WindowBase_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static T Topmost<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.WindowBase 
-   => control._set(Avalonia.Controls.WindowBase.TopmostProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.WindowBase.TopmostProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Topmost<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.WindowBase 
-=> control._setEx(Avalonia.Controls.WindowBase.TopmostProperty, ps, () => control.Topmost = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.WindowBase.TopmostProperty, ps, () => control.Topmost = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Topmost<T>(this T control, IBinding binding) where T : Avalonia.Controls.WindowBase 
@@ -31,8 +32,9 @@ public static T Topmost<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.WindowBase.TopmostProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Topmost<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.WindowBase 
-=> control._setEx(Avalonia.Controls.WindowBase.TopmostProperty, ps, () => control.Topmost = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.WindowBase.TopmostProperty, ps, () => control.Topmost = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -71,7 +73,7 @@ public static T OnResized<T>(this T control, Action<Avalonia.Controls.WindowResi
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Topmost<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.WindowBase 
-=> style._addSetter(Avalonia.Controls.WindowBase.TopmostProperty, value);
+=> style._addSetter(Avalonia.Controls.WindowBase.TopmostProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Topmost<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.WindowBase 

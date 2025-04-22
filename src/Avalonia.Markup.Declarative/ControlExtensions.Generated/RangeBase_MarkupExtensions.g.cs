@@ -16,11 +16,12 @@ public static partial class RangeBase_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static T Minimum<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.RangeBase 
-   => control._set(Avalonia.Controls.Primitives.RangeBase.MinimumProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.RangeBase.MinimumProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Minimum<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.RangeBase 
-=> control._setEx(Avalonia.Controls.Primitives.RangeBase.MinimumProperty, ps, () => control.Minimum = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.RangeBase.MinimumProperty, ps, () => control.Minimum = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Minimum<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.RangeBase 
@@ -31,19 +32,21 @@ public static T Minimum<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.Primitives.RangeBase.MinimumProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Minimum<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.RangeBase 
-=> control._setEx(Avalonia.Controls.Primitives.RangeBase.MinimumProperty, ps, () => control.Minimum = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.RangeBase.MinimumProperty, ps, () => control.Minimum = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Maximum
 
 /*BindFromExpressionSetterGenerator*/
 public static T Maximum<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.RangeBase 
-   => control._set(Avalonia.Controls.Primitives.RangeBase.MaximumProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.RangeBase.MaximumProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Maximum<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.RangeBase 
-=> control._setEx(Avalonia.Controls.Primitives.RangeBase.MaximumProperty, ps, () => control.Maximum = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.RangeBase.MaximumProperty, ps, () => control.Maximum = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Maximum<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.RangeBase 
@@ -54,19 +57,21 @@ public static T Maximum<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.Primitives.RangeBase.MaximumProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Maximum<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.RangeBase 
-=> control._setEx(Avalonia.Controls.Primitives.RangeBase.MaximumProperty, ps, () => control.Maximum = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.RangeBase.MaximumProperty, ps, () => control.Maximum = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Value
 
 /*BindFromExpressionSetterGenerator*/
 public static T Value<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.RangeBase 
-   => control._set(Avalonia.Controls.Primitives.RangeBase.ValueProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.RangeBase.ValueProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Value<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.RangeBase 
-=> control._setEx(Avalonia.Controls.Primitives.RangeBase.ValueProperty, ps, () => control.Value = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.RangeBase.ValueProperty, ps, () => control.Value = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Value<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.RangeBase 
@@ -77,19 +82,21 @@ public static T Value<T>(this T control, AvaloniaProperty avaloniaProperty, Bind
    => control._set(Avalonia.Controls.Primitives.RangeBase.ValueProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Value<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.RangeBase 
-=> control._setEx(Avalonia.Controls.Primitives.RangeBase.ValueProperty, ps, () => control.Value = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.RangeBase.ValueProperty, ps, () => control.Value = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // SmallChange
 
 /*BindFromExpressionSetterGenerator*/
 public static T SmallChange<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.RangeBase 
-   => control._set(Avalonia.Controls.Primitives.RangeBase.SmallChangeProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.RangeBase.SmallChangeProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T SmallChange<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.RangeBase 
-=> control._setEx(Avalonia.Controls.Primitives.RangeBase.SmallChangeProperty, ps, () => control.SmallChange = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.RangeBase.SmallChangeProperty, ps, () => control.SmallChange = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T SmallChange<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.RangeBase 
@@ -100,19 +107,21 @@ public static T SmallChange<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.Primitives.RangeBase.SmallChangeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T SmallChange<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.RangeBase 
-=> control._setEx(Avalonia.Controls.Primitives.RangeBase.SmallChangeProperty, ps, () => control.SmallChange = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.RangeBase.SmallChangeProperty, ps, () => control.SmallChange = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // LargeChange
 
 /*BindFromExpressionSetterGenerator*/
 public static T LargeChange<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.RangeBase 
-   => control._set(Avalonia.Controls.Primitives.RangeBase.LargeChangeProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.RangeBase.LargeChangeProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T LargeChange<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.RangeBase 
-=> control._setEx(Avalonia.Controls.Primitives.RangeBase.LargeChangeProperty, ps, () => control.LargeChange = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.RangeBase.LargeChangeProperty, ps, () => control.LargeChange = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T LargeChange<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.RangeBase 
@@ -123,8 +132,9 @@ public static T LargeChange<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.Primitives.RangeBase.LargeChangeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T LargeChange<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.RangeBase 
-=> control._setEx(Avalonia.Controls.Primitives.RangeBase.LargeChangeProperty, ps, () => control.LargeChange = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.RangeBase.LargeChangeProperty, ps, () => control.LargeChange = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -146,7 +156,7 @@ public static T OnValueChanged<T>(this T control, Action<Avalonia.Controls.Primi
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Minimum<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.Primitives.RangeBase 
-=> style._addSetter(Avalonia.Controls.Primitives.RangeBase.MinimumProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.RangeBase.MinimumProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Minimum<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.RangeBase 
@@ -157,7 +167,7 @@ public static Style<T> Minimum<T>(this Style<T> style, IBinding binding) where T
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Maximum<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.Primitives.RangeBase 
-=> style._addSetter(Avalonia.Controls.Primitives.RangeBase.MaximumProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.RangeBase.MaximumProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Maximum<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.RangeBase 
@@ -168,7 +178,7 @@ public static Style<T> Maximum<T>(this Style<T> style, IBinding binding) where T
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Value<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.Primitives.RangeBase 
-=> style._addSetter(Avalonia.Controls.Primitives.RangeBase.ValueProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.RangeBase.ValueProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Value<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.RangeBase 
@@ -179,7 +189,7 @@ public static Style<T> Value<T>(this Style<T> style, IBinding binding) where T :
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> SmallChange<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.Primitives.RangeBase 
-=> style._addSetter(Avalonia.Controls.Primitives.RangeBase.SmallChangeProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.RangeBase.SmallChangeProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> SmallChange<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.RangeBase 
@@ -190,7 +200,7 @@ public static Style<T> SmallChange<T>(this Style<T> style, IBinding binding) whe
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> LargeChange<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.Primitives.RangeBase 
-=> style._addSetter(Avalonia.Controls.Primitives.RangeBase.LargeChangeProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.RangeBase.LargeChangeProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> LargeChange<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.RangeBase 

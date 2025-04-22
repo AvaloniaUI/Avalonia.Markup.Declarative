@@ -16,11 +16,12 @@ public static partial class Span_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static T Inlines<T>(this T control, Func<Avalonia.Controls.Documents.InlineCollection> func, Action<Avalonia.Controls.Documents.InlineCollection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.Span 
-   => control._set(Avalonia.Controls.Documents.Span.InlinesProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Documents.Span.InlinesProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Inlines<T>(this T control,Avalonia.Controls.Documents.InlineCollection value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Documents.Span 
-=> control._setEx(Avalonia.Controls.Documents.Span.InlinesProperty, ps, () => control.Inlines = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Documents.Span.InlinesProperty, ps, () => control.Inlines = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Inlines<T>(this T control, IBinding binding) where T : Avalonia.Controls.Documents.Span 
@@ -31,8 +32,9 @@ public static T Inlines<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.Documents.Span.InlinesProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Inlines<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Documents.InlineCollection> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Documents.Span 
-=> control._setEx(Avalonia.Controls.Documents.Span.InlinesProperty, ps, () => control.Inlines = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Documents.Span.InlinesProperty, ps, () => control.Inlines = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -41,7 +43,7 @@ public static T Inlines<TValue,T>(this T control, TValue value, FuncValueConvert
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Inlines<T>(this Style<T> style, Avalonia.Controls.Documents.InlineCollection value) where T : Avalonia.Controls.Documents.Span 
-=> style._addSetter(Avalonia.Controls.Documents.Span.InlinesProperty, value);
+=> style._addSetter(Avalonia.Controls.Documents.Span.InlinesProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Inlines<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Documents.Span 

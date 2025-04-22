@@ -16,11 +16,12 @@ public static partial class Grid_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static T ShowGridLines<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Grid 
-   => control._set(Avalonia.Controls.Grid.ShowGridLinesProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Grid.ShowGridLinesProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T ShowGridLines<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Grid 
-=> control._setEx(Avalonia.Controls.Grid.ShowGridLinesProperty, ps, () => control.ShowGridLines = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Grid.ShowGridLinesProperty, ps, () => control.ShowGridLines = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ShowGridLines<T>(this T control, IBinding binding) where T : Avalonia.Controls.Grid 
@@ -31,8 +32,9 @@ public static T ShowGridLines<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.Grid.ShowGridLinesProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T ShowGridLines<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Grid 
-=> control._setEx(Avalonia.Controls.Grid.ShowGridLinesProperty, ps, () => control.ShowGridLines = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Grid.ShowGridLinesProperty, ps, () => control.ShowGridLines = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -45,7 +47,7 @@ public static T Grid_Column<T>(this T control, System.Int32 value, BindingMode? 
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T Grid_Column<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.Grid.ColumnProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Grid.ColumnProperty!, func, onChanged, expression);
 
 
  // Row
@@ -56,7 +58,7 @@ public static T Grid_Row<T>(this T control, System.Int32 value, BindingMode? bin
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T Grid_Row<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.Grid.RowProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Grid.RowProperty!, func, onChanged, expression);
 
 
  // ColumnSpan
@@ -67,7 +69,7 @@ public static T Grid_ColumnSpan<T>(this T control, System.Int32 value, BindingMo
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T Grid_ColumnSpan<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.Grid.ColumnSpanProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Grid.ColumnSpanProperty!, func, onChanged, expression);
 
 
  // RowSpan
@@ -78,7 +80,7 @@ public static T Grid_RowSpan<T>(this T control, System.Int32 value, BindingMode?
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T Grid_RowSpan<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.Grid.RowSpanProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Grid.RowSpanProperty!, func, onChanged, expression);
 
 
  // IsSharedSizeScope
@@ -89,7 +91,7 @@ public static T Grid_IsSharedSizeScope<T>(this T control, System.Boolean value, 
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T Grid_IsSharedSizeScope<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.Grid.IsSharedSizeScopeProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Grid.IsSharedSizeScopeProperty!, func, onChanged, expression);
 
 
 
@@ -98,7 +100,7 @@ public static T Grid_IsSharedSizeScope<T>(this T control, Func<System.Boolean> f
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> ShowGridLines<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.Grid 
-=> style._addSetter(Avalonia.Controls.Grid.ShowGridLinesProperty, value);
+=> style._addSetter(Avalonia.Controls.Grid.ShowGridLinesProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> ShowGridLines<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Grid 

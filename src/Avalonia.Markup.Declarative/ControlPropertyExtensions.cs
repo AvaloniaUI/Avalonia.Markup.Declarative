@@ -18,7 +18,8 @@ namespace Avalonia.Markup.Declarative;
 
 public static class ControlPropertyExtensions
 {
-	public static TControl _set<TControl>(this TControl control, Action setAction)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TControl _set<TControl>(this TControl control, Action setAction)
 	{
 		setAction();
 		return control;

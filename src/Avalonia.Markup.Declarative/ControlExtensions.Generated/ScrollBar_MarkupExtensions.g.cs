@@ -16,11 +16,12 @@ public static partial class ScrollBar_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static T ViewportSize<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-   => control._set(Avalonia.Controls.Primitives.ScrollBar.ViewportSizeProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.ScrollBar.ViewportSizeProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T ViewportSize<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.ViewportSizeProperty, ps, () => control.ViewportSize = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.ViewportSizeProperty, ps, () => control.ViewportSize = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ViewportSize<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -31,19 +32,21 @@ public static T ViewportSize<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.Primitives.ScrollBar.ViewportSizeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T ViewportSize<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.ViewportSizeProperty, ps, () => control.ViewportSize = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.ViewportSizeProperty, ps, () => control.ViewportSize = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Visibility
 
 /*BindFromExpressionSetterGenerator*/
 public static T Visibility<T>(this T control, Func<Avalonia.Controls.Primitives.ScrollBarVisibility> func, Action<Avalonia.Controls.Primitives.ScrollBarVisibility>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-   => control._set(Avalonia.Controls.Primitives.ScrollBar.VisibilityProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.ScrollBar.VisibilityProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Visibility<T>(this T control,Avalonia.Controls.Primitives.ScrollBarVisibility value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.VisibilityProperty, ps, () => control.Visibility = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.VisibilityProperty, ps, () => control.Visibility = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Visibility<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -54,19 +57,21 @@ public static T Visibility<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Primitives.ScrollBar.VisibilityProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Visibility<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.Primitives.ScrollBarVisibility> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.VisibilityProperty, ps, () => control.Visibility = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.VisibilityProperty, ps, () => control.Visibility = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Orientation
 
 /*BindFromExpressionSetterGenerator*/
 public static T Orientation<T>(this T control, Func<Avalonia.Layout.Orientation> func, Action<Avalonia.Layout.Orientation>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-   => control._set(Avalonia.Controls.Primitives.ScrollBar.OrientationProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.ScrollBar.OrientationProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Orientation<T>(this T control,Avalonia.Layout.Orientation value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.OrientationProperty, ps, () => control.Orientation = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.OrientationProperty, ps, () => control.Orientation = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Orientation<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -77,19 +82,21 @@ public static T Orientation<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.Primitives.ScrollBar.OrientationProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Orientation<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Layout.Orientation> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.OrientationProperty, ps, () => control.Orientation = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.OrientationProperty, ps, () => control.Orientation = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // AllowAutoHide
 
 /*BindFromExpressionSetterGenerator*/
 public static T AllowAutoHide<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-   => control._set(Avalonia.Controls.Primitives.ScrollBar.AllowAutoHideProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.ScrollBar.AllowAutoHideProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T AllowAutoHide<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.AllowAutoHideProperty, ps, () => control.AllowAutoHide = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.AllowAutoHideProperty, ps, () => control.AllowAutoHide = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T AllowAutoHide<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -100,19 +107,21 @@ public static T AllowAutoHide<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.Primitives.ScrollBar.AllowAutoHideProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T AllowAutoHide<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.AllowAutoHideProperty, ps, () => control.AllowAutoHide = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.AllowAutoHideProperty, ps, () => control.AllowAutoHide = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // HideDelay
 
 /*BindFromExpressionSetterGenerator*/
 public static T HideDelay<T>(this T control, Func<System.TimeSpan> func, Action<System.TimeSpan>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-   => control._set(Avalonia.Controls.Primitives.ScrollBar.HideDelayProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.ScrollBar.HideDelayProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T HideDelay<T>(this T control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.HideDelayProperty, ps, () => control.HideDelay = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.HideDelayProperty, ps, () => control.HideDelay = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T HideDelay<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -123,19 +132,21 @@ public static T HideDelay<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.Primitives.ScrollBar.HideDelayProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T HideDelay<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.HideDelayProperty, ps, () => control.HideDelay = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.HideDelayProperty, ps, () => control.HideDelay = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // ShowDelay
 
 /*BindFromExpressionSetterGenerator*/
 public static T ShowDelay<T>(this T control, Func<System.TimeSpan> func, Action<System.TimeSpan>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-   => control._set(Avalonia.Controls.Primitives.ScrollBar.ShowDelayProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.ScrollBar.ShowDelayProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T ShowDelay<T>(this T control,System.TimeSpan value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.ShowDelayProperty, ps, () => control.ShowDelay = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.ShowDelayProperty, ps, () => control.ShowDelay = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ShowDelay<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -146,8 +157,9 @@ public static T ShowDelay<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.Primitives.ScrollBar.ShowDelayProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T ShowDelay<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.TimeSpan> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.ShowDelayProperty, ps, () => control.ShowDelay = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.ScrollBar.ShowDelayProperty, ps, () => control.ShowDelay = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -165,7 +177,7 @@ public static T OnScroll<T>(this T control, Action<Avalonia.Controls.Primitives.
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> ViewportSize<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.ViewportSizeProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.ViewportSizeProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> ViewportSize<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -176,7 +188,7 @@ public static Style<T> ViewportSize<T>(this Style<T> style, IBinding binding) wh
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Visibility<T>(this Style<T> style, Avalonia.Controls.Primitives.ScrollBarVisibility value) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.VisibilityProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.VisibilityProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Visibility<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -187,7 +199,7 @@ public static Style<T> Visibility<T>(this Style<T> style, IBinding binding) wher
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Orientation<T>(this Style<T> style, Avalonia.Layout.Orientation value) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.OrientationProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.OrientationProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Orientation<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -198,7 +210,7 @@ public static Style<T> Orientation<T>(this Style<T> style, IBinding binding) whe
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> AllowAutoHide<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.AllowAutoHideProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.AllowAutoHideProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> AllowAutoHide<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -209,7 +221,7 @@ public static Style<T> AllowAutoHide<T>(this Style<T> style, IBinding binding) w
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> HideDelay<T>(this Style<T> style, System.TimeSpan value) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.HideDelayProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.HideDelayProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> HideDelay<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -220,7 +232,7 @@ public static Style<T> HideDelay<T>(this Style<T> style, IBinding binding) where
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> ShowDelay<T>(this Style<T> style, System.TimeSpan value) where T : Avalonia.Controls.Primitives.ScrollBar 
-=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.ShowDelayProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.ScrollBar.ShowDelayProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> ShowDelay<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Primitives.ScrollBar 

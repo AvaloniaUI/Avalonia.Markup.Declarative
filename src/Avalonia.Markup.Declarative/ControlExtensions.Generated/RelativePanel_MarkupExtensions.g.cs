@@ -20,7 +20,7 @@ public static T RelativePanel_Above<T>(this T control, System.Object value, Bind
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_Above<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AboveProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AboveProperty!, func, onChanged, expression);
 
 
  // AlignBottomWithPanel
@@ -31,7 +31,7 @@ public static T RelativePanel_AlignBottomWithPanel<T>(this T control, System.Boo
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignBottomWithPanel<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignBottomWithPanelProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignBottomWithPanelProperty!, func, onChanged, expression);
 
 
  // AlignBottomWith
@@ -42,7 +42,7 @@ public static T RelativePanel_AlignBottomWith<T>(this T control, System.Object v
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignBottomWith<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignBottomWithProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignBottomWithProperty!, func, onChanged, expression);
 
 
  // AlignHorizontalCenterWithPanel
@@ -53,7 +53,7 @@ public static T RelativePanel_AlignHorizontalCenterWithPanel<T>(this T control, 
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignHorizontalCenterWithPanel<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignHorizontalCenterWithPanelProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignHorizontalCenterWithPanelProperty!, func, onChanged, expression);
 
 
  // AlignHorizontalCenterWith
@@ -64,7 +64,7 @@ public static T RelativePanel_AlignHorizontalCenterWith<T>(this T control, Syste
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignHorizontalCenterWith<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignHorizontalCenterWithProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignHorizontalCenterWithProperty!, func, onChanged, expression);
 
 
  // AlignLeftWithPanel
@@ -75,7 +75,7 @@ public static T RelativePanel_AlignLeftWithPanel<T>(this T control, System.Boole
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignLeftWithPanel<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignLeftWithPanelProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignLeftWithPanelProperty!, func, onChanged, expression);
 
 
  // AlignLeftWith
@@ -86,7 +86,7 @@ public static T RelativePanel_AlignLeftWith<T>(this T control, System.Object val
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignLeftWith<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignLeftWithProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignLeftWithProperty!, func, onChanged, expression);
 
 
  // AlignRightWithPanel
@@ -97,7 +97,7 @@ public static T RelativePanel_AlignRightWithPanel<T>(this T control, System.Bool
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignRightWithPanel<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignRightWithPanelProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignRightWithPanelProperty!, func, onChanged, expression);
 
 
  // AlignRightWith
@@ -108,7 +108,7 @@ public static T RelativePanel_AlignRightWith<T>(this T control, System.Object va
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignRightWith<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignRightWithProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignRightWithProperty!, func, onChanged, expression);
 
 
  // AlignTopWithPanel
@@ -119,7 +119,7 @@ public static T RelativePanel_AlignTopWithPanel<T>(this T control, System.Boolea
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignTopWithPanel<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignTopWithPanelProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignTopWithPanelProperty!, func, onChanged, expression);
 
 
  // AlignTopWith
@@ -130,7 +130,7 @@ public static T RelativePanel_AlignTopWith<T>(this T control, System.Object valu
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignTopWith<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignTopWithProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignTopWithProperty!, func, onChanged, expression);
 
 
  // AlignVerticalCenterWithPanel
@@ -141,7 +141,7 @@ public static T RelativePanel_AlignVerticalCenterWithPanel<T>(this T control, Sy
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignVerticalCenterWithPanel<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignVerticalCenterWithPanelProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignVerticalCenterWithPanelProperty!, func, onChanged, expression);
 
 
  // AlignVerticalCenterWith
@@ -152,7 +152,7 @@ public static T RelativePanel_AlignVerticalCenterWith<T>(this T control, System.
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_AlignVerticalCenterWith<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.AlignVerticalCenterWithProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.AlignVerticalCenterWithProperty!, func, onChanged, expression);
 
 
  // Below
@@ -163,7 +163,7 @@ public static T RelativePanel_Below<T>(this T control, System.Object value, Bind
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_Below<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.BelowProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.BelowProperty!, func, onChanged, expression);
 
 
  // LeftOf
@@ -174,7 +174,7 @@ public static T RelativePanel_LeftOf<T>(this T control, System.Object value, Bin
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_LeftOf<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.LeftOfProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.LeftOfProperty!, func, onChanged, expression);
 
 
  // RightOf
@@ -185,7 +185,7 @@ public static T RelativePanel_RightOf<T>(this T control, System.Object value, Bi
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T RelativePanel_RightOf<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.RelativePanel.RightOfProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.RelativePanel.RightOfProperty!, func, onChanged, expression);
 
 
 

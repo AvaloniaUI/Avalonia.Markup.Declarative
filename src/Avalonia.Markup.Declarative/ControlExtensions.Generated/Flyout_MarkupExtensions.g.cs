@@ -16,11 +16,12 @@ public static partial class Flyout_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static T Content<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Flyout 
-   => control._set(Avalonia.Controls.Flyout.ContentProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Flyout.ContentProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Content<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Flyout 
-=> control._setEx(Avalonia.Controls.Flyout.ContentProperty, ps, () => control.Content = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Flyout.ContentProperty, ps, () => control.Content = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Content<T>(this T control, IBinding binding) where T : Avalonia.Controls.Flyout 
@@ -31,19 +32,21 @@ public static T Content<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.Flyout.ContentProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Content<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Flyout 
-=> control._setEx(Avalonia.Controls.Flyout.ContentProperty, ps, () => control.Content = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Flyout.ContentProperty, ps, () => control.Content = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // FlyoutPresenterTheme
 
 /*BindFromExpressionSetterGenerator*/
 public static T FlyoutPresenterTheme<T>(this T control, Func<Avalonia.Styling.ControlTheme> func, Action<Avalonia.Styling.ControlTheme>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Flyout 
-   => control._set(Avalonia.Controls.Flyout.FlyoutPresenterThemeProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Flyout.FlyoutPresenterThemeProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T FlyoutPresenterTheme<T>(this T control,Avalonia.Styling.ControlTheme value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Flyout 
-=> control._setEx(Avalonia.Controls.Flyout.FlyoutPresenterThemeProperty, ps, () => control.FlyoutPresenterTheme = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Flyout.FlyoutPresenterThemeProperty, ps, () => control.FlyoutPresenterTheme = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T FlyoutPresenterTheme<T>(this T control, IBinding binding) where T : Avalonia.Controls.Flyout 
@@ -54,8 +57,9 @@ public static T FlyoutPresenterTheme<T>(this T control, AvaloniaProperty avaloni
    => control._set(Avalonia.Controls.Flyout.FlyoutPresenterThemeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T FlyoutPresenterTheme<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Styling.ControlTheme> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Flyout 
-=> control._setEx(Avalonia.Controls.Flyout.FlyoutPresenterThemeProperty, ps, () => control.FlyoutPresenterTheme = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Flyout.FlyoutPresenterThemeProperty, ps, () => control.FlyoutPresenterTheme = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
