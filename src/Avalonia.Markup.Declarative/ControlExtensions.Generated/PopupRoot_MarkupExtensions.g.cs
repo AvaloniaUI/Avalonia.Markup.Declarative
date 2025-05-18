@@ -16,11 +16,12 @@ public static partial class PopupRoot_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Controls.Primitives.PopupRoot Transform(this Avalonia.Controls.Primitives.PopupRoot control, Func<Avalonia.Media.Transform> func, Action<Avalonia.Media.Transform>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
-   => control._set(Avalonia.Controls.Primitives.PopupRoot.TransformProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.PopupRoot.TransformProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static Avalonia.Controls.Primitives.PopupRoot Transform(this Avalonia.Controls.Primitives.PopupRoot control,Avalonia.Media.Transform value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Controls.Primitives.PopupRoot.TransformProperty, ps, () => control.Transform = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.PopupRoot.TransformProperty, ps, () => control.Transform = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Controls.Primitives.PopupRoot Transform(this Avalonia.Controls.Primitives.PopupRoot control, IBinding binding)  
@@ -31,19 +32,21 @@ public static Avalonia.Controls.Primitives.PopupRoot Transform(this Avalonia.Con
    => control._set(Avalonia.Controls.Primitives.PopupRoot.TransformProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static Avalonia.Controls.Primitives.PopupRoot Transform<TValue>(this Avalonia.Controls.Primitives.PopupRoot control, TValue value, FuncValueConverter<TValue, Avalonia.Media.Transform> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Controls.Primitives.PopupRoot.TransformProperty, ps, () => control.Transform = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.PopupRoot.TransformProperty, ps, () => control.Transform = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // WindowManagerAddShadowHint
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Controls.Primitives.PopupRoot WindowManagerAddShadowHint(this Avalonia.Controls.Primitives.PopupRoot control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
-   => control._set(Avalonia.Controls.Primitives.PopupRoot.WindowManagerAddShadowHintProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.PopupRoot.WindowManagerAddShadowHintProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static Avalonia.Controls.Primitives.PopupRoot WindowManagerAddShadowHint(this Avalonia.Controls.Primitives.PopupRoot control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Controls.Primitives.PopupRoot.WindowManagerAddShadowHintProperty, ps, () => control.WindowManagerAddShadowHint = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.PopupRoot.WindowManagerAddShadowHintProperty, ps, () => control.WindowManagerAddShadowHint = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Controls.Primitives.PopupRoot WindowManagerAddShadowHint(this Avalonia.Controls.Primitives.PopupRoot control, IBinding binding)  
@@ -54,8 +57,9 @@ public static Avalonia.Controls.Primitives.PopupRoot WindowManagerAddShadowHint(
    => control._set(Avalonia.Controls.Primitives.PopupRoot.WindowManagerAddShadowHintProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static Avalonia.Controls.Primitives.PopupRoot WindowManagerAddShadowHint<TValue>(this Avalonia.Controls.Primitives.PopupRoot control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Controls.Primitives.PopupRoot.WindowManagerAddShadowHintProperty, ps, () => control.WindowManagerAddShadowHint = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Primitives.PopupRoot.WindowManagerAddShadowHintProperty, ps, () => control.WindowManagerAddShadowHint = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -64,7 +68,7 @@ public static Avalonia.Controls.Primitives.PopupRoot WindowManagerAddShadowHint<
 
 /*ValueStyleSetterGenerator*/
 public static Style<Avalonia.Controls.Primitives.PopupRoot> Transform(this Style<Avalonia.Controls.Primitives.PopupRoot> style, Avalonia.Media.Transform value)  
-=> style._addSetter(Avalonia.Controls.Primitives.PopupRoot.TransformProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.PopupRoot.TransformProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<Avalonia.Controls.Primitives.PopupRoot> Transform(this Style<Avalonia.Controls.Primitives.PopupRoot> style, IBinding binding)  
@@ -75,7 +79,7 @@ public static Style<Avalonia.Controls.Primitives.PopupRoot> Transform(this Style
 
 /*ValueStyleSetterGenerator*/
 public static Style<Avalonia.Controls.Primitives.PopupRoot> WindowManagerAddShadowHint(this Style<Avalonia.Controls.Primitives.PopupRoot> style, System.Boolean value)  
-=> style._addSetter(Avalonia.Controls.Primitives.PopupRoot.WindowManagerAddShadowHintProperty, value);
+=> style._addSetter(Avalonia.Controls.Primitives.PopupRoot.WindowManagerAddShadowHintProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<Avalonia.Controls.Primitives.PopupRoot> WindowManagerAddShadowHint(this Style<Avalonia.Controls.Primitives.PopupRoot> style, IBinding binding)  

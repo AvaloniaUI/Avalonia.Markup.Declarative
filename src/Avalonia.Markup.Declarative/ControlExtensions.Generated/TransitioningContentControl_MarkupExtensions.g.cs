@@ -16,11 +16,12 @@ public static partial class TransitioningContentControl_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static T PageTransition<T>(this T control, Func<Avalonia.Animation.IPageTransition> func, Action<Avalonia.Animation.IPageTransition>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TransitioningContentControl 
-   => control._set(Avalonia.Controls.TransitioningContentControl.PageTransitionProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.TransitioningContentControl.PageTransitionProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T PageTransition<T>(this T control,Avalonia.Animation.IPageTransition value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TransitioningContentControl 
-=> control._setEx(Avalonia.Controls.TransitioningContentControl.PageTransitionProperty, ps, () => control.PageTransition = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TransitioningContentControl.PageTransitionProperty, ps, () => control.PageTransition = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T PageTransition<T>(this T control, IBinding binding) where T : Avalonia.Controls.TransitioningContentControl 
@@ -31,19 +32,21 @@ public static T PageTransition<T>(this T control, AvaloniaProperty avaloniaPrope
    => control._set(Avalonia.Controls.TransitioningContentControl.PageTransitionProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T PageTransition<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Animation.IPageTransition> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TransitioningContentControl 
-=> control._setEx(Avalonia.Controls.TransitioningContentControl.PageTransitionProperty, ps, () => control.PageTransition = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TransitioningContentControl.PageTransitionProperty, ps, () => control.PageTransition = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // IsTransitionReversed
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsTransitionReversed<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TransitioningContentControl 
-   => control._set(Avalonia.Controls.TransitioningContentControl.IsTransitionReversedProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.TransitioningContentControl.IsTransitionReversedProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T IsTransitionReversed<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TransitioningContentControl 
-=> control._setEx(Avalonia.Controls.TransitioningContentControl.IsTransitionReversedProperty, ps, () => control.IsTransitionReversed = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TransitioningContentControl.IsTransitionReversedProperty, ps, () => control.IsTransitionReversed = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsTransitionReversed<T>(this T control, IBinding binding) where T : Avalonia.Controls.TransitioningContentControl 
@@ -54,8 +57,9 @@ public static T IsTransitionReversed<T>(this T control, AvaloniaProperty avaloni
    => control._set(Avalonia.Controls.TransitioningContentControl.IsTransitionReversedProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T IsTransitionReversed<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TransitioningContentControl 
-=> control._setEx(Avalonia.Controls.TransitioningContentControl.IsTransitionReversedProperty, ps, () => control.IsTransitionReversed = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TransitioningContentControl.IsTransitionReversedProperty, ps, () => control.IsTransitionReversed = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -77,7 +81,7 @@ public static T OnTransitionCompleted<T>(this T control, Action<Avalonia.Control
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> PageTransition<T>(this Style<T> style, Avalonia.Animation.IPageTransition value) where T : Avalonia.Controls.TransitioningContentControl 
-=> style._addSetter(Avalonia.Controls.TransitioningContentControl.PageTransitionProperty, value);
+=> style._addSetter(Avalonia.Controls.TransitioningContentControl.PageTransitionProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> PageTransition<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TransitioningContentControl 
@@ -88,7 +92,7 @@ public static Style<T> PageTransition<T>(this Style<T> style, IBinding binding) 
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> IsTransitionReversed<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.TransitioningContentControl 
-=> style._addSetter(Avalonia.Controls.TransitioningContentControl.IsTransitionReversedProperty, value);
+=> style._addSetter(Avalonia.Controls.TransitioningContentControl.IsTransitionReversedProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> IsTransitionReversed<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TransitioningContentControl 

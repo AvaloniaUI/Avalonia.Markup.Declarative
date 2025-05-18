@@ -16,11 +16,12 @@ public static partial class TabItem_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsSelected<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TabItem 
-   => control._set(Avalonia.Controls.TabItem.IsSelectedProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.TabItem.IsSelectedProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T IsSelected<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TabItem 
-=> control._setEx(Avalonia.Controls.TabItem.IsSelectedProperty, ps, () => control.IsSelected = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TabItem.IsSelectedProperty, ps, () => control.IsSelected = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsSelected<T>(this T control, IBinding binding) where T : Avalonia.Controls.TabItem 
@@ -31,8 +32,9 @@ public static T IsSelected<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.TabItem.IsSelectedProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T IsSelected<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TabItem 
-=> control._setEx(Avalonia.Controls.TabItem.IsSelectedProperty, ps, () => control.IsSelected = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TabItem.IsSelectedProperty, ps, () => control.IsSelected = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -41,7 +43,7 @@ public static T IsSelected<TValue,T>(this T control, TValue value, FuncValueConv
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> IsSelected<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.TabItem 
-=> style._addSetter(Avalonia.Controls.TabItem.IsSelectedProperty, value);
+=> style._addSetter(Avalonia.Controls.TabItem.IsSelectedProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> IsSelected<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TabItem 

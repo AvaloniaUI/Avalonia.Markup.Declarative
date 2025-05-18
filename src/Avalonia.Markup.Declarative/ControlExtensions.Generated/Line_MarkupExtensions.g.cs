@@ -16,11 +16,12 @@ public static partial class Line_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static T StartPoint<T>(this T control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Line 
-   => control._set(Avalonia.Controls.Shapes.Line.StartPointProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Shapes.Line.StartPointProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T StartPoint<T>(this T control,Avalonia.Point value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Shapes.Line 
-=> control._setEx(Avalonia.Controls.Shapes.Line.StartPointProperty, ps, () => control.StartPoint = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Shapes.Line.StartPointProperty, ps, () => control.StartPoint = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T StartPoint<T>(this T control, IBinding binding) where T : Avalonia.Controls.Shapes.Line 
@@ -31,19 +32,21 @@ public static T StartPoint<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Shapes.Line.StartPointProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T StartPoint<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Point> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Shapes.Line 
-=> control._setEx(Avalonia.Controls.Shapes.Line.StartPointProperty, ps, () => control.StartPoint = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Shapes.Line.StartPointProperty, ps, () => control.StartPoint = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // EndPoint
 
 /*BindFromExpressionSetterGenerator*/
 public static T EndPoint<T>(this T control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Line 
-   => control._set(Avalonia.Controls.Shapes.Line.EndPointProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Shapes.Line.EndPointProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T EndPoint<T>(this T control,Avalonia.Point value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Shapes.Line 
-=> control._setEx(Avalonia.Controls.Shapes.Line.EndPointProperty, ps, () => control.EndPoint = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Shapes.Line.EndPointProperty, ps, () => control.EndPoint = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T EndPoint<T>(this T control, IBinding binding) where T : Avalonia.Controls.Shapes.Line 
@@ -54,8 +57,9 @@ public static T EndPoint<T>(this T control, AvaloniaProperty avaloniaProperty, B
    => control._set(Avalonia.Controls.Shapes.Line.EndPointProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T EndPoint<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Point> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Shapes.Line 
-=> control._setEx(Avalonia.Controls.Shapes.Line.EndPointProperty, ps, () => control.EndPoint = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Shapes.Line.EndPointProperty, ps, () => control.EndPoint = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -64,7 +68,7 @@ public static T EndPoint<TValue,T>(this T control, TValue value, FuncValueConver
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> StartPoint<T>(this Style<T> style, Avalonia.Point value) where T : Avalonia.Controls.Shapes.Line 
-=> style._addSetter(Avalonia.Controls.Shapes.Line.StartPointProperty, value);
+=> style._addSetter(Avalonia.Controls.Shapes.Line.StartPointProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> StartPoint<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Shapes.Line 
@@ -75,7 +79,7 @@ public static Style<T> StartPoint<T>(this Style<T> style, IBinding binding) wher
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> EndPoint<T>(this Style<T> style, Avalonia.Point value) where T : Avalonia.Controls.Shapes.Line 
-=> style._addSetter(Avalonia.Controls.Shapes.Line.EndPointProperty, value);
+=> style._addSetter(Avalonia.Controls.Shapes.Line.EndPointProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> EndPoint<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Shapes.Line 

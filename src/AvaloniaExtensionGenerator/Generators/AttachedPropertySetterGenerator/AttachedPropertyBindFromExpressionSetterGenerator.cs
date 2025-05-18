@@ -7,6 +7,6 @@ public class AttachedPropertyBindFromExpressionSetterGenerator : ExtensionGenera
     protected override string? GetExtension(AttachedPropertyExtensionInfo info) =>
         $"public static {info.ReturnType} {info.ExtensionName}{info.GenericArg}(this {info.ReturnType} control, Func<{info.ValueTypeSource}> func, Action<{info.ValueTypeSource}>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)" +
         $" where T : {info.AttachedPropertyHostTypeName} {Environment.NewLine}" +
-        $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}, func, onChanged, expression);";
+        $"   => control._set({info.ControlTypeName}.{info.FieldInfo.Name}!, func, onChanged, expression);";
 
 }

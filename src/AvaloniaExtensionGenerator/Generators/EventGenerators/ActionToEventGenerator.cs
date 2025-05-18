@@ -54,7 +54,8 @@ public class ActionToEventGenerator : ExtensionGeneratorBase<EventExtensionInfo>
 
 
         var extensionText =
-            $"public static {@event.ReturnType} {extensionName}{@event.GenericArg}"
+            (@event.IsObsolete ? "[Obsolete]" : "")
+            + $"public static {@event.ReturnType} {extensionName}{@event.GenericArg}"
             + $"(this {@event.ReturnType} control, {argsString}) {@event.GenericConstraint} "
             + extensionBody;
 

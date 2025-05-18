@@ -57,10 +57,10 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
                     .Select(x => new PropertyExtensionInfo(x)),
                 
                 new BindFromExpressionSetterGenerator(),
-                new MagicalSetterGenerator(),
                 new ValueOverloadsSetterGenerator(),
 
                 //obsolete candidates
+                new MagicalSetterGenerator(),
                 new BindSetterGenerator(),
                 new AvaloniaPropertyBindSetterGenerator(),
                 new MagicalSetterWithConverterGenerator()

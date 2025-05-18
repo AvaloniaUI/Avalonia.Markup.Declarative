@@ -16,11 +16,12 @@ public static partial class Border_MarkupExtensions
 
 /*BindFromExpressionSetterGenerator*/
 public static T Background<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 
-   => control._set(Avalonia.Controls.Border.BackgroundProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Border.BackgroundProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Background<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.BackgroundProperty, ps, () => control.Background = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Border.BackgroundProperty, ps, () => control.Background = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Background<T>(this T control, IBinding binding) where T : Avalonia.Controls.Border 
@@ -31,19 +32,21 @@ public static T Background<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.Border.BackgroundProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Background<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.BackgroundProperty, ps, () => control.Background = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Border.BackgroundProperty, ps, () => control.Background = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // BackgroundSizing
 
 /*BindFromExpressionSetterGenerator*/
 public static T BackgroundSizing<T>(this T control, Func<Avalonia.Media.BackgroundSizing> func, Action<Avalonia.Media.BackgroundSizing>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 
-   => control._set(Avalonia.Controls.Border.BackgroundSizingProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Border.BackgroundSizingProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T BackgroundSizing<T>(this T control,Avalonia.Media.BackgroundSizing value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.BackgroundSizingProperty, ps, () => control.BackgroundSizing = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Border.BackgroundSizingProperty, ps, () => control.BackgroundSizing = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T BackgroundSizing<T>(this T control, IBinding binding) where T : Avalonia.Controls.Border 
@@ -54,19 +57,21 @@ public static T BackgroundSizing<T>(this T control, AvaloniaProperty avaloniaPro
    => control._set(Avalonia.Controls.Border.BackgroundSizingProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T BackgroundSizing<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.BackgroundSizing> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.BackgroundSizingProperty, ps, () => control.BackgroundSizing = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Border.BackgroundSizingProperty, ps, () => control.BackgroundSizing = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // BorderBrush
 
 /*BindFromExpressionSetterGenerator*/
 public static T BorderBrush<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 
-   => control._set(Avalonia.Controls.Border.BorderBrushProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Border.BorderBrushProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T BorderBrush<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.BorderBrushProperty, ps, () => control.BorderBrush = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Border.BorderBrushProperty, ps, () => control.BorderBrush = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T BorderBrush<T>(this T control, IBinding binding) where T : Avalonia.Controls.Border 
@@ -77,28 +82,30 @@ public static T BorderBrush<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.Border.BorderBrushProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T BorderBrush<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.BorderBrushProperty, ps, () => control.BorderBrush = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Border.BorderBrushProperty, ps, () => control.BorderBrush = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // BorderThickness
 
 /*BindFromExpressionSetterGenerator*/
 public static T BorderThickness<T>(this T control, Func<Avalonia.Thickness> func, Action<Avalonia.Thickness>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 
-   => control._set(Avalonia.Controls.Border.BorderThicknessProperty, func, onChanged, expression);
-
-/*MagicalSetterGenerator*/
-public static T BorderThickness<T>(this T control,Avalonia.Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.BorderThicknessProperty, ps, () => control.BorderThickness = value, bindingMode, converter, bindingSource);
+   => control._set(Avalonia.Controls.Border.BorderThicknessProperty!, func, onChanged, expression);
 
 /*ValueOverloadsSetterGenerator*/
 
-public static T BorderThickness<T>(this T control, System.Double uniformLength = default) where T : Avalonia.Controls.Border 
+public static T BorderThickness<T>(this T control, System.Double uniformLength = default!) where T : Avalonia.Controls.Border 
    => control._set(() => control.BorderThickness = new Avalonia.Thickness(uniformLength));
-public static T BorderThickness<T>(this T control, System.Double horizontal = default, System.Double vertical = default) where T : Avalonia.Controls.Border 
+public static T BorderThickness<T>(this T control, System.Double horizontal = default!, System.Double vertical = default!) where T : Avalonia.Controls.Border 
    => control._set(() => control.BorderThickness = new Avalonia.Thickness(horizontal, vertical));
-public static T BorderThickness<T>(this T control, System.Double left = default, System.Double top = default, System.Double right = default, System.Double bottom = default) where T : Avalonia.Controls.Border 
+public static T BorderThickness<T>(this T control, System.Double left = default!, System.Double top = default!, System.Double right = default!, System.Double bottom = default!) where T : Avalonia.Controls.Border 
    => control._set(() => control.BorderThickness = new Avalonia.Thickness(left, top, right, bottom));
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static T BorderThickness<T>(this T control,Avalonia.Thickness value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
+=> control._setEx(Avalonia.Controls.Border.BorderThicknessProperty, ps, () => control.BorderThickness = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T BorderThickness<T>(this T control, IBinding binding) where T : Avalonia.Controls.Border 
@@ -109,28 +116,30 @@ public static T BorderThickness<T>(this T control, AvaloniaProperty avaloniaProp
    => control._set(Avalonia.Controls.Border.BorderThicknessProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T BorderThickness<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Thickness> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.BorderThicknessProperty, ps, () => control.BorderThickness = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Border.BorderThicknessProperty, ps, () => control.BorderThickness = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // CornerRadius
 
 /*BindFromExpressionSetterGenerator*/
 public static T CornerRadius<T>(this T control, Func<Avalonia.CornerRadius> func, Action<Avalonia.CornerRadius>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 
-   => control._set(Avalonia.Controls.Border.CornerRadiusProperty, func, onChanged, expression);
-
-/*MagicalSetterGenerator*/
-public static T CornerRadius<T>(this T control,Avalonia.CornerRadius value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.CornerRadiusProperty, ps, () => control.CornerRadius = value, bindingMode, converter, bindingSource);
+   => control._set(Avalonia.Controls.Border.CornerRadiusProperty!, func, onChanged, expression);
 
 /*ValueOverloadsSetterGenerator*/
 
-public static T CornerRadius<T>(this T control, System.Double uniformRadius = default) where T : Avalonia.Controls.Border 
+public static T CornerRadius<T>(this T control, System.Double uniformRadius = default!) where T : Avalonia.Controls.Border 
    => control._set(() => control.CornerRadius = new Avalonia.CornerRadius(uniformRadius));
-public static T CornerRadius<T>(this T control, System.Double top = default, System.Double bottom = default) where T : Avalonia.Controls.Border 
+public static T CornerRadius<T>(this T control, System.Double top = default!, System.Double bottom = default!) where T : Avalonia.Controls.Border 
    => control._set(() => control.CornerRadius = new Avalonia.CornerRadius(top, bottom));
-public static T CornerRadius<T>(this T control, System.Double topLeft = default, System.Double topRight = default, System.Double bottomRight = default, System.Double bottomLeft = default) where T : Avalonia.Controls.Border 
+public static T CornerRadius<T>(this T control, System.Double topLeft = default!, System.Double topRight = default!, System.Double bottomRight = default!, System.Double bottomLeft = default!) where T : Avalonia.Controls.Border 
    => control._set(() => control.CornerRadius = new Avalonia.CornerRadius(topLeft, topRight, bottomRight, bottomLeft));
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static T CornerRadius<T>(this T control,Avalonia.CornerRadius value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
+=> control._setEx(Avalonia.Controls.Border.CornerRadiusProperty, ps, () => control.CornerRadius = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T CornerRadius<T>(this T control, IBinding binding) where T : Avalonia.Controls.Border 
@@ -141,26 +150,28 @@ public static T CornerRadius<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.Border.CornerRadiusProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T CornerRadius<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.CornerRadius> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.CornerRadiusProperty, ps, () => control.CornerRadius = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Border.CornerRadiusProperty, ps, () => control.CornerRadius = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // BoxShadow
 
 /*BindFromExpressionSetterGenerator*/
 public static T BoxShadow<T>(this T control, Func<Avalonia.Media.BoxShadows> func, Action<Avalonia.Media.BoxShadows>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 
-   => control._set(Avalonia.Controls.Border.BoxShadowProperty, func, onChanged, expression);
-
-/*MagicalSetterGenerator*/
-public static T BoxShadow<T>(this T control,Avalonia.Media.BoxShadows value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.BoxShadowProperty, ps, () => control.BoxShadow = value, bindingMode, converter, bindingSource);
+   => control._set(Avalonia.Controls.Border.BoxShadowProperty!, func, onChanged, expression);
 
 /*ValueOverloadsSetterGenerator*/
 
-public static T BoxShadow<T>(this T control, Avalonia.Media.BoxShadow shadow = default) where T : Avalonia.Controls.Border 
+public static T BoxShadow<T>(this T control, Avalonia.Media.BoxShadow shadow = default!) where T : Avalonia.Controls.Border 
    => control._set(() => control.BoxShadow = new Avalonia.Media.BoxShadows(shadow));
-public static T BoxShadow<T>(this T control, Avalonia.Media.BoxShadow first = default, Avalonia.Media.BoxShadow[] rest = default) where T : Avalonia.Controls.Border 
+public static T BoxShadow<T>(this T control, Avalonia.Media.BoxShadow first = default!, Avalonia.Media.BoxShadow[] rest = default!) where T : Avalonia.Controls.Border 
    => control._set(() => control.BoxShadow = new Avalonia.Media.BoxShadows(first, rest));
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static T BoxShadow<T>(this T control,Avalonia.Media.BoxShadows value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
+=> control._setEx(Avalonia.Controls.Border.BoxShadowProperty, ps, () => control.BoxShadow = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T BoxShadow<T>(this T control, IBinding binding) where T : Avalonia.Controls.Border 
@@ -171,8 +182,9 @@ public static T BoxShadow<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.Border.BoxShadowProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T BoxShadow<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.BoxShadows> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Border 
-=> control._setEx(Avalonia.Controls.Border.BoxShadowProperty, ps, () => control.BoxShadow = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.Border.BoxShadowProperty, ps, () => control.BoxShadow = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -181,7 +193,7 @@ public static T BoxShadow<TValue,T>(this T control, TValue value, FuncValueConve
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Background<T>(this Style<T> style, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Border 
-=> style._addSetter(Avalonia.Controls.Border.BackgroundProperty, value);
+=> style._addSetter(Avalonia.Controls.Border.BackgroundProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Background<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Border 
@@ -192,7 +204,7 @@ public static Style<T> Background<T>(this Style<T> style, IBinding binding) wher
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> BackgroundSizing<T>(this Style<T> style, Avalonia.Media.BackgroundSizing value) where T : Avalonia.Controls.Border 
-=> style._addSetter(Avalonia.Controls.Border.BackgroundSizingProperty, value);
+=> style._addSetter(Avalonia.Controls.Border.BackgroundSizingProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> BackgroundSizing<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Border 
@@ -203,7 +215,7 @@ public static Style<T> BackgroundSizing<T>(this Style<T> style, IBinding binding
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> BorderBrush<T>(this Style<T> style, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Border 
-=> style._addSetter(Avalonia.Controls.Border.BorderBrushProperty, value);
+=> style._addSetter(Avalonia.Controls.Border.BorderBrushProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> BorderBrush<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Border 
@@ -214,7 +226,7 @@ public static Style<T> BorderBrush<T>(this Style<T> style, IBinding binding) whe
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> BorderThickness<T>(this Style<T> style, Avalonia.Thickness value) where T : Avalonia.Controls.Border 
-=> style._addSetter(Avalonia.Controls.Border.BorderThicknessProperty, value);
+=> style._addSetter(Avalonia.Controls.Border.BorderThicknessProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> BorderThickness<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Border 
@@ -231,7 +243,7 @@ public static Style<T> BorderThickness<T>(this Style<T> style, System.Double uni
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> CornerRadius<T>(this Style<T> style, Avalonia.CornerRadius value) where T : Avalonia.Controls.Border 
-=> style._addSetter(Avalonia.Controls.Border.CornerRadiusProperty, value);
+=> style._addSetter(Avalonia.Controls.Border.CornerRadiusProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> CornerRadius<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Border 
@@ -248,7 +260,7 @@ public static Style<T> CornerRadius<T>(this Style<T> style, System.Double unifor
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> BoxShadow<T>(this Style<T> style, Avalonia.Media.BoxShadows value) where T : Avalonia.Controls.Border 
-=> style._addSetter(Avalonia.Controls.Border.BoxShadowProperty, value);
+=> style._addSetter(Avalonia.Controls.Border.BoxShadowProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> BoxShadow<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Border 

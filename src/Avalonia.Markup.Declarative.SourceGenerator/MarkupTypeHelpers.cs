@@ -82,19 +82,22 @@ internal static class MarkupTypeHelpers
         return property != null && property.Modifiers.Any(x => x.ValueText == "public");
     }
 
-    //internal static string? GetPropertyTypeName(PropertyDeclarationSyntax property, Compilation compilation)
-    //{
-    //    var semanticModel = compilation.GetSemanticModel(property.SyntaxTree);
-    //    var fullTypeName = semanticModel.GetTypeInfo(property.Type).Type?.ToString();
-
-    //    return !string.IsNullOrWhiteSpace(fullTypeName) ? fullTypeName : property.Type.ToString();
-    //}
-
     internal static string GetPropertyTypeName(PropertyDeclarationSyntax property, SemanticModel semanticModel)
     {
         var typeInfo = semanticModel.GetTypeInfo(property.Type);
         return typeInfo.Type?.ToDisplayString() ?? property.Type.ToString();
     }
 
+    internal static string GetNullableLambdaParameterTypeName(PropertyDeclarationSyntax property, SemanticModel semanticModel)
+    {
+        var typeInfo = semanticModel.GetTypeInfo(property.Type);
+        var typeSymbol = typeInfo.Type;
 
+        if (typeSymbol == null)
+            return property.Type + "?";
+
+        var nullableTypeSymbol = typeSymbol.WithNullableAnnotation(NullableAnnotation.Annotated);
+
+        return nullableTypeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+    }
 }

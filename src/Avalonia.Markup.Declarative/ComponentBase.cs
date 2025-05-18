@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Avalonia.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Avalonia.Data;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -29,18 +30,19 @@ public abstract class ComponentBase<TViewModel> : ComponentBase
     protected override object Build() => Build(ViewModel);
 }
 
+[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties | DynamicallyAccessedMemberTypes.NonPublicFields)]
 public abstract class ComponentBase : ViewBase, IMvuComponent
 {
     private ViewPropertyState[]? _localPropertyStates;
     private List<ViewPropertyState>? _externalPropertyStates;
     private List<IMvuComponent>? _dependentViews;
 
-    public ComponentBase()
+    protected ComponentBase()
         : base()
     {
     }
 
-    public ComponentBase(bool deferredLoading)
+    protected ComponentBase(bool deferredLoading)
         : base(deferredLoading)
     {
     }
@@ -94,7 +96,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             .Select(p => new ViewPropertyState(p, this))
             .ToArray();
     }
-    public void UpdateState(Action? updateStateAction = default)
+    public void UpdateState(Action? updateStateAction = null)
     {
         updateStateAction?.Invoke();
         StateHasChanged();
@@ -120,10 +122,10 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             computedState.OnPropertyChanged();
     }
 
-    public void AddExternalState<TContorl, TValue>(TContorl source, string propertyName, Action<TValue?> setAction)
-        where TContorl : ComponentBase
+    public void AddExternalState<TControl, TValue>(TControl source, string propertyName, Action<TValue?> setAction)
+        where TControl : ComponentBase
     {
-        _externalPropertyStates ??= new List<ViewPropertyState>();
+        _externalPropertyStates ??= [];
 
         var propInfo = source.GetType().GetProperty(propertyName);
 
@@ -138,7 +140,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
 
     private void AddDependentView(IMvuComponent view, ViewPropertyState propertyState)
     {
-        _dependentViews ??= new List<IMvuComponent>();
+        _dependentViews ??= [];
 
         if (!_dependentViews.Contains(view))
             _dependentViews.Add(view);
