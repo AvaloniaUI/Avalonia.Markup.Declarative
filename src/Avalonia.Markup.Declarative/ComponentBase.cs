@@ -10,6 +10,7 @@ using Avalonia.Controls;
 
 namespace Avalonia.Markup.Declarative;
 
+[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties | DynamicallyAccessedMemberTypes.NonPublicFields)]
 public abstract class ComponentBase<TViewModel> : ComponentBase
 {
     public virtual TViewModel? ViewModel
@@ -58,24 +59,38 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     private void InjectServices()
     {
         var componentType = GetType();
-        var injectProps = componentType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-            .Where(x => x.GetCustomAttribute(typeof(InjectAttribute)) != null)
-            .ToArray();
+        var types = new List<Type>();
 
-        foreach (var propertyInfo in injectProps)
+        // Walk up the inheritance chain, but stop at object
+        for (var type = componentType; type != null && type != typeof(object); type = type.BaseType)
         {
-            var service = GetServiceFromProvider(propertyInfo.PropertyType);
+            types.Add(type);
+        }
 
-            if (propertyInfo.CanWrite)
+        // Go from base to derived so base properties are injected first
+        types.Reverse();
+
+        foreach (var type in types)
+        {
+            var injectProps = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                .Where(x => x.GetCustomAttribute(typeof(InjectAttribute)) != null)
+                .ToArray();
+
+            foreach (var propertyInfo in injectProps)
             {
-                propertyInfo.SetValue(this, service);
-            }
-            else
-            {
-                if (componentType.GetField($"<{propertyInfo.Name}>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance) is { } backingField)
-                    backingField.SetValue(this, service);
+                var service = GetServiceFromProvider(propertyInfo.PropertyType);
+
+                if (propertyInfo.CanWrite)
+                {
+                    propertyInfo.SetValue(this, service);
+                }
                 else
-                    throw new InvalidOperationException($"Can't inject {service?.GetType()} service. Ensure that target property: {GetType().Name}.{propertyInfo.Name} has public setter or it's an auto-property");
+                {
+                    if (type.GetField($"<{propertyInfo.Name}>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance) is { } backingField)
+                        backingField.SetValue(this, service);
+                    else
+                        throw new InvalidOperationException($"Can't inject {service?.GetType()} service. Ensure that target property: {type.Name}.{propertyInfo.Name} has public setter or it's an auto-property");
+                }
             }
         }
     }
@@ -98,7 +113,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     {
         if (AppBuilderExtensions.ComponentControlFactory == null)
             throw new InvalidOperationException("Please set Component Factory by calling UseComponentControlFactory on AppBuilder");
-        
+
         var control = AppBuilderExtensions.ComponentControlFactory.CreateControlInstance<TControl>();
         return control;
     }
