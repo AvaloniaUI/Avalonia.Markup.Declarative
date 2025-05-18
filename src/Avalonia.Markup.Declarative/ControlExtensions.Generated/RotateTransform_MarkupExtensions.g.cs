@@ -14,6 +14,10 @@ public static partial class RotateTransform_MarkupExtensions
 //================= Properties ======================//
  // Angle
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.RotateTransform Angle(this Avalonia.Media.RotateTransform control, System.Double value)  
+=> control._set(() => control.Angle = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.RotateTransform Angle(this Avalonia.Media.RotateTransform control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.RotateTransform.AngleProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static Avalonia.Media.RotateTransform Angle<TValue>(this Avalonia.Media.R
 
  // CenterX
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.RotateTransform CenterX(this Avalonia.Media.RotateTransform control, System.Double value)  
+=> control._set(() => control.CenterX = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.RotateTransform CenterX(this Avalonia.Media.RotateTransform control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.RotateTransform.CenterXProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static Avalonia.Media.RotateTransform CenterX<TValue>(this Avalonia.Media
 
 
  // CenterY
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.RotateTransform CenterY(this Avalonia.Media.RotateTransform control, System.Double value)  
+=> control._set(() => control.CenterY = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.RotateTransform CenterY(this Avalonia.Media.RotateTransform control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

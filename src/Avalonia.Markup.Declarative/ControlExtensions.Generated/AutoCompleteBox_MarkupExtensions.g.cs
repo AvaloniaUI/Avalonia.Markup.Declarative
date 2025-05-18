@@ -14,6 +14,10 @@ public static partial class AutoCompleteBox_MarkupExtensions
 //================= Properties ======================//
  // CaretIndex
 
+/*ValueSetterGenerator*/
+public static T CaretIndex<T>(this T control, System.Int32 value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.CaretIndex = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CaretIndex<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
    => control._set(Avalonia.Controls.AutoCompleteBox.CaretIndexProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T CaretIndex<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // Watermark
+
+/*ValueSetterGenerator*/
+public static T Watermark<T>(this T control, System.String value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.Watermark = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Watermark<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
@@ -64,6 +72,10 @@ public static T Watermark<TValue,T>(this T control, TValue value, FuncValueConve
 
  // MinimumPrefixLength
 
+/*ValueSetterGenerator*/
+public static T MinimumPrefixLength<T>(this T control, System.Int32 value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.MinimumPrefixLength = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T MinimumPrefixLength<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
    => control._set(Avalonia.Controls.AutoCompleteBox.MinimumPrefixLengthProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T MinimumPrefixLength<TValue,T>(this T control, TValue value, Func
 
 
  // MinimumPopulateDelay
+
+/*ValueSetterGenerator*/
+public static T MinimumPopulateDelay<T>(this T control, System.TimeSpan value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.MinimumPopulateDelay = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T MinimumPopulateDelay<T>(this T control, Func<System.TimeSpan> func, Action<System.TimeSpan>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
@@ -114,6 +130,10 @@ public static T MinimumPopulateDelay<TValue,T>(this T control, TValue value, Fun
 
  // MaxDropDownHeight
 
+/*ValueSetterGenerator*/
+public static T MaxDropDownHeight<T>(this T control, System.Double value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.MaxDropDownHeight = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T MaxDropDownHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
    => control._set(Avalonia.Controls.AutoCompleteBox.MaxDropDownHeightProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T MaxDropDownHeight<TValue,T>(this T control, TValue value, FuncVa
 
 
  // IsTextCompletionEnabled
+
+/*ValueSetterGenerator*/
+public static T IsTextCompletionEnabled<T>(this T control, System.Boolean value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.IsTextCompletionEnabled = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsTextCompletionEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
@@ -164,6 +188,10 @@ public static T IsTextCompletionEnabled<TValue,T>(this T control, TValue value, 
 
  // ItemTemplate
 
+/*ValueSetterGenerator*/
+public static T ItemTemplate<T>(this T control, Avalonia.Controls.Templates.IDataTemplate value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.ItemTemplate = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ItemTemplate<T>(this T control, Func<Avalonia.Controls.Templates.IDataTemplate> func, Action<Avalonia.Controls.Templates.IDataTemplate>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
    => control._set(Avalonia.Controls.AutoCompleteBox.ItemTemplateProperty!, func, onChanged, expression);
@@ -188,6 +216,10 @@ public static T ItemTemplate<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // IsDropDownOpen
+
+/*ValueSetterGenerator*/
+public static T IsDropDownOpen<T>(this T control, System.Boolean value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.IsDropDownOpen = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsDropDownOpen<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
@@ -214,6 +246,10 @@ public static T IsDropDownOpen<TValue,T>(this T control, TValue value, FuncValue
 
  // SelectedItem
 
+/*ValueSetterGenerator*/
+public static T SelectedItem<T>(this T control, System.Object value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.SelectedItem = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedItem<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
    => control._set(Avalonia.Controls.AutoCompleteBox.SelectedItemProperty!, func, onChanged, expression);
@@ -238,6 +274,10 @@ public static T SelectedItem<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // Text
+
+/*ValueSetterGenerator*/
+public static T Text<T>(this T control, System.String value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.Text = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Text<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
@@ -264,6 +304,10 @@ public static T Text<TValue,T>(this T control, TValue value, FuncValueConverter<
 
  // FilterMode
 
+/*ValueSetterGenerator*/
+public static T FilterMode<T>(this T control, Avalonia.Controls.AutoCompleteFilterMode value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.FilterMode = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FilterMode<T>(this T control, Func<Avalonia.Controls.AutoCompleteFilterMode> func, Action<Avalonia.Controls.AutoCompleteFilterMode>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
    => control._set(Avalonia.Controls.AutoCompleteBox.FilterModeProperty!, func, onChanged, expression);
@@ -288,6 +332,10 @@ public static T FilterMode<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // ItemFilter
+
+/*ValueSetterGenerator*/
+public static T ItemFilter<T>(this T control, Avalonia.Controls.AutoCompleteFilterPredicate<System.Object> value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.ItemFilter = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ItemFilter<T>(this T control, Func<Avalonia.Controls.AutoCompleteFilterPredicate<System.Object>> func, Action<Avalonia.Controls.AutoCompleteFilterPredicate<System.Object>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
@@ -314,6 +362,10 @@ public static T ItemFilter<TValue,T>(this T control, TValue value, FuncValueConv
 
  // TextFilter
 
+/*ValueSetterGenerator*/
+public static T TextFilter<T>(this T control, Avalonia.Controls.AutoCompleteFilterPredicate<System.String> value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.TextFilter = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TextFilter<T>(this T control, Func<Avalonia.Controls.AutoCompleteFilterPredicate<System.String>> func, Action<Avalonia.Controls.AutoCompleteFilterPredicate<System.String>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
    => control._set(Avalonia.Controls.AutoCompleteBox.TextFilterProperty!, func, onChanged, expression);
@@ -338,6 +390,10 @@ public static T TextFilter<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // ItemSelector
+
+/*ValueSetterGenerator*/
+public static T ItemSelector<T>(this T control, Avalonia.Controls.AutoCompleteSelector<System.Object> value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.ItemSelector = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ItemSelector<T>(this T control, Func<Avalonia.Controls.AutoCompleteSelector<System.Object>> func, Action<Avalonia.Controls.AutoCompleteSelector<System.Object>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
@@ -364,6 +420,10 @@ public static T ItemSelector<TValue,T>(this T control, TValue value, FuncValueCo
 
  // TextSelector
 
+/*ValueSetterGenerator*/
+public static T TextSelector<T>(this T control, Avalonia.Controls.AutoCompleteSelector<System.String> value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.TextSelector = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TextSelector<T>(this T control, Func<Avalonia.Controls.AutoCompleteSelector<System.String>> func, Action<Avalonia.Controls.AutoCompleteSelector<System.String>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
    => control._set(Avalonia.Controls.AutoCompleteBox.TextSelectorProperty!, func, onChanged, expression);
@@ -388,6 +448,10 @@ public static T TextSelector<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // ItemsSource
+
+/*ValueSetterGenerator*/
+public static T ItemsSource<T>(this T control, System.Collections.IEnumerable value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.ItemsSource = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ItemsSource<T>(this T control, Func<System.Collections.IEnumerable> func, Action<System.Collections.IEnumerable>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
@@ -414,6 +478,10 @@ public static T ItemsSource<TValue,T>(this T control, TValue value, FuncValueCon
 
  // AsyncPopulator
 
+/*ValueSetterGenerator*/
+public static T AsyncPopulator<T>(this T control, System.Func<System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<System.Object>>> value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.AsyncPopulator = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T AsyncPopulator<T>(this T control, Func<System.Func<System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<System.Object>>>> func, Action<System.Func<System.String,System.Threading.CancellationToken,System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<System.Object>>>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
    => control._set(Avalonia.Controls.AutoCompleteBox.AsyncPopulatorProperty!, func, onChanged, expression);
@@ -438,6 +506,10 @@ public static T AsyncPopulator<TValue,T>(this T control, TValue value, FuncValue
 
 
  // MaxLength
+
+/*ValueSetterGenerator*/
+public static T MaxLength<T>(this T control, System.Int32 value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.MaxLength = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T MaxLength<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
@@ -464,6 +536,10 @@ public static T MaxLength<TValue,T>(this T control, TValue value, FuncValueConve
 
  // InnerLeftContent
 
+/*ValueSetterGenerator*/
+public static T InnerLeftContent<T>(this T control, System.Object value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.InnerLeftContent = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T InnerLeftContent<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
    => control._set(Avalonia.Controls.AutoCompleteBox.InnerLeftContentProperty!, func, onChanged, expression);
@@ -488,6 +564,10 @@ public static T InnerLeftContent<TValue,T>(this T control, TValue value, FuncVal
 
 
  // InnerRightContent
+
+/*ValueSetterGenerator*/
+public static T InnerRightContent<T>(this T control, System.Object value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.InnerRightContent = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T InnerRightContent<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 

@@ -14,6 +14,10 @@ public static partial class AdornerLayer_MarkupExtensions
 //================= Properties ======================//
  // DefaultFocusAdorner
 
+/*ValueSetterGenerator*/
+public static T DefaultFocusAdorner<T>(this T control, Avalonia.Controls.ITemplate<Avalonia.Controls.Control> value) where T : Avalonia.Controls.Primitives.AdornerLayer 
+=> control._set(() => control.DefaultFocusAdorner = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T DefaultFocusAdorner<T>(this T control, Func<Avalonia.Controls.ITemplate<Avalonia.Controls.Control>> func, Action<Avalonia.Controls.ITemplate<Avalonia.Controls.Control>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.AdornerLayer 
    => control._set(Avalonia.Controls.Primitives.AdornerLayer.DefaultFocusAdornerProperty!, func, onChanged, expression);

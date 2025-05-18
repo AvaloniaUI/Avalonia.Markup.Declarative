@@ -14,6 +14,10 @@ public static partial class Control_MarkupExtensions
 //================= Properties ======================//
  // FocusAdorner
 
+/*ValueSetterGenerator*/
+public static T FocusAdorner<T>(this T control, Avalonia.Controls.ITemplate<Avalonia.Controls.Control> value) where T : Avalonia.Controls.Control 
+=> control._set(() => control.FocusAdorner = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FocusAdorner<T>(this T control, Func<Avalonia.Controls.ITemplate<Avalonia.Controls.Control>> func, Action<Avalonia.Controls.ITemplate<Avalonia.Controls.Control>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
    => control._set(Avalonia.Controls.Control.FocusAdornerProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T FocusAdorner<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // Tag
+
+/*ValueSetterGenerator*/
+public static T Tag<T>(this T control, System.Object value) where T : Avalonia.Controls.Control 
+=> control._set(() => control.Tag = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Tag<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
@@ -64,6 +72,10 @@ public static T Tag<TValue,T>(this T control, TValue value, FuncValueConverter<T
 
  // ContextMenu
 
+/*ValueSetterGenerator*/
+public static T ContextMenu<T>(this T control, Avalonia.Controls.ContextMenu value) where T : Avalonia.Controls.Control 
+=> control._set(() => control.ContextMenu = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ContextMenu<T>(this T control, Func<Avalonia.Controls.ContextMenu> func, Action<Avalonia.Controls.ContextMenu>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
    => control._set(Avalonia.Controls.Control.ContextMenuProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T ContextMenu<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // ContextFlyout
+
+/*ValueSetterGenerator*/
+public static T ContextFlyout<T>(this T control, Avalonia.Controls.Primitives.FlyoutBase value) where T : Avalonia.Controls.Control 
+=> control._set(() => control.ContextFlyout = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ContextFlyout<T>(this T control, Func<Avalonia.Controls.Primitives.FlyoutBase> func, Action<Avalonia.Controls.Primitives.FlyoutBase>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 

@@ -14,6 +14,10 @@ public static partial class MaskedTextBox_MarkupExtensions
 //================= Properties ======================//
  // AsciiOnly
 
+/*ValueSetterGenerator*/
+public static T AsciiOnly<T>(this T control, System.Boolean value) where T : Avalonia.Controls.MaskedTextBox 
+=> control._set(() => control.AsciiOnly = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T AsciiOnly<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MaskedTextBox 
    => control._set(Avalonia.Controls.MaskedTextBox.AsciiOnlyProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T AsciiOnly<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // Culture
+
+/*ValueSetterGenerator*/
+public static T Culture<T>(this T control, System.Globalization.CultureInfo value) where T : Avalonia.Controls.MaskedTextBox 
+=> control._set(() => control.Culture = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Culture<T>(this T control, Func<System.Globalization.CultureInfo> func, Action<System.Globalization.CultureInfo>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MaskedTextBox 
@@ -64,6 +72,10 @@ public static T Culture<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // HidePromptOnLeave
 
+/*ValueSetterGenerator*/
+public static T HidePromptOnLeave<T>(this T control, System.Boolean value) where T : Avalonia.Controls.MaskedTextBox 
+=> control._set(() => control.HidePromptOnLeave = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T HidePromptOnLeave<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MaskedTextBox 
    => control._set(Avalonia.Controls.MaskedTextBox.HidePromptOnLeaveProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T HidePromptOnLeave<TValue,T>(this T control, TValue value, FuncVa
 
 
  // Mask
+
+/*ValueSetterGenerator*/
+public static T Mask<T>(this T control, System.String value) where T : Avalonia.Controls.MaskedTextBox 
+=> control._set(() => control.Mask = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Mask<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MaskedTextBox 
@@ -114,6 +130,10 @@ public static T Mask<TValue,T>(this T control, TValue value, FuncValueConverter<
 
  // PromptChar
 
+/*ValueSetterGenerator*/
+public static T PromptChar<T>(this T control, System.Char value) where T : Avalonia.Controls.MaskedTextBox 
+=> control._set(() => control.PromptChar = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T PromptChar<T>(this T control, Func<System.Char> func, Action<System.Char>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MaskedTextBox 
    => control._set(Avalonia.Controls.MaskedTextBox.PromptCharProperty!, func, onChanged, expression);
@@ -139,6 +159,10 @@ public static T PromptChar<TValue,T>(this T control, TValue value, FuncValueConv
 
  // ResetOnPrompt
 
+/*ValueSetterGenerator*/
+public static T ResetOnPrompt<T>(this T control, System.Boolean value) where T : Avalonia.Controls.MaskedTextBox 
+=> control._set(() => control.ResetOnPrompt = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ResetOnPrompt<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MaskedTextBox 
    => control._set(Avalonia.Controls.MaskedTextBox.ResetOnPromptProperty!, func, onChanged, expression);
@@ -163,6 +187,10 @@ public static T ResetOnPrompt<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // ResetOnSpace
+
+/*ValueSetterGenerator*/
+public static T ResetOnSpace<T>(this T control, System.Boolean value) where T : Avalonia.Controls.MaskedTextBox 
+=> control._set(() => control.ResetOnSpace = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ResetOnSpace<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MaskedTextBox 

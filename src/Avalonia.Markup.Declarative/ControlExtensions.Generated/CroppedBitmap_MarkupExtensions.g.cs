@@ -14,6 +14,10 @@ public static partial class CroppedBitmap_MarkupExtensions
 //================= Properties ======================//
  // Source
 
+/*ValueSetterGenerator*/
+public static T Source<T>(this T control, Avalonia.Media.IImage value) where T : Avalonia.Media.Imaging.CroppedBitmap 
+=> control._set(() => control.Source = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Source<T>(this T control, Func<Avalonia.Media.IImage> func, Action<Avalonia.Media.IImage>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.Imaging.CroppedBitmap 
    => control._set(Avalonia.Media.Imaging.CroppedBitmap.SourceProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Source<TValue,T>(this T control, TValue value, FuncValueConverte
 
 
  // SourceRect
+
+/*ValueSetterGenerator*/
+public static T SourceRect<T>(this T control, Avalonia.PixelRect value) where T : Avalonia.Media.Imaging.CroppedBitmap 
+=> control._set(() => control.SourceRect = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SourceRect<T>(this T control, Func<Avalonia.PixelRect> func, Action<Avalonia.PixelRect>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.Imaging.CroppedBitmap 

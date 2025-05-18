@@ -55,7 +55,8 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
                 t => t.GetFields()
                     .Where(IsAvaloniaPropertyField)
                     .Select(x => new PropertyExtensionInfo(x)),
-                
+
+                new ValueSetterGenerator(),
                 new BindFromExpressionSetterGenerator(),
                 new ValueOverloadsSetterGenerator(),
 

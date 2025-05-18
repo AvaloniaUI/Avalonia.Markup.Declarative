@@ -14,6 +14,10 @@ public static partial class WindowBase_MarkupExtensions
 //================= Properties ======================//
  // Topmost
 
+/*ValueSetterGenerator*/
+public static T Topmost<T>(this T control, System.Boolean value) where T : Avalonia.Controls.WindowBase 
+=> control._set(() => control.Topmost = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Topmost<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.WindowBase 
    => control._set(Avalonia.Controls.WindowBase.TopmostProperty!, func, onChanged, expression);

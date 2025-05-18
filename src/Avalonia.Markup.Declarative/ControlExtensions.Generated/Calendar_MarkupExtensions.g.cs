@@ -14,6 +14,10 @@ public static partial class Calendar_MarkupExtensions
 //================= Properties ======================//
  // FirstDayOfWeek
 
+/*ValueSetterGenerator*/
+public static T FirstDayOfWeek<T>(this T control, System.DayOfWeek value) where T : Avalonia.Controls.Calendar 
+=> control._set(() => control.FirstDayOfWeek = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FirstDayOfWeek<T>(this T control, Func<System.DayOfWeek> func, Action<System.DayOfWeek>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Calendar 
    => control._set(Avalonia.Controls.Calendar.FirstDayOfWeekProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T FirstDayOfWeek<TValue,T>(this T control, TValue value, FuncValue
 
 
  // IsTodayHighlighted
+
+/*ValueSetterGenerator*/
+public static T IsTodayHighlighted<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Calendar 
+=> control._set(() => control.IsTodayHighlighted = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsTodayHighlighted<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Calendar 
@@ -64,6 +72,10 @@ public static T IsTodayHighlighted<TValue,T>(this T control, TValue value, FuncV
 
  // HeaderBackground
 
+/*ValueSetterGenerator*/
+public static T HeaderBackground<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Calendar 
+=> control._set(() => control.HeaderBackground = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T HeaderBackground<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Calendar 
    => control._set(Avalonia.Controls.Calendar.HeaderBackgroundProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T HeaderBackground<TValue,T>(this T control, TValue value, FuncVal
 
 
  // DisplayMode
+
+/*ValueSetterGenerator*/
+public static T DisplayMode<T>(this T control, Avalonia.Controls.CalendarMode value) where T : Avalonia.Controls.Calendar 
+=> control._set(() => control.DisplayMode = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T DisplayMode<T>(this T control, Func<Avalonia.Controls.CalendarMode> func, Action<Avalonia.Controls.CalendarMode>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Calendar 
@@ -114,6 +130,10 @@ public static T DisplayMode<TValue,T>(this T control, TValue value, FuncValueCon
 
  // SelectionMode
 
+/*ValueSetterGenerator*/
+public static T SelectionMode<T>(this T control, Avalonia.Controls.CalendarSelectionMode value) where T : Avalonia.Controls.Calendar 
+=> control._set(() => control.SelectionMode = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionMode<T>(this T control, Func<Avalonia.Controls.CalendarSelectionMode> func, Action<Avalonia.Controls.CalendarSelectionMode>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Calendar 
    => control._set(Avalonia.Controls.Calendar.SelectionModeProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T SelectionMode<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // SelectedDate
+
+/*ValueSetterGenerator*/
+public static T SelectedDate<T>(this T control, System.Nullable<System.DateTime> value) where T : Avalonia.Controls.Calendar 
+=> control._set(() => control.SelectedDate = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedDate<T>(this T control, Func<System.Nullable<System.DateTime>> func, Action<System.Nullable<System.DateTime>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Calendar 
@@ -164,6 +188,10 @@ public static T SelectedDate<TValue,T>(this T control, TValue value, FuncValueCo
 
  // DisplayDate
 
+/*ValueSetterGenerator*/
+public static T DisplayDate<T>(this T control, System.DateTime value) where T : Avalonia.Controls.Calendar 
+=> control._set(() => control.DisplayDate = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T DisplayDate<T>(this T control, Func<System.DateTime> func, Action<System.DateTime>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Calendar 
    => control._set(Avalonia.Controls.Calendar.DisplayDateProperty!, func, onChanged, expression);
@@ -189,6 +217,10 @@ public static T DisplayDate<TValue,T>(this T control, TValue value, FuncValueCon
 
  // DisplayDateStart
 
+/*ValueSetterGenerator*/
+public static T DisplayDateStart<T>(this T control, System.Nullable<System.DateTime> value) where T : Avalonia.Controls.Calendar 
+=> control._set(() => control.DisplayDateStart = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T DisplayDateStart<T>(this T control, Func<System.Nullable<System.DateTime>> func, Action<System.Nullable<System.DateTime>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Calendar 
    => control._set(Avalonia.Controls.Calendar.DisplayDateStartProperty!, func, onChanged, expression);
@@ -213,6 +245,10 @@ public static T DisplayDateStart<TValue,T>(this T control, TValue value, FuncVal
 
 
  // DisplayDateEnd
+
+/*ValueSetterGenerator*/
+public static T DisplayDateEnd<T>(this T control, System.Nullable<System.DateTime> value) where T : Avalonia.Controls.Calendar 
+=> control._set(() => control.DisplayDateEnd = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T DisplayDateEnd<T>(this T control, Func<System.Nullable<System.DateTime>> func, Action<System.Nullable<System.DateTime>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Calendar 

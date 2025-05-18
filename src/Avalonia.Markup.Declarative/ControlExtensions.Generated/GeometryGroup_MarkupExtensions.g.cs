@@ -14,6 +14,10 @@ public static partial class GeometryGroup_MarkupExtensions
 //================= Properties ======================//
  // Children
 
+/*ValueSetterGenerator*/
+public static T Children<T>(this T control, Avalonia.Media.GeometryCollection value) where T : Avalonia.Media.GeometryGroup 
+=> control._set(() => control.Children = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Children<T>(this T control, Func<Avalonia.Media.GeometryCollection> func, Action<Avalonia.Media.GeometryCollection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.GeometryGroup 
    => control._set(Avalonia.Media.GeometryGroup.ChildrenProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Children<TValue,T>(this T control, TValue value, FuncValueConver
 
 
  // FillRule
+
+/*ValueSetterGenerator*/
+public static T FillRule<T>(this T control, Avalonia.Media.FillRule value) where T : Avalonia.Media.GeometryGroup 
+=> control._set(() => control.FillRule = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FillRule<T>(this T control, Func<Avalonia.Media.FillRule> func, Action<Avalonia.Media.FillRule>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.GeometryGroup 

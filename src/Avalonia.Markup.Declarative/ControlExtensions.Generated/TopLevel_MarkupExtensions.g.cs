@@ -14,6 +14,10 @@ public static partial class TopLevel_MarkupExtensions
 //================= Properties ======================//
  // TransparencyLevelHint
 
+/*ValueSetterGenerator*/
+public static T TransparencyLevelHint<T>(this T control, System.Collections.Generic.IReadOnlyList<Avalonia.Controls.WindowTransparencyLevel> value) where T : Avalonia.Controls.TopLevel 
+=> control._set(() => control.TransparencyLevelHint = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TransparencyLevelHint<T>(this T control, Func<System.Collections.Generic.IReadOnlyList<Avalonia.Controls.WindowTransparencyLevel>> func, Action<System.Collections.Generic.IReadOnlyList<Avalonia.Controls.WindowTransparencyLevel>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TopLevel 
    => control._set(Avalonia.Controls.TopLevel.TransparencyLevelHintProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T TransparencyLevelHint<TValue,T>(this T control, TValue value, Fu
 
  // TransparencyBackgroundFallback
 
+/*ValueSetterGenerator*/
+public static T TransparencyBackgroundFallback<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TopLevel 
+=> control._set(() => control.TransparencyBackgroundFallback = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TransparencyBackgroundFallback<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TopLevel 
    => control._set(Avalonia.Controls.TopLevel.TransparencyBackgroundFallbackProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T TransparencyBackgroundFallback<TValue,T>(this T control, TValue 
 
 
  // RequestedThemeVariant
+
+/*ValueSetterGenerator*/
+public static T RequestedThemeVariant<T>(this T control, Avalonia.Styling.ThemeVariant value) where T : Avalonia.Controls.TopLevel 
+=> control._set(() => control.RequestedThemeVariant = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T RequestedThemeVariant<T>(this T control, Func<Avalonia.Styling.ThemeVariant> func, Action<Avalonia.Styling.ThemeVariant>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TopLevel 

@@ -14,6 +14,10 @@ public static partial class Polygon_MarkupExtensions
 //================= Properties ======================//
  // Points
 
+/*ValueSetterGenerator*/
+public static T Points<T>(this T control, System.Collections.Generic.IList<Avalonia.Point> value) where T : Avalonia.Controls.Shapes.Polygon 
+=> control._set(() => control.Points = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Points<T>(this T control, Func<System.Collections.Generic.IList<Avalonia.Point>> func, Action<System.Collections.Generic.IList<Avalonia.Point>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Polygon 
    => control._set(Avalonia.Controls.Shapes.Polygon.PointsProperty!, func, onChanged, expression);

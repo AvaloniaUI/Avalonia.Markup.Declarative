@@ -14,6 +14,10 @@ public static partial class CalendarItem_MarkupExtensions
 //================= Properties ======================//
  // HeaderBackground
 
+/*ValueSetterGenerator*/
+public static Avalonia.Controls.Primitives.CalendarItem HeaderBackground(this Avalonia.Controls.Primitives.CalendarItem control, Avalonia.Media.IBrush value)  
+=> control._set(() => control.HeaderBackground = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Controls.Primitives.CalendarItem HeaderBackground(this Avalonia.Controls.Primitives.CalendarItem control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Controls.Primitives.CalendarItem.HeaderBackgroundProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Controls.Primitives.CalendarItem HeaderBackground<TValue>
 
 
  // DayTitleTemplate
+
+/*ValueSetterGenerator*/
+public static Avalonia.Controls.Primitives.CalendarItem DayTitleTemplate(this Avalonia.Controls.Primitives.CalendarItem control, Avalonia.Controls.ITemplate<Avalonia.Controls.Control> value)  
+=> control._set(() => control.DayTitleTemplate = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Controls.Primitives.CalendarItem DayTitleTemplate(this Avalonia.Controls.Primitives.CalendarItem control, Func<Avalonia.Controls.ITemplate<Avalonia.Controls.Control>> func, Action<Avalonia.Controls.ITemplate<Avalonia.Controls.Control>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

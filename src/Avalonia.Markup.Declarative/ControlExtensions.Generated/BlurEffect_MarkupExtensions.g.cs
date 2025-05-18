@@ -14,6 +14,10 @@ public static partial class BlurEffect_MarkupExtensions
 //================= Properties ======================//
  // Radius
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.BlurEffect Radius(this Avalonia.Media.BlurEffect control, System.Double value)  
+=> control._set(() => control.Radius = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.BlurEffect Radius(this Avalonia.Media.BlurEffect control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.BlurEffect.RadiusProperty!, func, onChanged, expression);

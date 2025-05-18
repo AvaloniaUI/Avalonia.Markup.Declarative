@@ -14,6 +14,10 @@ public static partial class ListBoxItem_MarkupExtensions
 //================= Properties ======================//
  // IsSelected
 
+/*ValueSetterGenerator*/
+public static T IsSelected<T>(this T control, System.Boolean value) where T : Avalonia.Controls.ListBoxItem 
+=> control._set(() => control.IsSelected = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsSelected<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ListBoxItem 
    => control._set(Avalonia.Controls.ListBoxItem.IsSelectedProperty!, func, onChanged, expression);

@@ -14,6 +14,10 @@ public static partial class LineGeometry_MarkupExtensions
 //================= Properties ======================//
  // StartPoint
 
+/*ValueSetterGenerator*/
+public static T StartPoint<T>(this T control, Avalonia.Point value) where T : Avalonia.Media.LineGeometry 
+=> control._set(() => control.StartPoint = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T StartPoint<T>(this T control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.LineGeometry 
    => control._set(Avalonia.Media.LineGeometry.StartPointProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T StartPoint<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // EndPoint
+
+/*ValueSetterGenerator*/
+public static T EndPoint<T>(this T control, Avalonia.Point value) where T : Avalonia.Media.LineGeometry 
+=> control._set(() => control.EndPoint = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T EndPoint<T>(this T control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.LineGeometry 

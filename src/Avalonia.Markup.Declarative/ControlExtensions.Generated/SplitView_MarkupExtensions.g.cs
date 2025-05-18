@@ -14,6 +14,10 @@ public static partial class SplitView_MarkupExtensions
 //================= Properties ======================//
  // CompactPaneLength
 
+/*ValueSetterGenerator*/
+public static T CompactPaneLength<T>(this T control, System.Double value) where T : Avalonia.Controls.SplitView 
+=> control._set(() => control.CompactPaneLength = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CompactPaneLength<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitView 
    => control._set(Avalonia.Controls.SplitView.CompactPaneLengthProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T CompactPaneLength<TValue,T>(this T control, TValue value, FuncVa
 
 
  // DisplayMode
+
+/*ValueSetterGenerator*/
+public static T DisplayMode<T>(this T control, Avalonia.Controls.SplitViewDisplayMode value) where T : Avalonia.Controls.SplitView 
+=> control._set(() => control.DisplayMode = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T DisplayMode<T>(this T control, Func<Avalonia.Controls.SplitViewDisplayMode> func, Action<Avalonia.Controls.SplitViewDisplayMode>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitView 
@@ -64,6 +72,10 @@ public static T DisplayMode<TValue,T>(this T control, TValue value, FuncValueCon
 
  // IsPaneOpen
 
+/*ValueSetterGenerator*/
+public static T IsPaneOpen<T>(this T control, System.Boolean value) where T : Avalonia.Controls.SplitView 
+=> control._set(() => control.IsPaneOpen = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsPaneOpen<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitView 
    => control._set(Avalonia.Controls.SplitView.IsPaneOpenProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T IsPaneOpen<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // OpenPaneLength
+
+/*ValueSetterGenerator*/
+public static T OpenPaneLength<T>(this T control, System.Double value) where T : Avalonia.Controls.SplitView 
+=> control._set(() => control.OpenPaneLength = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T OpenPaneLength<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitView 
@@ -114,6 +130,10 @@ public static T OpenPaneLength<TValue,T>(this T control, TValue value, FuncValue
 
  // PaneBackground
 
+/*ValueSetterGenerator*/
+public static T PaneBackground<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.SplitView 
+=> control._set(() => control.PaneBackground = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T PaneBackground<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitView 
    => control._set(Avalonia.Controls.SplitView.PaneBackgroundProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T PaneBackground<TValue,T>(this T control, TValue value, FuncValue
 
 
  // PanePlacement
+
+/*ValueSetterGenerator*/
+public static T PanePlacement<T>(this T control, Avalonia.Controls.SplitViewPanePlacement value) where T : Avalonia.Controls.SplitView 
+=> control._set(() => control.PanePlacement = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T PanePlacement<T>(this T control, Func<Avalonia.Controls.SplitViewPanePlacement> func, Action<Avalonia.Controls.SplitViewPanePlacement>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitView 
@@ -164,6 +188,10 @@ public static T PanePlacement<TValue,T>(this T control, TValue value, FuncValueC
 
  // Pane
 
+/*ValueSetterGenerator*/
+public static T Pane<T>(this T control, System.Object value) where T : Avalonia.Controls.SplitView 
+=> control._set(() => control.Pane = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Pane<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitView 
    => control._set(Avalonia.Controls.SplitView.PaneProperty!, func, onChanged, expression);
@@ -189,6 +217,10 @@ public static T Pane<TValue,T>(this T control, TValue value, FuncValueConverter<
 
  // PaneTemplate
 
+/*ValueSetterGenerator*/
+public static T PaneTemplate<T>(this T control, Avalonia.Controls.Templates.IDataTemplate value) where T : Avalonia.Controls.SplitView 
+=> control._set(() => control.PaneTemplate = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T PaneTemplate<T>(this T control, Func<Avalonia.Controls.Templates.IDataTemplate> func, Action<Avalonia.Controls.Templates.IDataTemplate>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitView 
    => control._set(Avalonia.Controls.SplitView.PaneTemplateProperty!, func, onChanged, expression);
@@ -213,6 +245,10 @@ public static T PaneTemplate<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // UseLightDismissOverlayMode
+
+/*ValueSetterGenerator*/
+public static T UseLightDismissOverlayMode<T>(this T control, System.Boolean value) where T : Avalonia.Controls.SplitView 
+=> control._set(() => control.UseLightDismissOverlayMode = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T UseLightDismissOverlayMode<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitView 

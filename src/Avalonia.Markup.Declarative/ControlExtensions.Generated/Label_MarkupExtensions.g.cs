@@ -14,6 +14,10 @@ public static partial class Label_MarkupExtensions
 //================= Properties ======================//
  // Target
 
+/*ValueSetterGenerator*/
+public static T Target<T>(this T control, Avalonia.Input.IInputElement value) where T : Avalonia.Controls.Label 
+=> control._set(() => control.Target = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Target<T>(this T control, Func<Avalonia.Input.IInputElement> func, Action<Avalonia.Input.IInputElement>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Label 
    => control._set(Avalonia.Controls.Label.TargetProperty!, func, onChanged, expression);

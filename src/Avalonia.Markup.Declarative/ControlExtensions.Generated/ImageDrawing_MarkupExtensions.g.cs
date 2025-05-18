@@ -14,6 +14,10 @@ public static partial class ImageDrawing_MarkupExtensions
 //================= Properties ======================//
  // ImageSource
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.ImageDrawing ImageSource(this Avalonia.Media.ImageDrawing control, Avalonia.Media.IImage value)  
+=> control._set(() => control.ImageSource = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.ImageDrawing ImageSource(this Avalonia.Media.ImageDrawing control, Func<Avalonia.Media.IImage> func, Action<Avalonia.Media.IImage>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.ImageDrawing.ImageSourceProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.ImageDrawing ImageSource<TValue>(this Avalonia.Medi
 
 
  // Rect
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.ImageDrawing Rect(this Avalonia.Media.ImageDrawing control, Avalonia.Rect value)  
+=> control._set(() => control.Rect = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.ImageDrawing Rect(this Avalonia.Media.ImageDrawing control, Func<Avalonia.Rect> func, Action<Avalonia.Rect>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

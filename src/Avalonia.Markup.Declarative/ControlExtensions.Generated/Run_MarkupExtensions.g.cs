@@ -14,6 +14,10 @@ public static partial class Run_MarkupExtensions
 //================= Properties ======================//
  // Text
 
+/*ValueSetterGenerator*/
+public static T Text<T>(this T control, System.String value) where T : Avalonia.Controls.Documents.Run 
+=> control._set(() => control.Text = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Text<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.Run 
    => control._set(Avalonia.Controls.Documents.Run.TextProperty!, func, onChanged, expression);

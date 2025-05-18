@@ -14,6 +14,10 @@ public static partial class ReversibleStackPanel_MarkupExtensions
 //================= Properties ======================//
  // ReverseOrder
 
+/*ValueSetterGenerator*/
+public static T ReverseOrder<T>(this T control, System.Boolean value) where T : Avalonia.Controls.ReversibleStackPanel 
+=> control._set(() => control.ReverseOrder = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ReverseOrder<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ReversibleStackPanel 
    => control._set(Avalonia.Controls.ReversibleStackPanel.ReverseOrderProperty!, func, onChanged, expression);

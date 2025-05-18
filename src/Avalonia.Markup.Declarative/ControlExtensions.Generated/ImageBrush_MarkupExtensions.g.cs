@@ -14,6 +14,10 @@ public static partial class ImageBrush_MarkupExtensions
 //================= Properties ======================//
  // Source
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.ImageBrush Source(this Avalonia.Media.ImageBrush control, Avalonia.Media.IImageBrushSource value)  
+=> control._set(() => control.Source = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.ImageBrush Source(this Avalonia.Media.ImageBrush control, Func<Avalonia.Media.IImageBrushSource> func, Action<Avalonia.Media.IImageBrushSource>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.ImageBrush.SourceProperty!, func, onChanged, expression);

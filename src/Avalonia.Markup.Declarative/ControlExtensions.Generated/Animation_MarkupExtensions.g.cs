@@ -14,6 +14,10 @@ public static partial class Animation_MarkupExtensions
 //================= Properties ======================//
  // Duration
 
+/*ValueSetterGenerator*/
+public static Avalonia.Animation.Animation Duration(this Avalonia.Animation.Animation control, System.TimeSpan value)  
+=> control._set(() => control.Duration = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Animation.Animation Duration(this Avalonia.Animation.Animation control, Func<System.TimeSpan> func, Action<System.TimeSpan>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Animation.Animation.DurationProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Animation.Animation Duration<TValue>(this Avalonia.Animat
 
 
  // IterationCount
+
+/*ValueSetterGenerator*/
+public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animation.Animation control, Avalonia.Animation.IterationCount value)  
+=> control._set(() => control.IterationCount = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Animation.Animation IterationCount(this Avalonia.Animation.Animation control, Func<Avalonia.Animation.IterationCount> func, Action<Avalonia.Animation.IterationCount>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
@@ -71,6 +79,10 @@ public static Avalonia.Animation.Animation IterationCount<TValue>(this Avalonia.
 
  // PlaybackDirection
 
+/*ValueSetterGenerator*/
+public static Avalonia.Animation.Animation PlaybackDirection(this Avalonia.Animation.Animation control, Avalonia.Animation.PlaybackDirection value)  
+=> control._set(() => control.PlaybackDirection = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Animation.Animation PlaybackDirection(this Avalonia.Animation.Animation control, Func<Avalonia.Animation.PlaybackDirection> func, Action<Avalonia.Animation.PlaybackDirection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Animation.Animation.PlaybackDirectionProperty!, func, onChanged, expression);
@@ -95,6 +107,10 @@ public static Avalonia.Animation.Animation PlaybackDirection<TValue>(this Avalon
 
 
  // FillMode
+
+/*ValueSetterGenerator*/
+public static Avalonia.Animation.Animation FillMode(this Avalonia.Animation.Animation control, Avalonia.Animation.FillMode value)  
+=> control._set(() => control.FillMode = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Animation.Animation FillMode(this Avalonia.Animation.Animation control, Func<Avalonia.Animation.FillMode> func, Action<Avalonia.Animation.FillMode>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
@@ -121,6 +137,10 @@ public static Avalonia.Animation.Animation FillMode<TValue>(this Avalonia.Animat
 
  // Easing
 
+/*ValueSetterGenerator*/
+public static Avalonia.Animation.Animation Easing(this Avalonia.Animation.Animation control, Avalonia.Animation.Easings.Easing value)  
+=> control._set(() => control.Easing = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Animation.Animation Easing(this Avalonia.Animation.Animation control, Func<Avalonia.Animation.Easings.Easing> func, Action<Avalonia.Animation.Easings.Easing>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Animation.Animation.EasingProperty!, func, onChanged, expression);
@@ -145,6 +165,10 @@ public static Avalonia.Animation.Animation Easing<TValue>(this Avalonia.Animatio
 
 
  // Delay
+
+/*ValueSetterGenerator*/
+public static Avalonia.Animation.Animation Delay(this Avalonia.Animation.Animation control, System.TimeSpan value)  
+=> control._set(() => control.Delay = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Animation.Animation Delay(this Avalonia.Animation.Animation control, Func<System.TimeSpan> func, Action<System.TimeSpan>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
@@ -171,6 +195,10 @@ public static Avalonia.Animation.Animation Delay<TValue>(this Avalonia.Animation
 
  // DelayBetweenIterations
 
+/*ValueSetterGenerator*/
+public static Avalonia.Animation.Animation DelayBetweenIterations(this Avalonia.Animation.Animation control, System.TimeSpan value)  
+=> control._set(() => control.DelayBetweenIterations = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Animation.Animation DelayBetweenIterations(this Avalonia.Animation.Animation control, Func<System.TimeSpan> func, Action<System.TimeSpan>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Animation.Animation.DelayBetweenIterationsProperty!, func, onChanged, expression);
@@ -195,6 +223,10 @@ public static Avalonia.Animation.Animation DelayBetweenIterations<TValue>(this A
 
 
  // SpeedRatio
+
+/*ValueSetterGenerator*/
+public static Avalonia.Animation.Animation SpeedRatio(this Avalonia.Animation.Animation control, System.Double value)  
+=> control._set(() => control.SpeedRatio = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Animation.Animation SpeedRatio(this Avalonia.Animation.Animation control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

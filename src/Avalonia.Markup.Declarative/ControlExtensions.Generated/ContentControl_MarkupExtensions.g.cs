@@ -14,6 +14,10 @@ public static partial class ContentControl_MarkupExtensions
 //================= Properties ======================//
  // Content
 
+/*ValueSetterGenerator*/
+public static T Content<T>(this T control, System.Object value) where T : Avalonia.Controls.ContentControl 
+=> control._set(() => control.Content = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Content<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ContentControl 
    => control._set(Avalonia.Controls.ContentControl.ContentProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Content<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // ContentTemplate
+
+/*ValueSetterGenerator*/
+public static T ContentTemplate<T>(this T control, Avalonia.Controls.Templates.IDataTemplate value) where T : Avalonia.Controls.ContentControl 
+=> control._set(() => control.ContentTemplate = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ContentTemplate<T>(this T control, Func<Avalonia.Controls.Templates.IDataTemplate> func, Action<Avalonia.Controls.Templates.IDataTemplate>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ContentControl 
@@ -64,6 +72,10 @@ public static T ContentTemplate<TValue,T>(this T control, TValue value, FuncValu
 
  // HorizontalContentAlignment
 
+/*ValueSetterGenerator*/
+public static T HorizontalContentAlignment<T>(this T control, Avalonia.Layout.HorizontalAlignment value) where T : Avalonia.Controls.ContentControl 
+=> control._set(() => control.HorizontalContentAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T HorizontalContentAlignment<T>(this T control, Func<Avalonia.Layout.HorizontalAlignment> func, Action<Avalonia.Layout.HorizontalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ContentControl 
    => control._set(Avalonia.Controls.ContentControl.HorizontalContentAlignmentProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T HorizontalContentAlignment<TValue,T>(this T control, TValue valu
 
 
  // VerticalContentAlignment
+
+/*ValueSetterGenerator*/
+public static T VerticalContentAlignment<T>(this T control, Avalonia.Layout.VerticalAlignment value) where T : Avalonia.Controls.ContentControl 
+=> control._set(() => control.VerticalContentAlignment = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T VerticalContentAlignment<T>(this T control, Func<Avalonia.Layout.VerticalAlignment> func, Action<Avalonia.Layout.VerticalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ContentControl 

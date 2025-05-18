@@ -14,6 +14,10 @@ public static partial class ButtonSpinner_MarkupExtensions
 //================= Properties ======================//
  // AllowSpin
 
+/*ValueSetterGenerator*/
+public static T AllowSpin<T>(this T control, System.Boolean value) where T : Avalonia.Controls.ButtonSpinner 
+=> control._set(() => control.AllowSpin = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T AllowSpin<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ButtonSpinner 
    => control._set(Avalonia.Controls.ButtonSpinner.AllowSpinProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T AllowSpin<TValue,T>(this T control, TValue value, FuncValueConve
 
  // ShowButtonSpinner
 
+/*ValueSetterGenerator*/
+public static T ShowButtonSpinner<T>(this T control, System.Boolean value) where T : Avalonia.Controls.ButtonSpinner 
+=> control._set(() => control.ShowButtonSpinner = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ShowButtonSpinner<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ButtonSpinner 
    => control._set(Avalonia.Controls.ButtonSpinner.ShowButtonSpinnerProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T ShowButtonSpinner<TValue,T>(this T control, TValue value, FuncVa
 
 
  // ButtonSpinnerLocation
+
+/*ValueSetterGenerator*/
+public static T ButtonSpinnerLocation<T>(this T control, Avalonia.Controls.Location value) where T : Avalonia.Controls.ButtonSpinner 
+=> control._set(() => control.ButtonSpinnerLocation = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ButtonSpinnerLocation<T>(this T control, Func<Avalonia.Controls.Location> func, Action<Avalonia.Controls.Location>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ButtonSpinner 

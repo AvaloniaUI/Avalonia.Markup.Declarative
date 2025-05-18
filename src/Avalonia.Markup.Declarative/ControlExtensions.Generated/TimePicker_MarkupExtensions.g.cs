@@ -14,6 +14,10 @@ public static partial class TimePicker_MarkupExtensions
 //================= Properties ======================//
  // MinuteIncrement
 
+/*ValueSetterGenerator*/
+public static T MinuteIncrement<T>(this T control, System.Int32 value) where T : Avalonia.Controls.TimePicker 
+=> control._set(() => control.MinuteIncrement = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T MinuteIncrement<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TimePicker 
    => control._set(Avalonia.Controls.TimePicker.MinuteIncrementProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T MinuteIncrement<TValue,T>(this T control, TValue value, FuncValu
 
 
  // SecondIncrement
+
+/*ValueSetterGenerator*/
+public static T SecondIncrement<T>(this T control, System.Int32 value) where T : Avalonia.Controls.TimePicker 
+=> control._set(() => control.SecondIncrement = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SecondIncrement<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TimePicker 
@@ -64,6 +72,10 @@ public static T SecondIncrement<TValue,T>(this T control, TValue value, FuncValu
 
  // ClockIdentifier
 
+/*ValueSetterGenerator*/
+public static T ClockIdentifier<T>(this T control, System.String value) where T : Avalonia.Controls.TimePicker 
+=> control._set(() => control.ClockIdentifier = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ClockIdentifier<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TimePicker 
    => control._set(Avalonia.Controls.TimePicker.ClockIdentifierProperty!, func, onChanged, expression);
@@ -89,6 +101,10 @@ public static T ClockIdentifier<TValue,T>(this T control, TValue value, FuncValu
 
  // UseSeconds
 
+/*ValueSetterGenerator*/
+public static T UseSeconds<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TimePicker 
+=> control._set(() => control.UseSeconds = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T UseSeconds<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TimePicker 
    => control._set(Avalonia.Controls.TimePicker.UseSecondsProperty!, func, onChanged, expression);
@@ -113,6 +129,10 @@ public static T UseSeconds<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // SelectedTime
+
+/*ValueSetterGenerator*/
+public static T SelectedTime<T>(this T control, System.Nullable<System.TimeSpan> value) where T : Avalonia.Controls.TimePicker 
+=> control._set(() => control.SelectedTime = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedTime<T>(this T control, Func<System.Nullable<System.TimeSpan>> func, Action<System.Nullable<System.TimeSpan>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TimePicker 

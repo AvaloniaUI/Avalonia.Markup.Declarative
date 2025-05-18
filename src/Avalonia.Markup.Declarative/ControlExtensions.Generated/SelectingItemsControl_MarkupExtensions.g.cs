@@ -14,6 +14,10 @@ public static partial class SelectingItemsControl_MarkupExtensions
 //================= Properties ======================//
  // AutoScrollToSelectedItem
 
+/*ValueSetterGenerator*/
+public static T AutoScrollToSelectedItem<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
+=> control._set(() => control.AutoScrollToSelectedItem = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T AutoScrollToSelectedItem<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
    => control._set(Avalonia.Controls.Primitives.SelectingItemsControl.AutoScrollToSelectedItemProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T AutoScrollToSelectedItem<TValue,T>(this T control, TValue value,
 
 
  // SelectedIndex
+
+/*ValueSetterGenerator*/
+public static T SelectedIndex<T>(this T control, System.Int32 value) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
+=> control._set(() => control.SelectedIndex = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedIndex<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
@@ -64,6 +72,10 @@ public static T SelectedIndex<TValue,T>(this T control, TValue value, FuncValueC
 
  // SelectedItem
 
+/*ValueSetterGenerator*/
+public static T SelectedItem<T>(this T control, System.Object value) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
+=> control._set(() => control.SelectedItem = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedItem<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
    => control._set(Avalonia.Controls.Primitives.SelectingItemsControl.SelectedItemProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T SelectedItem<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // SelectedValue
+
+/*ValueSetterGenerator*/
+public static T SelectedValue<T>(this T control, System.Object value) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
+=> control._set(() => control.SelectedValue = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedValue<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
@@ -114,6 +130,10 @@ public static T SelectedValue<TValue,T>(this T control, TValue value, FuncValueC
 
  // SelectedValueBinding
 
+/*ValueSetterGenerator*/
+public static T SelectedValueBinding<T>(this T control, Avalonia.Data.IBinding value) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
+=> control._set(() => control.SelectedValueBinding = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedValueBinding<T>(this T control, Func<Avalonia.Data.IBinding> func, Action<Avalonia.Data.IBinding>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
    => control._set(Avalonia.Controls.Primitives.SelectingItemsControl.SelectedValueBindingProperty!, func, onChanged, expression);
@@ -122,10 +142,6 @@ public static T SelectedValueBinding<T>(this T control, Func<Avalonia.Data.IBind
 [Obsolete]
 public static T SelectedValueBinding<T>(this T control,Avalonia.Data.IBinding value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
 => control._setEx(Avalonia.Controls.Primitives.SelectingItemsControl.SelectedValueBindingProperty, ps, () => control.SelectedValueBinding = value!, bindingMode, converter, bindingSource);
-
-/*BindSetterGenerator*/
-public static T SelectedValueBinding<T>(this T control, IBinding binding) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
-   => control._set(Avalonia.Controls.Primitives.SelectingItemsControl.SelectedValueBindingProperty, binding);
 
 /*AvaloniaPropertyBindSetterGenerator*/
 public static T SelectedValueBinding<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
@@ -138,6 +154,10 @@ public static T SelectedValueBinding<TValue,T>(this T control, TValue value, Fun
 
 
  // IsTextSearchEnabled
+
+/*ValueSetterGenerator*/
+public static T IsTextSearchEnabled<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
+=> control._set(() => control.IsTextSearchEnabled = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsTextSearchEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
@@ -163,6 +183,10 @@ public static T IsTextSearchEnabled<TValue,T>(this T control, TValue value, Func
 
 
  // WrapSelection
+
+/*ValueSetterGenerator*/
+public static T WrapSelection<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Primitives.SelectingItemsControl 
+=> control._set(() => control.WrapSelection = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T WrapSelection<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.SelectingItemsControl 

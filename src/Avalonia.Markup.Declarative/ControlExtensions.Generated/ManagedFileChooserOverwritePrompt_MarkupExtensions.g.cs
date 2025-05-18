@@ -14,6 +14,10 @@ public static partial class ManagedFileChooserOverwritePrompt_MarkupExtensions
 //================= Properties ======================//
  // FileName
 
+/*ValueSetterGenerator*/
+public static T FileName<T>(this T control, System.String value) where T : Avalonia.Dialogs.ManagedFileChooserOverwritePrompt 
+=> control._set(() => control.FileName = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FileName<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Dialogs.ManagedFileChooserOverwritePrompt 
    => control._set(Avalonia.Dialogs.ManagedFileChooserOverwritePrompt.FileNameProperty!, func, onChanged, expression);

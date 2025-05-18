@@ -14,6 +14,10 @@ public static partial class TranslateTransform_MarkupExtensions
 //================= Properties ======================//
  // X
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.TranslateTransform X(this Avalonia.Media.TranslateTransform control, System.Double value)  
+=> control._set(() => control.X = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.TranslateTransform X(this Avalonia.Media.TranslateTransform control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.TranslateTransform.XProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.TranslateTransform X<TValue>(this Avalonia.Media.Tr
 
 
  // Y
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.TranslateTransform Y(this Avalonia.Media.TranslateTransform control, System.Double value)  
+=> control._set(() => control.Y = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.TranslateTransform Y(this Avalonia.Media.TranslateTransform control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

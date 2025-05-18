@@ -14,6 +14,10 @@ public static partial class Pen_MarkupExtensions
 //================= Properties ======================//
  // Brush
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.Pen Brush(this Avalonia.Media.Pen control, Avalonia.Media.IBrush value)  
+=> control._set(() => control.Brush = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.Pen Brush(this Avalonia.Media.Pen control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.Pen.BrushProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.Pen Brush<TValue>(this Avalonia.Media.Pen control, 
 
 
  // Thickness
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.Pen Thickness(this Avalonia.Media.Pen control, System.Double value)  
+=> control._set(() => control.Thickness = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.Pen Thickness(this Avalonia.Media.Pen control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
@@ -64,6 +72,10 @@ public static Avalonia.Media.Pen Thickness<TValue>(this Avalonia.Media.Pen contr
 
  // DashStyle
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.Pen DashStyle(this Avalonia.Media.Pen control, Avalonia.Media.IDashStyle value)  
+=> control._set(() => control.DashStyle = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.Pen DashStyle(this Avalonia.Media.Pen control, Func<Avalonia.Media.IDashStyle> func, Action<Avalonia.Media.IDashStyle>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.Pen.DashStyleProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static Avalonia.Media.Pen DashStyle<TValue>(this Avalonia.Media.Pen contr
 
 
  // LineCap
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.Pen LineCap(this Avalonia.Media.Pen control, Avalonia.Media.PenLineCap value)  
+=> control._set(() => control.LineCap = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.Pen LineCap(this Avalonia.Media.Pen control, Func<Avalonia.Media.PenLineCap> func, Action<Avalonia.Media.PenLineCap>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
@@ -114,6 +130,10 @@ public static Avalonia.Media.Pen LineCap<TValue>(this Avalonia.Media.Pen control
 
  // LineJoin
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.Pen LineJoin(this Avalonia.Media.Pen control, Avalonia.Media.PenLineJoin value)  
+=> control._set(() => control.LineJoin = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.Pen LineJoin(this Avalonia.Media.Pen control, Func<Avalonia.Media.PenLineJoin> func, Action<Avalonia.Media.PenLineJoin>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.Pen.LineJoinProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static Avalonia.Media.Pen LineJoin<TValue>(this Avalonia.Media.Pen contro
 
 
  // MiterLimit
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.Pen MiterLimit(this Avalonia.Media.Pen control, System.Double value)  
+=> control._set(() => control.MiterLimit = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.Pen MiterLimit(this Avalonia.Media.Pen control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

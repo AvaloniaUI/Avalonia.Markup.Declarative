@@ -14,6 +14,10 @@ public static partial class ScrollContentPresenter_MarkupExtensions
 //================= Properties ======================//
  // CanHorizontallyScroll
 
+/*ValueSetterGenerator*/
+public static T CanHorizontallyScroll<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
+=> control._set(() => control.CanHorizontallyScroll = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CanHorizontallyScroll<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ScrollContentPresenter.CanHorizontallyScrollProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T CanHorizontallyScroll<TValue,T>(this T control, TValue value, Fu
 
 
  // CanVerticallyScroll
+
+/*ValueSetterGenerator*/
+public static T CanVerticallyScroll<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
+=> control._set(() => control.CanVerticallyScroll = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T CanVerticallyScroll<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
@@ -64,6 +72,10 @@ public static T CanVerticallyScroll<TValue,T>(this T control, TValue value, Func
 
  // Offset
 
+/*ValueSetterGenerator*/
+public static T Offset<T>(this T control, Avalonia.Vector value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
+=> control._set(() => control.Offset = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Offset<T>(this T control, Func<Avalonia.Vector> func, Action<Avalonia.Vector>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ScrollContentPresenter.OffsetProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T Offset<TValue,T>(this T control, TValue value, FuncValueConverte
 
 
  // HorizontalSnapPointsType
+
+/*ValueSetterGenerator*/
+public static T HorizontalSnapPointsType<T>(this T control, Avalonia.Controls.Primitives.SnapPointsType value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
+=> control._set(() => control.HorizontalSnapPointsType = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T HorizontalSnapPointsType<T>(this T control, Func<Avalonia.Controls.Primitives.SnapPointsType> func, Action<Avalonia.Controls.Primitives.SnapPointsType>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
@@ -114,6 +130,10 @@ public static T HorizontalSnapPointsType<TValue,T>(this T control, TValue value,
 
  // VerticalSnapPointsType
 
+/*ValueSetterGenerator*/
+public static T VerticalSnapPointsType<T>(this T control, Avalonia.Controls.Primitives.SnapPointsType value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
+=> control._set(() => control.VerticalSnapPointsType = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T VerticalSnapPointsType<T>(this T control, Func<Avalonia.Controls.Primitives.SnapPointsType> func, Action<Avalonia.Controls.Primitives.SnapPointsType>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ScrollContentPresenter.VerticalSnapPointsTypeProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T VerticalSnapPointsType<TValue,T>(this T control, TValue value, F
 
 
  // HorizontalSnapPointsAlignment
+
+/*ValueSetterGenerator*/
+public static T HorizontalSnapPointsAlignment<T>(this T control, Avalonia.Controls.Primitives.SnapPointsAlignment value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
+=> control._set(() => control.HorizontalSnapPointsAlignment = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T HorizontalSnapPointsAlignment<T>(this T control, Func<Avalonia.Controls.Primitives.SnapPointsAlignment> func, Action<Avalonia.Controls.Primitives.SnapPointsAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
@@ -164,6 +188,10 @@ public static T HorizontalSnapPointsAlignment<TValue,T>(this T control, TValue v
 
  // VerticalSnapPointsAlignment
 
+/*ValueSetterGenerator*/
+public static T VerticalSnapPointsAlignment<T>(this T control, Avalonia.Controls.Primitives.SnapPointsAlignment value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
+=> control._set(() => control.VerticalSnapPointsAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T VerticalSnapPointsAlignment<T>(this T control, Func<Avalonia.Controls.Primitives.SnapPointsAlignment> func, Action<Avalonia.Controls.Primitives.SnapPointsAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ScrollContentPresenter.VerticalSnapPointsAlignmentProperty!, func, onChanged, expression);
@@ -188,6 +216,10 @@ public static T VerticalSnapPointsAlignment<TValue,T>(this T control, TValue val
 
 
  // IsScrollChainingEnabled
+
+/*ValueSetterGenerator*/
+public static T IsScrollChainingEnabled<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 
+=> control._set(() => control.IsScrollChainingEnabled = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsScrollChainingEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ScrollContentPresenter 

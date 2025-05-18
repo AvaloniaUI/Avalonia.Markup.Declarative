@@ -14,6 +14,10 @@ public static partial class TreeView_MarkupExtensions
 //================= Properties ======================//
  // AutoScrollToSelectedItem
 
+/*ValueSetterGenerator*/
+public static T AutoScrollToSelectedItem<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TreeView 
+=> control._set(() => control.AutoScrollToSelectedItem = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T AutoScrollToSelectedItem<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TreeView 
    => control._set(Avalonia.Controls.TreeView.AutoScrollToSelectedItemProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T AutoScrollToSelectedItem<TValue,T>(this T control, TValue value,
 
 
  // SelectedItem
+
+/*ValueSetterGenerator*/
+public static T SelectedItem<T>(this T control, System.Object value) where T : Avalonia.Controls.TreeView 
+=> control._set(() => control.SelectedItem = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedItem<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TreeView 
@@ -64,6 +72,10 @@ public static T SelectedItem<TValue,T>(this T control, TValue value, FuncValueCo
 
  // SelectedItems
 
+/*ValueSetterGenerator*/
+public static T SelectedItems<T>(this T control, System.Collections.IList value) where T : Avalonia.Controls.TreeView 
+=> control._set(() => control.SelectedItems = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedItems<T>(this T control, Func<System.Collections.IList> func, Action<System.Collections.IList>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TreeView 
    => control._set(Avalonia.Controls.TreeView.SelectedItemsProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T SelectedItems<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // SelectionMode
+
+/*ValueSetterGenerator*/
+public static T SelectionMode<T>(this T control, Avalonia.Controls.SelectionMode value) where T : Avalonia.Controls.TreeView 
+=> control._set(() => control.SelectionMode = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionMode<T>(this T control, Func<Avalonia.Controls.SelectionMode> func, Action<Avalonia.Controls.SelectionMode>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TreeView 

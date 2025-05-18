@@ -14,6 +14,10 @@ public static partial class ProgressBar_MarkupExtensions
 //================= Properties ======================//
  // IsIndeterminate
 
+/*ValueSetterGenerator*/
+public static T IsIndeterminate<T>(this T control, System.Boolean value) where T : Avalonia.Controls.ProgressBar 
+=> control._set(() => control.IsIndeterminate = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsIndeterminate<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ProgressBar 
    => control._set(Avalonia.Controls.ProgressBar.IsIndeterminateProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T IsIndeterminate<TValue,T>(this T control, TValue value, FuncValu
 
 
  // ShowProgressText
+
+/*ValueSetterGenerator*/
+public static T ShowProgressText<T>(this T control, System.Boolean value) where T : Avalonia.Controls.ProgressBar 
+=> control._set(() => control.ShowProgressText = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ShowProgressText<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ProgressBar 
@@ -64,6 +72,10 @@ public static T ShowProgressText<TValue,T>(this T control, TValue value, FuncVal
 
  // ProgressTextFormat
 
+/*ValueSetterGenerator*/
+public static T ProgressTextFormat<T>(this T control, System.String value) where T : Avalonia.Controls.ProgressBar 
+=> control._set(() => control.ProgressTextFormat = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ProgressTextFormat<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ProgressBar 
    => control._set(Avalonia.Controls.ProgressBar.ProgressTextFormatProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T ProgressTextFormat<TValue,T>(this T control, TValue value, FuncV
 
 
  // Orientation
+
+/*ValueSetterGenerator*/
+public static T Orientation<T>(this T control, Avalonia.Layout.Orientation value) where T : Avalonia.Controls.ProgressBar 
+=> control._set(() => control.Orientation = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Orientation<T>(this T control, Func<Avalonia.Layout.Orientation> func, Action<Avalonia.Layout.Orientation>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ProgressBar 

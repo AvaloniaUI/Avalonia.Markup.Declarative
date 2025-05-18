@@ -14,6 +14,10 @@ public static partial class RangeBase_MarkupExtensions
 //================= Properties ======================//
  // Minimum
 
+/*ValueSetterGenerator*/
+public static T Minimum<T>(this T control, System.Double value) where T : Avalonia.Controls.Primitives.RangeBase 
+=> control._set(() => control.Minimum = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Minimum<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.RangeBase 
    => control._set(Avalonia.Controls.Primitives.RangeBase.MinimumProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Minimum<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // Maximum
+
+/*ValueSetterGenerator*/
+public static T Maximum<T>(this T control, System.Double value) where T : Avalonia.Controls.Primitives.RangeBase 
+=> control._set(() => control.Maximum = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Maximum<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.RangeBase 
@@ -64,6 +72,10 @@ public static T Maximum<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // Value
 
+/*ValueSetterGenerator*/
+public static T Value<T>(this T control, System.Double value) where T : Avalonia.Controls.Primitives.RangeBase 
+=> control._set(() => control.Value = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Value<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.RangeBase 
    => control._set(Avalonia.Controls.Primitives.RangeBase.ValueProperty!, func, onChanged, expression);
@@ -89,6 +101,10 @@ public static T Value<TValue,T>(this T control, TValue value, FuncValueConverter
 
  // SmallChange
 
+/*ValueSetterGenerator*/
+public static T SmallChange<T>(this T control, System.Double value) where T : Avalonia.Controls.Primitives.RangeBase 
+=> control._set(() => control.SmallChange = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SmallChange<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.RangeBase 
    => control._set(Avalonia.Controls.Primitives.RangeBase.SmallChangeProperty!, func, onChanged, expression);
@@ -113,6 +129,10 @@ public static T SmallChange<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // LargeChange
+
+/*ValueSetterGenerator*/
+public static T LargeChange<T>(this T control, System.Double value) where T : Avalonia.Controls.Primitives.RangeBase 
+=> control._set(() => control.LargeChange = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T LargeChange<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.RangeBase 

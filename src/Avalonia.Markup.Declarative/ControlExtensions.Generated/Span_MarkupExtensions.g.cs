@@ -14,6 +14,10 @@ public static partial class Span_MarkupExtensions
 //================= Properties ======================//
  // Inlines
 
+/*ValueSetterGenerator*/
+public static T Inlines<T>(this T control, Avalonia.Controls.Documents.InlineCollection value) where T : Avalonia.Controls.Documents.Span 
+=> control._set(() => control.Inlines = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Inlines<T>(this T control, Func<Avalonia.Controls.Documents.InlineCollection> func, Action<Avalonia.Controls.Documents.InlineCollection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.Span 
    => control._set(Avalonia.Controls.Documents.Span.InlinesProperty!, func, onChanged, expression);

@@ -14,6 +14,10 @@ public static partial class GlyphRunDrawing_MarkupExtensions
 //================= Properties ======================//
  // Foreground
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.GlyphRunDrawing Foreground(this Avalonia.Media.GlyphRunDrawing control, Avalonia.Media.IBrush value)  
+=> control._set(() => control.Foreground = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.GlyphRunDrawing Foreground(this Avalonia.Media.GlyphRunDrawing control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.GlyphRunDrawing.ForegroundProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.GlyphRunDrawing Foreground<TValue>(this Avalonia.Me
 
 
  // GlyphRun
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.GlyphRunDrawing GlyphRun(this Avalonia.Media.GlyphRunDrawing control, Avalonia.Media.GlyphRun value)  
+=> control._set(() => control.GlyphRun = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.GlyphRunDrawing GlyphRun(this Avalonia.Media.GlyphRunDrawing control, Func<Avalonia.Media.GlyphRun> func, Action<Avalonia.Media.GlyphRun>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

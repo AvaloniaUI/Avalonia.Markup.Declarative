@@ -14,6 +14,10 @@ public static partial class SkewTransform_MarkupExtensions
 //================= Properties ======================//
  // AngleX
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.SkewTransform AngleX(this Avalonia.Media.SkewTransform control, System.Double value)  
+=> control._set(() => control.AngleX = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.SkewTransform AngleX(this Avalonia.Media.SkewTransform control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.SkewTransform.AngleXProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.SkewTransform AngleX<TValue>(this Avalonia.Media.Sk
 
 
  // AngleY
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.SkewTransform AngleY(this Avalonia.Media.SkewTransform control, System.Double value)  
+=> control._set(() => control.AngleY = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.SkewTransform AngleY(this Avalonia.Media.SkewTransform control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

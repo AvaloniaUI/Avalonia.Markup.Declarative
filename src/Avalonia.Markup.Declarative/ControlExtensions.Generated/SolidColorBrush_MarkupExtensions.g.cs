@@ -14,6 +14,10 @@ public static partial class SolidColorBrush_MarkupExtensions
 //================= Properties ======================//
  // Color
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.SolidColorBrush Color(this Avalonia.Media.SolidColorBrush control, Avalonia.Media.Color value)  
+=> control._set(() => control.Color = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.SolidColorBrush Color(this Avalonia.Media.SolidColorBrush control, Func<Avalonia.Media.Color> func, Action<Avalonia.Media.Color>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.SolidColorBrush.ColorProperty!, func, onChanged, expression);

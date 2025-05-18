@@ -14,6 +14,10 @@ public static partial class ListBox_MarkupExtensions
 //================= Properties ======================//
  // SelectedItems
 
+/*ValueSetterGenerator*/
+public static T SelectedItems<T>(this T control, System.Collections.IList value) where T : Avalonia.Controls.ListBox 
+=> control._set(() => control.SelectedItems = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedItems<T>(this T control, Func<System.Collections.IList> func, Action<System.Collections.IList>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ListBox 
    => control._set(Avalonia.Controls.ListBox.SelectedItemsProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T SelectedItems<TValue,T>(this T control, TValue value, FuncValueC
 
  // Selection
 
+/*ValueSetterGenerator*/
+public static T Selection<T>(this T control, Avalonia.Controls.Selection.ISelectionModel value) where T : Avalonia.Controls.ListBox 
+=> control._set(() => control.Selection = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Selection<T>(this T control, Func<Avalonia.Controls.Selection.ISelectionModel> func, Action<Avalonia.Controls.Selection.ISelectionModel>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ListBox 
    => control._set(Avalonia.Controls.ListBox.SelectionProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T Selection<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // SelectionMode
+
+/*ValueSetterGenerator*/
+public static T SelectionMode<T>(this T control, Avalonia.Controls.SelectionMode value) where T : Avalonia.Controls.ListBox 
+=> control._set(() => control.SelectionMode = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionMode<T>(this T control, Func<Avalonia.Controls.SelectionMode> func, Action<Avalonia.Controls.SelectionMode>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ListBox 

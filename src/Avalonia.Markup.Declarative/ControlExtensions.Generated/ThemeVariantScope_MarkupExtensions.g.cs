@@ -14,6 +14,10 @@ public static partial class ThemeVariantScope_MarkupExtensions
 //================= Properties ======================//
  // RequestedThemeVariant
 
+/*ValueSetterGenerator*/
+public static T RequestedThemeVariant<T>(this T control, Avalonia.Styling.ThemeVariant value) where T : Avalonia.Controls.ThemeVariantScope 
+=> control._set(() => control.RequestedThemeVariant = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T RequestedThemeVariant<T>(this T control, Func<Avalonia.Styling.ThemeVariant> func, Action<Avalonia.Styling.ThemeVariant>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ThemeVariantScope 
    => control._set(Avalonia.Controls.ThemeVariantScope.RequestedThemeVariantProperty!, func, onChanged, expression);

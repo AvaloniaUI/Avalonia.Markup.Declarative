@@ -14,6 +14,10 @@ public static partial class LineSegment_MarkupExtensions
 //================= Properties ======================//
  // Point
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.LineSegment Point(this Avalonia.Media.LineSegment control, Avalonia.Point value)  
+=> control._set(() => control.Point = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.LineSegment Point(this Avalonia.Media.LineSegment control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.LineSegment.PointProperty!, func, onChanged, expression);

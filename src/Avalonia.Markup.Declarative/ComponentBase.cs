@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Avalonia.Controls;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -85,6 +86,21 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             throw new InvalidOperationException("Please set Service Provider by calling UseServiceProvider on AppBuilder");
 
         return AppBuilderExtensions.ServiceProvider.GetService(serviceType);
+    }
+
+    /// <summary>
+    /// Creates a new instance of the control using the component factory. Injects services into the control if needed.
+    /// </summary>
+    /// <typeparam name="TControl"></typeparam>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
+    public static TControl New<TControl>() where TControl : Control
+    {
+        if (AppBuilderExtensions.ComponentControlFactory == null)
+            throw new InvalidOperationException("Please set Component Factory by calling UseComponentControlFactory on AppBuilder");
+        
+        var control = AppBuilderExtensions.ComponentControlFactory.CreateControlInstance<TControl>();
+        return control;
     }
 
     private void InitStateMembers()
@@ -198,5 +214,4 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-
 }

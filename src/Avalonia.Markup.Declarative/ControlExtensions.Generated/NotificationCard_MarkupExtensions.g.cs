@@ -14,6 +14,10 @@ public static partial class NotificationCard_MarkupExtensions
 //================= Properties ======================//
  // IsClosed
 
+/*ValueSetterGenerator*/
+public static T IsClosed<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Notifications.NotificationCard 
+=> control._set(() => control.IsClosed = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsClosed<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Notifications.NotificationCard 
    => control._set(Avalonia.Controls.Notifications.NotificationCard.IsClosedProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T IsClosed<TValue,T>(this T control, TValue value, FuncValueConver
 
 
  // NotificationType
+
+/*ValueSetterGenerator*/
+public static T NotificationType<T>(this T control, Avalonia.Controls.Notifications.NotificationType value) where T : Avalonia.Controls.Notifications.NotificationCard 
+=> control._set(() => control.NotificationType = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T NotificationType<T>(this T control, Func<Avalonia.Controls.Notifications.NotificationType> func, Action<Avalonia.Controls.Notifications.NotificationType>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Notifications.NotificationCard 

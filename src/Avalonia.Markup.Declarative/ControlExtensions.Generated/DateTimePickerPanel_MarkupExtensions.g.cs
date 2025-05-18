@@ -14,6 +14,10 @@ public static partial class DateTimePickerPanel_MarkupExtensions
 //================= Properties ======================//
  // ItemHeight
 
+/*ValueSetterGenerator*/
+public static T ItemHeight<T>(this T control, System.Double value) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._set(() => control.ItemHeight = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ItemHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
    => control._set(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemHeightProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T ItemHeight<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // PanelType
+
+/*ValueSetterGenerator*/
+public static T PanelType<T>(this T control, Avalonia.Controls.Primitives.DateTimePickerPanelType value) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._set(() => control.PanelType = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T PanelType<T>(this T control, Func<Avalonia.Controls.Primitives.DateTimePickerPanelType> func, Action<Avalonia.Controls.Primitives.DateTimePickerPanelType>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
@@ -64,6 +72,10 @@ public static T PanelType<TValue,T>(this T control, TValue value, FuncValueConve
 
  // ItemFormat
 
+/*ValueSetterGenerator*/
+public static T ItemFormat<T>(this T control, System.String value) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._set(() => control.ItemFormat = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ItemFormat<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
    => control._set(Avalonia.Controls.Primitives.DateTimePickerPanel.ItemFormatProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T ItemFormat<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // ShouldLoop
+
+/*ValueSetterGenerator*/
+public static T ShouldLoop<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 
+=> control._set(() => control.ShouldLoop = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ShouldLoop<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.DateTimePickerPanel 

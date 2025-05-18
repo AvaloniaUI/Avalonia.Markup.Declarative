@@ -14,6 +14,10 @@ public static partial class ComboBox_MarkupExtensions
 //================= Properties ======================//
  // IsDropDownOpen
 
+/*ValueSetterGenerator*/
+public static T IsDropDownOpen<T>(this T control, System.Boolean value) where T : Avalonia.Controls.ComboBox 
+=> control._set(() => control.IsDropDownOpen = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsDropDownOpen<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ComboBox 
    => control._set(Avalonia.Controls.ComboBox.IsDropDownOpenProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T IsDropDownOpen<TValue,T>(this T control, TValue value, FuncValue
 
 
  // MaxDropDownHeight
+
+/*ValueSetterGenerator*/
+public static T MaxDropDownHeight<T>(this T control, System.Double value) where T : Avalonia.Controls.ComboBox 
+=> control._set(() => control.MaxDropDownHeight = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T MaxDropDownHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ComboBox 
@@ -64,6 +72,10 @@ public static T MaxDropDownHeight<TValue,T>(this T control, TValue value, FuncVa
 
  // PlaceholderText
 
+/*ValueSetterGenerator*/
+public static T PlaceholderText<T>(this T control, System.String value) where T : Avalonia.Controls.ComboBox 
+=> control._set(() => control.PlaceholderText = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T PlaceholderText<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ComboBox 
    => control._set(Avalonia.Controls.ComboBox.PlaceholderTextProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T PlaceholderText<TValue,T>(this T control, TValue value, FuncValu
 
 
  // PlaceholderForeground
+
+/*ValueSetterGenerator*/
+public static T PlaceholderForeground<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.ComboBox 
+=> control._set(() => control.PlaceholderForeground = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T PlaceholderForeground<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ComboBox 
@@ -114,6 +130,10 @@ public static T PlaceholderForeground<TValue,T>(this T control, TValue value, Fu
 
  // HorizontalContentAlignment
 
+/*ValueSetterGenerator*/
+public static T HorizontalContentAlignment<T>(this T control, Avalonia.Layout.HorizontalAlignment value) where T : Avalonia.Controls.ComboBox 
+=> control._set(() => control.HorizontalContentAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T HorizontalContentAlignment<T>(this T control, Func<Avalonia.Layout.HorizontalAlignment> func, Action<Avalonia.Layout.HorizontalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ComboBox 
    => control._set(Avalonia.Controls.ComboBox.HorizontalContentAlignmentProperty!, func, onChanged, expression);
@@ -139,6 +159,10 @@ public static T HorizontalContentAlignment<TValue,T>(this T control, TValue valu
 
  // VerticalContentAlignment
 
+/*ValueSetterGenerator*/
+public static T VerticalContentAlignment<T>(this T control, Avalonia.Layout.VerticalAlignment value) where T : Avalonia.Controls.ComboBox 
+=> control._set(() => control.VerticalContentAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T VerticalContentAlignment<T>(this T control, Func<Avalonia.Layout.VerticalAlignment> func, Action<Avalonia.Layout.VerticalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ComboBox 
    => control._set(Avalonia.Controls.ComboBox.VerticalContentAlignmentProperty!, func, onChanged, expression);
@@ -163,6 +187,10 @@ public static T VerticalContentAlignment<TValue,T>(this T control, TValue value,
 
 
  // SelectionBoxItemTemplate
+
+/*ValueSetterGenerator*/
+public static T SelectionBoxItemTemplate<T>(this T control, Avalonia.Controls.Templates.IDataTemplate value) where T : Avalonia.Controls.ComboBox 
+=> control._set(() => control.SelectionBoxItemTemplate = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionBoxItemTemplate<T>(this T control, Func<Avalonia.Controls.Templates.IDataTemplate> func, Action<Avalonia.Controls.Templates.IDataTemplate>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ComboBox 

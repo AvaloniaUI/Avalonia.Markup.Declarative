@@ -14,6 +14,10 @@ public static partial class Visual_MarkupExtensions
 //================= Properties ======================//
  // ClipToBounds
 
+/*ValueSetterGenerator*/
+public static T ClipToBounds<T>(this T control, System.Boolean value) where T : Avalonia.Visual 
+=> control._set(() => control.ClipToBounds = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ClipToBounds<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Visual 
    => control._set(Avalonia.Visual.ClipToBoundsProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T ClipToBounds<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // Clip
+
+/*ValueSetterGenerator*/
+public static T Clip<T>(this T control, Avalonia.Media.Geometry value) where T : Avalonia.Visual 
+=> control._set(() => control.Clip = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Clip<T>(this T control, Func<Avalonia.Media.Geometry> func, Action<Avalonia.Media.Geometry>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Visual 
@@ -64,6 +72,10 @@ public static T Clip<TValue,T>(this T control, TValue value, FuncValueConverter<
 
  // IsVisible
 
+/*ValueSetterGenerator*/
+public static T IsVisible<T>(this T control, System.Boolean value) where T : Avalonia.Visual 
+=> control._set(() => control.IsVisible = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsVisible<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Visual 
    => control._set(Avalonia.Visual.IsVisibleProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T IsVisible<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // Opacity
+
+/*ValueSetterGenerator*/
+public static T Opacity<T>(this T control, System.Double value) where T : Avalonia.Visual 
+=> control._set(() => control.Opacity = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Opacity<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Visual 
@@ -114,6 +130,10 @@ public static T Opacity<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // OpacityMask
 
+/*ValueSetterGenerator*/
+public static T OpacityMask<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Visual 
+=> control._set(() => control.OpacityMask = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T OpacityMask<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Visual 
    => control._set(Avalonia.Visual.OpacityMaskProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T OpacityMask<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // Effect
+
+/*ValueSetterGenerator*/
+public static T Effect<T>(this T control, Avalonia.Media.IEffect value) where T : Avalonia.Visual 
+=> control._set(() => control.Effect = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Effect<T>(this T control, Func<Avalonia.Media.IEffect> func, Action<Avalonia.Media.IEffect>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Visual 
@@ -164,6 +188,10 @@ public static T Effect<TValue,T>(this T control, TValue value, FuncValueConverte
 
  // RenderTransform
 
+/*ValueSetterGenerator*/
+public static T RenderTransform<T>(this T control, Avalonia.Media.ITransform value) where T : Avalonia.Visual 
+=> control._set(() => control.RenderTransform = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T RenderTransform<T>(this T control, Func<Avalonia.Media.ITransform> func, Action<Avalonia.Media.ITransform>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Visual 
    => control._set(Avalonia.Visual.RenderTransformProperty!, func, onChanged, expression);
@@ -188,6 +216,10 @@ public static T RenderTransform<TValue,T>(this T control, TValue value, FuncValu
 
 
  // RenderTransformOrigin
+
+/*ValueSetterGenerator*/
+public static T RenderTransformOrigin<T>(this T control, Avalonia.RelativePoint value) where T : Avalonia.Visual 
+=> control._set(() => control.RenderTransformOrigin = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T RenderTransformOrigin<T>(this T control, Func<Avalonia.RelativePoint> func, Action<Avalonia.RelativePoint>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Visual 
@@ -221,6 +253,10 @@ public static T RenderTransformOrigin<TValue,T>(this T control, TValue value, Fu
 
  // FlowDirection
 
+/*ValueSetterGenerator*/
+public static T FlowDirection<T>(this T control, Avalonia.Media.FlowDirection value) where T : Avalonia.Visual 
+=> control._set(() => control.FlowDirection = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FlowDirection<T>(this T control, Func<Avalonia.Media.FlowDirection> func, Action<Avalonia.Media.FlowDirection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Visual 
    => control._set(Avalonia.Visual.FlowDirectionProperty!, func, onChanged, expression);
@@ -245,6 +281,10 @@ public static T FlowDirection<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // ZIndex
+
+/*ValueSetterGenerator*/
+public static T ZIndex<T>(this T control, System.Int32 value) where T : Avalonia.Visual 
+=> control._set(() => control.ZIndex = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ZIndex<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Visual 

@@ -16,22 +16,20 @@ public class Style<TControl> : Style, IRelativeStyle
     /// </summary>
     public Style()
     {
-        SelectorFunc = s=>s.OfType<TControl>();
+        SelectorFunc = s => s.OfType<TControl>();
         if (ViewBuildContext.CurrentState != ViewBuildContextState.StyleBuilding)
             Selector = SelectorFunc(null!);
     }
 
     /// <summary>
-    /// Don't forger to specify target control type directly, since it's impossible to inject it from generic type argument correctly yet
-    /// otherwise Avalonia will try to apply this style to any control, that match this selector. 
+    /// Creates Style with added .OfType<typeparam name="TControl"></typeparam> selector and use name="selectorFunc" to generate selector
     /// </summary>
-    /// <param name="selector"></param>
-    public Style(Func<Selector, Selector> selector)
+    /// <param name="selectorFunc"></param>
+    public Style(Func<Selector, Selector> selectorFunc)
     {
-        SelectorFunc = selector;
-
+        SelectorFunc = s => selectorFunc(s.OfType<TControl>());
         //Prevent Selector generation from immediate call, since we need to apply base selectors from ascendant groups
-        if(ViewBuildContext.CurrentState != ViewBuildContextState.StyleBuilding)
+        if (ViewBuildContext.CurrentState != ViewBuildContextState.StyleBuilding)
             Selector = SelectorFunc(null!);
     }
 
@@ -44,7 +42,7 @@ public class Style<TControl> : Style, IRelativeStyle
     }
 }
 
-internal interface IRelativeStyle: IStyle
+internal interface IRelativeStyle : IStyle
 {
     void UpdateSelector(Func<Selector, Selector>? baseSelectorFunc);
 }

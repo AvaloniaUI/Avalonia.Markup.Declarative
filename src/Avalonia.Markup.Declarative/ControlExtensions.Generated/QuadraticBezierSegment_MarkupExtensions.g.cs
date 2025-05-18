@@ -14,6 +14,10 @@ public static partial class QuadraticBezierSegment_MarkupExtensions
 //================= Properties ======================//
  // Point1
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.QuadraticBezierSegment Point1(this Avalonia.Media.QuadraticBezierSegment control, Avalonia.Point value)  
+=> control._set(() => control.Point1 = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.QuadraticBezierSegment Point1(this Avalonia.Media.QuadraticBezierSegment control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.QuadraticBezierSegment.Point1Property!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.QuadraticBezierSegment Point1<TValue>(this Avalonia
 
 
  // Point2
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.QuadraticBezierSegment Point2(this Avalonia.Media.QuadraticBezierSegment control, Avalonia.Point value)  
+=> control._set(() => control.Point2 = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.QuadraticBezierSegment Point2(this Avalonia.Media.QuadraticBezierSegment control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

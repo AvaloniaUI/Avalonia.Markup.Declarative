@@ -14,6 +14,10 @@ public static partial class ItemsPresenter_MarkupExtensions
 //================= Properties ======================//
  // ItemsPanel
 
+/*ValueSetterGenerator*/
+public static T ItemsPanel<T>(this T control, Avalonia.Controls.ITemplate<Avalonia.Controls.Panel> value) where T : Avalonia.Controls.Presenters.ItemsPresenter 
+=> control._set(() => control.ItemsPanel = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ItemsPanel<T>(this T control, Func<Avalonia.Controls.ITemplate<Avalonia.Controls.Panel>> func, Action<Avalonia.Controls.ITemplate<Avalonia.Controls.Panel>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ItemsPresenter 
    => control._set(Avalonia.Controls.Presenters.ItemsPresenter.ItemsPanelProperty!, func, onChanged, expression);

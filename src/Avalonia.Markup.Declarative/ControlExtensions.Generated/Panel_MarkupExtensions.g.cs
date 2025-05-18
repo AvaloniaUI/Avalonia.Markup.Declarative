@@ -14,6 +14,10 @@ public static partial class Panel_MarkupExtensions
 //================= Properties ======================//
  // Background
 
+/*ValueSetterGenerator*/
+public static T Background<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Panel 
+=> control._set(() => control.Background = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Background<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Panel 
    => control._set(Avalonia.Controls.Panel.BackgroundProperty!, func, onChanged, expression);

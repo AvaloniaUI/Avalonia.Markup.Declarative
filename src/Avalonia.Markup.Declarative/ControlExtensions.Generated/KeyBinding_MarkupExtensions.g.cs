@@ -14,6 +14,10 @@ public static partial class KeyBinding_MarkupExtensions
 //================= Properties ======================//
  // Command
 
+/*ValueSetterGenerator*/
+public static T Command<T>(this T control, System.Windows.Input.ICommand value) where T : Avalonia.Input.KeyBinding 
+=> control._set(() => control.Command = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Command<T>(this T control, Func<System.Windows.Input.ICommand> func, Action<System.Windows.Input.ICommand>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.KeyBinding 
    => control._set(Avalonia.Input.KeyBinding.CommandProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T Command<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // CommandParameter
 
+/*ValueSetterGenerator*/
+public static T CommandParameter<T>(this T control, System.Object value) where T : Avalonia.Input.KeyBinding 
+=> control._set(() => control.CommandParameter = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CommandParameter<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.KeyBinding 
    => control._set(Avalonia.Input.KeyBinding.CommandParameterProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T CommandParameter<TValue,T>(this T control, TValue value, FuncVal
 
 
  // Gesture
+
+/*ValueSetterGenerator*/
+public static T Gesture<T>(this T control, Avalonia.Input.KeyGesture value) where T : Avalonia.Input.KeyBinding 
+=> control._set(() => control.Gesture = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Gesture<T>(this T control, Func<Avalonia.Input.KeyGesture> func, Action<Avalonia.Input.KeyGesture>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.KeyBinding 

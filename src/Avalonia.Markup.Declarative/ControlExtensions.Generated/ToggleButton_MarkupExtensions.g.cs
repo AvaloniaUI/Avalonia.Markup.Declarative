@@ -14,6 +14,10 @@ public static partial class ToggleButton_MarkupExtensions
 //================= Properties ======================//
  // IsChecked
 
+/*ValueSetterGenerator*/
+public static T IsChecked<T>(this T control, System.Nullable<System.Boolean> value) where T : Avalonia.Controls.Primitives.ToggleButton 
+=> control._set(() => control.IsChecked = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsChecked<T>(this T control, Func<System.Nullable<System.Boolean>> func, Action<System.Nullable<System.Boolean>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ToggleButton 
    => control._set(Avalonia.Controls.Primitives.ToggleButton.IsCheckedProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T IsChecked<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // IsThreeState
+
+/*ValueSetterGenerator*/
+public static T IsThreeState<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Primitives.ToggleButton 
+=> control._set(() => control.IsThreeState = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsThreeState<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ToggleButton 

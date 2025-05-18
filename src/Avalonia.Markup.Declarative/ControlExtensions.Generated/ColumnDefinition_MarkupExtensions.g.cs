@@ -14,6 +14,10 @@ public static partial class ColumnDefinition_MarkupExtensions
 //================= Properties ======================//
  // MaxWidth
 
+/*ValueSetterGenerator*/
+public static T MaxWidth<T>(this T control, System.Double value) where T : Avalonia.Controls.ColumnDefinition 
+=> control._set(() => control.MaxWidth = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T MaxWidth<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ColumnDefinition 
    => control._set(Avalonia.Controls.ColumnDefinition.MaxWidthProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T MaxWidth<TValue,T>(this T control, TValue value, FuncValueConver
 
  // MinWidth
 
+/*ValueSetterGenerator*/
+public static T MinWidth<T>(this T control, System.Double value) where T : Avalonia.Controls.ColumnDefinition 
+=> control._set(() => control.MinWidth = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T MinWidth<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ColumnDefinition 
    => control._set(Avalonia.Controls.ColumnDefinition.MinWidthProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T MinWidth<TValue,T>(this T control, TValue value, FuncValueConver
 
 
  // Width
+
+/*ValueSetterGenerator*/
+public static T Width<T>(this T control, Avalonia.Controls.GridLength value) where T : Avalonia.Controls.ColumnDefinition 
+=> control._set(() => control.Width = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Width<T>(this T control, Func<Avalonia.Controls.GridLength> func, Action<Avalonia.Controls.GridLength>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ColumnDefinition 

@@ -14,6 +14,10 @@ public static partial class Arc_MarkupExtensions
 //================= Properties ======================//
  // StartAngle
 
+/*ValueSetterGenerator*/
+public static T StartAngle<T>(this T control, System.Double value) where T : Avalonia.Controls.Shapes.Arc 
+=> control._set(() => control.StartAngle = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T StartAngle<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Arc 
    => control._set(Avalonia.Controls.Shapes.Arc.StartAngleProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T StartAngle<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // SweepAngle
+
+/*ValueSetterGenerator*/
+public static T SweepAngle<T>(this T control, System.Double value) where T : Avalonia.Controls.Shapes.Arc 
+=> control._set(() => control.SweepAngle = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SweepAngle<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Arc 

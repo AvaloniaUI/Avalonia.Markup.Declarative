@@ -5,19 +5,22 @@ namespace MvuTemplate;
 
 //prevent from trimming [injected] services by native aot compilation
 [method: DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(SimpleComponent))]
-public class SimpleComponent() : ComponentBase
+public class SimpleComponent(SampleDataService dataService) : ComponentBase //constructor dependency injection sample
 {
+    // You can also use Service injection into Property with DI container as follows:
+    [Inject] public SampleDataService? DataService { get; set; }
 
-	[Inject] public SampleDataService? DataService { get; set; } //Service injection with DI container
-
-	//Styles
-	protected override StyleGroup? BuildStyles() =>
+    //Styles
+    protected override StyleGroup? BuildStyles() =>
 	[
-		new Style<Button>()
+        new Style<Button>(x => x.Class(":pointerover").Descendant())
+            .Background(Brushes.LightBlue),
+
+        new Style<Button>()
 			.Margin(6)
 			.Background(Brushes.DarkSalmon),
 
-		new StyleGroup(x => x.Class("narrow").Descendant())
+        new StyleGroup(x => x.Class("narrow").Descendant())
 		{
 			new Style<StackPanel>(s => s.Name("SideBar"))
 				.IsVisible(false)
@@ -62,7 +65,7 @@ public class SimpleComponent() : ComponentBase
 
 	private void OnButtonClick(RoutedEventArgs e)
 	{
-		_textBlock1.Text = DataService?.GetData() ?? "Data service is `null`";
+		_textBlock1.Text = dataService?.GetData() ?? "Data service is `null`";
 		StateHasChanged();
 	}
 

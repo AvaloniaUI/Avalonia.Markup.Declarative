@@ -2,7 +2,6 @@ using AvaloniaExtensionGenerator.ExtensionInfos;
 
 namespace AvaloniaExtensionGenerator.Generators.SetterGenerators;
 
-[Obsolete]
 public class ValueSetterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
 {
     protected override string? GetExtension(PropertyExtensionInfo info) =>

@@ -14,6 +14,10 @@ public static partial class TemplatedControl_MarkupExtensions
 //================= Properties ======================//
  // Background
 
+/*ValueSetterGenerator*/
+public static T Background<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.Background = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Background<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.BackgroundProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Background<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // BackgroundSizing
+
+/*ValueSetterGenerator*/
+public static T BackgroundSizing<T>(this T control, Avalonia.Media.BackgroundSizing value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.BackgroundSizing = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T BackgroundSizing<T>(this T control, Func<Avalonia.Media.BackgroundSizing> func, Action<Avalonia.Media.BackgroundSizing>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -64,6 +72,10 @@ public static T BackgroundSizing<TValue,T>(this T control, TValue value, FuncVal
 
  // BorderBrush
 
+/*ValueSetterGenerator*/
+public static T BorderBrush<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.BorderBrush = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T BorderBrush<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.BorderBrushProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T BorderBrush<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // BorderThickness
+
+/*ValueSetterGenerator*/
+public static T BorderThickness<T>(this T control, Avalonia.Thickness value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.BorderThickness = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T BorderThickness<T>(this T control, Func<Avalonia.Thickness> func, Action<Avalonia.Thickness>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -123,6 +139,10 @@ public static T BorderThickness<TValue,T>(this T control, TValue value, FuncValu
 
  // CornerRadius
 
+/*ValueSetterGenerator*/
+public static T CornerRadius<T>(this T control, Avalonia.CornerRadius value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.CornerRadius = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CornerRadius<T>(this T control, Func<Avalonia.CornerRadius> func, Action<Avalonia.CornerRadius>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.CornerRadiusProperty!, func, onChanged, expression);
@@ -157,6 +177,10 @@ public static T CornerRadius<TValue,T>(this T control, TValue value, FuncValueCo
 
  // FontFamily
 
+/*ValueSetterGenerator*/
+public static T FontFamily<T>(this T control, Avalonia.Media.FontFamily value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.FontFamily = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontFamily<T>(this T control, Func<Avalonia.Media.FontFamily> func, Action<Avalonia.Media.FontFamily>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontFamilyProperty!, func, onChanged, expression);
@@ -181,6 +205,10 @@ public static T FontFamily<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // FontFeatures
+
+/*ValueSetterGenerator*/
+public static T FontFeatures<T>(this T control, Avalonia.Media.FontFeatureCollection value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.FontFeatures = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FontFeatures<T>(this T control, Func<Avalonia.Media.FontFeatureCollection> func, Action<Avalonia.Media.FontFeatureCollection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -207,6 +235,10 @@ public static T FontFeatures<TValue,T>(this T control, TValue value, FuncValueCo
 
  // FontSize
 
+/*ValueSetterGenerator*/
+public static T FontSize<T>(this T control, System.Double value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.FontSize = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontSize<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontSizeProperty!, func, onChanged, expression);
@@ -231,6 +263,10 @@ public static T FontSize<TValue,T>(this T control, TValue value, FuncValueConver
 
 
  // FontStyle
+
+/*ValueSetterGenerator*/
+public static T FontStyle<T>(this T control, Avalonia.Media.FontStyle value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.FontStyle = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FontStyle<T>(this T control, Func<Avalonia.Media.FontStyle> func, Action<Avalonia.Media.FontStyle>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -257,6 +293,10 @@ public static T FontStyle<TValue,T>(this T control, TValue value, FuncValueConve
 
  // FontWeight
 
+/*ValueSetterGenerator*/
+public static T FontWeight<T>(this T control, Avalonia.Media.FontWeight value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.FontWeight = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontWeight<T>(this T control, Func<Avalonia.Media.FontWeight> func, Action<Avalonia.Media.FontWeight>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.FontWeightProperty!, func, onChanged, expression);
@@ -281,6 +321,10 @@ public static T FontWeight<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // FontStretch
+
+/*ValueSetterGenerator*/
+public static T FontStretch<T>(this T control, Avalonia.Media.FontStretch value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.FontStretch = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FontStretch<T>(this T control, Func<Avalonia.Media.FontStretch> func, Action<Avalonia.Media.FontStretch>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -307,6 +351,10 @@ public static T FontStretch<TValue,T>(this T control, TValue value, FuncValueCon
 
  // Foreground
 
+/*ValueSetterGenerator*/
+public static T Foreground<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.Foreground = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Foreground<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
    => control._set(Avalonia.Controls.Primitives.TemplatedControl.ForegroundProperty!, func, onChanged, expression);
@@ -331,6 +379,10 @@ public static T Foreground<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // Padding
+
+/*ValueSetterGenerator*/
+public static T Padding<T>(this T control, Avalonia.Thickness value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.Padding = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Padding<T>(this T control, Func<Avalonia.Thickness> func, Action<Avalonia.Thickness>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 
@@ -365,6 +417,10 @@ public static T Padding<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // Template
+
+/*ValueSetterGenerator*/
+public static T Template<T>(this T control, Avalonia.Controls.Templates.IControlTemplate value) where T : Avalonia.Controls.Primitives.TemplatedControl 
+=> control._set(() => control.Template = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Template<T>(this T control, Func<Avalonia.Controls.Templates.IControlTemplate> func, Action<Avalonia.Controls.Templates.IControlTemplate>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.TemplatedControl 

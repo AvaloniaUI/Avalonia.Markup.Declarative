@@ -14,6 +14,10 @@ public static partial class ExperimentalAcrylicBorder_MarkupExtensions
 //================= Properties ======================//
  // CornerRadius
 
+/*ValueSetterGenerator*/
+public static T CornerRadius<T>(this T control, Avalonia.CornerRadius value) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
+=> control._set(() => control.CornerRadius = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CornerRadius<T>(this T control, Func<Avalonia.CornerRadius> func, Action<Avalonia.CornerRadius>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
    => control._set(Avalonia.Controls.ExperimentalAcrylicBorder.CornerRadiusProperty!, func, onChanged, expression);
@@ -47,6 +51,10 @@ public static T CornerRadius<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // Material
+
+/*ValueSetterGenerator*/
+public static T Material<T>(this T control, Avalonia.Media.ExperimentalAcrylicMaterial value) where T : Avalonia.Controls.ExperimentalAcrylicBorder 
+=> control._set(() => control.Material = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Material<T>(this T control, Func<Avalonia.Media.ExperimentalAcrylicMaterial> func, Action<Avalonia.Media.ExperimentalAcrylicMaterial>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ExperimentalAcrylicBorder 

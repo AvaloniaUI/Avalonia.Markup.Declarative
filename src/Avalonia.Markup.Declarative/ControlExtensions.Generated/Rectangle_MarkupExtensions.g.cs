@@ -14,6 +14,10 @@ public static partial class Rectangle_MarkupExtensions
 //================= Properties ======================//
  // RadiusX
 
+/*ValueSetterGenerator*/
+public static T RadiusX<T>(this T control, System.Double value) where T : Avalonia.Controls.Shapes.Rectangle 
+=> control._set(() => control.RadiusX = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T RadiusX<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Rectangle 
    => control._set(Avalonia.Controls.Shapes.Rectangle.RadiusXProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T RadiusX<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // RadiusY
+
+/*ValueSetterGenerator*/
+public static T RadiusY<T>(this T control, System.Double value) where T : Avalonia.Controls.Shapes.Rectangle 
+=> control._set(() => control.RadiusY = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T RadiusY<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Rectangle 

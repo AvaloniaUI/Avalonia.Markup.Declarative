@@ -14,6 +14,10 @@ public static partial class ItemsControl_MarkupExtensions
 //================= Properties ======================//
  // ItemContainerTheme
 
+/*ValueSetterGenerator*/
+public static T ItemContainerTheme<T>(this T control, Avalonia.Styling.ControlTheme value) where T : Avalonia.Controls.ItemsControl 
+=> control._set(() => control.ItemContainerTheme = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ItemContainerTheme<T>(this T control, Func<Avalonia.Styling.ControlTheme> func, Action<Avalonia.Styling.ControlTheme>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ItemsControl 
    => control._set(Avalonia.Controls.ItemsControl.ItemContainerThemeProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T ItemContainerTheme<TValue,T>(this T control, TValue value, FuncV
 
 
  // ItemsPanel
+
+/*ValueSetterGenerator*/
+public static T ItemsPanel<T>(this T control, Avalonia.Controls.ITemplate<Avalonia.Controls.Panel> value) where T : Avalonia.Controls.ItemsControl 
+=> control._set(() => control.ItemsPanel = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ItemsPanel<T>(this T control, Func<Avalonia.Controls.ITemplate<Avalonia.Controls.Panel>> func, Action<Avalonia.Controls.ITemplate<Avalonia.Controls.Panel>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ItemsControl 
@@ -64,6 +72,10 @@ public static T ItemsPanel<TValue,T>(this T control, TValue value, FuncValueConv
 
  // ItemsSource
 
+/*ValueSetterGenerator*/
+public static T ItemsSource<T>(this T control, System.Collections.IEnumerable value) where T : Avalonia.Controls.ItemsControl 
+=> control._set(() => control.ItemsSource = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ItemsSource<T>(this T control, Func<System.Collections.IEnumerable> func, Action<System.Collections.IEnumerable>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ItemsControl 
    => control._set(Avalonia.Controls.ItemsControl.ItemsSourceProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T ItemsSource<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // ItemTemplate
+
+/*ValueSetterGenerator*/
+public static T ItemTemplate<T>(this T control, Avalonia.Controls.Templates.IDataTemplate value) where T : Avalonia.Controls.ItemsControl 
+=> control._set(() => control.ItemTemplate = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ItemTemplate<T>(this T control, Func<Avalonia.Controls.Templates.IDataTemplate> func, Action<Avalonia.Controls.Templates.IDataTemplate>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ItemsControl 
@@ -114,6 +130,10 @@ public static T ItemTemplate<TValue,T>(this T control, TValue value, FuncValueCo
 
  // DisplayMemberBinding
 
+/*ValueSetterGenerator*/
+public static T DisplayMemberBinding<T>(this T control, Avalonia.Data.IBinding value) where T : Avalonia.Controls.ItemsControl 
+=> control._set(() => control.DisplayMemberBinding = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T DisplayMemberBinding<T>(this T control, Func<Avalonia.Data.IBinding> func, Action<Avalonia.Data.IBinding>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ItemsControl 
    => control._set(Avalonia.Controls.ItemsControl.DisplayMemberBindingProperty!, func, onChanged, expression);
@@ -122,10 +142,6 @@ public static T DisplayMemberBinding<T>(this T control, Func<Avalonia.Data.IBind
 [Obsolete]
 public static T DisplayMemberBinding<T>(this T control,Avalonia.Data.IBinding value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.ItemsControl 
 => control._setEx(Avalonia.Controls.ItemsControl.DisplayMemberBindingProperty, ps, () => control.DisplayMemberBinding = value!, bindingMode, converter, bindingSource);
-
-/*BindSetterGenerator*/
-public static T DisplayMemberBinding<T>(this T control, IBinding binding) where T : Avalonia.Controls.ItemsControl 
-   => control._set(Avalonia.Controls.ItemsControl.DisplayMemberBindingProperty, binding);
 
 /*AvaloniaPropertyBindSetterGenerator*/
 public static T DisplayMemberBinding<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.ItemsControl 
@@ -139,6 +155,13 @@ public static T DisplayMemberBinding<TValue,T>(this T control, TValue value, Fun
 
 
 //================= Events ======================//
+ // PreparingContainer
+
+/*ActionToEventGenerator*/
+public static T OnPreparingContainer<T>(this T control, Action<Avalonia.Controls.ContainerPreparedEventArgs> action) where T : Avalonia.Controls.ItemsControl  => 
+ control._setEvent((System.EventHandler<Avalonia.Controls.ContainerPreparedEventArgs>) ((arg0, arg1) => action(arg1)), h => control.PreparingContainer += h);
+
+
  // ContainerPrepared
 
 /*ActionToEventGenerator*/

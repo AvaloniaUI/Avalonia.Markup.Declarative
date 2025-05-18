@@ -14,6 +14,10 @@ public static partial class Application_MarkupExtensions
 //================= Properties ======================//
  // DataContext
 
+/*ValueSetterGenerator*/
+public static T DataContext<T>(this T control, System.Object value) where T : Avalonia.Application 
+=> control._set(() => control.DataContext = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T DataContext<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Application 
    => control._set(Avalonia.Application.DataContextProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T DataContext<TValue,T>(this T control, TValue value, FuncValueCon
 
  // RequestedThemeVariant
 
+/*ValueSetterGenerator*/
+public static T RequestedThemeVariant<T>(this T control, Avalonia.Styling.ThemeVariant value) where T : Avalonia.Application 
+=> control._set(() => control.RequestedThemeVariant = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T RequestedThemeVariant<T>(this T control, Func<Avalonia.Styling.ThemeVariant> func, Action<Avalonia.Styling.ThemeVariant>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Application 
    => control._set(Avalonia.Application.RequestedThemeVariantProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T RequestedThemeVariant<TValue,T>(this T control, TValue value, Fu
 
 
  // Name
+
+/*ValueSetterGenerator*/
+public static T Name<T>(this T control, System.String value) where T : Avalonia.Application 
+=> control._set(() => control.Name = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Name<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Application 

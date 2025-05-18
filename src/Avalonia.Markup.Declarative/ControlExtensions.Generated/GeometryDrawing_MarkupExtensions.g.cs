@@ -14,6 +14,10 @@ public static partial class GeometryDrawing_MarkupExtensions
 //================= Properties ======================//
  // Geometry
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.GeometryDrawing Geometry(this Avalonia.Media.GeometryDrawing control, Avalonia.Media.Geometry value)  
+=> control._set(() => control.Geometry = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.GeometryDrawing Geometry(this Avalonia.Media.GeometryDrawing control, Func<Avalonia.Media.Geometry> func, Action<Avalonia.Media.Geometry>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.GeometryDrawing.GeometryProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static Avalonia.Media.GeometryDrawing Geometry<TValue>(this Avalonia.Medi
 
  // Brush
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.GeometryDrawing Brush(this Avalonia.Media.GeometryDrawing control, Avalonia.Media.IBrush value)  
+=> control._set(() => control.Brush = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.GeometryDrawing Brush(this Avalonia.Media.GeometryDrawing control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.GeometryDrawing.BrushProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static Avalonia.Media.GeometryDrawing Brush<TValue>(this Avalonia.Media.G
 
 
  // Pen
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.GeometryDrawing Pen(this Avalonia.Media.GeometryDrawing control, Avalonia.Media.IPen value)  
+=> control._set(() => control.Pen = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.GeometryDrawing Pen(this Avalonia.Media.GeometryDrawing control, Func<Avalonia.Media.IPen> func, Action<Avalonia.Media.IPen>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

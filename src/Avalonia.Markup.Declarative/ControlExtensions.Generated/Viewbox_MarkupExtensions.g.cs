@@ -14,6 +14,10 @@ public static partial class Viewbox_MarkupExtensions
 //================= Properties ======================//
  // Stretch
 
+/*ValueSetterGenerator*/
+public static T Stretch<T>(this T control, Avalonia.Media.Stretch value) where T : Avalonia.Controls.Viewbox 
+=> control._set(() => control.Stretch = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Stretch<T>(this T control, Func<Avalonia.Media.Stretch> func, Action<Avalonia.Media.Stretch>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Viewbox 
    => control._set(Avalonia.Controls.Viewbox.StretchProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T Stretch<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // StretchDirection
 
+/*ValueSetterGenerator*/
+public static T StretchDirection<T>(this T control, Avalonia.Media.StretchDirection value) where T : Avalonia.Controls.Viewbox 
+=> control._set(() => control.StretchDirection = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T StretchDirection<T>(this T control, Func<Avalonia.Media.StretchDirection> func, Action<Avalonia.Media.StretchDirection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Viewbox 
    => control._set(Avalonia.Controls.Viewbox.StretchDirectionProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T StretchDirection<TValue,T>(this T control, TValue value, FuncVal
 
 
  // Child
+
+/*ValueSetterGenerator*/
+public static T Child<T>(this T control, Avalonia.Controls.Control value) where T : Avalonia.Controls.Viewbox 
+=> control._set(() => control.Child = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Child<T>(this T control, Func<Avalonia.Controls.Control> func, Action<Avalonia.Controls.Control>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Viewbox 

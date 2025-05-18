@@ -14,6 +14,10 @@ public static partial class TextBlock_MarkupExtensions
 //================= Properties ======================//
  // Background
 
+/*ValueSetterGenerator*/
+public static T Background<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.Background = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Background<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
    => control._set(Avalonia.Controls.TextBlock.BackgroundProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Background<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // Padding
+
+/*ValueSetterGenerator*/
+public static T Padding<T>(this T control, Avalonia.Thickness value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.Padding = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Padding<T>(this T control, Func<Avalonia.Thickness> func, Action<Avalonia.Thickness>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
@@ -73,6 +81,10 @@ public static T Padding<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // FontFamily
 
+/*ValueSetterGenerator*/
+public static T FontFamily<T>(this T control, Avalonia.Media.FontFamily value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.FontFamily = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontFamily<T>(this T control, Func<Avalonia.Media.FontFamily> func, Action<Avalonia.Media.FontFamily>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
    => control._set(Avalonia.Controls.TextBlock.FontFamilyProperty!, func, onChanged, expression);
@@ -97,6 +109,10 @@ public static T FontFamily<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // FontSize
+
+/*ValueSetterGenerator*/
+public static T FontSize<T>(this T control, System.Double value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.FontSize = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FontSize<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
@@ -123,6 +139,10 @@ public static T FontSize<TValue,T>(this T control, TValue value, FuncValueConver
 
  // FontStyle
 
+/*ValueSetterGenerator*/
+public static T FontStyle<T>(this T control, Avalonia.Media.FontStyle value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.FontStyle = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontStyle<T>(this T control, Func<Avalonia.Media.FontStyle> func, Action<Avalonia.Media.FontStyle>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
    => control._set(Avalonia.Controls.TextBlock.FontStyleProperty!, func, onChanged, expression);
@@ -147,6 +167,10 @@ public static T FontStyle<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // FontWeight
+
+/*ValueSetterGenerator*/
+public static T FontWeight<T>(this T control, Avalonia.Media.FontWeight value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.FontWeight = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FontWeight<T>(this T control, Func<Avalonia.Media.FontWeight> func, Action<Avalonia.Media.FontWeight>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
@@ -173,6 +197,10 @@ public static T FontWeight<TValue,T>(this T control, TValue value, FuncValueConv
 
  // FontStretch
 
+/*ValueSetterGenerator*/
+public static T FontStretch<T>(this T control, Avalonia.Media.FontStretch value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.FontStretch = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontStretch<T>(this T control, Func<Avalonia.Media.FontStretch> func, Action<Avalonia.Media.FontStretch>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
    => control._set(Avalonia.Controls.TextBlock.FontStretchProperty!, func, onChanged, expression);
@@ -197,6 +225,10 @@ public static T FontStretch<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // Foreground
+
+/*ValueSetterGenerator*/
+public static T Foreground<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.Foreground = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Foreground<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
@@ -223,6 +255,10 @@ public static T Foreground<TValue,T>(this T control, TValue value, FuncValueConv
 
  // BaselineOffset
 
+/*ValueSetterGenerator*/
+public static T BaselineOffset<T>(this T control, System.Double value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.BaselineOffset = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T BaselineOffset<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
    => control._set(Avalonia.Controls.TextBlock.BaselineOffsetProperty!, func, onChanged, expression);
@@ -247,6 +283,10 @@ public static T BaselineOffset<TValue,T>(this T control, TValue value, FuncValue
 
 
  // LineHeight
+
+/*ValueSetterGenerator*/
+public static T LineHeight<T>(this T control, System.Double value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.LineHeight = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T LineHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
@@ -273,6 +313,10 @@ public static T LineHeight<TValue,T>(this T control, TValue value, FuncValueConv
 
  // LineSpacing
 
+/*ValueSetterGenerator*/
+public static T LineSpacing<T>(this T control, System.Double value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.LineSpacing = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T LineSpacing<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
    => control._set(Avalonia.Controls.TextBlock.LineSpacingProperty!, func, onChanged, expression);
@@ -297,6 +341,10 @@ public static T LineSpacing<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // LetterSpacing
+
+/*ValueSetterGenerator*/
+public static T LetterSpacing<T>(this T control, System.Double value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.LetterSpacing = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T LetterSpacing<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
@@ -323,6 +371,10 @@ public static T LetterSpacing<TValue,T>(this T control, TValue value, FuncValueC
 
  // MaxLines
 
+/*ValueSetterGenerator*/
+public static T MaxLines<T>(this T control, System.Int32 value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.MaxLines = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T MaxLines<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
    => control._set(Avalonia.Controls.TextBlock.MaxLinesProperty!, func, onChanged, expression);
@@ -347,6 +399,10 @@ public static T MaxLines<TValue,T>(this T control, TValue value, FuncValueConver
 
 
  // Text
+
+/*ValueSetterGenerator*/
+public static T Text<T>(this T control, System.String value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.Text = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Text<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
@@ -373,6 +429,10 @@ public static T Text<TValue,T>(this T control, TValue value, FuncValueConverter<
 
  // TextAlignment
 
+/*ValueSetterGenerator*/
+public static T TextAlignment<T>(this T control, Avalonia.Media.TextAlignment value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.TextAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TextAlignment<T>(this T control, Func<Avalonia.Media.TextAlignment> func, Action<Avalonia.Media.TextAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
    => control._set(Avalonia.Controls.TextBlock.TextAlignmentProperty!, func, onChanged, expression);
@@ -397,6 +457,10 @@ public static T TextAlignment<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // TextWrapping
+
+/*ValueSetterGenerator*/
+public static T TextWrapping<T>(this T control, Avalonia.Media.TextWrapping value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.TextWrapping = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T TextWrapping<T>(this T control, Func<Avalonia.Media.TextWrapping> func, Action<Avalonia.Media.TextWrapping>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
@@ -423,6 +487,10 @@ public static T TextWrapping<TValue,T>(this T control, TValue value, FuncValueCo
 
  // TextTrimming
 
+/*ValueSetterGenerator*/
+public static T TextTrimming<T>(this T control, Avalonia.Media.TextTrimming value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.TextTrimming = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TextTrimming<T>(this T control, Func<Avalonia.Media.TextTrimming> func, Action<Avalonia.Media.TextTrimming>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
    => control._set(Avalonia.Controls.TextBlock.TextTrimmingProperty!, func, onChanged, expression);
@@ -447,6 +515,10 @@ public static T TextTrimming<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // TextDecorations
+
+/*ValueSetterGenerator*/
+public static T TextDecorations<T>(this T control, Avalonia.Media.TextDecorationCollection value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.TextDecorations = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T TextDecorations<T>(this T control, Func<Avalonia.Media.TextDecorationCollection> func, Action<Avalonia.Media.TextDecorationCollection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
@@ -473,6 +545,10 @@ public static T TextDecorations<TValue,T>(this T control, TValue value, FuncValu
 
  // FontFeatures
 
+/*ValueSetterGenerator*/
+public static T FontFeatures<T>(this T control, Avalonia.Media.FontFeatureCollection value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.FontFeatures = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontFeatures<T>(this T control, Func<Avalonia.Media.FontFeatureCollection> func, Action<Avalonia.Media.FontFeatureCollection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 
    => control._set(Avalonia.Controls.TextBlock.FontFeaturesProperty!, func, onChanged, expression);
@@ -497,6 +573,10 @@ public static T FontFeatures<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // Inlines
+
+/*ValueSetterGenerator*/
+public static T Inlines<T>(this T control, Avalonia.Controls.Documents.InlineCollection value) where T : Avalonia.Controls.TextBlock 
+=> control._set(() => control.Inlines = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Inlines<T>(this T control, Func<Avalonia.Controls.Documents.InlineCollection> func, Action<Avalonia.Controls.Documents.InlineCollection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBlock 

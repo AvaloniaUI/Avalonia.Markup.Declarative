@@ -14,6 +14,10 @@ public static partial class TileBrush_MarkupExtensions
 //================= Properties ======================//
  // AlignmentX
 
+/*ValueSetterGenerator*/
+public static T AlignmentX<T>(this T control, Avalonia.Media.AlignmentX value) where T : Avalonia.Media.TileBrush 
+=> control._set(() => control.AlignmentX = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T AlignmentX<T>(this T control, Func<Avalonia.Media.AlignmentX> func, Action<Avalonia.Media.AlignmentX>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.TileBrush 
    => control._set(Avalonia.Media.TileBrush.AlignmentXProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T AlignmentX<TValue,T>(this T control, TValue value, FuncValueConv
 
  // AlignmentY
 
+/*ValueSetterGenerator*/
+public static T AlignmentY<T>(this T control, Avalonia.Media.AlignmentY value) where T : Avalonia.Media.TileBrush 
+=> control._set(() => control.AlignmentY = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T AlignmentY<T>(this T control, Func<Avalonia.Media.AlignmentY> func, Action<Avalonia.Media.AlignmentY>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.TileBrush 
    => control._set(Avalonia.Media.TileBrush.AlignmentYProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T AlignmentY<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // DestinationRect
+
+/*ValueSetterGenerator*/
+public static T DestinationRect<T>(this T control, Avalonia.RelativeRect value) where T : Avalonia.Media.TileBrush 
+=> control._set(() => control.DestinationRect = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T DestinationRect<T>(this T control, Func<Avalonia.RelativeRect> func, Action<Avalonia.RelativeRect>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.TileBrush 
@@ -102,6 +114,10 @@ public static T DestinationRect<TValue,T>(this T control, TValue value, FuncValu
 
  // SourceRect
 
+/*ValueSetterGenerator*/
+public static T SourceRect<T>(this T control, Avalonia.RelativeRect value) where T : Avalonia.Media.TileBrush 
+=> control._set(() => control.SourceRect = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SourceRect<T>(this T control, Func<Avalonia.RelativeRect> func, Action<Avalonia.RelativeRect>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.TileBrush 
    => control._set(Avalonia.Media.TileBrush.SourceRectProperty!, func, onChanged, expression);
@@ -140,6 +156,10 @@ public static T SourceRect<TValue,T>(this T control, TValue value, FuncValueConv
 
  // Stretch
 
+/*ValueSetterGenerator*/
+public static T Stretch<T>(this T control, Avalonia.Media.Stretch value) where T : Avalonia.Media.TileBrush 
+=> control._set(() => control.Stretch = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Stretch<T>(this T control, Func<Avalonia.Media.Stretch> func, Action<Avalonia.Media.Stretch>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.TileBrush 
    => control._set(Avalonia.Media.TileBrush.StretchProperty!, func, onChanged, expression);
@@ -164,6 +184,10 @@ public static T Stretch<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // TileMode
+
+/*ValueSetterGenerator*/
+public static T TileMode<T>(this T control, Avalonia.Media.TileMode value) where T : Avalonia.Media.TileBrush 
+=> control._set(() => control.TileMode = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T TileMode<T>(this T control, Func<Avalonia.Media.TileMode> func, Action<Avalonia.Media.TileMode>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.TileBrush 

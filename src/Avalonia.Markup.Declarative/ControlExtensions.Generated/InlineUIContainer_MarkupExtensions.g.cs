@@ -14,6 +14,10 @@ public static partial class InlineUIContainer_MarkupExtensions
 //================= Properties ======================//
  // Child
 
+/*ValueSetterGenerator*/
+public static T Child<T>(this T control, Avalonia.Controls.Control value) where T : Avalonia.Controls.Documents.InlineUIContainer 
+=> control._set(() => control.Child = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Child<T>(this T control, Func<Avalonia.Controls.Control> func, Action<Avalonia.Controls.Control>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.InlineUIContainer 
    => control._set(Avalonia.Controls.Documents.InlineUIContainer.ChildProperty!, func, onChanged, expression);

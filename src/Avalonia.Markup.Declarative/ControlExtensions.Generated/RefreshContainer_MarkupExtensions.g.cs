@@ -14,6 +14,10 @@ public static partial class RefreshContainer_MarkupExtensions
 //================= Properties ======================//
  // Visualizer
 
+/*ValueSetterGenerator*/
+public static T Visualizer<T>(this T control, Avalonia.Controls.RefreshVisualizer value) where T : Avalonia.Controls.RefreshContainer 
+=> control._set(() => control.Visualizer = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Visualizer<T>(this T control, Func<Avalonia.Controls.RefreshVisualizer> func, Action<Avalonia.Controls.RefreshVisualizer>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.RefreshContainer 
    => control._set(Avalonia.Controls.RefreshContainer.VisualizerProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Visualizer<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // PullDirection
+
+/*ValueSetterGenerator*/
+public static T PullDirection<T>(this T control, Avalonia.Input.PullDirection value) where T : Avalonia.Controls.RefreshContainer 
+=> control._set(() => control.PullDirection = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T PullDirection<T>(this T control, Func<Avalonia.Input.PullDirection> func, Action<Avalonia.Input.PullDirection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.RefreshContainer 

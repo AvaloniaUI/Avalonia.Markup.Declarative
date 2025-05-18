@@ -14,6 +14,10 @@ public static partial class ArcSegment_MarkupExtensions
 //================= Properties ======================//
  // IsLargeArc
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.ArcSegment IsLargeArc(this Avalonia.Media.ArcSegment control, System.Boolean value)  
+=> control._set(() => control.IsLargeArc = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.ArcSegment IsLargeArc(this Avalonia.Media.ArcSegment control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.ArcSegment.IsLargeArcProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.ArcSegment IsLargeArc<TValue>(this Avalonia.Media.A
 
 
  // Point
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.ArcSegment Point(this Avalonia.Media.ArcSegment control, Avalonia.Point value)  
+=> control._set(() => control.Point = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.ArcSegment Point(this Avalonia.Media.ArcSegment control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
@@ -64,6 +72,10 @@ public static Avalonia.Media.ArcSegment Point<TValue>(this Avalonia.Media.ArcSeg
 
  // RotationAngle
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.ArcSegment RotationAngle(this Avalonia.Media.ArcSegment control, System.Double value)  
+=> control._set(() => control.RotationAngle = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.ArcSegment RotationAngle(this Avalonia.Media.ArcSegment control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.ArcSegment.RotationAngleProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static Avalonia.Media.ArcSegment RotationAngle<TValue>(this Avalonia.Medi
 
 
  // Size
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.ArcSegment Size(this Avalonia.Media.ArcSegment control, Avalonia.Size value)  
+=> control._set(() => control.Size = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.ArcSegment Size(this Avalonia.Media.ArcSegment control, Func<Avalonia.Size> func, Action<Avalonia.Size>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
@@ -120,6 +136,10 @@ public static Avalonia.Media.ArcSegment Size<TValue>(this Avalonia.Media.ArcSegm
 
 
  // SweepDirection
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.ArcSegment SweepDirection(this Avalonia.Media.ArcSegment control, Avalonia.Media.SweepDirection value)  
+=> control._set(() => control.SweepDirection = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.ArcSegment SweepDirection(this Avalonia.Media.ArcSegment control, Func<Avalonia.Media.SweepDirection> func, Action<Avalonia.Media.SweepDirection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

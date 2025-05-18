@@ -14,6 +14,10 @@ public static partial class ConicGradientBrush_MarkupExtensions
 //================= Properties ======================//
  // Center
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.ConicGradientBrush Center(this Avalonia.Media.ConicGradientBrush control, Avalonia.RelativePoint value)  
+=> control._set(() => control.Center = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.ConicGradientBrush Center(this Avalonia.Media.ConicGradientBrush control, Func<Avalonia.RelativePoint> func, Action<Avalonia.RelativePoint>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.ConicGradientBrush.CenterProperty!, func, onChanged, expression);
@@ -45,6 +49,10 @@ public static Avalonia.Media.ConicGradientBrush Center<TValue>(this Avalonia.Med
 
 
  // Angle
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.ConicGradientBrush Angle(this Avalonia.Media.ConicGradientBrush control, System.Double value)  
+=> control._set(() => control.Angle = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.ConicGradientBrush Angle(this Avalonia.Media.ConicGradientBrush control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

@@ -14,6 +14,10 @@ public static partial class RepeatButton_MarkupExtensions
 //================= Properties ======================//
  // Interval
 
+/*ValueSetterGenerator*/
+public static T Interval<T>(this T control, System.Int32 value) where T : Avalonia.Controls.RepeatButton 
+=> control._set(() => control.Interval = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Interval<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.RepeatButton 
    => control._set(Avalonia.Controls.RepeatButton.IntervalProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Interval<TValue,T>(this T control, TValue value, FuncValueConver
 
 
  // Delay
+
+/*ValueSetterGenerator*/
+public static T Delay<T>(this T control, System.Int32 value) where T : Avalonia.Controls.RepeatButton 
+=> control._set(() => control.Delay = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Delay<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.RepeatButton 

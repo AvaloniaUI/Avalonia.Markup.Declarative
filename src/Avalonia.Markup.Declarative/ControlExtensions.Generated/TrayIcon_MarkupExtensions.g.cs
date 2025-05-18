@@ -14,6 +14,10 @@ public static partial class TrayIcon_MarkupExtensions
 //================= Properties ======================//
  // Command
 
+/*ValueSetterGenerator*/
+public static T Command<T>(this T control, System.Windows.Input.ICommand value) where T : Avalonia.Controls.TrayIcon 
+=> control._set(() => control.Command = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Command<T>(this T control, Func<System.Windows.Input.ICommand> func, Action<System.Windows.Input.ICommand>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TrayIcon 
    => control._set(Avalonia.Controls.TrayIcon.CommandProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Command<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // CommandParameter
+
+/*ValueSetterGenerator*/
+public static T CommandParameter<T>(this T control, System.Object value) where T : Avalonia.Controls.TrayIcon 
+=> control._set(() => control.CommandParameter = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T CommandParameter<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TrayIcon 
@@ -64,6 +72,10 @@ public static T CommandParameter<TValue,T>(this T control, TValue value, FuncVal
 
  // Menu
 
+/*ValueSetterGenerator*/
+public static T Menu<T>(this T control, Avalonia.Controls.NativeMenu value) where T : Avalonia.Controls.TrayIcon 
+=> control._set(() => control.Menu = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Menu<T>(this T control, Func<Avalonia.Controls.NativeMenu> func, Action<Avalonia.Controls.NativeMenu>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TrayIcon 
    => control._set(Avalonia.Controls.TrayIcon.MenuProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T Menu<TValue,T>(this T control, TValue value, FuncValueConverter<
 
 
  // Icon
+
+/*ValueSetterGenerator*/
+public static T Icon<T>(this T control, Avalonia.Controls.WindowIcon value) where T : Avalonia.Controls.TrayIcon 
+=> control._set(() => control.Icon = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Icon<T>(this T control, Func<Avalonia.Controls.WindowIcon> func, Action<Avalonia.Controls.WindowIcon>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TrayIcon 
@@ -114,6 +130,10 @@ public static T Icon<TValue,T>(this T control, TValue value, FuncValueConverter<
 
  // ToolTipText
 
+/*ValueSetterGenerator*/
+public static T ToolTipText<T>(this T control, System.String value) where T : Avalonia.Controls.TrayIcon 
+=> control._set(() => control.ToolTipText = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ToolTipText<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TrayIcon 
    => control._set(Avalonia.Controls.TrayIcon.ToolTipTextProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T ToolTipText<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // IsVisible
+
+/*ValueSetterGenerator*/
+public static T IsVisible<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TrayIcon 
+=> control._set(() => control.IsVisible = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsVisible<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TrayIcon 

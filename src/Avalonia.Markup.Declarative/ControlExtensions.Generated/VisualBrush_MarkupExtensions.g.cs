@@ -14,6 +14,10 @@ public static partial class VisualBrush_MarkupExtensions
 //================= Properties ======================//
  // Visual
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.VisualBrush Visual(this Avalonia.Media.VisualBrush control, Avalonia.Visual value)  
+=> control._set(() => control.Visual = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.VisualBrush Visual(this Avalonia.Media.VisualBrush control, Func<Avalonia.Visual> func, Action<Avalonia.Visual>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.VisualBrush.VisualProperty!, func, onChanged, expression);

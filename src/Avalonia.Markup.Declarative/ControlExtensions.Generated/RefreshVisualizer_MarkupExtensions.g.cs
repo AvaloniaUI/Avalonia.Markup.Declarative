@@ -14,6 +14,10 @@ public static partial class RefreshVisualizer_MarkupExtensions
 //================= Properties ======================//
  // Orientation
 
+/*ValueSetterGenerator*/
+public static T Orientation<T>(this T control, Avalonia.Controls.RefreshVisualizerOrientation value) where T : Avalonia.Controls.RefreshVisualizer 
+=> control._set(() => control.Orientation = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Orientation<T>(this T control, Func<Avalonia.Controls.RefreshVisualizerOrientation> func, Action<Avalonia.Controls.RefreshVisualizerOrientation>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.RefreshVisualizer 
    => control._set(Avalonia.Controls.RefreshVisualizer.OrientationProperty!, func, onChanged, expression);

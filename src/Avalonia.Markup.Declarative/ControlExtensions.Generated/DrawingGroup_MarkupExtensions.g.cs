@@ -14,6 +14,10 @@ public static partial class DrawingGroup_MarkupExtensions
 //================= Properties ======================//
  // Opacity
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DrawingGroup Opacity(this Avalonia.Media.DrawingGroup control, System.Double value)  
+=> control._set(() => control.Opacity = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DrawingGroup Opacity(this Avalonia.Media.DrawingGroup control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.DrawingGroup.OpacityProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.DrawingGroup Opacity<TValue>(this Avalonia.Media.Dr
 
 
  // Transform
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DrawingGroup Transform(this Avalonia.Media.DrawingGroup control, Avalonia.Media.Transform value)  
+=> control._set(() => control.Transform = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DrawingGroup Transform(this Avalonia.Media.DrawingGroup control, Func<Avalonia.Media.Transform> func, Action<Avalonia.Media.Transform>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
@@ -64,6 +72,10 @@ public static Avalonia.Media.DrawingGroup Transform<TValue>(this Avalonia.Media.
 
  // ClipGeometry
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DrawingGroup ClipGeometry(this Avalonia.Media.DrawingGroup control, Avalonia.Media.Geometry value)  
+=> control._set(() => control.ClipGeometry = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DrawingGroup ClipGeometry(this Avalonia.Media.DrawingGroup control, Func<Avalonia.Media.Geometry> func, Action<Avalonia.Media.Geometry>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.DrawingGroup.ClipGeometryProperty!, func, onChanged, expression);
@@ -89,6 +101,10 @@ public static Avalonia.Media.DrawingGroup ClipGeometry<TValue>(this Avalonia.Med
 
  // OpacityMask
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DrawingGroup OpacityMask(this Avalonia.Media.DrawingGroup control, Avalonia.Media.IBrush value)  
+=> control._set(() => control.OpacityMask = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DrawingGroup OpacityMask(this Avalonia.Media.DrawingGroup control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.DrawingGroup.OpacityMaskProperty!, func, onChanged, expression);
@@ -113,6 +129,10 @@ public static Avalonia.Media.DrawingGroup OpacityMask<TValue>(this Avalonia.Medi
 
 
  // Children
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DrawingGroup Children(this Avalonia.Media.DrawingGroup control, Avalonia.Media.DrawingCollection value)  
+=> control._set(() => control.Children = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DrawingGroup Children(this Avalonia.Media.DrawingGroup control, Func<Avalonia.Media.DrawingCollection> func, Action<Avalonia.Media.DrawingCollection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

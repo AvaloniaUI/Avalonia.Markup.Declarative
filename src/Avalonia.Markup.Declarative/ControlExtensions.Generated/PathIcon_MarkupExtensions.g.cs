@@ -14,6 +14,10 @@ public static partial class PathIcon_MarkupExtensions
 //================= Properties ======================//
  // Data
 
+/*ValueSetterGenerator*/
+public static T Data<T>(this T control, Avalonia.Media.Geometry value) where T : Avalonia.Controls.PathIcon 
+=> control._set(() => control.Data = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Data<T>(this T control, Func<Avalonia.Media.Geometry> func, Action<Avalonia.Media.Geometry>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.PathIcon 
    => control._set(Avalonia.Controls.PathIcon.DataProperty!, func, onChanged, expression);

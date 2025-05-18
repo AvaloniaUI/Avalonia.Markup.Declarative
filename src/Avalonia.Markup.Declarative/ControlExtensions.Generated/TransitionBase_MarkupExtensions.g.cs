@@ -14,6 +14,10 @@ public static partial class TransitionBase_MarkupExtensions
 //================= Properties ======================//
  // Duration
 
+/*ValueSetterGenerator*/
+public static T Duration<T>(this T control, System.TimeSpan value) where T : Avalonia.Animation.TransitionBase 
+=> control._set(() => control.Duration = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Duration<T>(this T control, Func<System.TimeSpan> func, Action<System.TimeSpan>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Animation.TransitionBase 
    => control._set(Avalonia.Animation.TransitionBase.DurationProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T Duration<TValue,T>(this T control, TValue value, FuncValueConver
 
  // Delay
 
+/*ValueSetterGenerator*/
+public static T Delay<T>(this T control, System.TimeSpan value) where T : Avalonia.Animation.TransitionBase 
+=> control._set(() => control.Delay = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Delay<T>(this T control, Func<System.TimeSpan> func, Action<System.TimeSpan>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Animation.TransitionBase 
    => control._set(Avalonia.Animation.TransitionBase.DelayProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T Delay<TValue,T>(this T control, TValue value, FuncValueConverter
 
 
  // Easing
+
+/*ValueSetterGenerator*/
+public static T Easing<T>(this T control, Avalonia.Animation.Easings.Easing value) where T : Avalonia.Animation.TransitionBase 
+=> control._set(() => control.Easing = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Easing<T>(this T control, Func<Avalonia.Animation.Easings.Easing> func, Action<Avalonia.Animation.Easings.Easing>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Animation.TransitionBase 

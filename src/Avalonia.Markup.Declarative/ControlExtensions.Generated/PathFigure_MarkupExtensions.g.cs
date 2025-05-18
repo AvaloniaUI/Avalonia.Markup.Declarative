@@ -14,6 +14,10 @@ public static partial class PathFigure_MarkupExtensions
 //================= Properties ======================//
  // IsClosed
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.PathFigure IsClosed(this Avalonia.Media.PathFigure control, System.Boolean value)  
+=> control._set(() => control.IsClosed = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.PathFigure IsClosed(this Avalonia.Media.PathFigure control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.PathFigure.IsClosedProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.PathFigure IsClosed<TValue>(this Avalonia.Media.Pat
 
 
  // IsFilled
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.PathFigure IsFilled(this Avalonia.Media.PathFigure control, System.Boolean value)  
+=> control._set(() => control.IsFilled = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.PathFigure IsFilled(this Avalonia.Media.PathFigure control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
@@ -64,6 +72,10 @@ public static Avalonia.Media.PathFigure IsFilled<TValue>(this Avalonia.Media.Pat
 
  // Segments
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.PathFigure Segments(this Avalonia.Media.PathFigure control, Avalonia.Media.PathSegments value)  
+=> control._set(() => control.Segments = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.PathFigure Segments(this Avalonia.Media.PathFigure control, Func<Avalonia.Media.PathSegments> func, Action<Avalonia.Media.PathSegments>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.PathFigure.SegmentsProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static Avalonia.Media.PathFigure Segments<TValue>(this Avalonia.Media.Pat
 
 
  // StartPoint
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.PathFigure StartPoint(this Avalonia.Media.PathFigure control, Avalonia.Point value)  
+=> control._set(() => control.StartPoint = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.PathFigure StartPoint(this Avalonia.Media.PathFigure control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

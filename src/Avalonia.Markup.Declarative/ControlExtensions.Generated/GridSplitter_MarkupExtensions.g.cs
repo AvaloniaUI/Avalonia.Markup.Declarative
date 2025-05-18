@@ -14,6 +14,10 @@ public static partial class GridSplitter_MarkupExtensions
 //================= Properties ======================//
  // ResizeDirection
 
+/*ValueSetterGenerator*/
+public static T ResizeDirection<T>(this T control, Avalonia.Controls.GridResizeDirection value) where T : Avalonia.Controls.GridSplitter 
+=> control._set(() => control.ResizeDirection = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ResizeDirection<T>(this T control, Func<Avalonia.Controls.GridResizeDirection> func, Action<Avalonia.Controls.GridResizeDirection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.GridSplitter 
    => control._set(Avalonia.Controls.GridSplitter.ResizeDirectionProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T ResizeDirection<TValue,T>(this T control, TValue value, FuncValu
 
 
  // ResizeBehavior
+
+/*ValueSetterGenerator*/
+public static T ResizeBehavior<T>(this T control, Avalonia.Controls.GridResizeBehavior value) where T : Avalonia.Controls.GridSplitter 
+=> control._set(() => control.ResizeBehavior = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ResizeBehavior<T>(this T control, Func<Avalonia.Controls.GridResizeBehavior> func, Action<Avalonia.Controls.GridResizeBehavior>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.GridSplitter 
@@ -64,6 +72,10 @@ public static T ResizeBehavior<TValue,T>(this T control, TValue value, FuncValue
 
  // ShowsPreview
 
+/*ValueSetterGenerator*/
+public static T ShowsPreview<T>(this T control, System.Boolean value) where T : Avalonia.Controls.GridSplitter 
+=> control._set(() => control.ShowsPreview = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ShowsPreview<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.GridSplitter 
    => control._set(Avalonia.Controls.GridSplitter.ShowsPreviewProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T ShowsPreview<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // KeyboardIncrement
+
+/*ValueSetterGenerator*/
+public static T KeyboardIncrement<T>(this T control, System.Double value) where T : Avalonia.Controls.GridSplitter 
+=> control._set(() => control.KeyboardIncrement = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T KeyboardIncrement<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.GridSplitter 
@@ -114,6 +130,10 @@ public static T KeyboardIncrement<TValue,T>(this T control, TValue value, FuncVa
 
  // DragIncrement
 
+/*ValueSetterGenerator*/
+public static T DragIncrement<T>(this T control, System.Double value) where T : Avalonia.Controls.GridSplitter 
+=> control._set(() => control.DragIncrement = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T DragIncrement<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.GridSplitter 
    => control._set(Avalonia.Controls.GridSplitter.DragIncrementProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T DragIncrement<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // PreviewContent
+
+/*ValueSetterGenerator*/
+public static T PreviewContent<T>(this T control, Avalonia.Controls.ITemplate<Avalonia.Controls.Control> value) where T : Avalonia.Controls.GridSplitter 
+=> control._set(() => control.PreviewContent = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T PreviewContent<T>(this T control, Func<Avalonia.Controls.ITemplate<Avalonia.Controls.Control>> func, Action<Avalonia.Controls.ITemplate<Avalonia.Controls.Control>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.GridSplitter 

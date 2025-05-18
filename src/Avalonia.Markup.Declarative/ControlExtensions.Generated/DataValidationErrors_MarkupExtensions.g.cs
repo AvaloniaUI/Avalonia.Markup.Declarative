@@ -14,6 +14,10 @@ public static partial class DataValidationErrors_MarkupExtensions
 //================= Properties ======================//
  // ErrorTemplate
 
+/*ValueSetterGenerator*/
+public static T ErrorTemplate<T>(this T control, Avalonia.Controls.Templates.IDataTemplate value) where T : Avalonia.Controls.DataValidationErrors 
+=> control._set(() => control.ErrorTemplate = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ErrorTemplate<T>(this T control, Func<Avalonia.Controls.Templates.IDataTemplate> func, Action<Avalonia.Controls.Templates.IDataTemplate>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.DataValidationErrors 
    => control._set(Avalonia.Controls.DataValidationErrors.ErrorTemplateProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T ErrorTemplate<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // Owner
+
+/*ValueSetterGenerator*/
+public static T Owner<T>(this T control, Avalonia.Controls.Control value) where T : Avalonia.Controls.DataValidationErrors 
+=> control._set(() => control.Owner = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Owner<T>(this T control, Func<Avalonia.Controls.Control> func, Action<Avalonia.Controls.Control>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.DataValidationErrors 

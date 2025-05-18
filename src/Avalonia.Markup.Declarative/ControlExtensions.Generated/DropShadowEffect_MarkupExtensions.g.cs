@@ -14,6 +14,10 @@ public static partial class DropShadowEffect_MarkupExtensions
 //================= Properties ======================//
  // OffsetX
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DropShadowEffect OffsetX(this Avalonia.Media.DropShadowEffect control, System.Double value)  
+=> control._set(() => control.OffsetX = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DropShadowEffect OffsetX(this Avalonia.Media.DropShadowEffect control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.DropShadowEffect.OffsetXProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.DropShadowEffect OffsetX<TValue>(this Avalonia.Medi
 
 
  // OffsetY
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DropShadowEffect OffsetY(this Avalonia.Media.DropShadowEffect control, System.Double value)  
+=> control._set(() => control.OffsetY = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DropShadowEffect OffsetY(this Avalonia.Media.DropShadowEffect control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

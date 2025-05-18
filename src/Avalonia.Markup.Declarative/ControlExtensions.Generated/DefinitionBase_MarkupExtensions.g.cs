@@ -14,6 +14,10 @@ public static partial class DefinitionBase_MarkupExtensions
 //================= Properties ======================//
  // SharedSizeGroup
 
+/*ValueSetterGenerator*/
+public static T SharedSizeGroup<T>(this T control, System.String value) where T : Avalonia.Controls.DefinitionBase 
+=> control._set(() => control.SharedSizeGroup = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SharedSizeGroup<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.DefinitionBase 
    => control._set(Avalonia.Controls.DefinitionBase.SharedSizeGroupProperty!, func, onChanged, expression);

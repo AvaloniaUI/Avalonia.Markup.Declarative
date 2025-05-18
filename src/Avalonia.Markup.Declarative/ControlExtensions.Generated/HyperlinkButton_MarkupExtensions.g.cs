@@ -14,6 +14,10 @@ public static partial class HyperlinkButton_MarkupExtensions
 //================= Properties ======================//
  // IsVisited
 
+/*ValueSetterGenerator*/
+public static T IsVisited<T>(this T control, System.Boolean value) where T : Avalonia.Controls.HyperlinkButton 
+=> control._set(() => control.IsVisited = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsVisited<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.HyperlinkButton 
    => control._set(Avalonia.Controls.HyperlinkButton.IsVisitedProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T IsVisited<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // NavigateUri
+
+/*ValueSetterGenerator*/
+public static T NavigateUri<T>(this T control, System.Uri value) where T : Avalonia.Controls.HyperlinkButton 
+=> control._set(() => control.NavigateUri = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T NavigateUri<T>(this T control, Func<System.Uri> func, Action<System.Uri>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.HyperlinkButton 

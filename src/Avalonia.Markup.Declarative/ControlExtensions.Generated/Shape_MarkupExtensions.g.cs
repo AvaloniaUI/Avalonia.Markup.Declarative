@@ -14,6 +14,10 @@ public static partial class Shape_MarkupExtensions
 //================= Properties ======================//
  // Fill
 
+/*ValueSetterGenerator*/
+public static T Fill<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Shapes.Shape 
+=> control._set(() => control.Fill = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Fill<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Shape 
    => control._set(Avalonia.Controls.Shapes.Shape.FillProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Fill<TValue,T>(this T control, TValue value, FuncValueConverter<
 
 
  // Stretch
+
+/*ValueSetterGenerator*/
+public static T Stretch<T>(this T control, Avalonia.Media.Stretch value) where T : Avalonia.Controls.Shapes.Shape 
+=> control._set(() => control.Stretch = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Stretch<T>(this T control, Func<Avalonia.Media.Stretch> func, Action<Avalonia.Media.Stretch>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Shape 
@@ -64,6 +72,10 @@ public static T Stretch<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // Stroke
 
+/*ValueSetterGenerator*/
+public static T Stroke<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Shapes.Shape 
+=> control._set(() => control.Stroke = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Stroke<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Shape 
    => control._set(Avalonia.Controls.Shapes.Shape.StrokeProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T Stroke<TValue,T>(this T control, TValue value, FuncValueConverte
 
 
  // StrokeDashArray
+
+/*ValueSetterGenerator*/
+public static T StrokeDashArray<T>(this T control, Avalonia.Collections.AvaloniaList<System.Double> value) where T : Avalonia.Controls.Shapes.Shape 
+=> control._set(() => control.StrokeDashArray = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T StrokeDashArray<T>(this T control, Func<Avalonia.Collections.AvaloniaList<System.Double>> func, Action<Avalonia.Collections.AvaloniaList<System.Double>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Shape 
@@ -114,6 +130,10 @@ public static T StrokeDashArray<TValue,T>(this T control, TValue value, FuncValu
 
  // StrokeDashOffset
 
+/*ValueSetterGenerator*/
+public static T StrokeDashOffset<T>(this T control, System.Double value) where T : Avalonia.Controls.Shapes.Shape 
+=> control._set(() => control.StrokeDashOffset = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T StrokeDashOffset<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Shape 
    => control._set(Avalonia.Controls.Shapes.Shape.StrokeDashOffsetProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T StrokeDashOffset<TValue,T>(this T control, TValue value, FuncVal
 
 
  // StrokeThickness
+
+/*ValueSetterGenerator*/
+public static T StrokeThickness<T>(this T control, System.Double value) where T : Avalonia.Controls.Shapes.Shape 
+=> control._set(() => control.StrokeThickness = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T StrokeThickness<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Shape 
@@ -164,6 +188,10 @@ public static T StrokeThickness<TValue,T>(this T control, TValue value, FuncValu
 
  // StrokeLineCap
 
+/*ValueSetterGenerator*/
+public static T StrokeLineCap<T>(this T control, Avalonia.Media.PenLineCap value) where T : Avalonia.Controls.Shapes.Shape 
+=> control._set(() => control.StrokeLineCap = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T StrokeLineCap<T>(this T control, Func<Avalonia.Media.PenLineCap> func, Action<Avalonia.Media.PenLineCap>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Shape 
    => control._set(Avalonia.Controls.Shapes.Shape.StrokeLineCapProperty!, func, onChanged, expression);
@@ -188,6 +216,10 @@ public static T StrokeLineCap<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // StrokeJoin
+
+/*ValueSetterGenerator*/
+public static T StrokeJoin<T>(this T control, Avalonia.Media.PenLineJoin value) where T : Avalonia.Controls.Shapes.Shape 
+=> control._set(() => control.StrokeJoin = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T StrokeJoin<T>(this T control, Func<Avalonia.Media.PenLineJoin> func, Action<Avalonia.Media.PenLineJoin>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Shapes.Shape 

@@ -14,6 +14,10 @@ public static partial class TransformGroup_MarkupExtensions
 //================= Properties ======================//
  // Children
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.TransformGroup Children(this Avalonia.Media.TransformGroup control, Avalonia.Media.Transforms value)  
+=> control._set(() => control.Children = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.TransformGroup Children(this Avalonia.Media.TransformGroup control, Func<Avalonia.Media.Transforms> func, Action<Avalonia.Media.Transforms>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.TransformGroup.ChildrenProperty!, func, onChanged, expression);

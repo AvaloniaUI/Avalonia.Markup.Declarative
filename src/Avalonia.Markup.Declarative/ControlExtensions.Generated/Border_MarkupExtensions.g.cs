@@ -14,6 +14,10 @@ public static partial class Border_MarkupExtensions
 //================= Properties ======================//
  // Background
 
+/*ValueSetterGenerator*/
+public static T Background<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Border 
+=> control._set(() => control.Background = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Background<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 
    => control._set(Avalonia.Controls.Border.BackgroundProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Background<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // BackgroundSizing
+
+/*ValueSetterGenerator*/
+public static T BackgroundSizing<T>(this T control, Avalonia.Media.BackgroundSizing value) where T : Avalonia.Controls.Border 
+=> control._set(() => control.BackgroundSizing = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T BackgroundSizing<T>(this T control, Func<Avalonia.Media.BackgroundSizing> func, Action<Avalonia.Media.BackgroundSizing>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 
@@ -64,6 +72,10 @@ public static T BackgroundSizing<TValue,T>(this T control, TValue value, FuncVal
 
  // BorderBrush
 
+/*ValueSetterGenerator*/
+public static T BorderBrush<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Border 
+=> control._set(() => control.BorderBrush = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T BorderBrush<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 
    => control._set(Avalonia.Controls.Border.BorderBrushProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T BorderBrush<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // BorderThickness
+
+/*ValueSetterGenerator*/
+public static T BorderThickness<T>(this T control, Avalonia.Thickness value) where T : Avalonia.Controls.Border 
+=> control._set(() => control.BorderThickness = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T BorderThickness<T>(this T control, Func<Avalonia.Thickness> func, Action<Avalonia.Thickness>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 
@@ -123,6 +139,10 @@ public static T BorderThickness<TValue,T>(this T control, TValue value, FuncValu
 
  // CornerRadius
 
+/*ValueSetterGenerator*/
+public static T CornerRadius<T>(this T control, Avalonia.CornerRadius value) where T : Avalonia.Controls.Border 
+=> control._set(() => control.CornerRadius = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CornerRadius<T>(this T control, Func<Avalonia.CornerRadius> func, Action<Avalonia.CornerRadius>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 
    => control._set(Avalonia.Controls.Border.CornerRadiusProperty!, func, onChanged, expression);
@@ -156,6 +176,10 @@ public static T CornerRadius<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // BoxShadow
+
+/*ValueSetterGenerator*/
+public static T BoxShadow<T>(this T control, Avalonia.Media.BoxShadows value) where T : Avalonia.Controls.Border 
+=> control._set(() => control.BoxShadow = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T BoxShadow<T>(this T control, Func<Avalonia.Media.BoxShadows> func, Action<Avalonia.Media.BoxShadows>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Border 

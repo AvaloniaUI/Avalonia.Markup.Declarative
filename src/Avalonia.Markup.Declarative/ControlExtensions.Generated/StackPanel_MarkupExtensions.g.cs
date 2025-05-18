@@ -14,6 +14,10 @@ public static partial class StackPanel_MarkupExtensions
 //================= Properties ======================//
  // Spacing
 
+/*ValueSetterGenerator*/
+public static T Spacing<T>(this T control, System.Double value) where T : Avalonia.Controls.StackPanel 
+=> control._set(() => control.Spacing = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Spacing<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.StackPanel 
    => control._set(Avalonia.Controls.StackPanel.SpacingProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Spacing<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // Orientation
+
+/*ValueSetterGenerator*/
+public static T Orientation<T>(this T control, Avalonia.Layout.Orientation value) where T : Avalonia.Controls.StackPanel 
+=> control._set(() => control.Orientation = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Orientation<T>(this T control, Func<Avalonia.Layout.Orientation> func, Action<Avalonia.Layout.Orientation>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.StackPanel 
@@ -64,6 +72,10 @@ public static T Orientation<TValue,T>(this T control, TValue value, FuncValueCon
 
  // AreHorizontalSnapPointsRegular
 
+/*ValueSetterGenerator*/
+public static T AreHorizontalSnapPointsRegular<T>(this T control, System.Boolean value) where T : Avalonia.Controls.StackPanel 
+=> control._set(() => control.AreHorizontalSnapPointsRegular = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T AreHorizontalSnapPointsRegular<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.StackPanel 
    => control._set(Avalonia.Controls.StackPanel.AreHorizontalSnapPointsRegularProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T AreHorizontalSnapPointsRegular<TValue,T>(this T control, TValue 
 
 
  // AreVerticalSnapPointsRegular
+
+/*ValueSetterGenerator*/
+public static T AreVerticalSnapPointsRegular<T>(this T control, System.Boolean value) where T : Avalonia.Controls.StackPanel 
+=> control._set(() => control.AreVerticalSnapPointsRegular = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T AreVerticalSnapPointsRegular<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.StackPanel 

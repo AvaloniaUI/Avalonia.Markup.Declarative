@@ -14,6 +14,10 @@ public static partial class PullGestureRecognizer_MarkupExtensions
 //================= Properties ======================//
  // PullDirection
 
+/*ValueSetterGenerator*/
+public static T PullDirection<T>(this T control, Avalonia.Input.PullDirection value) where T : Avalonia.Input.PullGestureRecognizer 
+=> control._set(() => control.PullDirection = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T PullDirection<T>(this T control, Func<Avalonia.Input.PullDirection> func, Action<Avalonia.Input.PullDirection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.PullGestureRecognizer 
    => control._set(Avalonia.Input.PullGestureRecognizer.PullDirectionProperty!, func, onChanged, expression);

@@ -14,6 +14,10 @@ public static partial class Slider_MarkupExtensions
 //================= Properties ======================//
  // Orientation
 
+/*ValueSetterGenerator*/
+public static T Orientation<T>(this T control, Avalonia.Layout.Orientation value) where T : Avalonia.Controls.Slider 
+=> control._set(() => control.Orientation = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Orientation<T>(this T control, Func<Avalonia.Layout.Orientation> func, Action<Avalonia.Layout.Orientation>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Slider 
    => control._set(Avalonia.Controls.Slider.OrientationProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Orientation<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // IsDirectionReversed
+
+/*ValueSetterGenerator*/
+public static T IsDirectionReversed<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Slider 
+=> control._set(() => control.IsDirectionReversed = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsDirectionReversed<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Slider 
@@ -64,6 +72,10 @@ public static T IsDirectionReversed<TValue,T>(this T control, TValue value, Func
 
  // IsSnapToTickEnabled
 
+/*ValueSetterGenerator*/
+public static T IsSnapToTickEnabled<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Slider 
+=> control._set(() => control.IsSnapToTickEnabled = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsSnapToTickEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Slider 
    => control._set(Avalonia.Controls.Slider.IsSnapToTickEnabledProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T IsSnapToTickEnabled<TValue,T>(this T control, TValue value, Func
 
 
  // TickFrequency
+
+/*ValueSetterGenerator*/
+public static T TickFrequency<T>(this T control, System.Double value) where T : Avalonia.Controls.Slider 
+=> control._set(() => control.TickFrequency = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T TickFrequency<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Slider 
@@ -114,6 +130,10 @@ public static T TickFrequency<TValue,T>(this T control, TValue value, FuncValueC
 
  // TickPlacement
 
+/*ValueSetterGenerator*/
+public static T TickPlacement<T>(this T control, Avalonia.Controls.TickPlacement value) where T : Avalonia.Controls.Slider 
+=> control._set(() => control.TickPlacement = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TickPlacement<T>(this T control, Func<Avalonia.Controls.TickPlacement> func, Action<Avalonia.Controls.TickPlacement>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Slider 
    => control._set(Avalonia.Controls.Slider.TickPlacementProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T TickPlacement<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // Ticks
+
+/*ValueSetterGenerator*/
+public static T Ticks<T>(this T control, Avalonia.Collections.AvaloniaList<System.Double> value) where T : Avalonia.Controls.Slider 
+=> control._set(() => control.Ticks = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Ticks<T>(this T control, Func<Avalonia.Collections.AvaloniaList<System.Double>> func, Action<Avalonia.Collections.AvaloniaList<System.Double>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Slider 

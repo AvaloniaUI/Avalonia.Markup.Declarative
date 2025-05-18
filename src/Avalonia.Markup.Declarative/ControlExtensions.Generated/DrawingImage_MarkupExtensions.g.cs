@@ -14,6 +14,10 @@ public static partial class DrawingImage_MarkupExtensions
 //================= Properties ======================//
  // Drawing
 
+/*ValueSetterGenerator*/
+public static T Drawing<T>(this T control, Avalonia.Media.Drawing value) where T : Avalonia.Media.DrawingImage 
+=> control._set(() => control.Drawing = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Drawing<T>(this T control, Func<Avalonia.Media.Drawing> func, Action<Avalonia.Media.Drawing>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.DrawingImage 
    => control._set(Avalonia.Media.DrawingImage.DrawingProperty!, func, onChanged, expression);

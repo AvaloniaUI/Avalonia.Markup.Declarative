@@ -14,6 +14,10 @@ public static partial class AccessText_MarkupExtensions
 //================= Properties ======================//
  // ShowAccessKey
 
+/*ValueSetterGenerator*/
+public static T ShowAccessKey<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Primitives.AccessText 
+=> control._set(() => control.ShowAccessKey = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ShowAccessKey<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.AccessText 
    => control._set(Avalonia.Controls.Primitives.AccessText.ShowAccessKeyProperty!, func, onChanged, expression);

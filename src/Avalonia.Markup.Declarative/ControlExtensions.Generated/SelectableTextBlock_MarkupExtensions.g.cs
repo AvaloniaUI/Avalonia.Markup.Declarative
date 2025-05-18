@@ -14,6 +14,10 @@ public static partial class SelectableTextBlock_MarkupExtensions
 //================= Properties ======================//
  // SelectionStart
 
+/*ValueSetterGenerator*/
+public static T SelectionStart<T>(this T control, System.Int32 value) where T : Avalonia.Controls.SelectableTextBlock 
+=> control._set(() => control.SelectionStart = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionStart<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SelectableTextBlock 
    => control._set(Avalonia.Controls.SelectableTextBlock.SelectionStartProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T SelectionStart<TValue,T>(this T control, TValue value, FuncValue
 
 
  // SelectionEnd
+
+/*ValueSetterGenerator*/
+public static T SelectionEnd<T>(this T control, System.Int32 value) where T : Avalonia.Controls.SelectableTextBlock 
+=> control._set(() => control.SelectionEnd = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionEnd<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SelectableTextBlock 
@@ -64,6 +72,10 @@ public static T SelectionEnd<TValue,T>(this T control, TValue value, FuncValueCo
 
  // SelectionBrush
 
+/*ValueSetterGenerator*/
+public static T SelectionBrush<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.SelectableTextBlock 
+=> control._set(() => control.SelectionBrush = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionBrush<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SelectableTextBlock 
    => control._set(Avalonia.Controls.SelectableTextBlock.SelectionBrushProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T SelectionBrush<TValue,T>(this T control, TValue value, FuncValue
 
 
  // SelectionForegroundBrush
+
+/*ValueSetterGenerator*/
+public static T SelectionForegroundBrush<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.SelectableTextBlock 
+=> control._set(() => control.SelectionForegroundBrush = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionForegroundBrush<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SelectableTextBlock 

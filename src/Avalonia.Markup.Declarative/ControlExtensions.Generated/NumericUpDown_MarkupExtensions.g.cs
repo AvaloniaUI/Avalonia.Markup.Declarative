@@ -14,6 +14,10 @@ public static partial class NumericUpDown_MarkupExtensions
 //================= Properties ======================//
  // AllowSpin
 
+/*ValueSetterGenerator*/
+public static T AllowSpin<T>(this T control, System.Boolean value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.AllowSpin = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T AllowSpin<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
    => control._set(Avalonia.Controls.NumericUpDown.AllowSpinProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T AllowSpin<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // ButtonSpinnerLocation
+
+/*ValueSetterGenerator*/
+public static T ButtonSpinnerLocation<T>(this T control, Avalonia.Controls.Location value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.ButtonSpinnerLocation = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ButtonSpinnerLocation<T>(this T control, Func<Avalonia.Controls.Location> func, Action<Avalonia.Controls.Location>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
@@ -64,6 +72,10 @@ public static T ButtonSpinnerLocation<TValue,T>(this T control, TValue value, Fu
 
  // ShowButtonSpinner
 
+/*ValueSetterGenerator*/
+public static T ShowButtonSpinner<T>(this T control, System.Boolean value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.ShowButtonSpinner = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ShowButtonSpinner<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
    => control._set(Avalonia.Controls.NumericUpDown.ShowButtonSpinnerProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T ShowButtonSpinner<TValue,T>(this T control, TValue value, FuncVa
 
 
  // ClipValueToMinMax
+
+/*ValueSetterGenerator*/
+public static T ClipValueToMinMax<T>(this T control, System.Boolean value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.ClipValueToMinMax = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ClipValueToMinMax<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
@@ -114,6 +130,10 @@ public static T ClipValueToMinMax<TValue,T>(this T control, TValue value, FuncVa
 
  // NumberFormat
 
+/*ValueSetterGenerator*/
+public static T NumberFormat<T>(this T control, System.Globalization.NumberFormatInfo value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.NumberFormat = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T NumberFormat<T>(this T control, Func<System.Globalization.NumberFormatInfo> func, Action<System.Globalization.NumberFormatInfo>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
    => control._set(Avalonia.Controls.NumericUpDown.NumberFormatProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T NumberFormat<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // FormatString
+
+/*ValueSetterGenerator*/
+public static T FormatString<T>(this T control, System.String value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.FormatString = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FormatString<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
@@ -164,6 +188,10 @@ public static T FormatString<TValue,T>(this T control, TValue value, FuncValueCo
 
  // Increment
 
+/*ValueSetterGenerator*/
+public static T Increment<T>(this T control, System.Decimal value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.Increment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Increment<T>(this T control, Func<System.Decimal> func, Action<System.Decimal>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
    => control._set(Avalonia.Controls.NumericUpDown.IncrementProperty!, func, onChanged, expression);
@@ -188,6 +216,10 @@ public static T Increment<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // IsReadOnly
+
+/*ValueSetterGenerator*/
+public static T IsReadOnly<T>(this T control, System.Boolean value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.IsReadOnly = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsReadOnly<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
@@ -214,6 +246,10 @@ public static T IsReadOnly<TValue,T>(this T control, TValue value, FuncValueConv
 
  // Maximum
 
+/*ValueSetterGenerator*/
+public static T Maximum<T>(this T control, System.Decimal value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.Maximum = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Maximum<T>(this T control, Func<System.Decimal> func, Action<System.Decimal>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
    => control._set(Avalonia.Controls.NumericUpDown.MaximumProperty!, func, onChanged, expression);
@@ -238,6 +274,10 @@ public static T Maximum<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // Minimum
+
+/*ValueSetterGenerator*/
+public static T Minimum<T>(this T control, System.Decimal value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.Minimum = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Minimum<T>(this T control, Func<System.Decimal> func, Action<System.Decimal>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
@@ -264,6 +304,10 @@ public static T Minimum<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // ParsingNumberStyle
 
+/*ValueSetterGenerator*/
+public static T ParsingNumberStyle<T>(this T control, System.Globalization.NumberStyles value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.ParsingNumberStyle = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ParsingNumberStyle<T>(this T control, Func<System.Globalization.NumberStyles> func, Action<System.Globalization.NumberStyles>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
    => control._set(Avalonia.Controls.NumericUpDown.ParsingNumberStyleProperty!, func, onChanged, expression);
@@ -288,6 +332,10 @@ public static T ParsingNumberStyle<TValue,T>(this T control, TValue value, FuncV
 
 
  // Text
+
+/*ValueSetterGenerator*/
+public static T Text<T>(this T control, System.String value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.Text = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Text<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
@@ -314,6 +362,10 @@ public static T Text<TValue,T>(this T control, TValue value, FuncValueConverter<
 
  // TextConverter
 
+/*ValueSetterGenerator*/
+public static T TextConverter<T>(this T control, Avalonia.Data.Converters.IValueConverter value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.TextConverter = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TextConverter<T>(this T control, Func<Avalonia.Data.Converters.IValueConverter> func, Action<Avalonia.Data.Converters.IValueConverter>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
    => control._set(Avalonia.Controls.NumericUpDown.TextConverterProperty!, func, onChanged, expression);
@@ -338,6 +390,10 @@ public static T TextConverter<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // Value
+
+/*ValueSetterGenerator*/
+public static T Value<T>(this T control, System.Nullable<System.Decimal> value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.Value = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Value<T>(this T control, Func<System.Nullable<System.Decimal>> func, Action<System.Nullable<System.Decimal>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
@@ -364,6 +420,10 @@ public static T Value<TValue,T>(this T control, TValue value, FuncValueConverter
 
  // Watermark
 
+/*ValueSetterGenerator*/
+public static T Watermark<T>(this T control, System.String value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.Watermark = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Watermark<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
    => control._set(Avalonia.Controls.NumericUpDown.WatermarkProperty!, func, onChanged, expression);
@@ -388,6 +448,10 @@ public static T Watermark<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // HorizontalContentAlignment
+
+/*ValueSetterGenerator*/
+public static T HorizontalContentAlignment<T>(this T control, Avalonia.Layout.HorizontalAlignment value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.HorizontalContentAlignment = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T HorizontalContentAlignment<T>(this T control, Func<Avalonia.Layout.HorizontalAlignment> func, Action<Avalonia.Layout.HorizontalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
@@ -414,6 +478,10 @@ public static T HorizontalContentAlignment<TValue,T>(this T control, TValue valu
 
  // VerticalContentAlignment
 
+/*ValueSetterGenerator*/
+public static T VerticalContentAlignment<T>(this T control, Avalonia.Layout.VerticalAlignment value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.VerticalContentAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T VerticalContentAlignment<T>(this T control, Func<Avalonia.Layout.VerticalAlignment> func, Action<Avalonia.Layout.VerticalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
    => control._set(Avalonia.Controls.NumericUpDown.VerticalContentAlignmentProperty!, func, onChanged, expression);
@@ -438,6 +506,10 @@ public static T VerticalContentAlignment<TValue,T>(this T control, TValue value,
 
 
  // TextAlignment
+
+/*ValueSetterGenerator*/
+public static T TextAlignment<T>(this T control, Avalonia.Media.TextAlignment value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.TextAlignment = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T TextAlignment<T>(this T control, Func<Avalonia.Media.TextAlignment> func, Action<Avalonia.Media.TextAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
@@ -464,6 +536,10 @@ public static T TextAlignment<TValue,T>(this T control, TValue value, FuncValueC
 
  // InnerLeftContent
 
+/*ValueSetterGenerator*/
+public static T InnerLeftContent<T>(this T control, System.Object value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.InnerLeftContent = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T InnerLeftContent<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 
    => control._set(Avalonia.Controls.NumericUpDown.InnerLeftContentProperty!, func, onChanged, expression);
@@ -488,6 +564,10 @@ public static T InnerLeftContent<TValue,T>(this T control, TValue value, FuncVal
 
 
  // InnerRightContent
+
+/*ValueSetterGenerator*/
+public static T InnerRightContent<T>(this T control, System.Object value) where T : Avalonia.Controls.NumericUpDown 
+=> control._set(() => control.InnerRightContent = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T InnerRightContent<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NumericUpDown 

@@ -14,6 +14,10 @@ public static partial class CombinedGeometry_MarkupExtensions
 //================= Properties ======================//
  // Geometry1
 
+/*ValueSetterGenerator*/
+public static T Geometry1<T>(this T control, Avalonia.Media.Geometry value) where T : Avalonia.Media.CombinedGeometry 
+=> control._set(() => control.Geometry1 = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Geometry1<T>(this T control, Func<Avalonia.Media.Geometry> func, Action<Avalonia.Media.Geometry>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.CombinedGeometry 
    => control._set(Avalonia.Media.CombinedGeometry.Geometry1Property!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T Geometry1<TValue,T>(this T control, TValue value, FuncValueConve
 
  // Geometry2
 
+/*ValueSetterGenerator*/
+public static T Geometry2<T>(this T control, Avalonia.Media.Geometry value) where T : Avalonia.Media.CombinedGeometry 
+=> control._set(() => control.Geometry2 = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Geometry2<T>(this T control, Func<Avalonia.Media.Geometry> func, Action<Avalonia.Media.Geometry>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.CombinedGeometry 
    => control._set(Avalonia.Media.CombinedGeometry.Geometry2Property!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T Geometry2<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // GeometryCombineMode
+
+/*ValueSetterGenerator*/
+public static T GeometryCombineMode<T>(this T control, Avalonia.Media.GeometryCombineMode value) where T : Avalonia.Media.CombinedGeometry 
+=> control._set(() => control.GeometryCombineMode = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T GeometryCombineMode<T>(this T control, Func<Avalonia.Media.GeometryCombineMode> func, Action<Avalonia.Media.GeometryCombineMode>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.CombinedGeometry 

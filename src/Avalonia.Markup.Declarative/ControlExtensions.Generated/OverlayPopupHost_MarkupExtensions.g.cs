@@ -14,6 +14,10 @@ public static partial class OverlayPopupHost_MarkupExtensions
 //================= Properties ======================//
  // Transform
 
+/*ValueSetterGenerator*/
+public static T Transform<T>(this T control, Avalonia.Media.Transform value) where T : Avalonia.Controls.Primitives.OverlayPopupHost 
+=> control._set(() => control.Transform = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Transform<T>(this T control, Func<Avalonia.Media.Transform> func, Action<Avalonia.Media.Transform>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.OverlayPopupHost 
    => control._set(Avalonia.Controls.Primitives.OverlayPopupHost.TransformProperty!, func, onChanged, expression);

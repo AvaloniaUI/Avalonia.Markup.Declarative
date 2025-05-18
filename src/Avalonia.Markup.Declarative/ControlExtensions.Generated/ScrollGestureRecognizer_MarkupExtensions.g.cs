@@ -14,6 +14,10 @@ public static partial class ScrollGestureRecognizer_MarkupExtensions
 //================= Properties ======================//
  // CanHorizontallyScroll
 
+/*ValueSetterGenerator*/
+public static T CanHorizontallyScroll<T>(this T control, System.Boolean value) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._set(() => control.CanHorizontallyScroll = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CanHorizontallyScroll<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
    => control._set(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.CanHorizontallyScrollProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T CanHorizontallyScroll<TValue,T>(this T control, TValue value, Fu
 
 
  // CanVerticallyScroll
+
+/*ValueSetterGenerator*/
+public static T CanVerticallyScroll<T>(this T control, System.Boolean value) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._set(() => control.CanVerticallyScroll = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T CanVerticallyScroll<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
@@ -64,6 +72,10 @@ public static T CanVerticallyScroll<TValue,T>(this T control, TValue value, Func
 
  // IsScrollInertiaEnabled
 
+/*ValueSetterGenerator*/
+public static T IsScrollInertiaEnabled<T>(this T control, System.Boolean value) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._set(() => control.IsScrollInertiaEnabled = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsScrollInertiaEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
    => control._set(Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer.IsScrollInertiaEnabledProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T IsScrollInertiaEnabled<TValue,T>(this T control, TValue value, F
 
 
  // ScrollStartDistance
+
+/*ValueSetterGenerator*/
+public static T ScrollStartDistance<T>(this T control, System.Int32 value) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 
+=> control._set(() => control.ScrollStartDistance = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ScrollStartDistance<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.GestureRecognizers.ScrollGestureRecognizer 

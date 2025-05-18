@@ -14,6 +14,10 @@ public static partial class InputElement_MarkupExtensions
 //================= Properties ======================//
  // Focusable
 
+/*ValueSetterGenerator*/
+public static T Focusable<T>(this T control, System.Boolean value) where T : Avalonia.Input.InputElement 
+=> control._set(() => control.Focusable = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Focusable<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.InputElement 
    => control._set(Avalonia.Input.InputElement.FocusableProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Focusable<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // IsEnabled
+
+/*ValueSetterGenerator*/
+public static T IsEnabled<T>(this T control, System.Boolean value) where T : Avalonia.Input.InputElement 
+=> control._set(() => control.IsEnabled = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.InputElement 
@@ -64,6 +72,10 @@ public static T IsEnabled<TValue,T>(this T control, TValue value, FuncValueConve
 
  // Cursor
 
+/*ValueSetterGenerator*/
+public static T Cursor<T>(this T control, Avalonia.Input.Cursor value) where T : Avalonia.Input.InputElement 
+=> control._set(() => control.Cursor = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Cursor<T>(this T control, Func<Avalonia.Input.Cursor> func, Action<Avalonia.Input.Cursor>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.InputElement 
    => control._set(Avalonia.Input.InputElement.CursorProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T Cursor<TValue,T>(this T control, TValue value, FuncValueConverte
 
 
  // IsHitTestVisible
+
+/*ValueSetterGenerator*/
+public static T IsHitTestVisible<T>(this T control, System.Boolean value) where T : Avalonia.Input.InputElement 
+=> control._set(() => control.IsHitTestVisible = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsHitTestVisible<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.InputElement 
@@ -114,6 +130,10 @@ public static T IsHitTestVisible<TValue,T>(this T control, TValue value, FuncVal
 
  // IsTabStop
 
+/*ValueSetterGenerator*/
+public static T IsTabStop<T>(this T control, System.Boolean value) where T : Avalonia.Input.InputElement 
+=> control._set(() => control.IsTabStop = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsTabStop<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.InputElement 
    => control._set(Avalonia.Input.InputElement.IsTabStopProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T IsTabStop<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // TabIndex
+
+/*ValueSetterGenerator*/
+public static T TabIndex<T>(this T control, System.Int32 value) where T : Avalonia.Input.InputElement 
+=> control._set(() => control.TabIndex = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T TabIndex<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Input.InputElement 

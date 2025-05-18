@@ -14,6 +14,10 @@ public static partial class Inline_MarkupExtensions
 //================= Properties ======================//
  // TextDecorations
 
+/*ValueSetterGenerator*/
+public static T TextDecorations<T>(this T control, Avalonia.Media.TextDecorationCollection value) where T : Avalonia.Controls.Documents.Inline 
+=> control._set(() => control.TextDecorations = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TextDecorations<T>(this T control, Func<Avalonia.Media.TextDecorationCollection> func, Action<Avalonia.Media.TextDecorationCollection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.Inline 
    => control._set(Avalonia.Controls.Documents.Inline.TextDecorationsProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T TextDecorations<TValue,T>(this T control, TValue value, FuncValu
 
 
  // BaselineAlignment
+
+/*ValueSetterGenerator*/
+public static T BaselineAlignment<T>(this T control, Avalonia.Media.BaselineAlignment value) where T : Avalonia.Controls.Documents.Inline 
+=> control._set(() => control.BaselineAlignment = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T BaselineAlignment<T>(this T control, Func<Avalonia.Media.BaselineAlignment> func, Action<Avalonia.Media.BaselineAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.Inline 

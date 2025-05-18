@@ -14,6 +14,10 @@ public static partial class TextBox_MarkupExtensions
 //================= Properties ======================//
  // IsInactiveSelectionHighlightEnabled
 
+/*ValueSetterGenerator*/
+public static T IsInactiveSelectionHighlightEnabled<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.IsInactiveSelectionHighlightEnabled = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsInactiveSelectionHighlightEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.IsInactiveSelectionHighlightEnabledProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T IsInactiveSelectionHighlightEnabled<TValue,T>(this T control, TV
 
 
  // ClearSelectionOnLostFocus
+
+/*ValueSetterGenerator*/
+public static T ClearSelectionOnLostFocus<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.ClearSelectionOnLostFocus = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ClearSelectionOnLostFocus<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -64,6 +72,10 @@ public static T ClearSelectionOnLostFocus<TValue,T>(this T control, TValue value
 
  // AcceptsReturn
 
+/*ValueSetterGenerator*/
+public static T AcceptsReturn<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.AcceptsReturn = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T AcceptsReturn<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.AcceptsReturnProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T AcceptsReturn<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // AcceptsTab
+
+/*ValueSetterGenerator*/
+public static T AcceptsTab<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.AcceptsTab = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T AcceptsTab<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -114,6 +130,10 @@ public static T AcceptsTab<TValue,T>(this T control, TValue value, FuncValueConv
 
  // CaretIndex
 
+/*ValueSetterGenerator*/
+public static T CaretIndex<T>(this T control, System.Int32 value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.CaretIndex = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CaretIndex<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.CaretIndexProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T CaretIndex<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // IsReadOnly
+
+/*ValueSetterGenerator*/
+public static T IsReadOnly<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.IsReadOnly = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsReadOnly<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -164,6 +188,10 @@ public static T IsReadOnly<TValue,T>(this T control, TValue value, FuncValueConv
 
  // PasswordChar
 
+/*ValueSetterGenerator*/
+public static T PasswordChar<T>(this T control, System.Char value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.PasswordChar = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T PasswordChar<T>(this T control, Func<System.Char> func, Action<System.Char>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.PasswordCharProperty!, func, onChanged, expression);
@@ -188,6 +216,10 @@ public static T PasswordChar<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // SelectionBrush
+
+/*ValueSetterGenerator*/
+public static T SelectionBrush<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.SelectionBrush = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionBrush<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -214,6 +246,10 @@ public static T SelectionBrush<TValue,T>(this T control, TValue value, FuncValue
 
  // SelectionForegroundBrush
 
+/*ValueSetterGenerator*/
+public static T SelectionForegroundBrush<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.SelectionForegroundBrush = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionForegroundBrush<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.SelectionForegroundBrushProperty!, func, onChanged, expression);
@@ -238,6 +274,10 @@ public static T SelectionForegroundBrush<TValue,T>(this T control, TValue value,
 
 
  // CaretBrush
+
+/*ValueSetterGenerator*/
+public static T CaretBrush<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.CaretBrush = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T CaretBrush<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -264,6 +304,10 @@ public static T CaretBrush<TValue,T>(this T control, TValue value, FuncValueConv
 
  // CaretBlinkInterval
 
+/*ValueSetterGenerator*/
+public static T CaretBlinkInterval<T>(this T control, System.TimeSpan value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.CaretBlinkInterval = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CaretBlinkInterval<T>(this T control, Func<System.TimeSpan> func, Action<System.TimeSpan>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.CaretBlinkIntervalProperty!, func, onChanged, expression);
@@ -288,6 +332,10 @@ public static T CaretBlinkInterval<TValue,T>(this T control, TValue value, FuncV
 
 
  // SelectionStart
+
+/*ValueSetterGenerator*/
+public static T SelectionStart<T>(this T control, System.Int32 value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.SelectionStart = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionStart<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -314,6 +362,10 @@ public static T SelectionStart<TValue,T>(this T control, TValue value, FuncValue
 
  // SelectionEnd
 
+/*ValueSetterGenerator*/
+public static T SelectionEnd<T>(this T control, System.Int32 value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.SelectionEnd = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SelectionEnd<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.SelectionEndProperty!, func, onChanged, expression);
@@ -338,6 +390,10 @@ public static T SelectionEnd<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // MaxLength
+
+/*ValueSetterGenerator*/
+public static T MaxLength<T>(this T control, System.Int32 value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.MaxLength = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T MaxLength<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -364,6 +420,10 @@ public static T MaxLength<TValue,T>(this T control, TValue value, FuncValueConve
 
  // MaxLines
 
+/*ValueSetterGenerator*/
+public static T MaxLines<T>(this T control, System.Int32 value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.MaxLines = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T MaxLines<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.MaxLinesProperty!, func, onChanged, expression);
@@ -388,6 +448,10 @@ public static T MaxLines<TValue,T>(this T control, TValue value, FuncValueConver
 
 
  // MinLines
+
+/*ValueSetterGenerator*/
+public static T MinLines<T>(this T control, System.Int32 value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.MinLines = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T MinLines<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -414,6 +478,10 @@ public static T MinLines<TValue,T>(this T control, TValue value, FuncValueConver
 
  // Text
 
+/*ValueSetterGenerator*/
+public static T Text<T>(this T control, System.String value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.Text = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Text<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.TextProperty!, func, onChanged, expression);
@@ -438,6 +506,10 @@ public static T Text<TValue,T>(this T control, TValue value, FuncValueConverter<
 
 
  // TextAlignment
+
+/*ValueSetterGenerator*/
+public static T TextAlignment<T>(this T control, Avalonia.Media.TextAlignment value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.TextAlignment = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T TextAlignment<T>(this T control, Func<Avalonia.Media.TextAlignment> func, Action<Avalonia.Media.TextAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -464,6 +536,10 @@ public static T TextAlignment<TValue,T>(this T control, TValue value, FuncValueC
 
  // HorizontalContentAlignment
 
+/*ValueSetterGenerator*/
+public static T HorizontalContentAlignment<T>(this T control, Avalonia.Layout.HorizontalAlignment value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.HorizontalContentAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T HorizontalContentAlignment<T>(this T control, Func<Avalonia.Layout.HorizontalAlignment> func, Action<Avalonia.Layout.HorizontalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.HorizontalContentAlignmentProperty!, func, onChanged, expression);
@@ -488,6 +564,10 @@ public static T HorizontalContentAlignment<TValue,T>(this T control, TValue valu
 
 
  // VerticalContentAlignment
+
+/*ValueSetterGenerator*/
+public static T VerticalContentAlignment<T>(this T control, Avalonia.Layout.VerticalAlignment value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.VerticalContentAlignment = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T VerticalContentAlignment<T>(this T control, Func<Avalonia.Layout.VerticalAlignment> func, Action<Avalonia.Layout.VerticalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -514,6 +594,10 @@ public static T VerticalContentAlignment<TValue,T>(this T control, TValue value,
 
  // TextWrapping
 
+/*ValueSetterGenerator*/
+public static T TextWrapping<T>(this T control, Avalonia.Media.TextWrapping value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.TextWrapping = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TextWrapping<T>(this T control, Func<Avalonia.Media.TextWrapping> func, Action<Avalonia.Media.TextWrapping>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.TextWrappingProperty!, func, onChanged, expression);
@@ -538,6 +622,10 @@ public static T TextWrapping<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // LineHeight
+
+/*ValueSetterGenerator*/
+public static T LineHeight<T>(this T control, System.Double value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.LineHeight = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T LineHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -564,6 +652,10 @@ public static T LineHeight<TValue,T>(this T control, TValue value, FuncValueConv
 
  // LetterSpacing
 
+/*ValueSetterGenerator*/
+public static T LetterSpacing<T>(this T control, System.Double value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.LetterSpacing = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T LetterSpacing<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.LetterSpacingProperty!, func, onChanged, expression);
@@ -588,6 +680,10 @@ public static T LetterSpacing<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // Watermark
+
+/*ValueSetterGenerator*/
+public static T Watermark<T>(this T control, System.String value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.Watermark = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Watermark<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -614,6 +710,10 @@ public static T Watermark<TValue,T>(this T control, TValue value, FuncValueConve
 
  // UseFloatingWatermark
 
+/*ValueSetterGenerator*/
+public static T UseFloatingWatermark<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.UseFloatingWatermark = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T UseFloatingWatermark<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.UseFloatingWatermarkProperty!, func, onChanged, expression);
@@ -638,6 +738,10 @@ public static T UseFloatingWatermark<TValue,T>(this T control, TValue value, Fun
 
 
  // NewLine
+
+/*ValueSetterGenerator*/
+public static T NewLine<T>(this T control, System.String value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.NewLine = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T NewLine<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -664,6 +768,10 @@ public static T NewLine<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // InnerLeftContent
 
+/*ValueSetterGenerator*/
+public static T InnerLeftContent<T>(this T control, System.Object value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.InnerLeftContent = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T InnerLeftContent<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.InnerLeftContentProperty!, func, onChanged, expression);
@@ -688,6 +796,10 @@ public static T InnerLeftContent<TValue,T>(this T control, TValue value, FuncVal
 
 
  // InnerRightContent
+
+/*ValueSetterGenerator*/
+public static T InnerRightContent<T>(this T control, System.Object value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.InnerRightContent = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T InnerRightContent<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
@@ -714,6 +826,10 @@ public static T InnerRightContent<TValue,T>(this T control, TValue value, FuncVa
 
  // RevealPassword
 
+/*ValueSetterGenerator*/
+public static T RevealPassword<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.RevealPassword = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T RevealPassword<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.RevealPasswordProperty!, func, onChanged, expression);
@@ -739,6 +855,10 @@ public static T RevealPassword<TValue,T>(this T control, TValue value, FuncValue
 
  // IsUndoEnabled
 
+/*ValueSetterGenerator*/
+public static T IsUndoEnabled<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.IsUndoEnabled = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsUndoEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 
    => control._set(Avalonia.Controls.TextBox.IsUndoEnabledProperty!, func, onChanged, expression);
@@ -763,6 +883,10 @@ public static T IsUndoEnabled<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // UndoLimit
+
+/*ValueSetterGenerator*/
+public static T UndoLimit<T>(this T control, System.Int32 value) where T : Avalonia.Controls.TextBox 
+=> control._set(() => control.UndoLimit = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T UndoLimit<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TextBox 

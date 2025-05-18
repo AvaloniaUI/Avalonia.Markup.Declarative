@@ -14,6 +14,10 @@ public static partial class PolyBezierSegment_MarkupExtensions
 //================= Properties ======================//
  // Points
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.PolyBezierSegment Points(this Avalonia.Media.PolyBezierSegment control, Avalonia.Points value)  
+=> control._set(() => control.Points = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.PolyBezierSegment Points(this Avalonia.Media.PolyBezierSegment control, Func<Avalonia.Points> func, Action<Avalonia.Points>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.PolyBezierSegment.PointsProperty!, func, onChanged, expression);

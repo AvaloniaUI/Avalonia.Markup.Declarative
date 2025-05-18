@@ -14,6 +14,10 @@ public static partial class PathGeometry_MarkupExtensions
 //================= Properties ======================//
  // Figures
 
+/*ValueSetterGenerator*/
+public static T Figures<T>(this T control, Avalonia.Media.PathFigures value) where T : Avalonia.Media.PathGeometry 
+=> control._set(() => control.Figures = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Figures<T>(this T control, Func<Avalonia.Media.PathFigures> func, Action<Avalonia.Media.PathFigures>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.PathGeometry 
    => control._set(Avalonia.Media.PathGeometry.FiguresProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Figures<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // FillRule
+
+/*ValueSetterGenerator*/
+public static T FillRule<T>(this T control, Avalonia.Media.FillRule value) where T : Avalonia.Media.PathGeometry 
+=> control._set(() => control.FillRule = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FillRule<T>(this T control, Func<Avalonia.Media.FillRule> func, Action<Avalonia.Media.FillRule>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.PathGeometry 

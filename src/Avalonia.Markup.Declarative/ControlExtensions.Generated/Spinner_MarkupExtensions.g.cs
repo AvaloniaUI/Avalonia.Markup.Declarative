@@ -14,6 +14,10 @@ public static partial class Spinner_MarkupExtensions
 //================= Properties ======================//
  // ValidSpinDirection
 
+/*ValueSetterGenerator*/
+public static T ValidSpinDirection<T>(this T control, Avalonia.Controls.ValidSpinDirections value) where T : Avalonia.Controls.Spinner 
+=> control._set(() => control.ValidSpinDirection = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ValidSpinDirection<T>(this T control, Func<Avalonia.Controls.ValidSpinDirections> func, Action<Avalonia.Controls.ValidSpinDirections>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Spinner 
    => control._set(Avalonia.Controls.Spinner.ValidSpinDirectionProperty!, func, onChanged, expression);

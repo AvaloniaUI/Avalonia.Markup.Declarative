@@ -14,6 +14,10 @@ public static partial class DashStyle_MarkupExtensions
 //================= Properties ======================//
  // Dashes
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DashStyle Dashes(this Avalonia.Media.DashStyle control, Avalonia.Collections.AvaloniaList<System.Double> value)  
+=> control._set(() => control.Dashes = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DashStyle Dashes(this Avalonia.Media.DashStyle control, Func<Avalonia.Collections.AvaloniaList<System.Double>> func, Action<Avalonia.Collections.AvaloniaList<System.Double>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.DashStyle.DashesProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.DashStyle Dashes<TValue>(this Avalonia.Media.DashSt
 
 
  // Offset
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DashStyle Offset(this Avalonia.Media.DashStyle control, System.Double value)  
+=> control._set(() => control.Offset = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DashStyle Offset(this Avalonia.Media.DashStyle control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

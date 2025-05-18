@@ -14,6 +14,10 @@ public static partial class PathSegment_MarkupExtensions
 //================= Properties ======================//
  // IsStroked
 
+/*ValueSetterGenerator*/
+public static T IsStroked<T>(this T control, System.Boolean value) where T : Avalonia.Media.PathSegment 
+=> control._set(() => control.IsStroked = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsStroked<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.PathSegment 
    => control._set(Avalonia.Media.PathSegment.IsStrokedProperty!, func, onChanged, expression);

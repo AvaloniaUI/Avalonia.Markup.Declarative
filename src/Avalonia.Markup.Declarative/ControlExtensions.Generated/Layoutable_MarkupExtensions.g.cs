@@ -14,6 +14,10 @@ public static partial class Layoutable_MarkupExtensions
 //================= Properties ======================//
  // Width
 
+/*ValueSetterGenerator*/
+public static T Width<T>(this T control, System.Double value) where T : Avalonia.Layout.Layoutable 
+=> control._set(() => control.Width = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Width<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Layout.Layoutable 
    => control._set(Avalonia.Layout.Layoutable.WidthProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Width<TValue,T>(this T control, TValue value, FuncValueConverter
 
 
  // Height
+
+/*ValueSetterGenerator*/
+public static T Height<T>(this T control, System.Double value) where T : Avalonia.Layout.Layoutable 
+=> control._set(() => control.Height = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Height<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Layout.Layoutable 
@@ -64,6 +72,10 @@ public static T Height<TValue,T>(this T control, TValue value, FuncValueConverte
 
  // MinWidth
 
+/*ValueSetterGenerator*/
+public static T MinWidth<T>(this T control, System.Double value) where T : Avalonia.Layout.Layoutable 
+=> control._set(() => control.MinWidth = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T MinWidth<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Layout.Layoutable 
    => control._set(Avalonia.Layout.Layoutable.MinWidthProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T MinWidth<TValue,T>(this T control, TValue value, FuncValueConver
 
 
  // MaxWidth
+
+/*ValueSetterGenerator*/
+public static T MaxWidth<T>(this T control, System.Double value) where T : Avalonia.Layout.Layoutable 
+=> control._set(() => control.MaxWidth = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T MaxWidth<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Layout.Layoutable 
@@ -114,6 +130,10 @@ public static T MaxWidth<TValue,T>(this T control, TValue value, FuncValueConver
 
  // MinHeight
 
+/*ValueSetterGenerator*/
+public static T MinHeight<T>(this T control, System.Double value) where T : Avalonia.Layout.Layoutable 
+=> control._set(() => control.MinHeight = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T MinHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Layout.Layoutable 
    => control._set(Avalonia.Layout.Layoutable.MinHeightProperty!, func, onChanged, expression);
@@ -139,6 +159,10 @@ public static T MinHeight<TValue,T>(this T control, TValue value, FuncValueConve
 
  // MaxHeight
 
+/*ValueSetterGenerator*/
+public static T MaxHeight<T>(this T control, System.Double value) where T : Avalonia.Layout.Layoutable 
+=> control._set(() => control.MaxHeight = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T MaxHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Layout.Layoutable 
    => control._set(Avalonia.Layout.Layoutable.MaxHeightProperty!, func, onChanged, expression);
@@ -163,6 +187,10 @@ public static T MaxHeight<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // Margin
+
+/*ValueSetterGenerator*/
+public static T Margin<T>(this T control, Avalonia.Thickness value) where T : Avalonia.Layout.Layoutable 
+=> control._set(() => control.Margin = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Margin<T>(this T control, Func<Avalonia.Thickness> func, Action<Avalonia.Thickness>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Layout.Layoutable 
@@ -198,6 +226,10 @@ public static T Margin<TValue,T>(this T control, TValue value, FuncValueConverte
 
  // HorizontalAlignment
 
+/*ValueSetterGenerator*/
+public static T HorizontalAlignment<T>(this T control, Avalonia.Layout.HorizontalAlignment value) where T : Avalonia.Layout.Layoutable 
+=> control._set(() => control.HorizontalAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T HorizontalAlignment<T>(this T control, Func<Avalonia.Layout.HorizontalAlignment> func, Action<Avalonia.Layout.HorizontalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Layout.Layoutable 
    => control._set(Avalonia.Layout.Layoutable.HorizontalAlignmentProperty!, func, onChanged, expression);
@@ -223,6 +255,10 @@ public static T HorizontalAlignment<TValue,T>(this T control, TValue value, Func
 
  // VerticalAlignment
 
+/*ValueSetterGenerator*/
+public static T VerticalAlignment<T>(this T control, Avalonia.Layout.VerticalAlignment value) where T : Avalonia.Layout.Layoutable 
+=> control._set(() => control.VerticalAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T VerticalAlignment<T>(this T control, Func<Avalonia.Layout.VerticalAlignment> func, Action<Avalonia.Layout.VerticalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Layout.Layoutable 
    => control._set(Avalonia.Layout.Layoutable.VerticalAlignmentProperty!, func, onChanged, expression);
@@ -247,6 +283,10 @@ public static T VerticalAlignment<TValue,T>(this T control, TValue value, FuncVa
 
 
  // UseLayoutRounding
+
+/*ValueSetterGenerator*/
+public static T UseLayoutRounding<T>(this T control, System.Boolean value) where T : Avalonia.Layout.Layoutable 
+=> control._set(() => control.UseLayoutRounding = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T UseLayoutRounding<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Layout.Layoutable 

@@ -14,6 +14,10 @@ public static partial class LinearGradientBrush_MarkupExtensions
 //================= Properties ======================//
  // StartPoint
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.LinearGradientBrush StartPoint(this Avalonia.Media.LinearGradientBrush control, Avalonia.RelativePoint value)  
+=> control._set(() => control.StartPoint = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.LinearGradientBrush StartPoint(this Avalonia.Media.LinearGradientBrush control, Func<Avalonia.RelativePoint> func, Action<Avalonia.RelativePoint>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.LinearGradientBrush.StartPointProperty!, func, onChanged, expression);
@@ -45,6 +49,10 @@ public static Avalonia.Media.LinearGradientBrush StartPoint<TValue>(this Avaloni
 
 
  // EndPoint
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.LinearGradientBrush EndPoint(this Avalonia.Media.LinearGradientBrush control, Avalonia.RelativePoint value)  
+=> control._set(() => control.EndPoint = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.LinearGradientBrush EndPoint(this Avalonia.Media.LinearGradientBrush control, Func<Avalonia.RelativePoint> func, Action<Avalonia.RelativePoint>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

@@ -14,6 +14,10 @@ public static partial class BezierSegment_MarkupExtensions
 //================= Properties ======================//
  // Point1
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.BezierSegment Point1(this Avalonia.Media.BezierSegment control, Avalonia.Point value)  
+=> control._set(() => control.Point1 = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.BezierSegment Point1(this Avalonia.Media.BezierSegment control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.BezierSegment.Point1Property!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static Avalonia.Media.BezierSegment Point1<TValue>(this Avalonia.Media.Be
 
  // Point2
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.BezierSegment Point2(this Avalonia.Media.BezierSegment control, Avalonia.Point value)  
+=> control._set(() => control.Point2 = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.BezierSegment Point2(this Avalonia.Media.BezierSegment control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.BezierSegment.Point2Property!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static Avalonia.Media.BezierSegment Point2<TValue>(this Avalonia.Media.Be
 
 
  // Point3
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.BezierSegment Point3(this Avalonia.Media.BezierSegment control, Avalonia.Point value)  
+=> control._set(() => control.Point3 = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.BezierSegment Point3(this Avalonia.Media.BezierSegment control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

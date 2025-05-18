@@ -14,6 +14,10 @@ public static partial class NativeMenuItem_MarkupExtensions
 //================= Properties ======================//
  // Menu
 
+/*ValueSetterGenerator*/
+public static T Menu<T>(this T control, Avalonia.Controls.NativeMenu value) where T : Avalonia.Controls.NativeMenuItem 
+=> control._set(() => control.Menu = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Menu<T>(this T control, Func<Avalonia.Controls.NativeMenu> func, Action<Avalonia.Controls.NativeMenu>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NativeMenuItem 
    => control._set(Avalonia.Controls.NativeMenuItem.MenuProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Menu<TValue,T>(this T control, TValue value, FuncValueConverter<
 
 
  // Icon
+
+/*ValueSetterGenerator*/
+public static T Icon<T>(this T control, Avalonia.Media.Imaging.Bitmap value) where T : Avalonia.Controls.NativeMenuItem 
+=> control._set(() => control.Icon = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Icon<T>(this T control, Func<Avalonia.Media.Imaging.Bitmap> func, Action<Avalonia.Media.Imaging.Bitmap>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NativeMenuItem 
@@ -64,6 +72,10 @@ public static T Icon<TValue,T>(this T control, TValue value, FuncValueConverter<
 
  // Header
 
+/*ValueSetterGenerator*/
+public static T Header<T>(this T control, System.String value) where T : Avalonia.Controls.NativeMenuItem 
+=> control._set(() => control.Header = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Header<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NativeMenuItem 
    => control._set(Avalonia.Controls.NativeMenuItem.HeaderProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T Header<TValue,T>(this T control, TValue value, FuncValueConverte
 
 
  // ToolTip
+
+/*ValueSetterGenerator*/
+public static T ToolTip<T>(this T control, System.String value) where T : Avalonia.Controls.NativeMenuItem 
+=> control._set(() => control.ToolTip = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ToolTip<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NativeMenuItem 
@@ -114,6 +130,10 @@ public static T ToolTip<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // Gesture
 
+/*ValueSetterGenerator*/
+public static T Gesture<T>(this T control, Avalonia.Input.KeyGesture value) where T : Avalonia.Controls.NativeMenuItem 
+=> control._set(() => control.Gesture = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Gesture<T>(this T control, Func<Avalonia.Input.KeyGesture> func, Action<Avalonia.Input.KeyGesture>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NativeMenuItem 
    => control._set(Avalonia.Controls.NativeMenuItem.GestureProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T Gesture<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // IsChecked
+
+/*ValueSetterGenerator*/
+public static T IsChecked<T>(this T control, System.Boolean value) where T : Avalonia.Controls.NativeMenuItem 
+=> control._set(() => control.IsChecked = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsChecked<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NativeMenuItem 
@@ -164,6 +188,10 @@ public static T IsChecked<TValue,T>(this T control, TValue value, FuncValueConve
 
  // ToggleType
 
+/*ValueSetterGenerator*/
+public static T ToggleType<T>(this T control, Avalonia.Controls.NativeMenuItemToggleType value) where T : Avalonia.Controls.NativeMenuItem 
+=> control._set(() => control.ToggleType = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ToggleType<T>(this T control, Func<Avalonia.Controls.NativeMenuItemToggleType> func, Action<Avalonia.Controls.NativeMenuItemToggleType>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NativeMenuItem 
    => control._set(Avalonia.Controls.NativeMenuItem.ToggleTypeProperty!, func, onChanged, expression);
@@ -188,6 +216,10 @@ public static T ToggleType<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // Command
+
+/*ValueSetterGenerator*/
+public static T Command<T>(this T control, System.Windows.Input.ICommand value) where T : Avalonia.Controls.NativeMenuItem 
+=> control._set(() => control.Command = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Command<T>(this T control, Func<System.Windows.Input.ICommand> func, Action<System.Windows.Input.ICommand>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NativeMenuItem 
@@ -214,6 +246,10 @@ public static T Command<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // CommandParameter
 
+/*ValueSetterGenerator*/
+public static T CommandParameter<T>(this T control, System.Object value) where T : Avalonia.Controls.NativeMenuItem 
+=> control._set(() => control.CommandParameter = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CommandParameter<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NativeMenuItem 
    => control._set(Avalonia.Controls.NativeMenuItem.CommandParameterProperty!, func, onChanged, expression);
@@ -239,6 +275,10 @@ public static T CommandParameter<TValue,T>(this T control, TValue value, FuncVal
 
  // IsEnabled
 
+/*ValueSetterGenerator*/
+public static T IsEnabled<T>(this T control, System.Boolean value) where T : Avalonia.Controls.NativeMenuItem 
+=> control._set(() => control.IsEnabled = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NativeMenuItem 
    => control._set(Avalonia.Controls.NativeMenuItem.IsEnabledProperty!, func, onChanged, expression);
@@ -263,6 +303,10 @@ public static T IsEnabled<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // IsVisible
+
+/*ValueSetterGenerator*/
+public static T IsVisible<T>(this T control, System.Boolean value) where T : Avalonia.Controls.NativeMenuItem 
+=> control._set(() => control.IsVisible = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsVisible<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.NativeMenuItem 

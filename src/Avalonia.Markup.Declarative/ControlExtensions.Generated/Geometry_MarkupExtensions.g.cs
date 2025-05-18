@@ -14,6 +14,10 @@ public static partial class Geometry_MarkupExtensions
 //================= Properties ======================//
  // Transform
 
+/*ValueSetterGenerator*/
+public static T Transform<T>(this T control, Avalonia.Media.Transform value) where T : Avalonia.Media.Geometry 
+=> control._set(() => control.Transform = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Transform<T>(this T control, Func<Avalonia.Media.Transform> func, Action<Avalonia.Media.Transform>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.Geometry 
    => control._set(Avalonia.Media.Geometry.TransformProperty!, func, onChanged, expression);

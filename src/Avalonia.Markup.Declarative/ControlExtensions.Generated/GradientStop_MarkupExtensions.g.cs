@@ -14,6 +14,10 @@ public static partial class GradientStop_MarkupExtensions
 //================= Properties ======================//
  // Offset
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.GradientStop Offset(this Avalonia.Media.GradientStop control, System.Double value)  
+=> control._set(() => control.Offset = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.GradientStop Offset(this Avalonia.Media.GradientStop control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.GradientStop.OffsetProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.GradientStop Offset<TValue>(this Avalonia.Media.Gra
 
 
  // Color
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.GradientStop Color(this Avalonia.Media.GradientStop control, Avalonia.Media.Color value)  
+=> control._set(() => control.Color = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.GradientStop Color(this Avalonia.Media.GradientStop control, Func<Avalonia.Media.Color> func, Action<Avalonia.Media.Color>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

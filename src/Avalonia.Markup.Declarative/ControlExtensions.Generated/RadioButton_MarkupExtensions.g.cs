@@ -14,6 +14,10 @@ public static partial class RadioButton_MarkupExtensions
 //================= Properties ======================//
  // GroupName
 
+/*ValueSetterGenerator*/
+public static T GroupName<T>(this T control, System.String value) where T : Avalonia.Controls.RadioButton 
+=> control._set(() => control.GroupName = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T GroupName<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.RadioButton 
    => control._set(Avalonia.Controls.RadioButton.GroupNameProperty!, func, onChanged, expression);

@@ -14,6 +14,10 @@ public static partial class TextElement_MarkupExtensions
 //================= Properties ======================//
  // Background
 
+/*ValueSetterGenerator*/
+public static T Background<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Documents.TextElement 
+=> control._set(() => control.Background = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Background<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.TextElement 
    => control._set(Avalonia.Controls.Documents.TextElement.BackgroundProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Background<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // FontFamily
+
+/*ValueSetterGenerator*/
+public static T FontFamily<T>(this T control, Avalonia.Media.FontFamily value) where T : Avalonia.Controls.Documents.TextElement 
+=> control._set(() => control.FontFamily = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FontFamily<T>(this T control, Func<Avalonia.Media.FontFamily> func, Action<Avalonia.Media.FontFamily>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.TextElement 
@@ -64,6 +72,10 @@ public static T FontFamily<TValue,T>(this T control, TValue value, FuncValueConv
 
  // FontFeatures
 
+/*ValueSetterGenerator*/
+public static T FontFeatures<T>(this T control, Avalonia.Media.FontFeatureCollection value) where T : Avalonia.Controls.Documents.TextElement 
+=> control._set(() => control.FontFeatures = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontFeatures<T>(this T control, Func<Avalonia.Media.FontFeatureCollection> func, Action<Avalonia.Media.FontFeatureCollection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.TextElement 
    => control._set(Avalonia.Controls.Documents.TextElement.FontFeaturesProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T FontFeatures<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // FontSize
+
+/*ValueSetterGenerator*/
+public static T FontSize<T>(this T control, System.Double value) where T : Avalonia.Controls.Documents.TextElement 
+=> control._set(() => control.FontSize = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FontSize<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.TextElement 
@@ -114,6 +130,10 @@ public static T FontSize<TValue,T>(this T control, TValue value, FuncValueConver
 
  // FontStyle
 
+/*ValueSetterGenerator*/
+public static T FontStyle<T>(this T control, Avalonia.Media.FontStyle value) where T : Avalonia.Controls.Documents.TextElement 
+=> control._set(() => control.FontStyle = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontStyle<T>(this T control, Func<Avalonia.Media.FontStyle> func, Action<Avalonia.Media.FontStyle>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.TextElement 
    => control._set(Avalonia.Controls.Documents.TextElement.FontStyleProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T FontStyle<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // FontWeight
+
+/*ValueSetterGenerator*/
+public static T FontWeight<T>(this T control, Avalonia.Media.FontWeight value) where T : Avalonia.Controls.Documents.TextElement 
+=> control._set(() => control.FontWeight = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FontWeight<T>(this T control, Func<Avalonia.Media.FontWeight> func, Action<Avalonia.Media.FontWeight>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.TextElement 
@@ -164,6 +188,10 @@ public static T FontWeight<TValue,T>(this T control, TValue value, FuncValueConv
 
  // FontStretch
 
+/*ValueSetterGenerator*/
+public static T FontStretch<T>(this T control, Avalonia.Media.FontStretch value) where T : Avalonia.Controls.Documents.TextElement 
+=> control._set(() => control.FontStretch = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontStretch<T>(this T control, Func<Avalonia.Media.FontStretch> func, Action<Avalonia.Media.FontStretch>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.TextElement 
    => control._set(Avalonia.Controls.Documents.TextElement.FontStretchProperty!, func, onChanged, expression);
@@ -188,6 +216,10 @@ public static T FontStretch<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // Foreground
+
+/*ValueSetterGenerator*/
+public static T Foreground<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Documents.TextElement 
+=> control._set(() => control.Foreground = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Foreground<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Documents.TextElement 

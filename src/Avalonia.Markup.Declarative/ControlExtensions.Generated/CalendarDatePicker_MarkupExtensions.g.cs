@@ -14,6 +14,10 @@ public static partial class CalendarDatePicker_MarkupExtensions
 //================= Properties ======================//
  // DisplayDate
 
+/*ValueSetterGenerator*/
+public static T DisplayDate<T>(this T control, System.DateTime value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.DisplayDate = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T DisplayDate<T>(this T control, Func<System.DateTime> func, Action<System.DateTime>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
    => control._set(Avalonia.Controls.CalendarDatePicker.DisplayDateProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T DisplayDate<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // DisplayDateStart
+
+/*ValueSetterGenerator*/
+public static T DisplayDateStart<T>(this T control, System.Nullable<System.DateTime> value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.DisplayDateStart = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T DisplayDateStart<T>(this T control, Func<System.Nullable<System.DateTime>> func, Action<System.Nullable<System.DateTime>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
@@ -64,6 +72,10 @@ public static T DisplayDateStart<TValue,T>(this T control, TValue value, FuncVal
 
  // DisplayDateEnd
 
+/*ValueSetterGenerator*/
+public static T DisplayDateEnd<T>(this T control, System.Nullable<System.DateTime> value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.DisplayDateEnd = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T DisplayDateEnd<T>(this T control, Func<System.Nullable<System.DateTime>> func, Action<System.Nullable<System.DateTime>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
    => control._set(Avalonia.Controls.CalendarDatePicker.DisplayDateEndProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T DisplayDateEnd<TValue,T>(this T control, TValue value, FuncValue
 
 
  // FirstDayOfWeek
+
+/*ValueSetterGenerator*/
+public static T FirstDayOfWeek<T>(this T control, System.DayOfWeek value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.FirstDayOfWeek = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FirstDayOfWeek<T>(this T control, Func<System.DayOfWeek> func, Action<System.DayOfWeek>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
@@ -114,6 +130,10 @@ public static T FirstDayOfWeek<TValue,T>(this T control, TValue value, FuncValue
 
  // IsDropDownOpen
 
+/*ValueSetterGenerator*/
+public static T IsDropDownOpen<T>(this T control, System.Boolean value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.IsDropDownOpen = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsDropDownOpen<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
    => control._set(Avalonia.Controls.CalendarDatePicker.IsDropDownOpenProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T IsDropDownOpen<TValue,T>(this T control, TValue value, FuncValue
 
 
  // IsTodayHighlighted
+
+/*ValueSetterGenerator*/
+public static T IsTodayHighlighted<T>(this T control, System.Boolean value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.IsTodayHighlighted = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsTodayHighlighted<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
@@ -164,6 +188,10 @@ public static T IsTodayHighlighted<TValue,T>(this T control, TValue value, FuncV
 
  // SelectedDate
 
+/*ValueSetterGenerator*/
+public static T SelectedDate<T>(this T control, System.Nullable<System.DateTime> value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.SelectedDate = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedDate<T>(this T control, Func<System.Nullable<System.DateTime>> func, Action<System.Nullable<System.DateTime>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
    => control._set(Avalonia.Controls.CalendarDatePicker.SelectedDateProperty!, func, onChanged, expression);
@@ -188,6 +216,10 @@ public static T SelectedDate<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // SelectedDateFormat
+
+/*ValueSetterGenerator*/
+public static T SelectedDateFormat<T>(this T control, Avalonia.Controls.CalendarDatePickerFormat value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.SelectedDateFormat = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T SelectedDateFormat<T>(this T control, Func<Avalonia.Controls.CalendarDatePickerFormat> func, Action<Avalonia.Controls.CalendarDatePickerFormat>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
@@ -214,6 +246,10 @@ public static T SelectedDateFormat<TValue,T>(this T control, TValue value, FuncV
 
  // CustomDateFormatString
 
+/*ValueSetterGenerator*/
+public static T CustomDateFormatString<T>(this T control, System.String value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.CustomDateFormatString = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CustomDateFormatString<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
    => control._set(Avalonia.Controls.CalendarDatePicker.CustomDateFormatStringProperty!, func, onChanged, expression);
@@ -238,6 +274,10 @@ public static T CustomDateFormatString<TValue,T>(this T control, TValue value, F
 
 
  // Text
+
+/*ValueSetterGenerator*/
+public static T Text<T>(this T control, System.String value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.Text = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Text<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
@@ -264,6 +304,10 @@ public static T Text<TValue,T>(this T control, TValue value, FuncValueConverter<
 
  // Watermark
 
+/*ValueSetterGenerator*/
+public static T Watermark<T>(this T control, System.String value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.Watermark = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Watermark<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
    => control._set(Avalonia.Controls.CalendarDatePicker.WatermarkProperty!, func, onChanged, expression);
@@ -288,6 +332,10 @@ public static T Watermark<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // UseFloatingWatermark
+
+/*ValueSetterGenerator*/
+public static T UseFloatingWatermark<T>(this T control, System.Boolean value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.UseFloatingWatermark = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T UseFloatingWatermark<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
@@ -314,6 +362,10 @@ public static T UseFloatingWatermark<TValue,T>(this T control, TValue value, Fun
 
  // HorizontalContentAlignment
 
+/*ValueSetterGenerator*/
+public static T HorizontalContentAlignment<T>(this T control, Avalonia.Layout.HorizontalAlignment value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.HorizontalContentAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T HorizontalContentAlignment<T>(this T control, Func<Avalonia.Layout.HorizontalAlignment> func, Action<Avalonia.Layout.HorizontalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 
    => control._set(Avalonia.Controls.CalendarDatePicker.HorizontalContentAlignmentProperty!, func, onChanged, expression);
@@ -338,6 +390,10 @@ public static T HorizontalContentAlignment<TValue,T>(this T control, TValue valu
 
 
  // VerticalContentAlignment
+
+/*ValueSetterGenerator*/
+public static T VerticalContentAlignment<T>(this T control, Avalonia.Layout.VerticalAlignment value) where T : Avalonia.Controls.CalendarDatePicker 
+=> control._set(() => control.VerticalContentAlignment = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T VerticalContentAlignment<T>(this T control, Func<Avalonia.Layout.VerticalAlignment> func, Action<Avalonia.Layout.VerticalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.CalendarDatePicker 

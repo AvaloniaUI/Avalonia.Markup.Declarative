@@ -14,6 +14,10 @@ public static partial class PolyLineSegment_MarkupExtensions
 //================= Properties ======================//
  // Points
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.PolyLineSegment Points(this Avalonia.Media.PolyLineSegment control, System.Collections.Generic.IList<Avalonia.Point> value)  
+=> control._set(() => control.Points = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.PolyLineSegment Points(this Avalonia.Media.PolyLineSegment control, Func<System.Collections.Generic.IList<Avalonia.Point>> func, Action<System.Collections.Generic.IList<Avalonia.Point>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.PolyLineSegment.PointsProperty!, func, onChanged, expression);

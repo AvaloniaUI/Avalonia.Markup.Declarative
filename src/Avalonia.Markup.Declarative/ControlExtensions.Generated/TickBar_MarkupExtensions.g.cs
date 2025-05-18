@@ -14,6 +14,10 @@ public static partial class TickBar_MarkupExtensions
 //================= Properties ======================//
  // Fill
 
+/*ValueSetterGenerator*/
+public static T Fill<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Fill = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Fill<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
    => control._set(Avalonia.Controls.TickBar.FillProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Fill<TValue,T>(this T control, TValue value, FuncValueConverter<
 
 
  // Minimum
+
+/*ValueSetterGenerator*/
+public static T Minimum<T>(this T control, System.Double value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Minimum = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Minimum<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
@@ -64,6 +72,10 @@ public static T Minimum<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // Maximum
 
+/*ValueSetterGenerator*/
+public static T Maximum<T>(this T control, System.Double value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Maximum = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Maximum<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
    => control._set(Avalonia.Controls.TickBar.MaximumProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T Maximum<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // TickFrequency
+
+/*ValueSetterGenerator*/
+public static T TickFrequency<T>(this T control, System.Double value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.TickFrequency = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T TickFrequency<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
@@ -114,6 +130,10 @@ public static T TickFrequency<TValue,T>(this T control, TValue value, FuncValueC
 
  // Orientation
 
+/*ValueSetterGenerator*/
+public static T Orientation<T>(this T control, Avalonia.Layout.Orientation value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Orientation = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Orientation<T>(this T control, Func<Avalonia.Layout.Orientation> func, Action<Avalonia.Layout.Orientation>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
    => control._set(Avalonia.Controls.TickBar.OrientationProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T Orientation<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // Ticks
+
+/*ValueSetterGenerator*/
+public static T Ticks<T>(this T control, Avalonia.Collections.AvaloniaList<System.Double> value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Ticks = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Ticks<T>(this T control, Func<Avalonia.Collections.AvaloniaList<System.Double>> func, Action<Avalonia.Collections.AvaloniaList<System.Double>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
@@ -164,6 +188,10 @@ public static T Ticks<TValue,T>(this T control, TValue value, FuncValueConverter
 
  // IsDirectionReversed
 
+/*ValueSetterGenerator*/
+public static T IsDirectionReversed<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.IsDirectionReversed = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsDirectionReversed<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
    => control._set(Avalonia.Controls.TickBar.IsDirectionReversedProperty!, func, onChanged, expression);
@@ -189,6 +217,10 @@ public static T IsDirectionReversed<TValue,T>(this T control, TValue value, Func
 
  // Placement
 
+/*ValueSetterGenerator*/
+public static T Placement<T>(this T control, Avalonia.Controls.TickBarPlacement value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Placement = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Placement<T>(this T control, Func<Avalonia.Controls.TickBarPlacement> func, Action<Avalonia.Controls.TickBarPlacement>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
    => control._set(Avalonia.Controls.TickBar.PlacementProperty!, func, onChanged, expression);
@@ -213,6 +245,10 @@ public static T Placement<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // ReservedSpace
+
+/*ValueSetterGenerator*/
+public static T ReservedSpace<T>(this T control, Avalonia.Rect value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.ReservedSpace = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ReservedSpace<T>(this T control, Func<Avalonia.Rect> func, Action<Avalonia.Rect>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 

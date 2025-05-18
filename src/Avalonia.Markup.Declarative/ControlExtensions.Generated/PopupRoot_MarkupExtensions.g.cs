@@ -14,6 +14,10 @@ public static partial class PopupRoot_MarkupExtensions
 //================= Properties ======================//
  // Transform
 
+/*ValueSetterGenerator*/
+public static Avalonia.Controls.Primitives.PopupRoot Transform(this Avalonia.Controls.Primitives.PopupRoot control, Avalonia.Media.Transform value)  
+=> control._set(() => control.Transform = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Controls.Primitives.PopupRoot Transform(this Avalonia.Controls.Primitives.PopupRoot control, Func<Avalonia.Media.Transform> func, Action<Avalonia.Media.Transform>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Controls.Primitives.PopupRoot.TransformProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Controls.Primitives.PopupRoot Transform<TValue>(this Aval
 
 
  // WindowManagerAddShadowHint
+
+/*ValueSetterGenerator*/
+public static Avalonia.Controls.Primitives.PopupRoot WindowManagerAddShadowHint(this Avalonia.Controls.Primitives.PopupRoot control, System.Boolean value)  
+=> control._set(() => control.WindowManagerAddShadowHint = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Controls.Primitives.PopupRoot WindowManagerAddShadowHint(this Avalonia.Controls.Primitives.PopupRoot control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

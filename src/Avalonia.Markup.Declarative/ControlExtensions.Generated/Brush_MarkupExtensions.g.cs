@@ -14,6 +14,10 @@ public static partial class Brush_MarkupExtensions
 //================= Properties ======================//
  // Opacity
 
+/*ValueSetterGenerator*/
+public static T Opacity<T>(this T control, System.Double value) where T : Avalonia.Media.Brush 
+=> control._set(() => control.Opacity = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Opacity<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.Brush 
    => control._set(Avalonia.Media.Brush.OpacityProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T Opacity<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // Transform
 
+/*ValueSetterGenerator*/
+public static T Transform<T>(this T control, Avalonia.Media.ITransform value) where T : Avalonia.Media.Brush 
+=> control._set(() => control.Transform = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Transform<T>(this T control, Func<Avalonia.Media.ITransform> func, Action<Avalonia.Media.ITransform>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.Brush 
    => control._set(Avalonia.Media.Brush.TransformProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T Transform<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // TransformOrigin
+
+/*ValueSetterGenerator*/
+public static T TransformOrigin<T>(this T control, Avalonia.RelativePoint value) where T : Avalonia.Media.Brush 
+=> control._set(() => control.TransformOrigin = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T TransformOrigin<T>(this T control, Func<Avalonia.RelativePoint> func, Action<Avalonia.RelativePoint>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Media.Brush 

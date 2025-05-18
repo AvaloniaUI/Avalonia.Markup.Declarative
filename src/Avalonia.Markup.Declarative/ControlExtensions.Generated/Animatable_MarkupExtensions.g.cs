@@ -14,6 +14,10 @@ public static partial class Animatable_MarkupExtensions
 //================= Properties ======================//
  // Transitions
 
+/*ValueSetterGenerator*/
+public static T Transitions<T>(this T control, Avalonia.Animation.Transitions value) where T : Avalonia.Animation.Animatable 
+=> control._set(() => control.Transitions = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Transitions<T>(this T control, Func<Avalonia.Animation.Transitions> func, Action<Avalonia.Animation.Transitions>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Animation.Animatable 
    => control._set(Avalonia.Animation.Animatable.TransitionsProperty!, func, onChanged, expression);

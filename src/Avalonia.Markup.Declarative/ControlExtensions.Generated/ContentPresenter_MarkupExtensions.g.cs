@@ -14,6 +14,10 @@ public static partial class ContentPresenter_MarkupExtensions
 //================= Properties ======================//
  // Background
 
+/*ValueSetterGenerator*/
+public static T Background<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.Background = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Background<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BackgroundProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Background<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // BackgroundSizing
+
+/*ValueSetterGenerator*/
+public static T BackgroundSizing<T>(this T control, Avalonia.Media.BackgroundSizing value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.BackgroundSizing = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T BackgroundSizing<T>(this T control, Func<Avalonia.Media.BackgroundSizing> func, Action<Avalonia.Media.BackgroundSizing>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -64,6 +72,10 @@ public static T BackgroundSizing<TValue,T>(this T control, TValue value, FuncVal
 
  // BorderBrush
 
+/*ValueSetterGenerator*/
+public static T BorderBrush<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.BorderBrush = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T BorderBrush<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BorderBrushProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T BorderBrush<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // BorderThickness
+
+/*ValueSetterGenerator*/
+public static T BorderThickness<T>(this T control, Avalonia.Thickness value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.BorderThickness = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T BorderThickness<T>(this T control, Func<Avalonia.Thickness> func, Action<Avalonia.Thickness>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -123,6 +139,10 @@ public static T BorderThickness<TValue,T>(this T control, TValue value, FuncValu
 
  // CornerRadius
 
+/*ValueSetterGenerator*/
+public static T CornerRadius<T>(this T control, Avalonia.CornerRadius value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.CornerRadius = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CornerRadius<T>(this T control, Func<Avalonia.CornerRadius> func, Action<Avalonia.CornerRadius>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.CornerRadiusProperty!, func, onChanged, expression);
@@ -157,6 +177,10 @@ public static T CornerRadius<TValue,T>(this T control, TValue value, FuncValueCo
 
  // BoxShadow
 
+/*ValueSetterGenerator*/
+public static T BoxShadow<T>(this T control, Avalonia.Media.BoxShadows value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.BoxShadow = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T BoxShadow<T>(this T control, Func<Avalonia.Media.BoxShadows> func, Action<Avalonia.Media.BoxShadows>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.BoxShadowProperty!, func, onChanged, expression);
@@ -189,6 +213,10 @@ public static T BoxShadow<TValue,T>(this T control, TValue value, FuncValueConve
 
  // Foreground
 
+/*ValueSetterGenerator*/
+public static T Foreground<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.Foreground = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Foreground<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.ForegroundProperty!, func, onChanged, expression);
@@ -213,6 +241,10 @@ public static T Foreground<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // FontFamily
+
+/*ValueSetterGenerator*/
+public static T FontFamily<T>(this T control, Avalonia.Media.FontFamily value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.FontFamily = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FontFamily<T>(this T control, Func<Avalonia.Media.FontFamily> func, Action<Avalonia.Media.FontFamily>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -239,6 +271,10 @@ public static T FontFamily<TValue,T>(this T control, TValue value, FuncValueConv
 
  // FontSize
 
+/*ValueSetterGenerator*/
+public static T FontSize<T>(this T control, System.Double value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.FontSize = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontSize<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontSizeProperty!, func, onChanged, expression);
@@ -263,6 +299,10 @@ public static T FontSize<TValue,T>(this T control, TValue value, FuncValueConver
 
 
  // FontStyle
+
+/*ValueSetterGenerator*/
+public static T FontStyle<T>(this T control, Avalonia.Media.FontStyle value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.FontStyle = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FontStyle<T>(this T control, Func<Avalonia.Media.FontStyle> func, Action<Avalonia.Media.FontStyle>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -289,6 +329,10 @@ public static T FontStyle<TValue,T>(this T control, TValue value, FuncValueConve
 
  // FontWeight
 
+/*ValueSetterGenerator*/
+public static T FontWeight<T>(this T control, Avalonia.Media.FontWeight value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.FontWeight = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T FontWeight<T>(this T control, Func<Avalonia.Media.FontWeight> func, Action<Avalonia.Media.FontWeight>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.FontWeightProperty!, func, onChanged, expression);
@@ -313,6 +357,10 @@ public static T FontWeight<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // FontStretch
+
+/*ValueSetterGenerator*/
+public static T FontStretch<T>(this T control, Avalonia.Media.FontStretch value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.FontStretch = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FontStretch<T>(this T control, Func<Avalonia.Media.FontStretch> func, Action<Avalonia.Media.FontStretch>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -339,6 +387,10 @@ public static T FontStretch<TValue,T>(this T control, TValue value, FuncValueCon
 
  // TextAlignment
 
+/*ValueSetterGenerator*/
+public static T TextAlignment<T>(this T control, Avalonia.Media.TextAlignment value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.TextAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TextAlignment<T>(this T control, Func<Avalonia.Media.TextAlignment> func, Action<Avalonia.Media.TextAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.TextAlignmentProperty!, func, onChanged, expression);
@@ -363,6 +415,10 @@ public static T TextAlignment<TValue,T>(this T control, TValue value, FuncValueC
 
 
  // TextWrapping
+
+/*ValueSetterGenerator*/
+public static T TextWrapping<T>(this T control, Avalonia.Media.TextWrapping value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.TextWrapping = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T TextWrapping<T>(this T control, Func<Avalonia.Media.TextWrapping> func, Action<Avalonia.Media.TextWrapping>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -389,6 +445,10 @@ public static T TextWrapping<TValue,T>(this T control, TValue value, FuncValueCo
 
  // TextTrimming
 
+/*ValueSetterGenerator*/
+public static T TextTrimming<T>(this T control, Avalonia.Media.TextTrimming value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.TextTrimming = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TextTrimming<T>(this T control, Func<Avalonia.Media.TextTrimming> func, Action<Avalonia.Media.TextTrimming>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.TextTrimmingProperty!, func, onChanged, expression);
@@ -413,6 +473,10 @@ public static T TextTrimming<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // LineHeight
+
+/*ValueSetterGenerator*/
+public static T LineHeight<T>(this T control, System.Double value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.LineHeight = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T LineHeight<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -439,6 +503,10 @@ public static T LineHeight<TValue,T>(this T control, TValue value, FuncValueConv
 
  // MaxLines
 
+/*ValueSetterGenerator*/
+public static T MaxLines<T>(this T control, System.Int32 value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.MaxLines = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T MaxLines<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.MaxLinesProperty!, func, onChanged, expression);
@@ -463,6 +531,10 @@ public static T MaxLines<TValue,T>(this T control, TValue value, FuncValueConver
 
 
  // Content
+
+/*ValueSetterGenerator*/
+public static T Content<T>(this T control, System.Object value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.Content = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Content<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -489,6 +561,10 @@ public static T Content<TValue,T>(this T control, TValue value, FuncValueConvert
 
  // ContentTemplate
 
+/*ValueSetterGenerator*/
+public static T ContentTemplate<T>(this T control, Avalonia.Controls.Templates.IDataTemplate value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.ContentTemplate = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ContentTemplate<T>(this T control, Func<Avalonia.Controls.Templates.IDataTemplate> func, Action<Avalonia.Controls.Templates.IDataTemplate>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.ContentTemplateProperty!, func, onChanged, expression);
@@ -513,6 +589,10 @@ public static T ContentTemplate<TValue,T>(this T control, TValue value, FuncValu
 
 
  // HorizontalContentAlignment
+
+/*ValueSetterGenerator*/
+public static T HorizontalContentAlignment<T>(this T control, Avalonia.Layout.HorizontalAlignment value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.HorizontalContentAlignment = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T HorizontalContentAlignment<T>(this T control, Func<Avalonia.Layout.HorizontalAlignment> func, Action<Avalonia.Layout.HorizontalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -539,6 +619,10 @@ public static T HorizontalContentAlignment<TValue,T>(this T control, TValue valu
 
  // VerticalContentAlignment
 
+/*ValueSetterGenerator*/
+public static T VerticalContentAlignment<T>(this T control, Avalonia.Layout.VerticalAlignment value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.VerticalContentAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T VerticalContentAlignment<T>(this T control, Func<Avalonia.Layout.VerticalAlignment> func, Action<Avalonia.Layout.VerticalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
    => control._set(Avalonia.Controls.Presenters.ContentPresenter.VerticalContentAlignmentProperty!, func, onChanged, expression);
@@ -563,6 +647,10 @@ public static T VerticalContentAlignment<TValue,T>(this T control, TValue value,
 
 
  // Padding
+
+/*ValueSetterGenerator*/
+public static T Padding<T>(this T control, Avalonia.Thickness value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.Padding = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Padding<T>(this T control, Func<Avalonia.Thickness> func, Action<Avalonia.Thickness>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 
@@ -597,6 +685,10 @@ public static T Padding<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // RecognizesAccessKey
+
+/*ValueSetterGenerator*/
+public static T RecognizesAccessKey<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Presenters.ContentPresenter 
+=> control._set(() => control.RecognizesAccessKey = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T RecognizesAccessKey<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Presenters.ContentPresenter 

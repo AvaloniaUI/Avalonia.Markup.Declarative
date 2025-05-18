@@ -14,6 +14,10 @@ public static partial class MenuFlyout_MarkupExtensions
 //================= Properties ======================//
  // ItemsSource
 
+/*ValueSetterGenerator*/
+public static T ItemsSource<T>(this T control, System.Collections.IEnumerable value) where T : Avalonia.Controls.MenuFlyout 
+=> control._set(() => control.ItemsSource = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ItemsSource<T>(this T control, Func<System.Collections.IEnumerable> func, Action<System.Collections.IEnumerable>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuFlyout 
    => control._set(Avalonia.Controls.MenuFlyout.ItemsSourceProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T ItemsSource<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // ItemTemplate
+
+/*ValueSetterGenerator*/
+public static T ItemTemplate<T>(this T control, Avalonia.Controls.Templates.IDataTemplate value) where T : Avalonia.Controls.MenuFlyout 
+=> control._set(() => control.ItemTemplate = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ItemTemplate<T>(this T control, Func<Avalonia.Controls.Templates.IDataTemplate> func, Action<Avalonia.Controls.Templates.IDataTemplate>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuFlyout 
@@ -64,6 +72,10 @@ public static T ItemTemplate<TValue,T>(this T control, TValue value, FuncValueCo
 
  // ItemContainerTheme
 
+/*ValueSetterGenerator*/
+public static T ItemContainerTheme<T>(this T control, Avalonia.Styling.ControlTheme value) where T : Avalonia.Controls.MenuFlyout 
+=> control._set(() => control.ItemContainerTheme = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ItemContainerTheme<T>(this T control, Func<Avalonia.Styling.ControlTheme> func, Action<Avalonia.Styling.ControlTheme>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuFlyout 
    => control._set(Avalonia.Controls.MenuFlyout.ItemContainerThemeProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T ItemContainerTheme<TValue,T>(this T control, TValue value, FuncV
 
 
  // FlyoutPresenterTheme
+
+/*ValueSetterGenerator*/
+public static T FlyoutPresenterTheme<T>(this T control, Avalonia.Styling.ControlTheme value) where T : Avalonia.Controls.MenuFlyout 
+=> control._set(() => control.FlyoutPresenterTheme = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T FlyoutPresenterTheme<T>(this T control, Func<Avalonia.Styling.ControlTheme> func, Action<Avalonia.Styling.ControlTheme>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuFlyout 

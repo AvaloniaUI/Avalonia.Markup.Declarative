@@ -14,6 +14,10 @@ public static partial class ScrollBar_MarkupExtensions
 //================= Properties ======================//
  // ViewportSize
 
+/*ValueSetterGenerator*/
+public static T ViewportSize<T>(this T control, System.Double value) where T : Avalonia.Controls.Primitives.ScrollBar 
+=> control._set(() => control.ViewportSize = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ViewportSize<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 
    => control._set(Avalonia.Controls.Primitives.ScrollBar.ViewportSizeProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T ViewportSize<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // Visibility
+
+/*ValueSetterGenerator*/
+public static T Visibility<T>(this T control, Avalonia.Controls.Primitives.ScrollBarVisibility value) where T : Avalonia.Controls.Primitives.ScrollBar 
+=> control._set(() => control.Visibility = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Visibility<T>(this T control, Func<Avalonia.Controls.Primitives.ScrollBarVisibility> func, Action<Avalonia.Controls.Primitives.ScrollBarVisibility>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -64,6 +72,10 @@ public static T Visibility<TValue,T>(this T control, TValue value, FuncValueConv
 
  // Orientation
 
+/*ValueSetterGenerator*/
+public static T Orientation<T>(this T control, Avalonia.Layout.Orientation value) where T : Avalonia.Controls.Primitives.ScrollBar 
+=> control._set(() => control.Orientation = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Orientation<T>(this T control, Func<Avalonia.Layout.Orientation> func, Action<Avalonia.Layout.Orientation>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 
    => control._set(Avalonia.Controls.Primitives.ScrollBar.OrientationProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T Orientation<TValue,T>(this T control, TValue value, FuncValueCon
 
 
  // AllowAutoHide
+
+/*ValueSetterGenerator*/
+public static T AllowAutoHide<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Primitives.ScrollBar 
+=> control._set(() => control.AllowAutoHide = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T AllowAutoHide<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 
@@ -114,6 +130,10 @@ public static T AllowAutoHide<TValue,T>(this T control, TValue value, FuncValueC
 
  // HideDelay
 
+/*ValueSetterGenerator*/
+public static T HideDelay<T>(this T control, System.TimeSpan value) where T : Avalonia.Controls.Primitives.ScrollBar 
+=> control._set(() => control.HideDelay = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T HideDelay<T>(this T control, Func<System.TimeSpan> func, Action<System.TimeSpan>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 
    => control._set(Avalonia.Controls.Primitives.ScrollBar.HideDelayProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T HideDelay<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // ShowDelay
+
+/*ValueSetterGenerator*/
+public static T ShowDelay<T>(this T control, System.TimeSpan value) where T : Avalonia.Controls.Primitives.ScrollBar 
+=> control._set(() => control.ShowDelay = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ShowDelay<T>(this T control, Func<System.TimeSpan> func, Action<System.TimeSpan>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ScrollBar 

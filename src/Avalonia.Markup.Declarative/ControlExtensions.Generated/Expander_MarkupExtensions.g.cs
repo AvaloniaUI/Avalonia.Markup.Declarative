@@ -14,6 +14,10 @@ public static partial class Expander_MarkupExtensions
 //================= Properties ======================//
  // ContentTransition
 
+/*ValueSetterGenerator*/
+public static T ContentTransition<T>(this T control, Avalonia.Animation.IPageTransition value) where T : Avalonia.Controls.Expander 
+=> control._set(() => control.ContentTransition = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ContentTransition<T>(this T control, Func<Avalonia.Animation.IPageTransition> func, Action<Avalonia.Animation.IPageTransition>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Expander 
    => control._set(Avalonia.Controls.Expander.ContentTransitionProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T ContentTransition<TValue,T>(this T control, TValue value, FuncVa
 
  // ExpandDirection
 
+/*ValueSetterGenerator*/
+public static T ExpandDirection<T>(this T control, Avalonia.Controls.ExpandDirection value) where T : Avalonia.Controls.Expander 
+=> control._set(() => control.ExpandDirection = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ExpandDirection<T>(this T control, Func<Avalonia.Controls.ExpandDirection> func, Action<Avalonia.Controls.ExpandDirection>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Expander 
    => control._set(Avalonia.Controls.Expander.ExpandDirectionProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T ExpandDirection<TValue,T>(this T control, TValue value, FuncValu
 
 
  // IsExpanded
+
+/*ValueSetterGenerator*/
+public static T IsExpanded<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Expander 
+=> control._set(() => control.IsExpanded = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsExpanded<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Expander 

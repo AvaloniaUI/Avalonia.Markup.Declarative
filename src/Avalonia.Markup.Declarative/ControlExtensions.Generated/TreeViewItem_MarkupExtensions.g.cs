@@ -14,6 +14,10 @@ public static partial class TreeViewItem_MarkupExtensions
 //================= Properties ======================//
  // IsExpanded
 
+/*ValueSetterGenerator*/
+public static T IsExpanded<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TreeViewItem 
+=> control._set(() => control.IsExpanded = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsExpanded<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TreeViewItem 
    => control._set(Avalonia.Controls.TreeViewItem.IsExpandedProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T IsExpanded<TValue,T>(this T control, TValue value, FuncValueConv
 
 
  // IsSelected
+
+/*ValueSetterGenerator*/
+public static T IsSelected<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TreeViewItem 
+=> control._set(() => control.IsSelected = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsSelected<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TreeViewItem 

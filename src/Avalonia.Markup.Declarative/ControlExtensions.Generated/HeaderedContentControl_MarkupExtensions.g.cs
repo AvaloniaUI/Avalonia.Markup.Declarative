@@ -14,6 +14,10 @@ public static partial class HeaderedContentControl_MarkupExtensions
 //================= Properties ======================//
  // Header
 
+/*ValueSetterGenerator*/
+public static T Header<T>(this T control, System.Object value) where T : Avalonia.Controls.Primitives.HeaderedContentControl 
+=> control._set(() => control.Header = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Header<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.HeaderedContentControl 
    => control._set(Avalonia.Controls.Primitives.HeaderedContentControl.HeaderProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Header<TValue,T>(this T control, TValue value, FuncValueConverte
 
 
  // HeaderTemplate
+
+/*ValueSetterGenerator*/
+public static T HeaderTemplate<T>(this T control, Avalonia.Controls.Templates.IDataTemplate value) where T : Avalonia.Controls.Primitives.HeaderedContentControl 
+=> control._set(() => control.HeaderTemplate = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T HeaderTemplate<T>(this T control, Func<Avalonia.Controls.Templates.IDataTemplate> func, Action<Avalonia.Controls.Templates.IDataTemplate>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.HeaderedContentControl 

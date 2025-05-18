@@ -14,6 +14,10 @@ public static partial class Decorator_MarkupExtensions
 //================= Properties ======================//
  // Child
 
+/*ValueSetterGenerator*/
+public static T Child<T>(this T control, Avalonia.Controls.Control value) where T : Avalonia.Controls.Decorator 
+=> control._set(() => control.Child = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Child<T>(this T control, Func<Avalonia.Controls.Control> func, Action<Avalonia.Controls.Control>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Decorator 
    => control._set(Avalonia.Controls.Decorator.ChildProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Child<TValue,T>(this T control, TValue value, FuncValueConverter
 
 
  // Padding
+
+/*ValueSetterGenerator*/
+public static T Padding<T>(this T control, Avalonia.Thickness value) where T : Avalonia.Controls.Decorator 
+=> control._set(() => control.Padding = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Padding<T>(this T control, Func<Avalonia.Thickness> func, Action<Avalonia.Thickness>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Decorator 

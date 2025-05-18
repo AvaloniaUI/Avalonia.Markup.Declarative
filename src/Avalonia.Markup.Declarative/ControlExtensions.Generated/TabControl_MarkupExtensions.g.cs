@@ -14,6 +14,10 @@ public static partial class TabControl_MarkupExtensions
 //================= Properties ======================//
  // TabStripPlacement
 
+/*ValueSetterGenerator*/
+public static T TabStripPlacement<T>(this T control, Avalonia.Controls.Dock value) where T : Avalonia.Controls.TabControl 
+=> control._set(() => control.TabStripPlacement = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TabStripPlacement<T>(this T control, Func<Avalonia.Controls.Dock> func, Action<Avalonia.Controls.Dock>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TabControl 
    => control._set(Avalonia.Controls.TabControl.TabStripPlacementProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T TabStripPlacement<TValue,T>(this T control, TValue value, FuncVa
 
 
  // HorizontalContentAlignment
+
+/*ValueSetterGenerator*/
+public static T HorizontalContentAlignment<T>(this T control, Avalonia.Layout.HorizontalAlignment value) where T : Avalonia.Controls.TabControl 
+=> control._set(() => control.HorizontalContentAlignment = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T HorizontalContentAlignment<T>(this T control, Func<Avalonia.Layout.HorizontalAlignment> func, Action<Avalonia.Layout.HorizontalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TabControl 
@@ -64,6 +72,10 @@ public static T HorizontalContentAlignment<TValue,T>(this T control, TValue valu
 
  // VerticalContentAlignment
 
+/*ValueSetterGenerator*/
+public static T VerticalContentAlignment<T>(this T control, Avalonia.Layout.VerticalAlignment value) where T : Avalonia.Controls.TabControl 
+=> control._set(() => control.VerticalContentAlignment = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T VerticalContentAlignment<T>(this T control, Func<Avalonia.Layout.VerticalAlignment> func, Action<Avalonia.Layout.VerticalAlignment>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TabControl 
    => control._set(Avalonia.Controls.TabControl.VerticalContentAlignmentProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T VerticalContentAlignment<TValue,T>(this T control, TValue value,
 
 
  // ContentTemplate
+
+/*ValueSetterGenerator*/
+public static T ContentTemplate<T>(this T control, Avalonia.Controls.Templates.IDataTemplate value) where T : Avalonia.Controls.TabControl 
+=> control._set(() => control.ContentTemplate = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ContentTemplate<T>(this T control, Func<Avalonia.Controls.Templates.IDataTemplate> func, Action<Avalonia.Controls.Templates.IDataTemplate>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TabControl 

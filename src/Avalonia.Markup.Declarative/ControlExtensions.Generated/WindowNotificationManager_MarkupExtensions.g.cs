@@ -14,6 +14,10 @@ public static partial class WindowNotificationManager_MarkupExtensions
 //================= Properties ======================//
  // Position
 
+/*ValueSetterGenerator*/
+public static T Position<T>(this T control, Avalonia.Controls.Notifications.NotificationPosition value) where T : Avalonia.Controls.Notifications.WindowNotificationManager 
+=> control._set(() => control.Position = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Position<T>(this T control, Func<Avalonia.Controls.Notifications.NotificationPosition> func, Action<Avalonia.Controls.Notifications.NotificationPosition>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Notifications.WindowNotificationManager 
    => control._set(Avalonia.Controls.Notifications.WindowNotificationManager.PositionProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Position<TValue,T>(this T control, TValue value, FuncValueConver
 
 
  // MaxItems
+
+/*ValueSetterGenerator*/
+public static T MaxItems<T>(this T control, System.Int32 value) where T : Avalonia.Controls.Notifications.WindowNotificationManager 
+=> control._set(() => control.MaxItems = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T MaxItems<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Notifications.WindowNotificationManager 

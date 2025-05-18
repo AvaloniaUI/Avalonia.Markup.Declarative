@@ -14,6 +14,10 @@ public static partial class DropShadowDirectionEffect_MarkupExtensions
 //================= Properties ======================//
  // ShadowDepth
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DropShadowDirectionEffect ShadowDepth(this Avalonia.Media.DropShadowDirectionEffect control, System.Double value)  
+=> control._set(() => control.ShadowDepth = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DropShadowDirectionEffect ShadowDepth(this Avalonia.Media.DropShadowDirectionEffect control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.DropShadowDirectionEffect.ShadowDepthProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static Avalonia.Media.DropShadowDirectionEffect ShadowDepth<TValue>(this 
 
 
  // Direction
+
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DropShadowDirectionEffect Direction(this Avalonia.Media.DropShadowDirectionEffect control, System.Double value)  
+=> control._set(() => control.Direction = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DropShadowDirectionEffect Direction(this Avalonia.Media.DropShadowDirectionEffect control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  

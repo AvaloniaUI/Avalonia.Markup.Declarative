@@ -14,6 +14,10 @@ public static partial class DrawingBrush_MarkupExtensions
 //================= Properties ======================//
  // Drawing
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.DrawingBrush Drawing(this Avalonia.Media.DrawingBrush control, Avalonia.Media.Drawing value)  
+=> control._set(() => control.Drawing = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.DrawingBrush Drawing(this Avalonia.Media.DrawingBrush control, Func<Avalonia.Media.Drawing> func, Action<Avalonia.Media.Drawing>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.DrawingBrush.DrawingProperty!, func, onChanged, expression);

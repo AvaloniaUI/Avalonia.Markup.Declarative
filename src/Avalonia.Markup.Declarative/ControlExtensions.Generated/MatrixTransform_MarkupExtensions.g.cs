@@ -14,6 +14,10 @@ public static partial class MatrixTransform_MarkupExtensions
 //================= Properties ======================//
  // Matrix
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.MatrixTransform Matrix(this Avalonia.Media.MatrixTransform control, Avalonia.Matrix value)  
+=> control._set(() => control.Matrix = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.MatrixTransform Matrix(this Avalonia.Media.MatrixTransform control, Func<Avalonia.Matrix> func, Action<Avalonia.Matrix>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
    => control._set(Avalonia.Media.MatrixTransform.MatrixProperty!, func, onChanged, expression);

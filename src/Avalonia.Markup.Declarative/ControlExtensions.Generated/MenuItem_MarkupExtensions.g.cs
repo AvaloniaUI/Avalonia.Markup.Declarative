@@ -14,6 +14,10 @@ public static partial class MenuItem_MarkupExtensions
 //================= Properties ======================//
  // Command
 
+/*ValueSetterGenerator*/
+public static T Command<T>(this T control, System.Windows.Input.ICommand value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.Command = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Command<T>(this T control, Func<System.Windows.Input.ICommand> func, Action<System.Windows.Input.ICommand>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
    => control._set(Avalonia.Controls.MenuItem.CommandProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Command<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // HotKey
+
+/*ValueSetterGenerator*/
+public static T HotKey<T>(this T control, Avalonia.Input.KeyGesture value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.HotKey = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T HotKey<T>(this T control, Func<Avalonia.Input.KeyGesture> func, Action<Avalonia.Input.KeyGesture>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
@@ -64,6 +72,10 @@ public static T HotKey<TValue,T>(this T control, TValue value, FuncValueConverte
 
  // CommandParameter
 
+/*ValueSetterGenerator*/
+public static T CommandParameter<T>(this T control, System.Object value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.CommandParameter = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CommandParameter<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
    => control._set(Avalonia.Controls.MenuItem.CommandParameterProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T CommandParameter<TValue,T>(this T control, TValue value, FuncVal
 
 
  // Icon
+
+/*ValueSetterGenerator*/
+public static T Icon<T>(this T control, System.Object value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.Icon = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Icon<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
@@ -114,6 +130,10 @@ public static T Icon<TValue,T>(this T control, TValue value, FuncValueConverter<
 
  // InputGesture
 
+/*ValueSetterGenerator*/
+public static T InputGesture<T>(this T control, Avalonia.Input.KeyGesture value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.InputGesture = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T InputGesture<T>(this T control, Func<Avalonia.Input.KeyGesture> func, Action<Avalonia.Input.KeyGesture>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
    => control._set(Avalonia.Controls.MenuItem.InputGestureProperty!, func, onChanged, expression);
@@ -138,6 +158,10 @@ public static T InputGesture<TValue,T>(this T control, TValue value, FuncValueCo
 
 
  // IsSubMenuOpen
+
+/*ValueSetterGenerator*/
+public static T IsSubMenuOpen<T>(this T control, System.Boolean value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.IsSubMenuOpen = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T IsSubMenuOpen<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
@@ -164,6 +188,10 @@ public static T IsSubMenuOpen<TValue,T>(this T control, TValue value, FuncValueC
 
  // StaysOpenOnClick
 
+/*ValueSetterGenerator*/
+public static T StaysOpenOnClick<T>(this T control, System.Boolean value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.StaysOpenOnClick = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T StaysOpenOnClick<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
    => control._set(Avalonia.Controls.MenuItem.StaysOpenOnClickProperty!, func, onChanged, expression);
@@ -188,6 +216,10 @@ public static T StaysOpenOnClick<TValue,T>(this T control, TValue value, FuncVal
 
 
  // ToggleType
+
+/*ValueSetterGenerator*/
+public static T ToggleType<T>(this T control, Avalonia.Controls.MenuItemToggleType value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.ToggleType = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T ToggleType<T>(this T control, Func<Avalonia.Controls.MenuItemToggleType> func, Action<Avalonia.Controls.MenuItemToggleType>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
@@ -214,6 +246,10 @@ public static T ToggleType<TValue,T>(this T control, TValue value, FuncValueConv
 
  // IsChecked
 
+/*ValueSetterGenerator*/
+public static T IsChecked<T>(this T control, System.Boolean value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.IsChecked = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsChecked<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
    => control._set(Avalonia.Controls.MenuItem.IsCheckedProperty!, func, onChanged, expression);
@@ -238,6 +274,10 @@ public static T IsChecked<TValue,T>(this T control, TValue value, FuncValueConve
 
 
  // GroupName
+
+/*ValueSetterGenerator*/
+public static T GroupName<T>(this T control, System.String value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.GroupName = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T GroupName<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 

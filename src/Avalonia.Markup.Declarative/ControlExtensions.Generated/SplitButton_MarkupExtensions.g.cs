@@ -14,6 +14,10 @@ public static partial class SplitButton_MarkupExtensions
 //================= Properties ======================//
  // Command
 
+/*ValueSetterGenerator*/
+public static T Command<T>(this T control, System.Windows.Input.ICommand value) where T : Avalonia.Controls.SplitButton 
+=> control._set(() => control.Command = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Command<T>(this T control, Func<System.Windows.Input.ICommand> func, Action<System.Windows.Input.ICommand>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitButton 
    => control._set(Avalonia.Controls.SplitButton.CommandProperty!, func, onChanged, expression);
@@ -38,6 +42,10 @@ public static T Command<TValue,T>(this T control, TValue value, FuncValueConvert
 
 
  // CommandParameter
+
+/*ValueSetterGenerator*/
+public static T CommandParameter<T>(this T control, System.Object value) where T : Avalonia.Controls.SplitButton 
+=> control._set(() => control.CommandParameter = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T CommandParameter<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitButton 
@@ -64,6 +72,10 @@ public static T CommandParameter<TValue,T>(this T control, TValue value, FuncVal
 
  // Flyout
 
+/*ValueSetterGenerator*/
+public static T Flyout<T>(this T control, Avalonia.Controls.Primitives.FlyoutBase value) where T : Avalonia.Controls.SplitButton 
+=> control._set(() => control.Flyout = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Flyout<T>(this T control, Func<Avalonia.Controls.Primitives.FlyoutBase> func, Action<Avalonia.Controls.Primitives.FlyoutBase>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitButton 
    => control._set(Avalonia.Controls.SplitButton.FlyoutProperty!, func, onChanged, expression);
@@ -88,6 +100,10 @@ public static T Flyout<TValue,T>(this T control, TValue value, FuncValueConverte
 
 
  // HotKey
+
+/*ValueSetterGenerator*/
+public static T HotKey<T>(this T control, Avalonia.Input.KeyGesture value) where T : Avalonia.Controls.SplitButton 
+=> control._set(() => control.HotKey = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T HotKey<T>(this T control, Func<Avalonia.Input.KeyGesture> func, Action<Avalonia.Input.KeyGesture>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.SplitButton 

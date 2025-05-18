@@ -14,6 +14,10 @@ public static partial class Carousel_MarkupExtensions
 //================= Properties ======================//
  // PageTransition
 
+/*ValueSetterGenerator*/
+public static T PageTransition<T>(this T control, Avalonia.Animation.IPageTransition value) where T : Avalonia.Controls.Carousel 
+=> control._set(() => control.PageTransition = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T PageTransition<T>(this T control, Func<Avalonia.Animation.IPageTransition> func, Action<Avalonia.Animation.IPageTransition>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Carousel 
    => control._set(Avalonia.Controls.Carousel.PageTransitionProperty!, func, onChanged, expression);

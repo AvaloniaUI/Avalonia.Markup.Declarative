@@ -14,6 +14,10 @@ public static partial class StyledElement_MarkupExtensions
 //================= Properties ======================//
  // DataContext
 
+/*ValueSetterGenerator*/
+public static T DataContext<T>(this T control, System.Object value) where T : Avalonia.StyledElement 
+=> control._set(() => control.DataContext = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T DataContext<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.StyledElement 
    => control._set(Avalonia.StyledElement.DataContextProperty!, func, onChanged, expression);
@@ -39,6 +43,10 @@ public static T DataContext<TValue,T>(this T control, TValue value, FuncValueCon
 
  // Name
 
+/*ValueSetterGenerator*/
+public static T Name<T>(this T control, System.String value) where T : Avalonia.StyledElement 
+=> control._set(() => control.Name = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Name<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.StyledElement 
    => control._set(Avalonia.StyledElement.NameProperty!, func, onChanged, expression);
@@ -63,6 +71,10 @@ public static T Name<TValue,T>(this T control, TValue value, FuncValueConverter<
 
 
  // Theme
+
+/*ValueSetterGenerator*/
+public static T Theme<T>(this T control, Avalonia.Styling.ControlTheme value) where T : Avalonia.StyledElement 
+=> control._set(() => control.Theme = value!);
 
 /*BindFromExpressionSetterGenerator*/
 public static T Theme<T>(this T control, Func<Avalonia.Styling.ControlTheme> func, Action<Avalonia.Styling.ControlTheme>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.StyledElement 
