@@ -56,6 +56,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         StateHasChanged();
     }
 
+    [RequiresUnreferencedCode("Method InjectServices is using reflection to iterate through Type hierarchy. That's can not be analyzed statically.")]
     private void InjectServices()
     {
         var componentType = GetType();
@@ -109,7 +110,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     /// <typeparam name="TControl"></typeparam>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    public static TControl New<TControl>() where TControl : Control
+    public static TControl New<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TControl>() where TControl : Control
     {
         if (AppBuilderExtensions.ComponentControlFactory == null)
             throw new InvalidOperationException("Please set Component Factory by calling UseComponentControlFactory on AppBuilder");
@@ -177,6 +178,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             _dependentViews.Add(view);
     }
 
+    [Obsolete("This is old binding method relies on Reflection. Use lambda expressions instead.")]
     protected Binding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression(nameof(value))] string? valueExpressionString = null)
     {
         return CreateMvuBinding(value, bindingMode, valueExpressionString);

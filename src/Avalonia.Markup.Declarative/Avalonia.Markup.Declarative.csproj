@@ -27,6 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="System.Collections.Immutable" Version="9.0.0" />
 		<PackageReference Include="Avalonia" Version="11.3.0" />
 	</ItemGroup>
 

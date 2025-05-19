@@ -127,6 +127,7 @@ public static class HotReloadManager
         public int Token { get; set; } = token;
     }
 
+    [RequiresUnreferencedCode("You should not use hot reload manager in AoT publish mode")]
     public static void RegisterMethodWatchers(Type type)
     {
         var methods = type

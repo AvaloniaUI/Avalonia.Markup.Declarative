@@ -28,7 +28,7 @@ internal static class StyleBuilder
                         break;
                     case Style style:
                         if (currentSelectorFunc != null)
-                            style.Selector = currentSelectorFunc(style.Selector);
+                            style.Selector = currentSelectorFunc(style.Selector!);
                         yield return style;
                         break;
 
