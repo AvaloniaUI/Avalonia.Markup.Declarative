@@ -73,42 +73,70 @@ namespace AvaloniaExtensionGenerator
         {
             var result = new List<string>();
             var cache = new SourceCacheContext();
-            var repositories = Repository.Provider.GetCoreV3();
-            var packageSource = new PackageSource("https://api.nuget.org/v3/index.json");
-            var repository = new SourceRepository(packageSource, repositories);
-            var resource = await repository.GetResourceAsync<DependencyInfoResource>();
+
+            // Load NuGet sources from config
+            ISettings settings = Settings.LoadDefaultSettings(root: null);
+            var packageSourceProvider = new PackageSourceProvider(settings);
+            var sources = packageSourceProvider.LoadPackageSources().Where(s => s.IsEnabled).ToList();
+
+            var repositories = sources
+                .Select(source => new SourceRepository(source, Repository.Provider.GetCoreV3()))
+                .ToList();
+
             var identity = new PackageIdentity(packageName, NuGetVersion.Parse(packageVersion));
             var nuGetFramework = NuGetFramework.ParseFolder(targetFramework);
 
-            var packageDependencies = await resource.ResolvePackage(
-                identity,
-                nuGetFramework,
-                cache,
-                NullLogger.Instance,
-                CancellationToken.None);
+            PackageDependencyInfo? packageDependencies = null;
+
+            // Try all sources until found
+            foreach (var repository in repositories)
+            {
+                var resource = await repository.GetResourceAsync<DependencyInfoResource>();
+                packageDependencies = await resource.ResolvePackage(
+                    identity,
+                    nuGetFramework,
+                    cache,
+                    NullLogger.Instance,
+                    CancellationToken.None);
+
+                if (packageDependencies != null)
+                    break;
+            }
 
             if (packageDependencies == null)
             {
-                throw new Exception($"Package {packageName} {packageVersion} not found.");
+                Console.WriteLine($"Warning: Package {packageName} {packageVersion} not found in any NuGet source. Skipping.");
+                return result; // Ignore missing dependencies
             }
 
             void AddDependencies(PackageDependencyInfo package)
             {
-                if (!result.Contains($"{package.Id},{package.Version}"))
+                var key = $"{package.Id},{package.Version}";
+                if (!result.Contains(key))
                 {
-                    result.Add($"{package.Id},{package.Version}");
+                    result.Add(key);
                     foreach (var dependency in package.Dependencies)
                     {
-                        var depPackage = resource.ResolvePackage(
-                            new PackageIdentity(dependency.Id, dependency.VersionRange.MinVersion),
-                            nuGetFramework,
-                            cache,
-                            NullLogger.Instance,
-                            CancellationToken.None).Result;
-
+                        PackageDependencyInfo? depPackage = null;
+                        foreach (var repo in repositories)
+                        {
+                            var res = repo.GetResourceAsync<DependencyInfoResource>().Result;
+                            depPackage = res.ResolvePackage(
+                                new PackageIdentity(dependency.Id, dependency.VersionRange.MinVersion),
+                                nuGetFramework,
+                                cache,
+                                NullLogger.Instance,
+                                CancellationToken.None).Result;
+                            if (depPackage != null)
+                                break;
+                        }
                         if (depPackage != null)
                         {
                             AddDependencies(depPackage);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Warning: Dependency {dependency.Id} not found. Skipping.");
                         }
                     }
                 }
