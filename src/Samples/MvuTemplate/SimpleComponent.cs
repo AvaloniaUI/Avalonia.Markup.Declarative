@@ -20,7 +20,7 @@ public class SimpleComponent(SampleDataService dataService) : ComponentBase //co
             .Margin(6)
             .Background(Brushes.DarkSalmon),
 
-        new Style<TextBlock>(s => s.Name("SideBar").Descendant().Is<TextBlock>())
+        new Style<TextBlock>(s => s.OfType<StackPanel>().Name("SideBar").Descendant())
             .FontSize(16)
             .Foreground(Brushes.White),
 
@@ -41,6 +41,7 @@ public class SimpleComponent(SampleDataService dataService) : ComponentBase //co
                     .Background(Brushes.CadetBlue)
                     .Children(
                         new TextBlock()
+                            .Name("title")
                             .Margin(top: 16, left: 16) //partial margin defined with named arguments
                             .Text("Sidebar")
                     ),
