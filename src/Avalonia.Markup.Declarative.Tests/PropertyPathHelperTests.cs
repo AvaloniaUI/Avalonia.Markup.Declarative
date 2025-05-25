@@ -1,3 +1,5 @@
+using Avalonia.Markup.Declarative.Helpers;
+
 namespace Avalonia.Markup.Declarative.Tests
 {
     public class PropertyPathHelperTests

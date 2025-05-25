@@ -5,6 +5,7 @@ using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Declarative.Helpers;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
