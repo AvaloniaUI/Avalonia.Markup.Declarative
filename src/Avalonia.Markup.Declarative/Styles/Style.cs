@@ -27,6 +27,7 @@ public class Style<TControl> : Style, IRelativeStyle
     /// <param name="selectorFunc"></param>
     public Style(Func<Selector, Selector> selectorFunc)
     {
+        var selector = selectorFunc(null!);
         SelectorFunc = s => selectorFunc(s.OfType<TControl>());
         //Prevent Selector generation from immediate call, since we need to apply base selectors from ascendant groups
         if (ViewBuildContext.CurrentState != ViewBuildContextState.StyleBuilding)
