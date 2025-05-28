@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Threading;
 
@@ -102,7 +103,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
         {
             Debug.WriteLine(ex.Message);
             Debug.WriteLine(ex.StackTrace);
-            throw;
+            throw new ViewBuildingException($"Build error in {GetType().Name} : {ex.Message}", ex);
         }
     }
 
@@ -147,7 +148,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 
 internal class ViewBuildContext : IDisposable
 {
-    private static readonly Stack<ViewBuildContext> _viewsStack = new();
+    private static readonly Stack<ViewBuildContext> ViewsStack = new();
     private static ViewBuildContext? _currentContext;
 
     internal static ViewBase? CurrentView => _currentContext?._view;
@@ -161,7 +162,7 @@ internal class ViewBuildContext : IDisposable
         _view = view;
 
         if (_currentContext != null)
-            _viewsStack.Push(_currentContext);
+            ViewsStack.Push(_currentContext);
 
         _currentContext = this;
 
@@ -175,11 +176,13 @@ internal class ViewBuildContext : IDisposable
 
     public void Dispose()
     {
-        _currentContext = _viewsStack.Count > 0 ? _viewsStack.Pop() : null;
+        _currentContext = ViewsStack.Count > 0 ? ViewsStack.Pop() : null;
 
         //if( _currentContext != null )
         //    Debug.WriteLine($"Poped view {_currentContext._view.GetType().Name}");
     }
+
+    public static string GetViewStackString() => string.Join("/", ViewsStack.ToArray().Reverse().Select(x=>x._view.GetType().Name));
 }
 
 internal enum ViewBuildContextState
@@ -189,3 +192,5 @@ internal enum ViewBuildContextState
     StyleSelectorUpdating,
     ViewBuilding
 }
+
+public class ViewBuildingException(string message, Exception innerException) : Exception(message, innerException);

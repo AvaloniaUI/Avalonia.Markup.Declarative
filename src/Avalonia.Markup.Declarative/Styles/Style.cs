@@ -1,8 +1,6 @@
-﻿using Avalonia.Controls;
-using Avalonia.Markup.Declarative.Helpers;
+﻿using Avalonia.Markup.Declarative.Helpers;
 using Avalonia.Styling;
 using System;
-using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
