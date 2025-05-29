@@ -55,12 +55,13 @@ public class GeneratorHost(ExtensionGeneratorConfig config)
                 t => t.GetFields()
                     .Where(IsAvaloniaPropertyField)
                     .Select(x => new PropertyExtensionInfo(x)),
-                
+
+                new ValueSetterGenerator(),
                 new BindFromExpressionSetterGenerator(),
-                new MagicalSetterGenerator(),
                 new ValueOverloadsSetterGenerator(),
 
                 //obsolete candidates
+                new MagicalSetterGenerator(),
                 new BindSetterGenerator(),
                 new AvaloniaPropertyBindSetterGenerator(),
                 new MagicalSetterWithConverterGenerator()

@@ -20,7 +20,7 @@ public static T NativeMenu_Menu<T>(this T control, Avalonia.Controls.NativeMenu 
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T NativeMenu_Menu<T>(this T control, Func<Avalonia.Controls.NativeMenu> func, Action<Avalonia.Controls.NativeMenu>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.NativeMenu.MenuProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.NativeMenu.MenuProperty!, func, onChanged, expression);
 
 
 

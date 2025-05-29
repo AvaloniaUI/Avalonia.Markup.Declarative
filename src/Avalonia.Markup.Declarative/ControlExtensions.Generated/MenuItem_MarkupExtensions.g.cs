@@ -14,13 +14,18 @@ public static partial class MenuItem_MarkupExtensions
 //================= Properties ======================//
  // Command
 
+/*ValueSetterGenerator*/
+public static T Command<T>(this T control, System.Windows.Input.ICommand value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.Command = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Command<T>(this T control, Func<System.Windows.Input.ICommand> func, Action<System.Windows.Input.ICommand>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
-   => control._set(Avalonia.Controls.MenuItem.CommandProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.MenuItem.CommandProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Command<T>(this T control,System.Windows.Input.ICommand value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.CommandProperty, ps, () => control.Command = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.CommandProperty, ps, () => control.Command = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Command<T>(this T control, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -31,19 +36,25 @@ public static T Command<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.MenuItem.CommandProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Command<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Windows.Input.ICommand> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.CommandProperty, ps, () => control.Command = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.CommandProperty, ps, () => control.Command = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // HotKey
 
+/*ValueSetterGenerator*/
+public static T HotKey<T>(this T control, Avalonia.Input.KeyGesture value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.HotKey = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T HotKey<T>(this T control, Func<Avalonia.Input.KeyGesture> func, Action<Avalonia.Input.KeyGesture>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
-   => control._set(Avalonia.Controls.MenuItem.HotKeyProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.MenuItem.HotKeyProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T HotKey<T>(this T control,Avalonia.Input.KeyGesture value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.HotKeyProperty, ps, () => control.HotKey = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.HotKeyProperty, ps, () => control.HotKey = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T HotKey<T>(this T control, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -54,19 +65,25 @@ public static T HotKey<T>(this T control, AvaloniaProperty avaloniaProperty, Bin
    => control._set(Avalonia.Controls.MenuItem.HotKeyProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T HotKey<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Input.KeyGesture> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.HotKeyProperty, ps, () => control.HotKey = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.HotKeyProperty, ps, () => control.HotKey = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // CommandParameter
 
+/*ValueSetterGenerator*/
+public static T CommandParameter<T>(this T control, System.Object value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.CommandParameter = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T CommandParameter<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
-   => control._set(Avalonia.Controls.MenuItem.CommandParameterProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.MenuItem.CommandParameterProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T CommandParameter<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.CommandParameterProperty, ps, () => control.CommandParameter = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.CommandParameterProperty, ps, () => control.CommandParameter = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T CommandParameter<T>(this T control, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -77,19 +94,25 @@ public static T CommandParameter<T>(this T control, AvaloniaProperty avaloniaPro
    => control._set(Avalonia.Controls.MenuItem.CommandParameterProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T CommandParameter<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.CommandParameterProperty, ps, () => control.CommandParameter = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.CommandParameterProperty, ps, () => control.CommandParameter = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Icon
 
+/*ValueSetterGenerator*/
+public static T Icon<T>(this T control, System.Object value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.Icon = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Icon<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
-   => control._set(Avalonia.Controls.MenuItem.IconProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.MenuItem.IconProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Icon<T>(this T control,System.Object value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.IconProperty, ps, () => control.Icon = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.IconProperty, ps, () => control.Icon = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Icon<T>(this T control, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -100,19 +123,25 @@ public static T Icon<T>(this T control, AvaloniaProperty avaloniaProperty, Bindi
    => control._set(Avalonia.Controls.MenuItem.IconProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Icon<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Object> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.IconProperty, ps, () => control.Icon = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.IconProperty, ps, () => control.Icon = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // InputGesture
 
+/*ValueSetterGenerator*/
+public static T InputGesture<T>(this T control, Avalonia.Input.KeyGesture value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.InputGesture = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T InputGesture<T>(this T control, Func<Avalonia.Input.KeyGesture> func, Action<Avalonia.Input.KeyGesture>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
-   => control._set(Avalonia.Controls.MenuItem.InputGestureProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.MenuItem.InputGestureProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T InputGesture<T>(this T control,Avalonia.Input.KeyGesture value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.InputGestureProperty, ps, () => control.InputGesture = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.InputGestureProperty, ps, () => control.InputGesture = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T InputGesture<T>(this T control, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -123,19 +152,25 @@ public static T InputGesture<T>(this T control, AvaloniaProperty avaloniaPropert
    => control._set(Avalonia.Controls.MenuItem.InputGestureProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T InputGesture<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Input.KeyGesture> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.InputGestureProperty, ps, () => control.InputGesture = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.InputGestureProperty, ps, () => control.InputGesture = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // IsSubMenuOpen
 
+/*ValueSetterGenerator*/
+public static T IsSubMenuOpen<T>(this T control, System.Boolean value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.IsSubMenuOpen = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsSubMenuOpen<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
-   => control._set(Avalonia.Controls.MenuItem.IsSubMenuOpenProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.MenuItem.IsSubMenuOpenProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T IsSubMenuOpen<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.IsSubMenuOpenProperty, ps, () => control.IsSubMenuOpen = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.IsSubMenuOpenProperty, ps, () => control.IsSubMenuOpen = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsSubMenuOpen<T>(this T control, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -146,19 +181,25 @@ public static T IsSubMenuOpen<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.MenuItem.IsSubMenuOpenProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T IsSubMenuOpen<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.IsSubMenuOpenProperty, ps, () => control.IsSubMenuOpen = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.IsSubMenuOpenProperty, ps, () => control.IsSubMenuOpen = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // StaysOpenOnClick
 
+/*ValueSetterGenerator*/
+public static T StaysOpenOnClick<T>(this T control, System.Boolean value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.StaysOpenOnClick = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T StaysOpenOnClick<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
-   => control._set(Avalonia.Controls.MenuItem.StaysOpenOnClickProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.MenuItem.StaysOpenOnClickProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T StaysOpenOnClick<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.StaysOpenOnClickProperty, ps, () => control.StaysOpenOnClick = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.StaysOpenOnClickProperty, ps, () => control.StaysOpenOnClick = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T StaysOpenOnClick<T>(this T control, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -169,19 +210,25 @@ public static T StaysOpenOnClick<T>(this T control, AvaloniaProperty avaloniaPro
    => control._set(Avalonia.Controls.MenuItem.StaysOpenOnClickProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T StaysOpenOnClick<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.StaysOpenOnClickProperty, ps, () => control.StaysOpenOnClick = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.StaysOpenOnClickProperty, ps, () => control.StaysOpenOnClick = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // ToggleType
 
+/*ValueSetterGenerator*/
+public static T ToggleType<T>(this T control, Avalonia.Controls.MenuItemToggleType value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.ToggleType = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ToggleType<T>(this T control, Func<Avalonia.Controls.MenuItemToggleType> func, Action<Avalonia.Controls.MenuItemToggleType>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
-   => control._set(Avalonia.Controls.MenuItem.ToggleTypeProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.MenuItem.ToggleTypeProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T ToggleType<T>(this T control,Avalonia.Controls.MenuItemToggleType value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.ToggleTypeProperty, ps, () => control.ToggleType = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.ToggleTypeProperty, ps, () => control.ToggleType = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ToggleType<T>(this T control, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -192,19 +239,25 @@ public static T ToggleType<T>(this T control, AvaloniaProperty avaloniaProperty,
    => control._set(Avalonia.Controls.MenuItem.ToggleTypeProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T ToggleType<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.MenuItemToggleType> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.ToggleTypeProperty, ps, () => control.ToggleType = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.ToggleTypeProperty, ps, () => control.ToggleType = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // IsChecked
 
+/*ValueSetterGenerator*/
+public static T IsChecked<T>(this T control, System.Boolean value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.IsChecked = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsChecked<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
-   => control._set(Avalonia.Controls.MenuItem.IsCheckedProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.MenuItem.IsCheckedProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T IsChecked<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.IsCheckedProperty, ps, () => control.IsChecked = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.IsCheckedProperty, ps, () => control.IsChecked = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsChecked<T>(this T control, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -215,19 +268,25 @@ public static T IsChecked<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.MenuItem.IsCheckedProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T IsChecked<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.IsCheckedProperty, ps, () => control.IsChecked = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.IsCheckedProperty, ps, () => control.IsChecked = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // GroupName
 
+/*ValueSetterGenerator*/
+public static T GroupName<T>(this T control, System.String value) where T : Avalonia.Controls.MenuItem 
+=> control._set(() => control.GroupName = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T GroupName<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
-   => control._set(Avalonia.Controls.MenuItem.GroupNameProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.MenuItem.GroupNameProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T GroupName<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.GroupNameProperty, ps, () => control.GroupName = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.GroupNameProperty, ps, () => control.GroupName = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T GroupName<T>(this T control, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -238,8 +297,9 @@ public static T GroupName<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.MenuItem.GroupNameProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T GroupName<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.MenuItem 
-=> control._setEx(Avalonia.Controls.MenuItem.GroupNameProperty, ps, () => control.GroupName = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.MenuItem.GroupNameProperty, ps, () => control.GroupName = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -247,10 +307,10 @@ public static T GroupName<TValue,T>(this T control, TValue value, FuncValueConve
  // Click
 
 /*ActionToEventGenerator*/
-public static T OnClick<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.MenuItem 
+public static T OnClick<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.MenuItem 
 {
-  control.AddHandler(Avalonia.Controls.MenuItem.ClickEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.MenuItem.ClickEvent, (_, args) => action(args), routes ?? Avalonia.Controls.MenuItem.ClickEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -258,10 +318,10 @@ public static T OnClick<T>(this T control, Action<Avalonia.Interactivity.RoutedE
  // PointerEnteredItem
 
 /*ActionToEventGenerator*/
-public static T OnPointerEnteredItem<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.MenuItem 
+public static T OnPointerEnteredItem<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.MenuItem 
 {
-  control.AddHandler(Avalonia.Controls.MenuItem.PointerEnteredItemEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.MenuItem.PointerEnteredItemEvent, (_, args) => action(args), routes ?? Avalonia.Controls.MenuItem.PointerEnteredItemEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -269,10 +329,10 @@ public static T OnPointerEnteredItem<T>(this T control, Action<Avalonia.Interact
  // PointerExitedItem
 
 /*ActionToEventGenerator*/
-public static T OnPointerExitedItem<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.MenuItem 
+public static T OnPointerExitedItem<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.MenuItem 
 {
-  control.AddHandler(Avalonia.Controls.MenuItem.PointerExitedItemEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.MenuItem.PointerExitedItemEvent, (_, args) => action(args), routes ?? Avalonia.Controls.MenuItem.PointerExitedItemEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -280,10 +340,10 @@ public static T OnPointerExitedItem<T>(this T control, Action<Avalonia.Interacti
  // SubmenuOpened
 
 /*ActionToEventGenerator*/
-public static T OnSubmenuOpened<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies routes = Avalonia.Interactivity.RoutingStrategies.Tunnel | Avalonia.Interactivity.RoutingStrategies.Bubble) where T : Avalonia.Controls.MenuItem 
+public static T OnSubmenuOpened<T>(this T control, Action<Avalonia.Interactivity.RoutedEventArgs> action, Avalonia.Interactivity.RoutingStrategies? routes = null) where T : Avalonia.Controls.MenuItem 
 {
-  control.AddHandler(Avalonia.Controls.MenuItem.SubmenuOpenedEvent, (_, args) => action(args), routes);
-  return control; 
+  control.AddHandler(Avalonia.Controls.MenuItem.SubmenuOpenedEvent, (_, args) => action(args), routes ?? Avalonia.Controls.MenuItem.SubmenuOpenedEvent.RoutingStrategies);
+  return control;
 }
 
 
@@ -294,7 +354,7 @@ public static T OnSubmenuOpened<T>(this T control, Action<Avalonia.Interactivity
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Command<T>(this Style<T> style, System.Windows.Input.ICommand value) where T : Avalonia.Controls.MenuItem 
-=> style._addSetter(Avalonia.Controls.MenuItem.CommandProperty, value);
+=> style._addSetter(Avalonia.Controls.MenuItem.CommandProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Command<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -305,7 +365,7 @@ public static Style<T> Command<T>(this Style<T> style, IBinding binding) where T
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> HotKey<T>(this Style<T> style, Avalonia.Input.KeyGesture value) where T : Avalonia.Controls.MenuItem 
-=> style._addSetter(Avalonia.Controls.MenuItem.HotKeyProperty, value);
+=> style._addSetter(Avalonia.Controls.MenuItem.HotKeyProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> HotKey<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -316,7 +376,7 @@ public static Style<T> HotKey<T>(this Style<T> style, IBinding binding) where T 
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> CommandParameter<T>(this Style<T> style, System.Object value) where T : Avalonia.Controls.MenuItem 
-=> style._addSetter(Avalonia.Controls.MenuItem.CommandParameterProperty, value);
+=> style._addSetter(Avalonia.Controls.MenuItem.CommandParameterProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> CommandParameter<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -327,7 +387,7 @@ public static Style<T> CommandParameter<T>(this Style<T> style, IBinding binding
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Icon<T>(this Style<T> style, System.Object value) where T : Avalonia.Controls.MenuItem 
-=> style._addSetter(Avalonia.Controls.MenuItem.IconProperty, value);
+=> style._addSetter(Avalonia.Controls.MenuItem.IconProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Icon<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -338,7 +398,7 @@ public static Style<T> Icon<T>(this Style<T> style, IBinding binding) where T : 
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> InputGesture<T>(this Style<T> style, Avalonia.Input.KeyGesture value) where T : Avalonia.Controls.MenuItem 
-=> style._addSetter(Avalonia.Controls.MenuItem.InputGestureProperty, value);
+=> style._addSetter(Avalonia.Controls.MenuItem.InputGestureProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> InputGesture<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -349,7 +409,7 @@ public static Style<T> InputGesture<T>(this Style<T> style, IBinding binding) wh
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> IsSubMenuOpen<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.MenuItem 
-=> style._addSetter(Avalonia.Controls.MenuItem.IsSubMenuOpenProperty, value);
+=> style._addSetter(Avalonia.Controls.MenuItem.IsSubMenuOpenProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> IsSubMenuOpen<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -360,7 +420,7 @@ public static Style<T> IsSubMenuOpen<T>(this Style<T> style, IBinding binding) w
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> StaysOpenOnClick<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.MenuItem 
-=> style._addSetter(Avalonia.Controls.MenuItem.StaysOpenOnClickProperty, value);
+=> style._addSetter(Avalonia.Controls.MenuItem.StaysOpenOnClickProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> StaysOpenOnClick<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -371,7 +431,7 @@ public static Style<T> StaysOpenOnClick<T>(this Style<T> style, IBinding binding
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> ToggleType<T>(this Style<T> style, Avalonia.Controls.MenuItemToggleType value) where T : Avalonia.Controls.MenuItem 
-=> style._addSetter(Avalonia.Controls.MenuItem.ToggleTypeProperty, value);
+=> style._addSetter(Avalonia.Controls.MenuItem.ToggleTypeProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> ToggleType<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -382,7 +442,7 @@ public static Style<T> ToggleType<T>(this Style<T> style, IBinding binding) wher
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> IsChecked<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.MenuItem 
-=> style._addSetter(Avalonia.Controls.MenuItem.IsCheckedProperty, value);
+=> style._addSetter(Avalonia.Controls.MenuItem.IsCheckedProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> IsChecked<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.MenuItem 
@@ -393,7 +453,7 @@ public static Style<T> IsChecked<T>(this Style<T> style, IBinding binding) where
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> GroupName<T>(this Style<T> style, System.String value) where T : Avalonia.Controls.MenuItem 
-=> style._addSetter(Avalonia.Controls.MenuItem.GroupNameProperty, value);
+=> style._addSetter(Avalonia.Controls.MenuItem.GroupNameProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> GroupName<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.MenuItem 

@@ -14,13 +14,18 @@ public static partial class TickBar_MarkupExtensions
 //================= Properties ======================//
  // Fill
 
+/*ValueSetterGenerator*/
+public static T Fill<T>(this T control, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Fill = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Fill<T>(this T control, Func<Avalonia.Media.IBrush> func, Action<Avalonia.Media.IBrush>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
-   => control._set(Avalonia.Controls.TickBar.FillProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.TickBar.FillProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Fill<T>(this T control,Avalonia.Media.IBrush value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.FillProperty, ps, () => control.Fill = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.FillProperty, ps, () => control.Fill = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Fill<T>(this T control, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -31,19 +36,25 @@ public static T Fill<T>(this T control, AvaloniaProperty avaloniaProperty, Bindi
    => control._set(Avalonia.Controls.TickBar.FillProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Fill<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Media.IBrush> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.FillProperty, ps, () => control.Fill = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.FillProperty, ps, () => control.Fill = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Minimum
 
+/*ValueSetterGenerator*/
+public static T Minimum<T>(this T control, System.Double value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Minimum = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Minimum<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
-   => control._set(Avalonia.Controls.TickBar.MinimumProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.TickBar.MinimumProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Minimum<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.MinimumProperty, ps, () => control.Minimum = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.MinimumProperty, ps, () => control.Minimum = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Minimum<T>(this T control, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -54,19 +65,25 @@ public static T Minimum<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.TickBar.MinimumProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Minimum<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.MinimumProperty, ps, () => control.Minimum = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.MinimumProperty, ps, () => control.Minimum = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Maximum
 
+/*ValueSetterGenerator*/
+public static T Maximum<T>(this T control, System.Double value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Maximum = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Maximum<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
-   => control._set(Avalonia.Controls.TickBar.MaximumProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.TickBar.MaximumProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Maximum<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.MaximumProperty, ps, () => control.Maximum = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.MaximumProperty, ps, () => control.Maximum = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Maximum<T>(this T control, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -77,19 +94,25 @@ public static T Maximum<T>(this T control, AvaloniaProperty avaloniaProperty, Bi
    => control._set(Avalonia.Controls.TickBar.MaximumProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Maximum<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.MaximumProperty, ps, () => control.Maximum = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.MaximumProperty, ps, () => control.Maximum = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // TickFrequency
 
+/*ValueSetterGenerator*/
+public static T TickFrequency<T>(this T control, System.Double value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.TickFrequency = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T TickFrequency<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
-   => control._set(Avalonia.Controls.TickBar.TickFrequencyProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.TickBar.TickFrequencyProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T TickFrequency<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.TickFrequencyProperty, ps, () => control.TickFrequency = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.TickFrequencyProperty, ps, () => control.TickFrequency = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T TickFrequency<T>(this T control, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -100,19 +123,25 @@ public static T TickFrequency<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.TickBar.TickFrequencyProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T TickFrequency<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.TickFrequencyProperty, ps, () => control.TickFrequency = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.TickFrequencyProperty, ps, () => control.TickFrequency = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Orientation
 
+/*ValueSetterGenerator*/
+public static T Orientation<T>(this T control, Avalonia.Layout.Orientation value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Orientation = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Orientation<T>(this T control, Func<Avalonia.Layout.Orientation> func, Action<Avalonia.Layout.Orientation>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
-   => control._set(Avalonia.Controls.TickBar.OrientationProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.TickBar.OrientationProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Orientation<T>(this T control,Avalonia.Layout.Orientation value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.OrientationProperty, ps, () => control.Orientation = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.OrientationProperty, ps, () => control.Orientation = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Orientation<T>(this T control, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -123,19 +152,25 @@ public static T Orientation<T>(this T control, AvaloniaProperty avaloniaProperty
    => control._set(Avalonia.Controls.TickBar.OrientationProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Orientation<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Layout.Orientation> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.OrientationProperty, ps, () => control.Orientation = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.OrientationProperty, ps, () => control.Orientation = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Ticks
 
+/*ValueSetterGenerator*/
+public static T Ticks<T>(this T control, Avalonia.Collections.AvaloniaList<System.Double> value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Ticks = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Ticks<T>(this T control, Func<Avalonia.Collections.AvaloniaList<System.Double>> func, Action<Avalonia.Collections.AvaloniaList<System.Double>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
-   => control._set(Avalonia.Controls.TickBar.TicksProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.TickBar.TicksProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Ticks<T>(this T control,Avalonia.Collections.AvaloniaList<System.Double> value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.TicksProperty, ps, () => control.Ticks = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.TicksProperty, ps, () => control.Ticks = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Ticks<T>(this T control, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -146,19 +181,25 @@ public static T Ticks<T>(this T control, AvaloniaProperty avaloniaProperty, Bind
    => control._set(Avalonia.Controls.TickBar.TicksProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Ticks<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Collections.AvaloniaList<System.Double>> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.TicksProperty, ps, () => control.Ticks = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.TicksProperty, ps, () => control.Ticks = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // IsDirectionReversed
 
+/*ValueSetterGenerator*/
+public static T IsDirectionReversed<T>(this T control, System.Boolean value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.IsDirectionReversed = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T IsDirectionReversed<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
-   => control._set(Avalonia.Controls.TickBar.IsDirectionReversedProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.TickBar.IsDirectionReversedProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T IsDirectionReversed<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.IsDirectionReversedProperty, ps, () => control.IsDirectionReversed = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.IsDirectionReversedProperty, ps, () => control.IsDirectionReversed = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T IsDirectionReversed<T>(this T control, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -169,19 +210,25 @@ public static T IsDirectionReversed<T>(this T control, AvaloniaProperty avalonia
    => control._set(Avalonia.Controls.TickBar.IsDirectionReversedProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T IsDirectionReversed<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.IsDirectionReversedProperty, ps, () => control.IsDirectionReversed = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.IsDirectionReversedProperty, ps, () => control.IsDirectionReversed = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Placement
 
+/*ValueSetterGenerator*/
+public static T Placement<T>(this T control, Avalonia.Controls.TickBarPlacement value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.Placement = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T Placement<T>(this T control, Func<Avalonia.Controls.TickBarPlacement> func, Action<Avalonia.Controls.TickBarPlacement>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
-   => control._set(Avalonia.Controls.TickBar.PlacementProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.TickBar.PlacementProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static T Placement<T>(this T control,Avalonia.Controls.TickBarPlacement value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.PlacementProperty, ps, () => control.Placement = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.PlacementProperty, ps, () => control.Placement = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T Placement<T>(this T control, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -192,30 +239,36 @@ public static T Placement<T>(this T control, AvaloniaProperty avaloniaProperty, 
    => control._set(Avalonia.Controls.TickBar.PlacementProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T Placement<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Controls.TickBarPlacement> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.PlacementProperty, ps, () => control.Placement = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.PlacementProperty, ps, () => control.Placement = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // ReservedSpace
 
+/*ValueSetterGenerator*/
+public static T ReservedSpace<T>(this T control, Avalonia.Rect value) where T : Avalonia.Controls.TickBar 
+=> control._set(() => control.ReservedSpace = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static T ReservedSpace<T>(this T control, Func<Avalonia.Rect> func, Action<Avalonia.Rect>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.TickBar 
-   => control._set(Avalonia.Controls.TickBar.ReservedSpaceProperty, func, onChanged, expression);
-
-/*MagicalSetterGenerator*/
-public static T ReservedSpace<T>(this T control,Avalonia.Rect value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.ReservedSpaceProperty, ps, () => control.ReservedSpace = value, bindingMode, converter, bindingSource);
+   => control._set(Avalonia.Controls.TickBar.ReservedSpaceProperty!, func, onChanged, expression);
 
 /*ValueOverloadsSetterGenerator*/
 
-public static T ReservedSpace<T>(this T control, System.Double x = default, System.Double y = default, System.Double width = default, System.Double height = default) where T : Avalonia.Controls.TickBar 
+public static T ReservedSpace<T>(this T control, System.Double x = default!, System.Double y = default!, System.Double width = default!, System.Double height = default!) where T : Avalonia.Controls.TickBar 
    => control._set(() => control.ReservedSpace = new Avalonia.Rect(x, y, width, height));
-public static T ReservedSpace<T>(this T control, Avalonia.Size size = default) where T : Avalonia.Controls.TickBar 
+public static T ReservedSpace<T>(this T control, Avalonia.Size size = default!) where T : Avalonia.Controls.TickBar 
    => control._set(() => control.ReservedSpace = new Avalonia.Rect(size));
-public static T ReservedSpace<T>(this T control, Avalonia.Point position = default, Avalonia.Size size = default) where T : Avalonia.Controls.TickBar 
+public static T ReservedSpace<T>(this T control, Avalonia.Point position = default!, Avalonia.Size size = default!) where T : Avalonia.Controls.TickBar 
    => control._set(() => control.ReservedSpace = new Avalonia.Rect(position, size));
-public static T ReservedSpace<T>(this T control, Avalonia.Point topLeft = default, Avalonia.Point bottomRight = default) where T : Avalonia.Controls.TickBar 
+public static T ReservedSpace<T>(this T control, Avalonia.Point topLeft = default!, Avalonia.Point bottomRight = default!) where T : Avalonia.Controls.TickBar 
    => control._set(() => control.ReservedSpace = new Avalonia.Rect(topLeft, bottomRight));
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static T ReservedSpace<T>(this T control,Avalonia.Rect value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
+=> control._setEx(Avalonia.Controls.TickBar.ReservedSpaceProperty, ps, () => control.ReservedSpace = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static T ReservedSpace<T>(this T control, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -226,8 +279,9 @@ public static T ReservedSpace<T>(this T control, AvaloniaProperty avaloniaProper
    => control._set(Avalonia.Controls.TickBar.ReservedSpaceProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static T ReservedSpace<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, Avalonia.Rect> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.TickBar 
-=> control._setEx(Avalonia.Controls.TickBar.ReservedSpaceProperty, ps, () => control.ReservedSpace = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Controls.TickBar.ReservedSpaceProperty, ps, () => control.ReservedSpace = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 
@@ -236,7 +290,7 @@ public static T ReservedSpace<TValue,T>(this T control, TValue value, FuncValueC
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Fill<T>(this Style<T> style, Avalonia.Media.IBrush value) where T : Avalonia.Controls.TickBar 
-=> style._addSetter(Avalonia.Controls.TickBar.FillProperty, value);
+=> style._addSetter(Avalonia.Controls.TickBar.FillProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Fill<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -247,7 +301,7 @@ public static Style<T> Fill<T>(this Style<T> style, IBinding binding) where T : 
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Minimum<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.TickBar 
-=> style._addSetter(Avalonia.Controls.TickBar.MinimumProperty, value);
+=> style._addSetter(Avalonia.Controls.TickBar.MinimumProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Minimum<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -258,7 +312,7 @@ public static Style<T> Minimum<T>(this Style<T> style, IBinding binding) where T
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Maximum<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.TickBar 
-=> style._addSetter(Avalonia.Controls.TickBar.MaximumProperty, value);
+=> style._addSetter(Avalonia.Controls.TickBar.MaximumProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Maximum<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -269,7 +323,7 @@ public static Style<T> Maximum<T>(this Style<T> style, IBinding binding) where T
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> TickFrequency<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.TickBar 
-=> style._addSetter(Avalonia.Controls.TickBar.TickFrequencyProperty, value);
+=> style._addSetter(Avalonia.Controls.TickBar.TickFrequencyProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> TickFrequency<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -280,7 +334,7 @@ public static Style<T> TickFrequency<T>(this Style<T> style, IBinding binding) w
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Orientation<T>(this Style<T> style, Avalonia.Layout.Orientation value) where T : Avalonia.Controls.TickBar 
-=> style._addSetter(Avalonia.Controls.TickBar.OrientationProperty, value);
+=> style._addSetter(Avalonia.Controls.TickBar.OrientationProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Orientation<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -291,7 +345,7 @@ public static Style<T> Orientation<T>(this Style<T> style, IBinding binding) whe
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Ticks<T>(this Style<T> style, Avalonia.Collections.AvaloniaList<System.Double> value) where T : Avalonia.Controls.TickBar 
-=> style._addSetter(Avalonia.Controls.TickBar.TicksProperty, value);
+=> style._addSetter(Avalonia.Controls.TickBar.TicksProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Ticks<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -302,7 +356,7 @@ public static Style<T> Ticks<T>(this Style<T> style, IBinding binding) where T :
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> IsDirectionReversed<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.TickBar 
-=> style._addSetter(Avalonia.Controls.TickBar.IsDirectionReversedProperty, value);
+=> style._addSetter(Avalonia.Controls.TickBar.IsDirectionReversedProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> IsDirectionReversed<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -313,7 +367,7 @@ public static Style<T> IsDirectionReversed<T>(this Style<T> style, IBinding bind
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> Placement<T>(this Style<T> style, Avalonia.Controls.TickBarPlacement value) where T : Avalonia.Controls.TickBar 
-=> style._addSetter(Avalonia.Controls.TickBar.PlacementProperty, value);
+=> style._addSetter(Avalonia.Controls.TickBar.PlacementProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> Placement<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar 
@@ -324,7 +378,7 @@ public static Style<T> Placement<T>(this Style<T> style, IBinding binding) where
 
 /*ValueStyleSetterGenerator*/
 public static Style<T> ReservedSpace<T>(this Style<T> style, Avalonia.Rect value) where T : Avalonia.Controls.TickBar 
-=> style._addSetter(Avalonia.Controls.TickBar.ReservedSpaceProperty, value);
+=> style._addSetter(Avalonia.Controls.TickBar.ReservedSpaceProperty!, value!);
 
 /*BindingStyleSetterGenerator*/
 public static Style<T> ReservedSpace<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.TickBar 

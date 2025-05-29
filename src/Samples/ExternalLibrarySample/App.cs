@@ -1,14 +1,24 @@
-﻿using ExternalLibrarySample;
+﻿using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Styling;
+using ExternalLibrarySample;
 using Microsoft.Extensions.DependencyInjection;
 
 var services = new ServiceCollection();
 
 var lifetime = new ClassicDesktopStyleApplicationLifetime { Args = args, ShutdownMode = ShutdownMode.OnLastWindowClose };
 
+var sp = services.BuildServiceProvider();
+
 AppBuilder.Configure<Application>()
     .UsePlatformDetect()
-    .AfterSetup(b => b.Instance?.Styles.Add(new FluentTheme()))
-    .UseServiceProvider(services.BuildServiceProvider())
+    .AfterSetup(b =>
+    {
+        b.Instance?.Styles.Add(new FluentTheme(sp));
+        b.Instance?.Styles.Add(
+            (IStyle)AvaloniaXamlLoader.Load(new Uri("avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml")));
+    })
+    .UseServiceProvider(sp)
     // uncomment the line below to enable rider ht reload workaround
     //.UseRiderHotReload()
     .SetupWithLifetime(lifetime);

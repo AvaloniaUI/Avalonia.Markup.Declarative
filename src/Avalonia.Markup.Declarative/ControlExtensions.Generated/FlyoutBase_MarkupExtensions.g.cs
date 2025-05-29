@@ -20,7 +20,7 @@ public static T FlyoutBase_AttachedFlyout<T>(this T control, Avalonia.Controls.P
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T FlyoutBase_AttachedFlyout<T>(this T control, Func<Avalonia.Controls.Primitives.FlyoutBase> func, Action<Avalonia.Controls.Primitives.FlyoutBase>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.Primitives.FlyoutBase.AttachedFlyoutProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Primitives.FlyoutBase.AttachedFlyoutProperty!, func, onChanged, expression);
 
 
 

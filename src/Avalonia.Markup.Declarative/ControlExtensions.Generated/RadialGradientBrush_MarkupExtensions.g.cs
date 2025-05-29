@@ -14,20 +14,25 @@ public static partial class RadialGradientBrush_MarkupExtensions
 //================= Properties ======================//
  // Center
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.RadialGradientBrush Center(this Avalonia.Media.RadialGradientBrush control, Avalonia.RelativePoint value)  
+=> control._set(() => control.Center = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.RadialGradientBrush Center(this Avalonia.Media.RadialGradientBrush control, Func<Avalonia.RelativePoint> func, Action<Avalonia.RelativePoint>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
-   => control._set(Avalonia.Media.RadialGradientBrush.CenterProperty, func, onChanged, expression);
-
-/*MagicalSetterGenerator*/
-public static Avalonia.Media.RadialGradientBrush Center(this Avalonia.Media.RadialGradientBrush control,Avalonia.RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.RadialGradientBrush.CenterProperty, ps, () => control.Center = value, bindingMode, converter, bindingSource);
+   => control._set(Avalonia.Media.RadialGradientBrush.CenterProperty!, func, onChanged, expression);
 
 /*ValueOverloadsSetterGenerator*/
 
-public static Avalonia.Media.RadialGradientBrush Center(this Avalonia.Media.RadialGradientBrush control, System.Double x = default, System.Double y = default, Avalonia.RelativeUnit unit = default)  
+public static Avalonia.Media.RadialGradientBrush Center(this Avalonia.Media.RadialGradientBrush control, System.Double x = default!, System.Double y = default!, Avalonia.RelativeUnit unit = default!)  
    => control._set(() => control.Center = new Avalonia.RelativePoint(x, y, unit));
-public static Avalonia.Media.RadialGradientBrush Center(this Avalonia.Media.RadialGradientBrush control, Avalonia.Point point = default, Avalonia.RelativeUnit unit = default)  
+public static Avalonia.Media.RadialGradientBrush Center(this Avalonia.Media.RadialGradientBrush control, Avalonia.Point point = default!, Avalonia.RelativeUnit unit = default!)  
    => control._set(() => control.Center = new Avalonia.RelativePoint(point, unit));
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static Avalonia.Media.RadialGradientBrush Center(this Avalonia.Media.RadialGradientBrush control,Avalonia.RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
+=> control._setEx(Avalonia.Media.RadialGradientBrush.CenterProperty, ps, () => control.Center = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.RadialGradientBrush Center(this Avalonia.Media.RadialGradientBrush control, IBinding binding)  
@@ -38,26 +43,32 @@ public static Avalonia.Media.RadialGradientBrush Center(this Avalonia.Media.Radi
    => control._set(Avalonia.Media.RadialGradientBrush.CenterProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static Avalonia.Media.RadialGradientBrush Center<TValue>(this Avalonia.Media.RadialGradientBrush control, TValue value, FuncValueConverter<TValue, Avalonia.RelativePoint> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.RadialGradientBrush.CenterProperty, ps, () => control.Center = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.RadialGradientBrush.CenterProperty, ps, () => control.Center = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // GradientOrigin
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.RadialGradientBrush GradientOrigin(this Avalonia.Media.RadialGradientBrush control, Avalonia.RelativePoint value)  
+=> control._set(() => control.GradientOrigin = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.RadialGradientBrush GradientOrigin(this Avalonia.Media.RadialGradientBrush control, Func<Avalonia.RelativePoint> func, Action<Avalonia.RelativePoint>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
-   => control._set(Avalonia.Media.RadialGradientBrush.GradientOriginProperty, func, onChanged, expression);
-
-/*MagicalSetterGenerator*/
-public static Avalonia.Media.RadialGradientBrush GradientOrigin(this Avalonia.Media.RadialGradientBrush control,Avalonia.RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.RadialGradientBrush.GradientOriginProperty, ps, () => control.GradientOrigin = value, bindingMode, converter, bindingSource);
+   => control._set(Avalonia.Media.RadialGradientBrush.GradientOriginProperty!, func, onChanged, expression);
 
 /*ValueOverloadsSetterGenerator*/
 
-public static Avalonia.Media.RadialGradientBrush GradientOrigin(this Avalonia.Media.RadialGradientBrush control, System.Double x = default, System.Double y = default, Avalonia.RelativeUnit unit = default)  
+public static Avalonia.Media.RadialGradientBrush GradientOrigin(this Avalonia.Media.RadialGradientBrush control, System.Double x = default!, System.Double y = default!, Avalonia.RelativeUnit unit = default!)  
    => control._set(() => control.GradientOrigin = new Avalonia.RelativePoint(x, y, unit));
-public static Avalonia.Media.RadialGradientBrush GradientOrigin(this Avalonia.Media.RadialGradientBrush control, Avalonia.Point point = default, Avalonia.RelativeUnit unit = default)  
+public static Avalonia.Media.RadialGradientBrush GradientOrigin(this Avalonia.Media.RadialGradientBrush control, Avalonia.Point point = default!, Avalonia.RelativeUnit unit = default!)  
    => control._set(() => control.GradientOrigin = new Avalonia.RelativePoint(point, unit));
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static Avalonia.Media.RadialGradientBrush GradientOrigin(this Avalonia.Media.RadialGradientBrush control,Avalonia.RelativePoint value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
+=> control._setEx(Avalonia.Media.RadialGradientBrush.GradientOriginProperty, ps, () => control.GradientOrigin = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.RadialGradientBrush GradientOrigin(this Avalonia.Media.RadialGradientBrush control, IBinding binding)  
@@ -68,19 +79,25 @@ public static Avalonia.Media.RadialGradientBrush GradientOrigin(this Avalonia.Me
    => control._set(Avalonia.Media.RadialGradientBrush.GradientOriginProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static Avalonia.Media.RadialGradientBrush GradientOrigin<TValue>(this Avalonia.Media.RadialGradientBrush control, TValue value, FuncValueConverter<TValue, Avalonia.RelativePoint> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.RadialGradientBrush.GradientOriginProperty, ps, () => control.GradientOrigin = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.RadialGradientBrush.GradientOriginProperty, ps, () => control.GradientOrigin = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // RadiusX
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.RadialGradientBrush RadiusX(this Avalonia.Media.RadialGradientBrush control, Avalonia.RelativeScalar value)  
+=> control._set(() => control.RadiusX = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.RadialGradientBrush RadiusX(this Avalonia.Media.RadialGradientBrush control, Func<Avalonia.RelativeScalar> func, Action<Avalonia.RelativeScalar>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
-   => control._set(Avalonia.Media.RadialGradientBrush.RadiusXProperty, func, onChanged, expression);
+   => control._set(Avalonia.Media.RadialGradientBrush.RadiusXProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static Avalonia.Media.RadialGradientBrush RadiusX(this Avalonia.Media.RadialGradientBrush control,Avalonia.RelativeScalar value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.RadialGradientBrush.RadiusXProperty, ps, () => control.RadiusX = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.RadialGradientBrush.RadiusXProperty, ps, () => control.RadiusX = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.RadialGradientBrush RadiusX(this Avalonia.Media.RadialGradientBrush control, IBinding binding)  
@@ -91,19 +108,25 @@ public static Avalonia.Media.RadialGradientBrush RadiusX(this Avalonia.Media.Rad
    => control._set(Avalonia.Media.RadialGradientBrush.RadiusXProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static Avalonia.Media.RadialGradientBrush RadiusX<TValue>(this Avalonia.Media.RadialGradientBrush control, TValue value, FuncValueConverter<TValue, Avalonia.RelativeScalar> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.RadialGradientBrush.RadiusXProperty, ps, () => control.RadiusX = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.RadialGradientBrush.RadiusXProperty, ps, () => control.RadiusX = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // RadiusY
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.RadialGradientBrush RadiusY(this Avalonia.Media.RadialGradientBrush control, Avalonia.RelativeScalar value)  
+=> control._set(() => control.RadiusY = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.RadialGradientBrush RadiusY(this Avalonia.Media.RadialGradientBrush control, Func<Avalonia.RelativeScalar> func, Action<Avalonia.RelativeScalar>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
-   => control._set(Avalonia.Media.RadialGradientBrush.RadiusYProperty, func, onChanged, expression);
+   => control._set(Avalonia.Media.RadialGradientBrush.RadiusYProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static Avalonia.Media.RadialGradientBrush RadiusY(this Avalonia.Media.RadialGradientBrush control,Avalonia.RelativeScalar value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.RadialGradientBrush.RadiusYProperty, ps, () => control.RadiusY = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.RadialGradientBrush.RadiusYProperty, ps, () => control.RadiusY = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.RadialGradientBrush RadiusY(this Avalonia.Media.RadialGradientBrush control, IBinding binding)  
@@ -114,8 +137,9 @@ public static Avalonia.Media.RadialGradientBrush RadiusY(this Avalonia.Media.Rad
    => control._set(Avalonia.Media.RadialGradientBrush.RadiusYProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static Avalonia.Media.RadialGradientBrush RadiusY<TValue>(this Avalonia.Media.RadialGradientBrush control, TValue value, FuncValueConverter<TValue, Avalonia.RelativeScalar> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.RadialGradientBrush.RadiusYProperty, ps, () => control.RadiusY = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.RadialGradientBrush.RadiusYProperty, ps, () => control.RadiusY = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 

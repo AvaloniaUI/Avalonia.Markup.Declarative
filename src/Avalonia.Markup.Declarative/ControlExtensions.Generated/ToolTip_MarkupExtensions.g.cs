@@ -20,7 +20,7 @@ public static T ToolTip_Tip<T>(this T control, System.Object value, BindingMode?
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T ToolTip_Tip<T>(this T control, Func<System.Object> func, Action<System.Object>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.ToolTip.TipProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.ToolTip.TipProperty!, func, onChanged, expression);
 
 
  // IsOpen
@@ -31,7 +31,7 @@ public static T ToolTip_IsOpen<T>(this T control, System.Boolean value, BindingM
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T ToolTip_IsOpen<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.ToolTip.IsOpenProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.ToolTip.IsOpenProperty!, func, onChanged, expression);
 
 
  // Placement
@@ -42,7 +42,7 @@ public static T ToolTip_Placement<T>(this T control, Avalonia.Controls.Placement
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T ToolTip_Placement<T>(this T control, Func<Avalonia.Controls.PlacementMode> func, Action<Avalonia.Controls.PlacementMode>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.ToolTip.PlacementProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.ToolTip.PlacementProperty!, func, onChanged, expression);
 
 
  // HorizontalOffset
@@ -53,7 +53,7 @@ public static T ToolTip_HorizontalOffset<T>(this T control, System.Double value,
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T ToolTip_HorizontalOffset<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.ToolTip.HorizontalOffsetProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.ToolTip.HorizontalOffsetProperty!, func, onChanged, expression);
 
 
  // VerticalOffset
@@ -64,7 +64,7 @@ public static T ToolTip_VerticalOffset<T>(this T control, System.Double value, B
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T ToolTip_VerticalOffset<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.ToolTip.VerticalOffsetProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.ToolTip.VerticalOffsetProperty!, func, onChanged, expression);
 
 
  // CustomPopupPlacementCallback
@@ -75,7 +75,7 @@ public static T ToolTip_CustomPopupPlacementCallback<T>(this T control, Avalonia
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T ToolTip_CustomPopupPlacementCallback<T>(this T control, Func<Avalonia.Controls.Primitives.PopupPositioning.CustomPopupPlacementCallback> func, Action<Avalonia.Controls.Primitives.PopupPositioning.CustomPopupPlacementCallback>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.ToolTip.CustomPopupPlacementCallbackProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.ToolTip.CustomPopupPlacementCallbackProperty!, func, onChanged, expression);
 
 
  // ShowDelay
@@ -86,7 +86,7 @@ public static T ToolTip_ShowDelay<T>(this T control, System.Int32 value, Binding
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T ToolTip_ShowDelay<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.ToolTip.ShowDelayProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.ToolTip.ShowDelayProperty!, func, onChanged, expression);
 
 
  // BetweenShowDelay
@@ -97,7 +97,7 @@ public static T ToolTip_BetweenShowDelay<T>(this T control, System.Int32 value, 
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T ToolTip_BetweenShowDelay<T>(this T control, Func<System.Int32> func, Action<System.Int32>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.ToolTip.BetweenShowDelayProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.ToolTip.BetweenShowDelayProperty!, func, onChanged, expression);
 
 
  // ShowOnDisabled
@@ -108,7 +108,7 @@ public static T ToolTip_ShowOnDisabled<T>(this T control, System.Boolean value, 
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T ToolTip_ShowOnDisabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.ToolTip.ShowOnDisabledProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.ToolTip.ShowOnDisabledProperty!, func, onChanged, expression);
 
 
  // ServiceEnabled
@@ -119,7 +119,7 @@ public static T ToolTip_ServiceEnabled<T>(this T control, System.Boolean value, 
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T ToolTip_ServiceEnabled<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Control 
-   => control._set(Avalonia.Controls.ToolTip.ServiceEnabledProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.ToolTip.ServiceEnabledProperty!, func, onChanged, expression);
 
 
 

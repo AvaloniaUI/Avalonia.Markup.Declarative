@@ -39,7 +39,8 @@ public class GenerateImageComponent : ComponentBase
                                 new TextBox().Col(1)
                                     .Margin(0, 0, 10, 0)
                                     .VerticalAlignment(VerticalAlignment.Center)
-                                    .Text(Bind(ApiKey)),
+                                    .Text(Bind(ApiKey)) //old way binding
+                                    .Text(()=>ApiKey, v => ApiKey = v), //new way binding
 
                                 new TextBlock()
                                     .Margin(10, 0)

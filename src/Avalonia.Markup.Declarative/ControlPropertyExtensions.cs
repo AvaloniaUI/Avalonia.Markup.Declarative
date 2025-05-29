@@ -5,6 +5,7 @@ using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Declarative.Helpers;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
@@ -18,7 +19,8 @@ namespace Avalonia.Markup.Declarative;
 
 public static class ControlPropertyExtensions
 {
-	public static TControl _set<TControl>(this TControl control, Action setAction)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TControl _set<TControl>(this TControl control, Action setAction)
 	{
 		setAction();
 		return control;

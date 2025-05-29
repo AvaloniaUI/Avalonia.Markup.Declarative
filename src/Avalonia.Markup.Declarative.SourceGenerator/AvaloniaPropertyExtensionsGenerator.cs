@@ -172,7 +172,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         var extensionText =
             $"public static {controlTypeName} {extensionName}"
             + $"(this {controlTypeName} control, IBinding binding)"
-            + $"=>{NewLine} control._setCommonBindingEx(({valueTypeSource} value) => control.{extensionName} = value, binding);";
+            + $"=>{NewLine} control._setCommonBindingEx(({valueTypeSource}? v) => control.{extensionName} = v ?? default({valueTypeSource}), binding);";
 
         return extensionText;
     }
