@@ -5,8 +5,7 @@ namespace ReactiveSample.Views;
 public abstract class ReactiveViewBase<TViewModel> : ViewBase, IViewFor<TViewModel> where TViewModel : class
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("AvaloniaProperty", "AVP1002", Justification = "Generic avalonia property is expected here.")]
-    public static readonly StyledProperty<TViewModel?> ViewModelProperty = AvaloniaProperty
-        .Register<ReactiveViewBase<TViewModel>, TViewModel?>(nameof(ViewModel));
+    public static readonly StyledProperty<TViewModel?> ViewModelProperty = AvaloniaProperty.Register<ReactiveViewBase<TViewModel>, TViewModel?>(nameof(ViewModel));
 
     public TViewModel? ViewModel
     {

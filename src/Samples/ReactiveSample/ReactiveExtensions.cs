@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
-using System.Reactive.Linq;
 using System.Linq.Expressions;
+using System.Reactive.Linq;
 
 namespace ReactiveSample;
 
