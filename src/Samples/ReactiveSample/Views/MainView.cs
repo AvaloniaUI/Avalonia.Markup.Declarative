@@ -2,7 +2,6 @@
 using Avalonia.Styling;
 using ReactiveSample.ViewModels;
 using ReactiveUI;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 
 namespace ReactiveSample.Views;
@@ -19,7 +18,7 @@ internal class MainView : ReactiveViewBase<MainViewModel>
                     }
                     .DefaultContent(
                         new TextBlock()
-                            .Text("Default content")
+                            .Text(vm.PropertyBinding(x => x.MyProperty))
                             .HorizontalAlignment(HorizontalAlignment.Center)
                             .VerticalAlignment(VerticalAlignment.Center)
                     )
@@ -43,7 +42,7 @@ internal class MainView : ReactiveViewBase<MainViewModel>
                             .Content("Go back")
                             .Command(vm?.GoBack),
                         new TextBlock()
-                            .Text(vm.ObservableForProperty(x => x.Router.NavigationStack.Count, false, false).Select(x => x.Value.ToString()).ToBinding())
+                            .Text(vm.PropertyBinding(x => x.Router.NavigationStack.Count, x => x.Value.ToString()))
                     ])
             ]);
 }

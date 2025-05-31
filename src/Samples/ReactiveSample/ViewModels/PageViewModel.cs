@@ -6,7 +6,7 @@ namespace ReactiveSample.ViewModels;
 public partial class PageViewModel : ReactiveObject, IRoutableViewModel
 {
     [Reactive]
-    public string _myProperty = "Default Value";
+    public string _myProperty = "Page View";
 
     public IScreen HostScreen { get; }
 

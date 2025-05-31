@@ -1,10 +1,14 @@
 ﻿using ReactiveUI;
+using ReactiveUI.SourceGenerators;
 using System.Reactive;
 
 namespace ReactiveSample.ViewModels;
 
 public partial class MainViewModel : ReactiveObject, IScreen
 {
+    [Reactive]
+    public string _myProperty = "Main View";
+
     // The Router associated with this Screen.
     // Required by the IScreen interface.
     public RoutingState Router { get; } = new();
