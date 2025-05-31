@@ -1,5 +1,4 @@
-﻿using Avalonia.Platform;
-using ReactiveUI;
+﻿using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 
 namespace ReactiveSample.ViewModels;

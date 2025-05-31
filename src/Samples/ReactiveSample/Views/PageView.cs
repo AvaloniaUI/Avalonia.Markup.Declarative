@@ -1,5 +1,4 @@
-﻿using Avalonia.ReactiveUI;
-using ReactiveSample.ViewModels;
+﻿using ReactiveSample.ViewModels;
 using ReactiveUI;
 
 namespace ReactiveSample.Views;
@@ -12,10 +11,8 @@ internal class PageView : ReactiveViewBase<PageViewModel>, IViewFor<PageViewMode
     }
 
     protected override object Build(PageViewModel? vm) =>
-        new TextBlock
-        {
-            Text = "This is a page view",
-            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
-            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
-        };
+        new TextBlock()
+            .Text("This is a page view")
+            .HorizontalAlignment(HorizontalAlignment.Center)
+            .VerticalAlignment(VerticalAlignment.Center);
 }

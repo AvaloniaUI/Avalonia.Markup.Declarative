@@ -1,4 +1,5 @@
 ﻿using Avalonia.ReactiveUI;
+using Avalonia.Styling;
 using ReactiveSample.ViewModels;
 using ReactiveUI;
 using System.Reactive.Linq;
@@ -16,85 +17,44 @@ internal class MainView : ReactiveViewBase<MainViewModel>
         new Grid()
             .Rows("*, Auto")
             .Children([
-                // RoutedViewHost with DefaultContent and ViewLocator
                 new RoutedViewHost
                 {
                     ViewLocator = new AppViewLocator()
                 }
-                .DefaultContent(
-                    new TextBlock {
-                        Text = "Default content",
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center
-                    }
-                )
-                .Router(vm.ObservableForProperty((x) => x.Router).ToBinding())
-                .Row(0),
-            ])
-        ;
-        //{
-            //RowDefinitions =
-            //{
-            //    new RowDefinition(GridLength.Star),
-            //    new RowDefinition(GridLength.Auto)
-            //},
-            //Children =
-            //{
-            //    // RoutedViewHost with DefaultContent and ViewLocator
-            //    new RoutedViewHost
-            //    {
-            //        [!RoutedViewHost.RouterProperty] = new Binding("Router"),
-            //        DefaultContent = new TextBlock
-            //        {
-            //            Text = "Default content",
-            //            HorizontalAlignment = HorizontalAlignment.Center,
-            //            VerticalAlignment = VerticalAlignment.Center
-            //        },
-            //        ViewLocator = new AppViewLocator()
-            //    }.Row(0),
+                    .DefaultContent(
+                        new TextBlock()
+                            .Text("Default content")
+                            .HorizontalAlignment(HorizontalAlignment.Center)
+                            .VerticalAlignment(VerticalAlignment.Center)
+                    )
+                    .Router(new Binding("Router"))
+                    //.Router(vm.ObservableForProperty((x) => x.Router).ToBinding())
+                    .Row(0),
+                new StackPanel()
+                {
+                    Orientation = Orientation.Horizontal,
+                    Margin = new Thickness(15),
+                }
+                    .Orientation(Orientation.Horizontal)
+                    .Margin(new Thickness(15))
+                    .Styles([
+                        new Style(x => x.OfType<StackPanel>().Child().OfType<Control>())
+                            .Setter(Control.MarginProperty, new Thickness(2)),
+                        new Style(x => x.OfType<StackPanel>().Child().OfType<TextBlock>())
+                            .Setter(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center),
+                    ])
+                    .Row(1)
+                    .Children([
+                        new Button()
+                            .Content("Go next")
+                            .Command(vm?.GoNext),
+                        new Button()
+                            .Content("Go back")
+                            .Command(vm?.GoBack),
+                        new TextBlock()
+                            .Text(new Binding("Router.NavigationStack.Count"))
+                            //.Text(vm.ObservableForProperty((x) => x.Router.NavigationStack.Count).ToBinding())
+                    ])
+            ]);
 
-            //    // StackPanel with styles and controls
-            //    new StackPanel
-            //    {
-            //        Orientation = Orientation.Horizontal,
-            //        Margin = new Thickness(15),
-            //        Styles =
-            //        {
-            //            // Style for all direct child controls
-            //            new Style(x => x.OfType<StackPanel>().Child().OfType<Control>())
-            //            {
-            //                Setters =
-            //                {
-            //                    new Setter(Control.MarginProperty, new Thickness(2))
-            //                }
-            //            },
-            //            // Style for all direct child TextBlocks
-            //            new Style(x => x.OfType<StackPanel>().Child().OfType<TextBlock>())
-            //            {
-            //                Setters =
-            //                {
-            //                    new Setter(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center)
-            //                }
-            //            }
-            //        },
-            //        Children =
-            //        {
-            //            new Button
-            //            {
-            //                Content = "Go next",
-            //                //[!Button.CommandProperty] = this.BindCommand(vm, x => x.GoNext)
-            //            },
-            //            new Button
-            //            {
-            //                Content = "Go back",
-            //                //[!Button.CommandProperty] = this.BindCommand(vm, x => x.GoBack)
-            //            },
-            //            new TextBlock
-            //            {
-            //                //[!TextBlock.TextProperty] = this.OneWayBind(vm, x => x.Router.NavigationStack.Count, v => v.Text)
-            //            }
-            //        }
-            //    }.Row(1)
-            //}
-       // };
 }

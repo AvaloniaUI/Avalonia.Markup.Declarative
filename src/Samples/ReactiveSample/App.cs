@@ -5,16 +5,15 @@ using ReactiveSample.Views;
 var lifetime = new ClassicDesktopStyleApplicationLifetime { Args = args, ShutdownMode = ShutdownMode.OnLastWindowClose };
 
 var appBuilder = AppBuilder.Configure<Application>()
-    .UsePlatformDetect()
     .AfterSetup(b => b.Instance?.Styles.Add(new FluentTheme()))
+    .UsePlatformDetect()
     .UseReactiveUI()
-    .SetupWithLifetime(lifetime); // This has to run last
+    .SetupWithLifetime(lifetime);
 
-lifetime.MainWindow = new Window
-{
-    Content = new MainView()
-                .DataContext(new MainViewModel())
-};
+lifetime.MainWindow = new Window()
+                            .Content(new MainView()
+                                        .DataContext(new MainViewModel())
+                                    );
 
 #if DEBUG
 lifetime.MainWindow.AttachDevTools();
