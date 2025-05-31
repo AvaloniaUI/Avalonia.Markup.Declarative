@@ -6,7 +6,7 @@ namespace ReactiveSample;
 
 public static class ReactiveExtensions
 {
-    public static IBinding PropertyBinding<TViewModel, TProperty>(
+    public static IBinding ReactiveBinding<TViewModel, TProperty>(
         this TViewModel viewModel,
         Expression<Func<TViewModel, TProperty>> propertySelector,
         bool beforeChange = false,
@@ -18,7 +18,7 @@ public static class ReactiveExtensions
                             .ToBinding();
     }
 
-    public static IBinding PropertyBinding<TViewModel, TProperty, TResult>(
+    public static IBinding ReactiveBinding<TViewModel, TProperty, TResult>(
         this TViewModel viewModel,
         Expression<Func<TViewModel, TProperty>> propertySelector,
         Func<IObservedChange<TViewModel, TProperty>, TResult> valueSelector,

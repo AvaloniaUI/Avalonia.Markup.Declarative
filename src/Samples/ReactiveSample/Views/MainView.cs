@@ -18,7 +18,7 @@ internal class MainView : ReactiveViewBase<MainViewModel>
                     .DefaultContent(
                         new TextBlock()
                             .HorizontalAlignment(HorizontalAlignment.Center)
-                            .Text(vm.PropertyBinding(x => x.MyProperty))
+                            .Text(vm.ReactiveBinding(x => x.MyProperty))
                             .VerticalAlignment(VerticalAlignment.Center)
                     )
                     .Router(vm.Router)
@@ -41,7 +41,7 @@ internal class MainView : ReactiveViewBase<MainViewModel>
                             .Content("Go back")
                             .Command(vm.GoBack),
                         new TextBlock()
-                            .Text(vm.PropertyBinding(x => x.Router.NavigationStack.Count, x => x.Value.ToString()))
+                            .Text(vm.ReactiveBinding(x => x.Router.NavigationStack.Count, x => x.Value.ToString()))
                     ])
             ]);
 }
