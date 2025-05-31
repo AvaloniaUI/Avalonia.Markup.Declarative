@@ -1,6 +1,4 @@
 ﻿using ReactiveUI;
-using ReactiveUI.SourceGenerators;
-using System.Diagnostics.Metrics;
 using System.Reactive;
 
 namespace ReactiveSample.ViewModels;
@@ -9,8 +7,7 @@ public partial class MainViewModel : ReactiveObject, IScreen
 {
     // The Router associated with this Screen.
     // Required by the IScreen interface.
-    [Reactive]
-    private RoutingState _router = new();
+    public RoutingState Router { get; } = new();
 
     // The command that navigates a user to first view model.
     public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
@@ -30,11 +27,5 @@ public partial class MainViewModel : ReactiveObject, IScreen
         GoNext = ReactiveCommand.CreateFromObservable(
             () => Router.Navigate.Execute(new PageViewModel(this))
         );
-
-        this.ObservableForProperty(t => t.Router)
-            .Subscribe(t =>
-        {
-            //Logic using previous and new value for Bar
-        });
     }
 }
