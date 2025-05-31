@@ -3,7 +3,7 @@ using System.Reactive;
 
 namespace ReactiveSample.ViewModels;
 
-public class MainWindowViewModel : ReactiveObject, IScreen
+public class MainViewModel : ReactiveObject, IScreen
 {
     // The Router associated with this Screen.
     // Required by the IScreen interface.
@@ -15,7 +15,7 @@ public class MainWindowViewModel : ReactiveObject, IScreen
     // The command that navigates a user back.
     public ReactiveCommand<Unit, IRoutableViewModel> GoBack => Router.NavigateBack;
 
-    public MainWindowViewModel()
+    public MainViewModel()
     {
         // Manage the routing state. Use the Router.Navigate.Execute
         // command to navigate to different view models.

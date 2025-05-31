@@ -1,19 +1,18 @@
 ﻿using Avalonia.ReactiveUI;
-using Avalonia.Styling;
 using ReactiveSample.ViewModels;
 using ReactiveUI;
 using System.Reactive.Linq;
 
 namespace ReactiveSample.Views;
 
-internal class MainWindow : ReactiveViewBase<MainWindowViewModel>
+internal class MainView : ReactiveViewBase<MainViewModel>
 {
-    public MainWindow()
+    public MainView()
     {
         this.WhenActivated(disposables => { });
     }
 
-    protected override object Build(MainWindowViewModel? vm) =>
+    protected override object Build(MainViewModel? vm) =>
         new Grid()
             .Rows("*, Auto")
             .Children([
@@ -29,7 +28,7 @@ internal class MainWindow : ReactiveViewBase<MainWindowViewModel>
                         VerticalAlignment = VerticalAlignment.Center
                     }
                 )
-                .Router(new Binding(nameof(MainWindowViewModel.Router)))
+                .Router(vm.ObservableForProperty((x) => x.Router).ToBinding())
                 .Row(0),
             ])
         ;

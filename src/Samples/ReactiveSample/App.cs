@@ -12,10 +12,8 @@ var appBuilder = AppBuilder.Configure<Application>()
 
 lifetime.MainWindow = new Window
 {
-    Content = new MainWindow
-    {
-        DataContext = new MainWindowViewModel()
-    }
+    Content = new MainView()
+                .DataContext(new MainViewModel())
 };
 
 #if DEBUG
