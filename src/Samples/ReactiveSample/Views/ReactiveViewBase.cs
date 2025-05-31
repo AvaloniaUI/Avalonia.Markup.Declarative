@@ -31,10 +31,9 @@ public abstract class ReactiveViewBase<TViewModel> : ViewBase, IViewFor<TViewMod
     {
     }
 
-    protected abstract object Build(TViewModel? vm);
+    protected abstract object Build(TViewModel vm);
 
-    protected override object Build() => Build((TViewModel)DataContext);
-
+    protected override object Build() => Build((TViewModel)DataContext!);
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {

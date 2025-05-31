@@ -1,14 +1,13 @@
 ﻿using Avalonia.ReactiveUI;
 using Avalonia.Styling;
 using ReactiveSample.ViewModels;
-using ReactiveUI;
 using System.Reactive.Linq;
 
 namespace ReactiveSample.Views;
 
 internal class MainView : ReactiveViewBase<MainViewModel>
 {
-    protected override object Build(MainViewModel? vm) =>
+    protected override object Build(MainViewModel vm) =>
         new Grid()
             .Rows("*, Auto")
             .Children([
@@ -37,10 +36,10 @@ internal class MainView : ReactiveViewBase<MainViewModel>
                     .Children([
                         new Button()
                             .Content("Go next")
-                            .Command(vm?.GoNext),
+                            .Command(vm.GoNext),
                         new Button()
                             .Content("Go back")
-                            .Command(vm?.GoBack),
+                            .Command(vm.GoBack),
                         new TextBlock()
                             .Text(vm.PropertyBinding(x => x.Router.NavigationStack.Count, x => x.Value.ToString()))
                     ])

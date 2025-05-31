@@ -5,6 +5,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,10 +43,6 @@
     <Using Include="Avalonia.Themes.Fluent" />
     <Using Include="Avalonia.Layout" />
     <Using Include="Avalonia.Media" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controls\" />
   </ItemGroup>
 
 </Project>
