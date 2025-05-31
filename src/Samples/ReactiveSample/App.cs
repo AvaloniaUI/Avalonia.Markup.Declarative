@@ -1,15 +1,22 @@
-﻿using ReactiveSample.Views;
+﻿using Avalonia.ReactiveUI;
+using ReactiveSample.ViewModels;
+using ReactiveSample.Views;
 
 var lifetime = new ClassicDesktopStyleApplicationLifetime { Args = args, ShutdownMode = ShutdownMode.OnLastWindowClose };
 
 var appBuilder = AppBuilder.Configure<Application>()
     .UsePlatformDetect()
     .AfterSetup(b => b.Instance?.Styles.Add(new FluentTheme()))
-    .SetupWithLifetime(lifetime);
+    .UseReactiveUI()
+    .SetupWithLifetime(lifetime); // This has to run last
 
-lifetime.MainWindow = new Window()
-    .Title("Avalonia Reactive Sample")
-    .Content(new MainView());
+lifetime.MainWindow = new Window
+{
+    Content = new MainWindow
+    {
+        DataContext = new MainWindowViewModel()
+    }
+};
 
 #if DEBUG
 lifetime.MainWindow.AttachDevTools();
