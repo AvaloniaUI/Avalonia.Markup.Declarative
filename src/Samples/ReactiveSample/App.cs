@@ -2,7 +2,11 @@
 using ReactiveSample.ViewModels;
 using ReactiveSample.Views;
 
-var lifetime = new ClassicDesktopStyleApplicationLifetime { Args = args, ShutdownMode = ShutdownMode.OnLastWindowClose };
+var lifetime = new ClassicDesktopStyleApplicationLifetime
+{
+    Args = args,
+    ShutdownMode = ShutdownMode.OnLastWindowClose
+};
 
 var appBuilder = AppBuilder.Configure<Application>()
     .AfterSetup(b => b.Instance?.Styles.Add(new FluentTheme()))
@@ -11,9 +15,10 @@ var appBuilder = AppBuilder.Configure<Application>()
     .SetupWithLifetime(lifetime);
 
 lifetime.MainWindow = new Window()
-                            .Content(new MainView()
-                                        .DataContext(new MainViewModel())
-                                    );
+                            .Content(
+                                new MainView()
+                                    .DataContext(new MainViewModel())
+                            );
 
 #if DEBUG
 lifetime.MainWindow.AttachDevTools();
