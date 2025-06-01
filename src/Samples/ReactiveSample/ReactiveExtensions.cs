@@ -14,8 +14,8 @@ public static class ReactiveExtensions
         where TViewModel : ReactiveObject
     {
         return viewModel.ObservableForProperty(propertySelector, beforeChange, skipInitial)
-                            .Select(x => x.GetValue())
-                            .ToBinding();
+                        .Value()
+                        .ToBinding();
     }
 
     public static IBinding ReactiveBinding<TViewModel, TProperty, TResult>(
@@ -29,5 +29,14 @@ public static class ReactiveExtensions
         return viewModel.ObservableForProperty(propertySelector, beforeChange, skipInitial)
                         .Select(valueSelector)
                         .ToBinding();
+    }
+}
+
+public static class AvaloniaObjectExtensions
+{
+    public static T Bind2<T>(this T obj, AvaloniaProperty prop, IObservable<object?> observable) where T : Control
+    {
+        obj.Bind(prop, observable);
+        return obj;
     }
 }
