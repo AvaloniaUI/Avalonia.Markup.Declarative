@@ -31,12 +31,3 @@ public static class ReactiveExtensions
                         .ToBinding();
     }
 }
-
-public static class AvaloniaObjectExtensions
-{
-    public static T Bind2<T>(this T obj, AvaloniaProperty prop, IObservable<object?> observable) where T : Control
-    {
-        obj.Bind(prop, observable);
-        return obj;
-    }
-}
