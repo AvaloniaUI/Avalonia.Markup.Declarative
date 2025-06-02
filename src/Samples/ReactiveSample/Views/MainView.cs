@@ -35,12 +35,13 @@ internal class MainView : ReactiveViewBase<MainViewModel>
                     .Row(1)
                     .Children([
                         new Button()
-                            .Content("Go next")
-                            .Command(vm.GoNext),
-                        new Button()
                             .Content("Go back")
                             .Command(vm.GoBack),
+                        new Button()
+                            .Content("Go next")
+                            .Command(vm.GoNext),
                         new TextBlock()
+                            .Padding(5)
                             .Text(vm.ReactiveBinding(x => x.Router.NavigationStack.Count, x => x.Value.ToString()))
                     ])
             ]);

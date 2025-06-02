@@ -7,7 +7,7 @@ namespace ReactiveSample.ViewModels;
 public partial class MainViewModel : ReactiveObject, IScreen
 {
     [Reactive]
-    public string MyProperty { get; set; } = "Main View";
+    private string _myProperty = "Main View";
 
     // The Router associated with this Screen.
     // Required by the IScreen interface.
@@ -29,7 +29,17 @@ public partial class MainViewModel : ReactiveObject, IScreen
         // your view models, or to reuse existing view models.
         //
         GoNext = ReactiveCommand.CreateFromObservable(
-            () => Router.Navigate.Execute(new PageViewModel(this))
+            () =>
+            {
+                if (Router.NavigationStack.Count == 0)
+                {
+                    return Router.Navigate.Execute(new PageViewModel(this));
+                }
+                else
+                {
+                    return Router.Navigate.Execute(new PageViewModel2(this) { MyProperty = "Page View " + (Router.NavigationStack.Count + 1)});
+                }
+            }
         );
     }
 }
