@@ -7,7 +7,7 @@ namespace ReactiveSample.ViewModels;
 public partial class MainViewModel : ReactiveObject, IScreen
 {
     [Reactive]
-    private string _myProperty = "Main View";
+    public partial string MyProperty { get; set; } = "Main View";
 
     // The Router associated with this Screen.
     // Required by the IScreen interface.
