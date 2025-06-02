@@ -1,7 +1,9 @@
-﻿using System;
+﻿//prevent from warning "Method 'OnPropertyChanged' do not invoke base.OnPropertyChanged" - OnPropertyChanged is abstract
+#pragma warning disable AVA2001
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Avalonia.Styling;
 
 namespace Avalonia.Markup.Declarative;
 

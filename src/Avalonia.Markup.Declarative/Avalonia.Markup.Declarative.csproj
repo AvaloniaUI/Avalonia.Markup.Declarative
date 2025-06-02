@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFrameworks>net9.0;net8.0</TargetFrameworks>
 		<IsPackable>true</IsPackable>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
@@ -17,7 +17,7 @@
 		<PackageTags>avalonia;avaloniaui;mvvm;mvp;csharpmarjup;android;ios;mac;forms;wpf;net;netstandard;net461;uwp;xamarin</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
-
+	
 	<ItemGroup>
 		<InternalsVisibleTo Include="Avalonia.Markup.Declarative.Tests" />
 	</ItemGroup>
@@ -27,7 +27,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="11.1.3" />
+		<PackageReference Include="System.Collections.Immutable" Version="9.0.0" />
+		<PackageReference Include="Avalonia" Version="11.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -37,8 +38,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="$(OutputPath)/$(AssemblyName).SourceGenerator.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<!-- Package the generator in the analyzer directory of the nuget package -->
-		<None Include="$(OutputPath)/$(AssemblyName).SourceGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+		<None Include="../Avalonia.Markup.Declarative.SourceGenerator/bin/$(Configuration)/netstandard2.0/Avalonia.Markup.Declarative.SourceGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -49,7 +54,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ControlExtensions.Generated\" />
+		<Folder Include="ControlExtensions.Generated\" />
 	</ItemGroup>
-
 </Project>

@@ -141,12 +141,12 @@ public class Component : ComponentBase
 By default *Avalonia.Markup.Declarative* contains only extension from Avalonia Framework controls and also has source generator, that adds Extensions from sources of your project. 
 But sometimes you need to use third-party controls form Nuget Packages. For that cases you need to use AvaloniaExtensionGenerator tool ( https://www.nuget.org/packages/AvaloniaExtensionGenerator/ ).
 
-##Installation
+## Installation
 ```
 dotnet tool install --global AvaloniaExtensionGenerator
 ```
 
-##Usage
+## Usage
 
 tool should be run from the folder where **.csproj** file is located 
 ```

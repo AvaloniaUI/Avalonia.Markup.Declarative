@@ -1,7 +1,10 @@
 using Avalonia.Markup.Declarative.SourceGenerator;
 using AvaloniaExtensionGenerator.Generators;
 using Microsoft.CodeAnalysis;
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace AvaloniaExtensionGenerator.ExtensionInfos;
 
@@ -21,6 +24,7 @@ public class EventExtensionInfo : IMemberExtensionInfo
     public string GenericArg { get; set; } = "";
 
     public bool IsRoutedEvent { get; set; }
+    public bool IsObsolete { get; set; }
 
     public bool HasStandardSignature =>
         EventParameterTypes.Count == 2 && EventParameterTypes[0] == "System.Object" &&
@@ -43,6 +47,7 @@ public class EventExtensionInfo : IMemberExtensionInfo
         ControlTypeName = ControlType.ToString();
         EventName = EventInfo.Name;
         MemberName = EventName;
+        IsObsolete = EventInfo.GetCustomAttribute<ObsoleteAttribute>() != null;
         EventHandler = EventInfo.Type.ToString();
 
         var methodInfo = eventInfo.Type.GetMembers("Invoke").FirstOrDefault();

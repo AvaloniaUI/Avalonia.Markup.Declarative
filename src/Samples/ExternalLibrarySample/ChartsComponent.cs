@@ -12,18 +12,30 @@ public class ChartsComponent() : ComponentBase
 
     //Markup
     protected override object Build() =>
-        new Grid().Cols("150, *")
+        new Grid().Cols("Auto, *")
             .Children(
-                new Button()
-                    .Content("Update data")
-                    .VerticalAlignment(VerticalAlignment.Top)
-                    .HorizontalAlignment(HorizontalAlignment.Center)
-                    .Margin(top:16)
-                    .OnClick(_ =>
-                    {
-                        ViewModel?.UpdateData();
-                        StateHasChanged();
-                    }),
+                new StackPanel().Children(
+                    new Button()
+                        .Content("Update data")
+                        .VerticalAlignment(VerticalAlignment.Top)
+                        .HorizontalAlignment(HorizontalAlignment.Center)
+                        .Margin(top: 16)
+                        .OnClick(_ =>
+                        {
+                            ViewModel?.UpdateData();
+                            StateHasChanged();
+                        }),
+
+                    new ColorPicker()
+                        .Margin(0, 16)
+                        .OnColorChanged(c =>
+                        {
+                            ViewModel?.UpdateColor(c);
+                            StateHasChanged();
+                        })
+                        .BorderThickness(1)
+                        .BorderBrush(Brushes.Gray)
+                ),
 
                 new CartesianChart().Col(1)
                     .Series(() => ViewModel?.Series)

@@ -103,6 +103,17 @@ public class MainView : ViewBase
                     ),
 
                 new TabItem()
+                    .Header("Treeview control")
+                    .Content(
+                        new Border()
+                            .BorderBrush(Brushes.Gray)
+                            .BorderThickness(1)
+                            .Child(
+                                new TreeViewSampleView()
+                            )
+                    ),
+
+                new TabItem()
                     .Header("Item control")
                     .Content(
                         new Border()
@@ -112,6 +123,7 @@ public class MainView : ViewBase
                                 new ItemControlSampleView()
                             )
                     ),
+
 
                 new TabItem().Header("Custom controls")
                     .Content(

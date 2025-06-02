@@ -7,19 +7,22 @@ public class ItemControlSampleView : ComponentBase
             .Children(
                 new ListBox()
                     .HorizontalAlignment(HorizontalAlignment.Center)
-                    .ItemsSource(Bind(Items))
+                    .ItemsSource(() => Items)
                     .ItemTemplate<string>(item =>
                         //needed to keep current view context for lambda bindings
                         new FuncComponent<string>(item, s =>
                             new TextBlock()
-                            .Background(Brushes.Beige)
-                            .Text(() => s))
+                                .Background(Brushes.Beige)
+                                .Text(() => s))
                     )
                     .SelectedItem(() => SelectedItem, v => SelectedItem = (string)v),
 
                 new TextBlock()
                     .HorizontalAlignment(HorizontalAlignment.Center)
-                    .Text(() => SelectedItem)
+                    .Text(() => SelectedItem),
+                new TextBlock()
+                    .HorizontalAlignment(HorizontalAlignment.Center)
+                    .Text(Items2.Count.ToString())
             );
 
     private string _selectedItem = "one";
@@ -34,10 +37,12 @@ public class ItemControlSampleView : ComponentBase
         }
     }
 
-    public List<string> Items { get; set; } = new()
-    {
+    public List<string> Items2 { get; set; } = null!;
+
+    public List<string> Items { get; set; } =
+    [
         "one",
         "two",
         "four"
-    };
+    ];
 }

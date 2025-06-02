@@ -1,4 +1,7 @@
-﻿using System.Collections.Immutable;
+﻿#nullable enable
+
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -7,12 +10,20 @@ namespace Avalonia.Markup.Declarative.SourceGenerator;
 
 internal static class MarkupTypeHelpers
 {
-    //internal static ImmutableArray<ClassDeclarationSyntax> FindAvaloniaMarkupViews(Compilation compilation)
-    //{
-    //    IEnumerable<SyntaxNode> allNodes = compilation.SyntaxTrees.SelectMany(s => s.GetRoot().DescendantNodes());
-    //    IEnumerable<ClassDeclarationSyntax> allClasses = allNodes
-    //        .Where(d => d.IsKind(SyntaxKind.ClassDeclaration))
-    //        .OfType<ClassDeclarationSyntax>();
+    internal const string NewLine = "\n";
+
+    internal static bool IsAvaloniaMarkupView(INamedTypeSymbol typeSymbol)
+    {
+        return typeSymbol.AllInterfaces
+               .Any(x => x.Name == "IDeclarativeViewBase");
+    }
+
+    internal static ImmutableArray<ClassDeclarationSyntax> FindAvaloniaMarkupViews(Compilation compilation)
+    {
+        IEnumerable<SyntaxNode> allNodes = compilation.SyntaxTrees.SelectMany(s => s.GetRoot().DescendantNodes());
+        IEnumerable<ClassDeclarationSyntax> allClasses = allNodes
+            .Where(d => d.IsKind(SyntaxKind.ClassDeclaration))
+            .OfType<ClassDeclarationSyntax>();
 
     //    return allClasses
     //        .Where(type => IsGenerateExtensionsView(compilation, type))
@@ -77,13 +88,22 @@ internal static class MarkupTypeHelpers
         }
     }
 
-    /// <summary>
-    /// Gets the Symbol Namespace
-    /// </summary>
-    /// <param name="ns"></param>
-    /// <returns></returns>
-    internal static string GetFullNamespace(this ISymbol ns)
+    internal static string GetPropertyTypeName(PropertyDeclarationSyntax property, SemanticModel semanticModel)
     {
-        return string.IsNullOrEmpty(ns?.ContainingNamespace?.Name) ? "" : ns.ContainingNamespace.ToString();
+        var typeInfo = semanticModel.GetTypeInfo(property.Type);
+        return typeInfo.Type?.ToDisplayString() ?? property.Type.ToString();
+    }
+
+    internal static string GetNullableLambdaParameterTypeName(PropertyDeclarationSyntax property, SemanticModel semanticModel)
+    {
+        var typeInfo = semanticModel.GetTypeInfo(property.Type);
+        var typeSymbol = typeInfo.Type;
+
+        if (typeSymbol == null)
+            return property.Type + "?";
+
+        var nullableTypeSymbol = typeSymbol.WithNullableAnnotation(NullableAnnotation.Annotated);
+
+        return nullableTypeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
     }
 }
