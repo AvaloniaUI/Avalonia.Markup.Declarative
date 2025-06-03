@@ -1,5 +1,4 @@
 ﻿using ReactiveSample.ViewModels;
-using System.Diagnostics.CodeAnalysis;
 
 namespace ReactiveSample.Views;
 
