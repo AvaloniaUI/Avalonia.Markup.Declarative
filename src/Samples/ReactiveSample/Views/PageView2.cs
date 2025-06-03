@@ -1,4 +1,6 @@
-﻿using ReactiveSample.ViewModels;
+﻿using Avalonia.Markup.Declarative;
+using Avalonia.Styling;
+using ReactiveSample.ViewModels;
 using ReactiveUI;
 using System.Reactive.Disposables;
 
@@ -10,22 +12,26 @@ internal class PageView2 : ReactiveViewBase<PageViewModel2>
     private TextBox tb2 = null!;
     private TextBox tb3 = null!;
 
+    protected override StyleGroup? BuildStyles() =>
+    [
+         new Style(x => x.Is<TextBlock>())
+             .Setter(Control.HorizontalAlignmentProperty, HorizontalAlignment.Center)
+             .Setter(Control.VerticalAlignmentProperty, VerticalAlignment.Center),
+         new Style(x => x.Is<TextBox>())
+             .Setter(Control.HorizontalAlignmentProperty, HorizontalAlignment.Center)
+             .Setter(Control.VerticalAlignmentProperty, VerticalAlignment.Center),
+    ];
+
     protected override object Build(PageViewModel2 vm)
     {
         var controls = new StackPanel()
             .Children([
                 new TextBlock()
-                    .Ref(out tb1)
-                    .HorizontalAlignment(HorizontalAlignment.Center)
-                    .VerticalAlignment(VerticalAlignment.Center),
+                    .Ref(out tb1),
                 new TextBox()
-                    .Ref(out tb2)
-                    .HorizontalAlignment(HorizontalAlignment.Center)
-                    .VerticalAlignment(VerticalAlignment.Center),
+                    .Ref(out tb2),
                 new TextBox()
-                    .Ref(out tb3)
-                    .HorizontalAlignment(HorizontalAlignment.Center)
-                    .VerticalAlignment(VerticalAlignment.Center)
+                    .Ref(out tb3),
             ]);
 
         this.WhenActivated(disposable =>
