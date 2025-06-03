@@ -17,8 +17,8 @@ internal class MainView : ReactiveViewBase<MainViewModel>
                     }
                     .DefaultContent(
                         new TextBlock()
+                            .ReactiveBinding(TextBox.TextProperty, vm, x => x.MyProperty)
                             .HorizontalAlignment(HorizontalAlignment.Center)
-                            .Text(vm.ReactiveBinding(x => x.MyProperty))
                             .VerticalAlignment(VerticalAlignment.Center)
                     )
                     .Router(vm.Router)
@@ -42,7 +42,7 @@ internal class MainView : ReactiveViewBase<MainViewModel>
                             .Command(vm.GoNext),
                         new TextBlock()
                             .Padding(5)
-                            .Text(vm.ReactiveBinding(x => x.Router.NavigationStack.Count, x => x.Value.ToString()))
+                            .ReactiveBinding(TextBlock.TextProperty, vm, x => x.Router.NavigationStack.Count, null, x => x.ToString())
                     ])
             ]);
 }

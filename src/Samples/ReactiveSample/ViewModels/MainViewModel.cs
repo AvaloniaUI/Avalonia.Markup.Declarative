@@ -33,7 +33,7 @@ public partial class MainViewModel : ReactiveObject, IScreen
             {
                 if (Router.NavigationStack.Count == 0)
                 {
-                    return Router.Navigate.Execute(new PageViewModel(this));
+                    return Router.Navigate.Execute(new PageViewModel1(this));
                 }
                 else
                 {

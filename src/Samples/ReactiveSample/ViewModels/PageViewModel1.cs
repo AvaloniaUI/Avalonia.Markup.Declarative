@@ -3,16 +3,16 @@ using ReactiveUI.SourceGenerators;
 
 namespace ReactiveSample.ViewModels;
 
-public partial class PageViewModel : ReactiveObject, IRoutableViewModel
+public partial class PageViewModel1 : ReactiveObject, IRoutableViewModel
 {
     [Reactive]
-    public partial string MyProperty { get; set; } = "Page View";
+    public partial string MyProperty { get; set; } = "Page View1";
 
     public IScreen HostScreen { get; }
 
     public string? UrlPathSegment => "page";
 
-    public PageViewModel(IScreen screen)
+    public PageViewModel1(IScreen screen)
     {
         HostScreen = screen;
     }
