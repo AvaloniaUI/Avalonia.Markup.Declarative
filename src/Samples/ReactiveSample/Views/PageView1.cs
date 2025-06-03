@@ -21,8 +21,8 @@ internal class PageView1 : ReactiveViewBase<PageViewModel1>
                 new TextBlock()
                     .ReactiveBinding(TextBox.TextProperty, vm, x => x.MyProperty),
                 new TextBox()
-                    .ReactiveBinding(TextBox.TextProperty, vm, x => x.MyProperty, x => vm.MyProperty = x!),
+                    .ReactiveBinding(TextBox.TextProperty, vm, x => x.MyProperty, x => vm.MyProperty = x ?? ""),
                 new TextBox()
-                    .ReactiveBinding(TextBox.TextProperty, vm, x => x.MyProperty, x => vm.MyProperty = x!),
+                    .ReactiveBinding(TextBox.TextProperty, vm, x => x.MyProperty, x => vm.MyProperty = x ?? ""),
             ]);
 }

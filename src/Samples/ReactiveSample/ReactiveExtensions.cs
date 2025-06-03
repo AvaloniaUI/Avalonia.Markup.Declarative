@@ -21,33 +21,23 @@ public static class ReactiveExtensions
     /// <param name="valueSelector">Optional: A function to convert the view model property value to the control property value.</param>
     /// <returns>The control instance, for chaining.</returns>
     public static TControl ReactiveBinding<TControl, TViewModel, TValue, TValue2>(this TControl control,
-        AvaloniaProperty<TValue> prop,
+        AvaloniaProperty<TValue?> prop,
         TViewModel model,
-        Expression<Func<TViewModel, TValue2>> propertySelector,
-        Action<TValue>? onChange,
-        Func<TValue2, TValue>? valueSelector = null) where TControl : AvaloniaObject where TViewModel : ReactiveObject
+        Expression<Func<TViewModel, TValue2?>> propertySelector,
+        Action<TValue?>? onChange,
+        Func<TValue2?, TValue?>? valueSelector = null) where TControl : AvaloniaObject where TViewModel : ReactiveObject
     {
         //One Way
         model.ObservableForProperty(propertySelector, skipInitial: false).Value()
              .SubscribeSafe(new AnonymousObserver<TValue2?>(v =>
             {
-                if (v == null) return;
-
-                if (valueSelector == null)
-                    control.SetValue(prop, v);
-                else
-                    control.SetValue(prop, valueSelector(v));
+                control.SetValue(prop, valueSelector == null ? v : valueSelector(v));
             }));
 
         //Two Way
         if (onChange != null)
         {
-            control.GetObservable(prop)
-                .SubscribeSafe(new AnonymousObserver<TValue?>(v =>
-                {
-                    if (v == null) return;
-                    onChange!.Invoke(v);
-                }));
+            control.GetObservable(prop).SubscribeSafe(new AnonymousObserver<TValue?>(onChange.Invoke));
         }
 
         return control;
@@ -66,10 +56,10 @@ public static class ReactiveExtensions
     /// <param name="onChange">Optional: An action to invoke when the control property changes (for two-way binding).</param>
     /// <returns>The control instance, for chaining.</returns>
     public static TControl ReactiveBinding<TControl, TViewModel, TValue>(this TControl control,
-        AvaloniaProperty<TValue> prop,
+        AvaloniaProperty<TValue?> prop,
         TViewModel model,
-        Expression<Func<TViewModel, TValue>> propertySelector,
-        Action<TValue>? onChange = null) where TControl : Control where TViewModel : ReactiveObject
+        Expression<Func<TViewModel, TValue?>> propertySelector,
+        Action<TValue?>? onChange = null) where TControl : Control where TViewModel : ReactiveObject
     {
         ReactiveBinding(control, prop, model, propertySelector, onChange, null);
 
