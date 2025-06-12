@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls.Templates;
 using Avalonia.Styling;
 
-namespace AvaloniaMarkupSample;
+namespace AvaloniaMarkupSample.CommonSamples;
 
 public class StylesSampleView : ViewBase
 {
@@ -26,7 +26,7 @@ public class StylesSampleView : ViewBase
 
                 new Button()
                     .Classes("nested-button")
-                    .HorizontalAlignment(Avalonia.Layout.HorizontalAlignment.Center)
+                    .HorizontalAlignment(HorizontalAlignment.Center)
                     .Content("Hello styles!")
                     .Height(50)
                     .Styles(
@@ -38,7 +38,7 @@ public class StylesSampleView : ViewBase
                             .Background(Brushes.Red)),
 
                 new Button()
-                    .HorizontalAlignment(Avalonia.Layout.HorizontalAlignment.Center)
+                    .HorizontalAlignment(HorizontalAlignment.Center)
                     .Content("Unstyled buton")
                     .Width(150)
             });

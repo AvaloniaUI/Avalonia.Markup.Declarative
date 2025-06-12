@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls.Primitives;
+using AvaloniaMarkupSample.CommonSamples;
 using AvaloniaMarkupSample.MvuSample;
 using AvaloniaMarkupSample.MvvmSample;
 
@@ -6,6 +7,13 @@ namespace AvaloniaMarkupSample;
 
 public class MainView : ViewBase
 {
+    protected override StyleGroup? BuildStyles() =>
+    [
+        new Style<Border>()
+            .BorderBrush(Brushes.Gray)
+            .BorderThickness(1)
+    ];
+
     protected override object Build() =>
         new TabControl()
             .SelectedIndex(0)
@@ -46,83 +54,45 @@ public class MainView : ViewBase
                 new TabItem()
                     .Header("Dock sample")
                     .Content(
-                        new Border()
-                            .BorderBrush(Brushes.Gray)
-                            .BorderThickness(1)
-                            .Child(
-                                new DockPanel()
-                                    .LastChildFill(true)
-                                    .Children(
-                                        new TextBox().Text("Left1").Dock(Dock.Left),
-                                        new TextBox().Text("Right").Dock(Dock.Right),
-                                        new TextBox().Text("Left2").Dock(Dock.Left)))
+                        new Border().Child(
+                            new DockPanel()
+                                .LastChildFill(true)
+                                .Children(
+                                    new TextBox().Text("Left1").Dock(Dock.Left),
+                                    new TextBox().Text("Right").Dock(Dock.Right),
+                                    new TextBox().Text("Left2").Dock(Dock.Left)))
                     ),
 
                 new TabItem()
                     .Header("MVVM")
-                    .Content(
-                        new Border()
-                            .BorderBrush(Brushes.Gray)
-                            .BorderThickness(1)
-                            .Child(
-                                new MvvmSampleView()
-                            )
+                    .Content(new Border().Child(new MvvmSampleView())
                     ),
 
                 new TabItem()
                     .Header("MVU")
-                    .Content(
-                        new Border()
-                            .BorderBrush(Brushes.Gray)
-                            .BorderThickness(1)
-                            .Child(
-                                new SampleMvuView()
-                            )
+                    .Content(new Border().Child(new SampleMvuView())
                     ),
 
                 new TabItem()
                     .Header("Canvas sample")
-                    .Content(
-                        new Border()
-                            .BorderBrush(Brushes.Gray)
-                            .BorderThickness(1)
-                            .Child(
-                                new CanvasSampleMvuView()
-                            )
+                    .Content(new Border().Child(new CanvasSampleMvuView())
                     ),
 
                 new TabItem()
                     .Header("Styles")
-                    .Content(
-                        new Border()
-                            .BorderBrush(Brushes.Gray)
-                            .BorderThickness(1)
-                            .Child(
-                                new StylesSampleView()
-                            )
-                    ),
+                    .Content(new Border().Child(new StylesSampleView())),
 
                 new TabItem()
                     .Header("Treeview control")
-                    .Content(
-                        new Border()
-                            .BorderBrush(Brushes.Gray)
-                            .BorderThickness(1)
-                            .Child(
-                                new TreeViewSampleView()
-                            )
-                    ),
+                    .Content(new Border().Child(new TreeViewSampleView())),
 
                 new TabItem()
                     .Header("Item control")
-                    .Content(
-                        new Border()
-                            .BorderBrush(Brushes.Gray)
-                            .BorderThickness(1)
-                            .Child(
-                                new ItemControlSampleView()
-                            )
-                    ),
+                    .Content(new Border().Child(new ItemControlSampleView())),
+
+                new TabItem()
+                    .Header("OpenGL view")
+                    .Content(new Border().Child(new OpenGlView())),
 
 
                 new TabItem().Header("Custom controls")

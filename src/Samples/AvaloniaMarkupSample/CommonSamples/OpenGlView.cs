@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace OpenGlSample;
+namespace AvaloniaMarkupSample.CommonSamples;
 
 //prevent from trimming [injected] services by native aot compilation
 [method: DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(OpenGlView))]

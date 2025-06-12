@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Avalonia.Controls.Templates;
 
-namespace AvaloniaMarkupSample;
+namespace AvaloniaMarkupSample.CommonSamples;
 
 public class TreeViewSampleView : ComponentBase
 {
