@@ -33,13 +33,13 @@ public class SampleMvuView : ComponentBase
                             .Text("NamedTextBlock"),
 
                         new TextBlock()
-                            .Text(Bind(MyProperty)),
+                            .Text(() => MyProperty),
 
                         new TextBlock()
-                            .Text(Bind(State.StateProperty)),
+                            .Text(() => State.StateProperty),
 
                         new Button()
-                            .Content(Bind(MyNotifiedProperty))
+                            .Content(() => MyNotifiedProperty)
                             .OnClick(OnButtonClick),
 
                         new Button()
@@ -47,10 +47,10 @@ public class SampleMvuView : ComponentBase
                             .OnClick(OnButton2Click),
 
                         new Border()
-                            .Background(Bind(BorderColor))
+                            .Background(() => BorderColor)
                             .Child(
                                 new Component()
-                                    .InnerContent(Bind(MvuComponentParam))
+                                    .InnerContent(() => MvuComponentParam)
                             ),
 
                         new Button()

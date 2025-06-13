@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls.Primitives;
+using Avalonia.Styling;
 using AvaloniaMarkupSample.CommonSamples;
 using AvaloniaMarkupSample.MvuSample;
 using AvaloniaMarkupSample.MvvmSample;
@@ -9,7 +10,7 @@ public class MainView : ViewBase
 {
     protected override StyleGroup? BuildStyles() =>
     [
-        new Style<Border>()
+        new Style<Border>(s => s.OfType<TabItem>().Child())
             .BorderBrush(Brushes.Gray)
             .BorderThickness(1)
     ];

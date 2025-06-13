@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Avalonia.Controls;
+using Avalonia.Threading;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using Avalonia.Controls;
-using Avalonia.Threading;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -35,6 +36,8 @@ public abstract class ViewBase<TViewModel> : ViewBase
 public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 {
     internal List<ViewPropertyComputedState> __viewComputedStates { get; set; } = [];
+    private INotifyPropertyChanged? _currentObservedDataContext;
+
 
     private INameScope? _nameScope;
 
@@ -107,19 +110,68 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
         }
     }
 
+    /// <summary>
+    /// Overrides Avalonia's OnDataContextChanged to handle ViewModel property changes.
+    /// </summary>
+    protected override void OnDataContextChanged(EventArgs e)
+    {
+        base.OnDataContextChanged(e); // Вызываем базовый метод
+
+        if (_currentObservedDataContext != null)
+        {
+            _currentObservedDataContext.PropertyChanged -= OnViewModelPropertyChanged;
+            _currentObservedDataContext = null;
+        }
+
+        if (DataContext is INotifyPropertyChanged newContext)
+        {
+            _currentObservedDataContext = newContext;
+            _currentObservedDataContext.PropertyChanged += OnViewModelPropertyChanged;
+        }
+
+        RecomputeAllBindings();
+    }
+    /// <summary>
+    /// Handles PropertyChanged event from the DataContext.
+    /// </summary>
+    protected void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        Dispatcher.UIThread.InvokeAsync(RecomputeAllBindings, DispatcherPriority.Normal);
+    }
+
+    /// <summary>
+    /// Recomputes all registered computed bindings in the view.
+    /// </summary>
+    protected void RecomputeAllBindings()
+    {
+        foreach (var state in __viewComputedStates.ToList()) 
+            state.OnPropertyChanged();
+    }
+
     #region Hot reload stuff
     public void Reload()
     {
         Dispatcher.UIThread.InvokeAsync(() =>
         {
+            // clean DataContext subscriptions and clear all computed states
+            if (_currentObservedDataContext != null)
+            {
+                _currentObservedDataContext.PropertyChanged -= OnViewModelPropertyChanged;
+                _currentObservedDataContext = null;
+            }
+
             __viewComputedStates.Clear();
             OnBeforeReload();
             Child = null;
             VisualChildren.Clear();
             _nameScope = null;
 
+            var oldDataContext = DataContext; 
+            DataContext = null; // guarantee that OnDataContextChanged is called
+
             OnCreatedCore();
             Initialize();
+            DataContext = oldDataContext; // set DataContext back
 
             InvalidateArrange();
             InvalidateMeasure();
@@ -141,9 +193,14 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     {
         base.OnDetachedFromVisualTree(e);
         HotReloadManager.UnregisterInstance(this);
-    }
 
+        if (_currentObservedDataContext == null) return;
+
+        _currentObservedDataContext.PropertyChanged -= OnViewModelPropertyChanged;
+        _currentObservedDataContext = null;
+    }
     #endregion
+
 }
 
 internal class ViewBuildContext : IDisposable
@@ -182,7 +239,7 @@ internal class ViewBuildContext : IDisposable
         //    Debug.WriteLine($"Poped view {_currentContext._view.GetType().Name}");
     }
 
-    public static string GetViewStackString() => string.Join("/", ViewsStack.ToArray().Reverse().Select(x=>x._view.GetType().Name));
+    public static string GetViewStackString() => string.Join("/", ViewsStack.ToArray().Reverse().Select(x => x._view.GetType().Name));
 }
 
 internal enum ViewBuildContextState

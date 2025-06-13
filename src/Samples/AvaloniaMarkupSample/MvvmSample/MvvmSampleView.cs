@@ -2,29 +2,18 @@
 
 public class MvvmSampleView() : ViewBase<MvvmSampleViewModel>(new MvvmSampleViewModel())
 {
-    #region NewValue Styled Avalonia Property
-    public string? NewValue
-    {
-        get => GetValue(NewValueProperty);
-        set => SetValue(NewValueProperty, value);
-    }
-
-    public static readonly StyledProperty<string?> NewValueProperty =
-        AvaloniaProperty.Register<MvvmSampleView, string?>
-        (
-            nameof(NewValue)
-        );
-    #endregion NewValue Styled Avalonia Property
-
-    protected override object Build(MvvmSampleViewModel vm) =>
+    protected override object Build(MvvmSampleViewModel? vm) =>
         new StackPanel()
             .Children(
                 new TextBlock()
-                    .Text(@vm.MyObject.MyProperty),
+                    .Text(() => vm?.MyObject.MyProperty ?? ""),
 
                 new Button()
                     .Content("Execute Command")
-                    .Command(new Binding(nameof(vm.MyCommand)))
-                    .CommandParameter(new Binding() { Source = vm })
+                    .Command(new Binding(nameof(vm.MyCommand))) //it demonstrates build in Avalonia Command binding to method mechanism, when you don't need to have ICommand object and pass method name directly
+                    .CommandParameter(new Binding { Source = vm })
+                    //but with Avalonia.Markup.Declarative you can just call
+                    //.OnClick(args => vm.MyCommand(vm))
+
             );
 }
