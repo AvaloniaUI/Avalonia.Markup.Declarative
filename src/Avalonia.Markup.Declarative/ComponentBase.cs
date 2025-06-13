@@ -49,7 +49,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         : base(deferredLoading)
     {
     }
-
+    
     protected override void OnCreated()
     {
         InjectServices();
@@ -179,13 +179,16 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             _dependentViews.Add(view);
     }
 
+    #region ObsoleteMvuBinding
+
     [Obsolete("This is old binding method relies on Reflection. Use lambda expressions instead.")]
     protected Binding Bind(object value, BindingMode bindingMode = BindingMode.Default, [CallerArgumentExpression(nameof(value))] string? valueExpressionString = null)
     {
         return CreateMvuBinding(value, bindingMode, valueExpressionString);
     }
 
-    internal Binding CreateMvuBinding(object value, BindingMode? bindingMode, string? valueExpressionString)
+    [Obsolete("This is old binding method relies on Reflection.")]
+    private Binding CreateMvuBinding(object value, BindingMode? bindingMode, string? valueExpressionString)
     {
         object? bindingSource = this;
         var useStateValueAsSource = false;
@@ -219,13 +222,17 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         };
     }
 
+    [Obsolete("This is old binding method relies on Reflection.")]
     public class MvuBinding : Binding
     {
         public object? Value { get; set; }
     }
 
+    [Obsolete("This is old binding method relies on Reflection.")]
     private ViewPropertyState? FindStateForBindingString(string stateName) =>
         _localPropertyStates?.FirstOrDefault(x => x.Name == stateName);
+
+    #endregion
 
     public new event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)

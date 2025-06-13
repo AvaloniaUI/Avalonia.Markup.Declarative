@@ -33,9 +33,11 @@ public class TestViewModel : INotifyPropertyChanged
 public class TestView(TestViewModel vm) : ViewBase<TestViewModel>(vm)
 {
     protected override object Build(TestViewModel? vm) =>
-        new TextBlock()
-            .Text(() => vm?.MyObject.MyProperty ?? "")
-            .Ref(out MyTextBlock);
+        new StackPanel().Children(
+            new TextBlock()
+                .Text(() => vm?.MyObject.MyProperty ?? "", val => vm!.MyObject = new MyObject(val))
+                .Ref(out MyTextBlock)
+        );
 
     public TextBlock MyTextBlock = null!; // Using a field to check it's value in tests
 }
@@ -69,9 +71,24 @@ public class ViewBaseBindingTests
         // Act: update the ViewModel
         vm.MyCommand(null);
 
-        // Force property changed propagation if needed
+        // Assert: TextBlock.Text should reflect the new value
+        Assert.Equal(vm.MyObject.MyProperty, view.MyTextBlock.Text);
+    }
+
+    [Fact]
+    public void ViewModel_MyObject_Updates_When_TextBlock_Value_Changes()
+    {
+        var vm = new TestViewModel();
+        var view = new TestView(vm);
+
+        // Initial value check
+        Assert.Equal("Initial", vm.MyObject.MyProperty);
+
+        // Act: update the ViewModel
+        view.MyTextBlock.Text = "New value";
 
         // Assert: TextBlock.Text should reflect the new value
         Assert.Equal(vm.MyObject.MyProperty, view.MyTextBlock.Text);
     }
+
 }

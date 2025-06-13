@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace Avalonia.Markup.Declarative;
 
+
 public abstract class ViewBase<TViewModel> : ViewBase
 {
     public virtual TViewModel? ViewModel
@@ -136,7 +137,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     /// </summary>
     protected void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        Dispatcher.UIThread.InvokeAsync(RecomputeAllBindings, DispatcherPriority.Normal);
+        Dispatcher.UIThread.Invoke(RecomputeAllBindings, DispatcherPriority.Normal);
     }
 
     /// <summary>

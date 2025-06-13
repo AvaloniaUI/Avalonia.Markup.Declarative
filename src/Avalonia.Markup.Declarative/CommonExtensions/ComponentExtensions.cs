@@ -36,6 +36,7 @@ public static class ComponentExtensions
     /// <param name="setAction"></param>
     /// <param name="binding"></param>
     /// <returns></returns>
+    [Obsolete]
     public static TControl _setCommonBindingEx<TControl, TValue>(this TControl control, Action<TValue?> setAction, IBinding binding)
         where TControl : AvaloniaObject
     {

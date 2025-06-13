@@ -16,7 +16,7 @@ public class TreeViewSampleView : ComponentBase
                             (n, _) => new TextBlock().Text(n.Name),
                             n => n.Children)
                     )
-                    .SelectedItem(() => SelectedNode, v => SelectedNode = (Node?)v),
+                    .SelectedItem(() => SelectedNode!, v => SelectedNode = (Node?)v),
 
                 new TextBlock()
                     .HorizontalAlignment(HorizontalAlignment.Center)

@@ -5,22 +5,28 @@ namespace AvaloniaMarkupSample.CommonSamples;
 
 public class StylesSampleView : ViewBase
 {
+    protected override StyleGroup? BuildStyles() =>
+    [
+        new Style<Button>(s => s.Class("nested-button"))
+            .FontSize(26d)
+    ];
+
     protected override object Build() =>
         new StackPanel()
             .Classes("sample-wrapper")
-            .Styles(
-                new Style<Button>(x => x.OfType<Button>().Class("nested-button"))
-                    .FontSize(26d)
-            )
-            .Children(new Control[]
-            {
+            .Children(
+            [
                 new TabControl()
-                    .ItemTemplate<TabVm>(tab => new TextBlock().Text(tab.Title))
-                    .ContentTemplate(new FuncDataTemplate<TabVm>((item, ns) => new TextBlock().Text(item?.Content)))
+                    .ItemTemplate<TabViewModel>(tab => new TextBlock().Text(tab.Title))
+                    .ContentTemplate(
+                        new FuncDataTemplate<TabViewModel>((item, ns) =>
+                            new FuncView<TabViewModel>(item, vm =>
+                                new TextBlock().Text(() => vm.Content)))
+                    )
                     .ItemsSource(Tabs)
                     .Styles(
                         new Style<TabItem>()
-                            .IsEnabled(new Binding(nameof(TabVm.Enabled)))
+                            .IsEnabled(new Binding(nameof(TabViewModel.Enabled)))
                             .Foreground(Brushes.YellowGreen)
                     ),
 
@@ -32,28 +38,31 @@ public class StylesSampleView : ViewBase
                     .Styles(
                         // Typed generic style
                         new Style<Button>(x =>
-                                x.OfType<StackPanel>().Class("sample-wrapper").Descendant().OfType<Button>().Class("nested-button"))
+                                x.OfType<StackPanel>().Class("sample-wrapper").Descendant().OfType<Button>()
+                                    .Class("nested-button"))
                             .Background(Brushes.Green),
-                        new Style<Button>(s => s.OfType<Button>().Class(":pointerover").Child()) //add child selector to change color of content presenter inside button
+                        new Style<Button>(s =>
+                                s.OfType<Button>().Class(":pointerover")
+                                    .Child()) //add child selector to change color of content presenter inside button
                             .Background(Brushes.Red)),
 
                 new Button()
                     .HorizontalAlignment(HorizontalAlignment.Center)
                     .Content("Unstyled buton")
                     .Width(150)
-            });
+            ]);
 
-    public List<TabVm> Tabs { get; set; } = new()
+    public List<TabViewModel> Tabs { get; set; } = new()
     {
-        new TabVm("Tab1"),
-        new TabVm("Tab2"),
-        new TabVm("Disabled tab",false)
+        new TabViewModel("Tab1"),
+        new TabViewModel("Tab2"),
+        new TabViewModel("Disabled tab",false)
     };
 }
 
-public class TabVm
+public class TabViewModel
 {
-    public TabVm(string title, bool enabled = true)
+    public TabViewModel(string title, bool enabled = true)
     {
         Title = title;
         Enabled = enabled;
