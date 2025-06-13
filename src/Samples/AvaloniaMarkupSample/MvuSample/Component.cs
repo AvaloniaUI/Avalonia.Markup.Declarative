@@ -9,7 +9,7 @@ public class Component : ComponentBase
                     .Text("This is nested MVU Component"),
 
                 new TextBlock()
-                    .Text(Bind(InnerContent))
+                    .Text(() => InnerContent)
             );
 
     public string InnerContent { get; set; } = "Parameter value";

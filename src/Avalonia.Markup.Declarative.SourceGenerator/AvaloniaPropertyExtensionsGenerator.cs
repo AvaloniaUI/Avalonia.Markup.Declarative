@@ -272,9 +272,11 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         var valueTypeSource = GetPropertyTypeName(property, semanticModel);
 
         var extensionText =
-            $"public static {controlTypeName} {extensionName}"
+            $"#pragma warning disable CS8601{NewLine}" +
+            $"[Obsolete] public static {controlTypeName} {extensionName}"
             + $"(this {controlTypeName} control, IBinding binding)"
-            + $"=>{NewLine} control._setCommonBindingEx(({valueTypeSource}? v) => control.{extensionName} = v ?? default({valueTypeSource}), binding);";
+            + $"=>{NewLine} control._setCommonBindingEx(({valueTypeSource}? v) => control.{extensionName} = v ?? default({valueTypeSource}), binding);{NewLine}"
+            + $"#pragma warning restore CS8601";
 
         return extensionText;
     }

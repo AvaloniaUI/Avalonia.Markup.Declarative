@@ -1,6 +1,3 @@
-using System;
-using Xunit;
-using Avalonia.Markup.Declarative;
 using System.Reflection;
 
 namespace Avalonia.Markup.Declarative.Tests

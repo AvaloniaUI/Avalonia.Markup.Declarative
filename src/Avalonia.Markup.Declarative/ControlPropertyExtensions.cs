@@ -88,7 +88,7 @@ public static class ControlPropertyExtensions
 		var view = ViewBuildContext.CurrentView;
 
 		if (view == null)
-			throw new InvalidOperationException("Current view is not set");
+			throw new InvalidOperationException("Current view is not set! If you are using expression binding inside of FuncTemplate, wrap it's content into FuncView or FuncComponent, to make bindings work.");
 
 		var handler = setChangedHandler;
 

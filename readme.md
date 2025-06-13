@@ -7,7 +7,53 @@ Write Avalonia UI with C#
 
 Add the `Avalonia.Markup.Declarative` NuGet package to your project
 
-## Usage
+## MVU Pattern implementation (Recommended)
+
+Inspired by Blazor's Components layout. A basic component should look like this:
+
+```C#
+public class Component : ComponentBase
+{
+
+//styles
+    protected override StyleGroup? BuildStyles() =>
+    [
+        new Style<Button>()
+            .Margin(6)
+            .Background(Brushes.DarkSalmon),
+    ];
+
+//markup part
+    protected override object Build() =>
+        new StackPanel()
+            .Children(
+                new TextBlock()
+                    .Ref(out _textBlock1)
+                    .Text("Hello world"),
+                new TextBlock()
+                    .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"),
+                new Button()
+                    .Content("Click me")
+                    .OnClick(OnButtonClick)
+            );
+            
+//code part
+    [Inject] SampleDataService DataService { get; set; } = null!; //service injection
+
+    public int Counter { get; set; } //no need to implement AvaloniaProperty or OnPropertyChanged behaviors, since component has registry of all properties and emits ProperyChanged event after changing state of component.
+
+    private void OnButtonClick(RoutedEventArgs e)
+    {
+        Counter++;
+        _textBlock1.Text = DataService.GetData();
+        StateHasChanged(); //for now we have to call this method manually. In future there will be some additional triggers like user input, that will rise this method automatically
+    }
+}
+```
+
+## MVVM Pattern implementation 
+
+to keep compatibilty with classic Avalonia/Wpf approach
 
 ```C#
 public class MainView : ViewBase<MainViewModel>
@@ -26,23 +72,25 @@ public class MainView : ViewBase<MainViewModel>
         new Grid()
             
             .Styles(
-                new Style<Button>(s => s.Class(":pointerover"))		//make button red when pointer is over using avalonia styles
+                new Style<Button>(s => s.Class(":pointerover").Child())      //make button red when pointer is over using avalonia styles
                     .Background(Brushes.Red)
             )
 
-            .Cols("Auto, 100, *")					// equivalent of Grid.ColumnDefintions property
-            .Background(Brushes.Green) 					// the same as grid.Background = Brushes.Green
+            .Cols("Auto, 100, *")                   // equivalent of Grid.ColumnDefintions property
+            .Background(Brushes.Green)                  // the same as grid.Background = Brushes.Green
             .Children(
                 
                 new TextBlock()
-                    .Text( @vm.TextVal ), 				// use @ character prefix to Bind control's property to ViewModel's property
+                    .Text(() => vm.TextVal),                // Bind control's property to ViewModel's property using lambda
 
                 new TextBlock()
                     .Col(1) //equivalent of Grid.SetColumn(textBlock, 1)
-                    .IsVisible( @vm.HideGreeting, 			// Bind TextBlock.IsVisible to MainViewModel.HideGreeting property
-                                bindingMode: BindingMode.OneWay, 	// We can set Binding mode if necessary.
-                                converter: InverseBooleanConverter ),	// Set value converter to invert values.
-                    .Text( "Hello Avalonia" ), 
+                    .IsVisible(
+                        () => vm.HideGreeting,              // Bind TextBlock.IsVisible to MainViewModel.HideGreeting property using lambda
+                        bindingMode: BindingMode.OneWay,    // We can set Binding mode if necessary.
+                        converter: InverseBooleanConverter  // Set value converter to invert values.
+                    )
+                    .Text("Hello Avalonia"), 
 
                 new Button()
                     .Col(2) //equivalent of Grid.SetColumn(textBlock, 1)
@@ -77,61 +125,17 @@ public class MainView : ViewBase<MainViewModel>
   ```
   
 ## Properties support on custom controls
+
 There are two source generators to add Markup Extensions on your own controls. If you downloaded source code or cloned this repo, add them by referencing `Avalonia.Markup.Declarative.SourceGenerator` project in your csproj file like this:
 
 ```xml
-	<ItemGroup>
-		<ProjectReference Include="..\..\AvaloniaMarkup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\AvaloniaMarkup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    </ItemGroup>
 ```
-* Make sure that the path to the source generator project is correct relative to your project.
+Make sure that the path to the source generator project is correct relative to your project.
 
-* If you are using this library as a Nuget, source generator will added to your project automatically.
-
-## MVU Pattern implementation
-
-Inspired by Blazor's Components layout. A basic component should look like this:
-
-```C#
-public class Component : ComponentBase
-{
-
-//styles
-	protected override StyleGroup? BuildStyles() =>
-	[
-		new Style<Button>()
-			.Margin(6)
-			.Background(Brushes.DarkSalmon),
-	];
-
-//markup part
-    protected override object Build() =>
-        new StackPanel()
-            .Children(
-                new TextBlock()
-                    .Ref(out _textBlock1)
-                    .Text("Hello world"),
-                new TextBlock()
-                    .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"),
-                new Button()
-                    .Content("Click me")
-                    .OnClick(OnButtonClick)
-            );
-            
-//code part
-    [Inject] SampleDataService DataService { get; set; } = null!; //service injection
-
-    public int Counter { get; set; } //no need to implement AvaloniaProperty or OnPropertyChanged behaviors, since component has registry of all properties and emits ProperyChanged event after changing state of component.
-
-    private void OnButtonClick(RoutedEventArgs e)
-    {
-        Counter++;
-        _textBlock1.Text = DataService.GetData();
-        StateHasChanged(); //for now we have to call this method manually. In future there will be some additional triggers like user input, that will rise this method automatically
-    }
-}
-```
-
+> **Note**: If you are using this library as a **Nuget**, source generator will added to your project **automatically**.
 
 ## External libraries support
 

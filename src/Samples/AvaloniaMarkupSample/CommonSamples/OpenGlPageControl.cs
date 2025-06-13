@@ -6,7 +6,7 @@ using Avalonia.OpenGL.Controls;
 using static Avalonia.OpenGL.GlConsts;
 // ReSharper disable StringLiteralTypo
 
-namespace OpenGlSample;
+namespace AvaloniaMarkupSample.CommonSamples;
 
 public class OpenGlPageControl : OpenGlControlBase
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Avalonia.Controls.Templates;
 
-namespace AvaloniaMarkupSample;
+namespace AvaloniaMarkupSample.CommonSamples;
 
 public class TreeViewSampleView : ComponentBase
 {
@@ -16,7 +16,7 @@ public class TreeViewSampleView : ComponentBase
                             (n, _) => new TextBlock().Text(n.Name),
                             n => n.Children)
                     )
-                    .SelectedItem(() => SelectedNode, v => SelectedNode = (Node?)v),
+                    .SelectedItem(() => SelectedNode!, v => SelectedNode = (Node?)v),
 
                 new TextBlock()
                     .HorizontalAlignment(HorizontalAlignment.Center)

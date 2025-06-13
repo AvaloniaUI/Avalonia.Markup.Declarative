@@ -112,22 +112,47 @@ internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyCompute
         UpdateControlValue();
     }
 
+    public override void OnPropertyChanged()
+    {
+        UpdateControlValue();
+        NotifyObservers(Value);
+    }
+
     private void UpdateControlValue()
     {
         if (_control == null)
             return;
 
+        TValue newValue = GetterFunc();
+
         if (_avaloniaProperty != null)
-            _control.SetValue(_avaloniaProperty, Value);
+        {
+            if (!Equals(_control.GetValue(_avaloniaProperty), newValue))
+            {
+                _control.SetValue(_avaloniaProperty, newValue);
+                SetChangedHandler?.Invoke(newValue);
+            }
+        }
         else
-            Setter?.Invoke(GetterFunc());
+        {
+            if (Setter != null)
+            {
+                Setter.Invoke(newValue);
+                SetChangedHandler?.Invoke(newValue);
+            }
+        }
     }
 
-    public override void OnPropertyChanged()
-    {
-        Setter?.Invoke(GetterFunc());
-        NotifyObservers(Value);
-    }
+    //private void UpdateControlValue()
+    //{
+    //    if (_control == null)
+    //        return;
+
+    //    if (_avaloniaProperty != null)
+    //        _control.SetValue(_avaloniaProperty, Value);
+    //    else
+    //        Setter?.Invoke(GetterFunc());
+    //}
 
     public void OnNext(TValue value)
     {
