@@ -5,6 +5,8 @@ namespace ReactiveSample.Views;
 
 public abstract class ReactiveViewBase<TViewModel> : ViewBase, IViewFor<TViewModel> where TViewModel : class
 {
+    private object? _cachedDataContext;
+
     [SuppressMessage("AvaloniaProperty", "AVP1002", Justification = "Generic avalonia property is expected here.")]
     public static readonly StyledProperty<TViewModel?> ViewModelProperty = AvaloniaProperty.Register<ReactiveViewBase<TViewModel>, TViewModel?>(nameof(ViewModel));
 
@@ -33,7 +35,12 @@ public abstract class ReactiveViewBase<TViewModel> : ViewBase, IViewFor<TViewMod
 
     protected abstract object Build(TViewModel vm);
 
-    protected override object Build() => Build((TViewModel)DataContext!);
+    protected override object Build() => Build((TViewModel)(_cachedDataContext ?? DataContext!));
+
+    protected override void OnBeforeReload()
+    {
+        _cachedDataContext = DataContext;
+    }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
