@@ -18,7 +18,7 @@ internal class MainView : ReactiveViewBase<MainViewModel>
                     .DefaultContent(
                         new TextBlock()
                             .ReactiveBinding(TextBox.TextProperty, vm, x => x.MyProperty)
-                            .HorizontalAlignment(HorizontalAlignment.Center)
+                            .HorizontalAlignment(HorizontalAlignment.Right)
                             .VerticalAlignment(VerticalAlignment.Center)
                     )
                     .Router(vm.Router)
