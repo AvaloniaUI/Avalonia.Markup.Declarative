@@ -86,9 +86,7 @@ public class MainView : ViewBase<MainViewModel>
                 new TextBlock()
                     .Col(1) //equivalent of Grid.SetColumn(textBlock, 1)
                     .IsVisible(
-                        () => vm.HideGreeting,              // Bind TextBlock.IsVisible to MainViewModel.HideGreeting property using lambda
-                        bindingMode: BindingMode.OneWay,    // We can set Binding mode if necessary.
-                        converter: InverseBooleanConverter  // Set value converter to invert values.
+                        () => vm.!HideGreeting,              // Bind TextBlock.IsVisible to inversed MainViewModel.HideGreeting property using lambda
                     )
                     .Text("Hello Avalonia"), 
 
@@ -96,7 +94,7 @@ public class MainView : ViewBase<MainViewModel>
                     .Col(2) //equivalent of Grid.SetColumn(textBlock, 1)
                     // we don't actually need binding here, 
                     // so just direct set to Command on view model
-                    .Command(vm.ClickButtonCommand) 
+                    .OnClick(args => vm.OnClickButton()) 
                     .Content("Click me") // Content = "Click me"
                     .Padding(left: 8) //Set left padding to 8
                     .With(ButtonStyle) //Execute LabelStyle method over TextBlock control 
