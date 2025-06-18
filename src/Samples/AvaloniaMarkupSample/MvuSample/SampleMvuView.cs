@@ -51,6 +51,7 @@ public class SampleMvuView : ComponentBase
                             .Child(
                                 new Component()
                                     .InnerContent(() => MvuComponentParam)
+                                    .OnButtonClicked()
                             ),
 
                         new Button()

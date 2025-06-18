@@ -104,7 +104,15 @@ public class AvaloniaEventExtensionsGenerator : IIncrementalGenerator
     {
         var eventHandler = @event.Declaration.Type.ToString();
 
-        var eventArgsType = string.Join(",", @event.Declaration.Type.DescendantNodes().OfType<IdentifierNameSyntax>().Select(x => x.ToString()));
+        //var eventArgsType = string.Join(",", @event.Declaration.Type.DescendantNodes().OfType<IdentifierNameSyntax>().Select(x => x.ToString()));
+
+        string eventArgsType = string.Empty; // Initialize as empty
+
+        var eventType = @event.Declaration.Type;
+        if (eventType is GenericNameSyntax genericName)
+        {
+            eventArgsType = string.Join(",", genericName.TypeArgumentList.Arguments.Select(arg => arg.ToString()));
+        }
 
         var argsString = $"Action<{eventArgsType}> action";
         var actionCallStr = "action(args)";
