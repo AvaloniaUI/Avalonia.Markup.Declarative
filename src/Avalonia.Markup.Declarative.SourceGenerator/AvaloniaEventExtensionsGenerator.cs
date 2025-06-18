@@ -100,28 +100,69 @@ public class AvaloniaEventExtensionsGenerator : IIncrementalGenerator
         }
     }
 
+    // Rewritten for clarity: separates logic for EventHandler, EventHandler<T>, Action, and Action<T>.
     private static string GetEventExtension(string controlTypeName, EventFieldDeclarationSyntax @event)
     {
-        var eventHandler = @event.Declaration.Type.ToString();
+        // Get the event type as string (e.g., EventHandler, EventHandler<T>, Action, Action<T>)
+        var eventTypeSyntax = @event.Declaration.Type;
+        var eventTypeString = eventTypeSyntax.ToString();
 
-        var eventArgsType = string.Join(",", @event.Declaration.Type.DescendantNodes().OfType<IdentifierNameSyntax>().Select(x => x.ToString()));
+        // Get the event name (e.g., Click)
+        var eventName = @event.Declaration.Variables[0].ToString();
+        var extensionName = $"On{eventName}";
 
-        var argsString = $"Action<{eventArgsType}> action";
-        var actionCallStr = "action(args)";
+        // Try to get the generic type arguments if present
+        var genericName = eventTypeSyntax.DescendantNodesAndSelf().OfType<GenericNameSyntax>().FirstOrDefault();
+        var typeArguments = genericName?.TypeArgumentList.Arguments.Select(arg => arg.ToString()).ToArray();
 
-        if (string.IsNullOrWhiteSpace(eventArgsType))
+        // Determine the extension method signature and lambda body
+        string parameterList;
+        string lambdaParameters;
+        string lambdaBody;
+        bool isEventHandler = eventTypeString.StartsWith("EventHandler");
+        bool isAction = eventTypeString.StartsWith("Action");
+
+        if (isEventHandler && typeArguments is { Length: 1 })
         {
-            argsString = "Action action";
-            actionCallStr = "action()";
+            // EventHandler<TEventArgs>
+            parameterList = $"Action<{typeArguments[0]}> action";
+            lambdaParameters = "_, args";
+            lambdaBody = "action(args)";
+        }
+        else if (isEventHandler)
+        {
+            // EventHandler (no generic args)
+            parameterList = "Action<EventArgs> action";
+            lambdaParameters = "_, args";
+            lambdaBody = "action(args)";
+        }
+        else if (isAction && typeArguments is { Length: 1 })
+        {
+            // Action<T>
+            parameterList = $"Action<{typeArguments[0]}> action";
+            lambdaParameters = "args";
+            lambdaBody = "action(args)";
+        }
+        else if (isAction)
+        {
+            // Action (no args)
+            parameterList = "Action action";
+            lambdaParameters = "";
+            lambdaBody = "action()";
+        }
+        else
+        {
+            // Fallback: treat as Action (no args)
+            parameterList = "Action action";
+            lambdaParameters = "";
+            lambdaBody = "action()";
         }
 
-        var eventName = @event.Declaration.Variables[0].ToString();
-        var extensionName = "On" + eventName;
-
+        // Compose the extension method
         var extensionText =
             $"    public static {controlTypeName} {extensionName}"
-            + $"(this {controlTypeName} control, {argsString}) =>\n"
-            + $"        control._setEvent(({eventHandler})((_, args) => {actionCallStr}), h => control.{eventName} += h);";
+            + $"(this {controlTypeName} control, {parameterList}) =>\n"
+            + $"        control._setEvent(({eventTypeString})(({lambdaParameters}) => {lambdaBody}), h => control.{eventName} += h);";
 
         return extensionText;
     }

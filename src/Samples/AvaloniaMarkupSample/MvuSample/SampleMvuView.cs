@@ -47,10 +47,16 @@ public class SampleMvuView : ComponentBase
                             .OnClick(OnButton2Click),
 
                         new Border()
-                            .Background(() => BorderColor)
+                            .BorderBrush(() => BorderColor)
+                            .BorderThickness(3)
                             .Child(
                                 new Component()
                                     .InnerContent(() => MvuComponentParam)
+                                    .OnButtonClicked(() =>
+                                    {
+                                        BorderColor = Colors.Yellow.ToBrush();
+                                        StateHasChanged();
+                                    })
                             ),
 
                         new Button()
