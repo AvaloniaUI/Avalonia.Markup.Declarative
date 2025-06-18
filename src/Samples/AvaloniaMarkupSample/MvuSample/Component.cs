@@ -12,6 +12,7 @@ public class Component : ComponentBase
                     .Text(() => InnerContent),
 
                 new Button()
+                    .Content("Change border to yellow")
                     .OnClick(args =>
                     {
                         InnerContent = "Button clicked!";
