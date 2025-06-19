@@ -5,7 +5,7 @@ using Avalonia.Platform;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 
-namespace Avalonia.Markup.Declarative.Tests;
+namespace Avalonia.Markup.Declarative.Tests.BindingTests;
 
 public class TemplateTestView : ViewBase
 {

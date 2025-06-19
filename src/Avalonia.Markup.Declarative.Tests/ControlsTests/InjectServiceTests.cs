@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Avalonia.Markup.Declarative.Tests
+namespace Avalonia.Markup.Declarative.Tests.ControlsTests
 {
     public class InjectServiceTests
     {
@@ -34,11 +34,9 @@ namespace Avalonia.Markup.Declarative.Tests
             Assert.IsType<TestService>(value);
         }
 
-        private class TestServiceProvider : IServiceProvider
+        private class TestServiceProvider(object service) : IServiceProvider
         {
-            private readonly object _service;
-            public TestServiceProvider(object service) => _service = service;
-            public object? GetService(Type serviceType) => _service;
+            public object? GetService(Type serviceType) => service;
         }
 
         private static void SetServiceProvider(IServiceProvider provider)

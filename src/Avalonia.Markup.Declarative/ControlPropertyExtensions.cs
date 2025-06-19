@@ -576,10 +576,10 @@ public static class ControlPropertyExtensions
     /// <param name="menuFlyout">The menu flyout to which the item will be added.</param>
     /// <param name="menuItem">The menu item to be added to the flyout.</param>
     /// <returns>The menu flyout with the added item.</returns>
-    public static TElement? AddItem<TElement>(this TElement menuFlyout, MenuItem menuItem)
+    public static TElement AddItem<TElement>(this TElement menuFlyout, MenuItem menuItem)
 		where TElement : MenuFlyout
 	{
-		(menuFlyout?.Items)?.Add(menuItem);
+		menuFlyout.Items.Add(menuItem);
 		return menuFlyout;
 	}
 
@@ -592,7 +592,7 @@ public static class ControlPropertyExtensions
 	/// <param name="command">Item command</param>
 	/// <param name="commandParameter">Command parameter</param>
 	/// <returns></returns>
-	public static TElement? AddItem<TElement>(this TElement menuFlyout, string text, ICommand command,
+	public static TElement AddItem<TElement>(this TElement menuFlyout, string text, ICommand command,
 		object? commandParameter = null)
 		where TElement : MenuFlyout
 	{
@@ -600,7 +600,7 @@ public static class ControlPropertyExtensions
 		if (commandParameter != null)
 			item.CommandParameter = commandParameter;
 
-		(menuFlyout?.Items)?.Add(item);
+		menuFlyout.Items.Add(item);
 		return menuFlyout;
 	}
 
