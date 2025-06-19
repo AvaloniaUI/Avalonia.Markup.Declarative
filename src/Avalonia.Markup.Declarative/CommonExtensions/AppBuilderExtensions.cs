@@ -64,6 +64,7 @@ public static class AppBuilderExtensions
     /// <param name="enable">A value indicating whether to enable Rider hot reload. Defaults to <c>true</c>.</param>
     /// <param name="checkIntervalInMilliseconds">The interval, in milliseconds, at which to check for changes. Defaults to 2000 milliseconds.</param>
     /// <returns>The configured <see cref="AppBuilder"/>.</returns>
+    [Obsolete("Latest rider does not need this hack to support hot-reload")]
     public static AppBuilder UseRiderHotReload(this AppBuilder appBuilder, bool enable = true, int checkIntervalInMilliseconds = 2000)
     {
         if (enable)

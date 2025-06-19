@@ -113,7 +113,7 @@ public static class HotReloadManager
     }
 
 
-    #region Rider hotreload workaround support
+    #region Rider hotreload workaround support - not necessary in latest verisons of rider
 
     private static readonly ConcurrentDictionary<Type, WatchMethodInfo[]> WatchMethods = new();
     private static int _interval = 2000;
