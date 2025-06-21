@@ -1,9 +1,11 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using static Avalonia.Markup.Declarative.SourceGenerator.MarkupTypeHelpers;
@@ -72,8 +74,25 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
             sb.AppendLine($"using {typeNamespace};");
 
         var typeName = type.Identifier.ToString();
+
+        var genericParams = "";
+
+        if (type.TypeParameterList != null && type.TypeParameterList.Parameters.Count > 0)
+        {
+            genericParams += '<';
+
+            foreach (var item in type.TypeParameterList.Parameters)
+            {
+                genericParams += item.Identifier.Text + ", ";
+            }
+            genericParams = genericParams.TrimEnd(' ').TrimEnd(',');
+            genericParams += '>';
+
+        }
+        typeName = typeName + genericParams;
+
         sb.AppendLine("namespace Avalonia.Markup.Declarative;");
-        sb.AppendLine($"public static partial class {typeName}Extensions");
+        sb.AppendLine($"public static partial class {CleanIdentifier(typeName)}Extensions");
         sb.AppendLine("{");
 
         var members = type.Members;
@@ -86,8 +105,8 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
                 && HasAvaloniaPropertyPublicSetter(field, members))
             {
                 sb.AppendLine($"// avalonia properties\n");
-                AppendIfNotNull(sb, GetPropertySetterExtension(typeName, field));
-                AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, field));
+                AppendIfNotNull(sb, GetPropertySetterExtension(typeName, genericParams, field));
+                AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, genericParams, field));
                 processedFields.Add(field.Declaration.Variables[0].Identifier.ValueText);
             }
         }
@@ -115,8 +134,77 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
 
         if (processedFields.Count > 0)
         {
-            context.AddSource($"{typeName}Extensions.g.cs", SourceText.From(sb.ToString(), Encoding.UTF8));
+            context.AddSource($"{RemoveIllegalFileNameCharacters(typeName)}Extensions.g.cs", SourceText.From(sb.ToString(), Encoding.UTF8));
         }
+    }
+
+    public static string RemoveIllegalFileNameCharacters(string fileName)
+    {
+        if (string.IsNullOrEmpty(fileName))
+            throw new ArgumentException("File name cannot be null or empty", nameof(fileName));
+
+        // Remove invalid characters from the input
+        string sanitizedFileName = new([.. fileName.Where(c => !Path.GetInvalidFileNameChars().Contains(c))]);
+
+        return sanitizedFileName;
+    }
+
+    private static string CleanIdentifier(string name, bool @namespace = false)
+    {
+        // trim off leading and trailing whitespace
+        name = name.Trim();
+
+        if (string.IsNullOrEmpty(name))
+        {
+            return null;
+        }
+
+        var sb = new StringBuilder();
+        if (!SyntaxFacts.IsIdentifierStartCharacter(name[0]))
+        {
+            // the first characters
+            sb.Append('_');
+        }
+
+        foreach (var ch in name)
+        {
+            if (SyntaxFacts.IsIdentifierPartCharacter(ch) || (@namespace && ch == '.'))
+            {
+                sb.Append(ch);
+            }
+        }
+
+        var result = sb.ToString();
+
+        if (SyntaxFacts.GetKeywordKind(result) != SyntaxKind.None)
+        {
+            result = '@' + result;
+        }
+
+        if (@namespace)
+        {
+            var newResult = string.Empty;
+            foreach (var chunk in result.Split('.'))
+            {
+                if (!string.IsNullOrEmpty(newResult))
+                {
+                    newResult += '.';
+                }
+
+                if (SyntaxFacts.GetKeywordKind(chunk) != SyntaxKind.None)
+                {
+                    newResult += '@' + chunk;
+                }
+                else
+                {
+                    newResult += chunk;
+                }
+            }
+
+            return newResult;
+        }
+
+        return result;
     }
 
     private static void AppendIfNotNull(StringBuilder sb, string value)
@@ -125,7 +213,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         sb.AppendLine(value);
     }
 
-    public static string GetPropertySetterExtension(string controlTypeName, FieldDeclarationSyntax field)
+    public static string GetPropertySetterExtension(string controlTypeName, string genericParams, FieldDeclarationSyntax field)
     {
         var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
 
@@ -133,13 +221,30 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
 
         var valueTypeSource = genericName.TypeArgumentList.Arguments.Last();
 
+        var valueName = valueTypeSource is NullableTypeSyntax nullableTypeSyntax
+            ? nullableTypeSyntax.ElementType.ToString()
+            : valueTypeSource.ToString();
+
+        // Get Class constraints
+        var classConstraint = "";
+        if (field.Parent is ClassDeclarationSyntax classDecleration)
+        {
+            foreach (TypeParameterConstraintClauseSyntax constraintClause in classDecleration.ConstraintClauses)
+            {
+                if (constraintClause.Name.ToString() == valueName)
+                {
+                    classConstraint = " " + constraintClause.ToString();
+                }
+            }
+        }
+
         var argsString = $"{valueTypeSource} value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null,"
                          + $" [CallerArgumentExpression(nameof(value))] string? ps = null";
 
         var extensionText =
-            $"public static {controlTypeName} {extensionName}"
-            + $"(this {controlTypeName} control, {argsString})"
-            + $"=>{NewLine} control._setEx({controlTypeName}.{extensionName}Property, ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
+            $"public static {controlTypeName} {extensionName}{genericParams}"
+            + $"(this {controlTypeName} control, {argsString}){classConstraint}{NewLine}"
+            + $"   => control._setEx({controlTypeName}.{extensionName}Property, ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
 
         return extensionText;
     }
@@ -167,13 +272,15 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         var valueTypeSource = GetPropertyTypeName(property, semanticModel);
 
         var extensionText =
-            $"public static {controlTypeName} {extensionName}"
+            $"#pragma warning disable CS8601{NewLine}" +
+            $"[Obsolete] public static {controlTypeName} {extensionName}"
             + $"(this {controlTypeName} control, IBinding binding)"
-            + $"=>{NewLine} control._setCommonBindingEx(({valueTypeSource} value) => control.{extensionName} = value, binding);";
+            + $"=>{NewLine} control._setCommonBindingEx(({valueTypeSource}? v) => control.{extensionName} = v ?? default({valueTypeSource}), binding);{NewLine}"
+            + $"#pragma warning restore CS8601";
 
         return extensionText;
     }
-    public static string GetExpressionBindingSetterExtension(string controlTypeName, FieldDeclarationSyntax field)
+    public static string GetExpressionBindingSetterExtension(string controlTypeName, string genericParams, FieldDeclarationSyntax field)
     {
         var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
 
@@ -181,8 +288,25 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
 
         var valueTypeSource = genericName.TypeArgumentList.Arguments.Last();
 
+        var valueName = valueTypeSource is NullableTypeSyntax nullableTypeSyntax
+            ? nullableTypeSyntax.ElementType.ToString()
+            : valueTypeSource.ToString();
+
+        // Get Class constraints
+        var classConstraint = "";
+        if (field.Parent is ClassDeclarationSyntax classDecleration)
+        {
+            foreach (TypeParameterConstraintClauseSyntax constraintClause in classDecleration.ConstraintClauses)
+            {
+                if (constraintClause.Name.ToString() == valueName)
+                {
+                    classConstraint = " " + constraintClause.ToString();
+                }
+            }
+        }
+
         var extensionText =
-            $"public static {controlTypeName} {extensionName}(this {controlTypeName} control, Func<{valueTypeSource}> func, Action<{valueTypeSource}>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null){NewLine}" +
+            $"public static {controlTypeName} {extensionName}{genericParams}(this {controlTypeName} control, Func<{valueTypeSource}> func, Action<{valueTypeSource}>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null){classConstraint}{NewLine}" +
             $"   => control._set({controlTypeName}.{extensionName}Property, func, onChanged, expression);";
 
         return extensionText;

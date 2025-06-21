@@ -20,7 +20,7 @@ public static T Canvas_Left<T>(this T control, System.Double value, BindingMode?
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T Canvas_Left<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.Canvas.LeftProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Canvas.LeftProperty!, func, onChanged, expression);
 
 
  // Top
@@ -31,7 +31,7 @@ public static T Canvas_Top<T>(this T control, System.Double value, BindingMode? 
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T Canvas_Top<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.Canvas.TopProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Canvas.TopProperty!, func, onChanged, expression);
 
 
  // Right
@@ -42,7 +42,7 @@ public static T Canvas_Right<T>(this T control, System.Double value, BindingMode
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T Canvas_Right<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.Canvas.RightProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Canvas.RightProperty!, func, onChanged, expression);
 
 
  // Bottom
@@ -53,7 +53,7 @@ public static T Canvas_Bottom<T>(this T control, System.Double value, BindingMod
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T Canvas_Bottom<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.AvaloniaObject 
-   => control._set(Avalonia.Controls.Canvas.BottomProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.Canvas.BottomProperty!, func, onChanged, expression);
 
 
 

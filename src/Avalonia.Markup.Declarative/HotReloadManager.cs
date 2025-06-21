@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -112,19 +113,21 @@ public static class HotReloadManager
     }
 
 
-    #region Rider hotreload workaround support
+    #region Rider hotreload workaround support - not necessary in latest verisons of rider
 
     private static readonly ConcurrentDictionary<Type, WatchMethodInfo[]> WatchMethods = new();
     private static int _interval = 2000;
     private static Timer? _watchMethodsTimer;
     public static bool IsRiderSupportEnabled { get; private set; }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
     private class WatchMethodInfo(MethodInfo method, int token)
     {
         public MethodInfo Method { get; } = method;
         public int Token { get; set; } = token;
     }
 
+    [RequiresUnreferencedCode("You should not use hot reload manager in AoT publish mode")]
     public static void RegisterMethodWatchers(Type type)
     {
         var methods = type

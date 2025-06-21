@@ -3,8 +3,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
-using Avalonia.Input;
-using Avalonia.Interactivity;
+using Avalonia.Markup.Declarative.Helpers;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
@@ -18,7 +17,8 @@ namespace Avalonia.Markup.Declarative;
 
 public static class ControlPropertyExtensions
 {
-	public static TControl _set<TControl>(this TControl control, Action setAction)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TControl _set<TControl>(this TControl control, Action setAction)
 	{
 		setAction();
 		return control;
@@ -86,7 +86,7 @@ public static class ControlPropertyExtensions
 		var view = ViewBuildContext.CurrentView;
 
 		if (view == null)
-			throw new InvalidOperationException("Current view is not set");
+			throw new InvalidOperationException("Current view is not set! If you are using expression binding inside of FuncTemplate, wrap it's content into FuncView or FuncComponent, to make bindings work.");
 
 		var handler = setChangedHandler;
 

@@ -14,13 +14,18 @@ public static partial class BlurEffect_MarkupExtensions
 //================= Properties ======================//
  // Radius
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.BlurEffect Radius(this Avalonia.Media.BlurEffect control, System.Double value)  
+=> control._set(() => control.Radius = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.BlurEffect Radius(this Avalonia.Media.BlurEffect control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
-   => control._set(Avalonia.Media.BlurEffect.RadiusProperty, func, onChanged, expression);
+   => control._set(Avalonia.Media.BlurEffect.RadiusProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static Avalonia.Media.BlurEffect Radius(this Avalonia.Media.BlurEffect control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.BlurEffect.RadiusProperty, ps, () => control.Radius = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.BlurEffect.RadiusProperty, ps, () => control.Radius = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.BlurEffect Radius(this Avalonia.Media.BlurEffect control, IBinding binding)  
@@ -31,8 +36,9 @@ public static Avalonia.Media.BlurEffect Radius(this Avalonia.Media.BlurEffect co
    => control._set(Avalonia.Media.BlurEffect.RadiusProperty, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static Avalonia.Media.BlurEffect Radius<TValue>(this Avalonia.Media.BlurEffect control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.BlurEffect.RadiusProperty, ps, () => control.Radius = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.BlurEffect.RadiusProperty, ps, () => control.Radius = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 

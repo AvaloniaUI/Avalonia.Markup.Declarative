@@ -20,6 +20,7 @@ public class EventExtensionInfo : IMemberExtensionInfo
     public string GenericArg { get; set; } = "";
 
     public bool IsRoutedEvent { get; set; }
+    public bool IsObsolete { get; set; }
 
     public bool HasStandardSignature =>
         EventParameterTypes.Count == 2 && EventParameterTypes[0] == "System.Object" &&
@@ -43,6 +44,7 @@ public class EventExtensionInfo : IMemberExtensionInfo
         EventName = EventInfo.Name;
         MemberName = EventName;
         EventHandler = EventInfo.EventHandlerType.GetTypeDeclarationSourceCode();
+        IsObsolete = EventInfo.GetCustomAttribute<ObsoleteAttribute>() != null;
 
         var methodInfo = eventInfo.EventHandlerType.GetMethod("Invoke");
         if (methodInfo != null)

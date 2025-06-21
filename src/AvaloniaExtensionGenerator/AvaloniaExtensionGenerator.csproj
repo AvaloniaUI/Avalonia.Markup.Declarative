@@ -39,8 +39,9 @@
 		<PackageReference Include="MicroCom.Runtime" Version="0.11.0" />
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
 
-		<PackageReference Include="NuGet.Configuration" Version="6.13.2" />
-		<PackageReference Include="NuGet.Protocol" Version="6.13.2" />
+		<PackageReference Include="NuGet.Configuration" Version="6.14.0" />
+		<PackageReference Include="NuGet.Protocol" Version="6.14.0" />
+		<PackageReference Include="System.Formats.Asn1" Version="9.0.5" />
 	</ItemGroup>
 
 	<ItemGroup>

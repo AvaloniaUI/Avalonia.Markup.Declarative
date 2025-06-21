@@ -14,13 +14,18 @@ public static partial class BezierSegment_MarkupExtensions
 //================= Properties ======================//
  // Point1
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.BezierSegment Point1(this Avalonia.Media.BezierSegment control, Avalonia.Point value)  
+=> control._set(() => control.Point1 = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.BezierSegment Point1(this Avalonia.Media.BezierSegment control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
-   => control._set(Avalonia.Media.BezierSegment.Point1Property, func, onChanged, expression);
+   => control._set(Avalonia.Media.BezierSegment.Point1Property!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static Avalonia.Media.BezierSegment Point1(this Avalonia.Media.BezierSegment control,Avalonia.Point value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.BezierSegment.Point1Property, ps, () => control.Point1 = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.BezierSegment.Point1Property, ps, () => control.Point1 = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.BezierSegment Point1(this Avalonia.Media.BezierSegment control, IBinding binding)  
@@ -31,19 +36,25 @@ public static Avalonia.Media.BezierSegment Point1(this Avalonia.Media.BezierSegm
    => control._set(Avalonia.Media.BezierSegment.Point1Property, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static Avalonia.Media.BezierSegment Point1<TValue>(this Avalonia.Media.BezierSegment control, TValue value, FuncValueConverter<TValue, Avalonia.Point> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.BezierSegment.Point1Property, ps, () => control.Point1 = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.BezierSegment.Point1Property, ps, () => control.Point1 = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Point2
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.BezierSegment Point2(this Avalonia.Media.BezierSegment control, Avalonia.Point value)  
+=> control._set(() => control.Point2 = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.BezierSegment Point2(this Avalonia.Media.BezierSegment control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
-   => control._set(Avalonia.Media.BezierSegment.Point2Property, func, onChanged, expression);
+   => control._set(Avalonia.Media.BezierSegment.Point2Property!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static Avalonia.Media.BezierSegment Point2(this Avalonia.Media.BezierSegment control,Avalonia.Point value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.BezierSegment.Point2Property, ps, () => control.Point2 = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.BezierSegment.Point2Property, ps, () => control.Point2 = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.BezierSegment Point2(this Avalonia.Media.BezierSegment control, IBinding binding)  
@@ -54,19 +65,25 @@ public static Avalonia.Media.BezierSegment Point2(this Avalonia.Media.BezierSegm
    => control._set(Avalonia.Media.BezierSegment.Point2Property, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static Avalonia.Media.BezierSegment Point2<TValue>(this Avalonia.Media.BezierSegment control, TValue value, FuncValueConverter<TValue, Avalonia.Point> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.BezierSegment.Point2Property, ps, () => control.Point2 = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.BezierSegment.Point2Property, ps, () => control.Point2 = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
  // Point3
 
+/*ValueSetterGenerator*/
+public static Avalonia.Media.BezierSegment Point3(this Avalonia.Media.BezierSegment control, Avalonia.Point value)  
+=> control._set(() => control.Point3 = value!);
+
 /*BindFromExpressionSetterGenerator*/
 public static Avalonia.Media.BezierSegment Point3(this Avalonia.Media.BezierSegment control, Func<Avalonia.Point> func, Action<Avalonia.Point>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null)  
-   => control._set(Avalonia.Media.BezierSegment.Point3Property, func, onChanged, expression);
+   => control._set(Avalonia.Media.BezierSegment.Point3Property!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
+[Obsolete]
 public static Avalonia.Media.BezierSegment Point3(this Avalonia.Media.BezierSegment control,Avalonia.Point value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.BezierSegment.Point3Property, ps, () => control.Point3 = value, bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.BezierSegment.Point3Property, ps, () => control.Point3 = value!, bindingMode, converter, bindingSource);
 
 /*BindSetterGenerator*/
 public static Avalonia.Media.BezierSegment Point3(this Avalonia.Media.BezierSegment control, IBinding binding)  
@@ -77,8 +94,9 @@ public static Avalonia.Media.BezierSegment Point3(this Avalonia.Media.BezierSegm
    => control._set(Avalonia.Media.BezierSegment.Point3Property, avaloniaProperty, bindingMode, converter, overrideView);
 
 /*MagicalSetterWithConverterGenerator*/
+[Obsolete]
 public static Avalonia.Media.BezierSegment Point3<TValue>(this Avalonia.Media.BezierSegment control, TValue value, FuncValueConverter<TValue, Avalonia.Point> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null)  
-=> control._setEx(Avalonia.Media.BezierSegment.Point3Property, ps, () => control.Point3 = converter.TryConvert(value), bindingMode, converter, bindingSource);
+=> control._setEx(Avalonia.Media.BezierSegment.Point3Property, ps, () => control.Point3 = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
 

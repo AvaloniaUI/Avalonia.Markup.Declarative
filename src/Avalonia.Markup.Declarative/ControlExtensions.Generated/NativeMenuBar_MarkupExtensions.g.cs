@@ -20,7 +20,7 @@ public static T NativeMenuBar_EnableMenuItemClickForwarding<T>(this T control, S
 
 /*AttachedPropertyBindFromExpressionSetterGenerator*/
 public static T NativeMenuBar_EnableMenuItemClickForwarding<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.MenuItem 
-   => control._set(Avalonia.Controls.NativeMenuBar.EnableMenuItemClickForwardingProperty, func, onChanged, expression);
+   => control._set(Avalonia.Controls.NativeMenuBar.EnableMenuItemClickForwardingProperty!, func, onChanged, expression);
 
 
 
