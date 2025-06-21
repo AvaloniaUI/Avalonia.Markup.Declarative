@@ -1,7 +1,7 @@
 using Avalonia.Markup.Declarative.Helpers;
 using Xunit;
 
-namespace Avalonia.Markup.Declarative.Tests;
+namespace Avalonia.Markup.Declarative.Tests.HelpersTests;
 
 public class SelectorParserHelperTests
 {

@@ -39,6 +39,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     private ViewPropertyState[]? _localPropertyStates;
     private List<ViewPropertyState>? _externalPropertyStates;
     private List<IMvuComponent>? _dependentViews;
+    private bool _isUpdatingState;
 
     protected ComponentBase()
         : base()
@@ -137,6 +138,11 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
 
     protected void StateHasChanged()
     {
+        if (_isUpdatingState)
+            return;
+
+        _isUpdatingState = true;
+
         if (_externalPropertyStates != null)
             foreach (var prop in _externalPropertyStates)
                 if (prop.CheckStateChangedAndUpdate())

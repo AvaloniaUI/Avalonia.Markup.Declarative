@@ -2,7 +2,7 @@ using Avalonia.Controls;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Avalonia.Markup.Declarative.Tests;
+namespace Avalonia.Markup.Declarative.Tests.BindingTests;
 
 public record struct MyObject(string MyProperty);
 
