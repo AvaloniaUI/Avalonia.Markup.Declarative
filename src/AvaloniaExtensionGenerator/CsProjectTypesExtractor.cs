@@ -58,14 +58,12 @@ namespace AvaloniaExtensionGenerator
 
             await process.WaitForExitAsync();
 
+            Console.WriteLine($"NuGet restore succeeded: {output}");
+
             if (process.ExitCode != 0)
             {
                 Console.WriteLine($"Failed to restore NuGet packages: {error}");
                 throw new Exception($"NuGet restore failed: {error}");
-            }
-            else
-            {
-                Console.WriteLine($"NuGet restore succeeded: {output}");
             }
         }
 
