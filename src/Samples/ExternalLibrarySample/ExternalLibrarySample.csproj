@@ -28,8 +28,11 @@
 		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.0" />
 		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
 		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.0" />
+		<PackageReference Include="Irihi.Ursa" Version="1.11.1" />
+		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.11.1" />
 		<PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc3.3" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5" />
+		<PackageReference Include="Semi.Avalonia" Version="11.2.1.8" />
 	</ItemGroup>
 
 	<ItemGroup>
