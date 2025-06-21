@@ -64,24 +64,10 @@ public class ColorPickerView : ComponentBase
     }
 }
 
-public class NestedComponentStateTest
+public class NestedComponentStateTest(ITestOutputHelper testOutputHelper) : AvaloniaTestBase
 {
-    private readonly ITestOutputHelper _testOutputHelper;
-
-    public NestedComponentStateTest(ITestOutputHelper testOutputHelper)
-    {
-        _testOutputHelper = testOutputHelper;
-        // Initialize Avalonia with headless (offscreen) platform only once
-        if (Application.Current == null)
-        {
-            AppBuilder.Configure<Application>()
-                .UseHeadless(new AvaloniaHeadlessPlatformOptions() { UseHeadlessDrawing = true, FrameBufferFormat = PixelFormat.Bgra8888 }) // Offscreen rendering
-                .SetupWithoutStarting();
-        }
-    }
-
     [Fact]
-    public void ColorPickerView_BindingStateChanges_PreventInfiniteRecursion()
+    public async Task ColorPickerView_BindingStateChanges_PreventInfiniteRecursion()
     {
         var view = new ColorPickerView();
         var window = new Window { Content = view };
@@ -94,7 +80,7 @@ public class NestedComponentStateTest
         //Should not throw exceptions after run
 
         var viewHexValue = view.HexValue;
-        _testOutputHelper.WriteLine($"Hex value: {viewHexValue}");
+        testOutputHelper.WriteLine($"Hex value: {viewHexValue}");
         Assert.Equal("#FFFF0000", viewHexValue);
     }
 }

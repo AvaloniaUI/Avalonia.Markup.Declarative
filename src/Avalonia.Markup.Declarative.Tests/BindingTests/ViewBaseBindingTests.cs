@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Avalonia.Threading;
 
 namespace Avalonia.Markup.Declarative.Tests.BindingTests;
 
@@ -42,53 +43,62 @@ public class TestView(TestViewModel vm) : ViewBase<TestViewModel>(vm)
     public TextBlock MyTextBlock = null!; // Using a field to check it's value in tests
 }
 
-public class ViewBaseBindingTests
+public class ViewBaseBindingTests : AvaloniaTestBase
 {
     [Fact]
-    public void TextBlock_Binding_RegistersComputedState()
+    public async Task TextBlock_Binding_RegistersComputedState()
     {
-        var vm = new TestViewModel();
-        var view = new TestView(vm);
+        await Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            var vm = new TestViewModel();
+            var view = new TestView(vm);
 
 
-        // Should have a computed state for the Text property
-        Assert.Contains(view.__viewComputedStates, s =>
-            s is ViewPropertyComputedState<TextBlock, string> state &&
-            state.GetterFunc() == "Initial");
+            // Should have a computed state for the Text property
+            Assert.Contains(view.__viewComputedStates, s =>
+                s is ViewPropertyComputedState<TextBlock, string> state &&
+                state.GetterFunc() == "Initial");
 
-        Assert.Equal("Initial", view.MyTextBlock.Text);
+            Assert.Equal("Initial", view.MyTextBlock.Text);
+        });
     }
 
     [Fact]
-    public void TextBlock_Updates_When_ViewModel_Changes()
+    public async Task TextBlock_Updates_When_ViewModel_Changes()
     {
-        var vm = new TestViewModel();
-        var view = new TestView(vm);
+        await Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            var vm = new TestViewModel();
+            var view = new TestView(vm);
 
-        // Initial value check
-        Assert.Equal("Initial", view.MyTextBlock.Text);
+            // Initial value check
+            Assert.Equal("Initial", view.MyTextBlock.Text);
 
-        // Act: update the ViewModel
-        vm.MyCommand(null);
+            // Act: update the ViewModel
+            vm.MyCommand(null);
 
-        // Assert: TextBlock.Text should reflect the new value
-        Assert.Equal(vm.MyObject.MyProperty, view.MyTextBlock.Text);
+            // Assert: TextBlock.Text should reflect the new value
+            Assert.Equal(vm.MyObject.MyProperty, view.MyTextBlock.Text);
+        });
     }
 
     [Fact]
-    public void ViewModel_MyObject_Updates_When_TextBlock_Value_Changes()
+    public async Task ViewModel_MyObject_Updates_When_TextBlock_Value_Changes()
     {
-        var vm = new TestViewModel();
-        var view = new TestView(vm);
+        await Dispatcher.UIThread.InvokeAsync(() =>
+        {
 
-        // Initial value check
-        Assert.Equal("Initial", vm.MyObject.MyProperty);
+            var vm = new TestViewModel();
+            var view = new TestView(vm);
 
-        // Act: update the ViewModel
-        view.MyTextBlock.Text = "New value";
+            // Initial value check
+            Assert.Equal("Initial", vm.MyObject.MyProperty);
 
-        // Assert: TextBlock.Text should reflect the new value
-        Assert.Equal(vm.MyObject.MyProperty, view.MyTextBlock.Text);
+            // Act: update the ViewModel
+            view.MyTextBlock.Text = "New value";
+
+            // Assert: TextBlock.Text should reflect the new value
+            Assert.Equal(vm.MyObject.MyProperty, view.MyTextBlock.Text);
+        });
     }
-
 }

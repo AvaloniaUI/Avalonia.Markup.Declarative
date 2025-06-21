@@ -29,19 +29,8 @@ public class TemplateTestView : ViewBase
     public Button MyButton = null!; // Using a field to check it's value in tests
 }
 
-public class TemplateBindingTests
+public class TemplateBindingTests : AvaloniaTestBase
 {
-    static TemplateBindingTests()
-    {
-        // Initialize Avalonia with headless (offscreen) platform only once
-        if (Application.Current == null)
-        {
-            AppBuilder.Configure<Application>()
-                .UseHeadless(new AvaloniaHeadlessPlatformOptions() { UseHeadlessDrawing = true, FrameBufferFormat = PixelFormat.Bgra8888 }) // Offscreen rendering
-                .SetupWithoutStarting();
-        }
-    }
-
     [Fact]
     public void TextBlock_Binding_RegistersComputedState()
     {

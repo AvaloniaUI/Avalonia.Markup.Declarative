@@ -1,3 +1,4 @@
+using Avalonia.Threading;
 using System.Reflection;
 
 namespace Avalonia.Markup.Declarative.Tests.ControlsTests
@@ -19,19 +20,23 @@ namespace Avalonia.Markup.Declarative.Tests.ControlsTests
         }
 
         [Fact]
-        public void InjectServices_InjectsIntoBaseClassProperties()
+        public async Task InjectServices_InjectsIntoBaseClassProperties()
         {
-            // Arrange
-            SetServiceProvider(new TestServiceProvider(new TestService()));
-            var component = new DerivedComponent();
-            
-            // Act
-            var property = typeof(BaseComponent).GetProperty("Service", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            var value = property?.GetValue(component);
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                // Arrange
+                SetServiceProvider(new TestServiceProvider(new TestService()));
+                var component = new DerivedComponent();
 
-            // Assert
-            Assert.NotNull(value);
-            Assert.IsType<TestService>(value);
+                // Act
+                var property = typeof(BaseComponent).GetProperty("Service",
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                var value = property?.GetValue(component);
+
+                // Assert
+                Assert.NotNull(value);
+                Assert.IsType<TestService>(value);
+            });
         }
 
         private class TestServiceProvider(object service) : IServiceProvider
