@@ -1,6 +1,6 @@
 using Avalonia.Markup.Declarative.Helpers;
 
-namespace Avalonia.Markup.Declarative.Tests.HelpersTest
+namespace Avalonia.Markup.Declarative.Tests.HelpersTests
 {
     public class PropertyPathHelperTests
     {

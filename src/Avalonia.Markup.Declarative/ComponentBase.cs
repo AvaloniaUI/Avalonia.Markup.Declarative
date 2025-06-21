@@ -7,7 +7,9 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Avalonia.Controls;
+using Avalonia.Markup.Declarative;
 using Avalonia.Markup.Declarative.Helpers;
+using Avalonia.Threading;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -50,7 +52,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         : base(deferredLoading)
     {
     }
-    
+
     protected override void OnCreated()
     {
         InjectServices();
@@ -137,6 +139,20 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     }
 
     protected void StateHasChanged()
+    {
+        if (Dispatcher.UIThread.CheckAccess())
+        {
+            // If on UI thread, proceed directly
+            PerformStateUpdate();
+        }
+        else
+        {
+            // If not on UI thread, dispatch to UI thread
+            Dispatcher.UIThread.Post(PerformStateUpdate, DispatcherPriority.Normal);
+        }
+    }
+
+    private void PerformStateUpdate()
     {
         if (_isUpdatingState)
             return;
