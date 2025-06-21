@@ -140,25 +140,31 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     {
         if (_isUpdatingState)
             return;
-
         _isUpdatingState = true;
+        try
+        {
 
-        if (_externalPropertyStates != null)
-            foreach (var prop in _externalPropertyStates)
-                if (prop.CheckStateChangedAndUpdate())
-                    OnPropertyChanged(prop.Name);
+            if (_externalPropertyStates != null)
+                foreach (var prop in _externalPropertyStates)
+                    if (prop.CheckStateChangedAndUpdate())
+                        OnPropertyChanged(prop.Name);
 
-        if (_localPropertyStates != null)
-            foreach (var prop in _localPropertyStates)
-                if (prop.CheckStateChangedAndUpdate())
-                    OnPropertyChanged(prop.Name);
+            if (_localPropertyStates != null)
+                foreach (var prop in _localPropertyStates)
+                    if (prop.CheckStateChangedAndUpdate())
+                        OnPropertyChanged(prop.Name);
 
-        if (_dependentViews != null)
-            foreach (var dependentView in _dependentViews)
-                dependentView.UpdateState();
+            if (_dependentViews != null)
+                foreach (var dependentView in _dependentViews)
+                    dependentView.UpdateState();
 
-        foreach (var computedState in __viewComputedStates)
-            computedState.OnPropertyChanged();
+            foreach (var computedState in __viewComputedStates)
+                computedState.OnPropertyChanged();
+        }
+        finally
+        {
+            _isUpdatingState = false;
+        }
     }
 
     public void AddExternalState<TControl, TValue>(TControl source, string propertyName, Action<TValue?> setAction)

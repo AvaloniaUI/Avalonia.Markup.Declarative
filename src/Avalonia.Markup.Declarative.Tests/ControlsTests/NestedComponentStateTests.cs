@@ -1,7 +1,5 @@
 using Avalonia.Controls;
-using Avalonia.Headless;
 using Avalonia.Markup.Declarative.Tests.ControlsTests.Controls;
-using Avalonia.Platform;
 using Avalonia.Threading;
 using System.Collections.ObjectModel;
 using Xunit.Abstractions;
@@ -74,6 +72,10 @@ public class NestedComponentStateTest(ITestOutputHelper testOutputHelper) : Aval
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
+        view.UpdateState(() => view.SelectedColor = Color.FromArgb(255, 255, 255, 0));
+        view.UpdateEditors();
+        view.UpdateState(() => view.SelectedColor = Color.FromArgb(255, 255, 0, 255));
+        view.UpdateEditors();
         view.UpdateState(() => view.SelectedColor = Color.FromArgb(255, 255, 0, 0));
         view.UpdateEditors();
 
