@@ -36,7 +36,7 @@ public class ColorPickerView : ComponentBase
     public void UpdateEditors()
     {
         var value = SelectedColor;
-        HexValue = $"#{value.R:X2}{value.G:X2}{value.B:X2}";
+        HexValue = $"#{value.A:X2}{value.R:X2}{value.G:X2}{value.B:X2}";
         OnPropertyChanged(nameof(HexValue));
         StateHasChanged();
     }
@@ -81,18 +81,20 @@ public class NestedComponentStateTest
     }
 
     [Fact]
-    public void TextBlock_Binding_RegistersComputedState()
+    public void ColorPickerView_BindingStateChanges_PreventInfiniteRecursion()
     {
         var view = new ColorPickerView();
         var window = new Window { Content = view };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        view.UpdateState(() => Color.FromArgb(255, 255, 0, 0));
+        view.UpdateState(() => view.SelectedColor = Color.FromArgb(255, 255, 0, 0));
         view.UpdateEditors();
 
         //Should not throw exceptions after run
 
-        _testOutputHelper.WriteLine($"Hex value: {view.HexValue}");
+        var viewHexValue = view.HexValue;
+        _testOutputHelper.WriteLine($"Hex value: {viewHexValue}");
+        Assert.Equal("#FFFF0000", viewHexValue);
     }
 }
