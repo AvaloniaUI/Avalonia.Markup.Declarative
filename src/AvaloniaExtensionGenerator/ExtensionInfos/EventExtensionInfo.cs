@@ -1,6 +1,6 @@
 using AvaloniaExtensionGenerator.Generators;
 using System.Reflection;
-using System.Reflection.Metadata;
+using System.Text.RegularExpressions;
 
 namespace AvaloniaExtensionGenerator.ExtensionInfos;
 
@@ -24,7 +24,7 @@ public class EventExtensionInfo : IMemberExtensionInfo
 
     public bool HasStandardSignature =>
         EventParameterTypes.Count == 2 && EventParameterTypes[0] == "System.Object" &&
-        EventParameterTypes[1].EndsWith("EventArgs");
+        Regex.IsMatch(EventParameterTypes[1], @"\b\w*EventArgs(\<.*\>)?$");
 
     public bool HasSingleParameter => EventParameterTypes.Count == 1;
     public bool HasMultipleParameters => EventParameterTypes.Count > 1;
@@ -50,12 +50,12 @@ public class EventExtensionInfo : IMemberExtensionInfo
         if (methodInfo != null)
         {
             var parameters = methodInfo.GetParameters();
-            foreach (var parameter in parameters) 
+            foreach (var parameter in parameters)
                 EventParameterTypes.Add(parameter.ParameterType.GetTypeDeclarationSourceCode());
 
             if (HasRoutedEventArgs(parameters))
             {
-                var routedEventFieldInfo = ControlType.GetField(EventName + "Event", BindingFlags.Static | BindingFlags.Public); 
+                var routedEventFieldInfo = ControlType.GetField(EventName + "Event", BindingFlags.Static | BindingFlags.Public);
                 IsRoutedEvent = routedEventFieldInfo != null; //if routed event field located in base class, ignore it and cout it classic event
             }
 
