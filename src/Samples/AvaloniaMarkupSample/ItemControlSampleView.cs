@@ -22,7 +22,7 @@ public class ItemControlSampleView : ComponentBase
                     .Text(() => SelectedItem),
                 new TextBlock()
                     .HorizontalAlignment(HorizontalAlignment.Center)
-                    .Text(Items2.Count.ToString())
+                    .Text(Items.Count.ToString())
             );
 
     private string _selectedItem = "one";
@@ -37,7 +37,13 @@ public class ItemControlSampleView : ComponentBase
         }
     }
 
-    public List<string> Items2 { get; set; } = null!;
+    protected void SetListBox(ListBox box, Func<string, Control> build)
+    {
+        box.ItemTemplate<string>(item =>
+            //needed to keep current view context for lambda bindings
+            new FuncComponent<string>(item, s => build(s))
+        );
+    }
 
     public List<string> Items { get; set; } =
     [

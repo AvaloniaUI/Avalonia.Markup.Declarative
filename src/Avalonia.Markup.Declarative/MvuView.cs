@@ -161,8 +161,31 @@ public static class MvuViewExtensions
 
     public static T Observable<T, TProperty>(this T ctrl, AvaloniaProperty<TProperty?> property, Action<TProperty?> onUpdate) where T : Control
     {
-        ctrl.GetObservable(property)
-            .Subscribe(onUpdate);
+        ctrl.GetObservable(property).Subscribe(new ActionObserver<TProperty?>(onUpdate));
+
         return ctrl;
+    }
+
+    public static T Observable<T, TProperty>(this T ctrl, AvaloniaProperty<TProperty?> property, IObserver<TProperty?> observer) where T : Control
+    {
+        ctrl.GetObservable(property).Subscribe(observer);
+
+        return ctrl;
+    }
+
+    public class ActionObserver<T> : IObserver<T>
+    {
+        private readonly Action<T> _onNext;
+
+        public ActionObserver(Action<T> onNext)
+        {
+            _onNext = onNext ?? throw new ArgumentNullException(nameof(onNext));
+        }
+
+        public void OnNext(T value) => _onNext(value);
+
+        public void OnError(Exception error) { /* 可选：处理错误 */ }
+
+        public void OnCompleted() { /* 可选：处理完成 */ }
     }
 }

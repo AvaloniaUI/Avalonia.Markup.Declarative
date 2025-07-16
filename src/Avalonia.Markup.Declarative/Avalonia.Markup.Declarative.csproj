@@ -16,8 +16,8 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>avalonia;avaloniaui;mvvm;mvp;csharpmarjup;android;ios;mac;forms;wpf;net;netstandard;net461;uwp;xamarin</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageId>navalonia.markup</PackageId>
-		<Title>navalonia.markup</Title>
+		<PackageId>nmarkup</PackageId>
+		<Title>nmarkup</Title>
 	</PropertyGroup>
 	
 	<ItemGroup>

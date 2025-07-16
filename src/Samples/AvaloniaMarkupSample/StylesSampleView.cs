@@ -36,12 +36,33 @@ public class StylesSampleView : ViewBase
                             .Background(Brushes.Green),
                         new Style<Button>(s => s.OfType<Button>().Class(":pointerover").Child()) //add child selector to change color of content presenter inside button
                             .Background(Brushes.Red)),
-
+                
                 new Button()
+                    .Classes("unstyles-button")
                     .HorizontalAlignment(Avalonia.Layout.HorizontalAlignment.Center)
                     .Content("Unstyled buton")
+                    .Width(150),
+
+                new Button()
+                    .Classes("style2-button")
+                    .HorizontalAlignment(Avalonia.Layout.HorizontalAlignment.Center)
+                    .Content("Style2 buton")
                     .Width(150)
             });
+
+    protected override StyleGroup? BuildStyles()
+    {
+        return [
+            // x.Class 有效
+            new Style<Button>(x=>x.Class("style2-button")).BorderThickness(2d)
+                .BorderBrush(Brushes.Red),
+
+            // Selector 无效, 因此, 该样式对所有 Button 都生效
+            //new Style<Button>()
+            //    .Selector(x=>x.Class("style2-button")).BorderThickness(2d)
+            //    .BorderBrush(Brushes.Red)
+            ];
+    }
 
     public List<TabVm> Tabs { get; set; } = new()
     {
