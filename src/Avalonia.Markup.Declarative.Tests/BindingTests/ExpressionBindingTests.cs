@@ -9,15 +9,22 @@ namespace Avalonia.Markup.Declarative.Tests.BindingTests;
 public class ExpressionBindingTestView : ComponentBase
 {
     protected override object Build() =>
-        new StackPanel().Children([
+        new StackPanel().Children(
+            new ToggleSwitch()
+                .OnContent("Erase mode: On")
+                .OffContent("Erase mode: Off")
+                .IsChecked(() => IsToggleChecked, v => IsToggleChecked = v ?? false),
+
             new TextBlock()
                 .Ref(out MyTextBlock)
-                .Text(() => State.StateProperty),
-        ]);
+                .Text(() => State.StateProperty)
+        );
 
     public TextBlock MyTextBlock = null!;
 
     public SeparatedViewState State { get; set; } = new();
+
+    private bool IsToggleChecked { get; set; }
 }
 
 public class SeparatedViewState : INotifyPropertyChanged
@@ -64,15 +71,15 @@ public class ExpressionBindingTests : AvaloniaTestBase
         Dispatcher.UIThread.RunJobs();
 
         var state = view.State;
-        
+
         view.UpdateState(() => state.UpdatePropertyWithoutNotification("Updated!"));
 
         var textBlock = view.MyTextBlock;
         Assert.NotNull(textBlock);
-        
+
         textBlock.Text.Should().Be("Updated!");
     }
-    
+
     [Fact]
     public void TextBlock_Binding_TextShouldBeUpdatedOnPropertyChanged()
     {

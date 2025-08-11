@@ -19,7 +19,7 @@ public static T IsChecked<T>(this T control, System.Nullable<System.Boolean> val
 => control._set(() => control.IsChecked = value!);
 
 /*BindFromExpressionSetterGenerator*/
-public static T IsChecked<T>(this T control, Func<System.Nullable<System.Boolean>> func, Action<System.Nullable<System.Boolean>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ToggleButton 
+public static T IsChecked<T>(this T control, Func<System.Nullable<bool>> func, Action<System.Nullable<bool>>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Primitives.ToggleButton 
    => control._set(Avalonia.Controls.Primitives.ToggleButton.IsCheckedProperty!, func, onChanged, expression);
 
 /*MagicalSetterGenerator*/
