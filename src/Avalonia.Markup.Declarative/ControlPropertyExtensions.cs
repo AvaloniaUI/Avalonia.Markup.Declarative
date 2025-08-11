@@ -68,7 +68,7 @@ public static class ControlPropertyExtensions
 	}
 
 	/// <summary>
-	/// Creates binding based on expression argument
+	/// Creates *Avalonia property* binding based on expression argument
 	/// </summary>
 	/// <typeparam name="TControl"></typeparam>
 	/// <typeparam name="TValue"></typeparam>
@@ -103,12 +103,13 @@ public static class ControlPropertyExtensions
 	}
 
     /// <summary>
-    /// Creates binding based on expression argument
+    /// Creates *Common property* binding based on expression argument
     /// </summary>
     /// <typeparam name="TControl"></typeparam>
     /// <typeparam name="TValue"></typeparam>
     /// <param name="control"></param>
-    /// <param name="getter"></param>
+    /// <param name="setter">Property setter action</param>
+    /// <param name="getter">Property getter function</param>
     /// <param name="setChangedHandler"></param>
     /// <param name="expression"></param>
     /// <returns></returns>
@@ -119,7 +120,7 @@ public static class ControlPropertyExtensions
         var view = ViewBuildContext.CurrentView;
 
         if (view == null)
-            throw new InvalidOperationException("Current view is not set");
+            throw new InvalidOperationException("Current view is not set. Control must be put into view (inherited from ViewBase of ComponentBase) that can store binding information.");
 
         //var handler = setChangedHandler;
 
