@@ -95,7 +95,9 @@ public static class ControlPropertyExtensions
 			handler = v => componentBase.UpdateState(() => setChangedHandler(v));
 
 		var state = new ViewPropertyComputedState<TControl, TValue>(expression, func, handler, control, avaloniaProperty);
-		
+
+        var target = func.Target;
+
 		view.__viewComputedStates.Add(state);
 		return control;
 	}

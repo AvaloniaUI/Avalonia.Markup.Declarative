@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Avalonia.Controls;
-using Avalonia.Markup.Declarative;
 using Avalonia.Markup.Declarative.Helpers;
 using Avalonia.Threading;
 
@@ -183,6 +182,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         }
     }
 
+    [Obsolete("Should not used directly and will be removed in future")]
     public void AddExternalState<TControl, TValue>(TControl source, string propertyName, Action<TValue?> setAction)
         where TControl : ComponentBase
     {
