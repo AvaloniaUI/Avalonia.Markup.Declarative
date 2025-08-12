@@ -122,13 +122,13 @@ public static class ControlPropertyExtensions
         if (view == null)
             throw new InvalidOperationException("Current view is not set. Control must be put into view (inherited from ViewBase of ComponentBase) that can store binding information.");
 
-        //var handler = setChangedHandler;
+        var handler = setChangedHandler;
 
         //override handler for MVU components so changing of such properties will trigger StateHasChanged method
-        //if (view is ComponentBase componentBase && setter != null)
-        //    handler = v => componentBase.UpdateState(() => setter(v));
+        if (view is ComponentBase componentBase && setChangedHandler != null)
+            handler = v => componentBase.UpdateState(() => setChangedHandler(v));
 
-        var state = new ViewPropertyComputedState<TControl, TValue>(expression, setter, getter, setChangedHandler, control);
+        var state = new ViewPropertyComputedState<TControl, TValue>(expression, setter, getter, handler, control);
 
         view.__viewComputedStates.Add(state);
         return control;
