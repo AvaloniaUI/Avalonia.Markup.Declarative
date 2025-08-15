@@ -55,7 +55,7 @@ public class ViewBaseBindingTests : AvaloniaTestBase
 
 
             // Should have a computed state for the Text property
-            Assert.Contains(view.__viewComputedStates, s =>
+            Assert.Contains(view.ViewComputedStates, s =>
                 s is ViewPropertyComputedState<TextBlock, string> state &&
                 state.GetterFunc() == "Initial");
 

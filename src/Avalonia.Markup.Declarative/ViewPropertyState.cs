@@ -3,28 +3,24 @@ using System.Reflection;
 
 namespace Avalonia.Markup.Declarative;
 
-internal class ViewPropertyState<TValue> : ViewPropertyState
+[Obsolete("Should not used directly and will be removed in future")]
+internal class ViewPropertyState<TValue>(PropertyInfo propertyInfo, ViewBase view, Action<TValue?> setAction)
+    : ViewPropertyState(propertyInfo, view)
 {
-    private readonly Action<TValue?> _setAction;
-
     private TValue? TypedValue => (TValue?) Value;
-
-    public ViewPropertyState(PropertyInfo propertyInfo, ViewBase view, Action<TValue?> setAction) : base(propertyInfo, view)
-    {
-        _setAction = setAction;
-    }
 
     public override bool CheckStateChangedAndUpdate()
     {
         var result = base.CheckStateChangedAndUpdate();
 
         if (result)
-            _setAction(TypedValue);
+            setAction(TypedValue);
 
         return result;
     }
 }
 
+[Obsolete("Should not used directly and will be removed in future")]
 internal class ViewPropertyState
 {
     public object? Value { get; private set; }

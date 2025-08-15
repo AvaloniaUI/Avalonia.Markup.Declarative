@@ -78,6 +78,9 @@ public class ExternalPropertySetTest(ITestOutputHelper testOutputHelper) : Avalo
         var expectedValue = 50;
         view.SliderWithLabel.ChangeSliderValue(expectedValue);
 
+        var sliderWithLabelValue = view.SliderWithLabel.Value;
+        Assert.Equal(expectedValue, sliderWithLabelValue);
+
         var realValue = view.Value;
         Assert.Equal(expectedValue, realValue);
     }
@@ -92,7 +95,7 @@ public class ExternalPropertySetTest(ITestOutputHelper testOutputHelper) : Avalo
         Dispatcher.UIThread.RunJobs();
 
         var expectedValue = 100;
-        view.Value = expectedValue;
+        view.Value(expectedValue); //initiates StateHasChanged notification on the view
 
         var realParentValue = view.Value;
         var realInnerValue = view.SliderWithLabel.Value;

@@ -37,9 +37,8 @@ public abstract class ComponentBase<TViewModel> : ComponentBase
 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties | DynamicallyAccessedMemberTypes.NonPublicFields)]
 public abstract class ComponentBase : ViewBase, IMvuComponent
 {
-    private ViewPropertyState[]? _localPropertyStates;
-    private List<ViewPropertyState>? _externalPropertyStates;
-    private List<IMvuComponent>? _dependentViews;
+    private ViewPropertyState[] _localPropertyStates = [];
+    private List<ViewPropertyState> _externalPropertyStates = [];
     private bool _isUpdatingState;
 
     protected ComponentBase()
@@ -122,6 +121,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         return control;
     }
 
+    [Obsolete]
     private void InitStateMembers()
     {
         var viewType = GetType();
@@ -131,10 +131,14 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
             .Select(p => new ViewPropertyState(p, this))
             .ToArray();
     }
-    public void UpdateState(Action? updateStateAction = null)
+    public void UpdateState(Action? updateStateAction = null, bool bubbleToParent = false)
     {
         updateStateAction?.Invoke();
         StateHasChanged();
+
+        //invalidate parent's state if bubbleToParent is true
+        if (bubbleToParent && Parent is ComponentBase parentComponent) 
+            parentComponent.StateHasChanged();
     }
 
     protected void StateHasChanged()
@@ -158,22 +162,20 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         _isUpdatingState = true;
         try
         {
+            //obsolete
+            //foreach (var prop in _externalPropertyStates)
+            //    if (prop.CheckStateChangedAndUpdate())
+            //        OnPropertyChanged(prop.Name);
 
-            if (_externalPropertyStates != null)
-                foreach (var prop in _externalPropertyStates)
-                    if (prop.CheckStateChangedAndUpdate())
-                        OnPropertyChanged(prop.Name);
+            //obsolete
+            //foreach (var prop in _localPropertyStates)
+            //    if (prop.CheckStateChangedAndUpdate())
+            //        OnPropertyChanged(prop.Name);
 
-            if (_localPropertyStates != null)
-                foreach (var prop in _localPropertyStates)
-                    if (prop.CheckStateChangedAndUpdate())
-                        OnPropertyChanged(prop.Name);
+            foreach (var dependentView in DependentViews.OfType<ComponentBase>())
+                dependentView.UpdateState();
 
-            if (_dependentViews != null)
-                foreach (var dependentView in _dependentViews)
-                    dependentView.UpdateState();
-
-            foreach (var computedState in __viewComputedStates)
+            foreach (var computedState in ViewComputedStates)
                 computedState.OnPropertyChanged();
         }
         finally
@@ -196,15 +198,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         var propertyState = new ViewPropertyState<TValue>(propInfo, source, setAction);
         _externalPropertyStates.Add(propertyState);
 
-        source.AddDependentView(this, propertyState);
-    }
-
-    private void AddDependentView(IMvuComponent view, ViewPropertyState propertyState)
-    {
-        _dependentViews ??= [];
-
-        if (!_dependentViews.Contains(view))
-            _dependentViews.Add(view);
+        source.AddDependentView(this);
     }
 
     #region ObsoleteMvuBinding

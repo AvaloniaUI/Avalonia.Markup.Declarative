@@ -50,7 +50,7 @@ public class TemplateBindingTests : AvaloniaTestBase
         Assert.NotNull(templateView); // Ensure template view is created
 
         // Should have a computed state for the Text property
-        Assert.Contains(templateView.__viewComputedStates, s =>
+        Assert.Contains(templateView.ViewComputedStates, s =>
             s is ViewPropertyComputedState<TextBox, string> state &&
             state.GetterFunc() == "Initial");
     }
