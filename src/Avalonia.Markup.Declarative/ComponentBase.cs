@@ -137,8 +137,8 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         StateHasChanged();
 
         //invalidate parent's state if bubbleToParent is true
-        if (bubbleToParent && Parent is ComponentBase parentComponent) 
-            parentComponent.StateHasChanged();
+        //if (bubbleToParent && Parent is ComponentBase parentComponent) 
+        //    parentComponent.StateHasChanged();
     }
 
     protected void StateHasChanged()

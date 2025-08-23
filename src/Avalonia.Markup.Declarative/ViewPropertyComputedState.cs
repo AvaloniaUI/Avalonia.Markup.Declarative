@@ -125,6 +125,7 @@ internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyCompute
 
         TValue newValue = GetterFunc();
 
+        //GetterFunc();
         if (_avaloniaProperty != null)
         {
             if (!Equals(_control.GetValue(_avaloniaProperty), newValue))
