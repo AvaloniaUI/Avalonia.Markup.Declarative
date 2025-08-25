@@ -12,7 +12,7 @@ namespace Avalonia.Markup.Declarative;
 
 public static class HotReloadManager
 {
-    private static readonly Dictionary<Type, HashSet<IReloadable>> Instances = new();
+    private static readonly ConcurrentDictionary<Type, HashSet<IReloadable>> Instances = new();
 
     public static event Action<Type[]?>? HotReloaded;
 

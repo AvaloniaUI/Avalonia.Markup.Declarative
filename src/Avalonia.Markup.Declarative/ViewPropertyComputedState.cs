@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace Avalonia.Markup.Declarative;
 
-internal class ViewPropertyComputedState<TValue> : ViewPropertyComputedState, IObservable<TValue>, INotifyPropertyChanged
+internal class ViewPropertyComputedState<TValue> : ExpressionBindingBase, IObservable<TValue>, INotifyPropertyChanged
 {
     private Func<TValue> GetterFunc { get; }
     private TValue Value => GetterFunc();
@@ -51,7 +51,7 @@ internal class ViewPropertyComputedState<TValue> : ViewPropertyComputedState, IO
     }
 }
 
-internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyComputedState, IObservable<TValue>, IObserver<TValue>
+internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBase, IObservable<TValue>, IObserver<TValue>
     where TControl : AvaloniaObject
 
 {
@@ -60,9 +60,7 @@ internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyCompute
     private readonly AvaloniaProperty<TValue>? _avaloniaProperty;
     private Action<TValue>? Setter { get; }
     private Action<TValue>? SetChangedHandler { get; }
-
     private TValue Value => GetterFunc();
-
     public Func<TValue> GetterFunc { get; }
 
     internal ViewPropertyComputedState(string? expressionString,
@@ -131,7 +129,7 @@ internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyCompute
             if (!Equals(_control.GetValue(_avaloniaProperty), newValue))
             {
                 _control.SetValue(_avaloniaProperty, newValue);
-                //SetChangedHandler?.Invoke(newValue);
+                SetChangedHandler?.Invoke(newValue);
             }
         }
         else
@@ -139,7 +137,7 @@ internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyCompute
             if (Setter != null)
             {
                 Setter.Invoke(newValue);
-                //SetChangedHandler?.Invoke(newValue);
+                SetChangedHandler?.Invoke(newValue);
             }
         }
     }
@@ -206,13 +204,13 @@ internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyCompute
 
 }
 
-internal abstract class ViewPropertyComputedState
+internal abstract class ExpressionBindingBase
 {
     internal string? ExpressionString { get; set; }
 
     public override bool Equals(object? obj)
     {
-        return obj is ViewPropertyComputedState state &&
+        return obj is ExpressionBindingBase state &&
                ExpressionString == state.ExpressionString;
     }
 

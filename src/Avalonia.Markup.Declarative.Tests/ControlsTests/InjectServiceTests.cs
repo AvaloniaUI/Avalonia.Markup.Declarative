@@ -22,21 +22,18 @@ namespace Avalonia.Markup.Declarative.Tests.ControlsTests
         [Fact]
         public async Task InjectServices_InjectsIntoBaseClassProperties()
         {
-            await Dispatcher.UIThread.InvokeAsync(() =>
-            {
-                // Arrange
-                SetServiceProvider(new TestServiceProvider(new TestService()));
-                var component = new DerivedComponent();
+            // Arrange
+            SetServiceProvider(new TestServiceProvider(new TestService()));
+            var component = new DerivedComponent();
 
-                // Act
-                var property = typeof(BaseComponent).GetProperty("Service",
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                var value = property?.GetValue(component);
+            // Act
+            var property = typeof(BaseComponent).GetProperty("Service",
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var value = property?.GetValue(component);
 
-                // Assert
-                Assert.NotNull(value);
-                Assert.IsType<TestService>(value);
-            });
+            // Assert
+            Assert.NotNull(value);
+            Assert.IsType<TestService>(value);
         }
 
         private class TestServiceProvider(object service) : IServiceProvider

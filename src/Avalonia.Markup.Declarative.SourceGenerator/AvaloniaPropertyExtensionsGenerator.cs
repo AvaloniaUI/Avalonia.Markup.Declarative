@@ -73,26 +73,37 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         if (!string.IsNullOrWhiteSpace(typeNamespace))
             sb.AppendLine($"using {typeNamespace};");
 
-        var typeName = type.Identifier.ToString();
+        // base type name (unqualified) used for extension class name and file name
+        var baseTypeName = type.Identifier.ToString();
 
-        var genericParams = "";
-
+        // original generic parameters for the type itself (kept for extension class name / file name)
+        var ownGenericParams = "";
         if (type.TypeParameterList != null && type.TypeParameterList.Parameters.Count > 0)
         {
-            genericParams += '<';
+            ownGenericParams += '<';
 
             foreach (var item in type.TypeParameterList.Parameters)
             {
-                genericParams += item.Identifier.Text + ", ";
+                ownGenericParams += item.Identifier.Text + ", ";
             }
-            genericParams = genericParams.TrimEnd(' ').TrimEnd(',');
-            genericParams += '>';
-
+            ownGenericParams = ownGenericParams.TrimEnd(' ').TrimEnd(',');
+            ownGenericParams += '>';
         }
-        typeName = typeName + genericParams;
+        var typeNameWithOwnParams = baseTypeName + ownGenericParams;
+
+        // Fully qualified control type name including namespace, containing types and type parameters
+        var typeSymbol = semanticModel.GetDeclaredSymbol(type) as INamedTypeSymbol;
+        var controlTypeQualified = typeSymbol?.ToDisplayString(
+            SymbolDisplayFormat.FullyQualifiedFormat
+                .WithGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance)
+                .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseSpecialTypes | SymbolDisplayMiscellaneousOptions.ExpandNullable)
+        ) ?? baseTypeName;
+
+        // Build method generic parameters for all containing type parameters (outermost -> innermost)
+        string allTypeParamsForMethods = BuildAllTypeParameters(type);
 
         sb.AppendLine("namespace Avalonia.Markup.Declarative;");
-        sb.AppendLine($"public static partial class {CleanIdentifier(typeName)}Extensions");
+        sb.AppendLine($"public static partial class {CleanIdentifier(typeNameWithOwnParams)}Extensions");
         sb.AppendLine("{");
 
         var members = type.Members;
@@ -105,8 +116,8 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
                 && HasAvaloniaPropertyPublicSetter(field, members))
             {
                 sb.AppendLine($"// avalonia properties\n");
-                AppendIfNotNull(sb, GetPropertySetterExtension(typeName, genericParams, field));
-                AppendIfNotNull(sb, GetExpressionBindingSetterExtension(typeName, genericParams, field));
+                AppendIfNotNull(sb, GetPropertySetterExtension(controlTypeQualified, allTypeParamsForMethods, field));
+                AppendIfNotNull(sb, GetExpressionBindingSetterExtension(controlTypeQualified, allTypeParamsForMethods, field));
                 processedFields.Add(field.Declaration.Variables[0].Identifier.ValueText);
             }
         }
@@ -122,9 +133,9 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
             {
                 sb.AppendLine($"// common properties\n");
 
-                AppendIfNotNull(sb, GetCommonPropertySetterExtension(typeName, property, semanticModel));
-                AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(typeName, property, semanticModel));
-                AppendIfNotNull(sb, GetCommonPropertyExpressionBindingSetterExtension(typeName, property, semanticModel));
+                AppendIfNotNull(sb, GetCommonPropertySetterExtension(controlTypeQualified, property, semanticModel));
+                AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(controlTypeQualified, property, semanticModel));
+                AppendIfNotNull(sb, GetCommonPropertyExpressionBindingSetterExtension(controlTypeQualified, property, semanticModel));
 
                 processedFields.Add(propertyName);
             }
@@ -134,8 +145,34 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
 
         if (processedFields.Count > 0)
         {
-            context.AddSource($"{RemoveIllegalFileNameCharacters(typeName)}Extensions.g.cs", SourceText.From(sb.ToString(), Encoding.UTF8));
+            context.AddSource($"{RemoveIllegalFileNameCharacters(typeNameWithOwnParams)}Extensions.g.cs", SourceText.From(sb.ToString(), Encoding.UTF8));
         }
+    }
+
+    private static string BuildAllTypeParameters(ClassDeclarationSyntax type)
+    {
+        var stack = new Stack<string>();
+        SyntaxNode? current = type;
+        while (current is ClassDeclarationSyntax cds)
+        {
+            if (cds.TypeParameterList is { Parameters.Count: > 0 })
+            {
+                // Push in reverse so that when we read Stack.ToArray() we keep original order per containing type
+                foreach (var p in cds.TypeParameterList.Parameters.Reverse())
+                {
+                    stack.Push(p.Identifier.Text);
+                }
+            }
+            current = current.Parent;
+            if (current is BaseNamespaceDeclarationSyntax)
+                break;
+        }
+
+        if (stack.Count == 0)
+            return string.Empty;
+
+        var arr = stack.ToArray(); // outermost -> innermost order
+        return $"<{string.Join(", ", arr)}>";
     }
 
     public static string RemoveIllegalFileNameCharacters(string fileName)
@@ -213,7 +250,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         sb.AppendLine(value);
     }
 
-    public static string GetPropertySetterExtension(string controlTypeName, string genericParams, FieldDeclarationSyntax field)
+    public static string GetPropertySetterExtension(string controlTypeName, string genericParamsAll, FieldDeclarationSyntax field)
     {
         var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
 
@@ -242,9 +279,9 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
                          + $" [CallerArgumentExpression(nameof(value))] string? ps = null";
 
         var extensionText =
-            $"public static {controlTypeName} {extensionName}{genericParams}"
-            + $"(this {controlTypeName} control, {argsString}){classConstraint}{NewLine}"
-            + $"   => control._setEx({controlTypeName}.{extensionName}Property, ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
+            $"public static {controlTypeName} {extensionName}{genericParamsAll}" +
+            $"(this {controlTypeName} control, {argsString}){classConstraint}{NewLine}" +
+            $"   => control._setEx({controlTypeName}.{extensionName}Property, ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
 
         return extensionText;
     }
@@ -259,9 +296,9 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
                          + $" [CallerArgumentExpression(nameof(value))] string? ps = null";
 
         var extensionText =
-            $"public static {controlTypeName} {extensionName}"
-            + $"(this {controlTypeName} control, {argsString})"
-            + $"=>{NewLine} control._setCommonEx(ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
+            $"public static {controlTypeName} {extensionName}" +
+            $"(this {controlTypeName} control, {argsString})" +
+            $"=>{NewLine} control._setCommonEx(ps, () => control.{extensionName} = value, bindingMode, converter, bindingSource);";
 
         return extensionText;
     }
@@ -273,14 +310,14 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
 
         var extensionText =
             $"#pragma warning disable CS8601{NewLine}" +
-            $"[Obsolete] public static {controlTypeName} {extensionName}"
-            + $"(this {controlTypeName} control, IBinding binding)"
-            + $"=>{NewLine} control._setCommonBindingEx(({valueTypeSource}? v) => control.{extensionName} = v ?? default({valueTypeSource}), binding);{NewLine}"
-            + $"#pragma warning restore CS8601";
+            $"[Obsolete] public static {controlTypeName} {extensionName}" +
+            $"(this {controlTypeName} control, IBinding binding)" +
+            $"=>{NewLine} control._setCommonBindingEx(({valueTypeSource}? v) => control.{extensionName} = v ?? default({valueTypeSource}), binding);{NewLine}" +
+            $"#pragma warning restore CS8601";
 
         return extensionText;
     }
-    public static string GetExpressionBindingSetterExtension(string controlTypeName, string genericParams, FieldDeclarationSyntax field)
+    public static string GetExpressionBindingSetterExtension(string controlTypeName, string genericParamsAll, FieldDeclarationSyntax field)
     {
         var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
 
@@ -306,7 +343,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         }
 
         var extensionText =
-            $"public static {controlTypeName} {extensionName}{genericParams}(this {controlTypeName} control, Func<{valueTypeSource}> func, Action<{valueTypeSource}>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null){classConstraint}{NewLine}" +
+            $"public static {controlTypeName} {extensionName}{genericParamsAll}(this {controlTypeName} control, Func<{valueTypeSource}> func, Action<{valueTypeSource}>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null){classConstraint}{NewLine}" +
             $"   => control._set({controlTypeName}.{extensionName}Property, func, onChanged, expression);";
 
         return extensionText;

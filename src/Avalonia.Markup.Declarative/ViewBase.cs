@@ -36,7 +36,7 @@ public abstract class ViewBase<TViewModel> : ViewBase
 /// </summary>
 public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 {
-    internal List<ViewPropertyComputedState> ViewComputedStates { get; } = [];
+    internal List<ExpressionBindingBase> ViewComputedStates { get; } = [];
     internal List<IDeclarativeViewBase> DependentViews { get; set; } = [];
 
     private INotifyPropertyChanged? _currentObservedDataContext;
@@ -147,7 +147,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     /// </summary>
     /// <param name="state">The computed state to add. This parameter cannot be null.</param>
     /// <param name="dependentControl">Avalonia control that contains property to bind</param>
-    internal virtual void AddComputedState<TControl>(ViewPropertyComputedState state, TControl dependentControl)
+    internal virtual void AddComputedState<TControl>(ExpressionBindingBase state, TControl dependentControl)
     {
         ViewComputedStates.Add(state);
 

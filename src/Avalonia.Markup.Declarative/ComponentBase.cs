@@ -40,6 +40,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     private ViewPropertyState[] _localPropertyStates = [];
     private List<ViewPropertyState> _externalPropertyStates = [];
     private bool _isUpdatingState;
+    private readonly HashSet<INotifyPropertyChanged> _subscribedNotifyPropertyChanged = new();
 
     protected ComponentBase()
         : base()
@@ -54,6 +55,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     protected override void OnCreated()
     {
         InjectServices();
+        SubscribeToNotifyPropertyChangedMembers();
         InitStateMembers();
         StateHasChanged();
     }
@@ -163,14 +165,14 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         try
         {
             //obsolete
-            //foreach (var prop in _externalPropertyStates)
-            //    if (prop.CheckStateChangedAndUpdate())
-            //        OnPropertyChanged(prop.Name);
+            foreach (var prop in _externalPropertyStates)
+                if (prop.CheckStateChangedAndUpdate())
+                    OnPropertyChanged(prop.Name);
 
             //obsolete
-            //foreach (var prop in _localPropertyStates)
-            //    if (prop.CheckStateChangedAndUpdate())
-            //        OnPropertyChanged(prop.Name);
+            foreach (var prop in _localPropertyStates)
+                if (prop.CheckStateChangedAndUpdate())
+                    OnPropertyChanged(prop.Name);
 
             foreach (var dependentView in DependentViews.OfType<ComponentBase>())
                 dependentView.UpdateState();
@@ -260,5 +262,67 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    [RequiresUnreferencedCode("Method SubscribeToNotifyPropertyChangedMembers uses reflection to inspect the type hierarchy. This can't be analyzed statically.")]
+    private void SubscribeToNotifyPropertyChangedMembers()
+    {
+        var componentType = GetType();
+        var types = new List<Type>();
+
+        for (var type = componentType; type != null && type != typeof(object); type = type.BaseType)
+            types.Add(type);
+
+        types.Reverse();
+
+        foreach (var type in types)
+        {
+            // Properties
+            var props = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            foreach (var prop in props)
+            {
+                try
+                {
+                    if (!prop.CanRead) continue;
+                    if (prop.GetIndexParameters().Length != 0) continue; // skip indexers
+
+                    var value = prop.GetValue(this);
+                    if (value is INotifyPropertyChanged inpc)
+                        SubscribeNotifyPropertyChanged(inpc);
+                }
+                catch
+                {
+                    // Ignore getter exceptions
+                }
+            }
+
+            // Fields
+            var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            foreach (var field in fields)
+            {
+                try
+                {
+                    var value = field.GetValue(this);
+                    if (value is INotifyPropertyChanged inpc)
+                        SubscribeNotifyPropertyChanged(inpc);
+                }
+                catch
+                {
+                    // Ignore getter exceptions
+                }
+            }
+        }
+    }
+
+    private void SubscribeNotifyPropertyChanged(INotifyPropertyChanged inpc)
+    {
+        if (_subscribedNotifyPropertyChanged.Add(inpc))
+            inpc.PropertyChanged += OnMemberPropertyChanged;
+    }
+
+    private void OnMemberPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        // Trigger a state update when any subscribed member changes
+        StateHasChanged();
     }
 }
