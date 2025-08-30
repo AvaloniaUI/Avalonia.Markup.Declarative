@@ -129,7 +129,6 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
             if (!Equals(_control.GetValue(_avaloniaProperty), newValue))
             {
                 _control.SetValue(_avaloniaProperty, newValue);
-                SetChangedHandler?.Invoke(newValue);
             }
         }
         else
@@ -137,21 +136,9 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
             if (Setter != null)
             {
                 Setter.Invoke(newValue);
-                SetChangedHandler?.Invoke(newValue);
             }
         }
     }
-
-    //private void UpdateControlValue()
-    //{
-    //    if (_control == null)
-    //        return;
-
-    //    if (_avaloniaProperty != null)
-    //        _control.SetValue(_avaloniaProperty, Value);
-    //    else
-    //        Setter?.Invoke(GetterFunc());
-    //}
 
     public void OnNext(TValue value)
     {
@@ -161,7 +148,17 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
         if (value != null && value.Equals(Value))
             return;
 
+        // Call the handler for this component
         SetChangedHandler?.Invoke(value);
+
+        // If this is a component and it has a parent, notify the parent
+        if (_control is ComponentBase childComponent &&
+            childComponent.Parent is ComponentBase parentComponent &&
+            !string.IsNullOrEmpty(ExpressionString))
+        {
+            // Notify parent without using reflection
+            parentComponent.NotifyExternalPropertyChanged(ExpressionString, value);
+        }
     }
 
     public void OnCompleted()

@@ -4,7 +4,7 @@ using Xunit.Abstractions;
 
 namespace Avalonia.Markup.Declarative.Tests.ControlsTests;
 
-public class BindPropertyStatePopTest(ITestOutputHelper testOutputHelper) : AvaloniaTestBase
+public class BindPropertyStatePopTest : AvaloniaTestBase
 {
     [Fact]
     public void ExternalPropertySetTestView_InnerValueChangePoppedToParentComponent()
@@ -12,18 +12,17 @@ public class BindPropertyStatePopTest(ITestOutputHelper testOutputHelper) : Aval
         var view = new SliderTestView();
 
         var window = new Window { Content = view };
-        window.Show();
-        Dispatcher.UIThread.RunJobs();
+    window.Show();
 
-        Assert.Equal(1, view.Value);
+    Assert.Equal(1, view.Value);
 
         var expectedValue = 50;
         view._wrapper._slider.Value = expectedValue;
-
-        Assert.Equal(expectedValue, view._wrapper.Value);
+        
+    Assert.Equal(expectedValue, view._wrapper.Value);
         view._wrapper.UpdateState();
-        view.UpdateState();
-        Assert.Equal(expectedValue, view.Value);
+    view.UpdateState();
+    Assert.Equal(expectedValue, view.Value);
     }
 
     public class SliderWrapper : ComponentBase

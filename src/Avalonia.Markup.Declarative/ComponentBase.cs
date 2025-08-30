@@ -39,6 +39,8 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
 {
     private ViewPropertyState[] _localPropertyStates = [];
     private List<ViewPropertyState> _externalPropertyStates = [];
+    protected Dictionary<string, Action<object?>> _propertyUpdateCallbacks = new();
+
     private bool _isUpdatingState;
     private readonly HashSet<INotifyPropertyChanged> _subscribedNotifyPropertyChanged = new();
 
@@ -139,8 +141,8 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         StateHasChanged();
 
         //invalidate parent's state if bubbleToParent is true
-        //if (bubbleToParent && Parent is ComponentBase parentComponent) 
-        //    parentComponent.StateHasChanged();
+        if (bubbleToParent && Parent is ComponentBase parentComponent)
+            parentComponent.StateHasChanged();
     }
 
     protected void StateHasChanged()
@@ -312,6 +314,26 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
                 }
             }
         }
+    }
+
+    public void RegisterPropertyCallback(string propertyName, Action<object?> callback)
+    {
+        _propertyUpdateCallbacks[propertyName] = callback;
+    }
+    public void NotifyExternalPropertyChanged(string propertyName, object? newValue)
+    {
+        // Update our own value if we have a callback
+        if (_propertyUpdateCallbacks.TryGetValue(propertyName, out var callback))
+        {
+            callback(newValue);
+        }
+
+        // Trigger state update on this component
+        StateHasChanged();
+
+        // Bubble up to parent if needed
+        if (Parent is ComponentBase parent)
+            parent.NotifyExternalPropertyChanged(propertyName, newValue);
     }
 
     private void SubscribeNotifyPropertyChanged(INotifyPropertyChanged inpc)

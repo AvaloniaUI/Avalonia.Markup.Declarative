@@ -91,7 +91,26 @@ public static class ControlPropertyExtensions
 
         //override handler for MVU components so changing of such properties will trigger StateHasChanged method
         if (view is ComponentBase componentBase && setChangedHandler != null)
-            handler = v => componentBase.UpdateState(() => setChangedHandler(v), bubbleToParent: true);
+        {
+            handler = v =>
+            {
+                // Update this component's state first
+                componentBase.UpdateState(() => setChangedHandler(v), bubbleToParent: true);
+
+                // Also notify listeners (e.g., parent components) that track this property by expression
+                if (!string.IsNullOrEmpty(expression))
+                {
+                    try
+                    {
+                        componentBase.NotifyExternalPropertyChanged(expression!, v);
+                    }
+                    catch
+                    {
+                        // Swallow diagnostics-only issues
+                    }
+                }
+            };
+        }
 
         var state = new ViewPropertyComputedState<TControl, TValue>(expression, getterFunc, handler, control, avaloniaProperty);
 
@@ -111,25 +130,58 @@ public static class ControlPropertyExtensions
     /// <param name="expression"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    public static TControl _set<TControl, TValue>(this TControl control, Action<TValue> setter, Func<TValue> getterFunc, Action<TValue>? setChangedHandler, string? expression)
-        where TControl : AvaloniaObject
+public static TControl _set<TControl, TValue>(this TControl control, Action<TValue> setter, Func<TValue> getterFunc, Action<TValue>? setChangedHandler, string? expression)
+    where TControl : AvaloniaObject
+{
+    var view = ViewBuildContext.CurrentView;
+
+    if (view == null)
+        throw new InvalidOperationException("Current view is not set. Control must be put into view (inherited from ViewBase of ComponentBase) that can store binding information.");
+
+    var handler = setChangedHandler;
+
+    if (view is ComponentBase componentBase && setChangedHandler != null)
     {
-        var view = ViewBuildContext.CurrentView;
+        // Extract property name for tracking (if possible)
+        string propertyName = expression ?? "unknown";
 
-        if (view == null)
-            throw new InvalidOperationException("Current view is not set. Control must be put into view (inherited from ViewBase of ComponentBase) that can store binding information.");
+        if (control is ComponentBase childComponent)
+        {
+            // Register callback on PARENT to handle child changes by expression key
+            componentBase.RegisterPropertyCallback(propertyName, value =>
+            {
+                try
+                {
+                    if (value is TValue typedValue)
+                        setChangedHandler(typedValue);
+                    else if (value is null)
+                        setChangedHandler(default!);
+                    else
+                        setChangedHandler((TValue)Convert.ChangeType(value, typeof(TValue))!);
+                }
+                catch
+                {
+                    // ignore conversion issues
+                }
+            });
 
-        var handler = setChangedHandler;
-
-        //override handler for MVU components so changing of such properties will trigger StateHasChanged method
-        if (view is ComponentBase componentBase && setChangedHandler != null)
-            handler = v => componentBase.UpdateState(() => setChangedHandler(v));
-
-        var state = new ViewPropertyComputedState<TControl, TValue>(expression, setter, getterFunc, handler, control);
-
-        view.AddComputedState(state, control);
-        return control;
+            // When child local setter fires via binding, bubble to parent listeners
+            handler = v =>
+            {
+                setChangedHandler(v);
+                componentBase.NotifyExternalPropertyChanged(propertyName, v);
+            };
+        }
+        else
+        {
+            handler = v => componentBase.UpdateState(() => setChangedHandler(v), bubbleToParent: true);
+        }
     }
+
+    var state = new ViewPropertyComputedState<TControl, TValue>(expression, setter, getterFunc, handler, control);
+    view.AddComputedState(state, control);
+    return control;
+}
 
     /// <summary>
     /// Creates binding to property on DataContext of the control parsed from Value's expression arg , used by generated extensions
