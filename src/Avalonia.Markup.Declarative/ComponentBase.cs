@@ -25,7 +25,6 @@ public abstract class ComponentBase<TViewModel> : ComponentBase
         : base(true)
     {
         DataContext = viewModel;
-        OnCreatedCore();
         Initialize();
     }
 

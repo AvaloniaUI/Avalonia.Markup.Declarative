@@ -24,7 +24,6 @@ public abstract class ReactiveViewBase<TViewModel> : ViewBase, IViewFor<TViewMod
 
         if (DataContext != null)
         {
-            OnCreatedCore();
             Initialize();
         }
     }
