@@ -22,7 +22,6 @@ public abstract class ViewBase<TViewModel> : ViewBase
         : base(true)
     {
         DataContext = viewModel;
-        OnCreatedCore();
         Initialize();
     }
 
@@ -64,14 +63,9 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     {
         if (!deferredLoading)
         {
-            OnCreatedCore();
             Initialize();
         }
     }
-
-    protected virtual void OnAfterInitialized() { }
-
-    protected internal void OnCreatedCore() => OnCreated();
 
     /// <summary>
     /// Called from constructor, right before initialization and building UI
@@ -81,10 +75,13 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     {
     }
 
+    protected virtual void OnAfterInitialized() { }
+
     public void Initialize()
     {
         try
         {
+            OnCreated();
             NameScope.SetNameScope(this, Scope);
 
             using (var context = new ViewBuildContext(this))
@@ -198,7 +195,6 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
             var oldDataContext = DataContext; 
             DataContext = null; // guarantee that OnDataContextChanged is called
 
-            OnCreatedCore();
             Initialize();
             DataContext = oldDataContext; // set DataContext back
 
