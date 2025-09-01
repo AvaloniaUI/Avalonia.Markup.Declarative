@@ -99,6 +99,35 @@ public static T AreVerticalSnapPointsRegular<TValue,T>(this T control, TValue va
 => control._setEx(Avalonia.Controls.VirtualizingStackPanel.AreVerticalSnapPointsRegularProperty, ps, () => control.AreVerticalSnapPointsRegular = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
+ // CacheLength
+
+/*ValueSetterGenerator*/
+public static T CacheLength<T>(this T control, System.Double value) where T : Avalonia.Controls.VirtualizingStackPanel 
+=> control._set(() => control.CacheLength = value!);
+
+/*BindFromExpressionSetterGenerator*/
+public static T CacheLength<T>(this T control, Func<System.Double> func, Action<System.Double>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.VirtualizingStackPanel 
+   => control._set(Avalonia.Controls.VirtualizingStackPanel.CacheLengthProperty!, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static T CacheLength<T>(this T control,System.Double value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.VirtualizingStackPanel 
+=> control._setEx(Avalonia.Controls.VirtualizingStackPanel.CacheLengthProperty, ps, () => control.CacheLength = value!, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T CacheLength<T>(this T control, IBinding binding) where T : Avalonia.Controls.VirtualizingStackPanel 
+   => control._set(Avalonia.Controls.VirtualizingStackPanel.CacheLengthProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T CacheLength<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.VirtualizingStackPanel 
+   => control._set(Avalonia.Controls.VirtualizingStackPanel.CacheLengthProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+[Obsolete]
+public static T CacheLength<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Double> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.VirtualizingStackPanel 
+=> control._setEx(Avalonia.Controls.VirtualizingStackPanel.CacheLengthProperty, ps, () => control.CacheLength = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
+
+
 
 //================= Events ======================//
  // HorizontalSnapPointsChanged
@@ -156,6 +185,17 @@ public static Style<T> AreVerticalSnapPointsRegular<T>(this Style<T> style, Syst
 /*BindingStyleSetterGenerator*/
 public static Style<T> AreVerticalSnapPointsRegular<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.VirtualizingStackPanel 
 => style._addSetter(Avalonia.Controls.VirtualizingStackPanel.AreVerticalSnapPointsRegularProperty, binding);
+
+
+ // CacheLength
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> CacheLength<T>(this Style<T> style, System.Double value) where T : Avalonia.Controls.VirtualizingStackPanel 
+=> style._addSetter(Avalonia.Controls.VirtualizingStackPanel.CacheLengthProperty!, value!);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> CacheLength<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.VirtualizingStackPanel 
+=> style._addSetter(Avalonia.Controls.VirtualizingStackPanel.CacheLengthProperty, binding);
 
 
 

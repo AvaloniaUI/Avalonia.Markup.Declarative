@@ -157,6 +157,35 @@ public static T SelectionMode<TValue,T>(this T control, TValue value, FuncValueC
 => control._setEx(Avalonia.Controls.Calendar.SelectionModeProperty, ps, () => control.SelectionMode = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
+ // AllowTapRangeSelection
+
+/*ValueSetterGenerator*/
+public static T AllowTapRangeSelection<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Calendar 
+=> control._set(() => control.AllowTapRangeSelection = value!);
+
+/*BindFromExpressionSetterGenerator*/
+public static T AllowTapRangeSelection<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Calendar 
+   => control._set(Avalonia.Controls.Calendar.AllowTapRangeSelectionProperty!, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static T AllowTapRangeSelection<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Calendar 
+=> control._setEx(Avalonia.Controls.Calendar.AllowTapRangeSelectionProperty, ps, () => control.AllowTapRangeSelection = value!, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T AllowTapRangeSelection<T>(this T control, IBinding binding) where T : Avalonia.Controls.Calendar 
+   => control._set(Avalonia.Controls.Calendar.AllowTapRangeSelectionProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T AllowTapRangeSelection<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.Calendar 
+   => control._set(Avalonia.Controls.Calendar.AllowTapRangeSelectionProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+[Obsolete]
+public static T AllowTapRangeSelection<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Calendar 
+=> control._setEx(Avalonia.Controls.Calendar.AllowTapRangeSelectionProperty, ps, () => control.AllowTapRangeSelection = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
+
+
  // SelectedDate
 
 /*ValueSetterGenerator*/
@@ -351,6 +380,17 @@ public static Style<T> SelectionMode<T>(this Style<T> style, Avalonia.Controls.C
 /*BindingStyleSetterGenerator*/
 public static Style<T> SelectionMode<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Calendar 
 => style._addSetter(Avalonia.Controls.Calendar.SelectionModeProperty, binding);
+
+
+ // AllowTapRangeSelection
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> AllowTapRangeSelection<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.Calendar 
+=> style._addSetter(Avalonia.Controls.Calendar.AllowTapRangeSelectionProperty!, value!);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> AllowTapRangeSelection<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Calendar 
+=> style._addSetter(Avalonia.Controls.Calendar.AllowTapRangeSelectionProperty, binding);
 
 
  // SelectedDate
