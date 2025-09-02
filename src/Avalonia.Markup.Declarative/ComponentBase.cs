@@ -22,10 +22,8 @@ public abstract class ComponentBase<TViewModel> : ComponentBase
     }
 
     protected ComponentBase(TViewModel viewModel)
-        : base(true)
     {
         DataContext = viewModel;
-        Initialize();
     }
 
     protected abstract object Build(TViewModel? vm);
@@ -44,14 +42,9 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     private readonly HashSet<INotifyPropertyChanged> _subscribedNotifyPropertyChanged = new();
 
     protected ComponentBase()
-        : base()
     {
     }
 
-    protected ComponentBase(bool deferredLoading)
-        : base(deferredLoading)
-    {
-    }
 
     protected override void OnCreated()
     {
