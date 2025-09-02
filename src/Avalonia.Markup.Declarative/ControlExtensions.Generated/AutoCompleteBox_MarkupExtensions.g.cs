@@ -215,6 +215,35 @@ public static T ItemTemplate<TValue,T>(this T control, TValue value, FuncValueCo
 => control._setEx(Avalonia.Controls.AutoCompleteBox.ItemTemplateProperty, ps, () => control.ItemTemplate = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
+ // ClearSelectionOnLostFocus
+
+/*ValueSetterGenerator*/
+public static T ClearSelectionOnLostFocus<T>(this T control, System.Boolean value) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._set(() => control.ClearSelectionOnLostFocus = value!);
+
+/*BindFromExpressionSetterGenerator*/
+public static T ClearSelectionOnLostFocus<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.AutoCompleteBox 
+   => control._set(Avalonia.Controls.AutoCompleteBox.ClearSelectionOnLostFocusProperty!, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static T ClearSelectionOnLostFocus<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.ClearSelectionOnLostFocusProperty, ps, () => control.ClearSelectionOnLostFocus = value!, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T ClearSelectionOnLostFocus<T>(this T control, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
+   => control._set(Avalonia.Controls.AutoCompleteBox.ClearSelectionOnLostFocusProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T ClearSelectionOnLostFocus<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.AutoCompleteBox 
+   => control._set(Avalonia.Controls.AutoCompleteBox.ClearSelectionOnLostFocusProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+[Obsolete]
+public static T ClearSelectionOnLostFocus<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.AutoCompleteBox 
+=> control._setEx(Avalonia.Controls.AutoCompleteBox.ClearSelectionOnLostFocusProperty, ps, () => control.ClearSelectionOnLostFocus = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
+
+
  // IsDropDownOpen
 
 /*ValueSetterGenerator*/
@@ -735,6 +764,17 @@ public static Style<T> ItemTemplate<T>(this Style<T> style, Avalonia.Controls.Te
 /*BindingStyleSetterGenerator*/
 public static Style<T> ItemTemplate<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
 => style._addSetter(Avalonia.Controls.AutoCompleteBox.ItemTemplateProperty, binding);
+
+
+ // ClearSelectionOnLostFocus
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> ClearSelectionOnLostFocus<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.AutoCompleteBox 
+=> style._addSetter(Avalonia.Controls.AutoCompleteBox.ClearSelectionOnLostFocusProperty!, value!);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> ClearSelectionOnLostFocus<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.AutoCompleteBox 
+=> style._addSetter(Avalonia.Controls.AutoCompleteBox.ClearSelectionOnLostFocusProperty, binding);
 
 
  // IsDropDownOpen

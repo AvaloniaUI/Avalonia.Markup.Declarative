@@ -65,24 +65,6 @@ public class ExternalPropertySetTest(ITestOutputHelper testOutputHelper) : Avalo
     }
 
     [Fact]
-    public void ExternalPropertySetTestView_InnerValueChangePoppedToParentComponent()
-    {
-        var view = new ExternalPropertySetTestView();
-
-        var window = new Window { Content = view };
-        window.Show();
-        Dispatcher.UIThread.RunJobs();
-
-        Assert.Equal(1, view.Value);
-
-        var expectedValue = 50;
-        view.SliderWithLabel.ChangeSliderValue(expectedValue);
-
-        var realValue = view.Value;
-        Assert.Equal(expectedValue, realValue);
-    }
-
-    [Fact]
     public void ExternalPropertySetTestView_BindPropertyChangeInnerValue()
     {
         var view = new ExternalPropertySetTestView();
@@ -92,7 +74,7 @@ public class ExternalPropertySetTest(ITestOutputHelper testOutputHelper) : Avalo
         Dispatcher.UIThread.RunJobs();
 
         var expectedValue = 100;
-        view.Value = expectedValue;
+        view.Value(expectedValue); //initiates StateHasChanged notification on the view
 
         var realParentValue = view.Value;
         var realInnerValue = view.SliderWithLabel.Value;

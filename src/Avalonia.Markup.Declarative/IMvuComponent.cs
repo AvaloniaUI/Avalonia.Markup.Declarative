@@ -5,5 +5,5 @@ namespace Avalonia.Markup.Declarative;
 
 public interface IMvuComponent : INotifyPropertyChanged
 {
-    void UpdateState(Action? updateStateAction = default);
+    void UpdateState(Action? updateStateAction = null, bool bubbleToParent = false);
 }

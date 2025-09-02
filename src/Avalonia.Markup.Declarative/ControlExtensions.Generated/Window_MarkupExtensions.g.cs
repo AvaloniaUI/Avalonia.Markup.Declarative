@@ -389,6 +389,64 @@ public static T CanResize<TValue,T>(this T control, TValue value, FuncValueConve
 => control._setEx(Avalonia.Controls.Window.CanResizeProperty, ps, () => control.CanResize = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
+ // CanMinimize
+
+/*ValueSetterGenerator*/
+public static T CanMinimize<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Window 
+=> control._set(() => control.CanMinimize = value!);
+
+/*BindFromExpressionSetterGenerator*/
+public static T CanMinimize<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Window 
+   => control._set(Avalonia.Controls.Window.CanMinimizeProperty!, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static T CanMinimize<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.CanMinimizeProperty, ps, () => control.CanMinimize = value!, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T CanMinimize<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
+   => control._set(Avalonia.Controls.Window.CanMinimizeProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T CanMinimize<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.Window 
+   => control._set(Avalonia.Controls.Window.CanMinimizeProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+[Obsolete]
+public static T CanMinimize<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.CanMinimizeProperty, ps, () => control.CanMinimize = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
+
+
+ // CanMaximize
+
+/*ValueSetterGenerator*/
+public static T CanMaximize<T>(this T control, System.Boolean value) where T : Avalonia.Controls.Window 
+=> control._set(() => control.CanMaximize = value!);
+
+/*BindFromExpressionSetterGenerator*/
+public static T CanMaximize<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.Window 
+   => control._set(Avalonia.Controls.Window.CanMaximizeProperty!, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static T CanMaximize<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.CanMaximizeProperty, ps, () => control.CanMaximize = value!, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T CanMaximize<T>(this T control, IBinding binding) where T : Avalonia.Controls.Window 
+   => control._set(Avalonia.Controls.Window.CanMaximizeProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T CanMaximize<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.Window 
+   => control._set(Avalonia.Controls.Window.CanMaximizeProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+[Obsolete]
+public static T CanMaximize<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.Window 
+=> control._setEx(Avalonia.Controls.Window.CanMaximizeProperty, ps, () => control.CanMaximize = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
+
+
 
 //================= Events ======================//
  // Closing
@@ -541,6 +599,28 @@ public static Style<T> CanResize<T>(this Style<T> style, System.Boolean value) w
 /*BindingStyleSetterGenerator*/
 public static Style<T> CanResize<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Window 
 => style._addSetter(Avalonia.Controls.Window.CanResizeProperty, binding);
+
+
+ // CanMinimize
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> CanMinimize<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.Window 
+=> style._addSetter(Avalonia.Controls.Window.CanMinimizeProperty!, value!);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> CanMinimize<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Window 
+=> style._addSetter(Avalonia.Controls.Window.CanMinimizeProperty, binding);
+
+
+ // CanMaximize
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> CanMaximize<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.Window 
+=> style._addSetter(Avalonia.Controls.Window.CanMaximizeProperty!, value!);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> CanMaximize<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.Window 
+=> style._addSetter(Avalonia.Controls.Window.CanMaximizeProperty, binding);
 
 
 

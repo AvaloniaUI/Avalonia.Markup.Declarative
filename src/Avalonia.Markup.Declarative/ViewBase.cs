@@ -35,7 +35,9 @@ public abstract class ViewBase<TViewModel> : ViewBase
 /// </summary>
 public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 {
-    internal List<ViewPropertyComputedState> __viewComputedStates { get; set; } = [];
+    internal List<ExpressionBindingBase> ViewComputedStates { get; } = [];
+    internal List<IDeclarativeViewBase> DependentViews { get; set; } = [];
+
     private INotifyPropertyChanged? _currentObservedDataContext;
 
 
@@ -138,13 +140,39 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     }
 
     /// <summary>
+    /// Adds a computed state to the collection of view property computed states.
+    /// </summary>
+    /// <param name="state">The computed state to add. This parameter cannot be null.</param>
+    /// <param name="dependentControl">Avalonia control that contains property to bind</param>
+    internal virtual void AddComputedState<TControl>(ExpressionBindingBase state, TControl dependentControl)
+    {
+        ViewComputedStates.Add(state);
+
+        if (dependentControl is ViewBase targetView) 
+            AddDependentView(targetView);
+    }
+
+    /// <summary>
     /// Recomputes all registered computed bindings in the view.
     /// </summary>
     protected void RecomputeAllBindings()
     {
-        foreach (var state in __viewComputedStates.ToList()) 
+        foreach (var state in ViewComputedStates.ToList()) 
             state.OnPropertyChanged();
     }
+
+    /// <summary>
+    /// Adds a dependent view to the collection if it is not already present.
+    /// </summary>
+    /// <remarks>This method ensures that the specified view is added to the collection of dependent views
+    /// only if it is not already included.</remarks>
+    /// <param name="view">The dependent view to add. Must implement <see cref="IDeclarativeViewBase"/>.</param>
+    protected void AddDependentView(IDeclarativeViewBase view)
+    {
+        if (!DependentViews.Contains(view))
+            DependentViews.Add(view);
+    }
+
 
     #region Hot reload stuff
     public void Reload()
@@ -158,7 +186,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
                 _currentObservedDataContext = null;
             }
 
-            __viewComputedStates.Clear();
+            ViewComputedStates.Clear();
             OnBeforeReload();
             Child = null;
             VisualChildren.Clear();

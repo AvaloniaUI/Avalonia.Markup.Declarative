@@ -7,10 +7,10 @@ using System.ComponentModel;
 
 namespace Avalonia.Markup.Declarative;
 
-internal class ViewPropertyComputedState<TValue> : ViewPropertyComputedState, IObservable<TValue>, INotifyPropertyChanged
+internal class ViewPropertyComputedState<TValue> : ExpressionBindingBase, IObservable<TValue>, INotifyPropertyChanged
 {
-    public Func<TValue> GetterFunc { get; }
-    public TValue Value => GetterFunc();
+    private Func<TValue> GetterFunc { get; }
+    private TValue Value => GetterFunc();
 
     public ViewPropertyComputedState(string? expressionString, Func<TValue> getterFunc)
     {
@@ -35,7 +35,7 @@ internal class ViewPropertyComputedState<TValue> : ViewPropertyComputedState, IO
         return new Unsubscriber(_observers, observer);
     }
 
-    public void NotifyObservers(TValue value)
+    private void NotifyObservers(TValue value)
     {
         foreach (var observer in _observers)
             observer.OnNext(value);
@@ -51,18 +51,16 @@ internal class ViewPropertyComputedState<TValue> : ViewPropertyComputedState, IO
     }
 }
 
-internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyComputedState, IObservable<TValue>, IObserver<TValue>
+internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBase, IObservable<TValue>, IObserver<TValue>
     where TControl : AvaloniaObject
 
 {
     private readonly IObservable<TValue>? _obs;
     private readonly TControl? _control;
     private readonly AvaloniaProperty<TValue>? _avaloniaProperty;
-    public Action<TValue>? Setter { get; }
-    public Action<TValue>? SetChangedHandler { get; }
-
-    public TValue Value => GetterFunc();
-
+    private Action<TValue>? Setter { get; }
+    private Action<TValue>? SetChangedHandler { get; }
+    private TValue Value => GetterFunc();
     public Func<TValue> GetterFunc { get; }
 
     internal ViewPropertyComputedState(string? expressionString,
@@ -125,12 +123,12 @@ internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyCompute
 
         TValue newValue = GetterFunc();
 
+        //GetterFunc();
         if (_avaloniaProperty != null)
         {
             if (!Equals(_control.GetValue(_avaloniaProperty), newValue))
             {
                 _control.SetValue(_avaloniaProperty, newValue);
-                SetChangedHandler?.Invoke(newValue);
             }
         }
         else
@@ -138,21 +136,9 @@ internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyCompute
             if (Setter != null)
             {
                 Setter.Invoke(newValue);
-                SetChangedHandler?.Invoke(newValue);
             }
         }
     }
-
-    //private void UpdateControlValue()
-    //{
-    //    if (_control == null)
-    //        return;
-
-    //    if (_avaloniaProperty != null)
-    //        _control.SetValue(_avaloniaProperty, Value);
-    //    else
-    //        Setter?.Invoke(GetterFunc());
-    //}
 
     public void OnNext(TValue value)
     {
@@ -162,7 +148,17 @@ internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyCompute
         if (value != null && value.Equals(Value))
             return;
 
+        // Call the handler for this component
         SetChangedHandler?.Invoke(value);
+
+        // If this is a component and it has a parent, notify the parent
+        if (_control is ComponentBase childComponent &&
+            childComponent.Parent is ComponentBase parentComponent &&
+            !string.IsNullOrEmpty(ExpressionString))
+        {
+            // Notify parent without using reflection
+            parentComponent.NotifyExternalPropertyChanged(ExpressionString, value);
+        }
     }
 
     public void OnCompleted()
@@ -205,13 +201,13 @@ internal class ViewPropertyComputedState<TControl, TValue> : ViewPropertyCompute
 
 }
 
-internal abstract class ViewPropertyComputedState
+internal abstract class ExpressionBindingBase
 {
     internal string? ExpressionString { get; set; }
 
     public override bool Equals(object? obj)
     {
-        return obj is ViewPropertyComputedState state &&
+        return obj is ExpressionBindingBase state &&
                ExpressionString == state.ExpressionString;
     }
 

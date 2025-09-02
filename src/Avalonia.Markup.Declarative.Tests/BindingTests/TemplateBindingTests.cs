@@ -1,36 +1,34 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using Avalonia.Headless;
-using Avalonia.Platform;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 
 namespace Avalonia.Markup.Declarative.Tests.BindingTests;
 
-public class TemplateTestView : ViewBase
-{
-    public static IControlTemplate MyControlTemplate { get; } = new FuncControlTemplate<Button>(
-        (control, scope) =>
-            // using FuncView to generate ViewContext that will be used for binding
-            // not elegant, but works while we are looking for a better solution
-            // and supports different func template types
-            new FuncView<Button>(control,
-                b =>
-                    new TextBox()
-                        .Text(() => $"{b.Content}", val => b.Content = val)
-            ));
-
-    protected override object Build() =>
-        new Button()
-            .Content("Initial")
-            .Template(() => MyControlTemplate)
-            .Ref(out MyButton);
-
-    public Button MyButton = null!; // Using a field to check it's value in tests
-}
-
 public class TemplateBindingTests : AvaloniaTestBase
 {
+    public class TemplateTestView : ViewBase
+    {
+        public static IControlTemplate MyControlTemplate { get; } = new FuncControlTemplate<Button>(
+            (control, scope) =>
+                // using FuncView to generate ViewContext that will be used for binding
+                // not elegant, but works while we are looking for a better solution
+                // and supports different func template types
+                new FuncView<Button>(control,
+                    b =>
+                        new TextBox()
+                            .Text(() => $"{b.Content}", val => b.Content = val)
+                ));
+
+        protected override object Build() =>
+            new Button()
+                .Content("Initial")
+                .Template(() => MyControlTemplate)
+                .Ref(out MyButton);
+
+        public Button MyButton = null!; // Using a field to check it's value in tests
+    }
+    
     [Fact]
     public void TextBlock_Binding_RegistersComputedState()
     {
@@ -50,7 +48,7 @@ public class TemplateBindingTests : AvaloniaTestBase
         Assert.NotNull(templateView); // Ensure template view is created
 
         // Should have a computed state for the Text property
-        Assert.Contains(templateView.__viewComputedStates, s =>
+        Assert.Contains(templateView.ViewComputedStates, s =>
             s is ViewPropertyComputedState<TextBox, string> state &&
             state.GetterFunc() == "Initial");
     }

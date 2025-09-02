@@ -72,10 +72,30 @@ public class AvaloniaEventExtensionsGenerator : IIncrementalGenerator
         if (!string.IsNullOrWhiteSpace(typeNamespace))
             sb.AppendLine($"using {typeNamespace};");
 
-        var typeName = classDecl.Identifier.ToString();
+        // Build the nested-qualified name (e.g., Outer.Inner for a nested class) so we can reference nested types.
+        static string GetNestedQualifiedName(ClassDeclarationSyntax cls)
+        {
+            var names = new System.Collections.Generic.List<string>();
+            SyntaxNode? node = cls;
+            while (node is ClassDeclarationSyntax cds)
+            {
+                names.Insert(0, cds.Identifier.ToString());
+                node = node.Parent;
+            }
+            return string.Join(".", names);
+        }
+
+        // The name to use in method signatures (within the containing namespace scope via using above)
+        var nestedQualifiedTypeName = GetNestedQualifiedName(classDecl);
+
+        // Create a unique and valid extension class/file name that includes namespace and nesting
+        var fullTypePathForId = (string.IsNullOrWhiteSpace(typeNamespace) ? string.Empty : typeNamespace + ".") + nestedQualifiedTypeName;
+        var safeId = fullTypePathForId
+            .Replace('.', '_')
+            .Replace('+', '_'); // just in case
 
         sb.AppendLine("namespace Avalonia.Markup.Declarative;");
-        sb.AppendLine($"public static partial class {typeName}EventExtensions");
+        sb.AppendLine($"public static partial class {safeId}EventExtensions");
         sb.AppendLine("{");
 
         var processedMembersCount = 0;
@@ -84,7 +104,7 @@ public class AvaloniaEventExtensionsGenerator : IIncrementalGenerator
             if (member is not EventFieldDeclarationSyntax @event)
                 continue;
 
-            var extensionString = GetEventExtension(typeName, @event);
+            var extensionString = GetEventExtension(nestedQualifiedTypeName, @event);
             if (string.IsNullOrWhiteSpace(extensionString))
                 continue;
 
@@ -96,7 +116,7 @@ public class AvaloniaEventExtensionsGenerator : IIncrementalGenerator
 
         if (processedMembersCount > 0)
         {
-            context.AddSource($"{typeName}EventExtensions.g.cs", SourceText.From(sb.ToString(), Encoding.UTF8));
+            context.AddSource($"{safeId}EventExtensions.g.cs", SourceText.From(sb.ToString(), Encoding.UTF8));
         }
     }
 
