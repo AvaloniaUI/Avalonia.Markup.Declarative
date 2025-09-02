@@ -70,12 +70,18 @@ public class SampleMvuView : ComponentBase
                         new TextBlock()
                             .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"),
                         new NumericUpDown()
-                            .Value(() => Counter, v => Counter = v)
+                            .Value(() => Counter, v => Counter = v),
 
+                        new SliderEx()
+                            .Label("Slider sample")
+                            .Units("px")
+                            .Minimum(1)
+                            .Value(() => SliderValue, v => SliderValue = (float)v)
                     )
             );
 
     private decimal? Counter { get; set; } = 0;
+    private float SliderValue { get; set; } = 10;
 
     private string _myNotifiedProperty1 = "Click me";
 

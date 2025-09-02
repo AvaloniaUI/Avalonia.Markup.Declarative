@@ -12,25 +12,35 @@ public class BindPropertyStatePopTest : AvaloniaTestBase
         var view = new SliderTestView();
 
         var window = new Window { Content = view };
-    window.Show();
+        window.Show();
 
-    Assert.Equal(1, view.Value);
+        Assert.Equal(1, view.Value);
 
         var expectedValue = 50;
         view._wrapper._slider.Value = expectedValue;
-        
-    Assert.Equal(expectedValue, view._wrapper.Value);
+
+        Assert.Equal(expectedValue, view._wrapper.Value);
         view._wrapper.UpdateState();
-    view.UpdateState();
-    Assert.Equal(expectedValue, view.Value);
+        view.UpdateState();
+        Assert.Equal(expectedValue, view.Value);
     }
 
     public class SliderWrapper : ComponentBase
     {
         protected override object Build() =>
-            new Slider()
-                .Ref(out _slider)
-                .Value(() => Value, v => Value = v);
+            new StackPanel().Children(
+                new NumericUpDown()
+                    .Col(1)
+                    .Width(80)
+                    .Minimum(() => 0)
+                    .Maximum(() => 100)
+                    .Increment(1)
+                    .Value(() => (decimal?)Value, v => Value = (double)v!),
+
+                new Slider()
+                    .Ref(out _slider)
+                    .Value(() => Value, v => Value = v)
+            );
 
         public Slider _slider = null!;
         public double Value { get; set; }
