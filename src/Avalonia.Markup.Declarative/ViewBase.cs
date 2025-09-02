@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using Avalonia.Controls.Primitives;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -19,10 +20,8 @@ public abstract class ViewBase<TViewModel> : ViewBase
     }
 
     protected ViewBase(TViewModel viewModel)
-        : base(true)
     {
         DataContext = viewModel;
-        Initialize();
     }
 
     protected abstract object Build(TViewModel? vm);
@@ -52,14 +51,16 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 
     protected virtual StyleGroup? BuildStyles() => null;
 
-    protected ViewBase() : this(false)
+    protected ViewBase()
     {
 
     }
 
-    protected ViewBase(bool deferredLoading)
+    private bool _isInitialized;
+
+    private void EnsureInitialized()
     {
-        if (!deferredLoading)
+        if (!_isInitialized)
         {
             Initialize();
         }
@@ -73,10 +74,16 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     {
     }
 
-    protected virtual void OnAfterInitialized() { }
+    protected virtual void OnAfterInitialized() 
+    {
+    }
 
     public void Initialize()
     {
+        if (_isInitialized)
+            return;
+        _isInitialized = true;
+
         try
         {
             OnCreated();
@@ -113,7 +120,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     /// </summary>
     protected override void OnDataContextChanged(EventArgs e)
     {
-        base.OnDataContextChanged(e); // Вызываем базовый метод
+        base.OnDataContextChanged(e); 
 
         if (_currentObservedDataContext != null)
         {
@@ -160,9 +167,10 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 
             __viewComputedStates.Clear();
             OnBeforeReload();
-            Child = null;
+            SetValue(ChildProperty, null);
             VisualChildren.Clear();
             _nameScope = null;
+            _isInitialized = false;
 
             var oldDataContext = DataContext; 
             DataContext = null; // guarantee that OnDataContextChanged is called
@@ -184,7 +192,9 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     {
         base.OnAttachedToVisualTree(e);
         HotReloadManager.RegisterInstance(this);
+        EnsureInitialized();
     }
+
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
