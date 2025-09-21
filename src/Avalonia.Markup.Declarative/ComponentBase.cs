@@ -43,6 +43,9 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
 
     protected ComponentBase()
     {
+        // ComponentBase should initialize immediately to maintain MVU semantics
+        // where components are built right after construction
+        Initialize();
     }
 
 

@@ -22,6 +22,9 @@ public abstract class ViewBase<TViewModel> : ViewBase
     protected ViewBase(TViewModel viewModel)
     {
         DataContext = viewModel;
+        // For ViewBase<T>, initialize immediately since it's intended for MVVM scenarios
+        // where the view should be ready to use right after construction
+        Initialize();
     }
 
     protected abstract object Build(TViewModel? vm);
@@ -59,10 +62,11 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     }
 
     private bool _isInitialized;
+    private bool _isInitializing;
 
     private void EnsureInitialized()
     {
-        if (!_isInitialized)
+        if (!_isInitialized && !_isInitializing)
         {
             Initialize();
         }
@@ -82,10 +86,11 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 
     public void Initialize()
     {
-        if (_isInitialized)
+        if (_isInitialized || _isInitializing)
             return;
-        _isInitialized = true;
-
+            
+        _isInitializing = true;
+        
         try
         {
             OnCreated();
@@ -106,6 +111,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
                 Child = content as Control;
             }
 
+            _isInitialized = true;
             ViewInitialized?.Invoke();
             OnAfterInitialized();
         }
@@ -114,6 +120,10 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
             Debug.WriteLine(ex.Message);
             Debug.WriteLine(ex.StackTrace);
             throw new ViewBuildingException($"Build error in {GetType().Name} : {ex.Message}", ex);
+        }
+        finally
+        {
+            _isInitializing = false;
         }
     }
 
@@ -136,8 +146,13 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
             _currentObservedDataContext.PropertyChanged += OnViewModelPropertyChanged;
         }
 
-        RecomputeAllBindings();
+        // Only recompute bindings if the view has been initialized
+        if (_isInitialized)
+        {
+            RecomputeAllBindings();
+        }
     }
+    
     /// <summary>
     /// Handles PropertyChanged event from the DataContext.
     /// </summary>
@@ -180,6 +195,19 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
             DependentViews.Add(view);
     }
 
+    /// <summary>
+    /// Gets the child control, ensuring initialization if needed.
+    /// This property provides access to the built content and triggers initialization if not already done.
+    /// </summary>
+    public new Control? Child
+    {
+        get
+        {
+            EnsureInitialized();
+            return base.Child;
+        }
+        protected set => base.Child = value;
+    }
 
     #region Hot reload stuff
     public void Reload()
@@ -199,6 +227,7 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
             VisualChildren.Clear();
             _nameScope = null;
             _isInitialized = false;
+            _isInitializing = false;
 
             var oldDataContext = DataContext; 
             DataContext = null; // guarantee that OnDataContextChanged is called
@@ -274,7 +303,7 @@ internal class ViewBuildContext : IDisposable
         //    Debug.WriteLine($"Poped view {_currentContext._view.GetType().Name}");
     }
 
-    public static string GetViewStackString() => string.Join("/", ViewsStack.ToArray().Reverse().Select(x => x._view.GetType().Name));
+    public static string GetViewStackString() => string.Join("/", ViewsStack.Reverse().Select(x => x._view.GetType().Name));
 }
 
 internal enum ViewBuildContextState
