@@ -28,9 +28,6 @@ public abstract class ReactiveViewBase<TViewModel> : ViewBase, IViewFor<TViewMod
         }
     }
 
-    protected ReactiveViewBase() : base(deferredLoading: true)
-    {
-    }
 
     protected abstract object Build(TViewModel vm);
 
