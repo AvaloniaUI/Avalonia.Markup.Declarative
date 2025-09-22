@@ -47,6 +47,4 @@ public class SliderEx : ComponentBase
     public double Maximum { get; set; } = 100;
     public string Label { get; set; } = "";
     public string Units { get; set; } = "";
-
-
 }

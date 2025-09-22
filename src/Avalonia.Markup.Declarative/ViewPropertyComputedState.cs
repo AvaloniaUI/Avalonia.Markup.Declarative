@@ -58,6 +58,7 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
     private readonly IObservable<TValue>? _obs;
     private readonly TControl? _control;
     private readonly AvaloniaProperty<TValue>? _avaloniaProperty;
+    private readonly ViewBase? _parentView; // Store reference to the parent view for property bubbling
     private Action<TValue>? Setter { get; }
     private Action<TValue>? SetChangedHandler { get; }
     private TValue Value => GetterFunc();
@@ -74,6 +75,7 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
         SetChangedHandler = setChangedHandler;
         ExpressionString = expressionString;
         GetterFunc = getterFunc;
+        _parentView = ViewBuildContext.CurrentView; // Capture the current view context for property bubbling
 
         if (control == null)
             return;
@@ -103,6 +105,7 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
         SetChangedHandler = setChangedHandler;
         ExpressionString = expressionString;
         GetterFunc = getterFunc;
+        _parentView = ViewBuildContext.CurrentView; // Capture the current view context for property bubbling
 
         if (control == null)
             return;
@@ -151,13 +154,22 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
         // Call the handler for this component
         SetChangedHandler?.Invoke(value);
 
-        // If this is a component and it has a parent, notify the parent
-        if (_control is ComponentBase childComponent &&
-            childComponent.Parent is ComponentBase parentComponent &&
-            !string.IsNullOrEmpty(ExpressionString))
+        // Handle property propagation to parent components
+        // Check if we have an expression string for property tracking and a parent view
+        if (!string.IsNullOrEmpty(ExpressionString) && _parentView is ComponentBase parentComponent)
         {
-            // Notify parent without using reflection
-            parentComponent.NotifyExternalPropertyChanged(ExpressionString, value);
+            // First, try direct child component propagation (existing behavior)
+            if (_control is ComponentBase childComponent)
+            {
+                // Notify parent without using reflection
+                parentComponent.NotifyExternalPropertyChanged(ExpressionString, value);
+            }
+            else
+            {
+                // For regular Avalonia controls, we need to bubble up to the parent component
+                // The parent component is stored when this state was created during view building
+                parentComponent.NotifyExternalPropertyChanged(ExpressionString, value);
+            }
         }
     }
 
