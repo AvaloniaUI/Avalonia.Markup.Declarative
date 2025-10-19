@@ -43,7 +43,7 @@ public class BindPropertySameLevelSyncTest : AvaloniaTestBase
                     .Maximum(() => (decimal)Maximum)
                     .NumberFormat(new NumberFormatInfo() { NumberDecimalDigits = 0 })
                     .Increment(1)
-                    .Value(() => (decimal?)Value, v => Value = (double)v!),
+                    .Value(() => (decimal?)Value, v => { if (v.HasValue) Value = (double)v.Value; }),
 
                 new TextBlock()
                     .Text(() => Units)

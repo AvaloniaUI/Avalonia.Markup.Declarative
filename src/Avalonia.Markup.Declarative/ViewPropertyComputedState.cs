@@ -62,7 +62,17 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
     private readonly IObservable<TValue>? _obs;
     private readonly TControl? _control;
     private readonly AvaloniaProperty<TValue>? _avaloniaProperty;
-    private readonly ViewBase? _parentView; // Store reference to the parent view for property bubbling
+    
+    /// <summary>
+    /// Captures the parent view context at binding creation time.
+    /// This is more reliable than checking _control.Parent later because:
+    /// 1. Parent relationships in the visual tree may not be established during binding setup
+    /// 2. The visual parent might be an intermediate container, not the logical component parent
+    /// 3. ViewBuildContext.CurrentView correctly points to the component executing Build() at this moment
+    /// This ensures property changes bubble to the correct parent component.
+    /// </summary>
+    private readonly ViewBase? _parentView;
+    
     private Action<TValue>? Setter { get; }
     private Action<TValue>? SetChangedHandler { get; }
     private TValue? _lastSetValue; // Track the last value we set to detect external changes
@@ -184,9 +194,14 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
         if (_isUpdatingFromGetter)
             return;
 
-        // Check if value is actually different from what getter returns
+        // Optimize: first check if value hasn't changed from what we last set
+        // This avoids unnecessary getter invocations in the common case
+        if (EqualityComparer<TValue>.Default.Equals(value, _lastSetValue))
+            return;
+
+        // Only invoke getter if we need to verify the value is truly different
+        // This is needed for cases where the property might have been changed externally
         var currentGetterValue = GetterFunc();
-        
         if (EqualityComparer<TValue>.Default.Equals(value, currentGetterValue))
             return;
 

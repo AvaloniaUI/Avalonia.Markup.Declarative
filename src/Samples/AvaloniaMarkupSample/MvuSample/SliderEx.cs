@@ -7,7 +7,7 @@ public class SliderEx : ComponentBase
     protected override object Build() =>
         new Grid()
             .Rows("Auto,Auto")
-            .Cols("Auto,Auto,* 20")
+            .Cols("Auto,*, 60, 20")
             .Margin(0, 4)
             .Children(
                 new TextBlock()
@@ -23,11 +23,12 @@ public class SliderEx : ComponentBase
                 new NumericUpDown()
                     .Col(2)
                     .HorizontalAlignment(HorizontalAlignment.Right)
+                    .MinWidth(150)
                     .Minimum(() => (decimal)Minimum)
                     .Maximum(() => (decimal)Maximum)
                     .NumberFormat(new NumberFormatInfo() { NumberDecimalDigits = 0 })
                     .Increment(1)
-                    .Value(() => (decimal?)Value, v => Value = (double)(v ?? 0)),
+                    .Value(() => (decimal?)Value, v => { if (v.HasValue) Value = (double)v.Value; }),
 
                 new TextBlock()
                     .Text(() => Units)
