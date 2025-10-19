@@ -7,32 +7,37 @@ public class SliderEx : ComponentBase
     protected override object Build() =>
         new Grid()
             .Rows("Auto,Auto")
-            .Cols("Auto,*, 20")
+            .Cols("Auto,Auto,* 20")
             .Margin(0, 4)
             .Children(
                 new TextBlock()
                     .Text(() => Label)
                     .VerticalAlignment(VerticalAlignment.Center),
 
+                new TextBlock()
+                    .Text(() => $"Value: {Value}")
+                    .VerticalAlignment(VerticalAlignment.Center)
+                    .Margin(4)
+                    .Col(1),
+
                 new NumericUpDown()
-                    .Col(1)
+                    .Col(2)
                     .HorizontalAlignment(HorizontalAlignment.Right)
-                    .Width(80)
                     .Minimum(() => (decimal)Minimum)
                     .Maximum(() => (decimal)Maximum)
                     .NumberFormat(new NumberFormatInfo() { NumberDecimalDigits = 0 })
                     .Increment(1)
-                    .Value(() => (decimal?)Value, v => Value = (double)v!),
+                    .Value(() => (decimal?)Value, v => Value = (double)(v ?? 0)),
 
                 new TextBlock()
                     .Text(() => Units)
                     .VerticalAlignment(VerticalAlignment.Center)
                     .Margin(4)
-                    .Col(2),
+                    .Col(3),
 
                 new Slider()
                     .Row(1)
-                    .ColSpan(3)
+                    .ColSpan(4)
                     .TickFrequency(1)
                     .IsSnapToTickEnabled(true)
                     .Maximum(() => Maximum)

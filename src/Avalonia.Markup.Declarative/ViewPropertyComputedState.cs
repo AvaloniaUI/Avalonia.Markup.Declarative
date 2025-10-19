@@ -31,7 +31,11 @@ internal class ViewPropertyComputedState<TValue> : ExpressionBindingBase, IObser
     public IDisposable Subscribe(IObserver<TValue> observer)
     {
         if (!_observers.Contains(observer))
+        {
             _observers.Add(observer);
+            // Immediately notify the new observer with the current value
+            observer.OnNext(Value);
+        }
         return new Unsubscriber(_observers, observer);
     }
 
@@ -61,6 +65,9 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
     private readonly ViewBase? _parentView; // Store reference to the parent view for property bubbling
     private Action<TValue>? Setter { get; }
     private Action<TValue>? SetChangedHandler { get; }
+    private TValue? _lastSetValue; // Track the last value we set to detect external changes
+    private bool _isUpdatingFromGetter; // Flag to prevent recursive updates
+    private bool _isInitializing = true; // Track if we're in initialization phase
     private TValue Value => GetterFunc();
     public Func<TValue> GetterFunc { get; }
 
@@ -80,7 +87,10 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
         if (control == null)
             return;
 
+        // During initialization, always set the value
+        _isInitializing = true;
         UpdateControlValue();
+        _isInitializing = false;
 
         if (_avaloniaProperty != null)
         {
@@ -110,11 +120,17 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
         if (control == null)
             return;
 
+        // During initialization, always set the value
+        _isInitializing = true;
         UpdateControlValue();
+        _isInitializing = false;
     }
 
     public override void OnPropertyChanged()
     {
+        if (_isUpdatingFromGetter)
+            return;
+            
         UpdateControlValue();
         NotifyObservers(Value);
     }
@@ -124,32 +140,58 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
         if (_control == null)
             return;
 
-        TValue newValue = GetterFunc();
-
-        //GetterFunc();
-        if (_avaloniaProperty != null)
+        _isUpdatingFromGetter = true;
+        try
         {
-            if (!Equals(_control.GetValue(_avaloniaProperty), newValue))
+            TValue newValue = GetterFunc();
+
+            // During initialization, always set the value
+            // After initialization, only update if value actually changed
+            if (_avaloniaProperty != null)
             {
-                _control.SetValue(_avaloniaProperty, newValue);
+                if (_isInitializing)
+                {
+                    _control.SetValue(_avaloniaProperty, newValue);
+                    _lastSetValue = newValue;
+                }
+                else
+                {
+                    var currentValue = _control.GetValue(_avaloniaProperty);
+                    if (!Equals(currentValue, newValue))
+                    {
+                        _control.SetValue(_avaloniaProperty, newValue);
+                        _lastSetValue = newValue;
+                    }
+                }
+            }
+            else
+            {
+                if (_isInitializing || !Equals(_lastSetValue, newValue))
+                {
+                    Setter?.Invoke(newValue);
+                    _lastSetValue = newValue;
+                }
             }
         }
-        else
+        finally
         {
-            if (Setter != null)
-            {
-                Setter.Invoke(newValue);
-            }
+            _isUpdatingFromGetter = false;
         }
     }
 
     public void OnNext(TValue value)
     {
-        if (Value == null && value == null)
+        if (_isUpdatingFromGetter)
             return;
 
-        if (value != null && value.Equals(Value))
+        // Check if value is actually different from what getter returns
+        var currentGetterValue = GetterFunc();
+        
+        if (EqualityComparer<TValue>.Default.Equals(value, currentGetterValue))
             return;
+
+        // Update the last set value to track this change
+        _lastSetValue = value;
 
         // Call the handler for this component
         SetChangedHandler?.Invoke(value);
@@ -158,18 +200,8 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
         // Check if we have an expression string for property tracking and a parent view
         if (!string.IsNullOrEmpty(ExpressionString) && _parentView is ComponentBase parentComponent)
         {
-            // First, try direct child component propagation (existing behavior)
-            if (_control is ComponentBase childComponent)
-            {
-                // Notify parent without using reflection
-                parentComponent.NotifyExternalPropertyChanged(ExpressionString, value);
-            }
-            else
-            {
-                // For regular Avalonia controls, we need to bubble up to the parent component
-                // The parent component is stored when this state was created during view building
-                parentComponent.NotifyExternalPropertyChanged(ExpressionString, value);
-            }
+            // Notify parent without using reflection
+            parentComponent.NotifyExternalPropertyChanged(ExpressionString, value);
         }
     }
 
@@ -190,7 +222,11 @@ internal class ViewPropertyComputedState<TControl, TValue> : ExpressionBindingBa
     public IDisposable Subscribe(IObserver<TValue> observer)
     {
         if (!_observers.Contains(observer))
+        {
             _observers.Add(observer);
+            // Immediately notify the new observer with the current value
+            observer.OnNext(Value);
+        }
         return new Unsubscriber(_observers, observer);
     }
 
