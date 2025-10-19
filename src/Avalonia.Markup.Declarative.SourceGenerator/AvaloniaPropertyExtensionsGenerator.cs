@@ -40,10 +40,30 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
     {
         var classDecl = (ClassDeclarationSyntax)context.Node;
         var symbol = context.SemanticModel.GetDeclaredSymbol(classDecl);
+        
+        // Check if this class or any of its base types implements IDeclarativeViewBase
         return symbol is INamedTypeSymbol typeSymbol &&
-               typeSymbol.AllInterfaces.Any(x => x.Name == "IDeclarativeViewBase")
+               ImplementsIDeclarativeViewBase(typeSymbol)
             ? (classDecl, context.SemanticModel)
             : null;
+    }
+
+    private static bool ImplementsIDeclarativeViewBase(INamedTypeSymbol typeSymbol)
+    {
+        // Check direct interfaces
+        if (typeSymbol.AllInterfaces.Any(x => x.Name == "IDeclarativeViewBase"))
+            return true;
+
+        // Check base types (for inheritance)
+        var current = typeSymbol.BaseType;
+        while (current != null)
+        {
+            if (current.AllInterfaces.Any(x => x.Name == "IDeclarativeViewBase"))
+                return true;
+            current = current.BaseType;
+        }
+
+        return false;
     }
 
     private static void GenerateSource(SourceProductionContext context, ClassDeclarationSyntax type, SemanticModel semanticModel)
@@ -73,37 +93,24 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         if (!string.IsNullOrWhiteSpace(typeNamespace))
             sb.AppendLine($"using {typeNamespace};");
 
-        // base type name (unqualified) used for extension class name and file name
-        var baseTypeName = type.Identifier.ToString();
-
-        // original generic parameters for the type itself (kept for extension class name / file name)
-        var ownGenericParams = "";
-        if (type.TypeParameterList != null && type.TypeParameterList.Parameters.Count > 0)
-        {
-            ownGenericParams += '<';
-
-            foreach (var item in type.TypeParameterList.Parameters)
-            {
-                ownGenericParams += item.Identifier.Text + ", ";
-            }
-            ownGenericParams = ownGenericParams.TrimEnd(' ').TrimEnd(',');
-            ownGenericParams += '>';
-        }
-        var typeNameWithOwnParams = baseTypeName + ownGenericParams;
-
-        // Fully qualified control type name including namespace, containing types and type parameters
+        // Get the type symbol to build proper qualified names
         var typeSymbol = semanticModel.GetDeclaredSymbol(type) as INamedTypeSymbol;
+        
+        // Build the extension class name - handle nested classes properly
+        var extensionClassName = BuildExtensionClassName(typeSymbol);
+        
+        // Fully qualified control type name including namespace, containing types and type parameters
         var controlTypeQualified = typeSymbol?.ToDisplayString(
             SymbolDisplayFormat.FullyQualifiedFormat
                 .WithGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance)
                 .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseSpecialTypes | SymbolDisplayMiscellaneousOptions.ExpandNullable)
-        ) ?? baseTypeName;
+        ) ?? type.Identifier.ToString();
 
         // Build method generic parameters for all containing type parameters (outermost -> innermost)
         string allTypeParamsForMethods = BuildAllTypeParameters(type);
 
         sb.AppendLine("namespace Avalonia.Markup.Declarative;");
-        sb.AppendLine($"public static partial class {CleanIdentifier(typeNameWithOwnParams)}Extensions");
+        sb.AppendLine($"public static partial class {extensionClassName}Extensions");
         sb.AppendLine("{");
 
         var members = type.Members;
@@ -145,8 +152,33 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
 
         if (processedFields.Count > 0)
         {
-            context.AddSource($"{RemoveIllegalFileNameCharacters(typeNameWithOwnParams)}Extensions.g.cs", SourceText.From(sb.ToString(), Encoding.UTF8));
+            var fileName = RemoveIllegalFileNameCharacters(extensionClassName) + "Extensions.g.cs";
+            context.AddSource(fileName, SourceText.From(sb.ToString(), Encoding.UTF8));
         }
+    }
+
+    private static string BuildExtensionClassName(INamedTypeSymbol? typeSymbol)
+    {
+        if (typeSymbol == null)
+            return "Unknown";
+
+        var parts = new List<string>();
+        
+        // Build from innermost to outermost
+        var current = typeSymbol;
+        while (current != null)
+        {
+            var name = current.Name;
+            if (current.TypeParameters.Length > 0)
+            {
+                name += $"`{current.TypeParameters.Length}";
+            }
+            parts.Insert(0, name);
+            
+            current = current.ContainingType;
+        }
+        
+        return CleanIdentifier(string.Join("_", parts));
     }
 
     private static string BuildAllTypeParameters(ClassDeclarationSyntax type)

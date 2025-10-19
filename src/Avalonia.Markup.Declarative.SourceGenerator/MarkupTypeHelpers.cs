@@ -26,9 +26,7 @@ internal static class MarkupTypeHelpers
             .Where(d => d.IsKind(SyntaxKind.ClassDeclaration))
             .OfType<ClassDeclarationSyntax>();
 
-        return allClasses
-            .Where(type => IsGenerateExtensionsView(compilation, type))
-            .ToImmutableArray();
+        return [..allClasses.Where(type => IsGenerateExtensionsView(compilation, type))];
     }
 
     private static bool IsGenerateExtensionsView(Compilation compilation, ClassDeclarationSyntax component)

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using Avalonia.Controls;
-using Xunit;
 
 namespace Avalonia.Markup.Declarative.Tests.ControlsTests;
 
@@ -73,6 +71,6 @@ public class ModalHostTests : AvaloniaTestBase
 
         // Build executed with MainContent == null, so only the modals panel is present
         Assert.NotNull(host.HostPanel);
-        Assert.Equal(1, host.HostPanel!.Children.Count);
+        Assert.Single(host.HostPanel!.Children);
     }
 }
