@@ -24,6 +24,8 @@ public abstract class ComponentBase<TViewModel> : ComponentBase
     protected ComponentBase(TViewModel viewModel)
     {
         DataContext = viewModel;
+        // Initialize after DataContext is set, so Build(ViewModel) has a valid ViewModel
+        Initialize();
     }
 
     protected abstract object Build(TViewModel? vm);
@@ -43,11 +45,9 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
 
     protected ComponentBase()
     {
-        // ComponentBase should initialize immediately to maintain MVU semantics
-        // where components are built right after construction
-        Initialize();
+        // ComponentBase does not initialize immediately - derived classes or ComponentBase<TViewModel> will call Initialize()
+        // This ensures that DataContext/ViewModel is set before Build() is called
     }
-
 
     protected override void OnCreated()
     {

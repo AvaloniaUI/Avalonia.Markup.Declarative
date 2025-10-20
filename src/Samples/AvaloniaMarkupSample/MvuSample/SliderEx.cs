@@ -37,6 +37,7 @@ public class SliderEx : ComponentBase
                     .Col(3),
 
                 new Slider()
+                    .Ref(out _slider)
                     .Row(1)
                     .ColSpan(4)
                     .TickFrequency(1)
@@ -53,4 +54,11 @@ public class SliderEx : ComponentBase
     public double Maximum { get; set; } = 100;
     public string Label { get; set; } = "";
     public string Units { get; set; } = "";
+
+    Slider _slider = null!;
+
+    protected override void OnAfterInitialized()
+    {
+        var value = _slider.Value;
+    }
 }

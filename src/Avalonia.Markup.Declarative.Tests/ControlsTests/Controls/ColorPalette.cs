@@ -65,6 +65,9 @@ public class ColorPalette : ComponentBase
     protected override object Build() =>
         new Grid()
             .Children(
+
+                GetColorSquare().Ref(out _colorSquare),
+
                 new ItemsControl()
                     .Ref(out _itemsControl)
                     .ItemsSource(ColorsProperty)
@@ -98,6 +101,12 @@ public class ColorPalette : ComponentBase
                     )
 
             );
+
+    private Control GetColorSquare() => new Border()
+        .CornerRadius(10)
+        .ClipToBounds(true);
+
+    private Control _colorSquare;
 
     private ItemsControl _itemsControl = null!;
 
@@ -144,5 +153,10 @@ public class ColorPalette : ComponentBase
         colors.AddRange(_sourceColorsCollection);
         colors.Add(Color.FromArgb(0, 0, 0, 0));
         return colors;
+    }
+
+    override protected void OnAfterInitialized()
+    {
+        var cs = _colorSquare;        
     }
 }
