@@ -41,6 +41,35 @@ public static T IsDropDownOpen<TValue,T>(this T control, TValue value, FuncValue
 => control._setEx(Avalonia.Controls.ComboBox.IsDropDownOpenProperty, ps, () => control.IsDropDownOpen = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
+ // IsEditable
+
+/*ValueSetterGenerator*/
+public static T IsEditable<T>(this T control, System.Boolean value) where T : Avalonia.Controls.ComboBox 
+=> control._set(() => control.IsEditable = value!);
+
+/*BindFromExpressionSetterGenerator*/
+public static T IsEditable<T>(this T control, Func<System.Boolean> func, Action<System.Boolean>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ComboBox 
+   => control._set(Avalonia.Controls.ComboBox.IsEditableProperty!, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static T IsEditable<T>(this T control,System.Boolean value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.ComboBox 
+=> control._setEx(Avalonia.Controls.ComboBox.IsEditableProperty, ps, () => control.IsEditable = value!, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T IsEditable<T>(this T control, IBinding binding) where T : Avalonia.Controls.ComboBox 
+   => control._set(Avalonia.Controls.ComboBox.IsEditableProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T IsEditable<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.ComboBox 
+   => control._set(Avalonia.Controls.ComboBox.IsEditableProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+[Obsolete]
+public static T IsEditable<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.Boolean> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.ComboBox 
+=> control._setEx(Avalonia.Controls.ComboBox.IsEditableProperty, ps, () => control.IsEditable = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
+
+
  // MaxDropDownHeight
 
 /*ValueSetterGenerator*/
@@ -186,6 +215,35 @@ public static T VerticalContentAlignment<TValue,T>(this T control, TValue value,
 => control._setEx(Avalonia.Controls.ComboBox.VerticalContentAlignmentProperty, ps, () => control.VerticalContentAlignment = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
 
 
+ // Text
+
+/*ValueSetterGenerator*/
+public static T Text<T>(this T control, System.String value) where T : Avalonia.Controls.ComboBox 
+=> control._set(() => control.Text = value!);
+
+/*BindFromExpressionSetterGenerator*/
+public static T Text<T>(this T control, Func<System.String> func, Action<System.String>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : Avalonia.Controls.ComboBox 
+   => control._set(Avalonia.Controls.ComboBox.TextProperty!, func, onChanged, expression);
+
+/*MagicalSetterGenerator*/
+[Obsolete]
+public static T Text<T>(this T control,System.String value, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.ComboBox 
+=> control._setEx(Avalonia.Controls.ComboBox.TextProperty, ps, () => control.Text = value!, bindingMode, converter, bindingSource);
+
+/*BindSetterGenerator*/
+public static T Text<T>(this T control, IBinding binding) where T : Avalonia.Controls.ComboBox 
+   => control._set(Avalonia.Controls.ComboBox.TextProperty, binding);
+
+/*AvaloniaPropertyBindSetterGenerator*/
+public static T Text<T>(this T control, AvaloniaProperty avaloniaProperty, BindingMode? bindingMode = null, IValueConverter? converter = null, ViewBase? overrideView = null) where T : Avalonia.Controls.ComboBox 
+   => control._set(Avalonia.Controls.ComboBox.TextProperty, avaloniaProperty, bindingMode, converter, overrideView);
+
+/*MagicalSetterWithConverterGenerator*/
+[Obsolete]
+public static T Text<TValue,T>(this T control, TValue value, FuncValueConverter<TValue, System.String> converter, BindingMode? bindingMode = null, object? bindingSource = null, [CallerArgumentExpression(nameof(value))] string? ps = null) where T : Avalonia.Controls.ComboBox 
+=> control._setEx(Avalonia.Controls.ComboBox.TextProperty, ps, () => control.Text = converter.TryConvert(value)!, bindingMode, converter, bindingSource);
+
+
  // SelectionBoxItemTemplate
 
 /*ValueSetterGenerator*/
@@ -244,6 +302,17 @@ public static Style<T> IsDropDownOpen<T>(this Style<T> style, IBinding binding) 
 => style._addSetter(Avalonia.Controls.ComboBox.IsDropDownOpenProperty, binding);
 
 
+ // IsEditable
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> IsEditable<T>(this Style<T> style, System.Boolean value) where T : Avalonia.Controls.ComboBox 
+=> style._addSetter(Avalonia.Controls.ComboBox.IsEditableProperty!, value!);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> IsEditable<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ComboBox 
+=> style._addSetter(Avalonia.Controls.ComboBox.IsEditableProperty, binding);
+
+
  // MaxDropDownHeight
 
 /*ValueStyleSetterGenerator*/
@@ -297,6 +366,17 @@ public static Style<T> VerticalContentAlignment<T>(this Style<T> style, Avalonia
 /*BindingStyleSetterGenerator*/
 public static Style<T> VerticalContentAlignment<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ComboBox 
 => style._addSetter(Avalonia.Controls.ComboBox.VerticalContentAlignmentProperty, binding);
+
+
+ // Text
+
+/*ValueStyleSetterGenerator*/
+public static Style<T> Text<T>(this Style<T> style, System.String value) where T : Avalonia.Controls.ComboBox 
+=> style._addSetter(Avalonia.Controls.ComboBox.TextProperty!, value!);
+
+/*BindingStyleSetterGenerator*/
+public static Style<T> Text<T>(this Style<T> style, IBinding binding) where T : Avalonia.Controls.ComboBox 
+=> style._addSetter(Avalonia.Controls.ComboBox.TextProperty, binding);
 
 
  // SelectionBoxItemTemplate
