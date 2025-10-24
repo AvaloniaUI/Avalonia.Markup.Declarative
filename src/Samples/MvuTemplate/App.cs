@@ -14,8 +14,6 @@ AppBuilder.Configure<Application>()
     .AfterSetup(b => b.Instance?.Styles.Add(new FluentTheme()))
     .UseServiceProvider(serviceProvider)
     .UseComponentControlFactory(new ControlFactory(serviceProvider))
-    // uncomment the line below to enable rider ht reload workaround
-    //.UseRiderHotReload()
     .SetupWithLifetime(lifetime);
 
 lifetime.MainWindow = new Window()

@@ -6,10 +6,24 @@ using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using Avalonia.Controls.Primitives;
 
 namespace Avalonia.Markup.Declarative;
 
+/// <summary>
+/// Defines when a view should be initialized.
+/// </summary>
+public enum ViewInitializationStrategy
+{
+    /// <summary>
+    /// View is initialized lazily when first accessed (e.g., when Child property is accessed or when attached to visual tree).
+    /// </summary>
+    Lazy,
+    
+    /// <summary>
+    /// View is initialized immediately in the constructor.
+    /// </summary>
+    Immediate
+}
 
 public abstract class ViewBase<TViewModel> : ViewBase
 {
@@ -19,12 +33,21 @@ public abstract class ViewBase<TViewModel> : ViewBase
         set => DataContext = value;
     }
 
-    protected ViewBase(TViewModel viewModel)
+    protected ViewBase(TViewModel viewModel) 
+        : this(viewModel, ViewInitializationStrategy.Immediate)
+    {
+    }
+
+    protected ViewBase(TViewModel viewModel, ViewInitializationStrategy initializationStrategy) 
+        : base(initializationStrategy)
     {
         DataContext = viewModel;
-        // For ViewBase<T>, initialize immediately since it's intended for MVVM scenarios
+        // For ViewBase<T>, default to immediate initialization since it's intended for MVVM scenarios
         // where the view should be ready to use right after construction
-        Initialize();
+        if (initializationStrategy == ViewInitializationStrategy.Immediate)
+        {
+            Initialize();
+        }
     }
 
     protected abstract object Build(TViewModel? vm);
@@ -56,10 +79,20 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
 
     protected virtual StyleGroup? BuildStyles() => null;
 
-    protected ViewBase()
+    protected ViewBase() 
+        : this(AppBuilderExtensions.DefaultViewInitializationStrategy)
     {
-
     }
+
+    protected ViewBase(ViewInitializationStrategy initializationStrategy)
+    {
+        InitializationStrategy = initializationStrategy;
+    }
+
+    /// <summary>
+    /// Gets the initialization strategy used by this view.
+    /// </summary>
+    public ViewInitializationStrategy InitializationStrategy { get; }
 
     private bool _isInitialized;
     private bool _isInitializing;
