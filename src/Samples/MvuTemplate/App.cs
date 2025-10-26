@@ -14,6 +14,7 @@ AppBuilder.Configure<Application>()
     .AfterSetup(b => b.Instance?.Styles.Add(new FluentTheme()))
     .UseServiceProvider(serviceProvider)
     .UseComponentControlFactory(new ControlFactory(serviceProvider))
+    .UseViewInitializationStrategy(ViewInitializationStrategy.Lazy) //optional: set view initialization strategy
     .SetupWithLifetime(lifetime);
 
 lifetime.MainWindow = new Window()

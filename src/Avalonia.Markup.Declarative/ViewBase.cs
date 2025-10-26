@@ -42,12 +42,6 @@ public abstract class ViewBase<TViewModel> : ViewBase
         : base(initializationStrategy)
     {
         DataContext = viewModel;
-        // For ViewBase<T>, default to immediate initialization since it's intended for MVVM scenarios
-        // where the view should be ready to use right after construction
-        if (initializationStrategy == ViewInitializationStrategy.Immediate)
-        {
-            Initialize();
-        }
     }
 
     protected abstract object Build(TViewModel? vm);
@@ -87,6 +81,9 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
     protected ViewBase(ViewInitializationStrategy initializationStrategy)
     {
         InitializationStrategy = initializationStrategy;
+
+        if (initializationStrategy == ViewInitializationStrategy.Immediate)
+            Initialize();
     }
 
     /// <summary>
