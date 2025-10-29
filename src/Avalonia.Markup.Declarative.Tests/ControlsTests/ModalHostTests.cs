@@ -27,9 +27,11 @@ public class ModalHostTests : AvaloniaTestBase
             // Modals container (always present)
             children.Add(new Panel());
 
-            return new Panel()
-                .Ref(out HostPanel)
+            var hostPanel = new Panel()
                 .Children(children.ToArray());
+
+            HostPanel = hostPanel;
+            return hostPanel;
         }
 
         protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)

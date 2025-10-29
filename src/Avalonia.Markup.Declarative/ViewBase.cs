@@ -34,14 +34,20 @@ public abstract class ViewBase<TViewModel> : ViewBase
     }
 
     protected ViewBase(TViewModel viewModel) 
-        : this(viewModel, ViewInitializationStrategy.Immediate)
+     : this(viewModel, ViewInitializationStrategy.Lazy)
     {
+        DataContext = viewModel;
+        Initialize();
     }
 
     protected ViewBase(TViewModel viewModel, ViewInitializationStrategy initializationStrategy) 
         : base(initializationStrategy)
-    {
+{
         DataContext = viewModel;
+        
+        // If Immediate strategy was requested, initialize now that DataContext is set
+     if (initializationStrategy == ViewInitializationStrategy.Immediate)
+            Initialize();
     }
 
     protected abstract object Build(TViewModel? vm);

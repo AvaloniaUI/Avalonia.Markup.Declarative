@@ -10,15 +10,11 @@ public class TemplateBindingTests : AvaloniaTestBase
     public class TemplateTestView : ViewBase
     {
         public static IControlTemplate MyControlTemplate { get; } = new FuncControlTemplate<Button>(
-            (control, scope) =>
-                // using FuncView to generate ViewContext that will be used for binding
-                // not elegant, but works while we are looking for a better solution
-                // and supports different func template types
-                new FuncView<Button>(control,
-                    b =>
-                        new TextBox()
-                            .Text(() => $"{b.Content}", val => b.Content = val)
-                ));
+            (control, scope) => new FuncView<Button>(control, c =>
+                new TextBox()
+                    .Text(() => (c.Content?.ToString() ?? ""), val => c.Content = val)
+            )
+        );
 
         protected override object Build() =>
             new Button()
@@ -43,14 +39,11 @@ public class TemplateBindingTests : AvaloniaTestBase
 
         var button = view.MyButton;
         Assert.NotNull(button); // Ensure button is created
-        var templateView = button.GetSelfAndVisualDescendants().OfType<FuncView<Button>>().FirstOrDefault();
+        var textBox = button.GetSelfAndVisualDescendants().OfType<TextBox>().FirstOrDefault();
+        Assert.NotNull(textBox);
 
-        Assert.NotNull(templateView); // Ensure template view is created
-
-        // Should have a computed state for the Text property
-        Assert.Contains(templateView.ViewComputedStates, s =>
-            s is ViewPropertyComputedState<TextBox, string> state &&
-            state.GetterFunc() == "Initial");
+        // Should have set the initial text
+        Assert.Equal("Initial", textBox.Text);
     }
 
     [Fact]

@@ -16,6 +16,7 @@ public abstract class AvaloniaTestBase
             AppBuilder.Configure<Application>()
                 .AfterSetup(b => b.Instance?.Styles.Add(new SimpleTheme()))
                 .UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = true, FrameBufferFormat = PixelFormat.Bgra8888 })
+                .UseViewInitializationStrategy(ViewInitializationStrategy.Lazy)
                 .SetupWithoutStarting();
         }
     }

@@ -21,7 +21,9 @@ public abstract class ComponentBase<TViewModel> : ComponentBase
         set => DataContext = value;
     }
 
-    protected ComponentBase(TViewModel viewModel)
+    // ComponentBase does not initialize immediately - derived classes or ComponentBase<TViewModel> will call Initialize()
+    // This ensures that DataContext/ViewModel is set before Build() is called
+    protected ComponentBase(TViewModel viewModel): base(ViewInitializationStrategy.Lazy)
     {
         DataContext = viewModel;
         // Initialize after DataContext is set, so Build(ViewModel) has a valid ViewModel
@@ -43,10 +45,12 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     private bool _isUpdatingState;
     private readonly HashSet<INotifyPropertyChanged> _subscribedNotifyPropertyChanged = new();
 
-    protected ComponentBase()
+    protected ComponentBase() : this(ViewInitializationStrategy.Immediate)
     {
-        // ComponentBase does not initialize immediately - derived classes or ComponentBase<TViewModel> will call Initialize()
-        // This ensures that DataContext/ViewModel is set before Build() is called
+    }
+
+    protected ComponentBase(ViewInitializationStrategy viewInitializationStrategy) : base(viewInitializationStrategy)
+    {
     }
 
     protected override void OnCreated()
