@@ -5,11 +5,11 @@ namespace AvaloniaMarkupSample.MvuSample;
 public class CanvasSampleMvuView : ComponentBase
 {
     protected override object Build() =>
-        new Grid().Rows("30, 40, *")
+        new Grid().Rows("30, Auto, *")
             .Children(
 
                 new TextBlock().Text("Canvas Sample"),
-                new Slider()
+                new SliderEx()
                     .Grid_Row(1)
                     .HorizontalAlignment(HorizontalAlignment.Left)
                     .MinWidth(300)

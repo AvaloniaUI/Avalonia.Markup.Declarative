@@ -92,17 +92,21 @@ public static class ControlPropertyExtensions
         //override handler for MVU components so changing of such properties will trigger StateHasChanged method
         if (view is ComponentBase componentBase && setChangedHandler != null)
         {
+            // Extract property name for tracking (if possible)
+            // Use PropertyPathHelper to extract actual property name from expression (e.g., "() => SliderValue" -> "SliderValue")
+            string propertyName = PropertyPathHelper.GetNameFromPropertyPath(expression) ?? "unknown";
+
             handler = v =>
             {
                 // Update this component's state first
                 componentBase.UpdateState(() => setChangedHandler(v), bubbleToParent: true);
 
                 // Also notify listeners (e.g., parent components) that track this property by expression
-                if (!string.IsNullOrEmpty(expression))
+                if (!string.IsNullOrEmpty(propertyName))
                 {
                     try
                     {
-                        componentBase.NotifyExternalPropertyChanged(expression!, v);
+                        componentBase.NotifyExternalPropertyChanged(propertyName, v);
                     }
                     catch
                     {
@@ -143,7 +147,8 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     if (view is ComponentBase componentBase && setChangedHandler != null)
     {
         // Extract property name for tracking (if possible)
-        string propertyName = expression ?? "unknown";
+        // Use PropertyPathHelper to extract actual property name from expression (e.g., "() => SliderValue" -> "SliderValue")
+        string propertyName = PropertyPathHelper.GetNameFromPropertyPath(expression) ?? "unknown";
 
         if (control is ComponentBase childComponent)
         {

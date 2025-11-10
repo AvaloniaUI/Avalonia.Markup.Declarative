@@ -319,6 +319,7 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
     {
         _propertyUpdateCallbacks[propertyName] = callback;
     }
+
     public void NotifyExternalPropertyChanged(string propertyName, object? newValue)
     {
         // Update our own value if we have a callback
@@ -330,9 +331,29 @@ public abstract class ComponentBase : ViewBase, IMvuComponent
         // Trigger state update on this component
         StateHasChanged();
 
-        // Bubble up to parent if needed
-        if (Parent is ComponentBase parent)
-            parent.NotifyExternalPropertyChanged(propertyName, newValue);
+        // Bubble up to parent ComponentBase (not just immediate Parent, which might be a layout control)
+        var parentComponent = FindParentComponent();
+        if (parentComponent != null)
+        {
+            parentComponent.NotifyExternalPropertyChanged(PropertyPathHelper.GetNameFromPropertyPath(propertyName), newValue);
+        }
+    }
+
+    /// <summary>
+    /// Finds the nearest ancestor ComponentBase in the visual tree.
+    /// This is needed because the immediate Parent might be a layout control (Grid, StackPanel, etc.)
+    /// rather than the logical parent ComponentBase.
+    /// </summary>
+    private ComponentBase? FindParentComponent()
+    {
+        var current = this.Parent as Visual;
+        while (current != null)
+        {
+            if (current is ComponentBase componentBase)
+                return componentBase;
+            current = current.Parent as Visual;
+        }
+        return null;
     }
 
     private void SubscribeNotifyPropertyChanged(INotifyPropertyChanged inpc)

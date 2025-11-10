@@ -23,6 +23,20 @@ namespace Avalonia.Markup.Declarative.Tests.HelpersTests
         //using brackets to isolate single property from its data source
         [InlineData("(vm.Property).SubProperty", "SubProperty")]
         [InlineData("((type)vm.Property).SubProperty", "SubProperty")]
+        
+        // Lambda expression tests
+        [InlineData("() => Property", "Property")]
+        [InlineData("() => SliderValue", "SliderValue")]
+        [InlineData("() => Counter", "Counter")]
+        [InlineData("()=>Value", "Value")]
+        [InlineData("() =>  Value", "Value")]
+        [InlineData("() => this.Property", "Property")]
+        [InlineData("() => vm.Property", "Property")]
+        [InlineData("() => obj.Property ?? 0", "Property")]
+        [InlineData("() => obj.Property?.SubProperty", "Property")]
+        [InlineData("() => obj.Property.SubProperty", "Property.SubProperty")]
+        [InlineData("() => (int)vm.Property", "Property")]
+        [InlineData("() => ((type)vm.Property).SubProperty", "SubProperty")]
         public void GetNameFromPropertyPath_ReturnsExpected(string path, string expected)
         {
             var result = PropertyPathHelper.GetNameFromPropertyPath(path);
