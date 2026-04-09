@@ -11,6 +11,7 @@ internal sealed class EventExtensionInfo : IMemberExtensionInfo
     public string EventHandler { get; }
     public string EventName { get; }
     public List<string> EventParameterTypes { get; } = [];
+    public bool ReturnsVoid { get; private set; } = true;
     public string ReturnType { get; }
     public string GenericConstraint { get; } = "";
     public string GenericArg { get; } = "";
@@ -44,6 +45,8 @@ internal sealed class EventExtensionInfo : IMemberExtensionInfo
 
         if (eventInfo.Type is INamedTypeSymbol delegateType && delegateType.DelegateInvokeMethod is { } invokeMethod)
         {
+            ReturnsVoid = invokeMethod.ReturnsVoid;
+
             foreach (var parameter in invokeMethod.Parameters)
             {
                 EventParameterTypes.Add(parameter.Type.GetFullTypeName());

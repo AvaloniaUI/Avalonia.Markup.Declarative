@@ -5,6 +5,8 @@ namespace AvaloniaMarkupSample.CommonSamples;
 
 public class StylesSampleView : ViewBase
 {
+    public TabViewModel TabViewModel { get; } = new("Template");
+
     protected override StyleGroup? BuildStyles() =>
     [
         new Style<Button>(s => s.Class("nested-button"))
@@ -26,7 +28,7 @@ public class StylesSampleView : ViewBase
                     .ItemsSource(Tabs)
                     .Styles(
                         new Style<TabItem>()
-                            .IsEnabled(new Binding(nameof(TabViewModel.Enabled)))
+                            .IsEnabled(() => TabViewModel.Enabled)
                             .Foreground(Brushes.YellowGreen)
                     ),
 

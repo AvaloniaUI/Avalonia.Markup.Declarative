@@ -6,6 +6,14 @@ internal sealed class ActionToEventGenerator : ExtensionGeneratorBase<EventExten
 {
     protected override string GetExtension(EventExtensionInfo @event)
     {
+        if (!@event.ReturnsVoid)
+        {
+            return
+                (@event.IsObsolete ? "[Obsolete]" + SymbolUtilities.NewLine : string.Empty) +
+                $"public static {@event.ReturnType} On{@event.EventName}{@event.GenericArg}(this {@event.ReturnType} control, {@event.EventHandler} handler) {@event.GenericConstraint} " +
+                $"=> {SymbolUtilities.NewLine} control._setEvent(handler, h => control.{@event.EventName} += h);";
+        }
+
         var eventParameterTypes = @event.EventParameterTypes;
         string argsString;
         string lambdaParameters;

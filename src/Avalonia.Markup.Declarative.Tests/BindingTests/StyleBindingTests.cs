@@ -26,10 +26,12 @@ public class StyleBindingTests : AvaloniaTestBase
 
     public class TabsView : ViewBase
     {
+        public TabVm TabViewModel { get; } = new("Template");
+
         protected override StyleGroup? BuildStyles() =>
         [
             new Style<TabItem>()
-                .IsEnabled(new Binding(nameof(TabVm.Enabled)))
+                .IsEnabled(() => TabViewModel.Enabled)
                 .Foreground(Brushes.YellowGreen)
         ];
 
@@ -67,6 +69,9 @@ public class StyleBindingTests : AvaloniaTestBase
     view._tabs.ItemsSource = null;
     view._tabs.ItemsSource = itemsSrc;
         Dispatcher.UIThread.RunJobs();
+
+        items = view._tabs.GetSelfAndVisualDescendants().OfType<TabItem>().ToList();
+        second = items[1];
         Assert.True(second.IsEnabled);
     }
 }

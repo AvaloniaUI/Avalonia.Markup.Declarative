@@ -5,6 +5,6 @@ namespace Avalonia.Markup.Declarative.SourceGenerator.Generators.StyleSetterGene
 internal sealed class ValueStyleSetterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
 {
     protected override string GetExtension(PropertyExtensionInfo info) =>
-        $"public static Style<{info.ReturnType}> {info.ExtensionName}{info.GenericArg}(this Style<{info.ReturnType}> style, {info.ValueTypeSource} value) {info.GenericConstraint} {SymbolUtilities.NewLine}" +
+    $"public static Style<{info.ReturnType}> {info.ExtensionName}{info.GenericArg}(this Style<{info.ReturnType}> style, {info.ValueTypeSource} value) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
         $"=> style._addSetter({info.ControlTypeName}.{info.MemberName}Property!, value!);";
 }

@@ -2,7 +2,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Threading;
-using Avalonia.Data;
 
 namespace Avalonia.Markup.Declarative.Tests.BindingTests;
 
@@ -36,8 +35,7 @@ public class CommandBindingTests : AvaloniaTestBase
                     new Button()
                         .Ref(out _button)
                         .Content("Execute Command")
-                        .Command(new Binding(nameof(Vm.MyCommand)))
-                        .CommandParameter(new Binding { Source = vm })
+                        .OnClick(_ => vm?.MyCommand(vm))
                 );
 
         public TextBlock _text = null!;

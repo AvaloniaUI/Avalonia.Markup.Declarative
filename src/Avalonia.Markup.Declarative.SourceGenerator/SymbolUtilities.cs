@@ -67,7 +67,9 @@ internal static class SymbolUtilities
     {
         foreach (var typeMember in sym.GetTypeMembers())
         {
-            if (typeMember.DeclaredAccessibility == Accessibility.Public && typeMember.TypeKind == TypeKind.Class)
+            if (typeMember.DeclaredAccessibility == Accessibility.Public &&
+                typeMember.TypeKind == TypeKind.Class &&
+                !typeMember.IsGenericType)
             {
                 yield return typeMember;
             }
@@ -127,8 +129,12 @@ internal static class SymbolUtilities
     }
 
     internal static bool IsStyledElement(this INamedTypeSymbol controlType) =>
-        controlType.IsOrInheritsFrom("Avalonia.StyledElement") ||
-        controlType.AllInterfaces.Any(static x => GetMetadataName(x) == "Avalonia.Styling.IStyleable");
+        controlType.IsOrInheritsFrom("Avalonia.StyledElement");
+
+    internal static string GetStyleConstraintTypeName(this ITypeSymbol controlType) =>
+        controlType.IsOrInheritsFrom("Avalonia.StyledElement")
+            ? controlType.GetFullTypeName()
+            : "global::Avalonia.StyledElement";
 
     internal static bool HasPublicSetter(this IPropertySymbol? property) =>
         property?.SetMethod != null && property.SetMethod.DeclaredAccessibility == Accessibility.Public;
@@ -174,6 +180,12 @@ internal static class SymbolUtilities
         }
 
         return false;
+    }
+
+    internal static bool HasUnsupportedExternalValueType(this IFieldSymbol field)
+    {
+        var valueTypeName = field.Type.GetLastGenericArgument().GetFullTypeName();
+        return valueTypeName is "global::Avalonia.Data.IBinding" or "global::Avalonia.Data.IBinding?";
     }
 
     internal static bool IsReadOnlyField(this IFieldSymbol field)
@@ -289,12 +301,21 @@ internal static class SymbolUtilities
     internal static string BuildExtensionClassName(INamedTypeSymbol typeSymbol)
     {
         var parts = new List<string>();
+
+        if (typeSymbol.ContainingNamespace is { IsGlobalNamespace: false } containingNamespace)
+        {
+            parts.AddRange(containingNamespace.ToDisplayString().Split('.'));
+        }
+
+        var typeParts = new Stack<string>();
         INamedTypeSymbol? current = typeSymbol;
         while (current != null)
         {
-            parts.Insert(0, current.Name.Split('`')[0]);
+            typeParts.Push(current.Name.Split('`')[0]);
             current = current.ContainingType;
         }
+
+        parts.AddRange(typeParts);
 
         return $"{CleanIdentifier(string.Join("_", parts))}_MarkupExtensions";
     }

@@ -30,8 +30,7 @@ public class MainView : ViewBase
                                     .Padding(12)
                                     .FontSize(30)
                                     .HorizontalAlignment(HorizontalAlignment.Center)
-                                    .Text("Hello Hot Reload!")
-                                    .Foreground("SystemAccentColor".GetDynamicResource()),
+                                    .Text("Hello Hot Reload!"),
 
                                 new Button()
                                     .Name("HotReloadButton", Scope)
@@ -90,11 +89,6 @@ public class MainView : ViewBase
                 new TabItem()
                     .Header("Item control")
                     .Content(new Border().Child(new ItemControlSampleView())),
-
-                new TabItem()
-                    .Header("OpenGL view")
-                    .Content(new Border().Child(new OpenGlView())),
-
 
                 new TabItem().Header("Custom controls")
                     .Content(

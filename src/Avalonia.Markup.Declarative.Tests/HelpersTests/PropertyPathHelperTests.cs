@@ -19,6 +19,9 @@ namespace Avalonia.Markup.Declarative.Tests.HelpersTests
         //nested properties works with binding Path in Avalonia
         [InlineData("vm.Property.SubProperty", "Property.SubProperty")]
         [InlineData("@vm.Property.SubProperty", "Property.SubProperty")]
+        [InlineData("() => vm.Property", "Property")]
+        [InlineData("() => vm.Property.SubProperty", "Property.SubProperty")]
+        [InlineData("() => TabViewModel.Enabled", "Enabled")]
 
         //using brackets to isolate single property from its data source
         [InlineData("(vm.Property).SubProperty", "SubProperty")]

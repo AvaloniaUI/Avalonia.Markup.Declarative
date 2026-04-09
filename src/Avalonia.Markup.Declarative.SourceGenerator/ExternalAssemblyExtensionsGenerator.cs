@@ -25,14 +25,21 @@ public sealed class ExternalAssemblyExtensionsGenerator : IIncrementalGenerator
                         continue;
                     }
 
-                    var code = generatorHost.GenerateExtensions(publicClass);
-                    if (string.IsNullOrWhiteSpace(code))
+                    try
                     {
-                        continue;
-                    }
+                        var code = generatorHost.GenerateExtensions(publicClass);
+                        if (string.IsNullOrWhiteSpace(code))
+                        {
+                            continue;
+                        }
 
-                    var hintName = $"External_{SymbolUtilities.RemoveIllegalFileNameCharacters(publicClass.ToDisplayString())}.g.cs";
-                    spc.AddSource(hintName, SourceText.From(code!, Encoding.UTF8));
+                        var hintName = $"External_{SymbolUtilities.RemoveIllegalFileNameCharacters(publicClass.ToDisplayString())}.g.cs";
+                        spc.AddSource(hintName, SourceText.From(code!, Encoding.UTF8));
+                    }
+                    catch (Exception ex)
+                    {
+                        _ = ex;
+                    }
                 }
             }
         });

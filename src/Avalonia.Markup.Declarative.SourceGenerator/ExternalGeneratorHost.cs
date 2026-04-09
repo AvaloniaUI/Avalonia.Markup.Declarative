@@ -15,9 +15,9 @@ internal sealed class ExternalGeneratorHost
     private readonly List<ExtensionGroupGenerator> _groupGenerators =
     [
         new("Properties",
-            static t => t.GetAllMembers()
+            static t => t.GetMembers()
                 .OfType<IFieldSymbol>()
-                .Where(static x => x.IsAvaloniaPropertyField())
+                .Where(static x => x.IsAvaloniaPropertyField() && !x.HasUnsupportedExternalValueType())
                 .Select(static x => new PropertyExtensionInfo(x)),
 
             new ValueSetterGenerator(),
@@ -27,12 +27,13 @@ internal sealed class ExternalGeneratorHost
         ),
 
         new("Attached Properties",
-            static t => t.GetAllMembers()
+            static t => t.GetMembers()
                 .OfType<IFieldSymbol>()
                 .Where(static x => x.IsAttachedPropertyField())
                 .Select(static x => new AttachedPropertyExtensionInfo(x))
                 .Where(static x => !string.IsNullOrWhiteSpace(x.AttachedPropertyHostTypeName)),
 
+            new AttachedPropertyValueSetterGenerator(),
             new AttachedPropertyBindFromExpressionSetterGenerator()
         ),
 
@@ -46,15 +47,31 @@ internal sealed class ExternalGeneratorHost
         ),
 
         new("Styles",
-            static t => !t.IsStyledElement() ? [] : t.GetAllMembers()
-                .OfType<IFieldSymbol>()
-                .Where(static x => x.IsAcceptableStyledField())
+            static t => !t.IsStyledElement() ? [] : GetStyledFields(t)
+                .Where(static x => !x.HasUnsupportedExternalValueType())
                 .Select(static x => new PropertyExtensionInfo(x)),
 
             new ValueStyleSetterGenerator(),
+            new BindFromExpressionStyleSetterGenerator(),
             new ValueOverloadsStyleSetterGenerator()
         )
     ];
+
+    private static IEnumerable<IFieldSymbol> GetStyledFields(INamedTypeSymbol type)
+    {
+        var fields = type.GetMembers().OfType<IFieldSymbol>();
+
+        if (type.GetFullTypeName() == "global::Avalonia.StyledElement")
+        {
+            fields = fields.Concat(type.GetAllMembers()
+                .OfType<IFieldSymbol>()
+                .Where(x => x.ContainingType is not null &&
+                            !SymbolEqualityComparer.Default.Equals(x.ContainingType, type) &&
+                            !x.ContainingType.IsOrInheritsFrom("Avalonia.StyledElement")));
+        }
+
+        return fields.Where(static x => x.IsAcceptableStyledField());
+    }
 
     public string? GenerateExtensions(INamedTypeSymbol controlType)
     {

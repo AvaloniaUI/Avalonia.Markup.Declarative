@@ -23,7 +23,7 @@ internal sealed class ValueOverloadsStyleSetterGenerator : ExtensionGeneratorBas
                 var argDefs = string.Join(", ", ps.Select(static x => $"{x.Type.GetFullTypeName()} {x.Name}"));
                 var argVals = string.Join(", ", ps.Select(static x => x.Name));
 
-                extensionText += $"public static Style<{info.ReturnType}> {info.ExtensionName}{info.GenericArg}(this Style<{info.ReturnType}> style, {argDefs}) {info.GenericConstraint} {SymbolUtilities.NewLine}" +
+                extensionText += $"public static Style<{info.ReturnType}> {info.ExtensionName}{info.GenericArg}(this Style<{info.ReturnType}> style, {argDefs}) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
                                  $"   => style._addSetter({info.ControlTypeName}.{info.MemberName}Property, new {info.ValueTypeSource}({argVals}));";
             }
         }

@@ -1,6 +1,10 @@
-﻿using Avalonia.Styling;
-using System;
+﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
+using Avalonia.Data.Converters;
+using Avalonia.Markup.Declarative.Helpers;
+using Avalonia.Styling;
+using System;
 using System.Xml.Linq;
 
 namespace Avalonia.Markup.Declarative;
@@ -47,6 +51,27 @@ public static class StylePropertyExtensions
         style.Setters.Add(new Setter(avaloniaProperty, value));
         return style;
     }
+
+    public static Style<TElement> _addSetterEx<TElement>(this Style<TElement> style, AvaloniaProperty avaloniaProperty,
+        string? sourcePropertyPathString, BindingMode? bindingMode = null, IValueConverter? converter = null, object? bindingSource = null)
+        where TElement : StyledElement
+    {
+        var binding = new Binding
+        {
+            Path = PropertyPathHelper.GetNameFromPropertyPath(sourcePropertyPathString),
+            Mode = bindingMode ?? BindingMode.Default,
+            Converter = converter
+        };
+
+        if (bindingSource != null)
+        {
+            binding.Source = bindingSource;
+        }
+
+        style.Setters.Add(new Setter(avaloniaProperty, binding));
+        return style;
+    }
+
     public static Style<TElement> Col<TElement>(this Style<TElement> style, int value)
         where TElement : Control
     {

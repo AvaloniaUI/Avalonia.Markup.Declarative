@@ -19,7 +19,7 @@ public class ChartsComponent() : ComponentBase
                         .Content("Update data")
                         .VerticalAlignment(VerticalAlignment.Top)
                         .HorizontalAlignment(HorizontalAlignment.Center)
-                        .Margin(top: 16)
+                        .Margin(new Avalonia.Thickness(left: 0, top: 16, right: 0, bottom: 0))
                         .OnClick(_ =>
                         {
                             ViewModel?.UpdateData();

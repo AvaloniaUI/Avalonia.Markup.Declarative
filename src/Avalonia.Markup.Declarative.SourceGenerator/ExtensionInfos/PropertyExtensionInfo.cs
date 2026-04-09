@@ -16,6 +16,7 @@ internal class PropertyExtensionInfo : IMemberExtensionInfo
     public bool IsGeneric { get; }
     public string ReturnType { get; protected set; }
     public string GenericConstraint { get; protected set; } = "";
+    public string StyleGenericConstraint { get; protected set; } = "";
     public string GenericArg { get; protected set; } = "";
 
     public PropertyExtensionInfo(IFieldSymbol field)
@@ -35,6 +36,7 @@ internal class PropertyExtensionInfo : IMemberExtensionInfo
         {
             ReturnType = "T";
             GenericConstraint = $"where T : {ControlTypeName}";
+            StyleGenericConstraint = $"where T : {ControlType.GetStyleConstraintTypeName()}";
             GenericArg = "<T>";
         }
     }
