@@ -155,13 +155,39 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
         {
             Debug.WriteLine(ex.Message);
             Debug.WriteLine(ex.StackTrace);
-            throw new ViewBuildingException($"Build error in {GetType().Name} : {ex.Message}", ex);
+            throw new ViewBuildingException(CreateBuildErrorMessage(GetType(), ex), ex);
         }
         finally
         {
             _isInitializing = false;
         }
     }
+
+    private static string CreateBuildErrorMessage(Type viewType, Exception exception)
+    {
+        var rootCause = GetRootCause(exception);
+        var message = $"Build error in {viewType.Name} ({rootCause.GetType().Name}): {rootCause.Message}";
+
+        if (IsBinaryCompatibilityException(rootCause))
+        {
+            message += " This usually means an external package was built against a different version of Avalonia or another dependency. Check the package's declared dependency versions against the versions resolved by the app.";
+        }
+
+        return message;
+    }
+
+    private static Exception GetRootCause(Exception exception)
+    {
+        while (exception.InnerException != null)
+        {
+            exception = exception.InnerException;
+        }
+
+        return exception;
+    }
+
+    private static bool IsBinaryCompatibilityException(Exception exception) =>
+        exception is MissingFieldException or MissingMethodException or TypeLoadException or System.IO.FileLoadException;
 
     /// <summary>
     /// Overrides Avalonia's OnDataContextChanged to handle ViewModel property changes.

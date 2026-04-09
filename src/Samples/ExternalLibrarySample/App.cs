@@ -1,8 +1,10 @@
 ﻿using Avalonia.Markup.Xaml;
-using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Styling;
 using ExternalLibrarySample;
+using LiveChartsCore.SkiaSharpView.Avalonia;
 using Microsoft.Extensions.DependencyInjection;
+
+[assembly: GenerateMarkupExtensionsForAssembly(typeof(CartesianChart))]
 
 var services = new ServiceCollection();
 
