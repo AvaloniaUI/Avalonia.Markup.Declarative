@@ -53,21 +53,6 @@ public static class ControlPropertyExtensions
     }
 
     /// <summary>
-    /// Used to pass Binding object constructed by end-user
-    /// </summary>
-    /// <typeparam name="TControl"></typeparam>
-    /// <param name="control"></param>
-    /// <param name="avaloniaProperty"></param>
-    /// <param name="binding"></param>
-    /// <returns></returns>
-    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, IBinding binding)
-        where TControl : AvaloniaObject
-    {
-        control[!avaloniaProperty] = binding;
-        return control;
-    }
-
-    /// <summary>
     /// Creates *Avalonia property* binding based on expression argument
     /// </summary>
     /// <typeparam name="TControl"></typeparam>
@@ -554,7 +539,7 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         where TElement : Control
     {
         var path = PropertyPathHelper.GetNameFromPropertyPath(ps);
-        var binding = new Binding(path, BindingMode.OneWay);
+        var binding = new ReflectionBinding(path);
 
         if (bindingSource != null)
             binding.Source = bindingSource;
@@ -579,7 +564,7 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         TValue value)
         where TElement : Control
     {
-        if (value is IBinding binding)
+        if (value is ReflectionBinding binding)
         {
             control[!property] = binding;
         }
@@ -595,7 +580,7 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         where TElement : Control
     {
         var prop = Avalonia.Controls.ToolTip.TipProperty;
-        if (value is IBinding binding)
+        if (value is ReflectionBinding binding)
         {
             control[!prop] = binding;
         }
@@ -617,7 +602,7 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     public static TElement AddFlyoutOnClick<TElement>(this TElement control, FlyoutBase flyout)
         where TElement : Button
     {
-        control.OnClick(_ => flyout.ShowAt(control));
+        control.Click += (o, e) => flyout.ShowAt(control);
         return control;
     }
 

@@ -2,11 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Text;
 using static Avalonia.Markup.Declarative.SourceGenerator.MarkupTypeHelpers;
 
@@ -33,7 +29,13 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
             .Where(static c => c is not null);
 
         context.RegisterSourceOutput(classDeclarations,
-            static (spc, data) => GenerateSource(spc, data.Value.Syntax, data.Value.Model));
+            static (spc, data) =>
+            {
+                if (data is { } value)
+                {
+                    GenerateSource(spc, value.Syntax, value.Model);
+                }
+            });
     }
 
     private static (ClassDeclarationSyntax Syntax, SemanticModel Model)? GetSemanticTarget(GeneratorSyntaxContext context)
@@ -178,7 +180,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
             current = current.ContainingType;
         }
         
-        return CleanIdentifier(string.Join("_", parts));
+        return CleanIdentifier(string.Join("_", parts)) ?? "Unknown";
     }
 
     private static string BuildAllTypeParameters(ClassDeclarationSyntax type)
@@ -218,7 +220,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         return sanitizedFileName;
     }
 
-    private static string CleanIdentifier(string name, bool @namespace = false)
+    private static string? CleanIdentifier(string name, bool @namespace = false)
     {
         // trim off leading and trailing whitespace
         name = name.Trim();
@@ -287,6 +289,8 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
 
         var genericName = field.Declaration.Type as GenericNameSyntax;
+        if (genericName == null)
+            return string.Empty;
 
         var valueTypeSource = genericName.TypeArgumentList.Arguments.Last();
 
@@ -354,6 +358,8 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
 
         var genericName = field.Declaration.Type as GenericNameSyntax;
+        if (genericName == null)
+            return string.Empty;
 
         var valueTypeSource = genericName.TypeArgumentList.Arguments.Last();
 
