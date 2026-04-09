@@ -42,7 +42,7 @@ public class SimpleComponent(SampleDataService dataService) : ComponentBase //co
                     .Children(
                         new TextBlock()
                             .Name("title")
-                            .Margin(new Avalonia.Thickness(left: 16, top: 16, right: 0, bottom: 0))
+                            .Margin(new Thickness(left: 16, top: 16, right: 0, bottom: 0))
                             .Text("Sidebar")
                     ),
 

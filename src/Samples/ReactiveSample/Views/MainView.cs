@@ -1,6 +1,6 @@
-﻿using Avalonia.ReactiveUI;
-using Avalonia.Styling;
+﻿using Avalonia.Styling;
 using ReactiveSample.ViewModels;
+using ReactiveUI.Avalonia;
 using System.Reactive.Linq;
 
 namespace ReactiveSample.Views;
