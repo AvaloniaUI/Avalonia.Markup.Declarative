@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using Avalonia.Threading;
-using Xunit.Abstractions;
 
 namespace Avalonia.Markup.Declarative.Tests.ControlsTests;
 

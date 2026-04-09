@@ -2,7 +2,6 @@ using Avalonia.Controls;
 using Avalonia.Markup.Declarative.Tests.ControlsTests.Controls;
 using Avalonia.Threading;
 using System.Collections.ObjectModel;
-using Xunit.Abstractions;
 using Color = Avalonia.Media.Color;
 
 namespace Avalonia.Markup.Declarative.Tests.ControlsTests;

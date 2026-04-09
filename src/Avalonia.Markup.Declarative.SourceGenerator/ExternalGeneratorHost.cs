@@ -1,5 +1,3 @@
-#nullable enable
-
 using System.Collections.Immutable;
 using System.Text;
 using Avalonia.Markup.Declarative.SourceGenerator.ExtensionInfos;
@@ -24,10 +22,7 @@ internal sealed class ExternalGeneratorHost
 
             new ValueSetterGenerator(),
             new BindFromExpressionSetterGenerator(),
-            new MagicalSetterGenerator(),
-            new BindSetterGenerator(),
             new AvaloniaPropertyBindSetterGenerator(),
-            new MagicalSetterWithConverterGenerator(),
             new ValueOverloadsSetterGenerator()
         ),
 
@@ -38,7 +33,6 @@ internal sealed class ExternalGeneratorHost
                 .Select(static x => new AttachedPropertyExtensionInfo(x))
                 .Where(static x => !string.IsNullOrWhiteSpace(x.AttachedPropertyHostTypeName)),
 
-            new AttachedPropertyMagicalSetterGenerator(),
             new AttachedPropertyBindFromExpressionSetterGenerator()
         ),
 
@@ -58,7 +52,6 @@ internal sealed class ExternalGeneratorHost
                 .Select(static x => new PropertyExtensionInfo(x)),
 
             new ValueStyleSetterGenerator(),
-            new BindingStyleSetterGenerator(),
             new ValueOverloadsStyleSetterGenerator()
         )
     ];

@@ -143,7 +143,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
                 sb.AppendLine($"// common properties\n");
 
                 AppendIfNotNull(sb, GetCommonPropertySetterExtension(controlTypeQualified, property, semanticModel));
-                AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(controlTypeQualified, property, semanticModel));
+                // AppendIfNotNull(sb, GetCommonPropertyBindingSetterExtension(controlTypeQualified, property, semanticModel));
                 AppendIfNotNull(sb, GetCommonPropertyExpressionBindingSetterExtension(controlTypeQualified, property, semanticModel));
 
                 processedFields.Add(propertyName);
@@ -339,20 +339,20 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         return extensionText;
     }
 
-    private static string GetCommonPropertyBindingSetterExtension(string controlTypeName, PropertyDeclarationSyntax property, SemanticModel semanticModel)
-    {
-        var extensionName = property.Identifier.ToString();
-        var valueTypeSource = GetPropertyTypeName(property, semanticModel);
+    // private static string GetCommonPropertyBindingSetterExtension(string controlTypeName, PropertyDeclarationSyntax property, SemanticModel semanticModel)
+    // {
+    //     var extensionName = property.Identifier.ToString();
+    //     var valueTypeSource = GetPropertyTypeName(property, semanticModel);
 
-        var extensionText =
-            $"#pragma warning disable CS8601{NewLine}" +
-            $"[Obsolete] public static {controlTypeName} {extensionName}" +
-            $"(this {controlTypeName} control, IBinding binding)" +
-            $"=>{NewLine} control._setCommonBindingEx(({valueTypeSource}? v) => control.{extensionName} = v ?? default({valueTypeSource}), binding);{NewLine}" +
-            $"#pragma warning restore CS8601";
+    //     var extensionText =
+    //         $"#pragma warning disable CS8601{NewLine}" +
+    //         $"[Obsolete] public static {controlTypeName} {extensionName}" +
+    //         $"(this {controlTypeName} control, IBinding binding)" +
+    //         $"=>{NewLine} control._setCommonBindingEx(({valueTypeSource}? v) => control.{extensionName} = v ?? default({valueTypeSource}), binding);{NewLine}" +
+    //         $"#pragma warning restore CS8601";
 
-        return extensionText;
-    }
+    //     return extensionText;
+    // }
     public static string GetExpressionBindingSetterExtension(string controlTypeName, string genericParamsAll, FieldDeclarationSyntax field)
     {
         var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
