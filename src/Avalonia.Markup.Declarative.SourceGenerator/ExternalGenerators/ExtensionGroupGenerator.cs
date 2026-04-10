@@ -15,7 +15,7 @@ internal sealed class ExtensionGroupGenerator(
     {
         generationsCount = 0;
 
-        var sb = new StringBuilder();
+        var sb = new StringBuilder(1024);
         foreach (var extensionInfo in membersQuery(avaloniaControlType))
         {
             sb.AppendLine($" // {extensionInfo.MemberName}");

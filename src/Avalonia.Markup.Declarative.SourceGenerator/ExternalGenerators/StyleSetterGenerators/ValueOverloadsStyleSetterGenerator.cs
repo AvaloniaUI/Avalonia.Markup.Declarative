@@ -1,3 +1,4 @@
+using System.Text;
 using Avalonia.Markup.Declarative.SourceGenerator.ExtensionInfos;
 using Microsoft.CodeAnalysis;
 
@@ -7,7 +8,7 @@ internal sealed class ValueOverloadsStyleSetterGenerator : ExtensionGeneratorBas
 {
     protected override string GetExtension(PropertyExtensionInfo info)
     {
-        var extensionText = string.Empty;
+        StringBuilder? extensionText = null;
 
         if (!info.ValueType.ContainingNamespace.ToDisplayString().StartsWith("System", StringComparison.Ordinal) &&
             info.ValueType.IsValueType)
@@ -23,11 +24,12 @@ internal sealed class ValueOverloadsStyleSetterGenerator : ExtensionGeneratorBas
                 var argDefs = string.Join(", ", ps.Select(static x => $"{x.Type.GetFullTypeName()} {x.Name}"));
                 var argVals = string.Join(", ", ps.Select(static x => x.Name));
 
-                extensionText += $"public static Style<{info.ReturnType}> {info.ExtensionName}{info.GenericArg}(this Style<{info.ReturnType}> style, {argDefs}) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
-                                 $"   => style._addSetter({info.ControlTypeName}.{info.MemberName}Property, new {info.ValueTypeSource}({argVals}));";
+                extensionText ??= new StringBuilder(256);
+                extensionText.Append($"public static Style<{info.ReturnType}> {info.ExtensionName}{info.GenericArg}(this Style<{info.ReturnType}> style, {argDefs}) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}");
+                extensionText.Append($"   => style._addSetter({info.ControlTypeName}.{info.MemberName}Property, new {info.ValueTypeSource}({argVals}));");
             }
         }
 
-        return extensionText;
+        return extensionText?.ToString() ?? string.Empty;
     }
 }

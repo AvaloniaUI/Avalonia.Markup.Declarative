@@ -11,13 +11,10 @@ namespace Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators;
 
 internal sealed class ExternalGeneratorHost
 {
-    private readonly List<ExtensionGroupGenerator> _groupGenerators =
+    private readonly ExtensionGroupGenerator[] _groupGenerators =
     [
         new("Properties",
-            static t => t.GetMembers()
-                .OfType<IFieldSymbol>()
-                .Where(static x => x.IsAvaloniaPropertyField() && !x.HasUnsupportedExternalValueType())
-                .Select(static x => new PropertyExtensionInfo(x)),
+            static t => GetPropertyInfos(t),
 
             new ValueSetterGenerator(),
             new BindFromExpressionSetterGenerator(),
@@ -25,29 +22,20 @@ internal sealed class ExternalGeneratorHost
         ),
 
         new("Attached Properties",
-            static t => t.GetMembers()
-                .OfType<IFieldSymbol>()
-                .Where(static x => x.IsAttachedPropertyField())
-                .Select(static x => new AttachedPropertyExtensionInfo(x))
-                .Where(static x => !string.IsNullOrWhiteSpace(x.AttachedPropertyHostTypeName)),
+            static t => GetAttachedPropertyInfos(t),
 
             new AttachedPropertyValueSetterGenerator(),
             new AttachedPropertyBindFromExpressionSetterGenerator()
         ),
 
         new("Events",
-            static t => t.GetMembers()
-                .OfType<IEventSymbol>()
-                .Where(x => x.DeclaredAccessibility == Accessibility.Public && SymbolEqualityComparer.Default.Equals(x.ContainingType, t))
-                .Select(static x => new EventExtensionInfo(x)),
+            static t => GetEventInfos(t),
 
             new ActionToEventGenerator()
         ),
 
         new("Styles",
-            static t => !t.IsStyledElement() ? [] : GetStyledFields(t)
-                .Where(static x => !x.HasUnsupportedExternalValueType())
-                .Select(static x => new PropertyExtensionInfo(x)),
+            static t => GetStyleInfos(t),
 
             new ValueStyleSetterGenerator(),
             new BindFromExpressionStyleSetterGenerator(),
@@ -55,7 +43,33 @@ internal sealed class ExternalGeneratorHost
         )
     ];
 
-    private static IEnumerable<IFieldSymbol> GetStyledFields(INamedTypeSymbol type)
+    internal static IEnumerable<PropertyExtensionInfo> GetPropertyInfos(INamedTypeSymbol type) =>
+        type.GetMembers()
+            .OfType<IFieldSymbol>()
+            .Where(static x => x.IsAvaloniaPropertyField() && !x.HasUnsupportedExternalValueType())
+            .Select(static x => new PropertyExtensionInfo(x));
+
+    internal static IEnumerable<AttachedPropertyExtensionInfo> GetAttachedPropertyInfos(INamedTypeSymbol type) =>
+        type.GetMembers()
+            .OfType<IFieldSymbol>()
+            .Where(static x => x.IsAttachedPropertyField())
+            .Select(static x => new AttachedPropertyExtensionInfo(x))
+            .Where(static x => !string.IsNullOrWhiteSpace(x.AttachedPropertyHostTypeName));
+
+    internal static IEnumerable<EventExtensionInfo> GetEventInfos(INamedTypeSymbol type) =>
+        type.GetMembers()
+            .OfType<IEventSymbol>()
+            .Where(x => x.DeclaredAccessibility == Accessibility.Public && SymbolEqualityComparer.Default.Equals(x.ContainingType, type))
+            .Select(static x => new EventExtensionInfo(x));
+
+    internal static IEnumerable<PropertyExtensionInfo> GetStyleInfos(INamedTypeSymbol type) =>
+        !type.IsStyledElement()
+            ? []
+            : GetStyledFields(type)
+                .Where(static x => !x.HasUnsupportedExternalValueType())
+                .Select(static x => new PropertyExtensionInfo(x));
+
+    internal static IEnumerable<IFieldSymbol> GetStyledFields(INamedTypeSymbol type)
     {
         var fields = type.GetMembers().OfType<IFieldSymbol>();
 
@@ -73,20 +87,26 @@ internal sealed class ExternalGeneratorHost
 
     public string? GenerateExtensions(INamedTypeSymbol controlType)
     {
-        var extensionGroups = _groupGenerators
-            .Select(x =>
-            {
-                var extensions = x.Generate(controlType, out var generatedCount);
-                return (x.GroupName, extensions, generatedCount);
-            })
-            .ToImmutableArray();
+        List<(string GroupName, string Extensions)>? generatedGroups = null;
 
-        if (extensionGroups.All(static x => x.generatedCount == 0))
+        foreach (var groupGenerator in _groupGenerators)
+        {
+            var extensions = groupGenerator.Generate(controlType, out var generatedCount);
+            if (generatedCount == 0 || string.IsNullOrWhiteSpace(extensions))
+            {
+                continue;
+            }
+
+            generatedGroups ??= [];
+            generatedGroups.Add((groupGenerator.GroupName, extensions!));
+        }
+
+        if (generatedGroups is null)
         {
             return null;
         }
 
-        var sb = new StringBuilder();
+        var sb = new StringBuilder(4096);
         sb.AppendLine("#nullable enable");
         sb.AppendLine("using Avalonia;");
         sb.AppendLine("using Avalonia.Data;");
@@ -101,10 +121,10 @@ internal sealed class ExternalGeneratorHost
         sb.AppendLine($"public static partial class {SymbolUtilities.BuildExtensionClassName(controlType)}");
         sb.AppendLine("{");
 
-        foreach (var group in extensionGroups.Where(static x => x.extensions != null))
+        foreach (var group in generatedGroups)
         {
             sb.AppendLine($"//================= {group.GroupName} ======================//");
-            sb.Append(group.extensions);
+            sb.Append(group.Extensions);
         }
 
         sb.AppendLine("}");

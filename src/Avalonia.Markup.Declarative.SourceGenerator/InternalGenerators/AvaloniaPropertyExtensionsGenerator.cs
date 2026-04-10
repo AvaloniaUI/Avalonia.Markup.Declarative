@@ -26,19 +26,15 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
             .CreateSyntaxProvider(
                 predicate: static (s, _) => s is ClassDeclarationSyntax,
                 transform: static (ctx, _) => GetSemanticTarget(ctx))
-            .Where(static c => c is not null);
+            .Where(static c => c is not null)
+            .Select(static (c, _) => c!.Value)
+            .WithComparer(PropertyGenerationTargetComparer.Instance);
 
         context.RegisterSourceOutput(classDeclarations,
-            static (spc, data) =>
-            {
-                if (data is { } value)
-                {
-                    GenerateSource(spc, value.Syntax, value.Model);
-                }
-            });
+            static (spc, target) => GenerateSource(spc, target));
     }
 
-    private static (ClassDeclarationSyntax Syntax, SemanticModel Model)? GetSemanticTarget(GeneratorSyntaxContext context)
+    private static PropertyGenerationTarget? GetSemanticTarget(GeneratorSyntaxContext context)
     {
         var classDecl = (ClassDeclarationSyntax)context.Node;
         var symbol = context.SemanticModel.GetDeclaredSymbol(classDecl);
@@ -46,7 +42,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         // Check if this class or any of its base types implements IDeclarativeViewBase
         return symbol is INamedTypeSymbol typeSymbol &&
                ImplementsIDeclarativeViewBase(typeSymbol)
-            ? (classDecl, context.SemanticModel)
+            ? PropertyGenerationTarget.Create(classDecl, context.SemanticModel, typeSymbol)
             : null;
     }
 
@@ -68,17 +64,19 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         return false;
     }
 
-    private static void GenerateSource(SourceProductionContext context, ClassDeclarationSyntax type, SemanticModel semanticModel)
+    private static void GenerateSource(SourceProductionContext context, PropertyGenerationTarget target)
     {
+        var type = target.Syntax;
+        var semanticModel = target.SemanticModel;
         var root = type.SyntaxTree.GetRoot();
         var ns = root.DescendantNodes()
             .FirstOrDefault(x => x is BaseNamespaceDeclarationSyntax) as BaseNamespaceDeclarationSyntax;
 
         var typeNamespace = ns?.Name.ToString() ?? string.Empty;
-        var sb = new StringBuilder();
+        var sb = new StringBuilder(4096);
 
         sb.AppendLine("#nullable enable");
-        sb.AppendLine($"// Auto-generated code {DateTime.Now:g}");
+        sb.AppendLine("// Auto-generated code");
         sb.AppendLine("using System;");
         sb.AppendLine("using Avalonia.Data;");
         sb.AppendLine("using Avalonia.Data.Converters;");
@@ -95,18 +93,11 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         if (!string.IsNullOrWhiteSpace(typeNamespace))
             sb.AppendLine($"using {typeNamespace};");
 
-        // Get the type symbol to build proper qualified names
-        var typeSymbol = semanticModel.GetDeclaredSymbol(type) as INamedTypeSymbol;
-        
         // Build the extension class name - handle nested classes properly
-        var extensionClassName = BuildExtensionClassName(typeSymbol);
+        var extensionClassName = target.ExtensionClassName;
         
         // Fully qualified control type name including namespace, containing types and type parameters
-        var controlTypeQualified = typeSymbol?.ToDisplayString(
-            SymbolDisplayFormat.FullyQualifiedFormat
-                .WithGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance)
-                .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseSpecialTypes | SymbolDisplayMiscellaneousOptions.ExpandNullable)
-        ) ?? type.Identifier.ToString();
+        var controlTypeQualified = GetControlTypeQualifiedName(target.TypeSymbol);
 
         // Build method generic parameters for all containing type parameters (outermost -> innermost)
         string allTypeParamsForMethods = BuildAllTypeParameters(type);
@@ -116,7 +107,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         sb.AppendLine("{");
 
         var members = type.Members;
-        var processedFields = new List<string>();
+        var processedFields = new HashSet<string>(StringComparer.Ordinal);
 
         // PROCESS AVALONIA PROPERTIES
         foreach (var field in members.OfType<FieldDeclarationSyntax>())
@@ -154,8 +145,65 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
 
         if (processedFields.Count > 0)
         {
-            var fileName = RemoveIllegalFileNameCharacters(extensionClassName) + "Extensions.g.cs";
-            context.AddSource(fileName, SourceText.From(sb.ToString(), Encoding.UTF8));
+            context.AddSource(target.HintName, SourceText.From(sb.ToString(), Encoding.UTF8));
+        }
+    }
+
+    private readonly struct PropertyGenerationTarget
+    {
+        public PropertyGenerationTarget(
+            ClassDeclarationSyntax syntax,
+            SemanticModel semanticModel,
+            INamedTypeSymbol typeSymbol,
+            string extensionClassName,
+            string hintName,
+            string signature)
+        {
+            Syntax = syntax;
+            SemanticModel = semanticModel;
+            TypeSymbol = typeSymbol;
+            ExtensionClassName = extensionClassName;
+            HintName = hintName;
+            Signature = signature;
+        }
+
+        public ClassDeclarationSyntax Syntax { get; }
+
+        public SemanticModel SemanticModel { get; }
+
+        public INamedTypeSymbol TypeSymbol { get; }
+
+        public string ExtensionClassName { get; }
+
+        public string HintName { get; }
+
+        public string Signature { get; }
+
+        public static PropertyGenerationTarget Create(ClassDeclarationSyntax syntax, SemanticModel semanticModel, INamedTypeSymbol typeSymbol)
+        {
+            var extensionClassName = BuildExtensionClassName(typeSymbol);
+            var hintName = SymbolUtilities.RemoveIllegalFileNameCharacters(extensionClassName) + "Extensions.g.cs";
+            var signature = CreateSignature(syntax, semanticModel, typeSymbol);
+
+            return new PropertyGenerationTarget(syntax, semanticModel, typeSymbol, extensionClassName, hintName, signature);
+        }
+    }
+
+    private sealed class PropertyGenerationTargetComparer : IEqualityComparer<PropertyGenerationTarget>
+    {
+        internal static readonly PropertyGenerationTargetComparer Instance = new();
+
+        public bool Equals(PropertyGenerationTarget x, PropertyGenerationTarget y) =>
+            StringComparer.Ordinal.Equals(x.HintName, y.HintName) &&
+            StringComparer.Ordinal.Equals(x.Signature, y.Signature);
+
+        public int GetHashCode(PropertyGenerationTarget obj)
+        {
+            unchecked
+            {
+                return (StringComparer.Ordinal.GetHashCode(obj.HintName) * 397) ^
+                    StringComparer.Ordinal.GetHashCode(obj.Signature);
+            }
         }
     }
 
@@ -209,15 +257,146 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         return $"<{string.Join(", ", arr)}>";
     }
 
-    public static string RemoveIllegalFileNameCharacters(string fileName)
+    private static string GetControlTypeQualifiedName(INamedTypeSymbol typeSymbol) =>
+        typeSymbol.ToDisplayString(
+            SymbolDisplayFormat.FullyQualifiedFormat
+                .WithGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance)
+                .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseSpecialTypes | SymbolDisplayMiscellaneousOptions.ExpandNullable));
+
+    private static string CreateSignature(ClassDeclarationSyntax type, SemanticModel semanticModel, INamedTypeSymbol typeSymbol)
     {
-        if (string.IsNullOrEmpty(fileName))
-            throw new ArgumentException("File name cannot be null or empty", nameof(fileName));
+        var signature = new StringBuilder(1024);
+        AppendSignaturePart(signature, GetControlTypeQualifiedName(typeSymbol));
+        AppendSignaturePart(signature, typeSymbol.ContainingNamespace?.ToDisplayString());
 
-        // Remove invalid characters from the input
-        string sanitizedFileName = new([.. fileName.Where(c => !Path.GetInvalidFileNameChars().Contains(c))]);
+        if (type.SyntaxTree.GetRoot() is CompilationUnitSyntax compilationUnit)
+        {
+            foreach (var usingDirective in compilationUnit.Usings)
+            {
+                AppendSyntaxFingerprint(signature, usingDirective);
+            }
+        }
 
-        return sanitizedFileName;
+        AppendSyntaxFingerprint(signature, type.Modifiers);
+        AppendSyntaxFingerprint(signature, type.TypeParameterList);
+        foreach (var constraintClause in type.ConstraintClauses)
+        {
+            AppendSyntaxFingerprint(signature, constraintClause);
+        }
+
+        var members = type.Members;
+        var processedFields = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var field in members.OfType<FieldDeclarationSyntax>())
+        {
+            if (field.Declaration.Type is GenericNameSyntax { Identifier.ValueText: "DirectProperty" or "StyledProperty" or "AttachedProperty" }
+                && HasAvaloniaPropertyPublicSetter(field, members))
+            {
+                AppendFieldSignature(signature, field, semanticModel);
+                processedFields.Add(field.Declaration.Variables[0].Identifier.ValueText);
+            }
+        }
+
+        foreach (var property in members.OfType<PropertyDeclarationSyntax>())
+        {
+            var propertyName = property.Identifier.ValueText;
+            if (!processedFields.Contains(propertyName + "Property")
+                && IsPublic(property)
+                && HasPublicSetter(property)
+                && IsCommonInstanceProperty(property, members))
+            {
+                AppendPropertySignature(signature, property, semanticModel);
+                processedFields.Add(propertyName);
+            }
+        }
+
+        return signature.ToString();
+    }
+
+    private static void AppendFieldSignature(StringBuilder signature, FieldDeclarationSyntax field, SemanticModel semanticModel)
+    {
+        AppendSignaturePart(signature, "field");
+        AppendSyntaxFingerprint(signature, field.Modifiers);
+        AppendSyntaxFingerprint(signature, field.Declaration.Type);
+
+        foreach (var variable in field.Declaration.Variables)
+        {
+            AppendSignaturePart(signature, variable.Identifier.ValueText);
+
+            if (semanticModel.GetDeclaredSymbol(variable) is IFieldSymbol fieldSymbol)
+            {
+                AppendSignaturePart(signature, fieldSymbol.Type.GetFullTypeName());
+                AppendSignaturePart(signature, fieldSymbol.Type.GetLastGenericArgument().GetFullTypeName());
+            }
+        }
+    }
+
+    private static void AppendPropertySignature(StringBuilder signature, PropertyDeclarationSyntax property, SemanticModel semanticModel)
+    {
+        AppendSignaturePart(signature, "property");
+        AppendSyntaxFingerprint(signature, property.Modifiers);
+        AppendSyntaxFingerprint(signature, property.Type);
+        AppendSignaturePart(signature, property.Identifier.ValueText);
+
+        if (property.AccessorList is { } accessorList)
+        {
+            foreach (var accessor in accessorList.Accessors)
+            {
+                AppendSignaturePart(signature, accessor.Keyword.ValueText);
+                AppendSyntaxFingerprint(signature, accessor.Modifiers);
+            }
+        }
+
+        if (property.ExpressionBody is not null)
+        {
+            AppendSignaturePart(signature, "expr");
+        }
+
+        if (semanticModel.GetDeclaredSymbol(property) is IPropertySymbol propertySymbol)
+        {
+            AppendSignaturePart(signature, propertySymbol.Type.GetFullTypeName());
+        }
+    }
+
+    private static void AppendSyntaxFingerprint(StringBuilder signature, SyntaxNode? node)
+    {
+        if (node is null)
+        {
+            signature.Append('\u001E');
+            return;
+        }
+
+        signature.Append(node.RawKind);
+        signature.Append('\u001F');
+
+        foreach (var token in node.DescendantTokens(descendIntoTrivia: false))
+        {
+            signature.Append(token.Text);
+            signature.Append('\u001F');
+        }
+
+        signature.Append('\u001E');
+    }
+
+    private static void AppendSyntaxFingerprint(StringBuilder signature, SyntaxTokenList tokens)
+    {
+        foreach (var token in tokens)
+        {
+            signature.Append(token.Text);
+            signature.Append('\u001F');
+        }
+
+        signature.Append('\u001E');
+    }
+
+    private static void AppendSignaturePart(StringBuilder signature, string? value)
+    {
+        if (!string.IsNullOrEmpty(value))
+        {
+            signature.Append(value);
+        }
+
+        signature.Append('\u001F');
     }
 
     private static string? CleanIdentifier(string name, bool @namespace = false)
