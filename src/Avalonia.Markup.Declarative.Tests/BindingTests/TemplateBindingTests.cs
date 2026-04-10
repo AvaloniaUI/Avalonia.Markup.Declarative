@@ -11,10 +11,9 @@ public class TemplateBindingTests : AvaloniaTestBase
     public class TemplateTestView : ViewBase
     {
         public static IControlTemplate MyControlTemplate { get; } = new FuncControlTemplate<Button>(
-            (control, scope) => new FuncView<Button>(control, c =>
+            (control, scope) =>
                 new TextBox()
-                    .Text(c, x => (string?)x.Content, BindingMode.OneWay)
-            )
+                    .Text(control, x => (string?)x.Content, BindingMode.OneWay)
         );
 
         protected override object Build() =>

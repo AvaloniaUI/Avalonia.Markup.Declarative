@@ -5,7 +5,7 @@ public static class StaticResources
     public static class Templates
     {
         public static IControlTemplate MyControlTemplate { get; } = new FuncControlTemplate<MyCustomTemplatedControl>(
-            (control, scope) => new FuncView<MyCustomTemplatedControl>(control, c =>
+            (control, scope) =>
                 new Grid()
                     .Rows("Auto, Auto, *, Auto")
                     .Children(
@@ -16,7 +16,7 @@ public static class StaticResources
                                 new TextBlock().Text("Enter text:")
                                     .VerticalAlignment(VerticalAlignment.Center),
                                 new TextBox()
-                                    .Text(c, x => x.NewValue, BindingMode.TwoWay)
+                                    .Text(control, x => x.NewValue, BindingMode.TwoWay)
                                     .MinWidth(150)
                             ),
                         new StackPanel().Row(1)
@@ -28,7 +28,7 @@ public static class StaticResources
                                 new TextBlock().Text("Saved text:")
                                     .VerticalAlignment(VerticalAlignment.Center),
                                 new TextBox()
-                                    .Text(c, x => x.SavedValue)
+                                    .Text(control, x => x.SavedValue)
                                     .MinWidth(150)
                             ),
                         new StackPanel().Row(3)
@@ -37,19 +37,18 @@ public static class StaticResources
                             .Children(
                                 new Button().Content("Cancel")
                                     .Margin(5, 0)
-                                    .IsEnabled(c, x => x.CanSave)
-                                    .OnClick(_ => c.Cancel()),
+                                    .IsEnabled(control, x => x.CanSave)
+                                    .OnClick(_ => control.Cancel()),
                                 new Button().Content("Save")
                                     .Margin(5, 0)
-                                    .IsEnabled(c, x => x.CanSave)
-                                    .OnClick(_ => c.Save())
+                                    .IsEnabled(control, x => x.CanSave)
+                                    .OnClick(_ => control.Save())
                             )
-                    ))
+                    )
             );
 
         public static IControlTemplate MyAnotherControlTemplate { get; } =
             new FuncControlTemplate<MyCustomTemplatedControl>((control, scope) =>
-                new FuncView<MyCustomTemplatedControl>(control, c =>
                     new StackPanel()
                         .Children(
                             new StackPanel()
@@ -57,7 +56,7 @@ public static class StaticResources
                                 .VerticalAlignment(VerticalAlignment.Center)
                                 .Children(
                                     new TextBlock()
-                                        .Text(c, x => x.NewValue!)
+                                        .Text(control, x => x.NewValue!)
                                         .MinWidth(150)
                                 ),
                             new StackPanel()
@@ -67,10 +66,10 @@ public static class StaticResources
                                 .HorizontalAlignment(HorizontalAlignment.Left)
                                 .Children(
                                     new TextBlock()
-                                        .Text(c, x => x.SavedValue!)
+                                        .Text(control, x => x.SavedValue!)
                                         .MinWidth(150)
                                 )
-                        ))
+                        )
             );
     }
 }

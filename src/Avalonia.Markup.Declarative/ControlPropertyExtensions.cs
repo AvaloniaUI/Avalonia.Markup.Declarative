@@ -67,7 +67,7 @@ public static class ControlPropertyExtensions
     IValueConverter? converter = null)
     where TControl : AvaloniaObject
     {
-        // Не передаем source! Биндинг сам подхватит DataContext во время рендера.
+        // don't specify source for the binding, so it will be determined automatically at runtime based on the DataContext of the control
         var binding = CompiledBinding.Create(getter,
             mode: mode ?? BindingMode.Default,
             converter: converter);
