@@ -1,6 +1,6 @@
 using Avalonia.Markup.Declarative.SourceGenerator.ExtensionInfos;
 
-namespace Avalonia.Markup.Declarative.SourceGenerator.Generators.AttachedPropertySetterGenerator;
+namespace Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators.AttachedPropertySetterGenerator;
 
 internal sealed class AttachedPropertyValueSetterGenerator : ExtensionGeneratorBase<AttachedPropertyExtensionInfo>
 {

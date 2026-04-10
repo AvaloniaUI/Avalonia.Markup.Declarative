@@ -2,7 +2,7 @@ using System.Text;
 using Avalonia.Markup.Declarative.SourceGenerator.ExtensionInfos;
 using Microsoft.CodeAnalysis;
 
-namespace Avalonia.Markup.Declarative.SourceGenerator.Generators;
+namespace Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators;
 
 internal sealed class ExtensionGroupGenerator(
     string groupName,

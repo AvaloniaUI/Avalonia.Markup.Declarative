@@ -53,9 +53,7 @@ public static class StylePropertyExtensions
     }
 
     /// <summary>
-    /// Adds a style setter using a strongly-typed expression.
-    /// The expression is converted to a property path for DataContext-relative binding
-    /// (the source parameter is used only for generic type inference).
+    /// Adds a style setter using a compiled binding with a specified source.
     /// </summary>
     public static Style<TElement> _addSetterCompiledBinding<TElement, TViewModel, TValue>(
         this Style<TElement> style,
@@ -66,34 +64,69 @@ public static class StylePropertyExtensions
         IValueConverter? converter = null)
         where TElement : StyledElement
     {
-        var propertyPath = ExpressionToPropertyPath(getter);
-        var binding = new Binding(propertyPath)
-        {
-            Mode = bindingMode ?? BindingMode.Default,
-            Converter = converter
-        };
-
+        var binding = CompiledBinding.Create(getter, source: source, mode: bindingMode ?? BindingMode.Default, converter: converter);
         style.Setters.Add(new Setter(avaloniaProperty, binding));
         return style;
     }
 
-    private static string ExpressionToPropertyPath<TIn, TOut>(Expression<Func<TIn, TOut>> expression)
+    /// <summary>
+    /// Adds a style setter using a compiled binding relative to DataContext.
+    /// </summary>
+    public static Style<TElement> _addSetterCompiledBinding<TElement, TViewModel, TValue>(
+        this Style<TElement> style,
+        AvaloniaProperty avaloniaProperty,
+        Expression<Func<TViewModel, TValue>> getter,
+        BindingMode? bindingMode = null,
+        IValueConverter? converter = null)
+        where TElement : StyledElement
     {
-        var members = new List<string>();
-        var expr = expression.Body;
-
-        // Unwrap Convert/ConvertChecked (e.g. boxing casts)
-        if (expr is UnaryExpression { NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked } unary)
-            expr = unary.Operand;
-
-        while (expr is MemberExpression memberExpr)
-        {
-            members.Insert(0, memberExpr.Member.Name);
-            expr = memberExpr.Expression;
-        }
-
-        return string.Join(".", members);
+        var binding = CompiledBinding.Create(getter, mode: bindingMode ?? BindingMode.Default, converter: converter);
+        style.Setters.Add(new Setter(avaloniaProperty, binding));
+        return style;
     }
+
+    /// <summary>
+    /// Adds a style setter using a strongly-typed expression.
+    /// The expression is converted to a property path for DataContext-relative binding
+    /// (the source parameter is used only for generic type inference).
+    /// </summary>
+    //public static Style<TElement> _addSetterCompiledBinding<TElement, TViewModel, TValue>(
+    //    this Style<TElement> style,
+    //    AvaloniaProperty avaloniaProperty,
+    //    TViewModel source,
+    //    Expression<Func<TViewModel, TValue>> getter,
+    //    BindingMode? bindingMode = null,
+    //    IValueConverter? converter = null)
+    //    where TElement : StyledElement
+    //{
+    //    var propertyPath = ExpressionToPropertyPath(getter);
+    //    var binding = new Binding(propertyPath)
+    //    {
+    //        Mode = bindingMode ?? BindingMode.Default,
+    //        Converter = converter
+    //    };
+
+    //    style.Setters.Add(new Setter(avaloniaProperty, binding));
+    //    return style;
+    //}
+
+    //private static string ExpressionToPropertyPath<TIn, TOut>(Expression<Func<TIn, TOut>> expression)
+    //{
+    //    var members = new List<string>();
+    //    var expr = expression.Body;
+
+    //    // Unwrap Convert/ConvertChecked (e.g. boxing casts)
+    //    if (expr is UnaryExpression { NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked } unary)
+    //        expr = unary.Operand;
+
+    //    while (expr is MemberExpression memberExpr)
+    //    {
+    //        members.Insert(0, memberExpr.Member.Name);
+    //        expr = memberExpr.Expression;
+    //    }
+
+    //    return string.Join(".", members);
+    //}
 
     public static Style<TElement> Col<TElement>(this Style<TElement> style, int value)
         where TElement : Control

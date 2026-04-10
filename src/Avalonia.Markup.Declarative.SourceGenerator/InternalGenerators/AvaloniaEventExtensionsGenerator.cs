@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using static Avalonia.Markup.Declarative.SourceGenerator.MarkupTypeHelpers;
 
-namespace Avalonia.Markup.Declarative.SourceGenerator;
+namespace Avalonia.Markup.Declarative.SourceGenerator.InternalGenerators;
 
 [Generator]
 public class AvaloniaEventExtensionsGenerator : IIncrementalGenerator

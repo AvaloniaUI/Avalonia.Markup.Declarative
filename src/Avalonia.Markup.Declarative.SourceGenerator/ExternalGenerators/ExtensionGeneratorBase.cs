@@ -1,6 +1,6 @@
 using Avalonia.Markup.Declarative.SourceGenerator.ExtensionInfos;
 
-namespace Avalonia.Markup.Declarative.SourceGenerator.Generators;
+namespace Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators;
 
 internal abstract class ExtensionGeneratorBase<TMemberExtensionInfo> : ExtensionGeneratorBase
 {

@@ -2,7 +2,7 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Avalonia.Markup.Declarative.SourceGenerator;
+namespace Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators;
 
 [Generator]
 public sealed class ExternalAssemblyExtensionsGenerator : IIncrementalGenerator

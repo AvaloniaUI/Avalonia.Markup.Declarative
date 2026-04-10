@@ -1,14 +1,13 @@
 using System.Collections.Immutable;
 using System.Text;
 using Avalonia.Markup.Declarative.SourceGenerator.ExtensionInfos;
-using Avalonia.Markup.Declarative.SourceGenerator.Generators;
-using Avalonia.Markup.Declarative.SourceGenerator.Generators.AttachedPropertySetterGenerator;
-using Avalonia.Markup.Declarative.SourceGenerator.Generators.EventGenerators;
-using Avalonia.Markup.Declarative.SourceGenerator.Generators.SetterGenerators;
-using Avalonia.Markup.Declarative.SourceGenerator.Generators.StyleSetterGenerators;
+using Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators.AttachedPropertySetterGenerator;
+using Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators.EventGenerators;
+using Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators.SetterGenerators;
+using Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators.StyleSetterGenerators;
 using Microsoft.CodeAnalysis;
 
-namespace Avalonia.Markup.Declarative.SourceGenerator;
+namespace Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators;
 
 internal sealed class ExternalGeneratorHost
 {

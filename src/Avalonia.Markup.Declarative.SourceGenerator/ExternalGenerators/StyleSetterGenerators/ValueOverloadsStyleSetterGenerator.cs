@@ -1,9 +1,9 @@
 using Avalonia.Markup.Declarative.SourceGenerator.ExtensionInfos;
 using Microsoft.CodeAnalysis;
 
-namespace Avalonia.Markup.Declarative.SourceGenerator.Generators.SetterGenerators;
+namespace Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators.StyleSetterGenerators;
 
-internal sealed class ValueOverloadsSetterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
+internal sealed class ValueOverloadsStyleSetterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
 {
     protected override string GetExtension(PropertyExtensionInfo info)
     {
@@ -23,8 +23,8 @@ internal sealed class ValueOverloadsSetterGenerator : ExtensionGeneratorBase<Pro
                 var argDefs = string.Join(", ", ps.Select(static x => $"{x.Type.GetFullTypeName()} {x.Name}"));
                 var argVals = string.Join(", ", ps.Select(static x => x.Name));
 
-                extensionText += $"{SymbolUtilities.NewLine}public static {info.ReturnType} {info.ExtensionName}{info.GenericArg}(this {info.ReturnType} control, {argDefs}) {info.GenericConstraint} {SymbolUtilities.NewLine}" +
-                                 $"   => control._set(() => control.{info.MemberName} = new {info.ValueTypeSource}({argVals}));";
+                extensionText += $"public static Style<{info.ReturnType}> {info.ExtensionName}{info.GenericArg}(this Style<{info.ReturnType}> style, {argDefs}) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
+                                 $"   => style._addSetter({info.ControlTypeName}.{info.MemberName}Property, new {info.ValueTypeSource}({argVals}));";
             }
         }
 

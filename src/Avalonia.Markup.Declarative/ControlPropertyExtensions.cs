@@ -47,6 +47,36 @@ public static class ControlPropertyExtensions
     }
 
     /// <summary>
+    /// Creates a compiled binding from an expression and applies it to an Avalonia property. The source of the binding will be determined automatically at runtime based on the DataContext of the control.
+    /// </summary>
+    /// <typeparam name="TControl"></typeparam>
+    /// <typeparam name="TViewModel"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
+    /// <param name="control"></param>
+    /// <param name="avaloniaProperty"></param>
+    /// <param name="getter"></param>
+    /// <param name="mode"></param>
+    /// <param name="converter"></param>
+    /// <returns></returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TControl _setCompiledBinding<TControl, TViewModel, TValue>(
+    this TControl control,
+    AvaloniaProperty avaloniaProperty,
+    Expression<Func<TViewModel, TValue>> getter,
+    BindingMode? mode = null,
+    IValueConverter? converter = null)
+    where TControl : AvaloniaObject
+    {
+        // Не передаем source! Биндинг сам подхватит DataContext во время рендера.
+        var binding = CompiledBinding.Create(getter,
+            mode: mode ?? BindingMode.Default,
+            converter: converter);
+
+        control.Bind(avaloniaProperty, binding);
+        return control;
+    }
+
+    /// <summary>
     /// Binds one Avalonia property to another on a given source object.
     /// </summary>
     public static TControl _setPropertyBinding<TControl>(this TControl control,

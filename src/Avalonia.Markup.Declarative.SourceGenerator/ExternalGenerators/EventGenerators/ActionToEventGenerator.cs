@@ -1,6 +1,6 @@
 using Avalonia.Markup.Declarative.SourceGenerator.ExtensionInfos;
 
-namespace Avalonia.Markup.Declarative.SourceGenerator.Generators.EventGenerators;
+namespace Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators.EventGenerators;
 
 internal sealed class ActionToEventGenerator : ExtensionGeneratorBase<EventExtensionInfo>
 {

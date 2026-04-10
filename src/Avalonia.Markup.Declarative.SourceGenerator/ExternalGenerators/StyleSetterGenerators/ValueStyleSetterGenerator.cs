@@ -1,6 +1,6 @@
 using Avalonia.Markup.Declarative.SourceGenerator.ExtensionInfos;
 
-namespace Avalonia.Markup.Declarative.SourceGenerator.Generators.StyleSetterGenerators;
+namespace Avalonia.Markup.Declarative.SourceGenerator.ExternalGenerators.StyleSetterGenerators;
 
 internal sealed class ValueStyleSetterGenerator : ExtensionGeneratorBase<PropertyExtensionInfo>
 {
