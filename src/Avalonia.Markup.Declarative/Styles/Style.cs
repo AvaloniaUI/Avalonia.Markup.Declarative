@@ -1,5 +1,4 @@
-﻿using Avalonia.Markup.Declarative.Helpers;
-using Avalonia.Styling;
+﻿using Avalonia.Styling;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -22,18 +21,29 @@ public class Style<TControl> : Style, IRelativeStyle
     }
 
     /// <summary>
-    /// Creates Style with added .OfType<typeparam name="TControl"></typeparam> selector and use name="selectorFunc" to generate selector
+    /// Creates Style with applied selector. 
+    /// If user starts selector with a type (for example, OfType<StackPanel>), then it will be used as is.
     /// </summary>
-    /// <param name="selectorFunc">Selector to control</param>
-    /// <param name="expression">expression how selector was called</param>
-    /// <param name="callerFile">file where style was constructed</param>
-    public Style(Func<Selector, Selector> selectorFunc, [CallerArgumentExpression(nameof(selectorFunc))] string? expression = null, [CallerFilePath] string? callerFile = null)
+    public Style(
+            Func<Selector, Selector> selectorFunc,
+            [CallerArgumentExpression(nameof(selectorFunc))] string? expression = null,
+            [CallerFilePath] string? callerFile = null)
     {
-        SelectorFunc = selectorFunc;
+        // determine if user provided explicit root type in selector
+        var selectorString = selectorFunc(null!).ToString();
+        
+        // if selector starts with a letter, it means that user provided explicit root type (for example, OfType<StackPanel>).
+        bool hasExplicitRootType = !string.IsNullOrEmpty(selectorString) && char.IsLetter(selectorString[0]);
 
-        //add TypeOf<> Selector as a beginning of the chain if it's not specified in selectorFunc body argument already
-        if (selectorFunc(null!).GetTypeNameFromSelector() == null) 
+        if (hasExplicitRootType)
+        {
+            SelectorFunc = selectorFunc;
+        }
+        else
+        {
+            // If user didn't provide explicit root type, we automatically add OfType<TControl>() to the beginning of the selector.
             SelectorFunc = s => selectorFunc(s.OfType<TControl>());
+        }
     }
 
     public void UpdateSelector(Func<Selector, Selector>? baseSelectorFunc)

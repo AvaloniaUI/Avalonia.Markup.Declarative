@@ -16,7 +16,7 @@ public static class StaticResources
                                 new TextBlock().Text("Enter text:")
                                     .VerticalAlignment(VerticalAlignment.Center),
                                 new TextBox()
-                                    .Text(MyCustomTemplatedControl.NewValueProperty, c, BindingMode.TwoWay)
+                                    .Text(c, x => x.NewValue, BindingMode.TwoWay)
                                     .MinWidth(150)
                             ),
                         new StackPanel().Row(1)
@@ -28,7 +28,7 @@ public static class StaticResources
                                 new TextBlock().Text("Saved text:")
                                     .VerticalAlignment(VerticalAlignment.Center),
                                 new TextBox()
-                                    .Text(MyCustomTemplatedControl.SavedValueProperty, c)
+                                    .Text(c, x => x.SavedValue)
                                     .MinWidth(150)
                             ),
                         new StackPanel().Row(3)
@@ -37,11 +37,11 @@ public static class StaticResources
                             .Children(
                                 new Button().Content("Cancel")
                                     .Margin(5, 0)
-                                    .IsEnabled(MyCustomTemplatedControl.CanSaveProperty, c)
+                                    .IsEnabled(c, x => x.CanSave)
                                     .OnClick(_ => c.Cancel()),
                                 new Button().Content("Save")
                                     .Margin(5, 0)
-                                    .IsEnabled(MyCustomTemplatedControl.CanSaveProperty, c)
+                                    .IsEnabled(c, x => x.CanSave)
                                     .OnClick(_ => c.Save())
                             )
                     ))

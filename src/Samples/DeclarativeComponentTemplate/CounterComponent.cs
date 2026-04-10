@@ -34,7 +34,7 @@ public partial class CounterComponent(SampleDataService dataService) : ViewBase<
                     .Children(
                         new TextBlock()
                             .Name("title")
-                            .Margin(new Thickness(left: 16, top: 16, right: 0, bottom: 0))
+                            .Margin(left: 16, top: 16, right: 0, bottom: 0)
                             .Text("Sidebar")
                     ),
 

@@ -17,6 +17,13 @@
 		<PackageTags>avalonia;avaloniaui;mvvm;mvp;csharpmarjup;android;ios;mac;forms;wpf;net;netstandard;net461;uwp;xamarin</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <AvaloniaXaml Remove="ControlExtensions.Generated\**" />
+	  <Compile Remove="ControlExtensions.Generated\**" />
+	  <EmbeddedResource Remove="ControlExtensions.Generated\**" />
+	  <None Remove="ControlExtensions.Generated\**" />
+	</ItemGroup>
 	
 	<ItemGroup>
 		<InternalsVisibleTo Include="Avalonia.Markup.Declarative.Tests" />
@@ -51,9 +58,5 @@
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="ControlExtensions.Generated\" />
 	</ItemGroup>
 </Project>

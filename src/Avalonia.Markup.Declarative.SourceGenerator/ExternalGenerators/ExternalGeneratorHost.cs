@@ -21,7 +21,6 @@ internal sealed class ExternalGeneratorHost
 
             new ValueSetterGenerator(),
             new BindFromExpressionSetterGenerator(),
-            new AvaloniaPropertyBindSetterGenerator(),
             new ValueOverloadsSetterGenerator()
         ),
 

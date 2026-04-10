@@ -76,29 +76,6 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    /// <summary>
-    /// Binds one Avalonia property to another on a given source object.
-    /// </summary>
-    public static TControl _setPropertyBinding<TControl>(this TControl control,
-        AvaloniaProperty avaloniaProperty,
-        AvaloniaProperty propertyToBindTo,
-        AvaloniaObject source,
-        BindingMode? bindingMode = null,
-        IValueConverter? converter = null)
-        where TControl : AvaloniaObject
-    {
-        var binding = new Binding()
-        {
-            Source = source,
-            Path = propertyToBindTo.Name,
-            Mode = bindingMode ?? BindingMode.Default,
-            Converter = converter
-        };
-
-        control[!avaloniaProperty] = binding;
-        return control;
-    }
-
     public static TElement DataContext<TElement, TDataContext>(
         this TElement control,
         TDataContext value,
@@ -343,20 +320,6 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    public static TElement BindClass<TElement>(this TElement control, bool value, string className,
-        object? bindingSource = null, [CallerLineNumber] int line = 0, [CallerMemberName] string? caller = null,
-        [CallerArgumentExpression(nameof(value))] string? ps = null)
-        where TElement : Control
-    {
-        var binding = new ReflectionBinding(ps ?? string.Empty);
-
-        if (bindingSource != null)
-            binding.Source = bindingSource;
-
-        control.BindClass(className, binding, null!);
-        return control;
-    }
-
     public static StackTrace GetDeeperStackTrace(int depth) =>
         depth > 0 ? GetDeeperStackTrace(depth - 1) : new StackTrace(0, true);
 
@@ -366,38 +329,6 @@ public static class ControlPropertyExtensions
     {
         foreach (var template in dataTemplate)
             control.DataTemplates.Add(template);
-        return control;
-    }
-
-    public static TElement SetProp<TElement, TValue>(this TElement control, Avalonia.AvaloniaProperty property,
-        TValue value)
-        where TElement : Control
-    {
-        if (value is ReflectionBinding binding)
-        {
-            control[!property] = binding;
-        }
-        else
-        {
-            control[property] = value;
-        }
-
-        return control;
-    }
-
-    public static TElement ToolTip<TElement, TValue>(this TElement control, TValue value)
-        where TElement : Control
-    {
-        var prop = Avalonia.Controls.ToolTip.TipProperty;
-        if (value is ReflectionBinding binding)
-        {
-            control[!prop] = binding;
-        }
-        else
-        {
-            control[prop] = value;
-        }
-
         return control;
     }
 

@@ -49,7 +49,7 @@ public class SliderWithLabel : ViewBase<SliderWithLabelViewModel>
     public string GetRealLabelValue() => _labelTextBlock.Text ?? "Not set";
 }
 
-public class ExternalPropertySetTest(ITestOutputHelper testOutputHelper) : AvaloniaTestBase
+public class ExternalPropertySetTest() : AvaloniaTestBase
 {
     [Fact]
     public void SliderWithLabel_Label_Binding_Applied()

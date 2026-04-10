@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Threading;
@@ -14,7 +13,7 @@ public class TemplateBindingTests : AvaloniaTestBase
         public static IControlTemplate MyControlTemplate { get; } = new FuncControlTemplate<Button>(
             (control, scope) => new FuncView<Button>(control, c =>
                 new TextBox()
-                    .Text(ContentControl.ContentProperty, c, BindingMode.OneWay)
+                    .Text(c, x => (string?)x.Content, BindingMode.OneWay)
             )
         );
 
