@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection;
-using System.Threading;
+using System.Runtime.CompilerServices;
 
 [assembly: System.Reflection.Metadata.MetadataUpdateHandler(typeof(Avalonia.Markup.Declarative.HotReloadManager))]
 
@@ -12,7 +9,7 @@ namespace Avalonia.Markup.Declarative;
 
 public static class HotReloadManager
 {
-    private static readonly ConcurrentDictionary<Type, HashSet<IReloadable>> Instances = new();
+    private static readonly ConcurrentDictionary<Type, ConditionalWeakTable<IReloadable, object?>> Instances = new();
 
     public static event Action<Type[]?>? HotReloaded;
 
@@ -34,12 +31,6 @@ public static class HotReloadManager
 
     public static void UpdateApplication(Type[]? types)
     {
-        if (IsRiderSupportEnabled)
-        {
-            Console.WriteLine("Native hot reload is working disabling Rider Workaround");
-            DeactivateRiderHotReload();
-        }
-
         if (IsEnabled)
             ReloadInstances(types);
 
@@ -54,11 +45,13 @@ public static class HotReloadManager
 
         foreach (var type in types)
         {
-            if (!Instances.TryGetValue(type, out var instances))
+            if (!Instances.TryGetValue(type, out var table))
                 continue;
 
-            foreach (var instance in instances)
-                instance.Reload();
+            foreach (var instance in table)
+            {
+                instance.Key.Reload();
+            }
         }
     }
 
@@ -75,24 +68,11 @@ public static class HotReloadManager
     internal static void RegisterInstance(IReloadable instance)
     {
         if (!IsEnabled) return;
-
         var type = instance.GetType();
+        if (type.IsGenericType) type = type.GetGenericTypeDefinition();
 
-        if (type.IsGenericType)
-        {
-            type = type.GetGenericTypeDefinition();
-        }
-
-        if (!Instances.TryGetValue(type, out var instances))
-        {
-            instances = new HashSet<IReloadable>();
-            Instances[type] = instances;
-        }
-
-        instances.Add(instance);
-
-        if (IsRiderSupportEnabled)
-            RegisterMethodWatchers(type);
+        var table = Instances.GetOrAdd(type, _ => []);
+        table.AddOrUpdate(instance, null);
     }
 
     internal static void UnregisterInstance(IReloadable instance)
@@ -106,88 +86,8 @@ public static class HotReloadManager
             type = type.GetGenericTypeDefinition();
         }
 
-        if (!Instances.TryGetValue(type, out var instances)) return;
+        if (!Instances.TryGetValue(type, out var table)) return;
 
-        if (instances.Contains(instance))
-            instances.Remove(instance);
+        table.Remove(instance);
     }
-
-
-    #region Rider hotreload workaround support - not necessary in latest verisons of rider
-
-    private static readonly ConcurrentDictionary<Type, WatchMethodInfo[]> WatchMethods = new();
-    private static int _interval = 2000;
-    private static Timer? _watchMethodsTimer;
-    public static bool IsRiderSupportEnabled { get; private set; }
-
-    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-    private class WatchMethodInfo(MethodInfo method, int token)
-    {
-        public MethodInfo Method { get; } = method;
-        public int Token { get; set; } = token;
-    }
-
-    [RequiresUnreferencedCode("You should not use hot reload manager in AoT publish mode")]
-    public static void RegisterMethodWatchers(Type type)
-    {
-        var methods = type
-            .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
-            .Select(m => new WatchMethodInfo(m, m.GetMethodBody()?.LocalSignatureMetadataToken ?? -1))
-            .Where(x => x.Token > -1)
-            .ToArray();
-
-        WatchMethods.TryAdd(type, methods);
-    }
-    public static void UnregisterMethodWatchers(Type type)
-    {
-        WatchMethods.TryRemove(type, out _);
-    }
-
-    public static void CheckMethodWereChanged()
-    {
-        HashSet<Type> changedInstances = [];
-
-        foreach (var (type, methods) in WatchMethods)
-            foreach (var watchMethodInfo in methods)
-            {
-                var currentToken = watchMethodInfo.Method.GetMethodBody()?.LocalSignatureMetadataToken ?? -1;
-                if (currentToken != watchMethodInfo.Token)
-                {
-                    watchMethodInfo.Token = currentToken;
-                    changedInstances.Add(type);
-                }
-            }
-
-        if(changedInstances.Count > 0)
-            ReloadInstances(changedInstances.ToArray());
-    }
-
-
-    public static void ActivateRiderHotReload()
-    {
-        IsRiderSupportEnabled = true;
-        StartWatchMethods();
-    }
-
-    public static void DeactivateRiderHotReload()
-    {
-        IsRiderSupportEnabled = false;
-        StopWatchMethods();
-    }
-
-    private static void StartWatchMethods()
-    {
-        _watchMethodsTimer = new Timer(_ => CheckMethodWereChanged(), null, _interval, _interval);
-    }
-
-    private static void StopWatchMethods()
-    {
-        _watchMethodsTimer?.Change(-1, -1);
-    }
-
-    public static void SetRiderRiderCheckInterval(int milliseconds) =>
-        _interval = milliseconds;
-
-
-    #endregion
 }

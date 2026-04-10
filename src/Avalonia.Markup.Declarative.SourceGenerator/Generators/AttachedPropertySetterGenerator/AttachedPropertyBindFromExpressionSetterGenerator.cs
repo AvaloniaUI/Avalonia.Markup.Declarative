@@ -11,7 +11,7 @@ internal sealed class AttachedPropertyBindFromExpressionSetterGenerator : Extens
             return null;
         }
 
-        return $"public static T {info.ExtensionName}<T>(this T control, Func<{info.ValueTypeSource}> func, Action<{info.ValueTypeSource}>? onChanged = null, [CallerArgumentExpression(nameof(func))] string? expression = null) where T : {info.AttachedPropertyHostTypeName} {SymbolUtilities.NewLine}" +
-               $"   => control._set({info.ControlTypeName}.{info.FieldSymbol.Name}!, func, onChanged, expression);";
+        return $"public static T {info.ExtensionName}<T, TViewModel>(this T control, TViewModel source, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null) where T : {info.AttachedPropertyHostTypeName} {SymbolUtilities.NewLine}" +
+               $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, source, getter, mode, converter);";
     }
 }

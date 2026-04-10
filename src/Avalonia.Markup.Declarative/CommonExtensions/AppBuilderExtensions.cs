@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia.Controls;
+using System;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -38,10 +39,27 @@ public static class AppBuilderExtensions
         return appBuilder;
     }
 
-    public static AppBuilder UseComponentControlFactory(this AppBuilder appBuilder, IComponentControlFactory componentControlFactory)
+
+    /// <summary>
+    /// Configures the application to use a custom factory for creating component controls.
+    /// </summary>
+    /// <remarks>Use this method to provide a custom control creation strategy for components. This is useful
+    /// when integrating with dependency injection or customizing control instantiation.</remarks>
+    /// <param name="appBuilder">The application builder to configure.</param>
+    /// <param name="factory">A delegate that creates a control instance for the specified component type. Cannot be null.</param>
+    /// <returns>The configured application builder instance.</returns>
+    public static AppBuilder UseComponentControlFactory(this AppBuilder appBuilder, Func<Type, Control> factory)
     {
-        _componentControlFactory = componentControlFactory;
+        _componentControlFactory = new DelegateControlFactory(factory);
         return appBuilder;
+    }
+
+    private class DelegateControlFactory(Func<Type, Control> factory) : IComponentControlFactory
+    {
+        public TControl CreateControlInstance<TControl>() where TControl : Control
+        {
+            return (TControl)factory(typeof(TControl));
+        }
     }
 
     /// <summary>

@@ -4,7 +4,7 @@ Date: 2025-09-02
 Branch: master (after parent-notification changes)
 
 ## Summary
-Expression bindings are implemented via lightweight computed states that capture lambdas and push values into controls. They support MVVM (INotifyPropertyChanged) and MVU (explicit StateHasChanged) and now propagate UI-originated changes upward to parent components. Recent changes fixed changed-handler semantics (no handler call on VM→UI path) and added parent notification without reflection. Disposal and scoped recompute are still pending.
+Expression bindings are implemented via lightweight computed states that capture lambdas and push values into controls. They support MVVM (`INotifyPropertyChanged`) and declarative components with component-owned reactive state, and now propagate UI-originated changes upward to parent components. Recent changes fixed changed-handler semantics (no handler call on VM→UI path) and added parent notification without reflection. Disposal and scoped recompute are still pending.
 
 ## How it works (today)
 - Authoring
@@ -27,7 +27,7 @@ Expression bindings are implemented via lightweight computed states that capture
 
 - Recompute triggers
   - MVVM: ViewBase subscribes to DataContext (INotifyPropertyChanged) and calls RecomputeAllBindings() on PropertyChanged.
-  - MVU: ComponentBase.StateHasChanged() iterates ViewComputedStates and calls OnPropertyChanged() to push current values.
+  - Declarative component state: component-owned state objects rely on standard `PropertyChanged` notifications instead of explicit `StateHasChanged()` calls.
   - ComponentBase subscribes to INotifyPropertyChanged members (fields and properties) of the component itself via reflection (SubscribeToNotifyPropertyChangedMembers) and triggers StateHasChanged on their changes.
   - Dependent views: parent/child components are chained via DependentViews and UpdateState.
 
@@ -45,7 +45,7 @@ Expression bindings are implemented via lightweight computed states that capture
   - ExpressionBindingTests verify that Text is updated on StateHasChanged (without PropertyChanged) and on PropertyChanged.
 
 ## Strengths
-- Simple functional API; minimal ceremony for MVVM/MVU.
+- Simple functional API; minimal ceremony for MVVM and declarative components.
 - Works with templates and class bindings.
 - Correct two-way semantics: handler is only invoked on UI→VM, preventing feedback.
 - Parent notification on UI changes without reflection-based path walking.

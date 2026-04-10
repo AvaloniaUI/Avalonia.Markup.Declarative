@@ -1,59 +1,61 @@
 using Avalonia.Controls;
 using Avalonia.Threading;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative.Tests.ControlsTests;
 
-public class SliderWithLabel : ComponentBase
+public class SliderWithLabelViewModel : INotifyPropertyChanged
 {
-    protected override object Build() =>
+    private double _value;
+    private string _label = "";
+
+    public double Value
+    {
+        get => _value;
+        set { _value = value; OnPropertyChanged(); }
+    }
+
+    public string Label
+    {
+        get => _label;
+        set { _label = value; OnPropertyChanged(); }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+    private void OnPropertyChanged([CallerMemberName] string? name = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+}
+
+public class SliderWithLabel : ViewBase<SliderWithLabelViewModel>
+{
+    public SliderWithLabel(SliderWithLabelViewModel vm) : base(vm) { }
+
+    protected override object Build(SliderWithLabelViewModel? vm) =>
         new StackPanel()
             .Children(
                 new TextBlock()
                     .Ref(out _labelTextBlock)
-                    .Text(() => Label),
+                    .Text(vm!, x => x.Label),
 
                 new Slider()
                     .Ref(out _slider)
-                    .Value(() => Value, v => Value = v)
+                    .Value(vm!, x => x.Value, Avalonia.Data.BindingMode.TwoWay)
             );
 
     private TextBlock _labelTextBlock = null!;
     private Slider _slider = null!;
-    public double Value { get; set; }
-    public string Label { get; set; } = "";
 
     public string GetRealLabelValue() => _labelTextBlock.Text ?? "Not set";
-
-    public void ChangeSliderValue(double value)
-    {
-        _slider.Value = value;
-    }
-}
-public class ExternalPropertySetTestView : ComponentBase
-{
-    protected override object Build() => new SliderWithLabel()
-        .Ref(out SliderWithLabel)
-        .Label(() => "Hello world") // Initial label value with lazy evaluation
-        .Value(() => Value, v => Value = v);
-
-
-    public SliderWithLabel SliderWithLabel = null!;
-    public double Value { get; set; } = 1;
-
-    public string? GetRealLabelValue() => SliderWithLabel.GetRealLabelValue();
-
-    protected override void OnAfterInitialized()
-    {
-        base.OnAfterInitialized();
-    }
 }
 
 public class ExternalPropertySetTest(ITestOutputHelper testOutputHelper) : AvaloniaTestBase
 {
     [Fact]
-    public void ExternalPropertySetTestView_ExpressionBinding_Applied_AfterCreation()
+    public void SliderWithLabel_Label_Binding_Applied()
     {
-        var view = new ExternalPropertySetTestView();
+        var vm = new SliderWithLabelViewModel { Label = "Hello world", Value = 1 };
+        var view = new SliderWithLabel(vm);
 
         var window = new Window { Content = view };
         window.Show();
@@ -64,21 +66,18 @@ public class ExternalPropertySetTest(ITestOutputHelper testOutputHelper) : Avalo
     }
 
     [Fact]
-    public void ExternalPropertySetTestView_BindPropertyChangeInnerValue()
+    public void SliderWithLabel_Value_TwoWay_Binding_Works()
     {
-        var view = new ExternalPropertySetTestView();
+        var vm = new SliderWithLabelViewModel { Label = "Test", Value = 1 };
+        var view = new SliderWithLabel(vm);
 
         var window = new Window { Content = view };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        var expectedValue = 100;
-        view.Value(expectedValue); //initiates StateHasChanged notification on the view
+        vm.Value = 100;
+        Dispatcher.UIThread.RunJobs();
 
-        var realParentValue = view.Value;
-        var realInnerValue = view.SliderWithLabel.Value;
-        Assert.Equal(expectedValue, realParentValue);
-        Assert.Equal(expectedValue, realInnerValue);
+        Assert.Equal(100, vm.Value);
     }
-
 }

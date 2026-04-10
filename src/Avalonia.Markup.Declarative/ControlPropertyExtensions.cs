@@ -3,13 +3,13 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
-using Avalonia.Markup.Declarative.Helpers;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -25,24 +25,41 @@ public static class ControlPropertyExtensions
     }
 
     /// <summary>
-    /// Used to bind one avalonia property to another
+    /// Creates a compiled binding from an expression and applies it to an Avalonia property.
     /// </summary>
-    /// <typeparam name="TControl"></typeparam>
-    /// <param name="control"></param>
-    /// <param name="avaloniaProperty"></param>
-    /// <param name="propertyToBindTo"></param>
-    /// <param name="bindingMode"></param>
-    /// <param name="converter"></param>
-    /// <param name="overrideView"></param>
-    /// <returns></returns>
-    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty,
-        AvaloniaProperty propertyToBindTo, BindingMode? bindingMode, IValueConverter? converter, ViewBase? overrideView)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TControl _setCompiledBinding<TControl, TViewModel, TValue>(
+        this TControl control,
+        AvaloniaProperty avaloniaProperty,
+        TViewModel source,
+        Expression<Func<TViewModel, TValue>> getter,
+        BindingMode? mode = null,
+        IValueConverter? converter = null)
         where TControl : AvaloniaObject
     {
-        var view = overrideView ?? ViewBuildContext.CurrentView;
+        var binding = CompiledBinding.Create(getter,
+            source: source,
+            mode: mode ?? BindingMode.Default,
+            converter: converter);
+
+        control.Bind(avaloniaProperty, binding);
+        return control;
+    }
+
+    /// <summary>
+    /// Binds one Avalonia property to another on a given source object.
+    /// </summary>
+    public static TControl _setPropertyBinding<TControl>(this TControl control,
+        AvaloniaProperty avaloniaProperty,
+        AvaloniaProperty propertyToBindTo,
+        AvaloniaObject source,
+        BindingMode? bindingMode = null,
+        IValueConverter? converter = null)
+        where TControl : AvaloniaObject
+    {
         var binding = new Binding()
         {
-            Source = view,
+            Source = source,
             Path = propertyToBindTo.Name,
             Mode = bindingMode ?? BindingMode.Default,
             Converter = converter
@@ -52,191 +69,15 @@ public static class ControlPropertyExtensions
         return control;
     }
 
-    /// <summary>
-    /// Creates *Avalonia property* binding based on expression argument
-    /// </summary>
-    /// <typeparam name="TControl"></typeparam>
-    /// <typeparam name="TValue"></typeparam>
-    /// <param name="control"></param>
-    /// <param name="avaloniaProperty"></param>
-    /// <param name="getterFunc"></param>
-    /// <param name="setChangedHandler"></param>
-    /// <param name="expression"></param>
-    /// <returns></returns>
-    /// <exception cref="InvalidOperationException"></exception>
-    public static TControl _set<TControl, TValue>(this TControl control, AvaloniaProperty<TValue> avaloniaProperty, Func<TValue> getterFunc, Action<TValue>? setChangedHandler, string? expression)
-        where TControl : AvaloniaObject
-    {
-        var view = ViewBuildContext.CurrentView;
-
-        if (view == null)
-            throw new InvalidOperationException("Current view is not set! If you are using expression binding inside of FuncTemplate, wrap it's content into FuncView or FuncComponent, to make bindings work.");
-
-        var handler = setChangedHandler;
-
-        //override handler for MVU components so changing of such properties will trigger StateHasChanged method
-        if (view is ComponentBase componentBase && setChangedHandler != null)
-        {
-            handler = v =>
-            {
-                // Update this component's state first
-                componentBase.UpdateState(() => setChangedHandler(v), bubbleToParent: true);
-
-                // Also notify listeners (e.g., parent components) that track this property by expression
-                if (!string.IsNullOrEmpty(expression))
-                {
-                    try
-                    {
-                        componentBase.NotifyExternalPropertyChanged(expression!, v);
-                    }
-                    catch
-                    {
-                        // Swallow diagnostics-only issues
-                    }
-                }
-            };
-        }
-
-        var state = new ViewPropertyComputedState<TControl, TValue>(expression, getterFunc, handler, control, avaloniaProperty);
-
-        view.AddComputedState(state, control);
-        return control;
-    }
-
-    /// <summary>
-    /// Creates *Common property* binding based on expression argument
-    /// </summary>
-    /// <typeparam name="TControl"></typeparam>
-    /// <typeparam name="TValue"></typeparam>
-    /// <param name="control"></param>
-    /// <param name="setter">Property setter action</param>
-    /// <param name="getterFunc">Property getterFunc function</param>
-    /// <param name="setChangedHandler"></param>
-    /// <param name="expression"></param>
-    /// <returns></returns>
-    /// <exception cref="InvalidOperationException"></exception>
-public static TControl _set<TControl, TValue>(this TControl control, Action<TValue> setter, Func<TValue> getterFunc, Action<TValue>? setChangedHandler, string? expression)
-    where TControl : AvaloniaObject
-{
-    var view = ViewBuildContext.CurrentView;
-
-    if (view == null)
-        throw new InvalidOperationException("Current view is not set. Control must be put into view (inherited from ViewBase of ComponentBase) that can store binding information.");
-
-    var handler = setChangedHandler;
-
-    if (view is ComponentBase componentBase && setChangedHandler != null)
-    {
-        // Extract property name for tracking (if possible)
-        string propertyName = expression ?? "unknown";
-
-        if (control is ComponentBase childComponent)
-        {
-            // Register callback on PARENT to handle child changes by expression key
-            componentBase.RegisterPropertyCallback(propertyName, value =>
-            {
-                try
-                {
-                    if (value is TValue typedValue)
-                        setChangedHandler(typedValue);
-                    else if (value is null)
-                        setChangedHandler(default!);
-                    else
-                        setChangedHandler((TValue)Convert.ChangeType(value, typeof(TValue))!);
-                }
-                catch
-                {
-                    // ignore conversion issues
-                }
-            });
-
-            // When child local setter fires via binding, bubble to parent listeners
-            handler = v =>
-            {
-                setChangedHandler(v);
-                componentBase.NotifyExternalPropertyChanged(propertyName, v);
-            };
-        }
-        else
-        {
-            handler = v => componentBase.UpdateState(() => setChangedHandler(v), bubbleToParent: true);
-        }
-    }
-
-    var state = new ViewPropertyComputedState<TControl, TValue>(expression, setter, getterFunc, handler, control);
-    view.AddComputedState(state, control);
-    return control;
-}
-
-    /// <summary>
-    /// Creates binding to property on DataContext of the control parsed from Value's expression arg , used by generated extensions
-    /// </summary>
-    /// <typeparam name="TControl"></typeparam>
-    /// <param name="control"></param>
-    /// <param name="destProperty"></param>
-    /// <param name="sourcePropertyPathString"></param>
-    /// <param name="setAction"></param>
-    /// <param name="bindingMode"></param>
-    /// <param name="converter"></param>
-    /// <param name="bindingSource"></param>
-    /// <returns></returns>
-    public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty,
-        string? sourcePropertyPathString, Action setAction,
-        BindingMode? bindingMode, IValueConverter? converter, object? bindingSource)
-        where TControl : AvaloniaObject
-    {
-        if (sourcePropertyPathString == null
-            || bindingMode.HasValue
-            || bindingSource != default
-            || sourcePropertyPathString.StartsWith("@"))
-        {
-            var binding = new Binding
-            {
-                Path = PropertyPathHelper.GetNameFromPropertyPath(sourcePropertyPathString),
-                Mode = bindingMode ?? BindingMode.Default,
-                Converter = converter
-            };
-
-            // This is needed as setting a null Source breaks the Binding
-            if (bindingSource != null)
-            {
-                binding.Source = bindingSource;
-            }
-            else
-            {
-                //for components the default binding context is the component itself instead of the control's data context
-                // except cases, where the binding source is defined directly
-                var view = ViewBuildContext.CurrentView;
-                if (view is IMvuComponent component)
-                {
-                    binding.Source ??= component;
-                }
-            }
-
-
-            setAction();
-            control.Bind(destProperty, binding);
-        }
-        else
-        {
-            setAction();
-        }
-
-        return control;
-    }
-
     public static TElement DataContext<TElement, TDataContext>(
         this TElement control,
         TDataContext value,
-        out TDataContext dataContext,
-        BindingMode? bindingMode = null,
-        IValueConverter? converter = null,
-        [CallerArgumentExpression(nameof(value))] string? ps = null)
+        out TDataContext dataContext)
         where TElement : StyledElement where TDataContext : class
     {
         dataContext = value;
-        return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode,
-            converter, null);
+        control.DataContext = value;
+        return control;
     }
 
     public static Brush ToBrush(this Color color) => new SolidColorBrush(color);
@@ -360,54 +201,6 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         return control;
     }
 
-    [Obsolete("Use Canvas_Top extension instead")]
-    public static TElement Top<TElement>(this TElement control, double value)
-        where TElement : Control
-    {
-        Canvas.SetTop(control, value);
-        return control;
-    }
-
-    [Obsolete("Use Canvas_Left extension instead")]
-    public static TElement Left<TElement>(this TElement control, double value)
-        where TElement : Control
-    {
-        Canvas.SetLeft(control, value);
-        return control;
-    }
-
-    [Obsolete("Use Canvas_Bottom extension instead")]
-    public static TElement Bottom<TElement>(this TElement control, double value)
-        where TElement : Control
-    {
-        Canvas.SetBottom(control, value);
-        return control;
-    }
-
-    [Obsolete("Use Canvas_Right extension instead")]
-    public static TElement Right<TElement>(this TElement control, double value)
-        where TElement : Control
-    {
-        Canvas.SetRight(control, value);
-        return control;
-    }
-
-    [Obsolete("Use ScrollViewer_HorizontalScrollBarVisibility extension instead")]
-    public static TElement HorizontalScrollBarVisibility<TElement>(this TElement control, ScrollBarVisibility value)
-        where TElement : ItemsControl
-    {
-        ScrollViewer.SetHorizontalScrollBarVisibility(control, value);
-        return control;
-    }
-
-    [Obsolete("Use ScrollViewer_VerticalScrollBarVisibility extension instead")]
-    public static TElement VerticalScrollBarVisibility<TElement>(this TElement control, ScrollBarVisibility value)
-        where TElement : ItemsControl
-    {
-        ScrollViewer.SetVerticalScrollBarVisibility(control, value);
-        return control;
-    }
-
     public static TPanel Children<TPanel>(this TPanel container, params Control[] children)
         where TPanel : Panel
     {
@@ -431,9 +224,6 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     public static SelectingItemsControl ItemTemplate<TItem>(this SelectingItemsControl control,
         Func<TItem, Control> build) =>
         ItemTemplate<TItem, SelectingItemsControl>(control, build);
-
-    //public static ItemsControl ItemTemplate<TItem>(this ItemsControl control, Func<TItem, Control> build) =>
-    //	ItemTemplate<TItem, ItemsControl>(control, build);
 
     public static TItemsControl ItemTemplate<TItem, TItemsControl>(this TItemsControl control,
         Func<TItem, Control> build)
@@ -512,24 +302,14 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         return control;
     }
 
-    public static TElement BindClass<TElement>(this TElement control, Func<bool> func, string className,
-        [CallerArgumentExpression(nameof(func))] string? ps = null)
+    public static TElement BindClass<TElement, TViewModel>(this TElement control,
+        TViewModel source,
+        Expression<Func<TViewModel, bool>> getter,
+        string className)
         where TElement : Control
     {
-
-        var view = ViewBuildContext.CurrentView;
-
-        if (view == null)
-            throw new InvalidOperationException("Current view is not set");
-
-        var state = new ViewPropertyComputedState<bool>(ps, func);
-
-        view.AddComputedState(state, control);
-
-        var binding = state.ToBinding();
-
+        var binding = CompiledBinding.Create(getter, source: source);
         control.BindClass(className, binding, null!);
-
         return control;
     }
 
@@ -538,8 +318,7 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         [CallerArgumentExpression(nameof(value))] string? ps = null)
         where TElement : Control
     {
-        var path = PropertyPathHelper.GetNameFromPropertyPath(ps);
-        var binding = new ReflectionBinding(path);
+        var binding = new ReflectionBinding(ps ?? string.Empty);
 
         if (bindingSource != null)
             binding.Source = bindingSource;

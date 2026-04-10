@@ -1,16 +1,10 @@
-using System.Diagnostics.CodeAnalysis;
 using Avalonia.Styling;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace MvuTemplate;
+namespace DeclarativeComponentTemplate;
 
-//prevent from trimming [injected] services by native aot compilation
-[method: DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(SimpleComponent))]
-public class SimpleComponent(SampleDataService dataService) : ComponentBase //constructor dependency injection sample
+public partial class CounterComponent(SampleDataService dataService) : ViewBase<CounterComponent.State>(new State(dataService))
 {
-    // You can also use Service injection into Property with DI container as follows:
-    [Inject] public SampleDataService? DataService { get; set; }
-
-    //Styles
     protected override StyleGroup? BuildStyles() =>
     [
         new Style<Button>(x => x.Class(":pointerover").Descendant())
@@ -31,10 +25,8 @@ public class SimpleComponent(SampleDataService dataService) : ComponentBase //co
         }
     ];
 
-    //Markup
-    protected override object Build() =>
+    protected override object Build(State state) =>
         new Grid().Cols("150, *")
-            .BindClass(() => Bounds.Width < 400, "narrow")
             .Children(
                 new StackPanel()
                     .Name("SideBar")
@@ -50,34 +42,35 @@ public class SimpleComponent(SampleDataService dataService) : ComponentBase //co
                     .VerticalAlignment(VerticalAlignment.Center)
                     .HorizontalAlignment(HorizontalAlignment.Center)
                     .Children(
-                        new TextBlock().Ref(out _textBlock1)
-                            .Text("Hello world"),
                         new TextBlock()
-                            .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"), //expression binding with dynamic string result
+                            .Text(state, x => x.StatusText),
+                        new TextBlock()
+                            .Text(state, x => x.CounterDisplay),
                         new NumericUpDown()
-                            .Value(() => Counter, onChanged: v => Counter = v), //two-way binding sample
+                            .Value(state, x => x.Counter, BindingMode.TwoWay),
                         new Button()
                             .HorizontalAlignment(HorizontalAlignment.Center)
                             .Content("Click me")
-                            .OnClick(OnButtonClick) //direct event callback
+                            .OnClick(_ => state.RefreshStatusText())
                     )
             );
 
-    //Code
-    private TextBlock _textBlock1 = null!;
-
-    private decimal? Counter { get; set; } = 0;
-
-    private void OnButtonClick(RoutedEventArgs e)
+    public partial class State(SampleDataService dataService) : ObservableObject
     {
-        _textBlock1.Text = dataService?.GetData() ?? "Data service is `null`";
-        StateHasChanged();
-    }
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(CounterDisplay))]
+        public partial decimal? Counter { get; set; } = 0;
 
-    protected override void OnSizeChanged(SizeChangedEventArgs e)
-    {
-        //force recalculation on window width to check if it's Narrow state now
-        StateHasChanged();
-        base.OnSizeChanged(e);
+        [ObservableProperty]
+        public partial string StatusText { get; set; } = "Hello world";
+
+        public string CounterDisplay => Counter is null || Counter == 0
+            ? "Counter: zero"
+            : $"Counter: {Counter}";
+
+        public void RefreshStatusText()
+        {
+            StatusText = dataService.GetData();
+        }
     }
 }

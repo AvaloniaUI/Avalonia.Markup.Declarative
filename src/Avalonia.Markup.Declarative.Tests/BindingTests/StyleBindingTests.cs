@@ -1,11 +1,8 @@
 using Avalonia.Controls;
-using Avalonia.Controls.Templates;
-using Avalonia.Styling;
-using Avalonia.Threading;
-using System.Linq;
-using Avalonia.Data;
 using Avalonia.Media;
+using Avalonia.Threading;
 using Avalonia.VisualTree;
+using System.Linq;
 
 namespace Avalonia.Markup.Declarative.Tests.BindingTests;
 
@@ -26,12 +23,10 @@ public class StyleBindingTests : AvaloniaTestBase
 
     public class TabsView : ViewBase
     {
-        public TabVm TabViewModel { get; } = new("Template");
-
         protected override StyleGroup? BuildStyles() =>
         [
             new Style<TabItem>()
-                .IsEnabled(() => TabViewModel.Enabled)
+                .IsEnabled(default(TabVm)!, x => x.Enabled)
                 .Foreground(Brushes.YellowGreen)
         ];
 
@@ -53,8 +48,7 @@ public class StyleBindingTests : AvaloniaTestBase
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-    // Collect generated TabItems via visual tree
-    var items = view._tabs.GetSelfAndVisualDescendants().OfType<TabItem>().ToList();
+        var items = view._tabs.GetSelfAndVisualDescendants().OfType<TabItem>().ToList();
         Assert.True(items.Count >= 2);
 
         var first = items[0];
@@ -62,12 +56,10 @@ public class StyleBindingTests : AvaloniaTestBase
         Assert.True(first.IsEnabled);
         Assert.False(second.IsEnabled);
 
-        // Toggle VM and ensure style updates
-    view.Tabs[1].Enabled = true;
-    // Force refresh by reassigning ItemsSource
-    var itemsSrc = view.Tabs.ToList();
-    view._tabs.ItemsSource = null;
-    view._tabs.ItemsSource = itemsSrc;
+        view.Tabs[1].Enabled = true;
+        var itemsSrc = view.Tabs.ToList();
+        view._tabs.ItemsSource = null;
+        view._tabs.ItemsSource = itemsSrc;
         Dispatcher.UIThread.RunJobs();
 
         items = view._tabs.GetSelfAndVisualDescendants().OfType<TabItem>().ToList();

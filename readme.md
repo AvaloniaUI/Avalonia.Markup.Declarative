@@ -11,47 +11,38 @@ Write Avalonia UI with C#
 
 Add the `Avalonia.Markup.Declarative` NuGet package to your project
 
-## MVU Pattern implementation (Recommended)
+## Declarative Component pattern (Recommended)
 
-Inspired by Blazor's Components layout. A basic component should look like this:
+Use a self-contained declarative component when the view and its reactive state belong to the same feature. Add `CommunityToolkit.Mvvm` to the app project and keep the component-local state terse with source-generated observable properties.
 
 ```C#
-public class Component : ComponentBase
+using CommunityToolkit.Mvvm.ComponentModel;
+
+public class CounterComponent() : ViewBase<CounterComponent.State>(new State())
 {
+    public sealed partial class State : ObservableObject
+    {
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(CounterLabel))]
+        private int counter;
 
-//styles
-    protected override StyleGroup? BuildStyles() =>
-    [
-        new Style<Button>()
-            .Margin(6)
-            .Background(Brushes.DarkSalmon),
-    ];
+        [ObservableProperty]
+        private string message = "Hello world";
 
-//markup part
-    protected override object Build() =>
+        public string CounterLabel => $"Counter: {Counter}";
+    }
+
+    protected override object Build(State? state) =>
         new StackPanel()
             .Children(
                 new TextBlock()
-                    .Ref(out _textBlock1)
-                    .Text("Hello world"),
+                    .Text(state!, x => x.Message),
                 new TextBlock()
-                    .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"),
+                    .Text(state, x => x.CounterLabel),
                 new Button()
-                    .Content("Click me")
-                    .OnClick(OnButtonClick)
+                    .Content("Increment")
+                    .OnClick(_ => state!.Counter++)
             );
-            
-//code part
-    [Inject] SampleDataService DataService { get; set; } = null!; //service injection
-
-    public int Counter { get; set; } //no need to implement AvaloniaProperty or OnPropertyChanged behaviors, since component has registry of all properties and emits ProperyChanged event after changing state of component.
-
-    private void OnButtonClick(RoutedEventArgs e)
-    {
-        Counter++;
-        _textBlock1.Text = DataService.GetData();
-        StateHasChanged(); //for now we have to call this method manually. In future there will be some additional triggers like user input, that will rise this method automatically
-    }
 }
 ```
 

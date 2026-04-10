@@ -1,20 +1,17 @@
 using Avalonia.Controls;
+using Avalonia.Threading;
 
 namespace Avalonia.Markup.Declarative.Tests.ControlsTests;
 
 public class ModalHostTests : AvaloniaTestBase
 {
-    // Reproduces the MVU-style component from the issue
-    public class ModalHost : ComponentBase
+    public class ModalHost : ViewBase
     {
         internal Panel? HostPanel;
 
-        // Common (non-Avalonia) property
         public Control? MainContent { get; set; }
 
-        // Diagnostics
         public bool WasMainContentNullDuringBuild { get; private set; }
-        public bool AvaloniaOnPropertyChangedFiredForMainContent { get; private set; }
 
         protected override object Build()
         {
@@ -24,7 +21,6 @@ public class ModalHostTests : AvaloniaTestBase
             if (MainContent is not null)
                 children.Add(MainContent);
 
-            // Modals container (always present)
             children.Add(new Panel());
 
             var hostPanel = new Panel()
@@ -33,46 +29,44 @@ public class ModalHostTests : AvaloniaTestBase
             HostPanel = hostPanel;
             return hostPanel;
         }
-
-        protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
-        {
-            base.OnPropertyChanged(change);
-
-            if (change.Property.Name.Contains(nameof(MainContent)))
-                AvaloniaOnPropertyChangedFiredForMainContent = true;
-        }
     }
 
     [Fact]
-    public void Build_is_called_before_MainContent_is_set()
+    public void Build_is_called_lazily_on_visual_tree_attachment()
     {
         var host = new ModalHost();
-        host.MainContent = new TextBlock(); // set after construction
+        // MainContent set BEFORE attaching to visual tree
+        host.MainContent = new TextBlock();
 
+        // Build not yet called
+        Assert.Null(host.HostPanel);
+
+        // Attach to visual tree triggers Build
+        var window = new Window { Content = host };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        Assert.NotNull(host.HostPanel);
+        // MainContent was set before Build, so it should be included
+        Assert.False(host.WasMainContentNullDuringBuild);
+        Assert.Equal(2, host.HostPanel!.Children.Count); // MainContent + Modals panel
+    }
+
+    [Fact]
+    public void Children_not_updated_when_setting_MainContent_after_build()
+    {
+        var host = new ModalHost();
+        var window = new Window { Content = host };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        // Build was called without MainContent
         Assert.True(host.WasMainContentNullDuringBuild);
-    }
-
-    [Fact]
-    public void Setting_Common_property_does_not_raise_Avalonia_OnPropertyChanged()
-    {
-        var host = new ModalHost();
-
-        Assert.False(host.AvaloniaOnPropertyChangedFiredForMainContent);
-
-        host.MainContent = new TextBlock();
-
-        // Because MainContent is a common (non-Avalonia) property, overriding Avalonia OnPropertyChanged won't see it
-        Assert.False(host.AvaloniaOnPropertyChangedFiredForMainContent);
-    }
-
-    [Fact]
-    public void Children_are_not_updated_automatically_when_setting_MainContent_after_build()
-    {
-        var host = new ModalHost();
-        host.MainContent = new TextBlock();
-
-        // Build executed with MainContent == null, so only the modals panel is present
         Assert.NotNull(host.HostPanel);
         Assert.Single(host.HostPanel!.Children);
+
+        // Setting MainContent after Build doesn't update children
+        host.MainContent = new TextBlock();
+        Assert.Single(host.HostPanel.Children);
     }
 }

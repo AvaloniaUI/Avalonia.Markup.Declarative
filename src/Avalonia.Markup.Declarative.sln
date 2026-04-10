@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Markup.Declarative
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaMarkupSample", "Samples\AvaloniaMarkupSample\AvaloniaMarkupSample.csproj", "{612D87E7-CF30-4E08-A7C3-AF4482924EBC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvuTemplate", "Samples\MvuTemplate\MvuTemplate.csproj", "{43B91641-30D5-448A-A996-16DFB85B7262}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeclarativeComponentTemplate", "Samples\DeclarativeComponentTemplate\DeclarativeComponentTemplate.csproj", "{43B91641-30D5-448A-A996-16DFB85B7262}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Markup.Declarative.SourceGenerator", "Avalonia.Markup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj", "{66115820-E3EB-45E2-A45C-AD79652CA3A8}"
 EndProject

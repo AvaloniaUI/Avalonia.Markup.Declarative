@@ -1,4 +1,4 @@
-﻿using AvaloniaMarkupSample;
+using AvaloniaMarkupSample;
 
 public class MyCustomControl : ViewBase
 {
@@ -98,7 +98,7 @@ public class MyCustomControl : ViewBase
                         new TextBlock().Text("Enter text:")
                             .VerticalAlignment(VerticalAlignment.Center),
                         new TextBox()
-                            .Text(NewValueProperty, BindingMode.TwoWay)
+                            .Text(NewValueProperty, this, BindingMode.TwoWay)
                             .MinWidth(150)
                     ),
 
@@ -111,7 +111,7 @@ public class MyCustomControl : ViewBase
                         new TextBlock().Text("Saved text:")
                             .VerticalAlignment(VerticalAlignment.Center),
                         new TextBox()
-                            .Text(SavedValueProperty, BindingMode.Default)
+                            .Text(SavedValueProperty, this)
                             .MinWidth(150)
                     ),
                 new StackPanel().Row(3)
@@ -120,11 +120,11 @@ public class MyCustomControl : ViewBase
                     .Children(
                         new Button().Content("Cancel")
                             .Margin(5, 0)
-                            .IsEnabled(CanSaveProperty)
+                            .IsEnabled(CanSaveProperty, this)
                             .OnClick(args=> Cancel()),
                         new Button().Content("Save")
                             .Margin(5, 0)
-                            .IsEnabled(CanSaveProperty)
+                            .IsEnabled(CanSaveProperty, this)
                             .OnClick(args => Save())
                     )
             );

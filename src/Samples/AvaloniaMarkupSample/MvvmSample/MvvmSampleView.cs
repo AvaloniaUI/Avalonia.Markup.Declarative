@@ -6,7 +6,7 @@ public class MvvmSampleView() : ViewBase<MvvmSampleViewModel>(new MvvmSampleView
         new StackPanel()
             .Children(
                 new TextBlock()
-                    .Text(() => vm?.MyObject.MyProperty ?? ""),
+                    .Text(vm!, x => x.MyObject.MyProperty),
 
                 new Button()
                     .Content("Execute Command")

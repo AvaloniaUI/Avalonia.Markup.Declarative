@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls.Templates;
+using Avalonia.Controls.Templates;
 using Avalonia.Styling;
 
 namespace AvaloniaMarkupSample.CommonSamples;
@@ -23,12 +23,12 @@ public class StylesSampleView : ViewBase
                     .ContentTemplate(
                         new FuncDataTemplate<TabViewModel>((item, ns) =>
                             new FuncView<TabViewModel>(item, vm =>
-                                new TextBlock().Text(() => vm.Content)))
+                                new TextBlock().Text(vm, x => x.Content)))
                     )
                     .ItemsSource(Tabs)
                     .Styles(
                         new Style<TabItem>()
-                            .IsEnabled(() => TabViewModel.Enabled)
+                            .IsEnabled(default(TabViewModel)!, x => x.Enabled)
                             .Foreground(Brushes.YellowGreen)
                     ),
 

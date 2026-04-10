@@ -1,6 +1,5 @@
 ﻿using Avalonia.Data;
 using Avalonia.Data.Converters;
-using System;
 
 namespace Avalonia.Markup.Declarative;
 

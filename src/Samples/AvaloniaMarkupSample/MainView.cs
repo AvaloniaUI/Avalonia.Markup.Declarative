@@ -1,7 +1,6 @@
-﻿using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Primitives;
 using Avalonia.Styling;
 using AvaloniaMarkupSample.CommonSamples;
-using AvaloniaMarkupSample.MvuSample;
 using AvaloniaMarkupSample.MvvmSample;
 
 namespace AvaloniaMarkupSample;
@@ -66,16 +65,6 @@ public class MainView : ViewBase
                 new TabItem()
                     .Header("MVVM")
                     .Content(new Border().Child(new MvvmSampleView())
-                    ),
-
-                new TabItem()
-                    .Header("MVU")
-                    .Content(new Border().Child(new SampleMvuView())
-                    ),
-
-                new TabItem()
-                    .Header("Canvas sample")
-                    .Content(new Border().Child(new CanvasSampleMvuView())
                     ),
 
                 new TabItem()
