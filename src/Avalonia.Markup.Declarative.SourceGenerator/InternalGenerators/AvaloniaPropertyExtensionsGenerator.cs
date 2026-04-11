@@ -74,24 +74,25 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
 
         var typeNamespace = ns?.Name.ToString() ?? string.Empty;
         var sb = new StringBuilder(4096);
+        var emittedUsings = new HashSet<string>(StringComparer.Ordinal);
 
         sb.AppendLine("#nullable enable");
         sb.AppendLine("// Auto-generated code");
-        sb.AppendLine("using System;");
-        sb.AppendLine("using Avalonia.Data;");
-        sb.AppendLine("using Avalonia.Data.Converters;");
-        sb.AppendLine("using System.Linq.Expressions;");
+        AppendUsingDirective(sb, emittedUsings, "using System;");
+        AppendUsingDirective(sb, emittedUsings, "using Avalonia.Data;");
+        AppendUsingDirective(sb, emittedUsings, "using Avalonia.Data.Converters;");
+        AppendUsingDirective(sb, emittedUsings, "using System.Linq.Expressions;");
 
         if (root is CompilationUnitSyntax compilationUnit)
         {
             foreach (var usingDirective in compilationUnit.Usings)
             {
-                sb.AppendLine(usingDirective.ToString());
+                AppendUsingDirective(sb, emittedUsings, usingDirective.ToString());
             }
         }
 
         if (!string.IsNullOrWhiteSpace(typeNamespace))
-            sb.AppendLine($"using {typeNamespace};");
+            AppendUsingDirective(sb, emittedUsings, $"using {typeNamespace};");
 
         // Build the extension class name - handle nested classes properly
         var extensionClassName = target.ExtensionClassName;
@@ -461,6 +462,14 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
     {
         if (string.IsNullOrWhiteSpace(value)) return;
         sb.AppendLine(value);
+    }
+
+    private static void AppendUsingDirective(StringBuilder sb, HashSet<string> emittedUsings, string usingDirective)
+    {
+        if (emittedUsings.Add(usingDirective))
+        {
+            sb.AppendLine(usingDirective);
+        }
     }
 
     public static string GetPropertySetterExtension(string controlTypeName, string genericParamsAll, FieldDeclarationSyntax field)

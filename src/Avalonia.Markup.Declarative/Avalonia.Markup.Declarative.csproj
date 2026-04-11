@@ -17,7 +17,10 @@
 		<PackageTags>avalonia;avaloniaui;mvvm;mvp;csharpmarjup;android;ios;mac;forms;wpf;net;netstandard;net461;uwp;xamarin</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
-
+	<PropertyGroup>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<AvaloniaNameGeneratorIsEnabled>false</AvaloniaNameGeneratorIsEnabled>
+	</PropertyGroup>
 	<ItemGroup>
 	  <AvaloniaXaml Remove="ControlExtensions.Generated\**" />
 	  <Compile Remove="ControlExtensions.Generated\**" />

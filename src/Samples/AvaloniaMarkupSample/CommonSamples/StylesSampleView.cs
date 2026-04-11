@@ -73,7 +73,7 @@ public class TabViewModel(string title, bool enabled = true) : INotifyPropertyCh
         set
         {
             title = value;
-            OnPropertyChanged("Title");
+            OnPropertyChanged();
         }
     }
     public bool Enabled
@@ -82,7 +82,7 @@ public class TabViewModel(string title, bool enabled = true) : INotifyPropertyCh
         set
         {
             enabled = value;
-            OnPropertyChanged("Enabled");
+            OnPropertyChanged();
         }
     }
 

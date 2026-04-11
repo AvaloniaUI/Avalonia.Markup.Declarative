@@ -139,6 +139,40 @@ internal static class SymbolUtilities
     internal static bool HasPublicSetter(this IPropertySymbol? property) =>
         property?.SetMethod != null && property.SetMethod.DeclaredAccessibility == Accessibility.Public;
 
+    internal static bool HasAccessibleParameterlessConstructor(this INamedTypeSymbol type)
+    {
+        foreach (var constructor in type.InstanceConstructors)
+        {
+            if (constructor.Parameters.Length != 0)
+            {
+                continue;
+            }
+
+            if (constructor.DeclaredAccessibility is Accessibility.Public or Accessibility.Internal or Accessibility.ProtectedOrInternal)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    internal static bool IsAccessibleFromGeneratedCode(this INamedTypeSymbol type)
+    {
+        INamedTypeSymbol? current = type;
+        while (current != null)
+        {
+            if (current.DeclaredAccessibility is not (Accessibility.Public or Accessibility.Internal or Accessibility.ProtectedOrInternal))
+            {
+                return false;
+            }
+
+            current = current.ContainingType;
+        }
+
+        return true;
+    }
+
     internal static bool IsAvaloniaPropertyField(this IFieldSymbol field)
     {
         if (field.IsObsolete())
@@ -300,6 +334,11 @@ internal static class SymbolUtilities
 
     internal static string BuildExtensionClassName(INamedTypeSymbol typeSymbol)
     {
+        return $"{BuildTypeIdentifier(typeSymbol)}_MarkupExtensions";
+    }
+
+    internal static string BuildTypeIdentifier(INamedTypeSymbol typeSymbol)
+    {
         var parts = new List<string>();
 
         if (typeSymbol.ContainingNamespace is { IsGlobalNamespace: false } containingNamespace)
@@ -317,7 +356,7 @@ internal static class SymbolUtilities
 
         parts.AddRange(typeParts);
 
-        return $"{CleanIdentifier(string.Join("_", parts))}_MarkupExtensions";
+        return CleanIdentifier(string.Join("_", parts)) ?? "Unknown";
     }
 
     private static string GetMetadataName(ISymbol symbol)
