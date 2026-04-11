@@ -132,6 +132,7 @@ public sealed class ExternalAssemblyExtensionsGenerator : IIncrementalGenerator
         AppendSignaturePart(signature, info.ControlTypeName);
         AppendSignaturePart(signature, info.ExtensionName);
         AppendSignaturePart(signature, info.MemberName);
+        AppendSignaturePart(signature, info.XmlDoc);
         AppendSignaturePart(signature, info.ValueTypeSource);
         AppendSignaturePart(signature, info.ReturnType);
         AppendSignaturePart(signature, info.GenericConstraint);
@@ -147,6 +148,7 @@ public sealed class ExternalAssemblyExtensionsGenerator : IIncrementalGenerator
         AppendSignaturePart(signature, info.ControlTypeName);
         AppendSignaturePart(signature, info.EventName);
         AppendSignaturePart(signature, info.EventHandler);
+        AppendSignaturePart(signature, info.XmlDoc);
         AppendSignaturePart(signature, info.ReturnType);
         AppendSignaturePart(signature, info.GenericConstraint);
         AppendSignaturePart(signature, info.GenericArg);

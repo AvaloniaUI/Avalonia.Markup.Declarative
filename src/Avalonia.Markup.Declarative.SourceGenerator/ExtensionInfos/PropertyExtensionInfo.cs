@@ -13,6 +13,7 @@ internal class PropertyExtensionInfo : IMemberExtensionInfo
     public string MemberName { get; }
     public ITypeSymbol ValueType { get; }
     public string ValueTypeSource { get; }
+    public string XmlDoc { get; }
     public bool IsGeneric { get; }
     public string ReturnType { get; protected set; }
     public string GenericConstraint { get; protected set; } = "";
@@ -28,6 +29,7 @@ internal class PropertyExtensionInfo : IMemberExtensionInfo
         ValueType = field.Type.GetLastGenericArgument();
         ControlTypeName = ControlType.GetFullTypeName();
         ValueTypeSource = ValueType.GetFullTypeName();
+        XmlDoc = field.GetGeneratedXmlDoc();
 
         IsGeneric = !ControlType.IsSealed;
         ReturnType = ControlTypeName;

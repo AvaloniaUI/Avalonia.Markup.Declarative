@@ -25,7 +25,9 @@ internal sealed class ValueOverloadsStyleSetterGenerator : ExtensionGeneratorBas
                 var argVals = string.Join(", ", ps.Select(static x => x.Name));
 
                 extensionText ??= new StringBuilder(256);
-                extensionText.Append($"public static Style<{info.ReturnType}> {info.ExtensionName}{info.GenericArg}(this Style<{info.ReturnType}> style, {argDefs}{CallerInfoParameters}) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}");
+                extensionText.Append(SymbolUtilities.NewLine);
+                extensionText.Append(PrefixDocumentation(info.XmlDoc,
+                    $"public static Style<{info.ReturnType}> {info.ExtensionName}{info.GenericArg}(this Style<{info.ReturnType}> style, {argDefs}{CallerInfoParameters}) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}"));
                 extensionText.Append($"   => style._addSetter({info.ControlTypeName}.{info.MemberName}Property, new {info.ValueTypeSource}({argVals}), _callerFile, _callerLine);");
             }
         }

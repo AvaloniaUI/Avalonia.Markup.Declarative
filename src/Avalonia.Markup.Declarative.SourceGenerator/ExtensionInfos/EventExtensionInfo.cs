@@ -13,6 +13,7 @@ internal sealed class EventExtensionInfo : IMemberExtensionInfo
     public List<string> EventParameterTypes { get; } = [];
     public bool ReturnsVoid { get; private set; } = true;
     public string ReturnType { get; }
+    public string XmlDoc { get; }
     public string GenericConstraint { get; } = "";
     public string GenericArg { get; } = "";
     public bool IsRoutedEvent { get; }
@@ -29,6 +30,7 @@ internal sealed class EventExtensionInfo : IMemberExtensionInfo
         EventName = eventInfo.Name;
         MemberName = EventName;
         EventHandler = eventInfo.Type.GetFullTypeName();
+        XmlDoc = SymbolUtilities.FormatXmlDoc(eventInfo);
         IsObsolete = eventInfo.IsObsolete();
         IsRoutedEvent = IsRoutedEventSymbol(eventInfo);
 

@@ -7,11 +7,12 @@ internal sealed class ActionToEventGenerator : ExtensionGeneratorBase<EventExten
     protected override string GetExtension(EventExtensionInfo @event)
     {
         var obsolete = @event.IsObsolete ? "[Obsolete]" + SymbolUtilities.NewLine : string.Empty;
+        var documentation = @event.XmlDoc;
 
         // events with non-void return types are not supported by the standard EventHandler pattern, so we generate a simple extension method that adds the handler and returns the control for chaining.
         if (!@event.ReturnsVoid)
         {
-            return $"{obsolete}public static {@event.ReturnType} On{@event.EventName}{@event.GenericArg}(this {@event.ReturnType} control, {@event.EventHandler} handler) {@event.GenericConstraint}\n" +
+            return $"{documentation}{obsolete}public static {@event.ReturnType} On{@event.EventName}{@event.GenericArg}(this {@event.ReturnType} control, {@event.EventHandler} handler) {@event.GenericConstraint}\n" +
                    $"{{\n" +
                    $"    control.{@event.EventName} += handler;\n" +
                    $"    return control;\n" +
@@ -53,7 +54,7 @@ internal sealed class ActionToEventGenerator : ExtensionGeneratorBase<EventExten
         // 2. RoutedEvents (Avalonia routing events)
         if (@event.IsRoutedEvent)
         {
-            return $"{obsolete}public static {@event.ReturnType} On{@event.EventName}{@event.GenericArg}(this {@event.ReturnType} control, {argsString}, Avalonia.Interactivity.RoutingStrategies? routes = null) {@event.GenericConstraint}\n" +
+            return $"{documentation}{obsolete}public static {@event.ReturnType} On{@event.EventName}{@event.GenericArg}(this {@event.ReturnType} control, {argsString}, Avalonia.Interactivity.RoutingStrategies? routes = null) {@event.GenericConstraint}\n" +
                    $"{{\n" +
                    $"    control.AddHandler({@event.ControlTypeName}.{@event.EventName}Event, ({lambdaParameters}) => {actionCall}, routes ?? {@event.ControlTypeName}.{@event.EventName}Event.RoutingStrategies);\n" +
                    $"    return control;\n" +
@@ -61,7 +62,7 @@ internal sealed class ActionToEventGenerator : ExtensionGeneratorBase<EventExten
         }
 
         // 3. Regular .NET events (create lambda directly)
-        return $"{obsolete}public static {@event.ReturnType} On{@event.EventName}{@event.GenericArg}(this {@event.ReturnType} control, {argsString}) {@event.GenericConstraint}\n" +
+        return $"{documentation}{obsolete}public static {@event.ReturnType} On{@event.EventName}{@event.GenericArg}(this {@event.ReturnType} control, {argsString}) {@event.GenericConstraint}\n" +
                $"{{\n" +
                $"    control.{@event.EventName} += ({lambdaParameters}) => {actionCall};\n" +
                $"    return control;\n" +

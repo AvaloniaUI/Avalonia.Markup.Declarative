@@ -79,6 +79,10 @@ public class MainView : ViewBase
                     .Header("Item control")
                     .Content(new Border().Child(new ItemControlSampleView())),
 
+                new TabItem()
+                    .Header("Exception sample")
+                    .Content(new Border().Child(new ExceptionSampleView())),
+
                 new TabItem().Header("Custom controls")
                     .Content(
                         new StackPanel()

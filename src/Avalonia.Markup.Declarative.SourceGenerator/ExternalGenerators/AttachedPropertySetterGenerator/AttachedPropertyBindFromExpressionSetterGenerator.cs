@@ -19,6 +19,6 @@ internal sealed class AttachedPropertyBindFromExpressionSetterGenerator : Extens
         var withoutSource = $"public static T {info.ExtensionName}<T, TViewModel>(this T control, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null{CallerInfoParameters}) where T : {info.AttachedPropertyHostTypeName} {SymbolUtilities.NewLine}" +
                             $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, getter, mode, converter{CallerInfoArguments});";
 
-        return withSource + SymbolUtilities.NewLine + withoutSource;
+        return PrefixDocumentation(info.XmlDoc, withSource) + SymbolUtilities.NewLine + PrefixDocumentation(info.XmlDoc, withoutSource);
     }
 }

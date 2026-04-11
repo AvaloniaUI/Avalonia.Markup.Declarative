@@ -118,8 +118,8 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
                 && HasAvaloniaPropertyPublicSetter(field, members))
             {
                 sb.AppendLine($"// avalonia properties\n");
-                AppendIfNotNull(sb, GetPropertySetterExtension(controlTypeQualified, allTypeParamsForMethods, field));
-                AppendIfNotNull(sb, GetExpressionBindingSetterExtension(controlTypeQualified, allTypeParamsForMethods, field));
+                AppendIfNotNull(sb, GetPropertySetterExtension(controlTypeQualified, allTypeParamsForMethods, field, semanticModel));
+                AppendIfNotNull(sb, GetExpressionBindingSetterExtension(controlTypeQualified, allTypeParamsForMethods, field, semanticModel));
                 processedFields.Add(field.Declaration.Variables[0].Identifier.ValueText);
             }
         }
@@ -329,6 +329,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
             {
                 AppendSignaturePart(signature, fieldSymbol.Type.GetFullTypeName());
                 AppendSignaturePart(signature, fieldSymbol.Type.GetLastGenericArgument().GetFullTypeName());
+                AppendSignaturePart(signature, fieldSymbol.GetGeneratedXmlDoc());
             }
         }
     }
@@ -357,6 +358,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         if (semanticModel.GetDeclaredSymbol(property) is IPropertySymbol propertySymbol)
         {
             AppendSignaturePart(signature, propertySymbol.Type.GetFullTypeName());
+            AppendSignaturePart(signature, SymbolUtilities.FormatXmlDoc(propertySymbol));
         }
     }
 
@@ -473,9 +475,28 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         }
     }
 
-    public static string GetPropertySetterExtension(string controlTypeName, string genericParamsAll, FieldDeclarationSyntax field)
+    private static string GetFieldXmlDoc(FieldDeclarationSyntax field, SemanticModel semanticModel)
+    {
+        var variable = field.Declaration.Variables.FirstOrDefault();
+        if (variable is null)
+        {
+            return string.Empty;
+        }
+
+        return semanticModel.GetDeclaredSymbol(variable) is IFieldSymbol fieldSymbol
+            ? fieldSymbol.GetGeneratedXmlDoc()
+            : string.Empty;
+    }
+
+    private static string GetPropertyXmlDoc(PropertyDeclarationSyntax property, SemanticModel semanticModel) =>
+        semanticModel.GetDeclaredSymbol(property) is IPropertySymbol propertySymbol
+            ? SymbolUtilities.FormatXmlDoc(propertySymbol)
+            : string.Empty;
+
+    public static string GetPropertySetterExtension(string controlTypeName, string genericParamsAll, FieldDeclarationSyntax field, SemanticModel semanticModel)
     {
         var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
+        var xmlDoc = GetFieldXmlDoc(field, semanticModel);
 
         var genericName = field.Declaration.Type as GenericNameSyntax;
         if (genericName == null)
@@ -501,7 +522,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         }
 
         var extensionText =
-            $"public static {controlTypeName} {extensionName}{genericParamsAll}" +
+            $"{xmlDoc}public static {controlTypeName} {extensionName}{genericParamsAll}" +
             $"(this {controlTypeName} control, {valueTypeSource} value, [CallerFilePath] string? _callerFile = null, [CallerLineNumber] int _callerLine = 0){classConstraint}{NewLine}" +
             $"=> control._set(() => control.{extensionName} = value!, _callerFile, _callerLine);";
 
@@ -513,9 +534,10 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
         var extensionName = property.Identifier.ToString();
 
         var valueTypeSource = GetPropertyTypeName(property, semanticModel);
+        var xmlDoc = GetPropertyXmlDoc(property, semanticModel);
 
         var extensionText =
-            $"public static {controlTypeName} {extensionName}" +
+            $"{xmlDoc}public static {controlTypeName} {extensionName}" +
             $"(this {controlTypeName} control, {valueTypeSource} value, [CallerFilePath] string? _callerFile = null, [CallerLineNumber] int _callerLine = 0)" +
             $"=>{NewLine} control._set(() => control.{extensionName} = value, _callerFile, _callerLine);";
 
@@ -536,9 +558,10 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
 
     //     return extensionText;
     // }
-    public static string GetExpressionBindingSetterExtension(string controlTypeName, string genericParamsAll, FieldDeclarationSyntax field)
+    public static string GetExpressionBindingSetterExtension(string controlTypeName, string genericParamsAll, FieldDeclarationSyntax field, SemanticModel semanticModel)
     {
         var extensionName = field.Declaration.Variables[0].Identifier.ToString().Replace("Property", "");
+        var xmlDoc = GetFieldXmlDoc(field, semanticModel);
 
         var genericName = field.Declaration.Type as GenericNameSyntax;
         if (genericName == null)
@@ -576,7 +599,7 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
                 : genericParamsAll.Insert(1, "TViewModel, "); // e.g. "<T>" -> "<TViewModel, T>"
 
         var extensionText =
-            $"public static {controlTypeName} {extensionName}{genericParamsCombined}(this {controlTypeName} control, TViewModel source, Expression<Func<TViewModel, {valueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null, [CallerFilePath] string? _callerFile = null, [CallerLineNumber] int _callerLine = 0){classConstraint}{NewLine}" +
+            $"{xmlDoc}public static {controlTypeName} {extensionName}{genericParamsCombined}(this {controlTypeName} control, TViewModel source, Expression<Func<TViewModel, {valueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null, [CallerFilePath] string? _callerFile = null, [CallerLineNumber] int _callerLine = 0){classConstraint}{NewLine}" +
             $"   => control._setCompiledBinding({controlTypeName}.{extensionName}Property, source, getter, mode, converter, _callerFile, _callerLine);";
 
         return extensionText;
@@ -586,10 +609,11 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
     {
         var extensionName = property.Identifier.ToString();
         var valueTypeSource = GetPropertyTypeName(property, semanticModel);
+        var xmlDoc = GetPropertyXmlDoc(property, semanticModel);
 
         var extensionText =
             $"//Generated by GetCommonPropertyExpressionBindingSetterExtension{NewLine}" +
-            $"public static {controlTypeName} {extensionName}<TViewModel>(this {controlTypeName} control, TViewModel source, Expression<Func<TViewModel, {valueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null, [CallerFilePath] string? _callerFile = null, [CallerLineNumber] int _callerLine = 0){NewLine}" +
+            $"{xmlDoc}public static {controlTypeName} {extensionName}<TViewModel>(this {controlTypeName} control, TViewModel source, Expression<Func<TViewModel, {valueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null, [CallerFilePath] string? _callerFile = null, [CallerLineNumber] int _callerLine = 0){NewLine}" +
             $"   => control._setCompiledBinding(null!, source, getter, mode, converter, _callerFile, _callerLine);";
 
 

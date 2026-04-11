@@ -9,6 +9,43 @@ internal static class SymbolUtilities
 {
     internal const string NewLine = "\n";
 
+    internal static string FormatXmlDoc(ISymbol? symbol)
+    {
+        if (symbol is null)
+        {
+            return string.Empty;
+        }
+
+        var xmlDoc = symbol.GetDocumentationCommentXml();
+        if (string.IsNullOrWhiteSpace(xmlDoc))
+        {
+            return string.Empty;
+        }
+
+        var lines = xmlDoc!
+            .Replace("\r\n", "\n")
+            .Replace('\r', '\n')
+            .Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+        var sb = new StringBuilder(xmlDoc.Length + (lines.Length * 5));
+        foreach (var line in lines)
+        {
+            var trimmed = line.Trim();
+            if (trimmed.Length == 0 ||
+                trimmed.StartsWith("<member", StringComparison.Ordinal) ||
+                trimmed.StartsWith("</member", StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            sb.Append("/// ");
+            sb.Append(trimmed);
+            sb.Append(NewLine);
+        }
+
+        return sb.ToString();
+    }
+
     private static readonly HashSet<string> AutoFrameworkAssemblies =
     [
         "Avalonia.Base",
@@ -244,6 +281,12 @@ internal static class SymbolUtilities
 
     internal static bool IsObsolete(this ISymbol symbol) =>
         symbol.GetAttributes().Any(static x => x.AttributeClass?.Name == nameof(ObsoleteAttribute));
+
+    internal static IPropertySymbol? GetBackingPropertySymbol(this IFieldSymbol field) =>
+        field.ContainingType?.GetMembers(field.GetMemberName()).OfType<IPropertySymbol>().FirstOrDefault();
+
+    internal static string GetGeneratedXmlDoc(this IFieldSymbol field) =>
+        FormatXmlDoc((ISymbol?)field.GetBackingPropertySymbol() ?? field);
 
     internal static string GetMemberName(this IFieldSymbol field)
     {

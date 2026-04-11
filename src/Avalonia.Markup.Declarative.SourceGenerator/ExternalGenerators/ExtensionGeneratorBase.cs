@@ -15,5 +15,8 @@ internal abstract class ExtensionGeneratorBase
 
     protected static string CallerInfoArguments => ", _callerFile, _callerLine";
 
+    protected static string PrefixDocumentation(string xmlDoc, string extensionCode) =>
+        string.IsNullOrEmpty(xmlDoc) ? extensionCode : xmlDoc + extensionCode;
+
     public abstract string? GetExtension(IMemberExtensionInfo info);
 }

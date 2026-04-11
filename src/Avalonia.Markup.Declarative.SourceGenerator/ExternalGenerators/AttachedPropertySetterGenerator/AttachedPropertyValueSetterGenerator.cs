@@ -11,7 +11,8 @@ internal sealed class AttachedPropertyValueSetterGenerator : ExtensionGeneratorB
             return null;
         }
 
-         return $"public static T {info.ExtensionName}<T>(this T control, {info.ValueTypeSource} value{CallerInfoParameters}) where T : {info.AttachedPropertyHostTypeName} {SymbolUtilities.NewLine}" +
-             $"   => control._set(() => {info.ControlTypeName}.Set{info.MemberName}(control, value!), _callerFile, _callerLine);";
+         return PrefixDocumentation(info.XmlDoc,
+             $"public static T {info.ExtensionName}<T>(this T control, {info.ValueTypeSource} value{CallerInfoParameters}) where T : {info.AttachedPropertyHostTypeName} {SymbolUtilities.NewLine}" +
+             $"   => control._set(() => {info.ControlTypeName}.Set{info.MemberName}(control, value!), _callerFile, _callerLine);");
     }
 }

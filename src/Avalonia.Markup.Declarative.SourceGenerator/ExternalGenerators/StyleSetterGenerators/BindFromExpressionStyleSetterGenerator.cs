@@ -21,6 +21,6 @@ internal sealed class BindFromExpressionStyleSetterGenerator : ExtensionGenerato
         var withoutSource = $"public static Style<{info.ReturnType}> {info.ExtensionName}{genericParams}(this Style<{info.ReturnType}> style, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? bindingMode = null, IValueConverter? converter = null{CallerInfoParameters}) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
                             $"   => style._addSetterCompiledBinding({info.ControlTypeName}.{info.MemberName}Property!, getter, bindingMode, converter, _callerFile, _callerLine);";
 
-        return withSource + SymbolUtilities.NewLine + withoutSource;
+        return PrefixDocumentation(info.XmlDoc, withSource) + SymbolUtilities.NewLine + PrefixDocumentation(info.XmlDoc, withoutSource);
     }
 }
