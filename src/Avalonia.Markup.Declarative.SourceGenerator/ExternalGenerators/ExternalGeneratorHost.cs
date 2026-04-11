@@ -118,7 +118,7 @@ internal sealed class ExternalGeneratorHost
         sb.AppendLine("namespace Avalonia.Markup.Declarative;");
         sb.AppendLine("[global::System.CodeDom.Compiler.GeneratedCode(\"Avalonia.Markup.Declarative.SourceGenerator\", \"1.0.0.0\")]");
         sb.AppendLine("[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]");
-        sb.AppendLine($"public static partial class {SymbolUtilities.BuildExtensionClassName(controlType)}");
+        sb.AppendLine($"internal static partial class {SymbolUtilities.BuildExtensionClassName(controlType)}");
         sb.AppendLine("{");
 
         foreach (var group in generatedGroups)

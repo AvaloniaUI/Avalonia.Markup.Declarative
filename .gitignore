@@ -8,6 +8,7 @@
 # User-specific files
 *.suo
 *.user
+*.lscache
 *.sln.docstates
 .vs/
 
