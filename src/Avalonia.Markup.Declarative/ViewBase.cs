@@ -153,6 +153,10 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
             ViewInitialized?.Invoke();
             OnAfterInitialized();
         }
+        catch (ViewBuildingException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);

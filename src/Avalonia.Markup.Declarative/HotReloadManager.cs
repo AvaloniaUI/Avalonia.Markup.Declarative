@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -26,7 +27,7 @@ public static class HotReloadManager
 
     public static void ClearCache(Type[]? types)
     {
-        Console.WriteLine("ClearCache for types: " + PrintTypes(types));
+        Log("ClearCache for types: " + PrintTypes(types));
     }
 
     public static void UpdateApplication(Type[]? types)
@@ -39,7 +40,7 @@ public static class HotReloadManager
 
     private static void ReloadInstances(Type[]? types)
     {
-        Console.WriteLine("UpdateApplication for types: " + PrintTypes(types));
+        Log("UpdateApplication for types: " + PrintTypes(types));
         if (types == null)
             return;
 
@@ -54,6 +55,9 @@ public static class HotReloadManager
             }
         }
     }
+
+    [Conditional("DEBUG")]
+    private static void Log(string message) => Debug.WriteLine($"[Markup.HotReload] {message}");
 
     public static string PrintTypes(Type[]? types)
     {

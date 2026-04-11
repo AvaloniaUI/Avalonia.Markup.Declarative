@@ -12,12 +12,12 @@ internal sealed class AttachedPropertyBindFromExpressionSetterGenerator : Extens
         }
 
         // overload with source parameter (for regular binding scenarios)
-        var withSource = $"public static T {info.ExtensionName}<T, TViewModel>(this T control, TViewModel source, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null) where T : {info.AttachedPropertyHostTypeName} {SymbolUtilities.NewLine}" +
-                         $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, source, getter, mode, converter);";
+        var withSource = $"public static T {info.ExtensionName}<T, TViewModel>(this T control, TViewModel source, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null{CallerInfoParameters}) where T : {info.AttachedPropertyHostTypeName} {SymbolUtilities.NewLine}" +
+                         $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, source, getter, mode, converter{CallerInfoArguments});";
 
         // overload without source parameter (for DataContext-bound scenarios)
-        var withoutSource = $"public static T {info.ExtensionName}<T, TViewModel>(this T control, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null) where T : {info.AttachedPropertyHostTypeName} {SymbolUtilities.NewLine}" +
-                            $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, getter, mode, converter);";
+        var withoutSource = $"public static T {info.ExtensionName}<T, TViewModel>(this T control, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null{CallerInfoParameters}) where T : {info.AttachedPropertyHostTypeName} {SymbolUtilities.NewLine}" +
+                            $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, getter, mode, converter{CallerInfoArguments});";
 
         return withSource + SymbolUtilities.NewLine + withoutSource;
     }

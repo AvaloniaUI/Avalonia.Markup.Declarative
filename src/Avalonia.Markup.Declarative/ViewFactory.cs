@@ -15,10 +15,8 @@ public static class ViewFactory
     /// </summary>
     public static TControl Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TControl>() where TControl : Control
     {
-        var factory = AppBuilderExtensions.ComponentControlFactory;
-
-        if (factory != null)
-            return factory.CreateControlInstance<TControl>();
+        if (AppBuilderExtensions.ComponentControlFactory is { } factory)
+            return (TControl)factory(typeof(TControl));
 
         if (ViewFactoryRegistry.TryCreate<TControl>(out var registeredControl))
             return registeredControl;

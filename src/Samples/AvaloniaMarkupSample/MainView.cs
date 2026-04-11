@@ -23,7 +23,7 @@ public class MainView : ViewBase
                     .Header("Hot reload")
                     .Content(
                         new StackPanel()
-                            .Children(
+                            .Children([
                                 new TextBlock()
                                     .Ref(out var textBlock)
                                     .Padding(12)
@@ -47,7 +47,7 @@ public class MainView : ViewBase
                                     .HorizontalAlignment(HorizontalAlignment.Center)
                                     .NavigateUri(new Uri("https://github.com/AvaloniaUI/Avalonia.Markup.Declarative"))
                                     .Content("Open on github")
-                            )
+                            ])
                     ),
 
                 new TabItem()
@@ -57,9 +57,9 @@ public class MainView : ViewBase
                             new DockPanel()
                                 .LastChildFill(true)
                                 .Children(
-                                    new TextBox().Text("Left1").Dock(Dock.Left),
-                                    new TextBox().Text("Right").Dock(Dock.Right),
-                                    new TextBox().Text("Left2").Dock(Dock.Left)))
+                                    new TextBox().Text("Left1").DockPanel_Dock(Dock.Left),
+                                    new TextBox().Text("Right").DockPanel_Dock(Dock.Right),
+                                    new TextBox().Text("Left2").DockPanel_Dock(Dock.Left)))
                     ),
 
                 new TabItem()

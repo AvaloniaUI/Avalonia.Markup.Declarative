@@ -11,5 +11,9 @@ internal abstract class ExtensionGeneratorBase<TMemberExtensionInfo> : Extension
 
 internal abstract class ExtensionGeneratorBase
 {
+    protected static string CallerInfoParameters => ", [CallerFilePath] string? _callerFile = null, [CallerLineNumber] int _callerLine = 0";
+
+    protected static string CallerInfoArguments => ", _callerFile, _callerLine";
+
     public abstract string? GetExtension(IMemberExtensionInfo info);
 }

@@ -14,12 +14,12 @@ internal sealed class BindFromExpressionStyleSetterGenerator : ExtensionGenerato
         var genericParams = info.IsGeneric ? "<T, TViewModel>" : "<TViewModel>";
 
         // Метод С передачей source (для привязки стиля к стейту SFC)
-        var withSource = $"public static Style<{info.ReturnType}> {info.ExtensionName}{genericParams}(this Style<{info.ReturnType}> style, TViewModel source, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? bindingMode = null, IValueConverter? converter = null) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
-                         $"   => style._addSetterCompiledBinding({info.ControlTypeName}.{info.MemberName}Property!, source, getter, bindingMode, converter);";
+        var withSource = $"public static Style<{info.ReturnType}> {info.ExtensionName}{genericParams}(this Style<{info.ReturnType}> style, TViewModel source, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? bindingMode = null, IValueConverter? converter = null{CallerInfoParameters}) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
+                         $"   => style._addSetterCompiledBinding({info.ControlTypeName}.{info.MemberName}Property!, source, getter, bindingMode, converter, _callerFile, _callerLine);";
 
         // Метод БЕЗ передачи source (для привязки стиля к DataContext)
-        var withoutSource = $"public static Style<{info.ReturnType}> {info.ExtensionName}{genericParams}(this Style<{info.ReturnType}> style, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? bindingMode = null, IValueConverter? converter = null) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
-                            $"   => style._addSetterCompiledBinding({info.ControlTypeName}.{info.MemberName}Property!, getter, bindingMode, converter);";
+        var withoutSource = $"public static Style<{info.ReturnType}> {info.ExtensionName}{genericParams}(this Style<{info.ReturnType}> style, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? bindingMode = null, IValueConverter? converter = null{CallerInfoParameters}) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
+                            $"   => style._addSetterCompiledBinding({info.ControlTypeName}.{info.MemberName}Property!, getter, bindingMode, converter, _callerFile, _callerLine);";
 
         return withSource + SymbolUtilities.NewLine + withoutSource;
     }

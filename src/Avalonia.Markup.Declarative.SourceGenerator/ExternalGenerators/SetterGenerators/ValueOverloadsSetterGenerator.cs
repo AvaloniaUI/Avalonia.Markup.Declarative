@@ -26,8 +26,8 @@ internal sealed class ValueOverloadsSetterGenerator : ExtensionGeneratorBase<Pro
 
                 extensionText ??= new StringBuilder(256);
                 extensionText.Append(SymbolUtilities.NewLine);
-                extensionText.Append($"public static {info.ReturnType} {info.ExtensionName}{info.GenericArg}(this {info.ReturnType} control, {argDefs}) {info.GenericConstraint} {SymbolUtilities.NewLine}");
-                extensionText.Append($"   => control._set(() => control.{info.MemberName} = new {info.ValueTypeSource}({argVals}));");
+                extensionText.Append($"public static {info.ReturnType} {info.ExtensionName}{info.GenericArg}(this {info.ReturnType} control, {argDefs}{CallerInfoParameters}) {info.GenericConstraint} {SymbolUtilities.NewLine}");
+                extensionText.Append($"   => control._set(() => control.{info.MemberName} = new {info.ValueTypeSource}({argVals}), _callerFile, _callerLine);");
             }
         }
 

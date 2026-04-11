@@ -8,7 +8,7 @@ namespace Avalonia.Markup.Declarative;
 /// </summary>
 public static class AppBuilderExtensions
 {
-    private static IComponentControlFactory? _componentControlFactory;
+    internal static Func<Type, Control>? ComponentControlFactory { get; private set; }
     private static IServiceProvider? _serviceProvider;
     private static ViewInitializationStrategy _defaultViewInitializationStrategy = ViewInitializationStrategy.Lazy;
 
@@ -16,11 +16,6 @@ public static class AppBuilderExtensions
     /// Gets the current <see cref="IServiceProvider"/> instance.
     /// </summary>
     internal static IServiceProvider? ServiceProvider => _serviceProvider;
-
-    /// <summary>
-    /// Gets the current <see cref="IComponentControlFactory"/> instance.
-    /// </summary>
-    internal static IComponentControlFactory? ComponentControlFactory => _componentControlFactory;
 
     /// <summary>
     /// Gets the default <see cref="ViewInitializationStrategy"/> used by views when not explicitly specified.
@@ -50,16 +45,8 @@ public static class AppBuilderExtensions
     /// <returns>The configured application builder instance.</returns>
     public static AppBuilder UseComponentControlFactory(this AppBuilder appBuilder, Func<Type, Control> factory)
     {
-        _componentControlFactory = new DelegateControlFactory(factory);
+        ComponentControlFactory = factory;
         return appBuilder;
-    }
-
-    private class DelegateControlFactory(Func<Type, Control> factory) : IComponentControlFactory
-    {
-        public TControl CreateControlInstance<TControl>() where TControl : Control
-        {
-            return (TControl)factory(typeof(TControl));
-        }
     }
 
     /// <summary>

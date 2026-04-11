@@ -9,12 +9,12 @@ internal sealed class BindFromExpressionSetterGenerator : ExtensionGeneratorBase
         var genericParams = info.IsGeneric ? "<T, TViewModel>" : "<TViewModel>";
 
         // Overloade with Source
-        var withSource = $"public static {info.ReturnType} {info.ExtensionName}{genericParams}(this {info.ReturnType} control, TViewModel source, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null) {info.GenericConstraint} {SymbolUtilities.NewLine}" +
-                         $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, source, getter, mode, converter);";
+        var withSource = $"public static {info.ReturnType} {info.ExtensionName}{genericParams}(this {info.ReturnType} control, TViewModel source, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null{CallerInfoParameters}) {info.GenericConstraint} {SymbolUtilities.NewLine}" +
+                         $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, source, getter, mode, converter{CallerInfoArguments});";
 
         // Overload without Source
-        var withoutSource = $"public static {info.ReturnType} {info.ExtensionName}{genericParams}(this {info.ReturnType} control, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null) {info.GenericConstraint} {SymbolUtilities.NewLine}" +
-                            $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, getter, mode, converter);";
+        var withoutSource = $"public static {info.ReturnType} {info.ExtensionName}{genericParams}(this {info.ReturnType} control, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null{CallerInfoParameters}) {info.GenericConstraint} {SymbolUtilities.NewLine}" +
+                            $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, getter, mode, converter{CallerInfoArguments});";
 
         return withSource + SymbolUtilities.NewLine + withoutSource;
     }

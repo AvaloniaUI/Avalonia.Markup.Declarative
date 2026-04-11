@@ -215,3 +215,4 @@ src/Web/Avalonia.Web.Blazor/wwwroot/*.js
 src/Web/Avalonia.Web.Blazor/Interop/Typescript/*.js
 /src/Avalonia.Markup.Declarative/nuget.config
 /src/AvaloniaExtensionGenerator/nupkg
+src/repomix-output.xml
