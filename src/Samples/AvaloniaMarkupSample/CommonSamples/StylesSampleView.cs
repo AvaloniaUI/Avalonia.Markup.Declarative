@@ -1,12 +1,19 @@
-﻿using Avalonia.Controls.Templates;
+using Avalonia.Controls.Templates;
 using Avalonia.Styling;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace AvaloniaMarkupSample.CommonSamples;
 
 public class StylesSampleView : ViewBase
 {
+    public TabViewModel TabViewModel { get; } = new("Template");
+
     protected override StyleGroup? BuildStyles() =>
     [
+        new Style<TabItem>(s => s.OfType<TabControl>().Class("styles-sample-tabs").Descendant().OfType<TabItem>())
+            .Foreground(Brushes.YellowGreen)
+            .IsEnabled<TabItem,TabViewModel>(x => x.Enabled),
         new Style<Button>(s => s.Class("nested-button"))
             .FontSize(26d)
     ];
@@ -17,17 +24,12 @@ public class StylesSampleView : ViewBase
             .Children(
             [
                 new TabControl()
+                    .Classes("styles-sample-tabs")
+                    .ItemsSource(Tabs)
                     .ItemTemplate<TabViewModel>(tab => new TextBlock().Text(tab.Title))
                     .ContentTemplate(
                         new FuncDataTemplate<TabViewModel>((item, ns) =>
-                            new FuncView<TabViewModel>(item, vm =>
-                                new TextBlock().Text(() => vm.Content)))
-                    )
-                    .ItemsSource(Tabs)
-                    .Styles(
-                        new Style<TabItem>()
-                            .IsEnabled(new Binding(nameof(TabViewModel.Enabled)))
-                            .Foreground(Brushes.YellowGreen)
+                                new TextBlock().Text(item, x => x.Content))
                     ),
 
                 new Button()
@@ -56,20 +58,41 @@ public class StylesSampleView : ViewBase
     {
         new TabViewModel("Tab1"),
         new TabViewModel("Tab2"),
-        new TabViewModel("Disabled tab",false)
+        new TabViewModel("Disabled tab", false)
     };
 }
 
-public class TabViewModel
+public class TabViewModel(string title, bool enabled = true) : INotifyPropertyChanged
 {
-    public TabViewModel(string title, bool enabled = true)
+    private string title = title;
+    private bool enabled = enabled;
+
+    public string Title
     {
-        Title = title;
-        Enabled = enabled;
+        get => title;
+        set
+        {
+            title = value;
+            OnPropertyChanged();
+        }
+    }
+    public bool Enabled
+    {
+        get => enabled;
+        set
+        {
+            enabled = value;
+            OnPropertyChanged();
+        }
     }
 
-    public string Title { get; }
-    public bool Enabled { get; }
-
     public string Content => Title + " Content";
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
 }

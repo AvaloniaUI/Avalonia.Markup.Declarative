@@ -1,6 +1,8 @@
-﻿using Avalonia.ReactiveUI;
-using ReactiveSample.ViewModels;
+﻿using ReactiveSample.ViewModels;
 using ReactiveSample.Views;
+using ReactiveUI.Avalonia;
+
+[assembly: GenerateMarkupExtensionsForAssembly(typeof(RoutedViewHost))] //external assembly extensions source generator support
 
 var lifetime = new ClassicDesktopStyleApplicationLifetime
 {
@@ -11,7 +13,7 @@ var lifetime = new ClassicDesktopStyleApplicationLifetime
 var appBuilder = AppBuilder.Configure<Application>()
     .AfterSetup(b => b.Instance?.Styles.Add(new FluentTheme()))
     .UsePlatformDetect()
-    .UseReactiveUI()
+    .UseReactiveUI(_ => { })
     .SetupWithLifetime(lifetime);
 
 lifetime.MainWindow = new Window()

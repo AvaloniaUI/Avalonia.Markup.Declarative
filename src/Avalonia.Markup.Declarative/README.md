@@ -15,4 +15,4 @@ https://www.nuget.org/packages/AvaloniaExtensionGenerator/
 
 Quick Start sample:
 
-https://github.com/AvaloniaUI/Avalonia.Markup.Declarative/tree/master/src/Samples/MvuTemplate
+https://github.com/AvaloniaUI/Avalonia.Markup.Declarative/tree/master/src/Samples/DeclarativeComponentTemplate

@@ -1,11 +1,10 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
+using Avalonia.Media;
 using Avalonia.Styling;
 using Avalonia.Threading;
-using System.Linq;
-using Avalonia.Data;
-using Avalonia.Media;
 using Avalonia.VisualTree;
+using System.Linq;
 
 namespace Avalonia.Markup.Declarative.Tests.BindingTests;
 
@@ -29,7 +28,7 @@ public class StyleBindingTests : AvaloniaTestBase
         protected override StyleGroup? BuildStyles() =>
         [
             new Style<TabItem>()
-                .IsEnabled(new Binding(nameof(TabVm.Enabled)))
+                .IsEnabled(default(TabVm)!, x => x.Enabled)
                 .Foreground(Brushes.YellowGreen)
         ];
 
@@ -43,6 +42,29 @@ public class StyleBindingTests : AvaloniaTestBase
         public List<TabVm> Tabs { get; set; } = new() { new("Tab1"), new("Disabled", false) };
     }
 
+    public class ScopedTabsView : ViewBase
+    {
+        protected override StyleGroup? BuildStyles() =>
+        [
+            new Style<TabItem>(s => s.OfType<TabControl>().Class("sample-tabs").Descendant().OfType<TabItem>())
+                .Foreground(Brushes.YellowGreen)
+                .IsEnabled(default(TabVm)!, x => x.Enabled)
+        ];
+
+        protected override object Build() =>
+            new TabControl()
+                .Ref(out _tabs)
+                .Classes("sample-tabs")
+                .ItemsSource(Tabs)
+                .ItemTemplate<TabVm>(tab => new TextBlock().Text(tab.Title))
+                .ContentTemplate(
+                    new FuncDataTemplate<TabVm>((item, _) =>
+                        new TextBlock().Text(item, x => x.Content)));
+
+        public TabControl _tabs = null!;
+        public List<TabVm> Tabs { get; set; } = new() { new("Tab1"), new("Tab2"), new("Disabled", false) };
+    }
+
     [Fact]
     public void TabItem_IsEnabled_Binding_Via_Style_Works()
     {
@@ -51,8 +73,7 @@ public class StyleBindingTests : AvaloniaTestBase
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-    // Collect generated TabItems via visual tree
-    var items = view._tabs.GetSelfAndVisualDescendants().OfType<TabItem>().ToList();
+        var items = view._tabs.GetSelfAndVisualDescendants().OfType<TabItem>().ToList();
         Assert.True(items.Count >= 2);
 
         var first = items[0];
@@ -60,13 +81,31 @@ public class StyleBindingTests : AvaloniaTestBase
         Assert.True(first.IsEnabled);
         Assert.False(second.IsEnabled);
 
-        // Toggle VM and ensure style updates
-    view.Tabs[1].Enabled = true;
-    // Force refresh by reassigning ItemsSource
-    var itemsSrc = view.Tabs.ToList();
-    view._tabs.ItemsSource = null;
-    view._tabs.ItemsSource = itemsSrc;
+        view.Tabs[1].Enabled = true;
+        var itemsSrc = view.Tabs.ToList();
+        view._tabs.ItemsSource = null;
+        view._tabs.ItemsSource = itemsSrc;
         Dispatcher.UIThread.RunJobs();
+
+        items = view._tabs.GetSelfAndVisualDescendants().OfType<TabItem>().ToList();
+        second = items[1];
         Assert.True(second.IsEnabled);
+    }
+
+    [Fact]
+    public void TabItem_IsEnabled_Binding_Via_View_Style_Scoped_To_TabControl_Works()
+    {
+        var view = new ScopedTabsView();
+        var window = new Window { Content = view };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        var items = view._tabs.GetSelfAndVisualDescendants().OfType<TabItem>().ToList();
+        Assert.True(items.Count >= 3);
+
+        Assert.IsType<TabVm>(items[2].DataContext);
+        Assert.Same(view.Tabs[2], items[2].DataContext);
+        Assert.Equal(Brushes.YellowGreen, items[2].Foreground);
+        Assert.False(items[2].IsEnabled);
     }
 }

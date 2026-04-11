@@ -1,7 +1,11 @@
-﻿using Avalonia.Styling;
+﻿using Avalonia.Controls;
+using Avalonia.Data;
+using Avalonia.Data.Converters;
+using Avalonia.Styling;
 using System;
-using Avalonia.Controls;
-using System.Xml.Linq;
+using System.Diagnostics;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative;
 
@@ -28,25 +32,159 @@ public static class StylePropertyExtensions
         return style;
     }
 
-    public static Style<TElement> Setter<TElement>(this Style<TElement> style, AvaloniaProperty avaloniaProperty, object value)
+    [StackTraceHidden]
+    public static Style<TElement> Setter<TElement>(
+        this Style<TElement> style,
+        AvaloniaProperty avaloniaProperty,
+        object value,
+        [CallerFilePath] string? file = null,
+        [CallerLineNumber] int line = 0)
+        where TElement : StyledElement
+        => style._addSetter(avaloniaProperty, value, file, line);
+
+    [StackTraceHidden]
+    public static Style Setter(
+        this Style style,
+        AvaloniaProperty avaloniaProperty,
+        object value,
+        [CallerFilePath] string? file = null,
+        [CallerLineNumber] int line = 0)
+        => ExecuteStyleAction(
+            style,
+            avaloniaProperty,
+            () => style.Setters.Add(new Setter(avaloniaProperty, value)),
+            file,
+            line);
+
+    [StackTraceHidden]
+    public static Style<TElement> _addSetter<TElement>(
+        this Style<TElement> style,
+        AvaloniaProperty avaloniaProperty,
+        object value,
+        [CallerFilePath] string? file = null,
+        [CallerLineNumber] int line = 0) 
+        where TElement : StyledElement
+        => ExecuteStyleAction(
+            style,
+            avaloniaProperty,
+            () => style.Setters.Add(new Setter(avaloniaProperty, value)),
+            file,
+            line);
+
+    /// <summary>
+    /// Adds a style setter using a compiled binding with a specified source.
+    /// </summary>
+    public static Style<TElement> _addSetterCompiledBinding<TElement, TViewModel, TValue>(
+        this Style<TElement> style,
+        AvaloniaProperty avaloniaProperty,
+        TViewModel source,
+        Expression<Func<TViewModel, TValue>> getter,
+        BindingMode? bindingMode = null,
+        IValueConverter? converter = null,
+        [CallerFilePath] string? file = null,
+        [CallerLineNumber] int line = 0)
         where TElement : StyledElement
     {
-        style._addSetter(avaloniaProperty, value);
-        return style;
+        return ExecuteStyleAction(
+            style,
+            avaloniaProperty,
+            () =>
+            {
+                var binding = CompiledBinding.Create(getter, source: source, mode: bindingMode ?? BindingMode.Default, converter: converter);
+                style.Setters.Add(new Setter(avaloniaProperty, binding));
+            },
+            file,
+            line);
     }
 
-    public static Style Setter(this Style style, AvaloniaProperty avaloniaProperty, object value)
+    /// <summary>
+    /// Adds a style setter using a compiled binding relative to DataContext.
+    /// </summary>
+    public static Style<TElement> _addSetterCompiledBinding<TElement, TViewModel, TValue>(
+            this Style<TElement> style,
+            AvaloniaProperty avaloniaProperty,
+            Expression<Func<TViewModel, TValue>> getter,
+            BindingMode? bindingMode = null,
+            IValueConverter? converter = null,
+            [CallerFilePath] string? file = null,
+            [CallerLineNumber] int line = 0)
+            where TElement : StyledElement
     {
-        style.Setters.Add(new Setter(avaloniaProperty, value));
-        return style;
+        return ExecuteStyleAction(
+            style,
+            avaloniaProperty,
+            () =>
+            {
+                var binding = CompiledBinding.Create(getter, mode: bindingMode ?? BindingMode.Default, converter: converter);
+                style.Setters.Add(new Setter(avaloniaProperty, binding));
+            },
+            file,
+            line);
     }
 
-    public static Style<TElement> _addSetter<TElement>(this Style<TElement> style, AvaloniaProperty avaloniaProperty, object value) 
+    [StackTraceHidden]
+    private static Style<TElement> ExecuteStyleAction<TElement>(
+        Style<TElement> style,
+        AvaloniaProperty avaloniaProperty,
+        Action action,
+        string? file,
+        int line)
         where TElement : StyledElement
     {
-        style.Setters.Add(new Setter(avaloniaProperty, value));
-        return style;
+        try
+        {
+            action();
+            return style;
+        }
+        catch (ViewBuildingException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw CreateStyleBuildException($"Style<{typeof(TElement).Name}>", avaloniaProperty, ex, file, line);
+        }
     }
+
+    [StackTraceHidden]
+    private static Style ExecuteStyleAction(
+        Style style,
+        AvaloniaProperty avaloniaProperty,
+        Action action,
+        string? file,
+        int line)
+    {
+        try
+        {
+            action();
+            return style;
+        }
+        catch (ViewBuildingException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw CreateStyleBuildException("Style", avaloniaProperty, ex, file, line);
+        }
+    }
+
+    [StackTraceHidden]
+    private static ViewBuildingException CreateStyleBuildException(
+        string identity,
+        AvaloniaProperty avaloniaProperty,
+        Exception exception,
+        string? file,
+        int line)
+    {
+        return new ViewBuildingException(
+            $"UI Build Error on {identity} while applying '{avaloniaProperty.Name}'.{Environment.NewLine}" +
+            $"File: {file}{Environment.NewLine}" +
+            $"Line: {line}{Environment.NewLine}" +
+            $"Error: {exception.Message}",
+            exception);
+    }
+
     public static Style<TElement> Col<TElement>(this Style<TElement> style, int value)
         where TElement : Control
     {

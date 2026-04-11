@@ -28,7 +28,7 @@ public static class ReactiveExtensions
         Func<TValue2?, TValue?>? valueSelector = null) where TControl : AvaloniaObject where TViewModel : ReactiveObject
     {
         //One Way
-        model.ObservableForProperty(propertySelector, skipInitial: false).Value()
+        model.WhenAnyValue(propertySelector)
              .SubscribeSafe(new AnonymousObserver<TValue2?>(v =>
             {
                 control.SetValue(prop, valueSelector == null ? v : valueSelector(v));

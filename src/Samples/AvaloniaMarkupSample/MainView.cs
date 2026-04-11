@@ -1,7 +1,6 @@
-﻿using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Primitives;
 using Avalonia.Styling;
 using AvaloniaMarkupSample.CommonSamples;
-using AvaloniaMarkupSample.MvuSample;
 using AvaloniaMarkupSample.MvvmSample;
 
 namespace AvaloniaMarkupSample;
@@ -24,14 +23,13 @@ public class MainView : ViewBase
                     .Header("Hot reload")
                     .Content(
                         new StackPanel()
-                            .Children(
+                            .Children([
                                 new TextBlock()
                                     .Ref(out var textBlock)
                                     .Padding(12)
                                     .FontSize(30)
                                     .HorizontalAlignment(HorizontalAlignment.Center)
-                                    .Text("Hello Hot Reload!")
-                                    .Foreground("SystemAccentColor".GetDynamicResource()),
+                                    .Text("Hello Hot Reload!"),
 
                                 new Button()
                                     .Name("HotReloadButton", Scope)
@@ -49,7 +47,7 @@ public class MainView : ViewBase
                                     .HorizontalAlignment(HorizontalAlignment.Center)
                                     .NavigateUri(new Uri("https://github.com/AvaloniaUI/Avalonia.Markup.Declarative"))
                                     .Content("Open on github")
-                            )
+                            ])
                     ),
 
                 new TabItem()
@@ -59,24 +57,14 @@ public class MainView : ViewBase
                             new DockPanel()
                                 .LastChildFill(true)
                                 .Children(
-                                    new TextBox().Text("Left1").Dock(Dock.Left),
-                                    new TextBox().Text("Right").Dock(Dock.Right),
-                                    new TextBox().Text("Left2").Dock(Dock.Left)))
+                                    new TextBox().Text("Left1").DockPanel_Dock(Dock.Left),
+                                    new TextBox().Text("Right").DockPanel_Dock(Dock.Right),
+                                    new TextBox().Text("Left2").DockPanel_Dock(Dock.Left)))
                     ),
 
                 new TabItem()
                     .Header("MVVM")
                     .Content(new Border().Child(new MvvmSampleView())
-                    ),
-
-                new TabItem()
-                    .Header("MVU")
-                    .Content(new Border().Child(new SampleMvuView())
-                    ),
-
-                new TabItem()
-                    .Header("Canvas sample")
-                    .Content(new Border().Child(new CanvasSampleMvuView())
                     ),
 
                 new TabItem()
@@ -92,9 +80,8 @@ public class MainView : ViewBase
                     .Content(new Border().Child(new ItemControlSampleView())),
 
                 new TabItem()
-                    .Header("OpenGL view")
-                    .Content(new Border().Child(new OpenGlView())),
-
+                    .Header("Exception sample")
+                    .Content(new Border().Child(new ExceptionSampleView())),
 
                 new TabItem().Header("Custom controls")
                     .Content(

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0;net8.0</TargetFrameworks>
+		<TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
 		<IsPackable>true</IsPackable>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
@@ -17,6 +17,16 @@
 		<PackageTags>avalonia;avaloniaui;mvvm;mvp;csharpmarjup;android;ios;mac;forms;wpf;net;netstandard;net461;uwp;xamarin</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+	<PropertyGroup>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<AvaloniaNameGeneratorIsEnabled>false</AvaloniaNameGeneratorIsEnabled>
+	</PropertyGroup>
+	<ItemGroup>
+	  <AvaloniaXaml Remove="ControlExtensions.Generated\**" />
+	  <Compile Remove="ControlExtensions.Generated\**" />
+	  <EmbeddedResource Remove="ControlExtensions.Generated\**" />
+	  <None Remove="ControlExtensions.Generated\**" />
+	</ItemGroup>
 	
 	<ItemGroup>
 		<InternalsVisibleTo Include="Avalonia.Markup.Declarative.Tests" />
@@ -27,8 +37,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Collections.Immutable" Version="9.0.10" />
-		<PackageReference Include="Avalonia" Version="11.3.7" />
+		<PackageReference Include="System.Collections.Immutable" Version="10.0.5" />
+		<PackageReference Include="Avalonia" Version="12.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -51,9 +61,5 @@
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="ControlExtensions.Generated\" />
 	</ItemGroup>
 </Project>

@@ -7,9 +7,6 @@ namespace Avalonia.Markup.Declarative.Tests.BindingTests;
 
 public record struct MyObject(string MyProperty);
 
-/// <summary>
-/// Classical ViewModel for testing purposes, implementing INotifyPropertyChanged
-/// </summary>
 public class TestViewModel : INotifyPropertyChanged
 {
     private MyObject _myObject = new("Initial");
@@ -25,10 +22,11 @@ public class TestViewModel : INotifyPropertyChanged
         }
     }
 
-    public void MyCommand(object? commandParameter) => MyObject = new MyObject($"New value");
+    public void MyCommand(object? commandParameter) => MyObject = new MyObject("New value");
 
     public event PropertyChangedEventHandler? PropertyChanged;
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }
 
 public class TestView(TestViewModel vm) : ViewBase<TestViewModel>(vm)
@@ -36,26 +34,23 @@ public class TestView(TestViewModel vm) : ViewBase<TestViewModel>(vm)
     protected override object Build(TestViewModel? vm) =>
         new StackPanel().Children(
             new TextBlock()
-                .Text(() => vm?.MyObject.MyProperty ?? "", val => vm!.MyObject = new MyObject(val))
+                .Text(vm!, x => x.MyObject.MyProperty)
                 .Ref(out MyTextBlock)
         );
 
-    public TextBlock MyTextBlock = null!; // Using a field to check it's value in tests
+    public TextBlock MyTextBlock = null!;
 }
 
 public class ViewBaseBindingTests : AvaloniaTestBase
 {
     [Fact]
-    public void TextBlock_Binding_RegistersComputedState()
+    public void TextBlock_Binding_InitialValue()
     {
         var vm = new TestViewModel();
         var view = new TestView(vm);
-
-
-        // Should have a computed state for the Text property
-        Assert.Contains(view.ViewComputedStates, s =>
-            s is ViewPropertyComputedState<TextBlock, string> state &&
-            state.GetterFunc() == "Initial");
+        var window = new Window { Content = view };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
 
         Assert.Equal("Initial", view.MyTextBlock.Text);
     }
@@ -63,33 +58,17 @@ public class ViewBaseBindingTests : AvaloniaTestBase
     [Fact]
     public void TextBlock_Updates_When_ViewModel_Changes()
     {
-
         var vm = new TestViewModel();
         var view = new TestView(vm);
+        var window = new Window { Content = view };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
 
-        // Initial value check
         Assert.Equal("Initial", view.MyTextBlock.Text);
 
-        // Act: update the ViewModel
         vm.MyCommand(null);
+        Dispatcher.UIThread.RunJobs();
 
-        // Assert: TextBlock.Text should reflect the new value
-        Assert.Equal(vm.MyObject.MyProperty, view.MyTextBlock.Text);
-    }
-
-    [Fact]
-    public void ViewModel_MyObject_Updates_When_TextBlock_Value_Changes()
-    {
-        var vm = new TestViewModel();
-        var view = new TestView(vm);
-
-        // Initial value check
-        Assert.Equal("Initial", vm.MyObject.MyProperty);
-
-        // Act: update the ViewModel
-        view.MyTextBlock.Text = "New value";
-
-        // Assert: TextBlock.Text should reflect the new value
         Assert.Equal(vm.MyObject.MyProperty, view.MyTextBlock.Text);
     }
 }

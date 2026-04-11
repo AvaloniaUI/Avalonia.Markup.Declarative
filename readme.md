@@ -5,158 +5,138 @@
 # Avalonia.Markup.Declarative
 Write Avalonia UI with C#
 
-*Avalonia.Markup.Declarative* is the set of base classes and extension methods over Avalonia's controls to define views/markup with C# code instead of XAML.
+*Avalonia.Markup.Declarative* is a C#-first authoring layer over Avalonia controls. The current API is compiled-binding-first and source-generator-driven, with public patterns intentionally aligned with Avalonia's `DataContext`, binding, style, and selector model.
 
 ## Installation
 
 Add the `Avalonia.Markup.Declarative` NuGet package to your project
 
-## MVU Pattern implementation (Recommended)
+## Declarative Component pattern (Single file component/SFC)
 
-Inspired by Blazor's Components layout. A basic component should look like this:
+Use a self-contained declarative component when the view and its reactive state belong to the same feature. Add `CommunityToolkit.Mvvm` to the app project and keep the component-local state in a nested `ObservableObject`.
 
-```C#
-public class Component : ComponentBase
+```csharp
+using Avalonia.Data;
+using CommunityToolkit.Mvvm.ComponentModel;
+
+public class CounterComponent() : ViewBase<CounterComponent.State>(new State())
 {
+    public sealed partial class State : ObservableObject
+    {
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(CounterLabel))]
+        public partial decimal? Counter { get; set; } = 0;
 
-//styles
-    protected override StyleGroup? BuildStyles() =>
-    [
-        new Style<Button>()
-            .Margin(6)
-            .Background(Brushes.DarkSalmon),
-    ];
+        [ObservableProperty]
+        public partial string StatusText { get; set; } = "Hello world";
 
-//markup part
-    protected override object Build() =>
+        public string CounterLabel => $"Counter: {Counter}";
+    }
+
+    protected override object Build(State state) =>
         new StackPanel()
             .Children(
                 new TextBlock()
-                    .Ref(out _textBlock1)
-                    .Text("Hello world"),
+                    .Text(state, x => x.StatusText),
                 new TextBlock()
-                    .Text(() => $"Counter: {(Counter == 0 ? "zero" : Counter)}"),
+                    .Text(state, x => x.CounterLabel),
+                new NumericUpDown()
+                    .Value(state, x => x.Counter, BindingMode.TwoWay),
                 new Button()
-                    .Content("Click me")
-                    .OnClick(OnButtonClick)
+                    .Content("Increment")
+                    .OnClick(_ => state.Counter++)
             );
-            
-//code part
-    [Inject] SampleDataService DataService { get; set; } = null!; //service injection
-
-    public int Counter { get; set; } //no need to implement AvaloniaProperty or OnPropertyChanged behaviors, since component has registry of all properties and emits ProperyChanged event after changing state of component.
-
-    private void OnButtonClick(RoutedEventArgs e)
-    {
-        Counter++;
-        _textBlock1.Text = DataService.GetData();
-        StateHasChanged(); //for now we have to call this method manually. In future there will be some additional triggers like user input, that will rise this method automatically
-    }
 }
 ```
 
-## MVVM Pattern implementation 
+To compose constructor-injected views, prefer `ViewFactory.Create<T>()`. If you use DI, register `UseComponentControlFactory(...)` on `AppBuilder`.
 
-to keep compatibilty with classic Avalonia/Wpf approach
+## MVVM Pattern implementation
 
-```C#
-public class MainView : ViewBase<MainViewModel>
+Use `ViewBase<TViewModel>` when you want a classic Avalonia or WPF-style view model. Generated setters expose compiled-binding overloads, so the binding syntax stays close to native Avalonia.
+
+```csharp
+using Avalonia.Data;
+
+public class MainView() : ViewBase<MainViewModel>(new MainViewModel())
 {
-    public static IValueConverter InverseBooleanConverter { get; } 
-        = new FuncValueConverter<bool, bool>(b => !b);
-
-    // This method is executed before View building
-    protected override void OnCreated()
-    {
-        ViewModel = new MainViewModel();
-    }
-
-    // Define markup in Build method
     protected override object Build(MainViewModel vm) =>
-        new Grid()
-            
-            .Styles(
-                new Style<Button>(s => s.Class(":pointerover").Child())      //make button red when pointer is over using avalonia styles
-                    .Background(Brushes.Red)
-            )
-
-            .Cols("Auto, 100, *")                   // equivalent of Grid.ColumnDefintions property
-            .Background(Brushes.Green)                  // the same as grid.Background = Brushes.Green
+        new StackPanel()
             .Children(
-                
+                new TextBox()
+                    .Text(vm, x => x.Message, BindingMode.TwoWay),
                 new TextBlock()
-                    .Text(() => vm.TextVal),                // Bind control's property to ViewModel's property using lambda
-
-                new TextBlock()
-                    .Col(1) //equivalent of Grid.SetColumn(textBlock, 1)
-                    .IsVisible(
-                        () => vm.!HideGreeting,              // Bind TextBlock.IsVisible to inversed MainViewModel.HideGreeting property using lambda
-                    )
-                    .Text("Hello Avalonia"), 
-
+                    .Text(vm, x => x.Message),
                 new Button()
-                    .Col(2) //equivalent of Grid.SetColumn(textBlock, 1)
-                    // we don't actually need binding here, 
-                    // so just direct set to Command on view model
-                    .OnClick(args => vm.OnClickButton()) 
-                    .Content("Click me") // Content = "Click me"
-                    .Padding(left: 8) //Set left padding to 8
-                    .With(ButtonStyle) //Execute LabelStyle method over TextBlock control 
+                    .Content("Reset")
+                    .OnClick(_ => vm.Message = string.Empty)
             );
-
-    private void ButtonStyle(Button b) => b
-        .VerticalAlignment(VerticalAlignment.Center)
-        .FontSize(12);
 }
 ```
+
+Equivalent XAML for the same view:
+
+```xml
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:MyApp.ViewModels"
+    x:Class="MyApp.MainView"
+    x:DataType="vm:MainViewModel">
+    <StackPanel>
+        <TextBox Text="{CompiledBinding Message, Mode=TwoWay}" />
+        <TextBlock Text="{CompiledBinding Message}" />
+        <Button Content="Reset"
+                Click="ResetClick" />
+    </StackPanel>
+</UserControl>
+```
+
+If you assign `DataContext` from the outside, the same generated setters also support DataContext-relative compiled bindings such as `new TextBlock().Text<MainViewModel>(x => x.Message);`.
 
 ## Hot reload support
 
-- ViewBase classes auto-magically supports .NET 6.0+'s `Hot Reload` feature.
+- `ViewBase` supports .NET 6.0+ hot reload.
 
-- Make sure that your view classes are located in the Assembly that doesn't contain any XAML files, otherwise `Hot Reload` will always throw "need to rebuild" message.
+- Keeping declarative views in an assembly without XAML can still produce the smoothest hot reload experience.
 
-- 2023 note - according to the latest reports, with .net 7.0 and latest avalonia versions there are no conflicts anymore between AXAML files and the `Hot Reload` functionality. So you can mix AXAML with C# Markup in the same project.
+- Current Avalonia and .NET toolchains are much better at mixing AXAML and C# markup in the same application, so the limitation is much smaller than it used to be.
 
-- JetBrains Rider has an issue with default .net hot reload behavior while debugging, so you can use following workaround:
-  ```C#
-  //init app
+- To enable AMD hot reload integration explicitly:
+  ```csharp
   AppBuilder.Configure<Application>()
-    .UseRiderHotReload() //this line adds watcher that checks, if Views were changed during debugging session
+    .UseHotReload()
     .SetupWithLifetime(lifetime);
   ```
-  
-## Properties support on custom controls
 
-There are two source generators to add Markup Extensions on your own controls. If you downloaded source code or cloned this repo, add them by referencing `Avalonia.Markup.Declarative.SourceGenerator` project in your csproj file like this:
+## Source generation for your own and external controls
+
+The package ships with the source generator that produces markup extensions for:
+
+- referenced Avalonia framework assemblies
+- controls declared in your own project
+- opted-in third-party assemblies
+
+If you downloaded source code or cloned this repo, add the source generator project as an analyzer reference:
 
 ```xml
     <ItemGroup>
-        <ProjectReference Include="..\..\AvaloniaMarkup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+        <ProjectReference Include="..\..\Avalonia.Markup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 ```
 Make sure that the path to the source generator project is correct relative to your project.
 
-> **Note**: If you are using this library as a **Nuget**, source generator will added to your project **automatically**.
+> **Note**: If you are using this library as a **NuGet** package, the source generator is included automatically.
 
 ## External libraries support
 
-By default *Avalonia.Markup.Declarative* contains only extension from Avalonia Framework controls and also has source generator, that adds Extensions from sources of your project. 
-But sometimes you need to use third-party controls from Nuget Packages. For that cases you need to use AvaloniaExtensionGenerator tool ( https://www.nuget.org/packages/AvaloniaExtensionGenerator/ ).
+Framework extensions are generated automatically for the supported Avalonia assemblies that your project references. To generate extensions for a third-party library, add an assembly attribute that points to any type from that assembly:
 
-## Installation
-```
-dotnet tool install --global AvaloniaExtensionGenerator
-```
+```csharp
+using Avalonia.Markup.Declarative;
+using ReactiveUI.Avalonia;
 
-## Usage
-
-tool should be run from the folder where **.csproj** file is located 
-```
-cd c:\your\project\
+[assembly: GenerateMarkupExtensionsForAssembly(typeof(RoutedViewHost))]
 ```
 
-call the command
-```
-avalonia-amd-gen
-```
+No standalone tool installation or manual `avalonia-amd-gen` step is required anymore.

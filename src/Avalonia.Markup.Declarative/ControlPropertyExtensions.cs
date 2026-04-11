@@ -3,13 +3,12 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
-using Avalonia.Markup.Declarative.Helpers;
-using Avalonia.Media;
 using Avalonia.Styling;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -17,249 +16,163 @@ namespace Avalonia.Markup.Declarative;
 
 public static class ControlPropertyExtensions
 {
+    [StackTraceHidden]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static TControl _set<TControl>(this TControl control, Action setAction)
+    public static TControl _set<TControl>(
+        this TControl control,
+        Action setAction,
+        [CallerFilePath] string? file = null,
+        [CallerLineNumber] int line = 0)
     {
-        setAction();
-        return control;
-    }
-
-    /// <summary>
-    /// Used to bind one avalonia property to another
-    /// </summary>
-    /// <typeparam name="TControl"></typeparam>
-    /// <param name="control"></param>
-    /// <param name="avaloniaProperty"></param>
-    /// <param name="propertyToBindTo"></param>
-    /// <param name="bindingMode"></param>
-    /// <param name="converter"></param>
-    /// <param name="overrideView"></param>
-    /// <returns></returns>
-    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty,
-        AvaloniaProperty propertyToBindTo, BindingMode? bindingMode, IValueConverter? converter, ViewBase? overrideView)
-        where TControl : AvaloniaObject
-    {
-        var view = overrideView ?? ViewBuildContext.CurrentView;
-        var binding = new Binding()
+        try
         {
-            Source = view,
-            Path = propertyToBindTo.Name,
-            Mode = bindingMode ?? BindingMode.Default,
-            Converter = converter
-        };
-
-        control[!avaloniaProperty] = binding;
-        return control;
-    }
-
-    /// <summary>
-    /// Used to pass Binding object constructed by end-user
-    /// </summary>
-    /// <typeparam name="TControl"></typeparam>
-    /// <param name="control"></param>
-    /// <param name="avaloniaProperty"></param>
-    /// <param name="binding"></param>
-    /// <returns></returns>
-    public static TControl _set<TControl>(this TControl control, AvaloniaProperty avaloniaProperty, IBinding binding)
-        where TControl : AvaloniaObject
-    {
-        control[!avaloniaProperty] = binding;
-        return control;
-    }
-
-    /// <summary>
-    /// Creates *Avalonia property* binding based on expression argument
-    /// </summary>
-    /// <typeparam name="TControl"></typeparam>
-    /// <typeparam name="TValue"></typeparam>
-    /// <param name="control"></param>
-    /// <param name="avaloniaProperty"></param>
-    /// <param name="getterFunc"></param>
-    /// <param name="setChangedHandler"></param>
-    /// <param name="expression"></param>
-    /// <returns></returns>
-    /// <exception cref="InvalidOperationException"></exception>
-    public static TControl _set<TControl, TValue>(this TControl control, AvaloniaProperty<TValue> avaloniaProperty, Func<TValue> getterFunc, Action<TValue>? setChangedHandler, string? expression)
-        where TControl : AvaloniaObject
-    {
-        var view = ViewBuildContext.CurrentView;
-
-        if (view == null)
-            throw new InvalidOperationException("Current view is not set! If you are using expression binding inside of FuncTemplate, wrap it's content into FuncView or FuncComponent, to make bindings work.");
-
-        var handler = setChangedHandler;
-
-        //override handler for MVU components so changing of such properties will trigger StateHasChanged method
-        if (view is ComponentBase componentBase && setChangedHandler != null)
-        {
-            handler = v =>
-            {
-                // Update this component's state first
-                componentBase.UpdateState(() => setChangedHandler(v), bubbleToParent: true);
-
-                // Also notify listeners (e.g., parent components) that track this property by expression
-                if (!string.IsNullOrEmpty(expression))
-                {
-                    try
-                    {
-                        componentBase.NotifyExternalPropertyChanged(expression!, v);
-                    }
-                    catch
-                    {
-                        // Swallow diagnostics-only issues
-                    }
-                }
-            };
+            setAction();
+            return control;
         }
-
-        var state = new ViewPropertyComputedState<TControl, TValue>(expression, getterFunc, handler, control, avaloniaProperty);
-
-        view.AddComputedState(state, control);
-        return control;
+        catch (ViewBuildingException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw CreateControlBuildException(control, ex, file, line);
+        }
     }
 
     /// <summary>
-    /// Creates *Common property* binding based on expression argument
+    /// Creates a compiled binding from an expression and applies it to an Avalonia property.
+    /// </summary>
+    [StackTraceHidden]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TControl _setCompiledBinding<TControl, TViewModel, TValue>(
+        this TControl control,
+        AvaloniaProperty avaloniaProperty,
+        TViewModel source,
+        Expression<Func<TViewModel, TValue>> getter,
+        BindingMode? mode = null,
+        IValueConverter? converter = null,
+        [CallerFilePath] string? file = null,
+        [CallerLineNumber] int line = 0)
+        where TControl : AvaloniaObject
+    {
+        try
+        {
+            var binding = CompiledBinding.Create(getter,
+                source: source,
+                mode: mode ?? BindingMode.Default,
+                converter: converter);
+
+            control.Bind(avaloniaProperty, binding);
+            return control;
+        }
+        catch (ViewBuildingException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw CreateControlBuildException(control, ex, file, line, avaloniaProperty?.Name);
+        }
+    }
+
+    /// <summary>
+    /// Creates a compiled binding from an expression and applies it to an Avalonia property. The source of the binding will be determined automatically at runtime based on the DataContext of the control.
     /// </summary>
     /// <typeparam name="TControl"></typeparam>
+    /// <typeparam name="TViewModel"></typeparam>
     /// <typeparam name="TValue"></typeparam>
     /// <param name="control"></param>
-    /// <param name="setter">Property setter action</param>
-    /// <param name="getterFunc">Property getterFunc function</param>
-    /// <param name="setChangedHandler"></param>
-    /// <param name="expression"></param>
+    /// <param name="avaloniaProperty"></param>
+    /// <param name="getter"></param>
+    /// <param name="mode"></param>
+    /// <param name="converter"></param>
     /// <returns></returns>
-    /// <exception cref="InvalidOperationException"></exception>
-public static TControl _set<TControl, TValue>(this TControl control, Action<TValue> setter, Func<TValue> getterFunc, Action<TValue>? setChangedHandler, string? expression)
+    [StackTraceHidden]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TControl _setCompiledBinding<TControl, TViewModel, TValue>(
+    this TControl control,
+    AvaloniaProperty avaloniaProperty,
+    Expression<Func<TViewModel, TValue>> getter,
+    BindingMode? mode = null,
+    IValueConverter? converter = null,
+    [CallerFilePath] string? file = null,
+    [CallerLineNumber] int line = 0)
     where TControl : AvaloniaObject
-{
-    var view = ViewBuildContext.CurrentView;
-
-    if (view == null)
-        throw new InvalidOperationException("Current view is not set. Control must be put into view (inherited from ViewBase of ComponentBase) that can store binding information.");
-
-    var handler = setChangedHandler;
-
-    if (view is ComponentBase componentBase && setChangedHandler != null)
     {
-        // Extract property name for tracking (if possible)
-        string propertyName = expression ?? "unknown";
-
-        if (control is ComponentBase childComponent)
+        try
         {
-            // Register callback on PARENT to handle child changes by expression key
-            componentBase.RegisterPropertyCallback(propertyName, value =>
-            {
-                try
-                {
-                    if (value is TValue typedValue)
-                        setChangedHandler(typedValue);
-                    else if (value is null)
-                        setChangedHandler(default!);
-                    else
-                        setChangedHandler((TValue)Convert.ChangeType(value, typeof(TValue))!);
-                }
-                catch
-                {
-                    // ignore conversion issues
-                }
-            });
+            // don't specify source for the binding, so it will be determined automatically at runtime based on the DataContext of the control
+            var binding = CompiledBinding.Create(getter,
+                mode: mode ?? BindingMode.Default,
+                converter: converter);
 
-            // When child local setter fires via binding, bubble to parent listeners
-            handler = v =>
-            {
-                setChangedHandler(v);
-                componentBase.NotifyExternalPropertyChanged(propertyName, v);
-            };
+            control.Bind(avaloniaProperty, binding);
+            return control;
         }
-        else
+        catch (ViewBuildingException)
         {
-            handler = v => componentBase.UpdateState(() => setChangedHandler(v), bubbleToParent: true);
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw CreateControlBuildException(control, ex, file, line, avaloniaProperty?.Name);
         }
     }
 
-    var state = new ViewPropertyComputedState<TControl, TValue>(expression, setter, getterFunc, handler, control);
-    view.AddComputedState(state, control);
-    return control;
-}
+    [StackTraceHidden]
+    private static ViewBuildingException CreateControlBuildException(
+        object? target,
+        Exception exception,
+        string? file,
+        int line,
+        string? operation = null)
+    {
+        var identity = CreateTargetIdentity(target);
+        var header = string.IsNullOrWhiteSpace(operation)
+            ? $"UI Build Error on {identity}."
+            : $"UI Build Error on {identity} while applying '{operation}'.";
+
+        return new ViewBuildingException(
+            $"{header}{Environment.NewLine}" +
+            $"File: {file}{Environment.NewLine}" +
+            $"Line: {line}{Environment.NewLine}" +
+            $"Error: {exception.Message}",
+            exception);
+    }
+
+    private static string CreateTargetIdentity(object? target)
+    {
+        if (target is null)
+        {
+            return "Unknown";
+        }
+
+        var name = (target as Control)?.Name;
+        return string.IsNullOrEmpty(name)
+            ? target.GetType().Name
+            : $"{target.GetType().Name} (Name: '{name}')";
+    }
 
     /// <summary>
-    /// Creates binding to property on DataContext of the control parsed from Value's expression arg , used by generated extensions
+    /// Sets the data context of the specified control and returns the control instance for method chaining.
     /// </summary>
-    /// <typeparam name="TControl"></typeparam>
-    /// <param name="control"></param>
-    /// <param name="destProperty"></param>
-    /// <param name="sourcePropertyPathString"></param>
-    /// <param name="setAction"></param>
-    /// <param name="bindingMode"></param>
-    /// <param name="converter"></param>
-    /// <param name="bindingSource"></param>
-    /// <returns></returns>
-    public static TControl _setEx<TControl>(this TControl control, AvaloniaProperty destProperty,
-        string? sourcePropertyPathString, Action setAction,
-        BindingMode? bindingMode, IValueConverter? converter, object? bindingSource)
-        where TControl : AvaloniaObject
-    {
-        if (sourcePropertyPathString == null
-            || bindingMode.HasValue
-            || bindingSource != default
-            || sourcePropertyPathString.StartsWith("@"))
-        {
-            var binding = new Binding
-            {
-                Path = PropertyPathHelper.GetNameFromPropertyPath(sourcePropertyPathString),
-                Mode = bindingMode ?? BindingMode.Default,
-                Converter = converter
-            };
-
-            // This is needed as setting a null Source breaks the Binding
-            if (bindingSource != null)
-            {
-                binding.Source = bindingSource;
-            }
-            else
-            {
-                //for components the default binding context is the component itself instead of the control's data context
-                // except cases, where the binding source is defined directly
-                var view = ViewBuildContext.CurrentView;
-                if (view is IMvuComponent component)
-                {
-                    binding.Source ??= component;
-                }
-            }
-
-
-            setAction();
-            control.Bind(destProperty, binding);
-        }
-        else
-        {
-            setAction();
-        }
-
-        return control;
-    }
-
+    /// <remarks>This method enables fluent configuration of a control's data context, allowing for concise
+    /// initialization patterns.</remarks>
+    /// <typeparam name="TElement">The type of the control, which must derive from StyledElement.</typeparam>
+    /// <typeparam name="TDataContext">The type of the data context to assign. Must be a reference type.</typeparam>
+    /// <param name="control">The control whose data context will be set.</param>
+    /// <param name="value">The data context value to assign to the control. Can be null.</param>
+    /// <param name="dataContext">When this method returns, contains the data context value that was assigned to the control.</param>
+    /// <returns>The control instance with its data context set to the specified value.</returns>
+    [StackTraceHidden]
     public static TElement DataContext<TElement, TDataContext>(
         this TElement control,
         TDataContext value,
-        out TDataContext dataContext,
-        BindingMode? bindingMode = null,
-        IValueConverter? converter = null,
-        [CallerArgumentExpression(nameof(value))] string? ps = null)
+        out TDataContext dataContext)
         where TElement : StyledElement where TDataContext : class
     {
         dataContext = value;
-        return control._setEx(StyledElement.DataContextProperty, ps, () => control.DataContext = value, bindingMode,
-            converter, null);
-    }
-
-    public static Brush ToBrush(this Color color) => new SolidColorBrush(color);
-
-    public static TElement Dock<TElement>(this TElement control, Dock dock)
-        where TElement : Control
-    {
-        DockPanel.SetDock(control, dock);
+        control.DataContext = value;
         return control;
     }
 
@@ -270,7 +183,8 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     /// <param name="control">Control for positioning</param>
     /// <param name="value">Grid.Column value</param>
     /// <returns></returns>
-	public static TElement Col<TElement>(this TElement control, int value)
+    [StackTraceHidden]
+    public static TElement Col<TElement>(this TElement control, int value)
         where TElement : Control
     {
         Grid.SetColumn(control, value);
@@ -284,6 +198,7 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     /// <param name="control">Control for positioning</param>
     /// <param name="value">Grid.Row value</param>
     /// <returns></returns>
+    [StackTraceHidden]
     public static TElement Row<TElement>(this TElement control, int value)
         where TElement : Control
     {
@@ -298,7 +213,8 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     /// <param name="control">Grid control</param>
     /// <param name="value">Grid.ColumnDefinitions value</param>
     /// <returns></returns>
-	public static TElement Cols<TElement>(this TElement control, ColumnDefinitions value)
+    [StackTraceHidden]
+    public static TElement Cols<TElement>(this TElement control, ColumnDefinitions value)
         where TElement : Grid
     {
         control.ColumnDefinitions = value;
@@ -312,7 +228,8 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     /// <param name="control">Grid control</param>
     /// <param name="value">Grid.RowDefinitions value</param>
     /// <returns></returns>
-	public static TElement Rows<TElement>(this TElement control, RowDefinitions value)
+    [StackTraceHidden]
+    public static TElement Rows<TElement>(this TElement control, RowDefinitions value)
         where TElement : Grid
     {
         control.RowDefinitions = value;
@@ -326,7 +243,8 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     /// <param name="control">Grid control</param>
     /// <param name="value">String representing ColumnDefinitions i.e. "0,*,30,Auto" </param>
     /// <returns></returns>
-	public static TElement Cols<TElement>(this TElement control, string value)
+    [StackTraceHidden]
+    public static TElement Cols<TElement>(this TElement control, string value)
         where TElement : Grid
     {
         control.ColumnDefinitions = ColumnDefinitions.Parse(value);
@@ -340,7 +258,8 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     /// <param name="control">Grid control</param>
     /// <param name="value">String representing RowDefinitions i.e. "0,*,30,Auto" </param>
     /// <returns></returns>
-	public static TElement Rows<TElement>(this TElement control, string value)
+    [StackTraceHidden]
+    public static TElement Rows<TElement>(this TElement control, string value)
         where TElement : Grid
     {
         control.RowDefinitions = RowDefinitions.Parse(value);
@@ -354,7 +273,8 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     /// <param name="control">Control for positioning</param>
     /// <param name="value">Grid.ColumnSpan value</param>
     /// <returns></returns>
-	public static TElement ColSpan<TElement>(this TElement control, int value)
+    [StackTraceHidden]
+    public static TElement ColSpan<TElement>(this TElement control, int value)
         where TElement : Control
     {
         Grid.SetColumnSpan(control, value);
@@ -368,61 +288,24 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     /// <param name="control">Control for positioning</param>
     /// <param name="value">Grid.RowSpan value</param>
     /// <returns></returns>
-	public static TElement RowSpan<TElement>(this TElement control, int value)
+    [StackTraceHidden]
+    public static TElement RowSpan<TElement>(this TElement control, int value)
         where TElement : Control
     {
         Grid.SetRowSpan(control, value);
         return control;
     }
 
-    [Obsolete("Use Canvas_Top extension instead")]
-    public static TElement Top<TElement>(this TElement control, double value)
-        where TElement : Control
-    {
-        Canvas.SetTop(control, value);
-        return control;
-    }
-
-    [Obsolete("Use Canvas_Left extension instead")]
-    public static TElement Left<TElement>(this TElement control, double value)
-        where TElement : Control
-    {
-        Canvas.SetLeft(control, value);
-        return control;
-    }
-
-    [Obsolete("Use Canvas_Bottom extension instead")]
-    public static TElement Bottom<TElement>(this TElement control, double value)
-        where TElement : Control
-    {
-        Canvas.SetBottom(control, value);
-        return control;
-    }
-
-    [Obsolete("Use Canvas_Right extension instead")]
-    public static TElement Right<TElement>(this TElement control, double value)
-        where TElement : Control
-    {
-        Canvas.SetRight(control, value);
-        return control;
-    }
-
-    [Obsolete("Use ScrollViewer_HorizontalScrollBarVisibility extension instead")]
-    public static TElement HorizontalScrollBarVisibility<TElement>(this TElement control, ScrollBarVisibility value)
-        where TElement : ItemsControl
-    {
-        ScrollViewer.SetHorizontalScrollBarVisibility(control, value);
-        return control;
-    }
-
-    [Obsolete("Use ScrollViewer_VerticalScrollBarVisibility extension instead")]
-    public static TElement VerticalScrollBarVisibility<TElement>(this TElement control, ScrollBarVisibility value)
-        where TElement : ItemsControl
-    {
-        ScrollViewer.SetVerticalScrollBarVisibility(control, value);
-        return control;
-    }
-
+    /// <summary>
+    /// Adds the specified child controls to the container and returns the container instance.
+    /// </summary>
+    /// <remarks>This method enables fluent configuration of panel controls by allowing multiple child
+    /// controls to be added in a single call. The method returns the container to support method chaining.</remarks>
+    /// <typeparam name="TPanel">The type of the container, which must derive from Panel.</typeparam>
+    /// <param name="container">The panel to which the child controls will be added. Must not be null.</param>
+    /// <param name="children">An array of controls to add as children to the container. Can be empty.</param>
+    /// <returns>The container instance with the specified child controls added.</returns>
+    [StackTraceHidden]
     public static TPanel Children<TPanel>(this TPanel container, params Control[] children)
         where TPanel : Panel
     {
@@ -431,6 +314,18 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         return container;
     }
 
+    /// <summary>
+    /// Adds the specified items to the item collection of the given items control and returns the control for further
+    /// configuration.
+    /// </summary>
+    /// <remarks>This method is typically used in fluent UI construction scenarios to add multiple items to an
+    /// ItemsControl-derived control. If the control's Items property does not implement IList, the items will not be
+    /// added.</remarks>
+    /// <typeparam name="TItemsControl">The type of the items control to which items are added. Must inherit from ItemsControl.</typeparam>
+    /// <param name="container">The items control instance to which the items will be added. Must not be null.</param>
+    /// <param name="items">The items to add to the control's item collection. Each item must be a valid AvaloniaObject.</param>
+    /// <returns>The same items control instance provided in the container parameter, enabling method chaining.</returns>
+    [StackTraceHidden]
     public static TItemsControl Items<TItemsControl>(this TItemsControl container, params AvaloniaObject[] items)
         where TItemsControl : ItemsControl
     {
@@ -440,16 +335,47 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         return container;
     }
 
+    /// <summary>
+    /// Configures the item template for the specified TabControl using a delegate to generate controls for each item.
+    /// </summary>
+    /// <remarks>This method enables custom rendering of each tab item by providing a function that generates
+    /// a Control for each data item. The method supports fluent configuration by returning the TabControl
+    /// instance.</remarks>
+    /// <typeparam name="TItem">The type of the data items to be displayed in the TabControl.</typeparam>
+    /// <param name="control">The TabControl to configure with the item template.</param>
+    /// <param name="build">A delegate that creates a Control for each data item of type TItem. Cannot be null.</param>
+    /// <returns>The TabControl instance with the item template applied.</returns>
+    [StackTraceHidden]
     public static TabControl ItemTemplate<TItem>(this TabControl control, Func<TItem, Control> build) =>
         ItemTemplate<TItem, TabControl>(control, build);
 
+    /// <summary>
+    /// Configures the item template for the specified SelectingItemsControl using a delegate that builds a control for
+    /// each item.
+    /// </summary>
+    /// <remarks>This method enables fluent configuration of item templates for SelectingItemsControl
+    /// instances. The provided delegate is invoked for each item to generate its corresponding control.</remarks>
+    /// <typeparam name="TItem">The type of the items displayed by the control.</typeparam>
+    /// <param name="control">The SelectingItemsControl to configure the item template for.</param>
+    /// <param name="build">A delegate that creates a Control for a given item of type TItem. Cannot be null.</param>
+    /// <returns>The SelectingItemsControl instance with the item template configured.</returns>
+    [StackTraceHidden]
     public static SelectingItemsControl ItemTemplate<TItem>(this SelectingItemsControl control,
         Func<TItem, Control> build) =>
         ItemTemplate<TItem, SelectingItemsControl>(control, build);
 
-    //public static ItemsControl ItemTemplate<TItem>(this ItemsControl control, Func<TItem, Control> build) =>
-    //	ItemTemplate<TItem, ItemsControl>(control, build);
-
+    /// <summary>
+    /// Sets the item template for the specified items control using a delegate to build each item.
+    /// </summary>
+    /// <remarks>This method enables fluent configuration of item templates for custom or standard items
+    /// controls. The provided delegate is used to generate a control for each item in the collection.</remarks>
+    /// <typeparam name="TItem">The type of the data items displayed by the items control.</typeparam>
+    /// <typeparam name="TItemsControl">The type of the items control to configure. Must inherit from ItemsControl.</typeparam>
+    /// <param name="control">The items control whose item template is to be set.</param>
+    /// <param name="build">A delegate that creates a control for each data item. The delegate receives the data item as a parameter and
+    /// returns a Control to represent it.</param>
+    /// <returns>The items control instance with the item template configured.</returns>
+    [StackTraceHidden]
     public static TItemsControl ItemTemplate<TItem, TItemsControl>(this TItemsControl control,
         Func<TItem, Control> build)
         where TItemsControl : ItemsControl
@@ -458,22 +384,66 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         return control;
     }
 
+    /// <summary>
+    /// Sets a custom item template for the specified MenuFlyout using the provided item builder function.
+    /// </summary>
+    /// <remarks>Use this method to define how each item in the MenuFlyout should be displayed by providing a
+    /// function that returns a Control for each data item. This enables flexible and dynamic item rendering based on
+    /// the data.</remarks>
+    /// <typeparam name="TItem">The type of the data items displayed in the MenuFlyout.</typeparam>
+    /// <param name="control">The MenuFlyout control to which the item template will be applied.</param>
+    /// <param name="build">A function that creates a Control for a given data item of type TItem. This function is used to generate the
+    /// visual representation of each item.</param>
+    /// <returns>The MenuFlyout control with the custom item template applied.</returns>
+    [StackTraceHidden]
     public static MenuFlyout ItemTemplate<TItem>(this MenuFlyout control, Func<TItem, Control> build)
     {
         control.ItemTemplate = new FuncDataTemplate<TItem>((val, _) => build(val));
         return control;
     }
+
+    /// <summary>
+    /// Sets a data template for the menu items using a delegate that builds a control for each item of the specified
+    /// type.
+    /// </summary>
+    /// <remarks>Use this method to define how each item in the menu should be rendered by providing a
+    /// function that returns a control for each data item. This enables custom item layouts and behaviors.</remarks>
+    /// <typeparam name="TItem">The type of the data items displayed in the menu.</typeparam>
+    /// <param name="control">The menu item control to which the data template will be applied.</param>
+    /// <param name="build">A delegate that creates a control for a given data item of type TItem.</param>
+    /// <returns>The menu item control with the specified item template applied.</returns>
+    [StackTraceHidden]
     public static MenuItem ItemTemplate<TItem>(this MenuItem control, Func<TItem, Control> build)
     {
         control.ItemTemplate = new FuncDataTemplate<TItem>((val, _) => build(val));
         return control;
     }
+
+    /// <summary>
+    /// Sets a data template for items in the menu using the specified item builder function.
+    /// </summary>
+    /// <remarks>Use this method to define how each item in the menu should be rendered based on its data.
+    /// This is useful for customizing the appearance of menu items when binding to a collection.</remarks>
+    /// <typeparam name="TItem">The type of the data items to be displayed in the menu.</typeparam>
+    /// <param name="control">The menu control to which the item template will be applied.</param>
+    /// <param name="build">A function that creates a control for each item of type TItem. The function is called for each data item to
+    /// generate its visual representation.</param>
+    /// <returns>The menu control with the item template applied, enabling fluent configuration.</returns>
+    [StackTraceHidden]
     public static Menu ItemTemplate<TItem>(this Menu control, Func<TItem, Control> build)
     {
         control.ItemTemplate = new FuncDataTemplate<TItem>((val, _) => build(val));
         return control;
     }
 
+    /// <summary>
+    /// Sets the ItemsPanel property of an ItemsControl to a new PanelTemplate that produces the specified Panel instance. This allows you to define a custom panel for arranging the items in the control. The method returns the control instance to enable fluent configuration. 
+    /// </summary>
+    /// <typeparam name="TItemsControl"></typeparam>
+    /// <param name="control"></param>
+    /// <param name="panel"></param>
+    /// <returns></returns>
+    [StackTraceHidden]
     public static TItemsControl ItemsPanel<TItemsControl>(this TItemsControl control, Panel panel)
         where TItemsControl : ItemsControl
     {
@@ -481,18 +451,40 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         return control;
     }
 
+    /// <summary>
+    /// Represents a template that produces a predefined Panel instance.
+    /// </summary>
+    /// <param name="panel">The Panel instance to be returned by the template. Cannot be null.</param>
+    [StackTraceHidden]
     record PanelTemplate(Panel panel) : ITemplate<Panel?>
     {
         public Panel Build() => panel;
         object ITemplate.Build() => throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// Performs additional processing on the control and returns the control itself. This method is useful for chaining multiple operations on a control in a fluent manner. 
+    /// </summary>
+    /// <typeparam name="TElement"></typeparam>
+    /// <param name="control"></param>
+    /// <param name="process"></param>
+    /// <returns></returns>
+    [StackTraceHidden]
     public static TElement With<TElement>(this TElement control, Action<TElement> process)
     {
         process?.Invoke(control);
         return control;
     }
 
+    /// <summary>
+    /// Sets the Name property of the control and registers it with the provided INameScope. This allows the control to be referenced by name within the scope, enabling features like data binding and event handling that rely on named controls. 
+    /// </summary>
+    /// <typeparam name="TElement"></typeparam>
+    /// <param name="control">The control whose Name property will be set. Cannot be null.</param>
+    /// <param name="name">The name to assign to the control. Cannot be null or empty.</param>
+    /// <param name="ns">The name scope in which to register the control. Cannot be null.</param>
+    /// <returns>The control instance with the specified name set and registered in the provided name scope. Enables method chaining.</returns>
+    [StackTraceHidden]
     public static TElement Name<TElement>(this TElement control, string name, INameScope ns)
         where TElement : Control
     {
@@ -501,6 +493,16 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         return control;
     }
 
+    /// <summary>
+    /// Adds one or more styles to the specified control and returns the control for further configuration.
+    /// </summary>
+    /// <remarks>This method is intended for use with fluent configuration patterns, allowing multiple style
+    /// additions in a single statement.</remarks>
+    /// <typeparam name="TElement">The type of the control to which styles are applied. Must derive from Control.</typeparam>
+    /// <param name="control">The control to which the styles will be added. Cannot be null.</param>
+    /// <param name="styles">An array of styles to apply to the control. Cannot contain null elements.</param>
+    /// <returns>The control instance with the specified styles applied. Enables method chaining.</returns>
+    [StackTraceHidden]
     public static TElement Styles<TElement>(this TElement control, params Style[] styles)
         where TElement : Control
     {
@@ -510,6 +512,17 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         return control;
     }
 
+    /// <summary>
+    /// Adds the specified styles to the control's style collection.
+    /// </summary>
+    /// <remarks>This method enables fluent configuration of a control's styles by allowing multiple styles to
+    /// be added in a single call. The method returns the original control instance to support method
+    /// chaining.</remarks>
+    /// <typeparam name="TElement">The type of control to which the styles will be applied. Must inherit from Control.</typeparam>
+    /// <param name="control">The control to which the styles will be added.</param>
+    /// <param name="styles">A collection of styles to add to the control. Cannot be null.</param>
+    /// <returns>The control instance with the specified styles added.</returns>
+    [StackTraceHidden]
     public static TElement Styles<TElement>(this TElement control, IEnumerable<Style> styles)
         where TElement : Control
     {
@@ -519,6 +532,23 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         return control;
     }
 
+    /// <summary>
+    /// Adds the specified CSS class name to the control's class collection and returns the control instance for method
+    /// chaining.
+    /// </summary>
+    /// <remarks>This method is intended for use in fluent APIs to simplify the addition of CSS classes to
+    /// controls. The method modifies the control's class collection in place.
+    /// If you need to BIND a class to a boolean property, use the <see cref="BindClass{TElement, TViewModel}"/> method instead, which allows you to conditionally apply a class based on the value of a property in your view model.
+    /// </remarks>
+    /// <typeparam name="TElement">The type of control to which the class name is added. Must inherit from Control.</typeparam>
+    /// <param name="control">The control to which the CSS class name will be added. Cannot be null.</param>
+    /// <param name="className">The CSS class name to add to the control's class collection. Cannot be null.</param>
+    /// <param name="line">The line number in the source file at which the method is called. This parameter is populated automatically by
+    /// the compiler and is not intended to be set explicitly.</param>
+    /// <param name="caller">The name of the calling member. This parameter is populated automatically by the compiler and is not intended to
+    /// be set explicitly.</param>
+    /// <returns>The control instance with the specified class name added, enabling method chaining.</returns>
+    [StackTraceHidden]
     public static TElement Classes<TElement>(this TElement control, string className, [CallerLineNumber] int line = 0,
         [CallerMemberName] string? caller = null)
         where TElement : Control
@@ -527,38 +557,28 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         return control;
     }
 
-    public static TElement BindClass<TElement>(this TElement control, Func<bool> func, string className,
-        [CallerArgumentExpression(nameof(func))] string? ps = null)
+    /// <summary>
+    /// Binds a CSS class to a control based on a boolean property of the specified view model.
+    /// </summary>
+    /// <remarks>Use this method to dynamically apply or remove a CSS class from a control based on the state
+    /// of a boolean property in the view model. This is useful for reflecting view model state changes in the
+    /// UI.</remarks>
+    /// <typeparam name="TElement">The type of the control to which the class will be bound. Must inherit from Control.</typeparam>
+    /// <typeparam name="TViewModel">The type of the view model containing the property to bind.</typeparam>
+    /// <param name="control">The control to which the CSS class will be conditionally applied.</param>
+    /// <param name="source">The view model instance that provides the property used for binding.</param>
+    /// <param name="getter">An expression that selects the boolean property from the view model. The class is applied when this property
+    /// evaluates to <see langword="true"/>.</param>
+    /// <param name="className">The name of the CSS class to apply to the control when the condition is met.</param>
+    /// <returns>The control instance with the class binding applied, enabling fluent configuration.</returns>
+    [StackTraceHidden]
+    public static TElement BindClass<TElement, TViewModel>(this TElement control,
+        TViewModel source,
+        Expression<Func<TViewModel, bool>> getter,
+        string className)
         where TElement : Control
     {
-
-        var view = ViewBuildContext.CurrentView;
-
-        if (view == null)
-            throw new InvalidOperationException("Current view is not set");
-
-        var state = new ViewPropertyComputedState<bool>(ps, func);
-
-        view.AddComputedState(state, control);
-
-        var binding = state.ToBinding();
-
-        control.BindClass(className, binding, null!);
-
-        return control;
-    }
-
-    public static TElement BindClass<TElement>(this TElement control, bool value, string className,
-        object? bindingSource = null, [CallerLineNumber] int line = 0, [CallerMemberName] string? caller = null,
-        [CallerArgumentExpression(nameof(value))] string? ps = null)
-        where TElement : Control
-    {
-        var path = PropertyPathHelper.GetNameFromPropertyPath(ps);
-        var binding = new Binding(path, BindingMode.OneWay);
-
-        if (bindingSource != null)
-            binding.Source = bindingSource;
-
+        var binding = CompiledBinding.Create(getter, source: source);
         control.BindClass(className, binding, null!);
         return control;
     }
@@ -567,43 +587,21 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
         depth > 0 ? GetDeeperStackTrace(depth - 1) : new StackTrace(0, true);
 
 
+    /// <summary>
+    /// Adds one or more data templates to the control's DataTemplates collection.
+    /// </summary>
+    /// <remarks>This method is intended for use in fluent configuration scenarios, allowing multiple data
+    /// templates to be added in a single call.</remarks>
+    /// <typeparam name="TElement">The type of the control to which the data templates are added. Must derive from Control.</typeparam>
+    /// <param name="control">The control instance to which the data templates will be added. Cannot be null.</param>
+    /// <param name="dataTemplate">An array of data templates to add to the control. Cannot contain null elements.</param>
+    /// <returns>The control instance with the specified data templates added, enabling method chaining.</returns>
+    [StackTraceHidden]
     public static TElement DataTemplates<TElement>(this TElement control, params IDataTemplate[] dataTemplate)
         where TElement : Control
     {
         foreach (var template in dataTemplate)
             control.DataTemplates.Add(template);
-        return control;
-    }
-
-    public static TElement SetProp<TElement, TValue>(this TElement control, Avalonia.AvaloniaProperty property,
-        TValue value)
-        where TElement : Control
-    {
-        if (value is IBinding binding)
-        {
-            control[!property] = binding;
-        }
-        else
-        {
-            control[property] = value;
-        }
-
-        return control;
-    }
-
-    public static TElement ToolTip<TElement, TValue>(this TElement control, TValue value)
-        where TElement : Control
-    {
-        var prop = Avalonia.Controls.ToolTip.TipProperty;
-        if (value is IBinding binding)
-        {
-            control[!prop] = binding;
-        }
-        else
-        {
-            control[prop] = value;
-        }
-
         return control;
     }
 
@@ -617,7 +615,7 @@ public static TControl _set<TControl, TValue>(this TControl control, Action<TVal
     public static TElement AddFlyoutOnClick<TElement>(this TElement control, FlyoutBase flyout)
         where TElement : Button
     {
-        control.OnClick(_ => flyout.ShowAt(control));
+        control.Click += (o, e) => flyout.ShowAt(control);
         return control;
     }
 

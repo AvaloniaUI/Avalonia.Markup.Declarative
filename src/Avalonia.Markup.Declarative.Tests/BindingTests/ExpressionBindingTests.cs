@@ -8,27 +8,6 @@ namespace Avalonia.Markup.Declarative.Tests.BindingTests;
 
 public class ExpressionBindingTests : AvaloniaTestBase
 {
-
-    public class ExpressionBindingTestView : ComponentBase
-    {
-        protected override object Build() =>
-            new StackPanel().Children(
-                new ToggleSwitch()
-                    .OnContent("Erase mode: On")
-                    .OffContent("Erase mode: Off")
-                    .IsChecked(() => IsToggleChecked, v => IsToggleChecked = v ?? false),
-
-                new TextBlock()
-                    .Ref(out MyTextBlock)
-                    .Text(() => State.StateProp)
-            );
-
-        public TextBlock MyTextBlock = null!;
-
-        public SeparatedViewState State { get; set; } = new();
-
-        private bool IsToggleChecked { get; set; }
-    }
     public class SeparatedViewState : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -43,49 +22,39 @@ public class ExpressionBindingTests : AvaloniaTestBase
                 OnPropertyChanged();
             }
         }
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        public void UpdatePropertyWithoutNotification(string newValue) => _stateProp = newValue;
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    [Fact]
-    public void TextBlock_Binding_TextShouldBeUpdatedOnStateHasChanged()
+    public class ExpressionBindingTestView : ViewBase<SeparatedViewState>
     {
-        var view = new ExpressionBindingTestView();
-        // Attach to visual tree to ensure template is applied
-        var window = new Window { Content = view };
-        window.Show();
-        // Process layout and rendering
-        Dispatcher.UIThread.RunJobs();
+        public ExpressionBindingTestView(SeparatedViewState state) : base(state) { }
 
-        var state = view.State;
+        protected override object Build(SeparatedViewState? vm) =>
+            new StackPanel().Children(
+                new TextBlock()
+                    .Ref(out MyTextBlock)
+                    .Text(vm!, x => x.StateProp)
+            );
 
-        view.UpdateState(() => state.UpdatePropertyWithoutNotification("Updated!"));
-
-        var textBlock = view.MyTextBlock;
-        Assert.NotNull(textBlock);
-
-        textBlock.Text.Should().Be("Updated!");
+        public TextBlock MyTextBlock = null!;
     }
 
     [Fact]
     public void TextBlock_Binding_TextShouldBeUpdatedOnPropertyChanged()
     {
-        var view = new ExpressionBindingTestView();
-        // Attach to visual tree to ensure template is applied
+        var state = new SeparatedViewState();
+        var view = new ExpressionBindingTestView(state);
         var window = new Window { Content = view };
         window.Show();
-        // Process layout and rendering
         Dispatcher.UIThread.RunJobs();
 
-        var state = view.State;
-
         state.StateProp = "Notified!";
+        Dispatcher.UIThread.RunJobs();
 
         var textBlock = view.MyTextBlock;
         Assert.NotNull(textBlock);
-
         textBlock.Text.Should().Be("Notified!");
     }
-
 }

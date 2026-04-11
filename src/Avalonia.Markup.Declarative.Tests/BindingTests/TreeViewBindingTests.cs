@@ -1,7 +1,10 @@
 using System.Collections.ObjectModel;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
+using Avalonia.Data;
 using Avalonia.Threading;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Avalonia.Markup.Declarative.Tests.BindingTests;
 
@@ -13,55 +16,69 @@ public class TreeViewBindingTests : AvaloniaTestBase
         public ObservableCollection<Node> Children { get; set; } = new(children ?? []);
     }
 
-    public class TreeViewSampleView : ComponentBase
+    public class TreeViewModel : INotifyPropertyChanged
     {
-        protected override object Build() =>
+        private Node? _selectedNode;
+
+        public Node? SelectedNode
+        {
+            get => _selectedNode;
+            set { _selectedNode = value; OnPropertyChanged(); OnPropertyChanged(nameof(SelectedNodeName)); }
+        }
+
+        public string SelectedNodeName => SelectedNode?.Name ?? "-";
+
+        public ObservableCollection<Node> Nodes { get; set; } =
+        [
+            new Node("Animals", [new Node("Mammals", [new Node("Lion"), new Node("Cat"), new Node("Zebra")])])
+        ];
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string? name = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+
+    public class TreeViewSampleView : ViewBase<TreeViewModel>
+    {
+        public TreeViewSampleView(TreeViewModel vm) : base(vm) { }
+
+        protected override object Build(TreeViewModel? vm) =>
             new StackPanel()
                 .Children(
                     new TreeView()
                         .Ref(out _tree)
-                        .ItemsSource(Nodes)
+                        .ItemsSource(vm!.Nodes)
                         .ItemTemplate(
                             new FuncTreeDataTemplate<Node>((n, _) => new TextBlock().Text(n.Name), n => n.Children)
                         )
-                        .SelectedItem(() => SelectedNode!, v => SelectedNode = (Node?)v),
+                        .SelectedItem(vm, x => x.SelectedNode!, BindingMode.TwoWay),
 
-                    new TextBlock().Ref(out _text).Text(() => SelectedNode?.Name ?? "-")
+                    new TextBlock().Ref(out _text).Text(vm, x => x.SelectedNodeName)
                 );
 
         public TreeView _tree = null!;
         public TextBlock _text = null!;
-
-        public Node? SelectedNode { get; set; }
-
-        public ObservableCollection<Node> Nodes { get; set; } =
-        [
-            new Node("Animals", [ new Node("Mammals", [ new Node("Lion"), new Node("Cat"), new Node("Zebra") ]) ])
-        ];
     }
 
     [Fact]
     public void TreeView_SelectedItem_TwoWay_Works()
     {
-        var view = new TreeViewSampleView();
+        var vm = new TreeViewModel();
+        var view = new TreeViewSampleView(vm);
         var window = new Window { Content = view };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        // Programmatic set should reflect in control
-        var lion = view.Nodes[0].Children[0].Children[0];
-    view.SelectedNode = lion;
-    view.UpdateState();
+        var lion = vm.Nodes[0].Children[0].Children[0];
+        vm.SelectedNode = lion;
         Dispatcher.UIThread.RunJobs();
         Assert.Equal(lion, (Node?)view._tree.SelectedItem);
         Assert.Equal("Lion", view._text.Text);
 
-        // Control-side change should pop back
-        var cat = view.Nodes[0].Children[0].Children[1];
+        var cat = vm.Nodes[0].Children[0].Children[1];
         view._tree.SelectedItem = cat;
-        view.UpdateState();
         Dispatcher.UIThread.RunJobs();
-        Assert.Equal(cat, view.SelectedNode);
+        Assert.Equal(cat, vm.SelectedNode);
         Assert.Equal("Cat", view._text.Text);
     }
 }

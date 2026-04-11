@@ -46,9 +46,9 @@ public class MyCustomControlBindingTests : AvaloniaTestBase
         protected override object Build() =>
             new Grid()
                 .Children(
-                    new TextBox().Ref(out TextBox).Text(NewValueProperty, BindingMode.TwoWay),
-                    new Button().Ref(out CancelButton).IsEnabled(CanSaveProperty),
-                    new Button().Ref(out SaveButton).IsEnabled(CanSaveProperty)
+                    new TextBox().Ref(out TextBox).Text(this, x => x.NewValue, BindingMode.TwoWay),
+                    new Button().Ref(out CancelButton).IsEnabled(this, x => x.CanSave),
+                    new Button().Ref(out SaveButton).IsEnabled(this, x => x.CanSave)
                 );
 
         public TextBox TextBox = null!;

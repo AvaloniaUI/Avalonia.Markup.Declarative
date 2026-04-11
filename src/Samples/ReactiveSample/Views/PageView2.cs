@@ -36,12 +36,9 @@ internal class PageView2 : ReactiveViewBase<PageViewModel2>
 
         this.WhenActivated(disposable =>
         {
-            this.OneWayBind(vm, x => x.MyProperty, x => x.tb1.Text)
-                .DisposeWith(disposable);
-            this.Bind(vm, x => x.MyProperty, x => x.tb2.Text)
-                .DisposeWith(disposable);
-            this.Bind(vm, x => x.MyProperty, x => x.tb3.Text)
-                .DisposeWith(disposable);
+            disposable.Add(this.OneWayBind(vm, x => x.MyProperty, x => x.tb1.Text));
+            disposable.Add(this.Bind(vm, x => x.MyProperty, x => x.tb2.Text));
+            disposable.Add(this.Bind(vm, x => x.MyProperty, x => x.tb3.Text));
         });
 
         return controls;
