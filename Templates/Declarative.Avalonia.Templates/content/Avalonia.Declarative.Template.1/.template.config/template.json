@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Avalonia Team",
+  "classifications": [
+    "Avalonia",
+    "Desktop",
+    "C#",
+    "Declarative"
+  ],
+  "identity": "Declarative.Avalonia.ProjectTemplate.CSharp",
+  "groupIdentity": "Declarative.Avalonia.ProjectTemplate",
+  "name": "Avalonia Markup Declarative App",
+  "shortName": "avalonia-declarative",
+  "description": "Creates an Avalonia desktop application using Avalonia.Markup.Declarative.",
+  "sourceName": "Avalonia.Declarative.Template.1",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "primaryOutputs": [
+    {
+      "path": "Avalonia.Declarative.Template.1.csproj"
+    }
+  ]
+}

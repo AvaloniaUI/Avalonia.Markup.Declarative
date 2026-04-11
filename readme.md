@@ -11,6 +11,15 @@ Write Avalonia UI with C#
 
 Add the `Avalonia.Markup.Declarative` NuGet package to your project
 
+## Project Template
+
+You can easily create a new project from the command line using the official template:
+
+```bash
+dotnet new install Declarative.Avalonia.Templates
+dotnet new avalonia-declarative -n MyApp
+```
+
 ## Declarative Component pattern (Single file component/SFC)
 
 Use a self-contained declarative component when the view and its reactive state belong to the same feature. Add `CommunityToolkit.Mvvm` to the app project and keep the component-local state in a nested `ObservableObject`.

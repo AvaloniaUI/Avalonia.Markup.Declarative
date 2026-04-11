@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<IsPackable>true</IsPackable>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<IncludeContentInPack>true</IncludeContentInPack>
+		<NoDefaultExcludes>true</NoDefaultExcludes>
+		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<PackageType>Template</PackageType>
+		<PackageId>Declarative.Avalonia.Templates</PackageId>
+		<Title>Declarative.Avalonia Templates</Title>
+		<Authors>Avalonia Team</Authors>
+		<Description>Project templates for building Avalonia desktop apps with Avalonia.Markup.Declarative.</Description>
+		<PackageTags>dotnet-new;template;avalonia;avaloniaui;declarative;csharp</PackageTags>
+		<PackageProjectUrl>https://github.com/AvaloniaUI/Avalonia.Markup.Declarative</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/AvaloniaUI/Avalonia.Markup.Declarative</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>Icon.png</PackageIcon>
+		<NoWarn>$(NoWarn);NU5128</NoWarn>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="content\**\*" />
+		<EmbeddedResource Remove="content\**\*" />
+		<None Remove="content\**\*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="content\**\*" Exclude="content\**\[Bb]in\**;content\**\[Oo]bj\**" Pack="true" PackagePath="content" />
+		<None Include="README.md" Pack="true" PackagePath="\" />
+		<None Include="..\..\src\Avalonia.Markup.Declarative\Icon.png" Pack="true" PackagePath="\" Link="Icon.png" />
+	</ItemGroup>
+</Project>

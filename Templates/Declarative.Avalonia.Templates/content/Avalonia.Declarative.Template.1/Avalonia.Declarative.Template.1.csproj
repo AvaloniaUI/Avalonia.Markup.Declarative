@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<TrimMode Condition="'$(Configuration)' != 'Debug'">copyused</TrimMode>
+		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' != 'Debug'">
+		<PublishAot>true</PublishAot>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Remove=".gitignore" />
+	</ItemGroup>
+	<ItemGroup>
+		<TrimmableAssembly Include="Avalonia.Themes.Fluent" />
+		<TrimmableAssembly Include="Avalonia.Themes.Default" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Avalonia.Desktop" Version="12.0.0" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.0" />
+		<PackageReference Include="Avalonia.Markup.Declarative" Version="12.0.1-preview1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
+		<PackageReference Include="Tmds.DBus.Protocol" Version="0.92.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="System" />
+		<Using Include="Avalonia" />
+		<Using Include="Avalonia.Controls" />
+		<Using Include="Avalonia.Controls.ApplicationLifetimes" />
+		<Using Include="Avalonia.Data" />
+		<Using Include="Avalonia.Interactivity" />
+		<Using Include="Avalonia.Layout" />
+		<Using Include="Avalonia.Markup.Declarative" />
+		<Using Include="Avalonia.Media" />
+		<Using Include="Avalonia.Themes.Fluent" />
+	</ItemGroup>
+</Project>
