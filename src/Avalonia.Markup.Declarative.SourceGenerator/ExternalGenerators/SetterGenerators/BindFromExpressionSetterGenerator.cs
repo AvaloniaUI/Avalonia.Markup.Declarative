@@ -6,16 +6,14 @@ internal sealed class BindFromExpressionSetterGenerator : ExtensionGeneratorBase
 {
     protected override string GetExtension(PropertyExtensionInfo info)
     {
-        var genericParams = info.IsGeneric ? "<T, TViewModel>" : "<TViewModel>";
+        var genericParams = info.IsGeneric ? "<T, TViewModel, TValue>" : "<TViewModel, TValue>";
 
-        // Overloade with Source
-        var withSource = $"public static {info.ReturnType} {info.ExtensionName}{genericParams}(this {info.ReturnType} control, TViewModel source, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null{CallerInfoParameters}) {info.GenericConstraint} {SymbolUtilities.NewLine}" +
-                         $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, source, getter, mode, converter{CallerInfoArguments});";
+        var withSource = $"public static {info.ReturnType} {info.ExtensionName}{genericParams}(this {info.ReturnType} control, TViewModel source, Expression<Func<TViewModel, TValue>> getter, BindingMode? mode = null, IValueConverter? converter = null) {info.GenericConstraint} {SymbolUtilities.NewLine}" +
+                         $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, source, getter, mode, converter);";
 
-        // Overload without Source
-        var withoutSource = $"public static {info.ReturnType} {info.ExtensionName}{genericParams}(this {info.ReturnType} control, Expression<Func<TViewModel, {info.ValueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null{CallerInfoParameters}) {info.GenericConstraint} {SymbolUtilities.NewLine}" +
-                            $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, getter, mode, converter{CallerInfoArguments});";
+        var withoutSource = $"public static {info.ReturnType} {info.ExtensionName}{genericParams}(this {info.ReturnType} control, Expression<Func<TViewModel, TValue>> getter, BindingMode? mode = null, IValueConverter? converter = null) {info.GenericConstraint} {SymbolUtilities.NewLine}" +
+                            $"   => control._setCompiledBinding({info.ControlTypeName}.{info.FieldSymbol.Name}!, getter, mode, converter);";
 
-        return PrefixDocumentation(info.XmlDoc, withSource) + SymbolUtilities.NewLine + PrefixDocumentation(info.XmlDoc, withoutSource);
+        return withSource + SymbolUtilities.NewLine + withoutSource;
     }
 }

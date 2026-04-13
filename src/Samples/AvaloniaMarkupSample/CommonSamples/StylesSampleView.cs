@@ -13,7 +13,7 @@ public class StylesSampleView : ViewBase
     [
         new Style<TabItem>(s => s.OfType<TabControl>().Class("styles-sample-tabs").Descendant().OfType<TabItem>())
             .Foreground(Brushes.YellowGreen)
-            .IsEnabled<TabItem,TabViewModel>(x => x.Enabled),
+            .IsEnabled(default(TabViewModel)!, x => x.Enabled),
         new Style<Button>(s => s.Class("nested-button"))
             .FontSize(26d)
     ];
