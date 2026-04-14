@@ -177,9 +177,11 @@ public class AvaloniaEventExtensionsGenerator : IIncrementalGenerator
 
         // Compose the extension method
         var extensionText =
-            $"    public static {controlTypeName} {extensionName}"
-            + $"(this {controlTypeName} control, {parameterList}) =>\n"
-            + $"        control._setEvent(({eventTypeString})(({lambdaParameters}) => {lambdaBody}), h => control.{eventName} += h);";
+            $"    public static {controlTypeName} {extensionName}(this {controlTypeName} control, {parameterList})\n"
+            + "    {\n"
+            + $"        control.{eventName} += ({lambdaParameters}) => {lambdaBody};\n"
+            + "        return control;\n"
+            + "    }";
 
         return extensionText;
     }

@@ -11,11 +11,11 @@ internal sealed class BindFromExpressionStyleSetterGenerator : ExtensionGenerato
 
         var genericParams = info.IsGeneric ? "<T, TViewModel, TValue>" : "<TViewModel, TValue>";
 
-        var withSource = $"public static Style<{info.ReturnType}> {info.ExtensionName}{genericParams}(this Style<{info.ReturnType}> style, TViewModel source, Expression<Func<TViewModel, TValue>> getter, BindingMode? bindingMode = null, IValueConverter? converter = null) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
-                         $"   => style._addSetterCompiledBinding({info.ControlTypeName}.{info.MemberName}Property!, source, getter, bindingMode, converter);";
+        var withSource = $"public static Style<{info.ReturnType}> {info.ExtensionName}{genericParams}(this Style<{info.ReturnType}> style, TViewModel source, Expression<Func<TViewModel, TValue>> getter, BindingMode? bindingMode = null, IValueConverter? converter = null{CallerInfoParameters}) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
+                         $"   => style._addSetterCompiledBinding({info.ControlTypeName}.{info.MemberName}Property!, source, getter, bindingMode, converter{CallerInfoArguments});";
 
-        var withoutSource = $"public static Style<{info.ReturnType}> {info.ExtensionName}{genericParams}(this Style<{info.ReturnType}> style, Expression<Func<TViewModel, TValue>> getter, BindingMode? bindingMode = null, IValueConverter? converter = null) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
-                            $"   => style._addSetterCompiledBinding({info.ControlTypeName}.{info.MemberName}Property!, getter, bindingMode, converter);";
+        var withoutSource = $"public static Style<{info.ReturnType}> {info.ExtensionName}{genericParams}(this Style<{info.ReturnType}> style, Expression<Func<TViewModel, TValue>> getter, BindingMode? bindingMode = null, IValueConverter? converter = null{CallerInfoParameters}) {info.StyleGenericConstraint} {SymbolUtilities.NewLine}" +
+                            $"   => style._addSetterCompiledBinding({info.ControlTypeName}.{info.MemberName}Property!, getter, bindingMode, converter{CallerInfoArguments});";
 
         return withSource + SymbolUtilities.NewLine + withoutSource;
     }
