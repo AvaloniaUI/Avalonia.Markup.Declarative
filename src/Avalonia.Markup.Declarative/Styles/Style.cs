@@ -18,32 +18,43 @@ public class Style<TControl> : Style, IRelativeStyle
     public Style()
     {
         SelectorFunc = s => s.OfType<TControl>();
+
+        UpdateSelector(null);
     }
 
     /// <summary>
     /// Creates Style with applied selector. 
-    /// If user starts selector with a type (for example, OfType<StackPanel>), then it will be used as is.
     /// </summary>
     public Style(
             Func<Selector, Selector> selectorFunc,
             [CallerArgumentExpression(nameof(selectorFunc))] string? expression = null,
             [CallerFilePath] string? callerFile = null)
     {
-        // determine if user provided explicit root type in selector
         var selectorString = selectorFunc(null!).ToString();
-        
-        // if selector starts with a letter, it means that user provided explicit root type (for example, OfType<StackPanel>).
+
+        // 1. Check if the user explicitly specified a root (starts with a letter, e.g. OfType<StackPanel>).
         bool hasExplicitRootType = !string.IsNullOrEmpty(selectorString) && char.IsLetter(selectorString[0]);
 
-        if (hasExplicitRootType)
+        // 2. Check whether the selector is a traversal (a path to descendants).
+        // In Avalonia traversals include spaces, '>', or '/' in the selector string.
+        // Also inspect the C# expression for traversal helpers for robustness.
+        bool isTraversal =
+            (!string.IsNullOrEmpty(selectorString) && (selectorString.Contains(' ') || selectorString.Contains('>') || selectorString.Contains('/'))) ||
+            (expression != null && (expression.Contains(".Descendant(") || expression.Contains(".Child(") || expression.Contains(".Template(")));
+
+        // If a root type is explicitly specified OR the selector is a traversal, do not modify it.
+        if (hasExplicitRootType || isTraversal)
         {
             SelectorFunc = selectorFunc;
         }
         else
         {
-            // If user didn't provide explicit root type, we automatically add OfType<TControl>() to the beginning of the selector.
+            // For simple single selectors (e.g. `.my-class` or `:pointerover`),
+            // safely bind the selector to `TControl` so it won't apply to other control types.
             SelectorFunc = s => selectorFunc(s.OfType<TControl>());
         }
+
+        UpdateSelector(null);
     }
 
     public void UpdateSelector(Func<Selector, Selector>? baseSelectorFunc)

@@ -5,10 +5,17 @@ var lifetime = new ClassicDesktopStyleApplicationLifetime { Args = args, Shutdow
 
 var appBuilder = AppBuilder.Configure<Application>()
     .UsePlatformDetect()
-    .AfterSetup(b => b.Instance?.Styles.Add(new FluentTheme()))
+    .AfterSetup(b =>
+    {
+        b.Instance?.Styles.Add(new FluentTheme());
+
+#if DEBUG
+        b.Instance?.AttachDeveloperTools();
+#endif
+    })
     .SetupWithLifetime(lifetime);
 
-var icon = AssetLoader.Open( new Uri($"avares://AvaloniaMarkupSample/avalonia-logo.ico"));
+var icon = AssetLoader.Open(new Uri($"avares://AvaloniaMarkupSample/avalonia-logo.ico"));
 
 var menu = new NativeMenu().Items(
     new NativeMenuItem()
@@ -43,9 +50,4 @@ void OnOpenClick(EventArgs e)
 {
 
 }
-
-#if DEBUG
-lifetime.MainWindow.AttachDevTools();
-#endif
-
 lifetime.Start(args);

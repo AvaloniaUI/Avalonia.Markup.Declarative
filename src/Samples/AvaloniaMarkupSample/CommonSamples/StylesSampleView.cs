@@ -11,7 +11,7 @@ public class StylesSampleView : ViewBase
 
     protected override StyleGroup? BuildStyles() =>
     [
-        new Style<TabItem>(s => s.OfType<TabControl>().Class("styles-sample-tabs").Descendant().OfType<TabItem>())
+        new Style<TabItem>(s => s.Class("styles-sample-tabs").Descendant().OfType<TabItem>())
             .Foreground(Brushes.YellowGreen)
             .IsEnabled(default(TabViewModel)!, x => x.Enabled),
         new Style<Button>(s => s.Class("nested-button"))
