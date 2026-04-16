@@ -85,12 +85,14 @@ public static class StylePropertyExtensions
         [CallerLineNumber] int line = 0)
         where TElement : StyledElement
     {
+        var effectiveConverter = DeclarativeBindingAutoConverter.GetEffectiveConverter<TValue>(avaloniaProperty, converter);
+
         return ExecuteStyleAction(
             style,
             avaloniaProperty,
             () =>
             {
-                var binding = CompiledBinding.Create(getter, source: source, mode: bindingMode ?? BindingMode.Default, converter: converter);
+                var binding = CompiledBinding.Create(getter, source: source, mode: bindingMode ?? BindingMode.Default, converter: effectiveConverter);
                 style.Setters.Add(new Setter(avaloniaProperty, binding));
             },
             file,
@@ -110,12 +112,14 @@ public static class StylePropertyExtensions
             [CallerLineNumber] int line = 0)
             where TElement : StyledElement
     {
+        var effectiveConverter = DeclarativeBindingAutoConverter.GetEffectiveConverter<TValue>(avaloniaProperty, converter);
+
         return ExecuteStyleAction(
             style,
             avaloniaProperty,
             () =>
             {
-                var binding = CompiledBinding.Create(getter, mode: bindingMode ?? BindingMode.Default, converter: converter);
+                var binding = CompiledBinding.Create(getter, mode: bindingMode ?? BindingMode.Default, converter: effectiveConverter);
                 style.Setters.Add(new Setter(avaloniaProperty, binding));
             },
             file,
