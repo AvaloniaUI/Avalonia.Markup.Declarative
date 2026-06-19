@@ -22,8 +22,6 @@ lifetime.MainWindow = new Window()
                                     .DataContext(new MainViewModel())
                             );
 
-#if DEBUG
-lifetime.MainWindow.AttachDevTools();
-#endif
+// DevTools is auto-attached in Debug builds by AvaloniaUI.DiagnosticsSupport.
 
 lifetime.Start(args);

@@ -22,9 +22,7 @@ lifetime.MainWindow = new Window()
     .Height(600)
     .Content(ViewFactory.Create<MainView>());
 
-#if DEBUG
-lifetime.MainWindow.AttachDevTools();
-#endif
+// DevTools is auto-attached in Debug builds by AvaloniaUI.DiagnosticsSupport.
 
 lifetime.Start(args);
 

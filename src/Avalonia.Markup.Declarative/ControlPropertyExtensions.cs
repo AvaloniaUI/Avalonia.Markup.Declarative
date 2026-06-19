@@ -119,6 +119,44 @@ public static class ControlPropertyExtensions
         }
     }
 
+    /// <summary>
+    /// Applies any binding to the specified <see cref="AvaloniaProperty"/> and returns the control for fluent chaining.
+    /// </summary>
+    /// <remarks>
+    /// Unlike the strongly-typed expression overloads (e.g. <c>Text(source, x =&gt; x.Value)</c>), this method accepts a
+    /// ready-made <see cref="BindingBase"/>, so it works with the full feature set of reflection bindings (<see cref="Binding"/>)
+    /// and compiled bindings.
+    /// </remarks>
+    /// <typeparam name="TControl">The control type, which must derive from <see cref="AvaloniaObject"/>.</typeparam>
+    /// <param name="control">The control to bind. Cannot be null.</param>
+    /// <param name="avaloniaProperty">The property to bind. Cannot be null.</param>
+    /// <param name="binding">The binding to apply to the property. Cannot be null.</param>
+    /// <returns>The same control instance, enabling method chaining.</returns>
+    [StackTraceHidden]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TControl BindValue<TControl>(
+        this TControl control,
+        AvaloniaProperty avaloniaProperty,
+        BindingBase binding,
+        [CallerFilePath] string? file = null,
+        [CallerLineNumber] int line = 0)
+        where TControl : AvaloniaObject
+    {
+        try
+        {
+            control.Bind(avaloniaProperty, binding);
+            return control;
+        }
+        catch (ViewBuildingException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw CreateControlBuildException(control, ex, file, line, avaloniaProperty?.Name);
+        }
+    }
+
     [StackTraceHidden]
     private static ViewBuildingException CreateControlBuildException(
         object? target,
