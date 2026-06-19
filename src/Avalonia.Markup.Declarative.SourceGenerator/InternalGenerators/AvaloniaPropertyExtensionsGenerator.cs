@@ -586,20 +586,10 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
             }
         }
 
-        // Check if TViewModel already exists as a type parameter (e.g. ReactiveViewBase<TViewModel>)
-        var existingParams = string.IsNullOrEmpty(genericParamsAll) 
-            ? Array.Empty<string>() 
-            : genericParamsAll.Trim('<', '>').Split(',').Select(p => p.Trim()).ToArray();
-        var hasTViewModel = existingParams.Contains("TViewModel");
-
-        var genericParamsCombined = hasTViewModel
-            ? genericParamsAll // TViewModel already present, no need to add
-            : string.IsNullOrEmpty(genericParamsAll)
-                ? "<TViewModel>"
-                : genericParamsAll.Insert(1, "TViewModel, "); // e.g. "<T>" -> "<TViewModel, T>"
+        var genericParamsCombined = CombineTypeParameters(genericParamsAll, "TViewModel", "TSourceValue");
 
         var extensionText =
-            $"{xmlDoc}public static {controlTypeName} {extensionName}{genericParamsCombined}(this {controlTypeName} control, TViewModel source, Expression<Func<TViewModel, {valueTypeSource}>> getter, BindingMode? mode = null, IValueConverter? converter = null, [CallerFilePath] string? _callerFile = null, [CallerLineNumber] int _callerLine = 0){classConstraint}{NewLine}" +
+            $"{xmlDoc}public static {controlTypeName} {extensionName}{genericParamsCombined}(this {controlTypeName} control, TViewModel source, Expression<Func<TViewModel, TSourceValue>> getter, BindingMode? mode = null, IValueConverter? converter = null, [CallerFilePath] string? _callerFile = null, [CallerLineNumber] int _callerLine = 0){classConstraint}{NewLine}" +
             $"   => control._setCompiledBinding({controlTypeName}.{extensionName}Property, source, getter, mode, converter, _callerFile, _callerLine);";
 
         return extensionText;
@@ -618,5 +608,24 @@ public class AvaloniaPropertyExtensionsGenerator : IIncrementalGenerator
 
 
         return extensionText;
+    }
+
+    private static string CombineTypeParameters(string genericParamsAll, params string[] requiredParameters)
+    {
+        var parameters = string.IsNullOrEmpty(genericParamsAll)
+            ? new List<string>()
+            : genericParamsAll.Trim('<', '>').Split(',').Select(p => p.Trim()).Where(p => p.Length > 0).ToList();
+
+        foreach (var requiredParameter in requiredParameters)
+        {
+            if (!parameters.Contains(requiredParameter))
+            {
+                parameters.Add(requiredParameter);
+            }
+        }
+
+        return parameters.Count == 0
+            ? string.Empty
+            : $"<{string.Join(", ", parameters)}>";
     }
 }

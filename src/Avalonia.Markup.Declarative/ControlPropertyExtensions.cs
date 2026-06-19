@@ -57,10 +57,11 @@ public static class ControlPropertyExtensions
     {
         try
         {
+            var effectiveConverter = DeclarativeBindingAutoConverter.GetEffectiveConverter<TValue>(avaloniaProperty, converter);
             var binding = CompiledBinding.Create(getter,
                 source: source,
                 mode: mode ?? BindingMode.Default,
-                converter: converter);
+                converter: effectiveConverter);
 
             control.Bind(avaloniaProperty, binding);
             return control;
@@ -101,10 +102,11 @@ public static class ControlPropertyExtensions
     {
         try
         {
+            var effectiveConverter = DeclarativeBindingAutoConverter.GetEffectiveConverter<TValue>(avaloniaProperty, converter);
             // don't specify source for the binding, so it will be determined automatically at runtime based on the DataContext of the control
             var binding = CompiledBinding.Create(getter,
                 mode: mode ?? BindingMode.Default,
-                converter: converter);
+                converter: effectiveConverter);
 
             control.Bind(avaloniaProperty, binding);
             return control;

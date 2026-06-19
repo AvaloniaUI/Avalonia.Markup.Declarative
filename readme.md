@@ -103,6 +103,8 @@ Equivalent XAML for the same view:
 
 If you assign `DataContext` from the outside, the same generated setters also support DataContext-relative compiled bindings such as `new TextBlock().Text<MainViewModel>(x => x.Message);`.
 
+Generated compiled-binding setters also apply automatic conversion for common primitive and nullable mismatches, so bindings like `new Slider().Value(vm, x => x.Counter, BindingMode.TwoWay)` work when `Counter` is `int`, and `new CheckBox().IsChecked(vm, x => x.Enabled)` work when `Enabled` is `bool`. Prefer plain member access such as `x => x.Counter`; avoid casts inside the binding expression like `x => (double)x.Counter`, because Avalonia compiled bindings reject `Convert` nodes. For lossy numeric `TwoWay` conversions, convert-back truncates toward zero.
+
 ## Hot reload support
 
 - `ViewBase` supports .NET 6.0+ hot reload.
