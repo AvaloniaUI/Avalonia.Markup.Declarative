@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -67,6 +68,19 @@ public static class HotReloadManager
         }
 
         return "";
+    }
+
+    /// <summary>
+    /// Enumerates the live attached instances currently tracked for hot reload. Used by the
+    /// diagnostics component registry to list active views.
+    /// </summary>
+    internal static IEnumerable<IReloadable> GetLiveInstances()
+    {
+        foreach (var table in Instances.Values)
+        {
+            foreach (var pair in table)
+                yield return pair.Key;
+        }
     }
 
     internal static void RegisterInstance(IReloadable instance)

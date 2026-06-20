@@ -172,12 +172,18 @@ public static class ControlPropertyExtensions
             ? $"UI Build Error on {identity}."
             : $"UI Build Error on {identity} while applying '{operation}'.";
 
-        return new ViewBuildingException(
+        var message =
             $"{header}{Environment.NewLine}" +
             $"File: {file}{Environment.NewLine}" +
             $"Line: {line}{Environment.NewLine}" +
-            $"Error: {exception.Message}",
-            exception);
+            $"Error: {exception.Message}";
+
+        // Record into the diagnostics buffer at the single creation site so agent tooling can read
+        // the rich control/file/line message. This is the only place build setter failures originate.
+        Diagnostics.DiagnosticsErrorLog.Record(
+            Diagnostics.DiagnosticSeverity.Error, Diagnostics.DiagnosticCategory.Build, identity, message);
+
+        return new ViewBuildingException(message, exception);
     }
 
     private static string CreateTargetIdentity(object? target)

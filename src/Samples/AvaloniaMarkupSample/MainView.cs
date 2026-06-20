@@ -57,7 +57,8 @@ public class MainView : ViewBase
                             new DockPanel()
                                 .LastChildFill(true)
                                 .Children(
-                                    new TextBox().Text("Left1").DockPanel_Dock(Dock.Left),
+                                    // Named so an agent can address it for set/type (TextBoxes have no automation name).
+                                    new TextBox().Name("DockLeft1", Scope).Text("Left1").DockPanel_Dock(Dock.Left),
                                     new TextBox().Text("Right").DockPanel_Dock(Dock.Right),
                                     new TextBox().Text("Left2").DockPanel_Dock(Dock.Left)))
                     ),
