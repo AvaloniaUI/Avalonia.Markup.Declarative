@@ -161,7 +161,12 @@ public abstract class ViewBase : Decorator, IReloadable, IDeclarativeViewBase
         {
             Debug.WriteLine(ex.Message);
             Debug.WriteLine(ex.StackTrace);
-            throw new ViewBuildingException(CreateBuildErrorMessage(GetType(), ex), ex);
+            var message = CreateBuildErrorMessage(GetType(), ex);
+            // A ViewBuildingException coming from a _set call is already recorded at its creation site
+            // (handled by the catch above), so only the generic wrap is recorded here.
+            Diagnostics.DiagnosticsErrorLog.Record(
+                Diagnostics.DiagnosticSeverity.Error, Diagnostics.DiagnosticCategory.Build, GetType().Name, message);
+            throw new ViewBuildingException(message, ex);
         }
         finally
         {

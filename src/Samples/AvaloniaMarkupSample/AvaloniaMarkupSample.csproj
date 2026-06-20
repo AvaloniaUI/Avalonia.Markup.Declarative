@@ -33,6 +33,11 @@
     <ProjectReference Include="..\..\Avalonia.Markup.Declarative.SourceGenerator\Avalonia.Markup.Declarative.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
+  <!-- Dev-only agent inspector. Referenced only in Debug so the MCP/web stack never reaches Release. -->
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <ProjectReference Include="..\..\Declarative.Avalonia.AgentTools\Declarative.Avalonia.AgentTools.csproj" />
+  </ItemGroup>
+
   <ItemGroup>
     <Using Include="System" />
     <Using Include="Avalonia" />

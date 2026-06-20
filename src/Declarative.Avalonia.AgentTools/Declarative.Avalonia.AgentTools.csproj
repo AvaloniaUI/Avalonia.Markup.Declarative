@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
+		<IsPackable>true</IsPackable>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+
+		<!-- Package metadata. Version is inherited from Directory.Build.props so the AgentTools major
+		     stays aligned with the Avalonia.Markup.Declarative it inspects. -->
+		<PackageId>Declarative.Avalonia.AgentTools</PackageId>
+		<Title>Declarative.Avalonia AgentTools</Title>
+		<Authors>Avalonia Team</Authors>
+		<Description>In-process MCP (Model Context Protocol) inspector for AI agents building UI with Avalonia.Markup.Declarative. In a debug build it exposes the running app to an agent over loopback: visual-tree dumps with bounds, window/control screenshots, the active component list, and build/binding errors. Debug/dev only — do not ship in Release.</Description>
+		<PackageTags>avalonia;avaloniaui;declarative;mcp;ai;agent;agentic;diagnostics;inspector;screenshot</PackageTags>
+		<PackageProjectUrl>https://github.com/AvaloniaUI/Avalonia.Markup.Declarative</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/AvaloniaUI/Avalonia.Markup.Declarative</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- ASP.NET Core hosts the loopback MCP HTTP/SSE endpoint. This is a dev-only package, so the
+		     web stack never reaches a Release consumer graph (the consumer opts in under #if DEBUG). -->
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="ModelContextProtocol.AspNetCore" Version="1.4.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- ProjectReference becomes a NuGet package dependency on pack, so the two packages cluster
+		     through the dependency graph and version compatibility is visible. -->
+		<ProjectReference Include="..\Avalonia.Markup.Declarative\Avalonia.Markup.Declarative.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+</Project>
