@@ -19,6 +19,8 @@ var appBuilder = AppBuilder.Configure<Application>()
 #if DEBUG
     // Dev-only: exposes the running app to an AI agent over loopback MCP. See docs/agent-tools.md.
     // EnableInteraction turns on the tier-2 'invoke' remote-control tool (click/select/set/keys etc).
+    // It is OFF by default in the package; this sample opts in deliberately so the interaction tools
+    // can be exercised end-to-end. Loopback-only and Debug-only, with a startup warning printed.
     .UseAgentInspector(o => o.EnableInteraction = true)
 #endif
     .SetupWithLifetime(lifetime);

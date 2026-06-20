@@ -112,6 +112,12 @@ internal static class AgentToolContext
                 return found;
         }
 
+        foreach (var component in ComponentRegistry.GetActiveViews())
+        {
+            if (ControlLocator.FindByAutomationName(component.RootControl, name) is { } found)
+                return found;
+        }
+
         return null;
     }
 

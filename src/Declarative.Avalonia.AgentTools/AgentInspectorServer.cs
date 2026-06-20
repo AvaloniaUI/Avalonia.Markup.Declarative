@@ -5,6 +5,7 @@ using Declarative.Avalonia.AgentTools.Tools;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Declarative.Avalonia.AgentTools;
@@ -79,7 +80,9 @@ internal sealed class AgentInspectorServer
                 Console.WriteLine(warning);
             }
 
-            app.Run();
+            // Observe the cancellation token so Stop() can shut the host down gracefully.
+            // The IHost extension takes the token; WebApplication.RunAsync(string?) would shadow it.
+            ((IHost)app).RunAsync(_cts.Token).GetAwaiter().GetResult();
         }
         catch (OperationCanceledException)
         {

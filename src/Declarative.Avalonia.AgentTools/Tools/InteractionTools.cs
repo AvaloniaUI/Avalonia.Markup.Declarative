@@ -68,7 +68,6 @@ public sealed class InteractionTools
             if (control is null)
                 return $"No control named (or labeled) '{name}' was found. Use get_visual_tree to discover names.";
 
-            var peer = ControlAutomationPeer.CreatePeerForElement(control);
             var typeName = control.GetType().Name;
 
             switch (action?.Trim().ToLowerInvariant())
@@ -149,11 +148,15 @@ public sealed class InteractionTools
                     return control.Focus() ? $"Focused '{name}'." : $"Could not focus '{name}'.";
 
                 case "scroll":
-                    peer.BringIntoView();
+                    if (TryCreatePeer(control) is not { } scrollPeer)
+                        return $"Could not bring '{name}' into view: no automation peer is available (the control may not be realized yet).";
+                    scrollPeer.BringIntoView();
                     return $"Brought '{name}' into view.";
 
                 case "context_menu":
-                    peer.ShowContextMenu();
+                    if (TryCreatePeer(control) is not { } menuPeer)
+                        return $"Could not open the context menu for '{name}': no automation peer is available (the control may not be realized yet).";
+                    menuPeer.ShowContextMenu();
                     return $"Opened context menu for '{name}'.";
 
                 default:
@@ -174,13 +177,31 @@ public sealed class InteractionTools
         Visual? current = control;
         while (current is Control owner)
         {
-            if (ControlAutomationPeer.CreatePeerForElement(owner).GetProvider<T>() is { } provider)
+            // A peer can throw for controls that aren't fully realized; treat that the same as
+            // "no provider here" and keep walking up to the actionable ancestor.
+            if (TryCreatePeer(owner)?.GetProvider<T>() is { } provider)
                 return provider;
 
             current = owner.GetVisualParent();
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Creates the automation peer for <paramref name="control"/>, returning null instead of throwing
+    /// for controls that aren't fully realized (mirrors <c>ControlLocator.FindByAutomationName</c>).
+    /// </summary>
+    private static AutomationPeer? TryCreatePeer(Control control)
+    {
+        try
+        {
+            return ControlAutomationPeer.CreatePeerForElement(control);
+        }
+        catch (Exception)
+        {
+            return null;
+        }
     }
 
     /// <summary>
@@ -230,7 +251,7 @@ public sealed class InteractionTools
         switch (control)
         {
             case TextBox textBox:
-                textBox.Text = value;
+                textBox.Text = value ?? string.Empty;
                 return $"Set '{name}'.Text to '{value}'.";
 
             case ToggleButton toggle when bool.TryParse(value, out var isChecked):
