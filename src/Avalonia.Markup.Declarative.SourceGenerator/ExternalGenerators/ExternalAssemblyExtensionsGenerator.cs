@@ -153,6 +153,7 @@ public sealed class ExternalAssemblyExtensionsGenerator : IIncrementalGenerator
         AppendSignaturePart(signature, info.GenericConstraint);
         AppendSignaturePart(signature, info.GenericArg);
         AppendSignaturePart(signature, info.IsRoutedEvent ? "routed" : "plain");
+        AppendSignaturePart(signature, info.SupportsAddHandler ? "addhandler" : "subscription");
         AppendSignaturePart(signature, info.IsObsolete ? "obsolete" : "active");
         AppendSignaturePart(signature, info.ReturnsVoid ? "void" : "nonvoid");
 

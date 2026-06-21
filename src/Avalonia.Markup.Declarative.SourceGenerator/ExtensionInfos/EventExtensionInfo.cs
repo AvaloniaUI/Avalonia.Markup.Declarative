@@ -17,6 +17,7 @@ internal sealed class EventExtensionInfo : IMemberExtensionInfo
     public string GenericConstraint { get; } = "";
     public string GenericArg { get; } = "";
     public bool IsRoutedEvent { get; }
+    public bool SupportsAddHandler { get; }
     public bool IsObsolete { get; }
 
     public bool HasStandardSignature =>
@@ -33,6 +34,7 @@ internal sealed class EventExtensionInfo : IMemberExtensionInfo
         XmlDoc = SymbolUtilities.FormatXmlDoc(eventInfo);
         IsObsolete = eventInfo.IsObsolete();
         IsRoutedEvent = IsRoutedEventSymbol(eventInfo);
+        SupportsAddHandler = eventInfo.ContainingType.IsOrInheritsFrom("Avalonia.Interactivity.Interactive");
 
         if (!eventInfo.ContainingType.IsSealed)
         {
