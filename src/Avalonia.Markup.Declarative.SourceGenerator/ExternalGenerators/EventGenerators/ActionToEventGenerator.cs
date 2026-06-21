@@ -52,7 +52,7 @@ internal sealed class ActionToEventGenerator : ExtensionGeneratorBase<EventExten
         }
 
         // 2. RoutedEvents (Avalonia routing events)
-        if (@event.IsRoutedEvent)
+        if (@event.IsRoutedEvent && @event.SupportsAddHandler)
         {
             return $"{documentation}{obsolete}public static {@event.ReturnType} On{@event.EventName}{@event.GenericArg}(this {@event.ReturnType} control, {argsString}, Avalonia.Interactivity.RoutingStrategies? routes = null) {@event.GenericConstraint}\n" +
                    $"{{\n" +
