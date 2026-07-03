@@ -126,8 +126,9 @@ public static class ControlPropertyExtensions
     /// </summary>
     /// <remarks>
     /// Unlike the strongly-typed expression overloads (e.g. <c>Text(source, x =&gt; x.Value)</c>), this method accepts a
-    /// ready-made <see cref="BindingBase"/>, so it works with the full feature set of reflection bindings (<see cref="Binding"/>)
-    /// and compiled bindings.
+    /// ready-made <see cref="BindingBase"/>, so it works with the full feature set of reflection bindings (<see cref="Binding"/>),
+    /// compiled bindings (<c>CompiledBinding</c>), template bindings and multi-bindings.
+    /// The generated per-property setters expose this as a named overload, e.g. <c>new TextBlock().Text(new Binding("Value"))</c>.
     /// </remarks>
     /// <typeparam name="TControl">The control type, which must derive from <see cref="AvaloniaObject"/>.</typeparam>
     /// <param name="control">The control to bind. Cannot be null.</param>

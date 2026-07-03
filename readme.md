@@ -105,6 +105,27 @@ If you assign `DataContext` from the outside, the same generated setters also su
 
 Generated compiled-binding setters also apply automatic conversion for common primitive and nullable mismatches, so bindings like `new Slider().Value(vm, x => x.Counter, BindingMode.TwoWay)` work when `Counter` is `int`, and `new CheckBox().IsChecked(vm, x => x.Enabled)` work when `Enabled` is `bool`. Prefer plain member access such as `x => x.Counter`: a numeric-conversion cast like `x => (double)x.Counter` is both unnecessary (the auto-converter handles it) and unsupported — Avalonia's expression parser rejects value-converting `Convert` nodes. Type casts that navigate to a member of a derived type, such as `x => ((DerivedType)x).Property`, *are* supported. For lossy numeric `TwoWay` conversions, convert-back truncates toward zero.
 
+### Passing a ready-made binding
+
+When you need the full binding feature set — reflection bindings (`Binding`), a pre-built compiled binding, a `TemplateBinding`, a `MultiBinding`, or a relative-source/element-name binding — every generated property, attached-property and style setter also exposes an overload that accepts a `BindingBase` directly:
+
+```csharp
+using Avalonia.Data;
+
+new TextBlock()
+    .Text(new Binding("ReflectionProperty"))                                // DataContext-relative reflection binding
+    .Foreground(new Binding("Theme.Accent") { Source = appState });         // explicit source
+
+new TextBlock()
+    .Text(CompiledBinding.Create<MyViewModel, string>(x => x.Title, source: vm));
+
+// attached properties and styles get the same overload
+new Border().Grid_Row(new Binding(nameof(vm.Row)) { Source = vm });
+new Style<TextBlock>().Text(new Binding(nameof(vm.Name)));
+```
+
+This is the escape hatch for anything the strongly-typed `x => x.Member` expression overloads don't cover (custom converters passed on the binding, `RelativeSource`, `ElementName`, string format, multi-value bindings, etc.). The same thing is available on any `AvaloniaProperty` via `control.BindValue(TextBlock.TextProperty, binding)`.
+
 ## Hot reload support
 
 - `ViewBase` supports .NET 6.0+ hot reload.
