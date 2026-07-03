@@ -18,6 +18,7 @@ internal sealed class ExternalGeneratorHost
 
             new ValueSetterGenerator(),
             new BindFromExpressionSetterGenerator(),
+            new BindFromBindingSetterGenerator(),
             new ValueOverloadsSetterGenerator()
         ),
 
@@ -25,7 +26,8 @@ internal sealed class ExternalGeneratorHost
             static t => GetAttachedPropertyInfos(t),
 
             new AttachedPropertyValueSetterGenerator(),
-            new AttachedPropertyBindFromExpressionSetterGenerator()
+            new AttachedPropertyBindFromExpressionSetterGenerator(),
+            new AttachedPropertyBindFromBindingSetterGenerator()
         ),
 
         new("Events",
@@ -39,6 +41,7 @@ internal sealed class ExternalGeneratorHost
 
             new ValueStyleSetterGenerator(),
             new BindFromExpressionStyleSetterGenerator(),
+            new BindFromBindingStyleSetterGenerator(),
             new ValueOverloadsStyleSetterGenerator()
         )
     ];
