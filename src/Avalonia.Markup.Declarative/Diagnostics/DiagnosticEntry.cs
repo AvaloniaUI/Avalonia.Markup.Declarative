@@ -26,6 +26,9 @@ public enum DiagnosticCategory
     /// <summary>Automatic binding conversion failures.</summary>
     Converter,
 
+    /// <summary>Unhandled exceptions from the UI dispatcher or unobserved tasks (e.g. event handlers).</summary>
+    Runtime,
+
     /// <summary>Anything else.</summary>
     Other
 }

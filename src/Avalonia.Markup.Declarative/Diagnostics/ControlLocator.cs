@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Avalonia.Automation.Peers;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.VisualTree;
 
 namespace Avalonia.Markup.Declarative.Diagnostics;
@@ -73,6 +75,78 @@ public static class ControlLocator
 
         return null;
     }
+
+    /// <summary>
+    /// Finds every control at or below <paramref name="root"/> whose type name matches
+    /// <paramref name="typeName"/> (its simple name, e.g. <c>Button</c>, or its full name), case-insensitive.
+    /// </summary>
+    /// <remarks>
+    /// This is the "by type" arm of a selector: agents often want to inspect or highlight all controls
+    /// of a kind ("all Buttons") without knowing their names. Must be called on the UI thread; the caller
+    /// is responsible for marshaling.
+    /// </remarks>
+    public static IReadOnlyList<Control> FindAllByType(Visual root, string typeName)
+    {
+        ArgumentNullException.ThrowIfNull(root);
+        var matches = new List<Control>();
+        if (string.IsNullOrWhiteSpace(typeName))
+            return matches;
+
+        var wanted = typeName.Trim();
+        foreach (var descendant in root.GetSelfAndVisualDescendants())
+        {
+            if (descendant is not Control control)
+                continue;
+
+            var type = control.GetType();
+            if (string.Equals(type.Name, wanted, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(type.FullName, wanted, StringComparison.OrdinalIgnoreCase))
+            {
+                matches.Add(control);
+            }
+        }
+
+        return matches;
+    }
+
+    /// <summary>
+    /// Finds every control at or below <paramref name="root"/> whose visible text contains
+    /// <paramref name="text"/> (case-insensitive). Checks <see cref="TextBlock"/>/<see cref="TextBox"/>
+    /// text, string <see cref="ContentControl.Content"/> and string <see cref="HeaderedContentControl.Header"/>.
+    /// </summary>
+    /// <remarks>
+    /// The reverse of a screenshot: an agent reads a label in the pixels and wants the control behind
+    /// it. Must be called on the UI thread; the caller is responsible for marshaling.
+    /// </remarks>
+    public static IReadOnlyList<Control> FindAllByText(Visual root, string text)
+    {
+        ArgumentNullException.ThrowIfNull(root);
+        var matches = new List<Control>();
+        if (string.IsNullOrEmpty(text))
+            return matches;
+
+        foreach (var descendant in root.GetSelfAndVisualDescendants())
+        {
+            if (descendant is Control control &&
+                GetVisibleText(control) is { } value &&
+                value.Contains(text, StringComparison.OrdinalIgnoreCase))
+            {
+                matches.Add(control);
+            }
+        }
+
+        return matches;
+    }
+
+    private static string? GetVisibleText(Control control) =>
+        control switch
+        {
+            TextBlock tb => tb.Text,
+            TextBox tx => tx.Text,
+            HeaderedContentControl { Header: string header } => header,
+            ContentControl { Content: string content } => content,
+            _ => null
+        };
 
     private static bool TryFromNameScope(Visual visual, string name, out Control? control)
     {

@@ -51,10 +51,19 @@ appBuilder.Instance?.TrayIcon_Icons(
     ]
 );
 
-lifetime.MainWindow = new Window()
-    .Title("Avalonia markup samples")
+const string baseTitle = "Avalonia markup samples";
+var mainWindow = new Window()
+    .Title(baseTitle)
     .Content(new MainView())
     .NativeMenu_Menu(menu);
+lifetime.MainWindow = mainWindow;
+
+#if DEBUG
+// Dev-only: reflect the agent connection status in the window title, the way Chrome shows a
+// "DevTools is connected" indicator. Events are raised on the UI thread, so we can set Title directly.
+AgentConnectionMonitor.StatusChanged += (_, e) =>
+    mainWindow.Title = e.IsConnected ? $"🟢 Agent connected — {baseTitle}" : baseTitle;
+#endif
 
 void OnOpenClick(EventArgs e)
 {

@@ -84,8 +84,39 @@ internal static class AgentToolContext
     }
 
     /// <summary>
-    /// Finds a control across every active top-level and tracked component root, first by its
-    /// <c>Name</c> and then, as a fallback, by its UI Automation name (visible label, e.g. a tab
+    /// The roots that always exist in the normal tree: active top-levels and tracked component roots.
+    /// </summary>
+    private static List<Visual> GetBaseRoots()
+    {
+        var roots = new List<Visual>();
+        roots.AddRange(GetTopLevels());
+        foreach (var component in ComponentRegistry.GetActiveViews())
+            roots.Add(component.RootControl);
+        return roots;
+    }
+
+    /// <summary>
+    /// Returns open popups (dropdowns, flyouts, menus) discoverable from the base roots.
+    /// </summary>
+    public static IReadOnlyList<PopupInfo> GetOpenPopups() =>
+        PopupLocator.GetOpenPopups(GetBaseRoots());
+
+    /// <summary>
+    /// All roots that should be searched for controls: the base roots plus the content of open popups
+    /// (whose content lives outside the window tree). This is what makes controls inside a live
+    /// dropdown/menu addressable.
+    /// </summary>
+    private static List<Visual> GetSearchRoots()
+    {
+        var roots = GetBaseRoots();
+        foreach (var popup in GetOpenPopups())
+            roots.Add(popup.ContentRoot);
+        return roots;
+    }
+
+    /// <summary>
+    /// Finds a control across every active top-level, tracked component root and open popup, first by
+    /// its <c>Name</c> and then, as a fallback, by its UI Automation name (visible label, e.g. a tab
     /// header). The name pass is tried everywhere before the automation pass so an explicit
     /// <c>Name</c> always wins over a coincidental label match.
     /// </summary>
@@ -94,31 +125,61 @@ internal static class AgentToolContext
         if (string.IsNullOrEmpty(name))
             return null;
 
-        foreach (var top in GetTopLevels())
-        {
-            if (ControlLocator.FindByName(top, name) is { } found)
-                return found;
-        }
+        var roots = GetSearchRoots();
 
-        foreach (var component in ComponentRegistry.GetActiveViews())
-        {
-            if (ControlLocator.FindByName(component.RootControl, name) is { } found)
+        foreach (var root in roots)
+            if (ControlLocator.FindByName(root, name) is { } found)
                 return found;
-        }
 
-        foreach (var top in GetTopLevels())
-        {
-            if (ControlLocator.FindByAutomationName(top, name) is { } found)
+        foreach (var root in roots)
+            if (ControlLocator.FindByAutomationName(root, name) is { } found)
                 return found;
-        }
-
-        foreach (var component in ComponentRegistry.GetActiveViews())
-        {
-            if (ControlLocator.FindByAutomationName(component.RootControl, name) is { } found)
-                return found;
-        }
 
         return null;
+    }
+
+    /// <summary>
+    /// Resolves a selector to one or more controls. A selector is matched, in order, as: a control
+    /// <c>Name</c> or UI Automation name (via <see cref="FindControl"/>, returning a single control),
+    /// or — failing that — a type name (returning every control of that type across the app).
+    /// </summary>
+    public static IReadOnlyList<Control> FindControls(string selector)
+    {
+        if (string.IsNullOrWhiteSpace(selector))
+            return Array.Empty<Control>();
+
+        if (FindControl(selector) is { } single)
+            return new[] { single };
+
+        var results = new List<Control>();
+        var seen = new HashSet<Control>();
+
+        foreach (var root in GetSearchRoots())
+            AddMatches(ControlLocator.FindAllByType(root, selector), results, seen);
+
+        return results;
+    }
+
+    private static void AddMatches(IReadOnlyList<Control> found, List<Control> results, HashSet<Control> seen)
+    {
+        foreach (var control in found)
+            if (seen.Add(control))
+                results.Add(control);
+    }
+
+    /// <summary>
+    /// Finds every control whose visible text contains <paramref name="text"/>, across all active
+    /// top-levels and tracked components.
+    /// </summary>
+    public static IReadOnlyList<Control> FindByText(string text)
+    {
+        var results = new List<Control>();
+        var seen = new HashSet<Control>();
+
+        foreach (var root in GetSearchRoots())
+            AddMatches(ControlLocator.FindAllByText(root, text), results, seen);
+
+        return results;
     }
 
     /// <summary>

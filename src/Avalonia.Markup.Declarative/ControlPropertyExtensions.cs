@@ -532,11 +532,17 @@ public static class ControlPropertyExtensions
     /// <param name="ns">The name scope in which to register the control. Cannot be null.</param>
     /// <returns>The control instance with the specified name set and registered in the provided name scope. Enables method chaining.</returns>
     [StackTraceHidden]
-    public static TElement Name<TElement>(this TElement control, string name, INameScope ns)
+    public static TElement Name<TElement>(this TElement control, string name, INameScope ns,
+        [CallerFilePath] string? _callerFile = null, [CallerLineNumber] int _callerLine = 0)
         where TElement : Control
     {
         ns?.Register(name, control);
         control.Name = name;
+
+        // Opt-in (dev-only): record where this control was declared so agent tooling can jump to the line.
+        if (Diagnostics.AgentSourceTagging.Enabled && _callerFile is not null)
+            Diagnostics.AgentSourceTagging.SetSource(control, $"{_callerFile}:{_callerLine}");
+
         return control;
     }
 

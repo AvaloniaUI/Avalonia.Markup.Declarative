@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Automation.Peers;
@@ -9,6 +10,9 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Declarative.Diagnostics;
+using Avalonia.Styling;
+using Avalonia.Threading;
 using Avalonia.VisualTree;
 
 using ModelContextProtocol.Server;
@@ -37,17 +41,19 @@ public sealed class InteractionTools
         "Target by Name or by visible label (automation name). Actions: " +
         "'invoke' (press a Button/MenuItem/Hyperlink), " +
         "'select' (choose a TabItem/ListBoxItem/RadioButton — e.g. switch tabs), " +
+        "'select_item' (choose an item in a ComboBox/ListBox/TabControl by its text — pass it in 'value'), " +
         "'toggle' (CheckBox/ToggleButton), " +
         "'set' (set value: TextBox text, or a Slider/NumericUpDown number — pass it in 'value'), " +
         "'expand'/'collapse' (TreeViewItem/Expander/ComboBox), " +
-        "'focus', 'scroll' (bring into view), 'context_menu' (open the context menu), " +
+        "'focus', 'scroll' (bring into view), 'scroll_by' (scroll the nearest ScrollViewer by 'dx,dy' in 'value'), " +
+        "'context_menu' (open the context menu), " +
         "'key' (press a key/gesture from 'value', e.g. 'Enter' or 'Ctrl+S'; targets the named control or the focused element), " +
         "'type' (raw text input from 'value' into the named control or the focused element). " +
         "Disabled unless EnableInteraction was set when starting the inspector.")]
     public static Task<string> Invoke(
         [Description("Name or visible label (automation name) of the target control. Optional for 'key'/'type' (defaults to the focused element).")]
         string? name,
-        [Description("Action: invoke | select | toggle | set | expand | collapse | focus | scroll | context_menu | key | type.")]
+        [Description("Action: invoke | select | select_item | toggle | set | expand | collapse | focus | scroll | scroll_by | context_menu | key | type.")]
         string action,
         [Description("Value used by 'set' (text/number), 'key' (gesture) and 'type' (text).")]
         string? value = null) =>
@@ -159,11 +165,122 @@ public sealed class InteractionTools
                     menuPeer.ShowContextMenu();
                     return $"Opened context menu for '{name}'.";
 
+                case "select_item":
+                    return SelectItem(control, name, value);
+
+                case "scroll_by":
+                    return ScrollBy(control, name, value);
+
                 default:
                     return $"Unknown action '{action}'. " +
-                           "Use invoke | select | toggle | set | expand | collapse | focus | scroll | context_menu | key | type.";
+                           "Use invoke | select | select_item | toggle | set | expand | collapse | focus | scroll | scroll_by | context_menu | key | type.";
             }
         });
+
+    [McpServerTool(Name = "set_window_size", Destructive = true), Description(
+        "Resizes a desktop window so you can verify responsive layout at a breakpoint (e.g. 400/800/1200 " +
+        "wide). Returns the resulting client size (which may be clamped by Min/Max) and the previous size " +
+        "so you can restore it. Disabled unless EnableInteraction was set.")]
+    public static Task<string> SetWindowSize(
+        [Description("New width in DIPs.")] double width,
+        [Description("New height in DIPs.")] double height,
+        [Description("Optional window title or 0-based index. Omit for the main window.")]
+        string? windowId = null) =>
+        AgentToolContext.RunOnUiThreadAsync(() =>
+        {
+            if (AgentToolContext.ResolveTopLevel(windowId) is not Window window)
+                return "set_window_size requires a desktop Window (the app has none, or this is a single-view top-level).";
+
+            var previous = window.ClientSize;
+            window.Width = width;
+            window.Height = height;
+            Dispatcher.UIThread.RunJobs();
+
+            return string.Format(CultureInfo.InvariantCulture,
+                "Resized '{0}' from client {1:0.#}x{2:0.#} to {3:0.#}x{4:0.#} (requested {5:0.#}x{6:0.#}).",
+                window.Title, previous.Width, previous.Height, window.ClientSize.Width, window.ClientSize.Height, width, height);
+        });
+
+    [McpServerTool(Name = "set_theme", Destructive = true), Description(
+        "Switches the application theme variant so you can verify both light and dark. Pass 'Light', " +
+        "'Dark' or 'Default'. Returns the previous and resulting variant. Disabled unless EnableInteraction was set.")]
+    public static Task<string> SetTheme(
+        [Description("Theme variant: Light | Dark | Default.")]
+        string variant) =>
+        AgentToolContext.RunOnUiThreadAsync(() =>
+        {
+            if (Application.Current is not { } app)
+                return "No Application is running.";
+
+            ThemeVariant? target = variant?.Trim().ToLowerInvariant() switch
+            {
+                "light" => ThemeVariant.Light,
+                "dark" => ThemeVariant.Dark,
+                "default" => ThemeVariant.Default,
+                _ => null
+            };
+
+            if (target is null)
+                return $"Unknown theme variant '{variant}'. Use Light | Dark | Default.";
+
+            var previous = app.RequestedThemeVariant;
+            app.RequestedThemeVariant = target;
+            Dispatcher.UIThread.RunJobs();
+
+            return $"Theme requested={target}, actual now={app.ActualThemeVariant} (was requested={previous?.ToString() ?? "Default"}).";
+        });
+
+    [McpServerTool(Name = "click_at", Destructive = true), Description(
+        "Acts on whatever control is at a pixel coordinate — useful for custom-drawn controls with no " +
+        "Name or automation label. Screenshot pixels equal these window-client coordinates. It resolves " +
+        "the control at the point and invokes/selects it (falling back to focus); it does NOT synthesize a " +
+        "raw OS click, so it has no hover/drag. Pass x/y and an optional windowId. Disabled unless EnableInteraction was set.")]
+    public static Task<string> ClickAt(
+        [Description("X coordinate in window-client pixels/DIPs.")] double x,
+        [Description("Y coordinate in window-client pixels/DIPs.")] double y,
+        [Description("Optional window title or 0-based index. Omit for the main window.")]
+        string? windowId = null) =>
+        AgentToolContext.RunOnUiThreadAsync(() =>
+        {
+            var top = AgentToolContext.ResolveTopLevel(windowId);
+            if (top is null)
+                return "No active window/top-level was found.";
+
+            var point = new Point(x, y);
+            if (HitTester.HitTest(top, point) is not { } hit)
+                return $"Nothing is at ({x}, {y}).";
+
+            var target = hit as Control ?? hit.FindAncestorOfType<Control>();
+            if (target is null)
+                return $"A non-control visual is at ({x}, {y}).";
+
+            var identity = DescribeTarget(target);
+
+            if (ResolveProvider<IInvokeProvider>(target) is { } invoke)
+            {
+                invoke.Invoke();
+                return $"Invoked {identity} at ({x}, {y}).";
+            }
+
+            if (target is Button button)
+            {
+                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                return $"Clicked {identity} at ({x}, {y}).";
+            }
+
+            if (ResolveProvider<ISelectionItemProvider>(target) is { } selection)
+            {
+                selection.Select();
+                return $"Selected {identity} at ({x}, {y}).";
+            }
+
+            return target.Focus()
+                ? $"No invokable control at ({x}, {y}); focused {identity} instead."
+                : $"{identity} at ({x}, {y}) is neither invokable nor focusable.";
+        });
+
+    private static string DescribeTarget(Control control) =>
+        control.Name is { Length: > 0 } name ? $"{control.GetType().Name} #{name}" : control.GetType().Name;
 
     /// <summary>
     /// Returns the requested automation provider from <paramref name="control"/>'s peer, or from the
@@ -229,6 +346,74 @@ public sealed class InteractionTools
 
         return false;
     }
+
+    /// <summary>
+    /// Selects an item in the nearest <see cref="SelectingItemsControl"/> (self or ancestor) by its
+    /// display text — covers ComboBox/ListBox/TabControl without opening the popup and hunting for the
+    /// item container.
+    /// </summary>
+    private static string SelectItem(Control control, string name, string? value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return "Provide the item text in 'value' for 'select_item'.";
+
+        var itemsControl = control as SelectingItemsControl
+                           ?? control.GetVisualAncestors().OfType<SelectingItemsControl>().FirstOrDefault();
+        if (itemsControl is null)
+            return $"Control '{name}' ({control.GetType().Name}) is not (and is not inside) a selectable items control.";
+
+        var index = 0;
+        foreach (var item in itemsControl.Items)
+        {
+            if (ItemText(item) is { } text && text.Contains(value, StringComparison.OrdinalIgnoreCase))
+            {
+                itemsControl.SelectedIndex = index;
+                return $"Selected item '{text}' (index {index}) in {itemsControl.GetType().Name}.";
+            }
+
+            index++;
+        }
+
+        return $"No item whose text contains '{value}' was found in {itemsControl.GetType().Name}.";
+    }
+
+    private static string? ItemText(object? item) =>
+        item switch
+        {
+            null => null,
+            string s => s,
+            ContentControl { Content: string content } => content,
+            HeaderedItemsControl { Header: string header } => header,
+            _ => item.ToString()
+        };
+
+    /// <summary>
+    /// Scrolls the nearest <see cref="ScrollViewer"/> (self, ancestor, or descendant) by a delta given
+    /// as "dx,dy".
+    /// </summary>
+    private static string ScrollBy(Control control, string name, string? value)
+    {
+        var parts = (value ?? string.Empty).Split(',', StringSplitOptions.TrimEntries);
+        if (parts.Length != 2 ||
+            !double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture, out var dx) ||
+            !double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out var dy))
+        {
+            return "Provide the scroll delta as 'dx,dy' in 'value' (e.g. '0,120').";
+        }
+
+        var scroll = FindScrollViewer(control);
+        if (scroll is null)
+            return $"No ScrollViewer found at or around '{name}' ({control.GetType().Name}).";
+
+        scroll.Offset = new Vector(scroll.Offset.X + dx, scroll.Offset.Y + dy);
+        return $"Scrolled by ({dx},{dy}); offset is now ({scroll.Offset.X:0.#},{scroll.Offset.Y:0.#}) " +
+               $"of extent {scroll.Extent.Width:0.#}x{scroll.Extent.Height:0.#}.";
+    }
+
+    private static ScrollViewer? FindScrollViewer(Control control) =>
+        control as ScrollViewer
+        ?? control.GetVisualAncestors().OfType<ScrollViewer>().FirstOrDefault()
+        ?? control.GetVisualDescendants().OfType<ScrollViewer>().FirstOrDefault();
 
     private static string SetValue(Control control, string name, string? value)
     {

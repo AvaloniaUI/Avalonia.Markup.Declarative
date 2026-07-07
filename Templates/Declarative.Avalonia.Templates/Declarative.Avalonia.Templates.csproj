@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="content\**\*" Exclude="content\**\[Bb]in\**;content\**\[Oo]bj\**" Pack="true" PackagePath="content" />
+		<Content Include="content\**\*" Exclude="content\**\bin\**;content\**\obj\**" Pack="true" PackagePath="content" />
 		<None Include="README.md" Pack="true" PackagePath="\" />
 		<None Include="..\..\src\Avalonia.Markup.Declarative\Icon.png" Pack="true" PackagePath="\" Link="Icon.png" />
 	</ItemGroup>

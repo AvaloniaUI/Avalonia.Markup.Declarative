@@ -1,7 +1,9 @@
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace Avalonia.Markup.Declarative.Diagnostics;
 
@@ -16,6 +18,15 @@ public enum ScreenshotMode
     /// <summary>Render the whole window, then crop to the control's bounds (shows real context).</summary>
     InContext
 }
+
+/// <summary>
+/// A captured image in both encoded (PNG) and raw (BGRA8888) form. The raw pixels enable pixel
+/// comparison without re-decoding.
+/// </summary>
+/// <param name="Png">PNG-encoded bytes.</param>
+/// <param name="Bgra">Raw BGRA8888 pixels, row-major, stride = <c>Size.Width * 4</c>.</param>
+/// <param name="Size">Pixel dimensions.</param>
+public readonly record struct CapturedImage(byte[] Png, byte[] Bgra, PixelSize Size);
 
 /// <summary>
 /// Captures PNG screenshots of controls and top-levels via <see cref="RenderTargetBitmap"/>.
@@ -39,13 +50,8 @@ public static class ControlScreenshotService
     /// </summary>
     public static byte[] CaptureControlPng(Control control, ScreenshotMode mode = ScreenshotMode.Isolated)
     {
-        ArgumentNullException.ThrowIfNull(control);
-        EnsureLaidOut(control);
-
-        if (mode == ScreenshotMode.InContext && TopLevel.GetTopLevel(control) is { } top)
-            return CaptureControlInContext(control, top);
-
-        return RenderToPng(control, control.Bounds.Size);
+        using var bitmap = RenderControl(control, mode);
+        return Encode(bitmap);
     }
 
     /// <summary>
@@ -54,10 +60,60 @@ public static class ControlScreenshotService
     public static byte[] CaptureTopLevelPng(TopLevel top)
     {
         ArgumentNullException.ThrowIfNull(top);
-        return RenderToPng(top, ResolveTopLevelSize(top));
+        using var bitmap = RenderToBitmap(top, ResolveTopLevelSize(top));
+        return Encode(bitmap);
     }
 
-    private static byte[] CaptureControlInContext(Control control, TopLevel top)
+    /// <summary>
+    /// Captures a control as PNG plus raw pixels (for comparison).
+    /// </summary>
+    public static CapturedImage CaptureControl(Control control, ScreenshotMode mode = ScreenshotMode.Isolated)
+    {
+        using var bitmap = RenderControl(control, mode);
+        return Capture(bitmap);
+    }
+
+    /// <summary>
+    /// Captures a top-level as PNG plus raw pixels (for comparison).
+    /// </summary>
+    public static CapturedImage CaptureTopLevel(TopLevel top)
+    {
+        ArgumentNullException.ThrowIfNull(top);
+        using var bitmap = RenderToBitmap(top, ResolveTopLevelSize(top));
+        return Capture(bitmap);
+    }
+
+    /// <summary>
+    /// Encodes a raw BGRA8888 buffer as PNG (used to render diff/overlay images).
+    /// </summary>
+    public static byte[] EncodePng(byte[] bgra, PixelSize size)
+    {
+        ArgumentNullException.ThrowIfNull(bgra);
+        using var writeable = new WriteableBitmap(size, StandardDpi, PixelFormat.Bgra8888, AlphaFormat.Premul);
+        using (var frameBuffer = writeable.Lock())
+        {
+            var stride = size.Width * 4;
+            for (var y = 0; y < size.Height; y++)
+                Marshal.Copy(bgra, y * stride, IntPtr.Add(frameBuffer.Address, y * frameBuffer.RowBytes), stride);
+        }
+
+        using var stream = new MemoryStream();
+        writeable.Save(stream);
+        return stream.ToArray();
+    }
+
+    private static RenderTargetBitmap RenderControl(Control control, ScreenshotMode mode)
+    {
+        ArgumentNullException.ThrowIfNull(control);
+        EnsureLaidOut(control);
+
+        if (mode == ScreenshotMode.InContext && TopLevel.GetTopLevel(control) is { } top)
+            return RenderControlInContext(control, top);
+
+        return RenderToBitmap(control, control.Bounds.Size);
+    }
+
+    private static RenderTargetBitmap RenderControlInContext(Control control, TopLevel top)
     {
         var topSize = ResolveTopLevelSize(top);
         using var full = new RenderTargetBitmap(ToPixelSize(topSize), StandardDpi);
@@ -69,7 +125,7 @@ public static class ControlScreenshotService
             throw new InvalidOperationException(
                 $"Control '{DescribeControl(control)}' has a zero size and cannot be captured.");
 
-        using var cropped = new RenderTargetBitmap(ToPixelSize(size), StandardDpi);
+        var cropped = new RenderTargetBitmap(ToPixelSize(size), StandardDpi);
         using (var ctx = cropped.CreateDrawingContext())
         {
             ctx.DrawImage(
@@ -78,19 +134,19 @@ public static class ControlScreenshotService
                 new Rect(0, 0, size.Width, size.Height));
         }
 
-        return Encode(cropped);
+        return cropped;
     }
 
-    private static byte[] RenderToPng(Visual visual, Size size)
+    private static RenderTargetBitmap RenderToBitmap(Visual visual, Size size)
     {
         if (size.Width <= 0 || size.Height <= 0)
             throw new InvalidOperationException(
                 $"Visual '{visual.GetType().Name}' has a zero size and cannot be captured. " +
                 "It may be collapsed, not yet laid out, or off-screen.");
 
-        using var rtb = new RenderTargetBitmap(ToPixelSize(size), StandardDpi);
+        var rtb = new RenderTargetBitmap(ToPixelSize(size), StandardDpi);
         rtb.Render(visual);
-        return Encode(rtb);
+        return rtb;
     }
 
     private static byte[] Encode(RenderTargetBitmap bitmap)
@@ -98,6 +154,26 @@ public static class ControlScreenshotService
         using var stream = new MemoryStream();
         bitmap.Save(stream);
         return stream.ToArray();
+    }
+
+    private static CapturedImage Capture(RenderTargetBitmap bitmap)
+    {
+        var png = Encode(bitmap);
+        var size = bitmap.PixelSize;
+        var stride = size.Width * 4;
+        var bgra = new byte[stride * size.Height];
+
+        var handle = GCHandle.Alloc(bgra, GCHandleType.Pinned);
+        try
+        {
+            bitmap.CopyPixels(new PixelRect(0, 0, size.Width, size.Height), handle.AddrOfPinnedObject(), bgra.Length, stride);
+        }
+        finally
+        {
+            handle.Free();
+        }
+
+        return new CapturedImage(png, bgra, size);
     }
 
     private static void EnsureLaidOut(Control control)

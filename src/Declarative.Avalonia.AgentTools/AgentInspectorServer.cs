@@ -65,6 +65,15 @@ internal sealed class AgentInspectorServer
                 mcp.WithTools<InteractionTools>();
 
             var app = builder.Build();
+
+            // Observe agent activity so the app can show a live "agent connected" status. Runs for every
+            // request to the loopback endpoint; it only records a timestamp, so it adds no meaningful cost.
+            app.Use(async (context, next) =>
+            {
+                AgentConnectionMonitor.NotifyActivity(context.Request.Path.Value);
+                await next(context);
+            });
+
             app.MapMcp();
 
             // Printed to both the debug output and stdout so it is visible under `dotnet watch`/`dotnet run`.

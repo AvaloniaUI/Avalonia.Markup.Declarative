@@ -31,8 +31,15 @@ public static class AppBuilderAgentInspectorExtensions
 
         AgentToolContext.Options = options;
 
+        // Opt-in per-control source tagging must be armed before any views are built.
+        global::Avalonia.Markup.Declarative.Diagnostics.AgentSourceTagging.Enabled = options.EnableSourceTagging;
+
         // Capturing binding/converter errors is part of the inspector's job; install the log sink now.
         global::Avalonia.Markup.Declarative.Diagnostics.BindingErrorSink.Install();
+
+        // Observe unhandled dispatcher/task exceptions (e.g. thrown inside an event handler) so they
+        // surface through get_errors. This is a pure observer and never alters the app's behavior.
+        global::Avalonia.Markup.Declarative.Diagnostics.RuntimeErrorSink.Install();
 
         _server = new AgentInspectorServer(options);
         _server.Start();

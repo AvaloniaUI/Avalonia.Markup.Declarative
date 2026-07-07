@@ -17,10 +17,18 @@ public sealed class AgentInspectorOptions
     public int Port { get; set; } = 5599;
 
     /// <summary>
-    /// Enables the tier-2 <c>invoke</c> tool (click / set value / focus). This is a remote-control
-    /// surface, so it is <see langword="false"/> by default and must be opted into explicitly.
+    /// Enables the tier-2 remote-control tools (<c>invoke</c>, <c>set_window_size</c>, <c>set_theme</c>,
+    /// <c>click_at</c>) — click / select / set value / focus / resize / switch theme. This is a
+    /// remote-control surface, so it is <see langword="false"/> by default and must be opted into explicitly.
     /// </summary>
     public bool EnableInteraction { get; set; }
+
+    /// <summary>
+    /// Records the <c>file:line</c> where each named control is declared (via <c>.Name(...)</c>) so
+    /// <c>get_source</c> can point at the exact line. Off by default because it touches a hot construction
+    /// path; enable it only while iterating with an agent.
+    /// </summary>
+    public bool EnableSourceTagging { get; set; }
 
     /// <summary>
     /// The MCP endpoint URL the server listens on, derived from <see cref="LoopbackAddress"/> and
