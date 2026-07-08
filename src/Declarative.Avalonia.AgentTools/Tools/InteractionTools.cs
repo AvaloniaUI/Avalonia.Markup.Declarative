@@ -59,123 +59,159 @@ public sealed class InteractionTools
         string? value = null) =>
         AgentToolContext.RunOnUiThreadAsync(() =>
         {
-            switch (action?.Trim().ToLowerInvariant())
+            // Never let an exception escape as the MCP SDK's opaque "An error occurred invoking 'invoke'":
+            // turn it into an actionable message naming the action that failed.
+            try
             {
-                case "key":
-                    return PressKey(name, value);
-                case "type":
-                    return TypeText(name, value);
+                return InvokeCore(name, action, value);
             }
-
-            if (string.IsNullOrWhiteSpace(name))
-                return "A control name is required for this action.";
-
-            var control = AgentToolContext.FindControl(name);
-            if (control is null)
-                return $"No control named (or labeled) '{name}' was found. Use get_visual_tree to discover names.";
-
-            var typeName = control.GetType().Name;
-
-            switch (action?.Trim().ToLowerInvariant())
+            catch (Exception ex)
             {
-                case "invoke":
-                    if (ResolveProvider<IInvokeProvider>(control) is { } invoke)
-                    {
-                        invoke.Invoke();
-                        return $"Invoked '{name}'.";
-                    }
-
-                    if (control is Button)
-                    {
-                        control.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        return $"Clicked '{name}'.";
-                    }
-
-                    return $"Control '{name}' ({typeName}) does not support 'invoke'.";
-
-                case "select":
-                    if (ResolveProvider<ISelectionItemProvider>(control) is { } selectionItem)
-                    {
-                        selectionItem.Select();
-                        return $"Selected '{name}'.";
-                    }
-
-                    if (control is TabItem tabItem)
-                    {
-                        tabItem.IsSelected = true;
-                        return $"Selected '{name}'.";
-                    }
-
-                    return $"Control '{name}' ({typeName}) does not support 'select'.";
-
-                case "toggle":
-                    if (ResolveProvider<IToggleProvider>(control) is { } toggleProvider)
-                    {
-                        toggleProvider.Toggle();
-                        return $"Toggled '{name}'.";
-                    }
-
-                    if (control is ToggleButton toggleButton)
-                    {
-                        toggleButton.IsChecked = !(toggleButton.IsChecked ?? false);
-                        return $"Toggled '{name}' to {toggleButton.IsChecked}.";
-                    }
-
-                    return $"Control '{name}' ({typeName}) does not support 'toggle'.";
-
-                case "set":
-                    return SetValue(control, name, value);
-
-                case "expand":
-                    if (ResolveProvider<IExpandCollapseProvider>(control) is { } expand)
-                    {
-                        expand.Expand();
-                        return $"Expanded '{name}'.";
-                    }
-
-                    if (SetExpanded(control, true))
-                        return $"Expanded '{name}'.";
-
-                    return $"Control '{name}' ({typeName}) does not support 'expand'.";
-
-                case "collapse":
-                    if (ResolveProvider<IExpandCollapseProvider>(control) is { } collapse)
-                    {
-                        collapse.Collapse();
-                        return $"Collapsed '{name}'.";
-                    }
-
-                    if (SetExpanded(control, false))
-                        return $"Collapsed '{name}'.";
-
-                    return $"Control '{name}' ({typeName}) does not support 'collapse'.";
-
-                case "focus":
-                    return control.Focus() ? $"Focused '{name}'." : $"Could not focus '{name}'.";
-
-                case "scroll":
-                    if (TryCreatePeer(control) is not { } scrollPeer)
-                        return $"Could not bring '{name}' into view: no automation peer is available (the control may not be realized yet).";
-                    scrollPeer.BringIntoView();
-                    return $"Brought '{name}' into view.";
-
-                case "context_menu":
-                    if (TryCreatePeer(control) is not { } menuPeer)
-                        return $"Could not open the context menu for '{name}': no automation peer is available (the control may not be realized yet).";
-                    menuPeer.ShowContextMenu();
-                    return $"Opened context menu for '{name}'.";
-
-                case "select_item":
-                    return SelectItem(control, name, value);
-
-                case "scroll_by":
-                    return ScrollBy(control, name, value);
-
-                default:
-                    return $"Unknown action '{action}'. " +
-                           "Use invoke | select | select_item | toggle | set | expand | collapse | focus | scroll | scroll_by | context_menu | key | type.";
+                return $"invoke '{action}' failed: {ex.GetType().Name}: {ex.Message}";
             }
         });
+
+    private static string InvokeCore(string? name, string action, string? value)
+    {
+        switch (action?.Trim().ToLowerInvariant())
+        {
+            case "key":
+                return PressKey(name, value);
+            case "type":
+                return TypeText(name, value);
+        }
+
+        if (string.IsNullOrWhiteSpace(name))
+            return "A control name is required for this action.";
+
+        var control = AgentToolContext.FindInteractionTarget(name);
+        if (control is null)
+            return $"No control named (or labeled) '{name}' was found. Use get_visual_tree or find_text to discover names.";
+
+        var typeName = control.GetType().Name;
+
+        switch (action?.Trim().ToLowerInvariant())
+        {
+            case "invoke":
+                return InvokeControl(control, $"'{name}'");
+
+            case "select":
+                return SelectControl(control, $"'{name}'");
+
+            case "toggle":
+                return ToggleControl(control, $"'{name}'");
+
+            case "set":
+                return SetValue(control, name, value);
+
+            case "expand":
+                if (ResolveProvider<IExpandCollapseProvider>(control) is { } expand)
+                {
+                    expand.Expand();
+                    return $"Expanded '{name}'.";
+                }
+
+                if (SetExpanded(control, true))
+                    return $"Expanded '{name}'.";
+
+                return $"Control '{name}' ({typeName}) does not support 'expand'.";
+
+            case "collapse":
+                if (ResolveProvider<IExpandCollapseProvider>(control) is { } collapse)
+                {
+                    collapse.Collapse();
+                    return $"Collapsed '{name}'.";
+                }
+
+                if (SetExpanded(control, false))
+                    return $"Collapsed '{name}'.";
+
+                return $"Control '{name}' ({typeName}) does not support 'collapse'.";
+
+            case "focus":
+                return control.Focus() ? $"Focused '{name}'." : $"Could not focus '{name}'.";
+
+            case "scroll":
+                if (TryCreatePeer(control) is not { } scrollPeer)
+                    return $"Could not bring '{name}' into view: no automation peer is available (the control may not be realized yet).";
+                scrollPeer.BringIntoView();
+                return $"Brought '{name}' into view.";
+
+            case "context_menu":
+                if (TryCreatePeer(control) is not { } menuPeer)
+                    return $"Could not open the context menu for '{name}': no automation peer is available (the control may not be realized yet).";
+                menuPeer.ShowContextMenu();
+                return $"Opened context menu for '{name}'.";
+
+            case "select_item":
+                return SelectItem(control, name, value);
+
+            case "scroll_by":
+                return ScrollBy(control, name, value);
+
+            default:
+                return $"Unknown action '{action}'. " +
+                       "Use invoke | select | select_item | toggle | set | expand | collapse | focus | scroll | scroll_by | context_menu | key | type.";
+        }
+    }
+
+    /// <summary>
+    /// Invokes <paramref name="control"/> — or the nearest actionable ancestor. Prefers the
+    /// <see cref="IInvokeProvider"/> peer (walked up the tree), then falls back to raising
+    /// <see cref="Button.ClickEvent"/> on the nearest <see cref="Button"/> ancestor. The typed fallback
+    /// must climb too: addressing a button by its label or hitting it by pixel lands on the inner
+    /// <c>AccessText</c>/<c>TextBlock</c>, which is not itself a <see cref="Button"/>.
+    /// </summary>
+    private static string InvokeControl(Control control, string label)
+    {
+        if (ResolveProviderOwner<IInvokeProvider>(control) is { } invoke)
+        {
+            invoke.Provider.Invoke();
+            return $"Invoked {ResolvedName(control, invoke.Owner, label)}.";
+        }
+
+        if (FindSelfOrAncestor<Button>(control) is { } button)
+        {
+            button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            return $"Clicked {ResolvedName(control, button, label)}.";
+        }
+
+        return $"Control {label} ({control.GetType().Name}) does not support 'invoke'.";
+    }
+
+    private static string SelectControl(Control control, string label)
+    {
+        if (ResolveProviderOwner<ISelectionItemProvider>(control) is { } select)
+        {
+            select.Provider.Select();
+            return $"Selected {ResolvedName(control, select.Owner, label)}.";
+        }
+
+        if (FindSelfOrAncestor<TabItem>(control) is { } tabItem)
+        {
+            tabItem.IsSelected = true;
+            return $"Selected {ResolvedName(control, tabItem, label)}.";
+        }
+
+        return $"Control {label} ({control.GetType().Name}) does not support 'select'.";
+    }
+
+    private static string ToggleControl(Control control, string label)
+    {
+        if (ResolveProviderOwner<IToggleProvider>(control) is { } toggle)
+        {
+            toggle.Provider.Toggle();
+            return $"Toggled {ResolvedName(control, toggle.Owner, label)}.";
+        }
+
+        if (FindSelfOrAncestor<ToggleButton>(control) is { } toggleButton)
+        {
+            toggleButton.IsChecked = !(toggleButton.IsChecked ?? false);
+            return $"Toggled {ResolvedName(control, toggleButton, label)} to {toggleButton.IsChecked}.";
+        }
+
+        return $"Control {label} ({control.GetType().Name}) does not support 'toggle'.";
+    }
 
     [McpServerTool(Name = "set_window_size", Destructive = true), Description(
         "Resizes a desktop window so you can verify responsive layout at a breakpoint (e.g. 400/800/1200 " +
@@ -242,45 +278,192 @@ public sealed class InteractionTools
         string? windowId = null) =>
         AgentToolContext.RunOnUiThreadAsync(() =>
         {
-            var top = AgentToolContext.ResolveTopLevel(windowId);
-            if (top is null)
-                return "No active window/top-level was found.";
-
-            var point = new Point(x, y);
-            if (HitTester.HitTest(top, point) is not { } hit)
-                return $"Nothing is at ({x}, {y}).";
-
-            var target = hit as Control ?? hit.FindAncestorOfType<Control>();
-            if (target is null)
-                return $"A non-control visual is at ({x}, {y}).";
-
-            var identity = DescribeTarget(target);
-
-            if (ResolveProvider<IInvokeProvider>(target) is { } invoke)
+            try
             {
-                invoke.Invoke();
-                return $"Invoked {identity} at ({x}, {y}).";
+                return ClickAtCore(x, y, windowId);
             }
-
-            if (target is Button button)
+            catch (Exception ex)
             {
-                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                return $"Clicked {identity} at ({x}, {y}).";
+                return $"click_at ({x}, {y}) failed: {ex.GetType().Name}: {ex.Message}";
             }
-
-            if (ResolveProvider<ISelectionItemProvider>(target) is { } selection)
-            {
-                selection.Select();
-                return $"Selected {identity} at ({x}, {y}).";
-            }
-
-            return target.Focus()
-                ? $"No invokable control at ({x}, {y}); focused {identity} instead."
-                : $"{identity} at ({x}, {y}) is neither invokable nor focusable.";
         });
+
+    private static string ClickAtCore(double x, double y, string? windowId)
+    {
+        var top = AgentToolContext.ResolveTopLevel(windowId);
+        if (top is null)
+            return "No active window/top-level was found.";
+
+        var point = new Point(x, y);
+        if (HitTester.HitTest(top, point) is not { } hit)
+            return $"Nothing is at ({x}, {y}).";
+
+        var target = hit as Control ?? hit.FindAncestorOfType<Control>();
+        if (target is null)
+            return $"A non-control visual is at ({x}, {y}).";
+
+        // The hit almost always lands on an inner glyph/child (an AccessText inside a Button). Climb to
+        // the nearest control that can actually be acted on, and report what we resolved to, so a
+        // "clicked the label, nothing happened" no-op can't slip through silently.
+        var at = $"at ({x}, {y})";
+
+        if (ResolveProviderOwner<IInvokeProvider>(target) is { } invoke)
+        {
+            invoke.Provider.Invoke();
+            return $"Invoked {ResolvedName(target, invoke.Owner, DescribeTarget(target))} {at}.";
+        }
+
+        if (FindSelfOrAncestor<Button>(target) is { } button)
+        {
+            button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            return $"Clicked {ResolvedName(target, button, DescribeTarget(target))} {at}.";
+        }
+
+        if (ResolveProviderOwner<ISelectionItemProvider>(target) is { } selection)
+        {
+            selection.Provider.Select();
+            return $"Selected {ResolvedName(target, selection.Owner, DescribeTarget(target))} {at}.";
+        }
+
+        if (FindSelfOrAncestor<TabItem>(target) is { } tabItem)
+        {
+            tabItem.IsSelected = true;
+            return $"Selected {ResolvedName(target, tabItem, DescribeTarget(target))} {at}.";
+        }
+
+        if (FindSelfOrAncestor<ToggleButton>(target) is { } toggle)
+        {
+            toggle.IsChecked = !(toggle.IsChecked ?? false);
+            return $"Toggled {ResolvedName(target, toggle, DescribeTarget(target))} {at} to {toggle.IsChecked}.";
+        }
+
+        return target.Focus()
+            ? $"No invokable control {at}; focused {DescribeTarget(target)} instead."
+            : $"{DescribeTarget(target)} {at} is neither invokable nor focusable.";
+    }
+
+    [McpServerTool(Name = "set_view_model", Destructive = true), Description(
+        "ESCAPE HATCH for UI tests: sets a property on a control's DataContext (view-model) directly, by " +
+        "reflection — the fast way to drive the app into a state that is awkward to reach through the UI " +
+        "(e.g. flip a flag to show a recovery banner) without killing/restarting the process. Give a dotted " +
+        "'path' ('IsBusy', 'CurrentUser.Name') and a 'value' as text (converted to the property's type: " +
+        "bool/number/enum/string/…). Resolves the view-model from 'name' (a control Name or visible label) " +
+        "or, if omitted, the main window's DataContext. Setting the real CLR property raises " +
+        "INotifyPropertyChanged, so bindings update just as they would from user input. Disabled unless " +
+        "EnableInteraction was set.")]
+    public static Task<string> SetViewModel(
+        [Description("Optional control Name/label whose DataContext to target. Omit for the main window's DataContext.")]
+        string? name,
+        [Description("Dotted property path on the view-model, e.g. 'IsBusy' or 'CurrentUser.Name'.")]
+        string path,
+        [Description("New value as text; converted to the property's type.")]
+        string? value = null) =>
+        AgentToolContext.RunOnUiThreadAsync(() =>
+        {
+            try
+            {
+                if (!TryResolveDataContext(name, out var dataContext, out var error))
+                    return error;
+
+                var result = ViewModelInspector.SetValue(dataContext, path, value);
+                Dispatcher.UIThread.RunJobs(); // flush bindings/layout so a follow-up screenshot sees the change
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return $"set_view_model failed: {ex.GetType().Name}: {ex.Message}";
+            }
+        });
+
+    [McpServerTool(Name = "invoke_command", Destructive = true), Description(
+        "ESCAPE HATCH for UI tests: invokes an ICommand (or a public method) on a control's DataContext " +
+        "(view-model) directly — trigger the logic behind a button without finding and clicking that " +
+        "button, or reach a command that has no button yet. Give the command's 'path' ('SaveCommand', " +
+        "'Editor.RefreshCommand', or a method name) and an optional 'parameter'. CanExecute is checked " +
+        "first. Resolves the view-model from 'name' (a control Name or visible label) or, if omitted, the " +
+        "main window's DataContext. Disabled unless EnableInteraction was set.")]
+    public static Task<string> InvokeCommandTool(
+        [Description("Optional control Name/label whose DataContext to target. Omit for the main window's DataContext.")]
+        string? name,
+        [Description("Dotted path to an ICommand property or a public method, e.g. 'SaveCommand'.")]
+        string path,
+        [Description("Optional command parameter / single method argument, as text.")]
+        string? parameter = null) =>
+        AgentToolContext.RunOnUiThreadAsync(() =>
+        {
+            try
+            {
+                if (!TryResolveDataContext(name, out var dataContext, out var error))
+                    return error;
+
+                var result = ViewModelInspector.InvokeCommand(dataContext, path, parameter);
+                Dispatcher.UIThread.RunJobs();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return $"invoke_command failed: {ex.GetType().Name}: {ex.Message}";
+            }
+        });
+
+    /// <summary>
+    /// Resolves the view-model to operate on: the DataContext of the control named by <paramref name="name"/>,
+    /// or the main window's DataContext when no name is given. Reports a clear reason when nothing usable
+    /// is found instead of returning a null the caller has to interpret.
+    /// </summary>
+    private static bool TryResolveDataContext(string? name, out object? dataContext, out string error)
+    {
+        dataContext = null;
+        error = string.Empty;
+
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            var control = AgentToolContext.FindInteractionTarget(name);
+            if (control is null)
+            {
+                error = $"No control named (or labeled) '{name}' was found to read a DataContext from.";
+                return false;
+            }
+
+            dataContext = control.DataContext;
+            if (dataContext is null)
+            {
+                error = $"Control '{name}' has a null DataContext.";
+                return false;
+            }
+
+            return true;
+        }
+
+        var top = AgentToolContext.GetPrimaryTopLevel();
+        if (top is null)
+        {
+            error = "No active window/top-level was found.";
+            return false;
+        }
+
+        dataContext = top.DataContext;
+        if (dataContext is null)
+        {
+            error = "The main window's DataContext is null. Pass 'name' to target a control whose DataContext is set.";
+            return false;
+        }
+
+        return true;
+    }
 
     private static string DescribeTarget(Control control) =>
         control.Name is { Length: > 0 } name ? $"{control.GetType().Name} #{name}" : control.GetType().Name;
+
+    /// <summary>
+    /// Describes the control that actually received the action. When it differs from the addressed/hit
+    /// control (the common case — a label or pixel resolves to an inner <c>AccessText</c>), it says so, so
+    /// the agent can tell "clicked the Button" from "poked the label and nothing happened".
+    /// </summary>
+    private static string ResolvedName(Control addressed, Control acted, string addressedLabel) =>
+        ReferenceEquals(addressed, acted)
+            ? addressedLabel
+            : $"{DescribeTarget(acted)} (resolved from {addressedLabel})";
 
     /// <summary>
     /// Returns the requested automation provider from <paramref name="control"/>'s peer, or from the
@@ -289,7 +472,14 @@ public sealed class InteractionTools
     /// <c>TextBlock</c> inside a <c>TreeViewItem</c> or <c>Button</c>), and the actionable element is an
     /// ancestor.
     /// </summary>
-    private static T? ResolveProvider<T>(Control control) where T : class
+    private static T? ResolveProvider<T>(Control control) where T : class =>
+        ResolveProviderOwner<T>(control)?.Provider;
+
+    /// <summary>
+    /// Like <see cref="ResolveProvider{T}"/> but also returns the <b>owner</b> control whose peer exposed
+    /// the provider, so callers can report which control the action actually resolved to.
+    /// </summary>
+    private static (T Provider, Control Owner)? ResolveProviderOwner<T>(Control control) where T : class
     {
         Visual? current = control;
         while (current is Control owner)
@@ -297,9 +487,28 @@ public sealed class InteractionTools
             // A peer can throw for controls that aren't fully realized; treat that the same as
             // "no provider here" and keep walking up to the actionable ancestor.
             if (TryCreatePeer(owner)?.GetProvider<T>() is { } provider)
-                return provider;
+                return (provider, owner);
 
             current = owner.GetVisualParent();
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Walks from <paramref name="control"/> up the visual tree to the nearest control assignable to
+    /// <typeparamref name="T"/> (inclusive). Used for the typed action fallbacks (<see cref="Button"/>,
+    /// <see cref="TabItem"/>, <see cref="ToggleButton"/>) so they climb to the actionable control just
+    /// like the peer-provider resolution does — a pixel hit or label match lands on an inner child.
+    /// </summary>
+    private static T? FindSelfOrAncestor<T>(Control control) where T : Control
+    {
+        Visual? current = control;
+        while (current is not null)
+        {
+            if (current is T match)
+                return match;
+            current = current.GetVisualParent();
         }
 
         return null;
@@ -535,7 +744,7 @@ public sealed class InteractionTools
 
         if (!string.IsNullOrWhiteSpace(name))
         {
-            if (AgentToolContext.FindControl(name) is { } control)
+            if (AgentToolContext.FindInteractionTarget(name) is { } control)
             {
                 target = control;
                 return true;
@@ -551,7 +760,8 @@ public sealed class InteractionTools
             return true;
         }
 
-        error = "No control name was given and nothing currently has focus.";
+        error = "No target was given and nothing currently has focus. Pass 'name' (a control Name or " +
+                "visible label) to target a specific control, or focus/click it first (e.g. invoke <name> focus).";
         return false;
     }
 

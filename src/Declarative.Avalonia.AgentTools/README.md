@@ -22,9 +22,11 @@ the feedback loop while iterating on a view:
 - `highlight` — draw a frame around a control (or all of a type) and screenshot it; `action='clear'` clears
 - `wait_for` / `wait_idle` — sync after an interaction or hot reload
 - `get_errors` — recent build / binding / converter / runtime errors (incl. exceptions in handlers)
-- `invoke`, `set_window_size`, `set_theme`, `click_at` — *(optional, off by default)* remote control:
-  invoke / select / select_item / toggle / set / expand / collapse / focus / scroll / scroll_by /
-  context_menu / key / type, plus resize, theme switch, and click-by-coordinate
+- `invoke`, `set_window_size`, `set_theme`, `click_at`, `set_view_model`, `invoke_command` —
+  *(optional, off by default)* remote control: invoke / select / select_item / toggle / set / expand /
+  collapse / focus / scroll / scroll_by / context_menu / key / type, plus resize, theme switch,
+  click-by-coordinate, and an escape hatch to set a view-model property or run an `ICommand`/method
+  directly (reach awkward states without restarting)
 
 ## Usage
 
@@ -51,7 +53,7 @@ AgentConnectionMonitor.StatusChanged += (_, e) =>
 
 > **Dev only.** Keep the call under `#if DEBUG`. This package pulls in the ASP.NET Core web stack and
 > a remote-control surface; it must not ship in Release. The server binds to loopback only, and
-> the tier-2 tools (`invoke`, `set_window_size`, `set_theme`, `click_at`) stay disabled unless you set
-> `EnableInteraction = true`.
+> the tier-2 tools (`invoke`, `set_window_size`, `set_theme`, `click_at`, `set_view_model`,
+> `invoke_command`) stay disabled unless you set `EnableInteraction = true`.
 
 See the repository's `docs/agent-tools.md` for the full guide.

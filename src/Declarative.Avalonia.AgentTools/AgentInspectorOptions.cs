@@ -18,7 +18,8 @@ public sealed class AgentInspectorOptions
 
     /// <summary>
     /// Enables the tier-2 remote-control tools (<c>invoke</c>, <c>set_window_size</c>, <c>set_theme</c>,
-    /// <c>click_at</c>) — click / select / set value / focus / resize / switch theme. This is a
+    /// <c>click_at</c>, <c>set_view_model</c>, <c>invoke_command</c>) — click / select / set value / focus /
+    /// resize / switch theme, plus writing view-model state and running commands directly. This is a
     /// remote-control surface, so it is <see langword="false"/> by default and must be opted into explicitly.
     /// </summary>
     public bool EnableInteraction { get; set; }

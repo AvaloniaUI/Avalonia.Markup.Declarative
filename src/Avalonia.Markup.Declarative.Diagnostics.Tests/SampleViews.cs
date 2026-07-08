@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel;
+using System.Windows.Input;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Markup.Declarative;
@@ -76,4 +78,84 @@ public sealed class OuterView : ViewBase
 {
     protected override object Build() =>
         new StackPanel().Children(new SampleView());
+}
+
+/// <summary>
+/// A view model with a settable flag, a nested child, a command and a plain method, used to exercise the
+/// <see cref="ViewModelInspector"/> escape-hatch (set property / invoke command).
+/// </summary>
+public sealed class CommandViewModel : INotifyPropertyChanged
+{
+    private bool _isBusy;
+
+    public bool IsBusy
+    {
+        get => _isBusy;
+        set
+        {
+            _isBusy = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBusy)));
+        }
+    }
+
+    public int Count { get; set; }
+    public string Status { get; set; } = "idle";
+    public CommandViewModel? Child { get; set; }
+
+    public int SaveCount { get; private set; }
+
+    /// <summary>Get-only (no setter at all), to exercise the "property is read-only" path.</summary>
+    public string Version => "1.0";
+
+    public string? LastParameter { get; private set; }
+
+    /// <summary>Gate for the command's CanExecute, so a test can force CanExecute=false.</summary>
+    public bool CanSave { get; set; } = true;
+
+    public ICommand SaveCommand { get; }
+
+    public CommandViewModel() =>
+        SaveCommand = new RelayCommand(
+            p => { SaveCount++; LastParameter = p as string; },
+            _ => CanSave);
+
+    /// <summary>A plain action method (no command), to exercise the method fallback.</summary>
+    public void Reset()
+    {
+        Count = 0;
+        Status = "reset";
+    }
+
+    /// <summary>A method taking <c>object?</c>, to exercise text→object parameter conversion.</summary>
+    public void Echo(object? parameter)
+    {
+        LastParameter = parameter as string;
+        Status = "echoed";
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+}
+
+/// <summary>Minimal <see cref="ICommand"/> for the sample view model.</summary>
+internal sealed class RelayCommand : ICommand
+{
+    private readonly Action<object?> _execute;
+    private readonly Func<object?, bool>? _canExecute;
+
+    public RelayCommand(Action<object?> execute, Func<object?, bool>? canExecute = null)
+    {
+        _execute = execute;
+        _canExecute = canExecute;
+    }
+
+    public bool CanExecute(object? parameter) => _canExecute?.Invoke(parameter) ?? true;
+
+    public void Execute(object? parameter) => _execute(parameter);
+
+    // Empty add/remove accessors: satisfies ICommand without the CS0067 "event never used" warning.
+    public event EventHandler? CanExecuteChanged
+    {
+        add { }
+        remove { }
+    }
 }

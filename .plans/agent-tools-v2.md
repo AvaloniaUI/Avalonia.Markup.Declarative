@@ -18,6 +18,19 @@ human relaying what the UI looks like.
 > **Beyond the plan:** `AgentConnectionMonitor` raises UI-thread `Connected`/`Disconnected`/`StatusChanged`
 > events (activity-based, since the transport is stateless HTTP) so an app can show a live "agent
 > connected" indicator (wired into the sample's window title).
+>
+> **Post-feedback refinements (from an agent driving the tools):**
+> - `click_at` and `invoke`'s typed fallbacks now **climb to the nearest actionable control** (a pixel/label
+>   lands on the inner `AccessText`, not the `Button`) and the result reports which control it resolved to,
+>   so a click on the label can't silently no-op.
+> - Interaction target resolution gained a **visible-text fallback** (`AgentToolContext.FindInteractionTarget`)
+>   mirroring `find_text`, so a button addressable by its caption in `find_text` is also invokable by it.
+> - `invoke`/`click_at`/the escape-hatch tools wrap their body in try/catch → an actionable message instead
+>   of the MCP SDK's opaque `An error occurred invoking 'invoke'`; the no-focus `key`/`type` message now
+>   tells you to pass `name` or focus first.
+> - **Escape hatch:** `ViewModelInspector` (core, dependency-free) + tier-2 `set_view_model` /
+>   `invoke_command` set a VM property or run an `ICommand`/method directly, to reach awkward states (e.g.
+>   a recovery banner) without killing/restarting the process.
 
 ## Current state (already shipped)
 

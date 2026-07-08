@@ -377,6 +377,60 @@ public class DiagnosticsTests
     }
 
     [AvaloniaFact]
+    public void ViewModelInspector_sets_scalar_nested_and_reports_failures()
+    {
+        var vm = new CommandViewModel { Child = new CommandViewModel() };
+
+        Assert.Contains("IsBusy = True", ViewModelInspector.SetValue(vm, "IsBusy", "true"));
+        Assert.True(vm.IsBusy);
+
+        Assert.Contains("Count = 42", ViewModelInspector.SetValue(vm, "Count", "42"));
+        Assert.Equal(42, vm.Count);
+
+        // Dotted path walks into the nested child.
+        ViewModelInspector.SetValue(vm, "Child.Status", "child-set");
+        Assert.Equal("child-set", vm.Child!.Status);
+
+        // Case-insensitive property match is forgiving for an agent.
+        ViewModelInspector.SetValue(vm, "status", "lowercased");
+        Assert.Equal("lowercased", vm.Status);
+
+        Assert.Contains("read-only", ViewModelInspector.SetValue(vm, "Version", "2.0"));
+        Assert.Contains("No property", ViewModelInspector.SetValue(vm, "Nope", "x"));
+        Assert.Contains("Cannot convert", ViewModelInspector.SetValue(vm, "Count", "not-a-number"));
+        Assert.Contains("null", ViewModelInspector.SetValue(null, "Count", "1"));
+    }
+
+    [AvaloniaFact]
+    public void ViewModelInspector_invokes_command_method_and_respects_can_execute()
+    {
+        var vm = new CommandViewModel();
+
+        Assert.Contains("Executed command 'SaveCommand'", ViewModelInspector.InvokeCommand(vm, "SaveCommand", null));
+        Assert.Equal(1, vm.SaveCount);
+
+        // The parameter flows through to the command.
+        ViewModelInspector.InvokeCommand(vm, "SaveCommand", "hello");
+        Assert.Equal("hello", vm.LastParameter);
+        Assert.Equal(2, vm.SaveCount);
+
+        // CanExecute=false blocks execution and says so.
+        vm.CanSave = false;
+        Assert.Contains("CanExecute", ViewModelInspector.InvokeCommand(vm, "SaveCommand", null));
+        Assert.Equal(2, vm.SaveCount);
+
+        // Method fallback for a view-model that exposes an action as a plain method.
+        Assert.Contains("Invoked method 'Reset'", ViewModelInspector.InvokeCommand(vm, "Reset", null));
+        Assert.Equal("reset", vm.Status);
+
+        // Method fallback with a parameter typed 'object?' — text is passed through as-is.
+        Assert.Contains("Invoked method 'Echo'", ViewModelInspector.InvokeCommand(vm, "Echo", "passed-through"));
+        Assert.Equal("passed-through", vm.LastParameter);
+
+        Assert.Contains("No command property or invokable method", ViewModelInspector.InvokeCommand(vm, "Nope", null));
+    }
+
+    [AvaloniaFact]
     public void ComponentSourceLocator_reports_owning_and_nesting_components()
     {
         var outer = new OuterView();

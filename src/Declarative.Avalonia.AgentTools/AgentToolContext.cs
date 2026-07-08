@@ -139,6 +139,17 @@ internal static class AgentToolContext
     }
 
     /// <summary>
+    /// Resolves a control to act on: the same <c>Name</c> → UI Automation name path as
+    /// <see cref="FindControl"/>, then a <b>visible-text</b> fallback (matching what <c>find_text</c>
+    /// sees). The text fallback bridges a gap the interaction tools kept hitting: a button whose caption
+    /// is a plain string is found by <c>find_text</c>, but its automation name is not always exposed, so
+    /// addressing it by label failed. The result may be an inner text element (e.g. the <c>TextBlock</c>
+    /// inside the button); the caller is expected to climb to the actionable ancestor.
+    /// </summary>
+    public static Control? FindInteractionTarget(string name) =>
+        FindControl(name) ?? FindByText(name).FirstOrDefault();
+
+    /// <summary>
     /// Resolves a selector to one or more controls. A selector is matched, in order, as: a control
     /// <c>Name</c> or UI Automation name (via <see cref="FindControl"/>, returning a single control),
     /// or — failing that — a type name (returning every control of that type across the app).

@@ -7,8 +7,8 @@ screenshots of a window or a single control (with before/after pixel-diffing), a
 annotated with bounds and names, a detailed per-control layout report, an automated layout audit,
 property / property-source / view-model inspection, pixel↔control hit-testing, a highlight overlay that
 frames where a control actually landed, the list of active components, and recent build/binding/runtime
-errors — plus an opt-in tier for driving the app (clicking, typing, resizing, theming). The app can also
-show a live "agent connected" status.
+errors — plus an opt-in tier for driving the app (clicking, typing, resizing, theming, and setting
+view-model state directly). The app can also show a live "agent connected" status.
 
 The agent runs its own loop — change code → (hot reload) → screenshot / read the tree / read errors →
 adjust — without a human relaying what the UI looks like.
@@ -60,7 +60,7 @@ Options:
 | Option | Default | Meaning |
 | --- | --- | --- |
 | `Port` | `5599` | Loopback TCP port for the MCP endpoint. |
-| `EnableInteraction` | `false` | Registers the tier-2 tools (`invoke`, `set_window_size`, `set_theme`, `click_at`). |
+| `EnableInteraction` | `false` | Registers the tier-2 tools (`invoke`, `set_window_size`, `set_theme`, `click_at`, `set_view_model`, `invoke_command`). |
 | `EnableSourceTagging` | `false` | Stamps each `.Name(...)`ed control with its `file:line` so `get_source` can point at the exact line. |
 
 ```csharp
@@ -150,6 +150,8 @@ is the useful signal for an indicator. `RequestCount` and `LastActivity` are als
 | `set_window_size` ⚠️ | `width`, `height`, `windowId?` | Resizes a window to test responsive layout; returns resulting + previous client size. |
 | `set_theme` ⚠️ | `variant` | Switches theme (`Light`/`Dark`/`Default`) to verify both. |
 | `click_at` ⚠️ | `x`, `y`, `windowId?` | Acts on the control at a pixel (for unnamed custom controls) — see [`click_at`](#click_at). |
+| `set_view_model` ⚠️ | `name?`, `path`, `value?` | Sets a view-model property directly (escape hatch) — see [`set_view_model` and `invoke_command`](#set_view_model-and-invoke_command). |
+| `invoke_command` ⚠️ | `name?`, `path`, `parameter?` | Executes an `ICommand`/method on the view-model directly — see [`set_view_model` and `invoke_command`](#set_view_model-and-invoke_command). |
 
 The tools compose: `get_app_info` to orient → `get_visual_tree` surfaces names → the agent picks one →
 `get_layout`/`get_properties`/`screenshot_control`/`highlight` → change code → `wait_idle` →
@@ -327,15 +329,27 @@ cannot drive a real window).
 | `key` | synthetic `KeyDown`/`KeyUp` (`value` is a gesture, e.g. `Enter`, `Ctrl+S`) | named control, or the focused element if `name` is omitted |
 | `type` | synthetic `TextInput` (`value` is the text) | named control, or the focused element if `name` is omitted |
 
-Two robustness rules make addressing forgiving:
+Three robustness rules make addressing forgiving:
 
 - **Ancestor resolution.** Addressing by visible label often lands on an inner element (the `TextBlock`
   inside a `TreeViewItem`, or the text inside a `Button`). If the matched control does not expose the
   requested pattern, `invoke` walks up to the nearest visual ancestor that does — so `expand "Animals"`
   expands the tree node even though the label matched its inner `TextBlock`.
-- **Typed fallbacks.** Where a peer does not implement a pattern, `invoke` falls back to the obvious
-  property (`Button.Click`, `TabItem.IsSelected`, `ToggleButton.IsChecked`, `TextBox.Text`,
-  `TreeViewItem`/`Expander.IsExpanded` — Avalonia's `TreeViewItem` has no expand/collapse peer).
+- **Typed fallbacks (that also climb).** Where a peer does not implement a pattern, `invoke` falls back to
+  the obvious property on the nearest matching ancestor: `Button.Click`, `TabItem.IsSelected`,
+  `ToggleButton.IsChecked`, `TextBox.Text`, `TreeViewItem`/`Expander.IsExpanded` (Avalonia's `TreeViewItem`
+  has no expand/collapse peer). The climb matters — hitting a `Button` by its label lands on the inner
+  `AccessText`, which is not itself a `Button`, so a leaf-only fallback would no-op.
+- **Text fallback.** If neither a `Name` nor an automation name matches, `invoke` resolves the target the
+  same way `find_text` does (visible `TextBlock`/`Content`/`Header` text) and then climbs to the actionable
+  control — so a button whose caption `find_text` can see is invokable by that caption even when its
+  automation name is not exposed.
+
+When the control that actually received the action differs from what you addressed, the result says so
+(`Clicked Button #Save (resolved from 'Save')`), so a "poked the label, nothing happened" no-op can't pass
+as success. Any failure comes back as a plain message naming the action — an exception is never surfaced as
+the MCP SDK's opaque `An error occurred invoking 'invoke'`. Omitting `name` for `key`/`type` with nothing
+focused returns an explicit hint to pass `name` or focus a control first, rather than an error.
 
 > **Addressing text inputs.** A `Button`/`TabItem`/`ToggleButton` exposes its caption as its automation
 > name, so it is addressable by its visible text. A `TextBox` does **not** — its automation name is
@@ -369,10 +383,48 @@ These tier-2 tools drive whole-app verification loops:
 ## `click_at`
 
 `click_at(x, y, windowId?)` acts on whatever control sits at a pixel — useful for **custom-drawn controls
-that carry no `Name` or automation label**. Screenshot pixels equal these window-client coordinates. It
-resolves the control at the point and invokes/selects it, falling back to focus. It is **not** a
-synthetic OS click: there is no hover or drag, and a control that only handles raw `PointerPressed`
-without an automation pattern will only be focused. For controls you can name, prefer `invoke`.
+that carry no `Name` or automation label**. Screenshot pixels equal these window-client coordinates. A
+pixel almost always lands on an inner glyph/child (the `AccessText` inside a `Button`), so `click_at`
+**climbs to the nearest actionable control** — invoke → click a `Button` → select an item → select a
+`TabItem` → toggle a `ToggleButton` → focus — and reports which control it resolved to
+(`Clicked Button #Save (resolved from AccessText)`) so a click on the label can't silently no-op. It is
+**not** a synthetic OS click: there is no hover or drag, and a control that only handles raw
+`PointerPressed` without an automation pattern will only be focused. For controls you can name, prefer
+`invoke`.
+
+## `set_view_model` and `invoke_command`
+
+Some states are expensive or awkward to reach by driving the UI — the recovery banner after an unclean
+shutdown, an error flag, a "loading" spinner, a screen that only appears once a command has run. Killing
+and restarting the process to reproduce them is slow and lossy. These two tier-2 tools are the **escape
+hatch**: they reach past the view and act on the **view-model** directly.
+
+- `set_view_model(name?, path, value?)` sets a property on a `DataContext` by a dotted `path`
+  (`IsBusy`, `CurrentUser.Name`). `value` is text, converted to the property's type (bool/number/enum/
+  string/`Guid`/`DateTime`/`TimeSpan`/`Uri`, or anything with a `TypeConverter`). It sets the **real CLR
+  property**, so an `INotifyPropertyChanged` view-model raises its change notification and bindings update
+  exactly as they would from user input.
+- `invoke_command(name?, path, parameter?)` executes an `ICommand` at `path` (`SaveCommand`,
+  `Editor.RefreshCommand`) — checking `CanExecute` first — or, if `path` names a public method instead, it
+  invokes the method (0 or 1 argument). Use it to trigger the logic behind a button without finding and
+  clicking that button, or to reach a command that has no button yet.
+
+The view-model is resolved from `name` (a control `Name`/label — its `DataContext` is used) or, when
+`name` is omitted, from the **main window's `DataContext`**. Both tools flush the dispatcher after acting,
+so a follow-up `screenshot_window`/`get_visual_tree` sees the result. Every outcome (and every failure —
+missing property, read-only, bad conversion, `CanExecute=false`, a throwing setter/command) comes back as
+a plain message.
+
+```
+set_view_model null IsBusy true              # flip a flag on the main window's VM → spinner shows
+set_view_model "editor" Document.IsDirty true
+invoke_command null ShowRecoveryCommand      # drive the app into the recovery state without a restart
+invoke_command "grid" RefreshCommand 25      # execute a command with a parameter
+```
+
+> These are a **reflection escape hatch**, not a substitute for real user input — they bypass the view
+> entirely. Use them to *set up* a state to verify, then drive the actual control with `invoke`/`click_at`
+> when it is the control's behavior you are testing.
 
 ## Limitations & safety
 
@@ -382,10 +434,11 @@ without an automation pattern will only be focused. For controls you can name, p
   that is expected behaviour.
 - **Loopback only.** The server binds strictly to `127.0.0.1`. Screenshots can contain sensitive data
   — another reason it is loopback + debug-only.
-- **The tier-2 tools are off by default.** `invoke`, `set_window_size`, `set_theme` and `click_at` are a
-  remote-control surface — they change app state (click, select, toggle, set values, resize, switch
-  theme). They are registered only when you opt in with `EnableInteraction = true`, and like the rest of
-  the inspector they are loopback + debug-only.
+- **The tier-2 tools are off by default.** `invoke`, `set_window_size`, `set_theme`, `click_at`,
+  `set_view_model` and `invoke_command` are a remote-control surface — they change app state (click,
+  select, toggle, set values, resize, switch theme, write view-model state, run commands). They are
+  registered only when you opt in with `EnableInteraction = true`, and like the rest of the inspector they
+  are loopback + debug-only.
 - **`highlight` and annotated screenshots add a transient overlay.** They mutate the visual tree with a
   frame adorner (cleared afterwards / by `action='clear'`); they never change app logic or state.
 - **`hit_test`/`click_at` use a geometric hit test**, not the compositor: they locate by point-in-bounds
