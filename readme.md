@@ -141,6 +141,34 @@ This is the escape hatch for anything the strongly-typed `x => x.Member` express
     .SetupWithLifetime(lifetime);
   ```
 
+## AI agent tooling (MCP)
+
+The optional, **dev-only** `Declarative.Avalonia.AgentTools` package runs an in-process **MCP** (Model
+Context Protocol) server on loopback in debug builds, so an AI agent iterating on your UI can *see and
+drive the running app* — closing the edit → hot-reload → verify loop without a human relaying what the
+window looks like.
+
+```csharp
+using Declarative.Avalonia.AgentTools; // under #if DEBUG
+
+AppBuilder.Configure<App>()
+    .UsePlatformDetect()
+#if DEBUG
+    .UseAgentInspector() // loopback MCP server on 127.0.0.1:5599
+#endif
+    .SetupWithLifetime(lifetime);
+```
+
+It exposes screenshots (with before/after pixel-diffing), the visual tree with bounds, per-control layout
+reports, an automated layout audit, property / property-source / view-model inspection, pixel↔control
+hit-testing, and recent build/binding/runtime errors. An opt-in tier (`EnableInteraction`) also drives the
+app — click, type, select, resize, switch theme — plus an escape hatch to set a view-model property or run
+a command directly to reach awkward states.
+
+Keep the call under `#if DEBUG`: the package pulls in a web stack and a remote-control surface and must not
+ship in Release; it binds to loopback only. See [`docs/agent-tools.md`](docs/agent-tools.md) for the full
+guide.
+
 ## Source generation for your own and external controls
 
 The package ships with the source generator that produces markup extensions for:
