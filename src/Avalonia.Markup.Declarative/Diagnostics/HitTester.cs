@@ -14,19 +14,23 @@ namespace Avalonia.Markup.Declarative.Diagnostics;
 /// </summary>
 /// <remarks>
 /// Screenshots are rendered at 96 DPI, so <b>image pixel coordinates equal window-client DIP
-/// coordinates</b> — a point read off a screenshot can be passed straight in. Must be called on the UI
-/// thread; the caller is responsible for marshaling.
+/// coordinates</b> — a point read off a screenshot can be passed straight in. Coordinates are resolved
+/// through <see cref="VisualBoundsHelper"/>, the same absolute client-DIP frame reported by
+/// <c>get_visual_tree</c> (<c>boundsAbs</c>/<c>centerAbs</c>) and consumed by <c>click_at</c>/<c>drag</c>,
+/// so a reported center round-trips back to the same control. Must be called on the UI thread; the
+/// caller is responsible for marshaling.
 /// </remarks>
 public static class HitTester
 {
     /// <summary>
     /// Describes the visual stack at <paramref name="point"/> (in <paramref name="top"/>'s client
-    /// coordinates), from the topmost hit visual up to the root.
+    /// coordinates), from the topmost hit visual up to the root, and — for the topmost control — how it
+    /// can be driven (automation-invokable / focusable / raw-pointer-only).
     /// </summary>
     /// <remarks>
-    /// Uses a geometric hit test (point-in-bounds over the visual tree) rather than the renderer's
-    /// compositor hit test, so it is deterministic and works without a running render loop. It does not
-    /// account for arbitrary render transforms or clipping, which is fine for locating a control.
+    /// Uses a geometric, transform-aware hit test (point-in-transformed-bounds over the visual tree)
+    /// rather than the renderer's compositor hit test, so it is deterministic and works without a
+    /// running render loop.
     /// </remarks>
     public static string Describe(TopLevel top, Point point)
     {
@@ -52,8 +56,16 @@ public static class HitTester
             if (visual is StyledElement { Name: { Length: > 0 } name })
                 builder.Append(" #").Append(name);
 
-            builder.Append(' ').Append(FormatRect(visual.Bounds)).Append('\n');
+            builder.Append(' ').Append(FormatRect(AbsBounds(visual, top))).Append('\n');
             indent++;
+        }
+
+        // P7: tell the agent which tool to drive the topmost control with, so it can pick
+        // click_at(automation) vs tap/drag(pointer) without guessing.
+        if (leaf is Control control)
+        {
+            var drivability = ControlDrivability.Classify(control);
+            builder.Append("Drive: ").Append(drivability.Recommendation).Append('\n');
         }
 
         return builder.ToString();
@@ -95,15 +107,19 @@ public static class HitTester
         {
             hits.Add(visual);
         }
-        else if (visual.TranslatePoint(new Point(0, 0), top) is { } origin &&
-                 new Rect(origin, visual.Bounds.Size).Contains(point))
+        else if (VisualBoundsHelper.GetClientBounds(visual, top) is { } bounds && bounds.Contains(point))
         {
+            // Transform-aware containment: matches the absolute frame reported by get_visual_tree and
+            // consumed by click_at/drag, including LayoutTransformControl UI-scale and render transforms.
             hits.Add(visual);
         }
 
         foreach (var child in visual.GetVisualChildren())
             Collect(child, top, point, hits);
     }
+
+    private static Rect AbsBounds(Visual visual, TopLevel top) =>
+        VisualBoundsHelper.GetClientBounds(visual, top) ?? visual.Bounds;
 
     private static string DescribeTop(TopLevel top) =>
         top is Window { Title: { Length: > 0 } title } ? $"Window '{title}'" : top.GetType().Name;

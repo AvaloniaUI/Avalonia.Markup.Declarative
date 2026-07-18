@@ -159,15 +159,47 @@ AppBuilder.Configure<App>()
     .SetupWithLifetime(lifetime);
 ```
 
-It exposes screenshots (with before/after pixel-diffing), the visual tree with bounds, per-control layout
-reports, an automated layout audit, property / property-source / view-model inspection, pixel↔control
-hit-testing, and recent build/binding/runtime errors. An opt-in tier (`EnableInteraction`) also drives the
-app — click, type, select, resize, switch theme — plus an escape hatch to set a view-model property or run
-a command directly to reach awkward states.
+It exposes screenshots (with before/after pixel-diffing), the visual tree with bounds *and a single
+absolute client-DIP coordinate frame* (`abs`/`center`) shared by every tool, per-control layout reports,
+an automated layout audit, property / property-source / view-model inspection, pixel↔control hit-testing
+(with a "how to drive this control" hint), and recent build/binding/runtime errors. An opt-in tier
+(`EnableInteraction`) also drives the app — **real synthesized pointer/keyboard input** (`tap`, `drag`,
+`pointer_*`, that work even on custom controls with no automation peer), click, type, select, resize,
+switch theme, open a closed popup — plus an escape hatch (with structured, actionable errors) to set a
+view-model property or run a command directly to reach awkward states.
 
 Keep the call under `#if DEBUG`: the package pulls in a web stack and a remote-control surface and must not
 ship in Release; it binds to loopback only. See [`docs/agent-tools.md`](docs/agent-tools.md) for the full
 guide.
+
+### Enable the MCP in your agent
+
+The inspector is a streamable-**HTTP** MCP server on `http://127.0.0.1:5599`, so every agent points at the
+same URL. Run the app under `dotnet watch` so the agent's edits hot-reload into the process it inspects.
+
+**Claude Code** — `claude mcp add --transport http avalonia-agent-inspector http://127.0.0.1:5599`, or a
+project `.mcp.json`:
+
+```json
+{ "mcpServers": { "avalonia-agent-inspector": { "type": "http", "url": "http://127.0.0.1:5599" } } }
+```
+
+**opencode** — under `mcp` in `opencode.json` (remote servers use `type: "remote"`):
+
+```json
+{ "mcp": { "avalonia-agent-inspector": { "type": "remote", "url": "http://127.0.0.1:5599", "enabled": true } } }
+```
+
+**Codex** — an `[mcp_servers.*]` table in `~/.codex/config.toml` (a `url` makes it streamable-HTTP; enable
+the RMCP client once with `[features]` → `experimental_use_rmcp_client = true`):
+
+```toml
+[mcp_servers.avalonia-agent-inspector]
+url = "http://127.0.0.1:5599"
+```
+
+See [`docs/agent-tools.md`](docs/agent-tools.md#connect-your-agent) for headers, project-scoped variants,
+and the full tool reference.
 
 ## Source generation for your own and external controls
 

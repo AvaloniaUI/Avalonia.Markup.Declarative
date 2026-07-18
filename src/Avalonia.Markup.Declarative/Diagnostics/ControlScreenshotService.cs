@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using Avalonia.Threading;
 
 namespace Avalonia.Markup.Declarative.Diagnostics;
 
@@ -81,6 +82,70 @@ public static class ControlScreenshotService
         ArgumentNullException.ThrowIfNull(top);
         using var bitmap = RenderToBitmap(top, ResolveTopLevelSize(top));
         return Capture(bitmap);
+    }
+
+    /// <summary>
+    /// Like <see cref="CaptureTopLevel"/>, but first drains queued layout/binding work and, if the
+    /// captured frame is degenerate (a single flat color — the classic "captured before the layout
+    /// settled" empty/dark frame), forces a layout pass and retries once. Prevents an empty screenshot
+    /// right after opening a popup or switching state (P6).
+    /// </summary>
+    public static CapturedImage CaptureTopLevelStable(TopLevel top)
+    {
+        ArgumentNullException.ThrowIfNull(top);
+        return CaptureStable(top, () => CaptureTopLevel(top));
+    }
+
+    /// <summary>
+    /// Like <see cref="CaptureControl"/>, but drains queued work and retries once on a degenerate frame
+    /// (P6).
+    /// </summary>
+    public static CapturedImage CaptureControlStable(Control control, ScreenshotMode mode = ScreenshotMode.Isolated)
+    {
+        ArgumentNullException.ThrowIfNull(control);
+        return CaptureStable(control, () => CaptureControl(control, mode));
+    }
+
+    private static CapturedImage CaptureStable(Control target, Func<CapturedImage> capture)
+    {
+        // Settle first: flush layout/binding/render jobs so we don't snapshot a half-arranged frame.
+        Dispatcher.UIThread.RunJobs();
+        var image = capture();
+
+        if (!IsDegenerate(image.Bgra))
+            return image;
+
+        // A flat frame usually means layout hadn't run yet. Force one more measure/arrange + flush and
+        // re-capture once; if it is still flat it is genuinely a solid-colored control and we keep it.
+        target.InvalidateMeasure();
+        target.InvalidateArrange();
+        Dispatcher.UIThread.RunJobs();
+        return capture();
+    }
+
+    /// <summary>
+    /// Returns true when the pixel buffer is (near-)uniform — a single flat color — which for a UI
+    /// capture almost always means an unrendered / not-yet-laid-out frame rather than real content.
+    /// </summary>
+    public static bool IsDegenerate(byte[] bgra)
+    {
+        if (bgra is null || bgra.Length < 8)
+            return true;
+
+        var pixelCount = bgra.Length / 4;
+        if (pixelCount == 0)
+            return true;
+
+        byte b0 = bgra[0], g0 = bgra[1], r0 = bgra[2], a0 = bgra[3];
+        var identical = 0L;
+        for (var i = 0; i < bgra.Length; i += 4)
+        {
+            if (bgra[i] == b0 && bgra[i + 1] == g0 && bgra[i + 2] == r0 && bgra[i + 3] == a0)
+                identical++;
+        }
+
+        // >= 99.9% of pixels are the exact same color ⇒ treat as degenerate.
+        return identical >= pixelCount * 0.999;
     }
 
     /// <summary>

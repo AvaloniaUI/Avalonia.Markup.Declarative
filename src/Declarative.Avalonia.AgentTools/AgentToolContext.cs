@@ -38,21 +38,74 @@ internal static class AgentToolContext
     }
 
     /// <summary>
-    /// Returns the active top-levels (desktop windows, or the single-view top-level).
+    /// Runs a string-returning tool body on the UI thread, guaranteeing it never surfaces the MCP SDK's
+    /// opaque "An error occurred invoking '&lt;tool&gt;'": any exception — inside the body or while
+    /// marshaling — is turned into an actionable message naming the tool and the root exception. Escape
+    /// hatches route through this so a failure always carries a reason (P2).
+    /// </summary>
+    public static async Task<string> RunToolAsync(string toolName, Func<string> body)
+    {
+        try
+        {
+            return await RunOnUiThreadAsync(() =>
+            {
+                try
+                {
+                    return body();
+                }
+                catch (Exception ex)
+                {
+                    return DescribeException(toolName, ex);
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            return DescribeException(toolName, ex);
+        }
+    }
+
+    private static string DescribeException(string toolName, Exception ex)
+    {
+        var root = ex;
+        while (root.InnerException is not null)
+            root = root.InnerException;
+        return $"{toolName} failed: {root.GetType().Name}: {root.Message}";
+    }
+
+    /// <summary>
+    /// Returns the active top-levels: desktop windows or the single-view top-level, <b>plus</b> any
+    /// top-level hosting a tracked declarative component. The component-root fallback means the tools
+    /// still find the window in hosts that never set a classic lifetime (embedded scenarios and headless
+    /// tests), so it is unioned in and de-duplicated rather than replacing the lifetime windows.
     /// </summary>
     public static IReadOnlyList<TopLevel> GetTopLevels()
     {
+        var result = new List<TopLevel>();
+        var seen = new HashSet<TopLevel>();
+
+        void Add(TopLevel? top)
+        {
+            if (top is not null && seen.Add(top))
+                result.Add(top);
+        }
+
         switch (Application.Current?.ApplicationLifetime)
         {
             case IClassicDesktopStyleApplicationLifetime desktop:
-                return desktop.Windows.Cast<TopLevel>().ToArray();
+                foreach (var window in desktop.Windows)
+                    Add(window);
+                break;
 
-            case ISingleViewApplicationLifetime { MainView: { } mainView } when TopLevel.GetTopLevel(mainView) is { } top:
-                return new[] { top };
-
-            default:
-                return Array.Empty<TopLevel>();
+            case ISingleViewApplicationLifetime { MainView: { } mainView }:
+                Add(TopLevel.GetTopLevel(mainView));
+                break;
         }
+
+        foreach (var component in ComponentRegistry.GetActiveViews())
+            Add(TopLevel.GetTopLevel(component.RootControl));
+
+        return result;
     }
 
     /// <summary>
@@ -113,6 +166,13 @@ internal static class AgentToolContext
             roots.Add(popup.ContentRoot);
         return roots;
     }
+
+    /// <summary>
+    /// The roots the interaction tools search when resolving popups/controls by name: active top-levels,
+    /// tracked component roots, and the content of any already-open popups. A closed popup's placeholder
+    /// node lives in the normal tree, so it is reachable here too (used by <c>open_popup</c>).
+    /// </summary>
+    public static IReadOnlyList<Visual> GetToolSearchRoots() => GetSearchRoots();
 
     /// <summary>
     /// Finds a control across every active top-level, tracked component root and open popup, first by

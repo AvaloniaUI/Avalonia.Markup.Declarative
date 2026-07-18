@@ -10,7 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Real (Skia) headless rendering so RenderTargetBitmap produces valid PNGs. -->
+    <!-- Real (Skia) headless rendering so RenderTargetBitmap produces valid PNGs and the input pipeline
+         behaves like a real windowing backend. -->
     <PackageReference Include="Avalonia.Headless" Version="12.1.0" />
     <PackageReference Include="Avalonia.Skia" Version="12.1.0" />
     <PackageReference Include="Avalonia.Headless.XUnit" Version="12.1.0" />
@@ -24,7 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Avalonia.Markup.Declarative\Avalonia.Markup.Declarative.csproj" />
+    <!-- The AgentTools package under test (which itself references Avalonia.Markup.Declarative). Its
+         ASP.NET Core dependency is only used to host the MCP endpoint, which the smoke test does not
+         start — it drives the tool methods directly. -->
+    <ProjectReference Include="..\Declarative.Avalonia.AgentTools\Declarative.Avalonia.AgentTools.csproj" />
   </ItemGroup>
 
   <ItemGroup>

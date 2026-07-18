@@ -76,10 +76,13 @@ public sealed class InspectionTools
 
     [McpServerTool(Name = "get_visual_tree", ReadOnly = true), Description(
         "Returns a text rendering of the live visual tree (type, #Name, layout bounds, key properties incl. " +
-        "non-default alignment/margin). Bounds reveal layout problems (zero-size, off-screen, overlap) " +
-        "without pixels. Pass rootName to dump a named subtree; omit it to dump the active window. Use " +
-        "maxDepth to cap depth and filter to show only subtrees matching a type/name substring (keeps " +
-        "large trees readable).")]
+        "non-default alignment/margin). Each node also carries abs=[…] and center=(x,y): ABSOLUTE " +
+        "client-DIP coordinates (top-level origin, 96-DPI pixels) — the SAME frame click_at/tap/drag " +
+        "consume and hit_test returns. The leading [x y w h] stays parent-relative for layout debugging; " +
+        "pass a node's center=(x,y) straight to click_at/tap. Bounds reveal layout problems (zero-size, " +
+        "off-screen, overlap) without pixels. Pass rootName to dump a named subtree; omit it to dump the " +
+        "active window. Use maxDepth to cap depth and filter to show only subtrees matching a type/name " +
+        "substring (keeps large trees readable).")]
     public static Task<string> GetVisualTree(
         [Description("Optional Name of a control to use as the root. Omit for the active window.")]
         string? rootName = null,
@@ -248,8 +251,11 @@ public sealed class InspectionTools
 
     [McpServerTool(Name = "hit_test", ReadOnly = true), Description(
         "Returns the control(s) at a pixel coordinate — the reverse of a screenshot. Screenshots render " +
-        "at 96 DPI, so screenshot pixel coordinates equal these window-client coordinates. Reports the " +
-        "topmost-hit visual up to the root. Pass x/y and an optional windowId (title or 0-based index).")]
+        "at 96 DPI, so screenshot pixel coordinates equal these absolute client-DIP coordinates (the same " +
+        "frame get_visual_tree's abs/center and click_at/drag use). Reports the topmost-hit visual up to " +
+        "the root, and how the topmost control can be driven (automation-invokable / focusable / " +
+        "raw-pointer-only) so you can pick click_at(automation) vs tap/drag(pointer). Pass x/y and an " +
+        "optional windowId (title or 0-based index).")]
     public static Task<string> HitTest(
         [Description("X coordinate in window-client pixels/DIPs.")]
         double x,
@@ -387,7 +393,9 @@ public sealed class InspectionTools
 
                 if (!annotate)
                 {
-                    var captured = ControlScreenshotService.CaptureTopLevel(top);
+                    // Stable capture: drain layout/render jobs and retry once on a degenerate (flat)
+                    // frame, so a capture right after a state change isn't an empty/dark image (P6).
+                    var captured = ControlScreenshotService.CaptureTopLevelStable(top);
                     var id = ScreenshotStore.Add($"Window '{title}'", captured);
                     return Image(captured.Png, $"Window '{title}' {FormatBounds(top.Bounds)} (id={id})");
                 }
@@ -401,7 +409,7 @@ public sealed class InspectionTools
                 try
                 {
                     Dispatcher.UIThread.RunJobs();
-                    var png = ControlScreenshotService.CaptureTopLevelPng(top);
+                    var png = ControlScreenshotService.CaptureTopLevelStable(top).Png;
                     return Image(png, $"Window '{title}' {FormatBounds(top.Bounds)} — annotated {adorners.Count} named control(s).");
                 }
                 finally
@@ -418,7 +426,9 @@ public sealed class InspectionTools
 
     [McpServerTool(Name = "screenshot_control", ReadOnly = true), Description(
         "Captures a PNG screenshot of a single control identified by its Name. mode='isolated' renders " +
-        "just the control's subtree; mode='in_context' renders the window and crops to the control.")]
+        "just the control's subtree; mode='in_context' renders the window and crops to the control. " +
+        "Waits for a rendered frame and retries a degenerate (empty/flat) capture once. If the target is " +
+        "a closed popup/flyout (zero size), returns a hint on how to open it (see open_popup).")]
     public static Task<CallToolResult> ScreenshotControl(
         [Description("The Name of the control to capture.")]
         string name,
@@ -426,22 +436,30 @@ public sealed class InspectionTools
         string? mode = null) =>
         AgentToolContext.RunOnUiThreadAsync(() =>
         {
+            var control = AgentToolContext.FindControl(name);
+            if (control is null)
+                return Error($"No control named '{name}' was found. Use get_visual_tree to discover names.");
+
+            // If the named target is a closed popup/flyout, capturing it is a dead end — guide the agent
+            // to open it first instead of returning a bare "has a zero size" (P5).
+            if (PopupLocator.DescribeIfClosedPopup(control) is { } closedHint)
+                return Error(closedHint);
+
             try
             {
-                var control = AgentToolContext.FindControl(name);
-                if (control is null)
-                    return Error($"No control named '{name}' was found. Use get_visual_tree to discover names.");
-
                 var screenshotMode = string.Equals(mode, "in_context", StringComparison.OrdinalIgnoreCase)
                     ? ScreenshotMode.InContext
                     : ScreenshotMode.Isolated;
 
-                var captured = ControlScreenshotService.CaptureControl(control, screenshotMode);
+                var captured = ControlScreenshotService.CaptureControlStable(control, screenshotMode);
                 var id = ScreenshotStore.Add($"Control '{name}' ({control.GetType().Name})", captured);
                 return Image(captured.Png, $"Control '{name}' ({control.GetType().Name}) {FormatBounds(control.Bounds)} mode={screenshotMode} (id={id})");
             }
             catch (Exception ex)
             {
+                // A zero-size failure on a control that turns out to be a closed popup: surface the hint.
+                if (PopupLocator.DescribeIfClosedPopup(control) is { } hint)
+                    return Error(hint);
                 return Error($"Failed to capture control '{name}': {ex.Message}");
             }
         });

@@ -60,7 +60,7 @@ Options:
 | Option | Default | Meaning |
 | --- | --- | --- |
 | `Port` | `5599` | Loopback TCP port for the MCP endpoint. |
-| `EnableInteraction` | `false` | Registers the tier-2 tools (`invoke`, `set_window_size`, `set_theme`, `click_at`, `set_view_model`, `invoke_command`). |
+| `EnableInteraction` | `false` | Registers the tier-2 tools (`tap`, `drag`, `pointer_press`/`pointer_move`/`pointer_release`, `invoke`, `set_window_size`, `set_theme`, `click_at`, `open_popup`, `list_bindable`, `set_view_model`, `invoke_command`). |
 | `EnableSourceTagging` | `false` | Stamps each `.Name(...)`ed control with its `file:line` so `get_source` can point at the exact line. |
 
 ```csharp
@@ -75,10 +75,21 @@ On startup the server prints its URL to the debug console.
 
 ## Connect your agent
 
-The server speaks streamable **HTTP** on loopback. Point your agent's MCP client at it. Example
-`.mcp.json`:
+The server speaks streamable **HTTP** on loopback, so every MCP client points at the same endpoint —
+`http://127.0.0.1:5599`. Below are the three most common coding agents; any other MCP client takes the
+same URL. Run the app under `dotnet watch` so the agent's code edits hot-reload into the live process it
+is inspecting.
+
+### Claude Code
+
+Register it with one command, or commit a project-scoped `.mcp.json` so everyone on the repo gets it:
+
+```bash
+claude mcp add --transport http avalonia-agent-inspector http://127.0.0.1:5599
+```
 
 ```json
+// .mcp.json  (project root)
 {
   "mcpServers": {
     "avalonia-agent-inspector": {
@@ -89,8 +100,42 @@ The server speaks streamable **HTTP** on loopback. Point your agent's MCP client
 }
 ```
 
-Run the app under `dotnet watch` so the agent's code edits hot-reload into the live process it is
-inspecting.
+### opencode
+
+Add it under the `mcp` key of `opencode.json` (global at `~/.config/opencode/opencode.json`, or
+per-project). Remote (HTTP/SSE) servers use `type: "remote"`:
+
+```json
+// opencode.json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "avalonia-agent-inspector": {
+      "type": "remote",
+      "url": "http://127.0.0.1:5599",
+      "enabled": true
+    }
+  }
+}
+```
+
+### Codex
+
+Add an `[mcp_servers.*]` table to `~/.codex/config.toml` (or a project-local `.codex/config.toml`). A
+`url` (instead of a `command`) makes it a streamable-HTTP server:
+
+```toml
+# ~/.codex/config.toml
+[mcp_servers.avalonia-agent-inspector]
+url = "http://127.0.0.1:5599"
+
+# The first time you wire up a streamable-HTTP MCP, Codex needs its RMCP client enabled once:
+[features]
+experimental_use_rmcp_client = true
+```
+
+> The endpoint is loopback + debug-only, so no auth token is needed — leave the `headers` /
+> `bearer_token_env_var` fields off.
 
 ## Show the connection status in your app
 
@@ -118,15 +163,16 @@ is the useful signal for an indicator. `RequestCount` and `LastActivity` are als
 | Tool | Args | Returns |
 | --- | --- | --- |
 | `get_app_info` | — | Windows, focused element, open popups, theme, Avalonia version, hot-reload/interaction state. Call this first. |
-| `get_visual_tree` | `rootName?`, `maxDepth?`, `filter?` | Text tree: type, `#Name`, bounds, key props (incl. non-default alignment/margin). `filter` prunes to matching subtrees; open popups are appended. |
+| `get_visual_tree` | `rootName?`, `maxDepth?`, `filter?` | Text tree: type, `#Name`, local bounds **plus `abs=[…]`/`center=(x,y)` absolute client-DIP coords** (the frame `click_at`/`tap`/`drag`/`hit_test` share), key props (incl. non-default alignment/margin). `filter` prunes to matching subtrees; open popups are appended. |
 | `get_layout` | `selector` | Detailed layout for one control — see [`get_layout`](#get_layout). |
 | `get_properties` | `selector`, `properties?` | Effective state, DataContext type, classes, and every locally-set styled property. |
 | `get_property_sources` | `selector`, `property?` | Where a property value comes from — local/style/template/animation/inherited — see [`get_property_sources`](#get_property_sources). |
 | `get_data_context` | `selector`, `depth?` | The control's view-model rendered as text (property names + values) — see [`get_data_context`](#get_data_context). |
 | `get_source` | `selector` | The `ViewBase` component (and nesting) that built the control — see [`get_source`](#get_source). |
 | `find_text` | `text` | Controls whose visible text contains `text` (reverse of reading a label off a screenshot). |
-| `hit_test` | `x`, `y`, `windowId?` | The control chain at a pixel — see [`hit_test`](#hit_test). |
+| `hit_test` | `x`, `y`, `windowId?` | The control chain at a pixel **plus how the topmost control can be driven** (automation-invokable / focusable / raw-pointer-only) — see [`hit_test`](#hit_test). |
 | `list_components` | — | Active declarative views: type, name, attachment, bounds. |
+| `list_bindable` | `name?` | Settable properties, `ICommand`s + invokable methods, and nested sub-objects of a `DataContext` — discover the right path for `set_view_model`/`invoke_command` (P3). |
 
 **Verify** (read-only):
 
@@ -146,10 +192,14 @@ is the useful signal for an indicator. `RequestCount` and `LastActivity` are als
 
 | Tool | Args | Returns |
 | --- | --- | --- |
-| `invoke` ⚠️ | `name?`, `action`, `value?` | Remote control via UI Automation — see [The `invoke` actions](#the-invoke-actions). |
+| `tap` ⚠️ | `x`, `y`, `button?`, `modifiers?`, `windowId?` | **Real** synthesized click (move→press→release) at an absolute client-DIP point — drives any control, peer or not — see [Real input synthesis](#real-input-synthesis-p1). |
+| `drag` ⚠️ | `x1`, `y1`, `x2`, `y2`, `button?`, `steps?`, `holdMs?`, `modifiers?`, `windowId?` | **Real** press-drag-release (scrub a custom slider, move a thumb, draw). |
+| `pointer_press` / `pointer_move` / `pointer_release` ⚠️ | `x`, `y`, `button?`/`modifiers?`, `windowId?` | **Real** low-level pointer steps; press begins a gesture whose capture is held across the calls. |
+| `invoke` ⚠️ | `name?`, `action`, `value?` | Remote control via UI Automation (`key`/`type` now send **real** input) — see [The `invoke` actions](#the-invoke-actions). |
 | `set_window_size` ⚠️ | `width`, `height`, `windowId?` | Resizes a window to test responsive layout; returns resulting + previous client size. |
 | `set_theme` ⚠️ | `variant` | Switches theme (`Light`/`Dark`/`Default`) to verify both. |
-| `click_at` ⚠️ | `x`, `y`, `windowId?` | Acts on the control at a pixel (for unnamed custom controls) — see [`click_at`](#click_at). |
+| `click_at` ⚠️ | `x`, `y`, `windowId?`, `method?` | Clicks the control at a pixel; **real pointer first**, automation fallback — see [`click_at`](#click_at). |
+| `open_popup` ⚠️ | `name` | Opens a closed Popup/Flyout (sets its bound `IsOpen`, or shows an attached flyout) — see [Popups](#closed-popups-open_popup-p5). |
 | `set_view_model` ⚠️ | `name?`, `path`, `value?` | Sets a view-model property directly (escape hatch) — see [`set_view_model` and `invoke_command`](#set_view_model-and-invoke_command). |
 | `invoke_command` ⚠️ | `name?`, `path`, `parameter?` | Executes an `ICommand`/method on the view-model directly — see [`set_view_model` and `invoke_command`](#set_view_model-and-invoke_command). |
 
@@ -252,12 +302,34 @@ property-diagnostic API. Reach for it when a value isn't what you set and you su
 is winning. Pass a single `property` (e.g. `Background`) or omit it to list every set property with its
 source.
 
+## Coordinate frame
+
+There is **one** coordinate frame across every tool: **absolute client-DIP coordinates of the
+top-level** — the client-area origin is `(0,0)` and, because screenshots render at **96 DPI**, one unit
+equals one screenshot pixel. `get_visual_tree` reports each node's `abs=[x y w h]` and `center=(x,y)` in
+this frame (the leading `[x y w h]` stays parent-relative, for layout debugging); `hit_test` reports it;
+and `click_at`/`tap`/`drag`/`pointer_*` **consume** it. So the round-trip holds: take a node's
+`center=(x,y)` from `get_visual_tree`, pass it to `click_at`/`tap`, and it lands on that node
+(verifiable with `hit_test`).
+
+The absolute bounds are computed with `Visual.TransformToVisual`, so they account for render transforms,
+a `LayoutTransformControl`'s UI-scale, and scroll offsets. Popup content that lives in its own visual
+root (a `PopupRoot`) is reported relative to **its own** top-level; target it with that window's
+`windowId`.
+
 ## `hit_test`
 
 `hit_test(x, y, windowId?)` is the reverse of a screenshot: it reports the control chain at a pixel
-(topmost → root). Screenshots render at **96 DPI**, so **screenshot pixel coordinates equal these
-window-client coordinates** — read a point off a capture and pass it straight in. It is a geometric
-point-in-bounds test (no compositor dependency), so it does not account for arbitrary render transforms.
+(topmost → root) in the [absolute client-DIP frame](#coordinate-frame), then a **`Drive:`** line saying
+how the topmost control can be driven:
+
+- **automation-invokable** — `click_at` or `invoke` works (a Button/menu/selectable/toggle);
+- **focusable but not automation-invokable** — `tap`/`click` to focus+press, `pointer_*` to drag;
+- **raw-pointer-only** — no automation peer/pattern (a custom `Border`/`Panel` with hand-written pointer
+  handlers); use `tap`/`drag`/`pointer_*` (synthetic real input).
+
+It is a geometric, transform-aware point-in-bounds test (no running compositor required), consistent with
+the frame `get_visual_tree` reports.
 
 ## `wait_for` and `wait_idle`
 
@@ -326,8 +398,8 @@ cannot drive a real window).
 | `scroll` | `AutomationPeer.BringIntoView()` | any |
 | `scroll_by` | nearest `ScrollViewer.Offset += dx,dy` (`value` = `"dx,dy"`) | any inside/around a ScrollViewer |
 | `context_menu` | `AutomationPeer.ShowContextMenu()` | any (opens the context menu) |
-| `key` | synthetic `KeyDown`/`KeyUp` (`value` is a gesture, e.g. `Enter`, `Ctrl+S`) | named control, or the focused element if `name` is omitted |
-| `type` | synthetic `TextInput` (`value` is the text) | named control, or the focused element if `name` is omitted |
+| `key` | **real** `KeyDown`/`KeyUp` through the input pipeline (`value` is a gesture, e.g. `Enter`, `Ctrl+S`) | named control (focused first), or the focused element if `name` is omitted |
+| `type` | **real** `TextInput` through the input pipeline (`value` is the text) | named control (focused first), or the focused element if `name` is omitted |
 
 Three robustness rules make addressing forgiving:
 
@@ -350,6 +422,40 @@ When the control that actually received the action differs from what you address
 as success. Any failure comes back as a plain message naming the action — an exception is never surfaced as
 the MCP SDK's opaque `An error occurred invoking 'invoke'`. Omitting `name` for `key`/`type` with nothing
 focused returns an explicit hint to pass `name` or focus a control first, rather than an error.
+
+`key`/`type` now synthesize **real** keyboard/text input through Avalonia's input pipeline (see
+[Real input synthesis](#real-input-synthesis-p1)) rather than raising a routed event on the target, so
+`Escape`/`Enter` reach a focused `TextBox` and trigger its own key handling exactly as a physical key
+would. The addressed control is focused first; if synthetic input is unavailable the tool falls back to
+the previous routed-event behavior.
+
+## Real input synthesis (P1)
+
+`tap`, `drag`, `pointer_press`/`pointer_move`/`pointer_release` (and `click_at` by default) synthesize
+**real** pointer input: they feed `RawPointerEventArgs` into the top-level's platform input sink
+(`ITopLevelImpl.Input`), which hit-tests the point and dispatches through `InputManager`. Hit-testing,
+**pointer capture**, and the routed `PointerPressed`/`PointerMoved`/`PointerReleased` events fire exactly
+as they would from a mouse — so these drive controls that expose **no automation peer**: a custom
+`Border`/`Panel` "slider" with hand-written pointer handlers, a drag thumb, a drawing canvas. This is the
+universal complement to `invoke`/`click_at(automation)`, which only work where a control implements an
+automation pattern.
+
+- Coordinates are [absolute client-DIP](#coordinate-frame); take them from `get_visual_tree` `center=` or
+  `hit_test`.
+- `drag(x1,y1,x2,y2, button?, steps?, holdMs?, modifiers?)` presses at the start, moves in `steps`
+  intermediate steps **with the button held** (so scrub/drag handlers see `IsLeftButtonPressed`), then
+  releases — the way to move a slider value or a thumb.
+- `pointer_press` begins a gesture and `pointer_move`/`pointer_release` continue it; the same synthetic
+  pointer (and its capture) is reused across the calls, so a multi-step drag stays coherent.
+- It is **not** `Avalonia.Headless` input simulation — `ITopLevelImpl.Input` is wired by every real
+  windowing backend, so this drives a live desktop window too. (Internally the raw-event constructors are
+  reached by reflection because they are hidden in the NuGet reference assembly though public at runtime.)
+
+```
+tap 128 96                       # real click at an absolute point
+drag 40 300 210 300              # scrub a custom slider left→right
+pointer_press 40 300 ; pointer_move 210 300 ; pointer_release 210 300
+```
 
 > **Addressing text inputs.** A `Button`/`TabItem`/`ToggleButton` exposes its caption as its automation
 > name, so it is addressable by its visible text. A `TextBox` does **not** — its automation name is
@@ -382,15 +488,21 @@ These tier-2 tools drive whole-app verification loops:
 
 ## `click_at`
 
-`click_at(x, y, windowId?)` acts on whatever control sits at a pixel — useful for **custom-drawn controls
-that carry no `Name` or automation label**. Screenshot pixels equal these window-client coordinates. A
-pixel almost always lands on an inner glyph/child (the `AccessText` inside a `Button`), so `click_at`
-**climbs to the nearest actionable control** — invoke → click a `Button` → select an item → select a
-`TabItem` → toggle a `ToggleButton` → focus — and reports which control it resolved to
-(`Clicked Button #Save (resolved from AccessText)`) so a click on the label can't silently no-op. It is
-**not** a synthetic OS click: there is no hover or drag, and a control that only handles raw
-`PointerPressed` without an automation pattern will only be focused. For controls you can name, prefer
-`invoke`.
+`click_at(x, y, windowId?, method?)` clicks whatever control sits at a pixel — useful for **custom-drawn
+controls that carry no `Name` or automation label**. Coordinates are [absolute client-DIP](#coordinate-frame).
+
+By default (`method='auto'`) it synthesizes a **real pointer click first** (see
+[Real input synthesis](#real-input-synthesis-p1)), which works universally — including controls that only
+handle raw `PointerPressed` with no automation pattern. Only when synthetic input is unavailable does it
+fall back to the UI-Automation path, which **climbs to the nearest actionable control** (invoke → click a
+`Button` → select an item/`TabItem` → toggle → focus) and reports what it resolved to
+(`Clicked Button #Save (resolved from AccessText)`).
+
+- `method='pointer'` forces the real-pointer path.
+- `method='automation'` forces the peer path (the old behavior: no hover/drag, raw-pointer-only controls
+  are only focused).
+
+For hover or drag use `pointer_move` / `drag`. For controls you can name, `invoke` is still fine.
 
 ## `set_view_model` and `invoke_command`
 
@@ -411,11 +523,29 @@ hatch**: they reach past the view and act on the **view-model** directly.
 
 The view-model is resolved from `name` (a control `Name`/label — its `DataContext` is used) or, when
 `name` is omitted, from the **main window's `DataContext`**. Both tools flush the dispatcher after acting,
-so a follow-up `screenshot_window`/`get_visual_tree` sees the result. Every outcome (and every failure —
-missing property, read-only, bad conversion, `CanExecute=false`, a throwing setter/command) comes back as
-a plain message.
+so a follow-up `screenshot_window`/`get_visual_tree` sees the result.
+
+**Failures are structured and actionable (P2/P3)** — never a bare `An error occurred`. When a dotted path
+doesn't resolve, the message names the failing segment, the **runtime type** of the object it was looked
+up on, and what is actually available there — the relevant `ICommand` properties (for `invoke_command`)
+or settable properties (for `set_view_model`), the nested sub-objects you can drill into, and a
+"did you mean" suggestion:
 
 ```
+invoke_command null "ViewCommands.ToggleBrushSettingsCommand"
+→ path 'ViewCommands.ToggleBrushSettingsCommand' failed: DataContext is MainViewModel, no member
+  'ViewCommands'. Available ICommand properties: [SaveCommand, ToggleBrushSettingsCommand].
+  Sub-objects to drill into (dotted path): [AppState]. Did you mean 'ToggleBrushSettingsCommand'?
+  Tip: call list_bindable to enumerate everything the target exposes.
+```
+
+When the real state lives on nested app state (`AppState.UiState.ShowBrushSettings`) rather than the
+window's `DataContext`, **`list_bindable(name?)`** enumerates the whole bindable surface — settable
+properties, `ICommand`s, invokable methods, and sub-objects — so you can build the correct deep path, then
+`set_view_model null AppState.UiState.ShowBrushSettings true`.
+
+```
+list_bindable                                # enumerate the main window VM's bindable surface
 set_view_model null IsBusy true              # flip a flag on the main window's VM → spinner shows
 set_view_model "editor" Document.IsDirty true
 invoke_command null ShowRecoveryCommand      # drive the app into the recovery state without a restart
@@ -423,8 +553,24 @@ invoke_command "grid" RefreshCommand 25      # execute a command with a paramete
 ```
 
 > These are a **reflection escape hatch**, not a substitute for real user input — they bypass the view
-> entirely. Use them to *set up* a state to verify, then drive the actual control with `invoke`/`click_at`
-> when it is the control's behavior you are testing.
+> entirely. Use them to *set up* a state to verify, then drive the actual control with `tap`/`drag`/
+> `invoke`/`click_at` when it is the control's behavior you are testing.
+
+## Closed popups (`open_popup`, P5)
+
+A closed `Popup`/`Flyout` has zero size and no realized content, so `screenshot_control` on it is a dead
+end. Instead of a bare "has a zero size and cannot be captured", the tools now **detect a closed popup**
+and return a hint: that it is a closed popup and how to open it. `open_popup(name)` then opens it in one
+call — it sets the bound `IsOpen` of a `Popup` named `name` (or one owned by / nested in the named
+control), or shows an attached `Button.Flyout`/`FlyoutBase`. After it opens, the content is realized and
+`screenshot_control`/`get_visual_tree` can see it.
+
+```
+screenshot_control BrushSettingsPopup
+→ 'BrushSettingsPopup' is a CLOSED popup … Open it first: open_popup{name:"BrushSettingsPopup"} …
+open_popup BrushSettingsPopup                # sets IsOpen=true
+screenshot_control BrushSettings             # now captures the realized content
+```
 
 ## Limitations & safety
 
@@ -441,8 +587,14 @@ invoke_command "grid" RefreshCommand 25      # execute a command with a paramete
   are loopback + debug-only.
 - **`highlight` and annotated screenshots add a transient overlay.** They mutate the visual tree with a
   frame adorner (cleared afterwards / by `action='clear'`); they never change app logic or state.
-- **`hit_test`/`click_at` use a geometric hit test**, not the compositor: they locate by point-in-bounds
-  and don't account for arbitrary render transforms or clip geometry.
+- **`hit_test` uses a transform-aware geometric hit test** (point-in-transformed-bounds over the visual
+  tree), consistent with the absolute frame `get_visual_tree` reports. Real input (`tap`/`drag`/
+  `pointer_*`/`click_at`) instead routes through the compositor's own hit test, so it respects clip
+  geometry and z-order exactly as a device would.
+- **Screenshots wait for a rendered frame.** `screenshot_window`/`screenshot_control` drain queued
+  layout/render work and, if the captured frame is degenerate (a single flat color — captured before the
+  layout settled), force a layout pass and retry once, so a capture right after opening a popup or
+  switching state isn't an empty/dark image.
 - **`get_data_context`/`get_properties` read via reflection** and call property getters; a getter with
   side effects will run, and one that throws is reported inline rather than aborting.
 - **Component listing needs hot-reload tracking**, which is enabled by default. If you call

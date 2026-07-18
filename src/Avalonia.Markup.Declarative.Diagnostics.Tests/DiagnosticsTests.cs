@@ -396,7 +396,10 @@ public class DiagnosticsTests
         Assert.Equal("lowercased", vm.Status);
 
         Assert.Contains("read-only", ViewModelInspector.SetValue(vm, "Version", "2.0"));
-        Assert.Contains("No property", ViewModelInspector.SetValue(vm, "Nope", "x"));
+        // Structured, actionable failure: names the missing member and lists what is settable.
+        var missing = ViewModelInspector.SetValue(vm, "Nope", "x");
+        Assert.Contains("no member 'Nope'", missing);
+        Assert.Contains("settable properties", missing);
         Assert.Contains("Cannot convert", ViewModelInspector.SetValue(vm, "Count", "not-a-number"));
         Assert.Contains("null", ViewModelInspector.SetValue(null, "Count", "1"));
     }
@@ -427,7 +430,10 @@ public class DiagnosticsTests
         Assert.Contains("Invoked method 'Echo'", ViewModelInspector.InvokeCommand(vm, "Echo", "passed-through"));
         Assert.Equal("passed-through", vm.LastParameter);
 
-        Assert.Contains("No command property or invokable method", ViewModelInspector.InvokeCommand(vm, "Nope", null));
+        var noCommand = ViewModelInspector.InvokeCommand(vm, "Nope", null);
+        Assert.Contains("no member 'Nope'", noCommand);
+        Assert.Contains("ICommand properties", noCommand);
+        Assert.Contains("SaveCommand", noCommand);
     }
 
     [AvaloniaFact]

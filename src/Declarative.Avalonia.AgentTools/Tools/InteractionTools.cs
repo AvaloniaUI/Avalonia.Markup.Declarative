@@ -57,19 +57,9 @@ public sealed class InteractionTools
         string action,
         [Description("Value used by 'set' (text/number), 'key' (gesture) and 'type' (text).")]
         string? value = null) =>
-        AgentToolContext.RunOnUiThreadAsync(() =>
-        {
-            // Never let an exception escape as the MCP SDK's opaque "An error occurred invoking 'invoke'":
-            // turn it into an actionable message naming the action that failed.
-            try
-            {
-                return InvokeCore(name, action, value);
-            }
-            catch (Exception ex)
-            {
-                return $"invoke '{action}' failed: {ex.GetType().Name}: {ex.Message}";
-            }
-        });
+        // RunToolAsync guarantees this never surfaces the MCP SDK's opaque "An error occurred invoking
+        // 'invoke'": any exception becomes an actionable message naming the tool and cause.
+        AgentToolContext.RunToolAsync("invoke", () => InvokeCore(name, action, value));
 
     private static string InvokeCore(string? name, string action, string? value)
     {
@@ -267,25 +257,38 @@ public sealed class InteractionTools
         });
 
     [McpServerTool(Name = "click_at", Destructive = true), Description(
-        "Acts on whatever control is at a pixel coordinate — useful for custom-drawn controls with no " +
-        "Name or automation label. Screenshot pixels equal these window-client coordinates. It resolves " +
-        "the control at the point and invokes/selects it (falling back to focus); it does NOT synthesize a " +
-        "raw OS click, so it has no hover/drag. Pass x/y and an optional windowId. Disabled unless EnableInteraction was set.")]
+        "Clicks whatever control is at a coordinate. Coordinates are ABSOLUTE client-DIP (the same frame " +
+        "get_visual_tree's center=(x,y)/hit_test/drag use; 96-DPI screenshot pixels match 1:1). By default " +
+        "it synthesizes a REAL pointer click through Avalonia's input pipeline (works for custom Border/" +
+        "Panel controls with hand-written pointer handlers and no automation peer), and only falls back to " +
+        "a UI-Automation invoke when synthetic input is unavailable. Pass method='pointer' to force real " +
+        "input or method='automation' to force the invoke/select-by-peer path. For drags/hover use drag / " +
+        "pointer_* / tap. Disabled unless EnableInteraction was set.")]
     public static Task<string> ClickAt(
-        [Description("X coordinate in window-client pixels/DIPs.")] double x,
-        [Description("Y coordinate in window-client pixels/DIPs.")] double y,
+        [Description("X coordinate in absolute client-DIP pixels.")] double x,
+        [Description("Y coordinate in absolute client-DIP pixels.")] double y,
         [Description("Optional window title or 0-based index. Omit for the main window.")]
-        string? windowId = null) =>
-        AgentToolContext.RunOnUiThreadAsync(() =>
+        string? windowId = null,
+        [Description("Dispatch method: 'auto' (default: real pointer, automation fallback), 'pointer', or 'automation'.")]
+        string? method = null) =>
+        AgentToolContext.RunToolAsync("click_at", () =>
         {
-            try
-            {
+            var top = AgentToolContext.ResolveTopLevel(windowId);
+            if (top is null)
+                return "No active window/top-level was found.";
+
+            var mode = method?.Trim().ToLowerInvariant();
+            var point = new Point(x, y);
+
+            if (mode == "automation")
                 return ClickAtCore(x, y, windowId);
-            }
-            catch (Exception ex)
-            {
-                return $"click_at ({x}, {y}) failed: {ex.GetType().Name}: {ex.Message}";
-            }
+
+            // Pointer-first (universal): real synthetic click when the input pipeline is reachable.
+            if (mode == "pointer" || InputSynthesizer.CanSynthesize(top))
+                return "click_at via real pointer — " + InputSynthesizer.Tap(top, point, MouseButton.Left, RawInputModifiers.None);
+
+            // Automation fallback when synthetic input is unavailable (e.g. window not realized).
+            return "click_at via automation (synthetic input unavailable) — " + ClickAtCore(x, y, windowId);
         });
 
     private static string ClickAtCore(double x, double y, string? windowId)
@@ -342,6 +345,161 @@ public sealed class InteractionTools
             : $"{DescribeTarget(target)} {at} is neither invokable nor focusable.";
     }
 
+    // ── Real synthetic input (P1) ─────────────────────────────────────────────────────────────────
+    // These feed real RawPointer/RawKey/RawTextInput events through Avalonia's input pipeline, so
+    // hit-testing, pointer capture and PointerPressed/Moved/Released fire exactly as from a device.
+    // They drive controls that have NO automation peer (custom Border/Panel sliders, drag thumbs,
+    // drawing canvases) — where click_at(automation)/invoke cannot. Coordinates are absolute client-DIP
+    // (the frame get_visual_tree's center=/hit_test/screenshots share).
+
+    [McpServerTool(Name = "tap", Destructive = true), Description(
+        "Synthesizes a REAL pointer click (move → press → release) at an absolute client-DIP coordinate — " +
+        "the universal way to click, including custom controls with hand-written pointer handlers and no " +
+        "automation peer. Focuses a focusable target and enters text-edit mode on a click-to-edit control, " +
+        "just like a real click. Use get_visual_tree center=(x,y) or hit_test to find the point. " +
+        "Disabled unless EnableInteraction was set.")]
+    public static Task<string> Tap(
+        [Description("X in absolute client-DIP pixels.")] double x,
+        [Description("Y in absolute client-DIP pixels.")] double y,
+        [Description("Mouse button: Left (default) | Right | Middle.")] string? button = null,
+        [Description("Optional modifiers, e.g. 'Ctrl+Shift'.")] string? modifiers = null,
+        [Description("Optional window title or 0-based index. Omit for the main window.")] string? windowId = null) =>
+        AgentToolContext.RunToolAsync("tap", () =>
+            WithTop(windowId, top => InputSynthesizer.Tap(top, new Point(x, y), ParseButton(button), ParseModifiers(modifiers))));
+
+    [McpServerTool(Name = "pointer_press", Destructive = true), Description(
+        "Synthesizes a REAL pointer button press at an absolute client-DIP coordinate and BEGINS a gesture " +
+        "(the button stays held). Follow with pointer_move / pointer_release — capture is maintained across " +
+        "the calls, so PointerMoved reports the button down (what drag/scrub handlers check). For a one-shot " +
+        "press+drag+release use drag; for a click use tap. Disabled unless EnableInteraction was set.")]
+    public static Task<string> PointerPress(
+        [Description("X in absolute client-DIP pixels.")] double x,
+        [Description("Y in absolute client-DIP pixels.")] double y,
+        [Description("Mouse button: Left (default) | Right | Middle.")] string? button = null,
+        [Description("Optional modifiers, e.g. 'Ctrl+Shift'.")] string? modifiers = null,
+        [Description("Optional window title or 0-based index. Omit for the main window.")] string? windowId = null) =>
+        AgentToolContext.RunToolAsync("pointer_press", () =>
+            WithTop(windowId, top => InputSynthesizer.PointerPress(top, new Point(x, y), ParseButton(button), ParseModifiers(modifiers))));
+
+    [McpServerTool(Name = "pointer_move", Destructive = true), Description(
+        "Synthesizes a REAL pointer move to an absolute client-DIP coordinate. During a gesture started by " +
+        "pointer_press the held button is carried (drag); otherwise it is a hover move. Disabled unless " +
+        "EnableInteraction was set.")]
+    public static Task<string> PointerMove(
+        [Description("X in absolute client-DIP pixels.")] double x,
+        [Description("Y in absolute client-DIP pixels.")] double y,
+        [Description("Optional modifiers, e.g. 'Ctrl+Shift'.")] string? modifiers = null,
+        [Description("Optional window title or 0-based index. Omit for the main window.")] string? windowId = null) =>
+        AgentToolContext.RunToolAsync("pointer_move", () =>
+            WithTop(windowId, top => InputSynthesizer.PointerMove(top, new Point(x, y), ParseModifiers(modifiers))));
+
+    [McpServerTool(Name = "pointer_release", Destructive = true), Description(
+        "Synthesizes a REAL pointer button release at an absolute client-DIP coordinate, ending the active " +
+        "gesture. Disabled unless EnableInteraction was set.")]
+    public static Task<string> PointerRelease(
+        [Description("X in absolute client-DIP pixels.")] double x,
+        [Description("Y in absolute client-DIP pixels.")] double y,
+        [Description("Mouse button: Left (default) | Right | Middle.")] string? button = null,
+        [Description("Optional modifiers, e.g. 'Ctrl+Shift'.")] string? modifiers = null,
+        [Description("Optional window title or 0-based index. Omit for the main window.")] string? windowId = null) =>
+        AgentToolContext.RunToolAsync("pointer_release", () =>
+            WithTop(windowId, top => InputSynthesizer.PointerRelease(top, new Point(x, y), ParseButton(button), ParseModifiers(modifiers))));
+
+    [McpServerTool(Name = "drag", Destructive = true), Description(
+        "Synthesizes a REAL press-drag-release from (x1,y1) to (x2,y2) in absolute client-DIP coordinates, " +
+        "with the button held through intermediate moves — this is how you scrub a custom slider, move a " +
+        "drag thumb, draw a stroke, or reorder a list. 'steps' controls the number of intermediate moves " +
+        "(default 10) and 'holdMs' an optional dwell after pressing. Disabled unless EnableInteraction was set.")]
+    public static Task<string> Drag(
+        [Description("Start X in absolute client-DIP pixels.")] double x1,
+        [Description("Start Y in absolute client-DIP pixels.")] double y1,
+        [Description("End X in absolute client-DIP pixels.")] double x2,
+        [Description("End Y in absolute client-DIP pixels.")] double y2,
+        [Description("Mouse button: Left (default) | Right | Middle.")] string? button = null,
+        [Description("Intermediate move count (default 10).")] int steps = 10,
+        [Description("Optional dwell in ms after the press.")] int holdMs = 0,
+        [Description("Optional modifiers, e.g. 'Ctrl+Shift'.")] string? modifiers = null,
+        [Description("Optional window title or 0-based index. Omit for the main window.")] string? windowId = null) =>
+        AgentToolContext.RunToolAsync("drag", () =>
+            WithTop(windowId, top => InputSynthesizer.Drag(top, new Point(x1, y1), new Point(x2, y2), ParseButton(button), steps <= 0 ? 10 : steps, Math.Max(0, holdMs), ParseModifiers(modifiers))));
+
+    [McpServerTool(Name = "open_popup", Destructive = true), Description(
+        "Opens a closed Popup/Flyout so its content becomes visible and capturable — the guided way out of " +
+        "the 'has a zero size and cannot be captured' dead end (see the hint from screenshot_control). Pass " +
+        "the Name of the Popup, of the control that owns it, or of the control with an attached flyout; it " +
+        "sets the popup's IsOpen=true (or shows the flyout). Disabled unless EnableInteraction was set.")]
+    public static Task<string> OpenPopup(
+        [Description("Name of the Popup, its owning control, or a control with an attached flyout.")]
+        string name) =>
+        AgentToolContext.RunToolAsync("open_popup", () =>
+        {
+            var result = PopupLocator.Open(AgentToolContext.GetToolSearchRoots(), name);
+            Dispatcher.UIThread.RunJobs(); // flush layout so a follow-up screenshot sees the opened content
+            return result;
+        });
+
+    [McpServerTool(Name = "list_bindable", ReadOnly = true), Description(
+        "Lists what an escape hatch can drive on a DataContext: settable properties (for set_view_model), " +
+        "ICommand properties + invokable methods (for invoke_command), and nested sub-objects to drill into " +
+        "with a dotted path (e.g. AppState.UiState.ShowBrushSettings). Resolve the DataContext from 'name' " +
+        "(a control Name/label) or, if omitted, the main window's. Use this to discover the correct path " +
+        "when set_view_model/invoke_command reports the member is missing.")]
+    public static Task<string> ListBindable(
+        [Description("Optional control Name/label whose DataContext to enumerate. Omit for the main window's.")]
+        string? name = null) =>
+        AgentToolContext.RunToolAsync("list_bindable", () =>
+        {
+            if (!TryResolveDataContext(name, out var dataContext, out var error))
+                return error;
+            return ViewModelInspector.ListBindable(dataContext);
+        });
+
+    private static string WithTop(string? windowId, Func<TopLevel, string> body)
+    {
+        var top = AgentToolContext.ResolveTopLevel(windowId);
+        return top is null ? "No active window/top-level was found." : body(top);
+    }
+
+    private static MouseButton ParseButton(string? button) =>
+        button?.Trim().ToLowerInvariant() switch
+        {
+            null or "" or "left" or "l" => MouseButton.Left,
+            "right" or "r" => MouseButton.Right,
+            "middle" or "m" => MouseButton.Middle,
+            _ => MouseButton.Left
+        };
+
+    private static RawInputModifiers ParseModifiers(string? modifiers)
+    {
+        if (string.IsNullOrWhiteSpace(modifiers))
+            return RawInputModifiers.None;
+
+        var result = RawInputModifiers.None;
+        foreach (var raw in modifiers.Split(new[] { '+', ',', ' ' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            result |= raw.ToLowerInvariant() switch
+            {
+                "ctrl" or "control" => RawInputModifiers.Control,
+                "shift" => RawInputModifiers.Shift,
+                "alt" => RawInputModifiers.Alt,
+                "meta" or "win" or "cmd" or "super" => RawInputModifiers.Meta,
+                _ => RawInputModifiers.None
+            };
+        }
+
+        return result;
+    }
+
+    private static RawInputModifiers ToRawModifiers(KeyModifiers modifiers)
+    {
+        var result = RawInputModifiers.None;
+        if (modifiers.HasFlag(KeyModifiers.Alt)) result |= RawInputModifiers.Alt;
+        if (modifiers.HasFlag(KeyModifiers.Control)) result |= RawInputModifiers.Control;
+        if (modifiers.HasFlag(KeyModifiers.Shift)) result |= RawInputModifiers.Shift;
+        if (modifiers.HasFlag(KeyModifiers.Meta)) result |= RawInputModifiers.Meta;
+        return result;
+    }
+
     [McpServerTool(Name = "set_view_model", Destructive = true), Description(
         "ESCAPE HATCH for UI tests: sets a property on a control's DataContext (view-model) directly, by " +
         "reflection — the fast way to drive the app into a state that is awkward to reach through the UI " +
@@ -358,21 +516,14 @@ public sealed class InteractionTools
         string path,
         [Description("New value as text; converted to the property's type.")]
         string? value = null) =>
-        AgentToolContext.RunOnUiThreadAsync(() =>
+        AgentToolContext.RunToolAsync("set_view_model", () =>
         {
-            try
-            {
-                if (!TryResolveDataContext(name, out var dataContext, out var error))
-                    return error;
+            if (!TryResolveDataContext(name, out var dataContext, out var error))
+                return error;
 
-                var result = ViewModelInspector.SetValue(dataContext, path, value);
-                Dispatcher.UIThread.RunJobs(); // flush bindings/layout so a follow-up screenshot sees the change
-                return result;
-            }
-            catch (Exception ex)
-            {
-                return $"set_view_model failed: {ex.GetType().Name}: {ex.Message}";
-            }
+            var result = ViewModelInspector.SetValue(dataContext, path, value);
+            Dispatcher.UIThread.RunJobs(); // flush bindings/layout so a follow-up screenshot sees the change
+            return result;
         });
 
     [McpServerTool(Name = "invoke_command", Destructive = true), Description(
@@ -389,21 +540,14 @@ public sealed class InteractionTools
         string path,
         [Description("Optional command parameter / single method argument, as text.")]
         string? parameter = null) =>
-        AgentToolContext.RunOnUiThreadAsync(() =>
+        AgentToolContext.RunToolAsync("invoke_command", () =>
         {
-            try
-            {
-                if (!TryResolveDataContext(name, out var dataContext, out var error))
-                    return error;
+            if (!TryResolveDataContext(name, out var dataContext, out var error))
+                return error;
 
-                var result = ViewModelInspector.InvokeCommand(dataContext, path, parameter);
-                Dispatcher.UIThread.RunJobs();
-                return result;
-            }
-            catch (Exception ex)
-            {
-                return $"invoke_command failed: {ex.GetType().Name}: {ex.Message}";
-            }
+            var result = ViewModelInspector.InvokeCommand(dataContext, path, parameter);
+            Dispatcher.UIThread.RunJobs();
+            return result;
         });
 
     /// <summary>
@@ -675,29 +819,33 @@ public sealed class InteractionTools
         if (!TryResolveInputTarget(name, out var target, out var error))
             return error;
 
+        // Focus the addressed control so a REAL KeyDown/KeyUp routes to it (keyboard input goes to the
+        // focused element). Then synthesize real input through the pipeline so the control's own KeyDown
+        // handling runs — e.g. Escape/Enter reach a focused TextBox. Falls back to a routed event if
+        // synthesis is unavailable.
+        var control = target as Control;
+        control?.Focus();
+
+        var top = TopLevelOf(control) ?? AgentToolContext.GetPrimaryTopLevel();
+        var modifiers = ToRawModifiers(parsed.KeyModifiers);
+
+        if (top is not null && InputSynthesizer.CanSynthesize(top))
+        {
+            var result = InputSynthesizer.PressKey(top, parsed.Key, modifiers);
+            return $"Pressed '{gesture}'{TargetSuffix(name)} (real input): {result}";
+        }
+
         try
         {
-            target.RaiseEvent(new KeyEventArgs
-            {
-                RoutedEvent = InputElement.KeyDownEvent,
-                Key = parsed.Key,
-                KeyModifiers = parsed.KeyModifiers,
-                Source = target,
-            });
-            target.RaiseEvent(new KeyEventArgs
-            {
-                RoutedEvent = InputElement.KeyUpEvent,
-                Key = parsed.Key,
-                KeyModifiers = parsed.KeyModifiers,
-                Source = target,
-            });
+            target.RaiseEvent(new KeyEventArgs { RoutedEvent = InputElement.KeyDownEvent, Key = parsed.Key, KeyModifiers = parsed.KeyModifiers, Source = target });
+            target.RaiseEvent(new KeyEventArgs { RoutedEvent = InputElement.KeyUpEvent, Key = parsed.Key, KeyModifiers = parsed.KeyModifiers, Source = target });
         }
         catch (Exception ex)
         {
             return $"Could not press '{gesture}'{TargetSuffix(name)}: {ex.Message}";
         }
 
-        return $"Pressed '{gesture}'{TargetSuffix(name)}.";
+        return $"Pressed '{gesture}'{TargetSuffix(name)} (routed-event fallback).";
     }
 
     private static string TypeText(string? name, string? text)
@@ -708,34 +856,41 @@ public sealed class InteractionTools
         if (!TryResolveInputTarget(name, out var target, out var error))
             return error;
 
-        // A TextBox is the common case; insert at the caret directly — reliable across platforms and
-        // independent of synthetic-input plumbing.
+        var control = target as Control;
+        control?.Focus();
+
+        // Prefer REAL text input through the pipeline (the way typed characters reach a focused TextBox).
+        var top = TopLevelOf(control) ?? AgentToolContext.GetPrimaryTopLevel();
+        if (top is not null && InputSynthesizer.CanSynthesize(top))
+        {
+            var result = InputSynthesizer.TextInput(top, text);
+            return $"Typed '{text}'{TargetSuffix(name)} (real input): {result}";
+        }
+
+        // Fallback for a TextBox when synthesis is unavailable: insert at the caret directly.
         if (target is TextBox textBox)
         {
             var current = textBox.Text ?? string.Empty;
             var caret = Math.Clamp(textBox.CaretIndex, 0, current.Length);
             textBox.Text = current.Insert(caret, text);
             textBox.CaretIndex = caret + text.Length;
-            return $"Typed '{text}'{TargetSuffix(name)}.";
+            return $"Typed '{text}'{TargetSuffix(name)} (direct-insert fallback).";
         }
 
-        // Otherwise raise a routed text-input event for controls that handle it themselves.
         try
         {
-            target.RaiseEvent(new TextInputEventArgs
-            {
-                RoutedEvent = InputElement.TextInputEvent,
-                Text = text,
-                Source = target,
-            });
+            target.RaiseEvent(new TextInputEventArgs { RoutedEvent = InputElement.TextInputEvent, Text = text, Source = target });
         }
         catch (Exception ex)
         {
             return $"Could not type{TargetSuffix(name)}: {ex.Message}";
         }
 
-        return $"Typed '{text}'{TargetSuffix(name)}.";
+        return $"Typed '{text}'{TargetSuffix(name)} (routed-event fallback).";
     }
+
+    private static TopLevel? TopLevelOf(Control? control) =>
+        control is null ? null : TopLevel.GetTopLevel(control);
 
     private static bool TryResolveInputTarget(string? name, out Interactive target, out string error)
     {

@@ -31,6 +31,18 @@ public sealed class VisualTreeDumpOptions
     /// </summary>
     public string? Filter { get; set; }
 
+    /// <summary>
+    /// The top-level whose client-DIP space each node's absolute <c>abs=[…]</c>/<c>center=(…)</c>
+    /// coordinates are expressed in. When <see langword="null"/>, it is resolved from the dump root's
+    /// own top-level. These absolute coordinates are the frame consumed by <c>click_at</c>/<c>drag</c>
+    /// and produced by <c>hit_test</c>; the per-node local <c>[x y w h]</c> stays parent-relative for
+    /// layout debugging. See <see cref="VisualBoundsHelper"/>.
+    /// </summary>
+    public Visual? CoordinateRoot { get; set; }
+
+    /// <summary>Whether to append absolute client-DIP bounds/center to each node. Default true.</summary>
+    public bool IncludeAbsoluteBounds { get; set; } = true;
+
     internal static readonly VisualTreeDumpOptions Default = new();
 }
 
@@ -59,8 +71,16 @@ public static class VisualTreeInspector
                 return $"No node matching '{options.Filter}' was found in the tree.";
         }
 
+        var coordinateRoot = options.IncludeAbsoluteBounds
+            ? options.CoordinateRoot ?? TopLevel.GetTopLevel(root) as Visual
+            : null;
+
         var builder = new StringBuilder();
-        AppendNode(builder, root, 0, options, include);
+        if (coordinateRoot is not null)
+            builder.Append("Frame: abs=[…]/center=(…) are absolute client-DIP coords (top-level origin, 96-DPI pixels), " +
+                           "the same frame click_at/drag/hit_test use; local [x y w h] stays parent-relative.\n");
+
+        AppendNode(builder, root, 0, options, include, coordinateRoot);
         return builder.ToString();
     }
 
@@ -88,7 +108,7 @@ public static class VisualTreeInspector
                name.Contains(filter, StringComparison.OrdinalIgnoreCase);
     }
 
-    private static void AppendNode(StringBuilder builder, Visual visual, int depth, VisualTreeDumpOptions options, HashSet<Visual>? include)
+    private static void AppendNode(StringBuilder builder, Visual visual, int depth, VisualTreeDumpOptions options, HashSet<Visual>? include, Visual? coordinateRoot)
     {
         if (include is not null && !include.Contains(visual))
             return;
@@ -103,6 +123,14 @@ public static class VisualTreeInspector
 
         var bounds = visual.Bounds;
         builder.Append(' ').Append(FormatBounds(bounds));
+
+        // P4: absolute client-DIP bounds + center, the frame click_at/drag/hit_test consume. Local
+        // bounds above stay parent-relative (useful for layout), so both are available side by side.
+        if (coordinateRoot is not null && VisualBoundsHelper.GetClientBounds(visual, coordinateRoot) is { } abs)
+        {
+            builder.Append(" abs=").Append(FormatBounds(abs))
+                .Append(" center=(").Append(Format(abs.Center.X)).Append(',').Append(Format(abs.Center.Y)).Append(')');
+        }
 
         if (!visual.IsVisible)
             builder.Append(" [hidden]");
@@ -122,8 +150,11 @@ public static class VisualTreeInspector
             return;
 
         foreach (var child in visual.GetVisualChildren())
-            AppendNode(builder, child, depth + 1, options, include);
+            AppendNode(builder, child, depth + 1, options, include, coordinateRoot);
     }
+
+    private static string Format(double value) =>
+        value.ToString("0.#", CultureInfo.InvariantCulture);
 
     private static string FormatBounds(Rect b) =>
         string.Format(
